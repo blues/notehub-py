@@ -60,6 +60,10 @@ Name | Type | Description | Notes
 **voltage** | **float** | Device voltage. Only available on _session.qo events. | [optional] 
 **temp** | **float** | Device temperature. Only available on _session.qo events. | [optional] 
 **environment** | **object** | Routed environment variables beginning with \&quot;$\&quot;. Only available on _session.qo events. | [optional] 
+**sku** | **str** | SKU. Only available on _session.qo events. | [optional] 
+**ordering_code** | **str** | Ordering code. Only available on _session.qo events. | [optional] 
+**ssid** | **str** | SSID. Only available on _session.qo events. | [optional] 
+**bssid** | **str** | BSSID. Only available on _session.qo events. | [optional] 
 
 ## Example
 

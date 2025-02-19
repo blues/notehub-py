@@ -92,7 +92,11 @@ class TestGetProjectEvents200Response(unittest.TestCase):
                         bars = 1.337, 
                         voltage = 1.337, 
                         temp = 1.337, 
-                        environment = notehub_py.models.environment.environment(), )
+                        environment = notehub_py.models.environment.environment(), 
+                        sku = '', 
+                        ordering_code = '', 
+                        ssid = '', 
+                        bssid = '', )
                     ],
                 has_more = True,
                 through = ''
@@ -155,7 +159,11 @@ class TestGetProjectEvents200Response(unittest.TestCase):
                         bars = 1.337, 
                         voltage = 1.337, 
                         temp = 1.337, 
-                        environment = notehub_py.models.environment.environment(), )
+                        environment = notehub_py.models.environment.environment(), 
+                        sku = '', 
+                        ordering_code = '', 
+                        ssid = '', 
+                        bssid = '', )
                     ],
                 has_more = True,
         )

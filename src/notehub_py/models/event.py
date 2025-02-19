@@ -82,7 +82,11 @@ class Event(BaseModel):
     voltage: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Device voltage. Only available on _session.qo events.")
     temp: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Device temperature. Only available on _session.qo events.")
     environment: Optional[Dict[str, Any]] = Field(default=None, description="Routed environment variables beginning with \"$\". Only available on _session.qo events.")
-    __properties: ClassVar[List[str]] = ["event", "session", "tls", "best_id", "device", "sn", "product", "app", "received", "req", "when", "file", "note", "updates", "body", "payload", "best_location_type", "best_location_when", "best_lat", "best_lon", "best_location", "best_country", "best_timezone", "where_olc", "where_when", "where_lat", "where_lon", "where_location", "where_country", "where_timezone", "tower_when", "tower_lat", "tower_lon", "tower_country", "tower_location", "tower_timezone", "tower_id", "tri_when", "tri_lat", "tri_lon", "tri_location", "tri_country", "tri_timezone", "tri_points", "moved", "orientation", "rssi", "sinr", "rsrp", "rsrq", "rat", "bars", "voltage", "temp", "environment"]
+    sku: Optional[StrictStr] = Field(default=None, description="SKU. Only available on _session.qo events.")
+    ordering_code: Optional[StrictStr] = Field(default=None, description="Ordering code. Only available on _session.qo events.")
+    ssid: Optional[StrictStr] = Field(default=None, description="SSID. Only available on _session.qo events.")
+    bssid: Optional[StrictStr] = Field(default=None, description="BSSID. Only available on _session.qo events.")
+    __properties: ClassVar[List[str]] = ["event", "session", "tls", "best_id", "device", "sn", "product", "app", "received", "req", "when", "file", "note", "updates", "body", "payload", "best_location_type", "best_location_when", "best_lat", "best_lon", "best_location", "best_country", "best_timezone", "where_olc", "where_when", "where_lat", "where_lon", "where_location", "where_country", "where_timezone", "tower_when", "tower_lat", "tower_lon", "tower_country", "tower_location", "tower_timezone", "tower_id", "tri_when", "tri_lat", "tri_lon", "tri_location", "tri_country", "tri_timezone", "tri_points", "moved", "orientation", "rssi", "sinr", "rsrp", "rsrq", "rat", "bars", "voltage", "temp", "environment", "sku", "ordering_code", "ssid", "bssid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -189,7 +193,11 @@ class Event(BaseModel):
             "bars": obj.get("bars"),
             "voltage": obj.get("voltage"),
             "temp": obj.get("temp"),
-            "environment": obj.get("environment")
+            "environment": obj.get("environment"),
+            "sku": obj.get("sku"),
+            "ordering_code": obj.get("ordering_code"),
+            "ssid": obj.get("ssid"),
+            "bssid": obj.get("bssid")
         })
         return _obj
 
