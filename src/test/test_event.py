@@ -90,7 +90,11 @@ class TestEvent(unittest.TestCase):
                 bars = 1.337,
                 voltage = 1.337,
                 temp = 1.337,
-                environment = None
+                environment = None,
+                sku = '',
+                ordering_code = '',
+                ssid = '',
+                bssid = ''
             )
         else:
             return Event(
