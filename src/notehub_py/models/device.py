@@ -46,9 +46,11 @@ class Device(BaseModel):
     voltage: Union[StrictFloat, StrictInt]
     temperature: Union[StrictFloat, StrictInt]
     dfu: Optional[DFUEnv] = None
+    firmware_host: Optional[StrictStr] = None
+    firmware_notecard: Optional[StrictStr] = None
     sku: Optional[StrictStr] = None
     disabled: Optional[StrictBool] = None
-    __properties: ClassVar[List[str]] = ["uid", "serial_number", "provisioned", "last_activity", "contact", "product_uid", "fleet_uids", "tower_info", "tower_location", "gps_location", "triangulated_location", "voltage", "temperature", "dfu", "sku", "disabled"]
+    __properties: ClassVar[List[str]] = ["uid", "serial_number", "provisioned", "last_activity", "contact", "product_uid", "fleet_uids", "tower_info", "tower_location", "gps_location", "triangulated_location", "voltage", "temperature", "dfu", "firmware_host", "firmware_notecard", "sku", "disabled"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -153,6 +155,8 @@ class Device(BaseModel):
             "voltage": obj.get("voltage"),
             "temperature": obj.get("temperature"),
             "dfu": DFUEnv.from_dict(obj["dfu"]) if obj.get("dfu") is not None else None,
+            "firmware_host": obj.get("firmware_host"),
+            "firmware_notecard": obj.get("firmware_notecard"),
             "sku": obj.get("sku"),
             "disabled": obj.get("disabled")
         })

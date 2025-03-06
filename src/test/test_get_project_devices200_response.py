@@ -102,6 +102,8 @@ class TestGetProjectDevices200Response(unittest.TestCase):
                                 read = 1.337, 
                                 updated = 1.337, 
                                 version = '', ), ), 
+                        firmware_host = '', 
+                        firmware_notecard = '', 
                         sku = '', 
                         disabled = True, )
                     ],
@@ -175,6 +177,8 @@ class TestGetProjectDevices200Response(unittest.TestCase):
                                 read = 1.337, 
                                 updated = 1.337, 
                                 version = '', ), ), 
+                        firmware_host = '', 
+                        firmware_notecard = '', 
                         sku = '', 
                         disabled = True, )
                     ],
