@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **voltage** | **float** |  | 
 **temperature** | **float** |  | 
 **dfu** | [**DFUEnv**](DFUEnv.md) |  | [optional] 
+**firmware_host** | **str** |  | [optional] 
+**firmware_notecard** | **str** |  | [optional] 
 **sku** | **str** |  | [optional] 
 **disabled** | **bool** |  | [optional] 
 
