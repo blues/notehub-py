@@ -3973,7 +3973,7 @@ class DeviceApi:
         device_uid: Annotated[Optional[List[StrictStr]], Field(description="A Device UID.")] = None,
         tag: Annotated[Optional[List[StrictStr]], Field(description="Tag filter")] = None,
         serial_number: Annotated[Optional[List[StrictStr]], Field(description="Serial number filter")] = None,
-        fleet_uid: Optional[StrictStr] = None,
+        fleet_uid: Optional[List[StrictStr]] = None,
         notecard_firmware: Annotated[Optional[List[StrictStr]], Field(description="Firmware version filter")] = None,
         location: Annotated[Optional[List[StrictStr]], Field(description="Location filter")] = None,
         host_firmware: Annotated[Optional[List[StrictStr]], Field(description="Host firmware filter")] = None,
@@ -4009,7 +4009,7 @@ class DeviceApi:
         :param serial_number: Serial number filter
         :type serial_number: List[str]
         :param fleet_uid:
-        :type fleet_uid: str
+        :type fleet_uid: List[str]
         :param notecard_firmware: Firmware version filter
         :type notecard_firmware: List[str]
         :param location: Location filter
@@ -4084,7 +4084,7 @@ class DeviceApi:
         device_uid: Annotated[Optional[List[StrictStr]], Field(description="A Device UID.")] = None,
         tag: Annotated[Optional[List[StrictStr]], Field(description="Tag filter")] = None,
         serial_number: Annotated[Optional[List[StrictStr]], Field(description="Serial number filter")] = None,
-        fleet_uid: Optional[StrictStr] = None,
+        fleet_uid: Optional[List[StrictStr]] = None,
         notecard_firmware: Annotated[Optional[List[StrictStr]], Field(description="Firmware version filter")] = None,
         location: Annotated[Optional[List[StrictStr]], Field(description="Location filter")] = None,
         host_firmware: Annotated[Optional[List[StrictStr]], Field(description="Host firmware filter")] = None,
@@ -4120,7 +4120,7 @@ class DeviceApi:
         :param serial_number: Serial number filter
         :type serial_number: List[str]
         :param fleet_uid:
-        :type fleet_uid: str
+        :type fleet_uid: List[str]
         :param notecard_firmware: Firmware version filter
         :type notecard_firmware: List[str]
         :param location: Location filter
@@ -4195,7 +4195,7 @@ class DeviceApi:
         device_uid: Annotated[Optional[List[StrictStr]], Field(description="A Device UID.")] = None,
         tag: Annotated[Optional[List[StrictStr]], Field(description="Tag filter")] = None,
         serial_number: Annotated[Optional[List[StrictStr]], Field(description="Serial number filter")] = None,
-        fleet_uid: Optional[StrictStr] = None,
+        fleet_uid: Optional[List[StrictStr]] = None,
         notecard_firmware: Annotated[Optional[List[StrictStr]], Field(description="Firmware version filter")] = None,
         location: Annotated[Optional[List[StrictStr]], Field(description="Location filter")] = None,
         host_firmware: Annotated[Optional[List[StrictStr]], Field(description="Host firmware filter")] = None,
@@ -4231,7 +4231,7 @@ class DeviceApi:
         :param serial_number: Serial number filter
         :type serial_number: List[str]
         :param fleet_uid:
-        :type fleet_uid: str
+        :type fleet_uid: List[str]
         :param notecard_firmware: Firmware version filter
         :type notecard_firmware: List[str]
         :param location: Location filter
@@ -4319,6 +4319,7 @@ class DeviceApi:
             'deviceUID': 'multi',
             'tag': 'multi',
             'serialNumber': 'multi',
+            'fleetUID': 'multi',
             'notecardFirmware': 'multi',
             'location': 'multi',
             'hostFirmware': 'multi',

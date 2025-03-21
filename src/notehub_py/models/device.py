@@ -109,10 +109,20 @@ class Device(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of dfu
         if self.dfu:
             _dict['dfu'] = self.dfu.to_dict()
+        # set to None if last_activity (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_activity is None and "last_activity" in self.model_fields_set:
+            _dict['last_activity'] = None
+
         # set to None if contact (nullable) is None
         # and model_fields_set contains the field
         if self.contact is None and "contact" in self.model_fields_set:
             _dict['contact'] = None
+
+        # set to None if tower_info (nullable) is None
+        # and model_fields_set contains the field
+        if self.tower_info is None and "tower_info" in self.model_fields_set:
+            _dict['tower_info'] = None
 
         # set to None if tower_location (nullable) is None
         # and model_fields_set contains the field
@@ -128,6 +138,11 @@ class Device(BaseModel):
         # and model_fields_set contains the field
         if self.triangulated_location is None and "triangulated_location" in self.model_fields_set:
             _dict['triangulated_location'] = None
+
+        # set to None if dfu (nullable) is None
+        # and model_fields_set contains the field
+        if self.dfu is None and "dfu" in self.model_fields_set:
+            _dict['dfu'] = None
 
         return _dict
 
