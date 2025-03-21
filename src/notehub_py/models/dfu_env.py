@@ -77,6 +77,16 @@ class DFUEnv(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of user
         if self.user:
             _dict['user'] = self.user.to_dict()
+        # set to None if card (nullable) is None
+        # and model_fields_set contains the field
+        if self.card is None and "card" in self.model_fields_set:
+            _dict['card'] = None
+
+        # set to None if user (nullable) is None
+        # and model_fields_set contains the field
+        if self.user is None and "user" in self.model_fields_set:
+            _dict['user'] = None
+
         return _dict
 
     @classmethod

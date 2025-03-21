@@ -1208,7 +1208,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
     tag = ['tag_example'] # List[str] | Tag filter (optional)
     serial_number = ['serial_number_example'] # List[str] | Serial number filter (optional)
-    fleet_uid = 'fleet_uid_example' # str |  (optional)
+    fleet_uid = ['fleet_uid_example'] # List[str] |  (optional)
     notecard_firmware = ['notecard_firmware_example'] # List[str] | Firmware version filter (optional)
     location = ['location_example'] # List[str] | Location filter (optional)
     host_firmware = ['host_firmware_example'] # List[str] | Host firmware filter (optional)
@@ -1236,7 +1236,7 @@ Name | Type | Description  | Notes
  **device_uid** | [**List[str]**](str.md)| A Device UID. | [optional] 
  **tag** | [**List[str]**](str.md)| Tag filter | [optional] 
  **serial_number** | [**List[str]**](str.md)| Serial number filter | [optional] 
- **fleet_uid** | **str**|  | [optional] 
+ **fleet_uid** | [**List[str]**](str.md)|  | [optional] 
  **notecard_firmware** | [**List[str]**](str.md)| Firmware version filter | [optional] 
  **location** | [**List[str]**](str.md)| Location filter | [optional] 
  **host_firmware** | [**List[str]**](str.md)| Host firmware filter | [optional] 
