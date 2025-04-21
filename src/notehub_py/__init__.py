@@ -25,6 +25,7 @@ from notehub_py.api.device_api import DeviceApi
 from notehub_py.api.event_api import EventApi
 from notehub_py.api.monitor_api import MonitorApi
 from notehub_py.api.project_api import ProjectApi
+from notehub_py.api.repository_api import RepositoryApi
 from notehub_py.api.route_api import RouteApi
 
 # import ApiClient
@@ -53,9 +54,13 @@ from notehub_py.models.create_fleet_request import CreateFleetRequest
 from notehub_py.models.create_monitor import CreateMonitor
 from notehub_py.models.create_product_request import CreateProductRequest
 from notehub_py.models.create_project_request import CreateProjectRequest
+from notehub_py.models.create_update_repository import CreateUpdateRepository
 from notehub_py.models.current_firmware import CurrentFirmware
 from notehub_py.models.dfu_env import DFUEnv
 from notehub_py.models.dfu_state import DFUState
+from notehub_py.models.data_field import DataField
+from notehub_py.models.data_set import DataSet
+from notehub_py.models.data_set_field import DataSetField
 from notehub_py.models.delete_device_fleets_request import DeleteDeviceFleetsRequest
 from notehub_py.models.device import Device
 from notehub_py.models.device_dfu_history import DeviceDfuHistory
@@ -119,7 +124,10 @@ from notehub_py.models.project import Project
 from notehub_py.models.project_member import ProjectMember
 from notehub_py.models.proxy import Proxy
 from notehub_py.models.put_device_fleets_request import PutDeviceFleetsRequest
+from notehub_py.models.question_data_response_line_chart import QuestionDataResponseLineChart
+from notehub_py.models.question_data_response_map import QuestionDataResponseMap
 from notehub_py.models.radresponder import Radresponder
+from notehub_py.models.repository import Repository
 from notehub_py.models.role import Role
 from notehub_py.models.slack import Slack
 from notehub_py.models.slack_bearer_notification import SlackBearerNotification
