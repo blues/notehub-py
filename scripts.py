@@ -152,13 +152,58 @@ def run_prettier_on_docs():
     except Exception as e:
         print(f"Exception when running Prettier on docs: {e}")
 
+def run_black_on_python():
+    """
+    Run Black formatter on all Python files in the src/ directory.
+    This requires Black to be installed on the system.
+    Uses python -m black to ensure we use the installed package.
+    """
+    try:
+        src_dir = "src"
+        
+        # Check if the src directory exists
+        if not os.path.exists(src_dir):
+            print(f"Source directory {src_dir} not found. Skipping Black formatting.")
+            return
+            
+        print(f"Running Black on Python files in {src_dir}...")
+        
+        # Install Black if needed (will be a no-op if already installed)
+        print("Ensuring Black is installed...")
+        subprocess.run([
+            "python3", 
+            "-m", 
+            "pip", 
+            "install", 
+            "black"
+        ])
+        
+        # Run Black using Python module approach to avoid path issues
+        subprocess.run([
+            "python3",
+            "-m",
+            "black", 
+            src_dir
+        ])
+        print("Black formatting of Python files completed successfully.")
+    except Exception as e:
+        print(f"Exception when running Black on Python files: {e}")
+    
+def format_code():
+    """
+    Format both Python and Markdown files in the repository.
+    """
+    run_black_on_python()
+    run_prettier_on_docs()
+    print("All code formatting completed.")        
+
 def generate_and_format():
     """
     Convenience function to generate the package and run Prettier on it.
     """
     remove_deprecated_parameters("openapi.yaml", "openapi_filtered.yaml")
     generate_package()
-    run_prettier_on_docs()
+    format_code()
     build_distro_package()
 
 
@@ -167,7 +212,8 @@ if __name__ == "__main__":
         print(
             "Usage: python3 scripts.py [download_python_template | " 
             "generate_package | build_distro_package | "
-            "remove_deprecated_parameters | run_prettier_on_docs | generate_and_format]"
+            "remove_deprecated_parameters | run_prettier_on_docs | "
+            "run_black_on_python | format_code | generate_and_format]"
         )
         sys.exit(1)
     
@@ -182,12 +228,17 @@ if __name__ == "__main__":
         remove_deprecated_parameters("openapi.yaml", "openapi_filtered.yaml")
     elif script_to_run == "run_prettier_on_docs":
         run_prettier_on_docs()
+    elif script_to_run == "run_black_on_python":
+        run_black_on_python()
+    elif script_to_run == "format_code":
+        format_code()    
     elif script_to_run == "generate_and_format":
         generate_and_format()
     else:
         print(
             "Invalid script name. Use one of: download_python_template, "
             "generate_package, build_distro_package, "
-            "remove_deprecated_parameters, run_prettier_on_docs, generate_and_format"
+            "remove_deprecated_parameters, run_prettier_on_docs, "
+            "run_black_on_python, format_code, generate_and_format"
         )
         sys.exit(1)
