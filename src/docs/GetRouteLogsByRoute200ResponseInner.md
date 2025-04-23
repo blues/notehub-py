@@ -1,17 +1,16 @@
 # GetRouteLogsByRoute200ResponseInner
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**var_date** | **str** | The date of the logs. | [optional] 
-**route_uid** | **str** | The route UID. | [optional] 
-**event_uid** | **str** | The event UID. | [optional] 
-**attn** | **bool** | Whether the event was routed in error | [optional] 
-**status** | **str** | The status of the event. | [optional] 
-**text** | **str** | The response body of the route. | [optional] 
-**url** | **str** | The URL of the route. | [optional] 
+| Name          | Type     | Description                           | Notes      |
+| ------------- | -------- | ------------------------------------- | ---------- |
+| **var_date**  | **str**  | The date of the logs.                 | [optional] |
+| **route_uid** | **str**  | The route UID.                        | [optional] |
+| **event_uid** | **str**  | The event UID.                        | [optional] |
+| **attn**      | **bool** | Whether the event was routed in error | [optional] |
+| **status**    | **str**  | The status of the event.              | [optional] |
+| **text**      | **str**  | The response body of the route.       | [optional] |
+| **url**       | **str**  | The URL of the route.                 | [optional] |
 
 ## Example
 
@@ -30,6 +29,5 @@ get_route_logs_by_route200_response_inner_dict = get_route_logs_by_route200_resp
 # create an instance of GetRouteLogsByRoute200ResponseInner from a dict
 get_route_logs_by_route200_response_inner_from_dict = GetRouteLogsByRoute200ResponseInner.from_dict(get_route_logs_by_route200_response_inner_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

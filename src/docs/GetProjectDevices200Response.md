@@ -1,12 +1,11 @@
 # GetProjectDevices200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**devices** | [**List[Device]**](Device.md) |  | 
-**has_more** | **bool** |  | 
+| Name         | Type                          | Description | Notes |
+| ------------ | ----------------------------- | ----------- | ----- |
+| **devices**  | [**List[Device]**](Device.md) |             |
+| **has_more** | **bool**                      |             |
 
 ## Example
 
@@ -25,6 +24,5 @@ get_project_devices200_response_dict = get_project_devices200_response_instance.
 # create an instance of GetProjectDevices200Response from a dict
 get_project_devices200_response_from_dict = GetProjectDevices200Response.from_dict(get_project_devices200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

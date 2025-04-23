@@ -1,11 +1,10 @@
 # Body
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**body** | **object** |  | [optional] 
+| Name     | Type       | Description | Notes      |
+| -------- | ---------- | ----------- | ---------- |
+| **body** | **object** |             | [optional] |
 
 ## Example
 
@@ -24,6 +23,5 @@ body_dict = body_instance.to_dict()
 # create an instance of Body from a dict
 body_from_dict = Body.from_dict(body_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

@@ -1,11 +1,10 @@
 # Login200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**session_token** | **str** |  | [optional] 
+| Name              | Type    | Description | Notes      |
+| ----------------- | ------- | ----------- | ---------- |
+| **session_token** | **str** |             | [optional] |
 
 ## Example
 
@@ -24,6 +23,5 @@ login200_response_dict = login200_response_instance.to_dict()
 # create an instance of Login200Response from a dict
 login200_response_from_dict = Login200Response.from_dict(login200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

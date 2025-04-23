@@ -1,11 +1,10 @@
 # GetDeviceLatest200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**latest_events** | [**List[Event]**](Event.md) | The set of latest events.  Will always include the current \&quot;session.begin\&quot; event. | [optional] 
+| Name              | Type                        | Description                                                                                  | Notes      |
+| ----------------- | --------------------------- | -------------------------------------------------------------------------------------------- | ---------- |
+| **latest_events** | [**List[Event]**](Event.md) | The set of latest events. Will always include the current \&quot;session.begin\&quot; event. | [optional] |
 
 ## Example
 
@@ -24,6 +23,5 @@ get_device_latest200_response_dict = get_device_latest200_response_instance.to_d
 # create an instance of GetDeviceLatest200Response from a dict
 get_device_latest200_response_from_dict = GetDeviceLatest200Response.from_dict(get_device_latest200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

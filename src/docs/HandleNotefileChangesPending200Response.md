@@ -1,14 +1,13 @@
 # HandleNotefileChangesPending200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**total** | **int** | The total number of files. | [optional] 
-**changes** | **int** | The number of pending changes in the Notefile. | [optional] 
-**pending** | **bool** | Whether there are pending changes. | [optional] 
-**info** | **object** | An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file. | [optional] 
+| Name        | Type       | Description                                                                                                                            | Notes      |
+| ----------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **total**   | **int**    | The total number of files.                                                                                                             | [optional] |
+| **changes** | **int**    | The number of pending changes in the Notefile.                                                                                         | [optional] |
+| **pending** | **bool**   | Whether there are pending changes.                                                                                                     | [optional] |
+| **info**    | **object** | An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file. | [optional] |
 
 ## Example
 
@@ -27,6 +26,5 @@ handle_notefile_changes_pending200_response_dict = handle_notefile_changes_pendi
 # create an instance of HandleNotefileChangesPending200Response from a dict
 handle_notefile_changes_pending200_response_from_dict = HandleNotefileChangesPending200Response.from_dict(handle_notefile_changes_pending200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

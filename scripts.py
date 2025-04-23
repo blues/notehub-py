@@ -115,13 +115,59 @@ def remove_deprecated_parameters(input_file: str, output_file: str):
 
     print(f"Filtered OpenAPI spec saved to: {output_file}")
 
+def run_prettier_on_docs():
+    """
+    Run Prettier on the generated markdown documentation files in the src/docs/ directory.
+    This requires Prettier to be installed on the system.
+    """
+    try:
+        docs_dir = "src/docs"
+        
+        # Check if the docs directory exists
+        if not os.path.exists(docs_dir):
+            print(f"Documentation directory {docs_dir} not found. Skipping Prettier formatting.")
+            return
+            
+        print(f"Running Prettier on markdown documentation in {docs_dir}...")
+        
+        # Check if Prettier is installed
+        result = subprocess.run(
+            ["npx", "--no-install", "prettier", "--version"], 
+            capture_output=True, 
+            text=True
+        )
+        
+        if result.returncode != 0:
+            print("Prettier not found. Installing Prettier...")
+            subprocess.run(["npm", "install", "--global", "prettier"])
+        
+        # Run Prettier on all markdown files in the src/docs/ directory and subdirectories
+        subprocess.run([
+            "npx", 
+            "prettier", 
+            "--write", 
+            f"{docs_dir}/**/*.md"
+        ])
+        print("Prettier formatting of documentation completed successfully.")
+    except Exception as e:
+        print(f"Exception when running Prettier on docs: {e}")
+
+def generate_and_format():
+    """
+    Convenience function to generate the package and run Prettier on it.
+    """
+    remove_deprecated_parameters("openapi.yaml", "openapi_filtered.yaml")
+    generate_package()
+    run_prettier_on_docs()
+    build_distro_package()
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print(
             "Usage: python3 scripts.py [download_python_template | " 
             "generate_package | build_distro_package | "
-            "remove_deprecated_parameters]"
+            "remove_deprecated_parameters | run_prettier_on_docs | generate_and_format]"
         )
         sys.exit(1)
     
@@ -133,11 +179,15 @@ if __name__ == "__main__":
     elif script_to_run == "build_distro_package":
         build_distro_package()
     elif script_to_run == "remove_deprecated_parameters":
-        remove_deprecated_parameters("openapi.yaml", "openapi_filtered.yaml")    
+        remove_deprecated_parameters("openapi.yaml", "openapi_filtered.yaml")
+    elif script_to_run == "run_prettier_on_docs":
+        run_prettier_on_docs()
+    elif script_to_run == "generate_and_format":
+        generate_and_format()
     else:
         print(
             "Invalid script name. Use one of: download_python_template, "
             "generate_package, build_distro_package, "
-            "remove_deprecated_parameters"
+            "remove_deprecated_parameters, run_prettier_on_docs, generate_and_format"
         )
-        sys.exit(1) 
+        sys.exit(1)

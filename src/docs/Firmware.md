@@ -1,21 +1,20 @@
 # Firmware
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**org** | **str** |  | [optional] 
-**product** | **str** |  | [optional] 
-**firmware** | **str** |  | [optional] 
-**version** | **str** |  | [optional] 
-**target** | **str** |  | [optional] 
-**ver_major** | **int** |  | [optional] 
-**ver_minor** | **int** |  | [optional] 
-**ver_patch** | **int** |  | [optional] 
-**ver_build** | **int** |  | [optional] 
-**built** | **str** |  | [optional] 
-**builder** | **str** |  | [optional] 
+| Name          | Type    | Description | Notes      |
+| ------------- | ------- | ----------- | ---------- |
+| **org**       | **str** |             | [optional] |
+| **product**   | **str** |             | [optional] |
+| **firmware**  | **str** |             | [optional] |
+| **version**   | **str** |             | [optional] |
+| **target**    | **str** |             | [optional] |
+| **ver_major** | **int** |             | [optional] |
+| **ver_minor** | **int** |             | [optional] |
+| **ver_patch** | **int** |             | [optional] |
+| **ver_build** | **int** |             | [optional] |
+| **built**     | **str** |             | [optional] |
+| **builder**   | **str** |             | [optional] |
 
 ## Example
 
@@ -34,6 +33,5 @@ firmware_dict = firmware_instance.to_dict()
 # create an instance of Firmware from a dict
 firmware_from_dict = Firmware.from_dict(firmware_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

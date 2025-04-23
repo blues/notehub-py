@@ -1,12 +1,11 @@
 # Note
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**body** | **object** |  | [optional] 
-**payload** | **str** |  | [optional] 
+| Name        | Type       | Description | Notes      |
+| ----------- | ---------- | ----------- | ---------- |
+| **body**    | **object** |             | [optional] |
+| **payload** | **str**    |             | [optional] |
 
 ## Example
 
@@ -25,6 +24,5 @@ note_dict = note_instance.to_dict()
 # create an instance of Note from a dict
 note_from_dict = Note.from_dict(note_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

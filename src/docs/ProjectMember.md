@@ -1,13 +1,12 @@
 # ProjectMember
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**name** | **str** |  | 
-**email** | **str** | The email address of the project member. This property will only be populated if the viewer is an owner of the project.  | 
-**role** | [**Role**](Role.md) |  | 
+| Name      | Type                | Description                                                                                                             | Notes |
+| --------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----- |
+| **name**  | **str**             |                                                                                                                         |
+| **email** | **str**             | The email address of the project member. This property will only be populated if the viewer is an owner of the project. |
+| **role**  | [**Role**](Role.md) |                                                                                                                         |
 
 ## Example
 
@@ -26,6 +25,5 @@ project_member_dict = project_member_instance.to_dict()
 # create an instance of ProjectMember from a dict
 project_member_from_dict = ProjectMember.from_dict(project_member_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

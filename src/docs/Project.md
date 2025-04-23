@@ -1,16 +1,15 @@
 # Project
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**uid** | **str** |  | 
-**label** | **str** |  | 
-**created** | **datetime** |  | 
-**role** | [**Role**](Role.md) |  | [optional] 
-**administrative_contact** | [**Contact**](Contact.md) |  | [optional] 
-**technical_contact** | [**Contact**](Contact.md) |  | [optional] 
+| Name                       | Type                      | Description | Notes      |
+| -------------------------- | ------------------------- | ----------- | ---------- |
+| **uid**                    | **str**                   |             |
+| **label**                  | **str**                   |             |
+| **created**                | **datetime**              |             |
+| **role**                   | [**Role**](Role.md)       |             | [optional] |
+| **administrative_contact** | [**Contact**](Contact.md) |             | [optional] |
+| **technical_contact**      | [**Contact**](Contact.md) |             | [optional] |
 
 ## Example
 
@@ -29,6 +28,5 @@ project_dict = project_instance.to_dict()
 # create an instance of Project from a dict
 project_from_dict = Project.from_dict(project_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

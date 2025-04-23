@@ -1,12 +1,11 @@
 # GetAlerts200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**alerts** | [**List[Alert]**](Alert.md) | The list of alerts | 
-**has_more** | **bool** | True if there are more alerts | 
+| Name         | Type                        | Description                   | Notes |
+| ------------ | --------------------------- | ----------------------------- | ----- |
+| **alerts**   | [**List[Alert]**](Alert.md) | The list of alerts            |
+| **has_more** | **bool**                    | True if there are more alerts |
 
 ## Example
 
@@ -25,6 +24,5 @@ get_alerts200_response_dict = get_alerts200_response_instance.to_dict()
 # create an instance of GetAlerts200Response from a dict
 get_alerts200_response_from_dict = GetAlerts200Response.from_dict(get_alerts200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

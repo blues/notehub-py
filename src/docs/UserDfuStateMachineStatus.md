@@ -1,14 +1,13 @@
 # UserDfuStateMachineStatus
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**phase** | **str** |  | [optional] 
-**phase_description** | **str** |  | [optional] 
-**var_date** | **datetime** |  | [optional] 
-**status** | **str** |  | [optional] 
+| Name                  | Type         | Description | Notes      |
+| --------------------- | ------------ | ----------- | ---------- |
+| **phase**             | **str**      |             | [optional] |
+| **phase_description** | **str**      |             | [optional] |
+| **var_date**          | **datetime** |             | [optional] |
+| **status**            | **str**      |             | [optional] |
 
 ## Example
 
@@ -27,6 +26,5 @@ user_dfu_state_machine_status_dict = user_dfu_state_machine_status_instance.to_d
 # create an instance of UserDfuStateMachineStatus from a dict
 user_dfu_state_machine_status_from_dict = UserDfuStateMachineStatus.from_dict(user_dfu_state_machine_status_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

@@ -1,11 +1,10 @@
 # GetProjects200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**projects** | [**List[Project]**](Project.md) |  | [optional] 
+| Name         | Type                            | Description | Notes      |
+| ------------ | ------------------------------- | ----------- | ---------- |
+| **projects** | [**List[Project]**](Project.md) |             | [optional] |
 
 ## Example
 
@@ -24,6 +23,5 @@ get_projects200_response_dict = get_projects200_response_instance.to_dict()
 # create an instance of GetProjects200Response from a dict
 get_projects200_response_from_dict = GetProjects200Response.from_dict(get_projects200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

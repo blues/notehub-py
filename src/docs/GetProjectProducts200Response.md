@@ -1,11 +1,10 @@
 # GetProjectProducts200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**products** | [**List[Product]**](Product.md) |  | [optional] 
+| Name         | Type                            | Description | Notes      |
+| ------------ | ------------------------------- | ----------- | ---------- |
+| **products** | [**List[Product]**](Product.md) |             | [optional] |
 
 ## Example
 
@@ -24,6 +23,5 @@ get_project_products200_response_dict = get_project_products200_response_instanc
 # create an instance of GetProjectProducts200Response from a dict
 get_project_products200_response_from_dict = GetProjectProducts200Response.from_dict(get_project_products200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

@@ -1,13 +1,12 @@
 # AlertNotificationsInner
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**notification_type** | **str** | The type of notification | [optional] 
-**status** | **float** | The status of the notification | [optional] 
-**recipients** | **str** | The recipients of the notification | [optional] 
+| Name                  | Type      | Description                        | Notes      |
+| --------------------- | --------- | ---------------------------------- | ---------- |
+| **notification_type** | **str**   | The type of notification           | [optional] |
+| **status**            | **float** | The status of the notification     | [optional] |
+| **recipients**        | **str**   | The recipients of the notification | [optional] |
 
 ## Example
 
@@ -26,6 +25,5 @@ alert_notifications_inner_dict = alert_notifications_inner_instance.to_dict()
 # create an instance of AlertNotificationsInner from a dict
 alert_notifications_inner_from_dict = AlertNotificationsInner.from_dict(alert_notifications_inner_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

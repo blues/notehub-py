@@ -2,30 +2,28 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**create_repository**](RepositoryApi.md#create_repository) | **POST** /v1/repositories | 
-[**create_repository_dataset**](RepositoryApi.md#create_repository_dataset) | **PUT** /v1/repositories/{repositoryUID}/datasets | 
-[**delete_repository**](RepositoryApi.md#delete_repository) | **DELETE** /v1/repositories/{repositoryUID} | 
-[**delete_repository_dataset**](RepositoryApi.md#delete_repository_dataset) | **DELETE** /v1/repositories/{repositoryUID}/datasets/{name} | 
-[**get_repository**](RepositoryApi.md#get_repository) | **GET** /v1/repositories/{repositoryUID} | 
-[**get_repository_data**](RepositoryApi.md#get_repository_data) | **GET** /v1/repositories/{repositoryUID}/data | 
-[**get_repository_dataset**](RepositoryApi.md#get_repository_dataset) | **GET** /v1/repositories/{repositoryUID}/datasets/{name} | 
-[**put_repository**](RepositoryApi.md#put_repository) | **PUT** /v1/repositories/{repositoryUID} | 
-[**query_repository_dataset**](RepositoryApi.md#query_repository_dataset) | **GET** /v1/repositories/{repositoryUID}/datasets/{name}/query | 
-[**query_repository_sql**](RepositoryApi.md#query_repository_sql) | **POST** /v1/repositories/{repositoryUID}/sql | 
-
+| Method                                                                      | HTTP request                                                   | Description |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------- | ----------- |
+| [**create_repository**](RepositoryApi.md#create_repository)                 | **POST** /v1/repositories                                      |
+| [**create_repository_dataset**](RepositoryApi.md#create_repository_dataset) | **PUT** /v1/repositories/{repositoryUID}/datasets              |
+| [**delete_repository**](RepositoryApi.md#delete_repository)                 | **DELETE** /v1/repositories/{repositoryUID}                    |
+| [**delete_repository_dataset**](RepositoryApi.md#delete_repository_dataset) | **DELETE** /v1/repositories/{repositoryUID}/datasets/{name}    |
+| [**get_repository**](RepositoryApi.md#get_repository)                       | **GET** /v1/repositories/{repositoryUID}                       |
+| [**get_repository_data**](RepositoryApi.md#get_repository_data)             | **GET** /v1/repositories/{repositoryUID}/data                  |
+| [**get_repository_dataset**](RepositoryApi.md#get_repository_dataset)       | **GET** /v1/repositories/{repositoryUID}/datasets/{name}       |
+| [**put_repository**](RepositoryApi.md#put_repository)                       | **PUT** /v1/repositories/{repositoryUID}                       |
+| [**query_repository_dataset**](RepositoryApi.md#query_repository_dataset)   | **GET** /v1/repositories/{repositoryUID}/datasets/{name}/query |
+| [**query_repository_sql**](RepositoryApi.md#query_repository_sql)           | **POST** /v1/repositories/{repositoryUID}/sql                  |
 
 # **create_repository**
+
 > Repository create_repository(create_update_repository)
-
-
 
 Create a new repository
 
 ### Example
 
-* Api Key Authentication (api_key):
+- Api Key Authentication (api_key):
 
 ```python
 import notehub_py
@@ -55,7 +53,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RepositoryApi(api_client)
-    create_update_repository = notehub_py.CreateUpdateRepository() # CreateUpdateRepository | 
+    create_update_repository = notehub_py.CreateUpdateRepository() # CreateUpdateRepository |
 
     try:
         api_response = api_instance.create_repository(create_update_repository)
@@ -65,14 +63,11 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("Exception when calling RepositoryApi->create_repository: %s\n" % e)
 ```
 
-
-
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **create_update_repository** | [**CreateUpdateRepository**](CreateUpdateRepository.md)|  | 
+| Name                         | Type                                                    | Description | Notes |
+| ---------------------------- | ------------------------------------------------------- | ----------- | ----- |
+| **create_update_repository** | [**CreateUpdateRepository**](CreateUpdateRepository.md) |             |
 
 ### Return type
 
@@ -84,28 +79,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 ### HTTP response details
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**201** | Repository created successfully |  -  |
-**0** | The response body in case of an API error. |  -  |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **201**     | Repository created successfully            | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_repository_dataset**
+
 > DataSet create_repository_dataset(repository_uid, x_repository_key, data_set)
-
-
 
 Create a new dataset within a repository
 
 ### Example
 
-* Api Key Authentication (api_key):
+- Api Key Authentication (api_key):
 
 ```python
 import notehub_py
@@ -134,9 +128,9 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RepositoryApi(api_client)
-    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str | 
+    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     x_repository_key = 'x_repository_key_example' # str | The secret key used to access this repository
-    data_set = notehub_py.DataSet() # DataSet | 
+    data_set = notehub_py.DataSet() # DataSet |
 
     try:
         api_response = api_instance.create_repository_dataset(repository_uid, x_repository_key, data_set)
@@ -146,16 +140,13 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("Exception when calling RepositoryApi->create_repository_dataset: %s\n" % e)
 ```
 
-
-
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **repository_uid** | **str**|  | 
- **x_repository_key** | **str**| The secret key used to access this repository | 
- **data_set** | [**DataSet**](DataSet.md)|  | 
+| Name                 | Type                      | Description                                   | Notes |
+| -------------------- | ------------------------- | --------------------------------------------- | ----- |
+| **repository_uid**   | **str**                   |                                               |
+| **x_repository_key** | **str**                   | The secret key used to access this repository |
+| **data_set**         | [**DataSet**](DataSet.md) |                                               |
 
 ### Return type
 
@@ -167,28 +158,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 ### HTTP response details
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**201** | Dataset created successfully |  -  |
-**0** | The response body in case of an API error. |  -  |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **201**     | Dataset created successfully               | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_repository**
+
 > delete_repository(repository_uid, x_repository_key)
-
-
 
 Delete a repository
 
 ### Example
 
-* Api Key Authentication (api_key):
+- Api Key Authentication (api_key):
 
 ```python
 import notehub_py
@@ -216,7 +206,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RepositoryApi(api_client)
-    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str | 
+    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     x_repository_key = 'x_repository_key_example' # str | The secret key used to access this repository
 
     try:
@@ -225,15 +215,12 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("Exception when calling RepositoryApi->delete_repository: %s\n" % e)
 ```
 
-
-
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **repository_uid** | **str**|  | 
- **x_repository_key** | **str**| The secret key used to access this repository | 
+| Name                 | Type    | Description                                   | Notes |
+| -------------------- | ------- | --------------------------------------------- | ----- |
+| **repository_uid**   | **str** |                                               |
+| **x_repository_key** | **str** | The secret key used to access this repository |
 
 ### Return type
 
@@ -245,28 +232,27 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 ### HTTP response details
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Dataset deleted successfully |  -  |
-**0** | The response body in case of an API error. |  -  |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Dataset deleted successfully               | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_repository_dataset**
+
 > delete_repository_dataset(repository_uid, name, x_repository_key)
-
-
 
 Delete a dataset
 
 ### Example
 
-* Api Key Authentication (api_key):
+- Api Key Authentication (api_key):
 
 ```python
 import notehub_py
@@ -294,7 +280,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RepositoryApi(api_client)
-    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str | 
+    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     name = 'name_example' # str | The name of the data set
     x_repository_key = 'x_repository_key_example' # str | The secret key used to access this repository
 
@@ -304,16 +290,13 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("Exception when calling RepositoryApi->delete_repository_dataset: %s\n" % e)
 ```
 
-
-
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **repository_uid** | **str**|  | 
- **name** | **str**| The name of the data set | 
- **x_repository_key** | **str**| The secret key used to access this repository | 
+| Name                 | Type    | Description                                   | Notes |
+| -------------------- | ------- | --------------------------------------------- | ----- |
+| **repository_uid**   | **str** |                                               |
+| **name**             | **str** | The name of the data set                      |
+| **x_repository_key** | **str** | The secret key used to access this repository |
 
 ### Return type
 
@@ -325,28 +308,27 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 ### HTTP response details
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Dataset deleted successfully |  -  |
-**0** | The response body in case of an API error. |  -  |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Dataset deleted successfully               | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_repository**
+
 > Repository get_repository(repository_uid, x_repository_key)
-
-
 
 Get repository information
 
 ### Example
 
-* Api Key Authentication (api_key):
+- Api Key Authentication (api_key):
 
 ```python
 import notehub_py
@@ -375,7 +357,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RepositoryApi(api_client)
-    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str | 
+    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     x_repository_key = 'x_repository_key_example' # str | The secret key used to access this repository
 
     try:
@@ -386,15 +368,12 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("Exception when calling RepositoryApi->get_repository: %s\n" % e)
 ```
 
-
-
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **repository_uid** | **str**|  | 
- **x_repository_key** | **str**| The secret key used to access this repository | 
+| Name                 | Type    | Description                                   | Notes |
+| -------------------- | ------- | --------------------------------------------- | ----- |
+| **repository_uid**   | **str** |                                               |
+| **x_repository_key** | **str** | The secret key used to access this repository |
 
 ### Return type
 
@@ -406,28 +385,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 ### HTTP response details
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Dataset updated successfully |  -  |
-**0** | The response body in case of an API error. |  -  |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Dataset updated successfully               | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_repository_data**
+
 > bytearray get_repository_data(x_repository_key, repository_uid, start, end=end)
-
-
 
 Get event and session data from a repository in NDJSON format.
 
 ### Example
 
-* Api Key Authentication (api_key):
+- Api Key Authentication (api_key):
 
 ```python
 import notehub_py
@@ -456,7 +434,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RepositoryApi(api_client)
     x_repository_key = 'x_repository_key_example' # str | The secret key used to access this repository
-    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str | 
+    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     start = 'start_example' # str | Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format.
     end = 'end_example' # str | End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used. (optional)
 
@@ -468,17 +446,14 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("Exception when calling RepositoryApi->get_repository_data: %s\n" % e)
 ```
 
-
-
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **x_repository_key** | **str**| The secret key used to access this repository | 
- **repository_uid** | **str**|  | 
- **start** | **str**| Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format. | 
- **end** | **str**| End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used. | [optional] 
+| Name                 | Type    | Description                                                                                                                     | Notes      |
+| -------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **x_repository_key** | **str** | The secret key used to access this repository                                                                                   |
+| **repository_uid**   | **str** |                                                                                                                                 |
+| **start**            | **str** | Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format. |
+| **end**              | **str** | End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used.                                | [optional] |
 
 ### Return type
 
@@ -490,28 +465,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/csv, application/json
+- **Content-Type**: Not defined
+- **Accept**: text/csv, application/json
 
 ### HTTP response details
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful request returning NDJSON encoded event and session objects. |  -  |
-**0** | The response body in case of an API error. |  -  |
+| Status code | Description                                                            | Response headers |
+| ----------- | ---------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request returning NDJSON encoded event and session objects. | -                |
+| **0**       | The response body in case of an API error.                             | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_repository_dataset**
+
 > DataSet get_repository_dataset(repository_uid, name, x_repository_key)
-
-
 
 Get the details of a dataset
 
 ### Example
 
-* Api Key Authentication (api_key):
+- Api Key Authentication (api_key):
 
 ```python
 import notehub_py
@@ -540,7 +514,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RepositoryApi(api_client)
-    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str | 
+    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     name = 'name_example' # str | The name of the data set
     x_repository_key = 'x_repository_key_example' # str | The secret key used to access this repository
 
@@ -552,16 +526,13 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("Exception when calling RepositoryApi->get_repository_dataset: %s\n" % e)
 ```
 
-
-
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **repository_uid** | **str**|  | 
- **name** | **str**| The name of the data set | 
- **x_repository_key** | **str**| The secret key used to access this repository | 
+| Name                 | Type    | Description                                   | Notes |
+| -------------------- | ------- | --------------------------------------------- | ----- |
+| **repository_uid**   | **str** |                                               |
+| **name**             | **str** | The name of the data set                      |
+| **x_repository_key** | **str** | The secret key used to access this repository |
 
 ### Return type
 
@@ -573,28 +544,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 ### HTTP response details
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Dataset details |  -  |
-**0** | The response body in case of an API error. |  -  |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Dataset details                            | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_repository**
+
 > Repository put_repository(repository_uid, x_repository_key, create_update_repository)
-
-
 
 Update a repository
 
 ### Example
 
-* Api Key Authentication (api_key):
+- Api Key Authentication (api_key):
 
 ```python
 import notehub_py
@@ -624,9 +594,9 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RepositoryApi(api_client)
-    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str | 
+    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     x_repository_key = 'x_repository_key_example' # str | The secret key used to access this repository
-    create_update_repository = notehub_py.CreateUpdateRepository() # CreateUpdateRepository | 
+    create_update_repository = notehub_py.CreateUpdateRepository() # CreateUpdateRepository |
 
     try:
         api_response = api_instance.put_repository(repository_uid, x_repository_key, create_update_repository)
@@ -636,16 +606,13 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("Exception when calling RepositoryApi->put_repository: %s\n" % e)
 ```
 
-
-
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **repository_uid** | **str**|  | 
- **x_repository_key** | **str**| The secret key used to access this repository | 
- **create_update_repository** | [**CreateUpdateRepository**](CreateUpdateRepository.md)|  | 
+| Name                         | Type                                                    | Description                                   | Notes |
+| ---------------------------- | ------------------------------------------------------- | --------------------------------------------- | ----- |
+| **repository_uid**           | **str**                                                 |                                               |
+| **x_repository_key**         | **str**                                                 | The secret key used to access this repository |
+| **create_update_repository** | [**CreateUpdateRepository**](CreateUpdateRepository.md) |                                               |
 
 ### Return type
 
@@ -657,28 +624,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 ### HTTP response details
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Dataset updated successfully |  -  |
-**0** | The response body in case of an API error. |  -  |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Dataset updated successfully               | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **query_repository_dataset**
+
 > bytearray query_repository_dataset(x_repository_key, repository_uid, name, start, end=end, select=select, where=where, aggregate_window=aggregate_window, location_near=location_near, location_near_radius=location_near_radius, limit=limit, order_by=order_by, distinct=distinct)
-
-
 
 Query a dataset with support for time ranges, field selection, filtering, and location-based queries
 
 ### Example
 
-* Api Key Authentication (api_key):
+- Api Key Authentication (api_key):
 
 ```python
 import notehub_py
@@ -707,7 +673,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RepositoryApi(api_client)
     x_repository_key = 'x_repository_key_example' # str | The secret key used to access this repository
-    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str | 
+    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     name = 'name_example' # str | The name of the data set
     start = 'start_example' # str | Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format.
     end = 'end_example' # str | End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used. (optional)
@@ -728,26 +694,23 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("Exception when calling RepositoryApi->query_repository_dataset: %s\n" % e)
 ```
 
-
-
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **x_repository_key** | **str**| The secret key used to access this repository | 
- **repository_uid** | **str**|  | 
- **name** | **str**| The name of the data set | 
- **start** | **str**| Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format. | 
- **end** | **str**| End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used. | [optional] 
- **select** | **str**| Comma separated list of fields to include. Supports aggregate functions (avg, sum, min, max, count, most_recent). | [optional] 
- **where** | **str**| Additional filters using boolean logic mini-language (e.g. and.(device.eq.dev:123,temp.gt.100)) | [optional] 
- **aggregate_window** | **str**| Aggregate results into buckets for a time duration, expressed in Postgres INTERVAL format | [optional] 
- **location_near** | **str**| Latitude and Longitude for location-based filtering, location_near_radius must also be provided | [optional] 
- **location_near_radius** | **int**| Distance from location_near in meters, location_near must also be provided | [optional] 
- **limit** | **int**| Limit the number of results returned | [optional] 
- **order_by** | **str**| Order the results by a field | [optional] 
- **distinct** | **bool**| Return only distinct results | [optional] 
+| Name                     | Type     | Description                                                                                                                     | Notes      |
+| ------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **x_repository_key**     | **str**  | The secret key used to access this repository                                                                                   |
+| **repository_uid**       | **str**  |                                                                                                                                 |
+| **name**                 | **str**  | The name of the data set                                                                                                        |
+| **start**                | **str**  | Start of the time range, as an ISO-8601 date or relative to now (e.g. -1y). Relative dates follow the Postgres INTERVAL format. |
+| **end**                  | **str**  | End of the time range, as an ISO-8601 date or relative to now. If omitted, current time is used.                                | [optional] |
+| **select**               | **str**  | Comma separated list of fields to include. Supports aggregate functions (avg, sum, min, max, count, most_recent).               | [optional] |
+| **where**                | **str**  | Additional filters using boolean logic mini-language (e.g. and.(device.eq.dev:123,temp.gt.100))                                 | [optional] |
+| **aggregate_window**     | **str**  | Aggregate results into buckets for a time duration, expressed in Postgres INTERVAL format                                       | [optional] |
+| **location_near**        | **str**  | Latitude and Longitude for location-based filtering, location_near_radius must also be provided                                 | [optional] |
+| **location_near_radius** | **int**  | Distance from location_near in meters, location_near must also be provided                                                      | [optional] |
+| **limit**                | **int**  | Limit the number of results returned                                                                                            | [optional] |
+| **order_by**             | **str**  | Order the results by a field                                                                                                    | [optional] |
+| **distinct**             | **bool** | Return only distinct results                                                                                                    | [optional] |
 
 ### Return type
 
@@ -759,28 +722,27 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/csv, application/json
+- **Content-Type**: Not defined
+- **Accept**: text/csv, application/json
 
 ### HTTP response details
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful query |  -  |
-**0** | The response body in case of an API error. |  -  |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Successful query                           | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **query_repository_sql**
+
 > bytearray query_repository_sql(repository_uid, x_repository_key, body, x_click_house_format=x_click_house_format)
-
-
 
 Run a raw Clickhouse-compatible SQL statement against the repository's database. Results are returned in CSV format
 
 ### Example
 
-* Api Key Authentication (api_key):
+- Api Key Authentication (api_key):
 
 ```python
 import notehub_py
@@ -808,7 +770,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RepositoryApi(api_client)
-    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str | 
+    repository_uid = 'rid:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     x_repository_key = 'x_repository_key_example' # str | The secret key used to access this repository
     body = 'body_example' # str | Clickhouse-compatible SQL statement
     x_click_house_format = 'x_click_house_format_example' # str | Specify the format of the response data. This functions the same as the ClickHouse `FORMAT` clause. Supported values include `CSV`, `JSON`, `JSONEachRow`, `TabSeparated`, and `NDJSON`. If not specified, defaults to `TabSeparated`. (optional)
@@ -821,17 +783,14 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("Exception when calling RepositoryApi->query_repository_sql: %s\n" % e)
 ```
 
-
-
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **repository_uid** | **str**|  | 
- **x_repository_key** | **str**| The secret key used to access this repository | 
- **body** | **str**| Clickhouse-compatible SQL statement | 
- **x_click_house_format** | **str**| Specify the format of the response data. This functions the same as the ClickHouse &#x60;FORMAT&#x60; clause. Supported values include &#x60;CSV&#x60;, &#x60;JSON&#x60;, &#x60;JSONEachRow&#x60;, &#x60;TabSeparated&#x60;, and &#x60;NDJSON&#x60;. If not specified, defaults to &#x60;TabSeparated&#x60;. | [optional] 
+| Name                     | Type    | Description                                                                                                                                                                                                                                                                                                  | Notes      |
+| ------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
+| **repository_uid**       | **str** |                                                                                                                                                                                                                                                                                                              |
+| **x_repository_key**     | **str** | The secret key used to access this repository                                                                                                                                                                                                                                                                |
+| **body**                 | **str** | Clickhouse-compatible SQL statement                                                                                                                                                                                                                                                                          |
+| **x_click_house_format** | **str** | Specify the format of the response data. This functions the same as the ClickHouse &#x60;FORMAT&#x60; clause. Supported values include &#x60;CSV&#x60;, &#x60;JSON&#x60;, &#x60;JSONEachRow&#x60;, &#x60;TabSeparated&#x60;, and &#x60;NDJSON&#x60;. If not specified, defaults to &#x60;TabSeparated&#x60;. | [optional] |
 
 ### Return type
 
@@ -843,15 +802,14 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: text/plain
- - **Accept**: text/plain, application/json
+- **Content-Type**: text/plain
+- **Accept**: text/plain, application/json
 
 ### HTTP response details
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful query |  -  |
-**0** | The response body in case of an API error. |  -  |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Successful query                           | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-

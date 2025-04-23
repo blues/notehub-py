@@ -1,14 +1,13 @@
 # Repository
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**uid** | **str** | The unique identifier for the data repository | [optional] 
-**name** | **str** | repository name | [optional] 
-**fleet_uids** | **List[str]** |  | [optional] 
-**project_uids** | **List[str]** |  | [optional] 
+| Name             | Type          | Description                                   | Notes      |
+| ---------------- | ------------- | --------------------------------------------- | ---------- |
+| **uid**          | **str**       | The unique identifier for the data repository | [optional] |
+| **name**         | **str**       | repository name                               | [optional] |
+| **fleet_uids**   | **List[str]** |                                               | [optional] |
+| **project_uids** | **List[str]** |                                               | [optional] |
 
 ## Example
 
@@ -27,6 +26,5 @@ repository_dict = repository_instance.to_dict()
 # create an instance of Repository from a dict
 repository_from_dict = Repository.from_dict(repository_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

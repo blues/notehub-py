@@ -2,21 +2,19 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**get_billing_accounts**](BillingAccountApi.md#get_billing_accounts) | **GET** /v1/billing-accounts | 
-
+| Method                                                                | HTTP request                 | Description |
+| --------------------------------------------------------------------- | ---------------------------- | ----------- |
+| [**get_billing_accounts**](BillingAccountApi.md#get_billing_accounts) | **GET** /v1/billing-accounts |
 
 # **get_billing_accounts**
+
 > GetBillingAccounts200Response get_billing_accounts()
-
-
 
 Get Billing Accounts accessible by the api_key
 
 ### Example
 
-* Api Key Authentication (api_key):
+- Api Key Authentication (api_key):
 
 ```python
 import notehub_py
@@ -54,8 +52,6 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("Exception when calling BillingAccountApi->get_billing_accounts: %s\n" % e)
 ```
 
-
-
 ### Parameters
 
 This endpoint does not need any parameter.
@@ -70,15 +66,14 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 ### HTTP response details
 
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful operation |  -  |
-**0** | The response body in case of an API error. |  -  |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Successful operation                       | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-

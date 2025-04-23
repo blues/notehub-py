@@ -1,15 +1,14 @@
 # DataSet
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**name** | **str** | The name of the data set | [optional] 
-**time** | **str** | JSONata expression resulting in the relevant time field | [optional] 
-**lat** | **str** | JSONata expression resulting in the latitude field | [optional] 
-**lon** | **str** | JSONata expression resulting in the Longitude field | [optional] 
-**fields** | [**List[DataSetField]**](DataSetField.md) |  | [optional] 
+| Name       | Type                                      | Description                                             | Notes      |
+| ---------- | ----------------------------------------- | ------------------------------------------------------- | ---------- |
+| **name**   | **str**                                   | The name of the data set                                | [optional] |
+| **time**   | **str**                                   | JSONata expression resulting in the relevant time field | [optional] |
+| **lat**    | **str**                                   | JSONata expression resulting in the latitude field      | [optional] |
+| **lon**    | **str**                                   | JSONata expression resulting in the Longitude field     | [optional] |
+| **fields** | [**List[DataSetField]**](DataSetField.md) |                                                         | [optional] |
 
 ## Example
 
@@ -28,6 +27,5 @@ data_set_dict = data_set_instance.to_dict()
 # create an instance of DataSet from a dict
 data_set_from_dict = DataSet.from_dict(data_set_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

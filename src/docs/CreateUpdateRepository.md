@@ -1,13 +1,12 @@
 # CreateUpdateRepository
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**name** | **str** |  | [optional] 
-**fleet_uids** | **List[str]** |  | [optional] 
-**project_uids** | **List[str]** |  | [optional] 
+| Name             | Type          | Description | Notes      |
+| ---------------- | ------------- | ----------- | ---------- |
+| **name**         | **str**       |             | [optional] |
+| **fleet_uids**   | **List[str]** |             | [optional] |
+| **project_uids** | **List[str]** |             | [optional] |
 
 ## Example
 
@@ -26,6 +25,5 @@ create_update_repository_dict = create_update_repository_instance.to_dict()
 # create an instance of CreateUpdateRepository from a dict
 create_update_repository_from_dict = CreateUpdateRepository.from_dict(create_update_repository_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

@@ -1,11 +1,10 @@
 # HandleNoteSignal200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**connected** | **bool** | true if the Notecard is connected to Notehub. | [optional] 
+| Name          | Type     | Description                                   | Notes      |
+| ------------- | -------- | --------------------------------------------- | ---------- |
+| **connected** | **bool** | true if the Notecard is connected to Notehub. | [optional] |
 
 ## Example
 
@@ -24,6 +23,5 @@ handle_note_signal200_response_dict = handle_note_signal200_response_instance.to
 # create an instance of HandleNoteSignal200Response from a dict
 handle_note_signal200_response_from_dict = HandleNoteSignal200Response.from_dict(handle_note_signal200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

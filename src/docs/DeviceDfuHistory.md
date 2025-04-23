@@ -1,13 +1,12 @@
 # DeviceDfuHistory
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**device_uid** | **str** | Device UID | [optional] 
-**current** | [**DeviceDfuStatusCurrent**](DeviceDfuStatusCurrent.md) |  | [optional] 
-**history** | [**List[DeviceDfuStateMachine]**](DeviceDfuStateMachine.md) |  | [optional] 
+| Name           | Type                                                        | Description | Notes      |
+| -------------- | ----------------------------------------------------------- | ----------- | ---------- |
+| **device_uid** | **str**                                                     | Device UID  | [optional] |
+| **current**    | [**DeviceDfuStatusCurrent**](DeviceDfuStatusCurrent.md)     |             | [optional] |
+| **history**    | [**List[DeviceDfuStateMachine]**](DeviceDfuStateMachine.md) |             | [optional] |
 
 ## Example
 
@@ -26,6 +25,5 @@ device_dfu_history_dict = device_dfu_history_instance.to_dict()
 # create an instance of DeviceDfuHistory from a dict
 device_dfu_history_from_dict = DeviceDfuHistory.from_dict(device_dfu_history_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

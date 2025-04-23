@@ -4,14 +4,14 @@ Description of the current firmware
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**version** | **str** | Firmware version | [optional] 
-**organization** | **str** | Firmware organization | [optional] 
-**description** | **str** | Firmware description | [optional] 
-**product** | **str** | Firmware product | [optional] 
-**built** | **str** | Firmware build date | [optional] 
-**builder** | **str** | Firmware author | [optional] 
+| Name             | Type    | Description           | Notes      |
+| ---------------- | ------- | --------------------- | ---------- |
+| **version**      | **str** | Firmware version      | [optional] |
+| **organization** | **str** | Firmware organization | [optional] |
+| **description**  | **str** | Firmware description  | [optional] |
+| **product**      | **str** | Firmware product      | [optional] |
+| **built**        | **str** | Firmware build date   | [optional] |
+| **builder**      | **str** | Firmware author       | [optional] |
 
 ## Example
 
@@ -30,6 +30,5 @@ device_dfu_status_current_dict = device_dfu_status_current_instance.to_dict()
 # create an instance of DeviceDfuStatusCurrent from a dict
 device_dfu_status_current_from_dict = DeviceDfuStatusCurrent.from_dict(device_dfu_status_current_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

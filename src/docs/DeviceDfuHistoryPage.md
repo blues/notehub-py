@@ -1,12 +1,11 @@
 # DeviceDfuHistoryPage
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**devices** | [**List[DeviceDfuHistory]**](DeviceDfuHistory.md) |  | [optional] 
-**has_more** | **bool** |  | [optional] [default to False]
+| Name         | Type                                              | Description | Notes                         |
+| ------------ | ------------------------------------------------- | ----------- | ----------------------------- |
+| **devices**  | [**List[DeviceDfuHistory]**](DeviceDfuHistory.md) |             | [optional]                    |
+| **has_more** | **bool**                                          |             | [optional] [default to False] |
 
 ## Example
 
@@ -25,6 +24,5 @@ device_dfu_history_page_dict = device_dfu_history_page_instance.to_dict()
 # create an instance of DeviceDfuHistoryPage from a dict
 device_dfu_history_page_from_dict = DeviceDfuHistoryPage.from_dict(device_dfu_history_page_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

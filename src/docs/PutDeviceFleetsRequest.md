@@ -1,11 +1,10 @@
 # PutDeviceFleetsRequest
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**fleet_uids** | **List[str]** | The fleetUIDs to add to the device. | 
+| Name           | Type          | Description                         | Notes |
+| -------------- | ------------- | ----------------------------------- | ----- |
+| **fleet_uids** | **List[str]** | The fleetUIDs to add to the device. |
 
 ## Example
 
@@ -24,6 +23,5 @@ put_device_fleets_request_dict = put_device_fleets_request_instance.to_dict()
 # create an instance of PutDeviceFleetsRequest from a dict
 put_device_fleets_request_from_dict = PutDeviceFleetsRequest.from_dict(put_device_fleets_request_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

@@ -1,11 +1,10 @@
 # GetDeviceHealthLog200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**health_log** | [**List[GetDeviceHealthLog200ResponseHealthLogInner]**](GetDeviceHealthLog200ResponseHealthLogInner.md) |  | 
+| Name           | Type                                                                                                    | Description | Notes |
+| -------------- | ------------------------------------------------------------------------------------------------------- | ----------- | ----- |
+| **health_log** | [**List[GetDeviceHealthLog200ResponseHealthLogInner]**](GetDeviceHealthLog200ResponseHealthLogInner.md) |             |
 
 ## Example
 
@@ -24,6 +23,5 @@ get_device_health_log200_response_dict = get_device_health_log200_response_insta
 # create an instance of GetDeviceHealthLog200Response from a dict
 get_device_health_log200_response_from_dict = GetDeviceHealthLog200Response.from_dict(get_device_health_log200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

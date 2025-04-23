@@ -1,13 +1,12 @@
 # DataSetField
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**name** | **str** | The name of the field | [optional] 
-**datatype** | **int** | The datatype of the field | [optional] 
-**jsonata** | **str** | the JSONata expression used to populate this field | [optional] 
+| Name         | Type    | Description                                        | Notes      |
+| ------------ | ------- | -------------------------------------------------- | ---------- |
+| **name**     | **str** | The name of the field                              | [optional] |
+| **datatype** | **int** | The datatype of the field                          | [optional] |
+| **jsonata**  | **str** | the JSONata expression used to populate this field | [optional] |
 
 ## Example
 
@@ -26,6 +25,5 @@ data_set_field_dict = data_set_field_instance.to_dict()
 # create an instance of DataSetField from a dict
 data_set_field_from_dict = DataSetField.from_dict(data_set_field_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

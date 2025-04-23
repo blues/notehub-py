@@ -1,12 +1,11 @@
 # QuestionDataResponseMap
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**type** | **str** | Graph type must be &#39;map&#39; for a map visualization. | 
-**title** | **str** | Title of the map. | 
+| Name      | Type    | Description                                               | Notes |
+| --------- | ------- | --------------------------------------------------------- | ----- |
+| **type**  | **str** | Graph type must be &#39;map&#39; for a map visualization. |
+| **title** | **str** | Title of the map.                                         |
 
 ## Example
 
@@ -25,6 +24,5 @@ question_data_response_map_dict = question_data_response_map_instance.to_dict()
 # create an instance of QuestionDataResponseMap from a dict
 question_data_response_map_from_dict = QuestionDataResponseMap.from_dict(question_data_response_map_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-
