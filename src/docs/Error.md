@@ -1,16 +1,15 @@
 # Error
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**err** | **str** | Human readable error message. | 
-**code** | **int** | The HTTP error code associated with the error. | 
-**status** | **str** | Machine readable representation of the HTTP error code. | 
-**request** | **str** |  | [optional] 
-**details** | **object** |  | [optional] 
-**debug** | **str** |  | [optional] 
+| Name        | Type       | Description                                             | Notes      |
+| ----------- | ---------- | ------------------------------------------------------- | ---------- |
+| **err**     | **str**    | Human readable error message.                           |
+| **code**    | **int**    | The HTTP error code associated with the error.          |
+| **status**  | **str**    | Machine readable representation of the HTTP error code. |
+| **request** | **str**    |                                                         | [optional] |
+| **details** | **object** |                                                         | [optional] |
+| **debug**   | **str**    |                                                         | [optional] |
 
 ## Example
 
@@ -29,6 +28,5 @@ error_dict = error_instance.to_dict()
 # create an instance of Error from a dict
 error_from_dict = Error.from_dict(error_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

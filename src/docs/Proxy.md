@@ -4,13 +4,13 @@ Route settings specific to Proxy routes.
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**fleets** | **List[str]** | list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets | [optional] 
-**url** | **str** |  | [optional] 
-**alias** | **str** |  | [optional] 
-**http_headers** | **Dict[str, str]** |  | [optional] 
-**timeout** | **int** | Timeout in seconds for each request | [optional] [default to 15]
+| Name             | Type               | Description                                                                   | Notes                      |
+| ---------------- | ------------------ | ----------------------------------------------------------------------------- | -------------------------- |
+| **fleets**       | **List[str]**      | list of Fleet UIDs to apply route to, if any. If empty, applies to all Fleets | [optional]                 |
+| **url**          | **str**            |                                                                               | [optional]                 |
+| **alias**        | **str**            |                                                                               | [optional]                 |
+| **http_headers** | **Dict[str, str]** |                                                                               | [optional]                 |
+| **timeout**      | **int**            | Timeout in seconds for each request                                           | [optional] [default to 15] |
 
 ## Example
 
@@ -29,6 +29,5 @@ proxy_dict = proxy_instance.to_dict()
 # create an instance of Proxy from a dict
 proxy_from_dict = Proxy.from_dict(proxy_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

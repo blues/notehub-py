@@ -8,5 +8,5 @@ from notehub_py.api.device_api import DeviceApi
 from notehub_py.api.event_api import EventApi
 from notehub_py.api.monitor_api import MonitorApi
 from notehub_py.api.project_api import ProjectApi
+from notehub_py.api.repository_api import RepositoryApi
 from notehub_py.api.route_api import RouteApi
-

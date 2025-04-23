@@ -1,14 +1,13 @@
 # Contact
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**name** | **str** |  | [optional] 
-**email** | **str** |  | [optional] 
-**role** | **str** |  | [optional] 
-**organization** | **str** |  | [optional] 
+| Name             | Type    | Description | Notes      |
+| ---------------- | ------- | ----------- | ---------- |
+| **name**         | **str** |             | [optional] |
+| **email**        | **str** |             | [optional] |
+| **role**         | **str** |             | [optional] |
+| **organization** | **str** |             | [optional] |
 
 ## Example
 
@@ -27,6 +26,5 @@ contact_dict = contact_instance.to_dict()
 # create an instance of Contact from a dict
 contact_from_dict = Contact.from_dict(contact_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

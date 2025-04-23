@@ -1,16 +1,15 @@
 # Location
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**when** | **str** |  | 
-**name** | **str** |  | 
-**country** | **str** |  | 
-**timezone** | **str** |  | 
-**latitude** | **float** |  | 
-**longitude** | **float** |  | 
+| Name          | Type      | Description | Notes |
+| ------------- | --------- | ----------- | ----- |
+| **when**      | **str**   |             |
+| **name**      | **str**   |             |
+| **country**   | **str**   |             |
+| **timezone**  | **str**   |             |
+| **latitude**  | **float** |             |
+| **longitude** | **float** |             |
 
 ## Example
 
@@ -29,6 +28,5 @@ location_dict = location_instance.to_dict()
 # create an instance of Location from a dict
 location_from_dict = Location.from_dict(location_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

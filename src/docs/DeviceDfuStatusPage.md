@@ -1,12 +1,11 @@
 # DeviceDfuStatusPage
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**devices** | [**List[DeviceDfuStatus]**](DeviceDfuStatus.md) |  | [optional] 
-**has_more** | **bool** |  | [optional] [default to False]
+| Name         | Type                                            | Description | Notes                         |
+| ------------ | ----------------------------------------------- | ----------- | ----------------------------- |
+| **devices**  | [**List[DeviceDfuStatus]**](DeviceDfuStatus.md) |             | [optional]                    |
+| **has_more** | **bool**                                        |             | [optional] [default to False] |
 
 ## Example
 
@@ -25,6 +24,5 @@ device_dfu_status_page_dict = device_dfu_status_page_instance.to_dict()
 # create an instance of DeviceDfuStatusPage from a dict
 device_dfu_status_page_from_dict = DeviceDfuStatusPage.from_dict(device_dfu_status_page_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

@@ -1,13 +1,12 @@
 # PostProvisionProjectDeviceRequest
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**product_uid** | **str** | The ProductUID that the device should use. | 
-**device_sn** | **str** | The serial number to assign to the device. | [optional] 
-**fleet_uids** | **List[str]** | The fleetUIDs to provision the device to. | [optional] 
+| Name            | Type          | Description                                | Notes      |
+| --------------- | ------------- | ------------------------------------------ | ---------- |
+| **product_uid** | **str**       | The ProductUID that the device should use. |
+| **device_sn**   | **str**       | The serial number to assign to the device. | [optional] |
+| **fleet_uids**  | **List[str]** | The fleetUIDs to provision the device to.  | [optional] |
 
 ## Example
 
@@ -26,6 +25,5 @@ post_provision_project_device_request_dict = post_provision_project_device_reque
 # create an instance of PostProvisionProjectDeviceRequest from a dict
 post_provision_project_device_request_from_dict = PostProvisionProjectDeviceRequest.from_dict(post_provision_project_device_request_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

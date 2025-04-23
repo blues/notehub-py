@@ -1,12 +1,11 @@
 # GetDeviceSessions200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**sessions** | [**List[DeviceSession]**](DeviceSession.md) |  | 
-**has_more** | **bool** |  | 
+| Name         | Type                                        | Description | Notes |
+| ------------ | ------------------------------------------- | ----------- | ----- |
+| **sessions** | [**List[DeviceSession]**](DeviceSession.md) |             |
+| **has_more** | **bool**                                    |             |
 
 ## Example
 
@@ -25,6 +24,5 @@ get_device_sessions200_response_dict = get_device_sessions200_response_instance.
 # create an instance of GetDeviceSessions200Response from a dict
 get_device_sessions200_response_from_dict = GetDeviceSessions200Response.from_dict(get_device_sessions200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

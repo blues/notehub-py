@@ -1,11 +1,10 @@
 # EnvironmentVariables
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**environment_variables** | **Dict[str, str]** |  | 
+| Name                      | Type               | Description | Notes |
+| ------------------------- | ------------------ | ----------- | ----- |
+| **environment_variables** | **Dict[str, str]** |             |
 
 ## Example
 
@@ -24,6 +23,5 @@ environment_variables_dict = environment_variables_instance.to_dict()
 # create an instance of EnvironmentVariables from a dict
 environment_variables_from_dict = EnvironmentVariables.from_dict(environment_variables_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

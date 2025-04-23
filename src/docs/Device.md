@@ -1,28 +1,27 @@
 # Device
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**uid** | **str** |  | 
-**serial_number** | **str** |  | [optional] 
-**provisioned** | **datetime** |  | 
-**last_activity** | **datetime** |  | [optional] 
-**contact** | [**Contact**](Contact.md) |  | [optional] 
-**product_uid** | **str** |  | 
-**fleet_uids** | **List[str]** |  | 
-**tower_info** | [**DeviceTowerInfo**](DeviceTowerInfo.md) |  | [optional] 
-**tower_location** | [**Location**](Location.md) |  | [optional] 
-**gps_location** | [**Location**](Location.md) |  | [optional] 
-**triangulated_location** | [**Location**](Location.md) |  | [optional] 
-**voltage** | **float** |  | 
-**temperature** | **float** |  | 
-**dfu** | [**DFUEnv**](DFUEnv.md) |  | [optional] 
-**firmware_host** | **str** |  | [optional] 
-**firmware_notecard** | **str** |  | [optional] 
-**sku** | **str** |  | [optional] 
-**disabled** | **bool** |  | [optional] 
+| Name                      | Type                                      | Description | Notes      |
+| ------------------------- | ----------------------------------------- | ----------- | ---------- |
+| **uid**                   | **str**                                   |             |
+| **serial_number**         | **str**                                   |             | [optional] |
+| **provisioned**           | **datetime**                              |             |
+| **last_activity**         | **datetime**                              |             | [optional] |
+| **contact**               | [**Contact**](Contact.md)                 |             | [optional] |
+| **product_uid**           | **str**                                   |             |
+| **fleet_uids**            | **List[str]**                             |             |
+| **tower_info**            | [**DeviceTowerInfo**](DeviceTowerInfo.md) |             | [optional] |
+| **tower_location**        | [**Location**](Location.md)               |             | [optional] |
+| **gps_location**          | [**Location**](Location.md)               |             | [optional] |
+| **triangulated_location** | [**Location**](Location.md)               |             | [optional] |
+| **voltage**               | **float**                                 |             |
+| **temperature**           | **float**                                 |             |
+| **dfu**                   | [**DFUEnv**](DFUEnv.md)                   |             | [optional] |
+| **firmware_host**         | **str**                                   |             | [optional] |
+| **firmware_notecard**     | **str**                                   |             | [optional] |
+| **sku**                   | **str**                                   |             | [optional] |
+| **disabled**              | **bool**                                  |             | [optional] |
 
 ## Example
 
@@ -41,6 +40,5 @@ device_dict = device_instance.to_dict()
 # create an instance of Device from a dict
 device_from_dict = Device.from_dict(device_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

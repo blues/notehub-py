@@ -1,11 +1,10 @@
 # HandleNotefileDeleteRequest
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**files** | **List[str]** | One or more files to obtain change information from. | [optional] 
+| Name      | Type          | Description                                          | Notes      |
+| --------- | ------------- | ---------------------------------------------------- | ---------- |
+| **files** | **List[str]** | One or more files to obtain change information from. | [optional] |
 
 ## Example
 
@@ -24,6 +23,5 @@ handle_notefile_delete_request_dict = handle_notefile_delete_request_instance.to
 # create an instance of HandleNotefileDeleteRequest from a dict
 handle_notefile_delete_request_from_dict = HandleNotefileDeleteRequest.from_dict(handle_notefile_delete_request_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

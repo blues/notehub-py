@@ -1,12 +1,11 @@
 # UserFirmwareInfo
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**current_firmware** | [**CurrentFirmware**](CurrentFirmware.md) |  | [optional] 
-**firmware_update** | [**UserDfuStateMachine**](UserDfuStateMachine.md) |  | [optional] 
+| Name                 | Type                                              | Description | Notes      |
+| -------------------- | ------------------------------------------------- | ----------- | ---------- |
+| **current_firmware** | [**CurrentFirmware**](CurrentFirmware.md)         |             | [optional] |
+| **firmware_update**  | [**UserDfuStateMachine**](UserDfuStateMachine.md) |             | [optional] |
 
 ## Example
 
@@ -25,6 +24,5 @@ user_firmware_info_dict = user_firmware_info_instance.to_dict()
 # create an instance of UserFirmwareInfo from a dict
 user_firmware_info_from_dict = UserFirmwareInfo.from_dict(user_firmware_info_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

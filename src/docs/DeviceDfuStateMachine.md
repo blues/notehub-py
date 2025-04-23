@@ -4,12 +4,12 @@ Represents a single request to update the host or Notecard firmware
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**requested_version** | **str** | Version of the firmware that was requested to be installed | [optional] 
-**current_version** | **str** | Version of the firmware that was installed prior to this request | [optional] 
-**initiated** | **str** | RFC3339 datetime of when this update was requested | [optional] 
-**updates** | [**List[DeviceDfuStateMachineNode]**](DeviceDfuStateMachineNode.md) |  | [optional] 
+| Name                  | Type                                                                | Description                                                      | Notes      |
+| --------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------- | ---------- |
+| **requested_version** | **str**                                                             | Version of the firmware that was requested to be installed       | [optional] |
+| **current_version**   | **str**                                                             | Version of the firmware that was installed prior to this request | [optional] |
+| **initiated**         | **str**                                                             | RFC3339 datetime of when this update was requested               | [optional] |
+| **updates**           | [**List[DeviceDfuStateMachineNode]**](DeviceDfuStateMachineNode.md) |                                                                  | [optional] |
 
 ## Example
 
@@ -28,6 +28,5 @@ device_dfu_state_machine_dict = device_dfu_state_machine_instance.to_dict()
 # create an instance of DeviceDfuStateMachine from a dict
 device_dfu_state_machine_from_dict = DeviceDfuStateMachine.from_dict(device_dfu_state_machine_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

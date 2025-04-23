@@ -1,14 +1,13 @@
 # DeviceTowerInfo
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**mcc** | **int** |  | [optional] 
-**mnc** | **int** |  | [optional] 
-**lac** | **int** |  | [optional] 
-**cell_id** | **int** |  | [optional] 
+| Name        | Type    | Description | Notes      |
+| ----------- | ------- | ----------- | ---------- |
+| **mcc**     | **int** |             | [optional] |
+| **mnc**     | **int** |             | [optional] |
+| **lac**     | **int** |             | [optional] |
+| **cell_id** | **int** |             | [optional] |
 
 ## Example
 
@@ -27,6 +26,5 @@ device_tower_info_dict = device_tower_info_instance.to_dict()
 # create an instance of DeviceTowerInfo from a dict
 device_tower_info_from_dict = DeviceTowerInfo.from_dict(device_tower_info_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

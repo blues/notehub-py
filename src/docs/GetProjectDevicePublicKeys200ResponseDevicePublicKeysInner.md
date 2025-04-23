@@ -1,12 +1,11 @@
 # GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**uid** | **str** |  | [optional] 
-**key** | **str** |  | [optional] 
+| Name    | Type    | Description | Notes      |
+| ------- | ------- | ----------- | ---------- |
+| **uid** | **str** |             | [optional] |
+| **key** | **str** |             | [optional] |
 
 ## Example
 
@@ -25,6 +24,5 @@ get_project_device_public_keys200_response_device_public_keys_inner_dict = get_p
 # create an instance of GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner from a dict
 get_project_device_public_keys200_response_device_public_keys_inner_from_dict = GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner.from_dict(get_project_device_public_keys200_response_device_public_keys_inner_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

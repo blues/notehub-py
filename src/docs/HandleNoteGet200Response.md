@@ -1,13 +1,12 @@
 # HandleNoteGet200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**body** | **object** | The note body | [optional] 
-**payload** | **str** | The note payload | [optional] 
-**time** | **int** | The time the Note was added to the Notecard or Notehub | [optional] 
+| Name        | Type       | Description                                            | Notes      |
+| ----------- | ---------- | ------------------------------------------------------ | ---------- |
+| **body**    | **object** | The note body                                          | [optional] |
+| **payload** | **str**    | The note payload                                       | [optional] |
+| **time**    | **int**    | The time the Note was added to the Notecard or Notehub | [optional] |
 
 ## Example
 
@@ -26,6 +25,5 @@ handle_note_get200_response_dict = handle_note_get200_response_instance.to_dict(
 # create an instance of HandleNoteGet200Response from a dict
 handle_note_get200_response_from_dict = HandleNoteGet200Response.from_dict(handle_note_get200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

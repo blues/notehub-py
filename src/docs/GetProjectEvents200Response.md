@@ -1,13 +1,12 @@
 # GetProjectEvents200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**events** | [**List[Event]**](Event.md) |  | 
-**has_more** | **bool** | True if there are more events | 
-**through** | **str** | The UID of the last event returned | [optional] 
+| Name         | Type                        | Description                        | Notes      |
+| ------------ | --------------------------- | ---------------------------------- | ---------- |
+| **events**   | [**List[Event]**](Event.md) |                                    |
+| **has_more** | **bool**                    | True if there are more events      |
+| **through**  | **str**                     | The UID of the last event returned | [optional] |
 
 ## Example
 
@@ -26,6 +25,5 @@ get_project_events200_response_dict = get_project_events200_response_instance.to
 # create an instance of GetProjectEvents200Response from a dict
 get_project_events200_response_from_dict = GetProjectEvents200Response.from_dict(get_project_events200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

@@ -1,11 +1,10 @@
 # EmailNotification
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**email** | **str** | Email Address | [optional] 
+| Name      | Type    | Description   | Notes      |
+| --------- | ------- | ------------- | ---------- |
+| **email** | **str** | Email Address | [optional] |
 
 ## Example
 
@@ -24,6 +23,5 @@ email_notification_dict = email_notification_instance.to_dict()
 # create an instance of EmailNotification from a dict
 email_notification_from_dict = EmailNotification.from_dict(email_notification_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

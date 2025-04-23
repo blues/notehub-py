@@ -1,12 +1,11 @@
 # GetDevicePublicKey200Response
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**uid** | **str** |  | 
-**key** | **str** |  | 
+| Name    | Type    | Description | Notes |
+| ------- | ------- | ----------- | ----- |
+| **uid** | **str** |             |
+| **key** | **str** |             |
 
 ## Example
 
@@ -25,6 +24,5 @@ get_device_public_key200_response_dict = get_device_public_key200_response_insta
 # create an instance of GetDevicePublicKey200Response from a dict
 get_device_public_key200_response_from_dict = GetDevicePublicKey200Response.from_dict(get_device_public_key200_response_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

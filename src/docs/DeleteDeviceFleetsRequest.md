@@ -1,11 +1,10 @@
 # DeleteDeviceFleetsRequest
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**fleet_uids** | **List[str]** | The fleetUIDs to remove from the device. | 
+| Name           | Type          | Description                              | Notes |
+| -------------- | ------------- | ---------------------------------------- | ----- |
+| **fleet_uids** | **List[str]** | The fleetUIDs to remove from the device. |
 
 ## Example
 
@@ -24,6 +23,5 @@ delete_device_fleets_request_dict = delete_device_fleets_request_instance.to_dic
 # create an instance of DeleteDeviceFleetsRequest from a dict
 delete_device_fleets_request_from_dict = DeleteDeviceFleetsRequest.from_dict(delete_device_fleets_request_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

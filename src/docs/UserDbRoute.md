@@ -1,15 +1,14 @@
 # UserDbRoute
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**uid** | **str** |  | [optional] [default to 'route:8d65a087d5d290ce5bdf03aeff2becc0']
-**label** | **str** |  | [optional] [default to 'success route']
-**type** | **str** |  | [optional] [default to 'http']
-**modified** | **str** |  | [optional] [default to '2020-03-09T17:58:37Z']
-**disabled** | **bool** |  | [optional] [default to False]
+| Name         | Type     | Description | Notes                                                            |
+| ------------ | -------- | ----------- | ---------------------------------------------------------------- |
+| **uid**      | **str**  |             | [optional] [default to 'route:8d65a087d5d290ce5bdf03aeff2becc0'] |
+| **label**    | **str**  |             | [optional] [default to 'success route']                          |
+| **type**     | **str**  |             | [optional] [default to 'http']                                   |
+| **modified** | **str**  |             | [optional] [default to '2020-03-09T17:58:37Z']                   |
+| **disabled** | **bool** |             | [optional] [default to False]                                    |
 
 ## Example
 
@@ -28,6 +27,5 @@ user_db_route_dict = user_db_route_instance.to_dict()
 # create an instance of UserDbRoute from a dict
 user_db_route_from_dict = UserDbRoute.from_dict(user_db_route_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

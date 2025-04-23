@@ -1,16 +1,15 @@
 # MonitorAlertRoutesInner
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**url** | **str** | The URL of the Slack webhook. | [optional] 
-**message_type** | **str** | text or blocks | [optional] 
-**text** | **str** | The text of the message, or the blocks definition | [optional] 
-**token** | **str** | The bearer token for the Slack app. | [optional] 
-**channel** | **str** | The channel to send the message to. | [optional] 
-**email** | **str** | Email Address | [optional] 
+| Name             | Type    | Description                                       | Notes      |
+| ---------------- | ------- | ------------------------------------------------- | ---------- |
+| **url**          | **str** | The URL of the Slack webhook.                     | [optional] |
+| **message_type** | **str** | text or blocks                                    | [optional] |
+| **text**         | **str** | The text of the message, or the blocks definition | [optional] |
+| **token**        | **str** | The bearer token for the Slack app.               | [optional] |
+| **channel**      | **str** | The channel to send the message to.               | [optional] |
+| **email**        | **str** | Email Address                                     | [optional] |
 
 ## Example
 
@@ -29,6 +28,5 @@ monitor_alert_routes_inner_dict = monitor_alert_routes_inner_instance.to_dict()
 # create an instance of MonitorAlertRoutesInner from a dict
 monitor_alert_routes_inner_from_dict = MonitorAlertRoutesInner.from_dict(monitor_alert_routes_inner_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-

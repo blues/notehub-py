@@ -1,12 +1,11 @@
 # CurrentFirmware
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**version** | **str** |  | [optional] 
-**metadata** | [**Firmware**](Firmware.md) |  | [optional] 
+| Name         | Type                        | Description | Notes      |
+| ------------ | --------------------------- | ----------- | ---------- |
+| **version**  | **str**                     |             | [optional] |
+| **metadata** | [**Firmware**](Firmware.md) |             | [optional] |
 
 ## Example
 
@@ -25,6 +24,5 @@ current_firmware_dict = current_firmware_instance.to_dict()
 # create an instance of CurrentFirmware from a dict
 current_firmware_from_dict = CurrentFirmware.from_dict(current_firmware_dict)
 ```
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
-
