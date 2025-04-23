@@ -270,27 +270,40 @@ Run the following commands from the `notehub-py` root directory in this order to
 ### Steps to Publish an Updated notehub_py Package to PyPi
 
 1. Update the `"packageVersion"` in the `config.json` file. Follow [semantic versioning](https://semver.org/) for this.
-2. Create a new copy of the `openapi_filtered.yaml` file that removes all deprecated query params from the original `openapi.yaml` file.
+2. Run the all in one command that removes the deprecated query params from the original `openapi.yaml` file, generates a fresh version of the package, formats the docs with Prettier, and then builds the distro packages for the PyPI package repository.
 
 ```bash
-python3 scripts.py remove_deprecated_parameters
+python3 scripts.py generate_and_format
 ```
 
-3. Generate the new version of the package.
+> **NOTE:** This convenience command can be done in separate steps if you prefer. Just run the following steps in order from the command line.
+>  1. Create a new copy of the `openapi_filtered.yaml` file that removes all deprecated query params from the original `openapi.yaml` file.
+> 
+> ```bash
+> python3 scripts.py remove_deprecated_parameters
+> ```
+>
+> 2. Generate the new version of the package.
+>
+> ```bash
+> python3 scripts.py generate_package
+> ```
+>
+> 3. Format the auto generated docs in the SDK folder with Prettier
+>
+> ```bash
+> python3 scripts.py run_prettier_on_docs
+> ```
+>
+> 4. Rebuild the distribution packages for the PyPi package repository.
+>
+> ```bash
+> python3 scripts.py build_distro_package
+> ```
 
-```bash
-python3 scripts.py generate_package
-```
-
-4. Rebuild the distribution packages for the PyPi package repository.
-
-```bash
-python3 scripts.py build_distro_package
-```
-
-5. Commit and push the changes to a new branch in GitHub and open a new pull request when the branch is ready for review. See the [contribution documentation](CONTRIBUTING.md) for further details around a good PR and commit messages.
-6. Get the PR approved and merged to `main`.
-7. Create a new release with a tag following the [semantic versioning](https://semver.org/) style of [vX.X.X], click the "Generate release notes" button, and publish the release. For example: a new release with a tag named v1.0.2.
+3. Commit and push the changes to a new branch in GitHub and open a new pull request when the branch is ready for review. See the [contribution documentation](CONTRIBUTING.md) for further details around a good PR and commit messages.
+4. Get the PR approved and merged to `main`.
+5. Create a new release with a tag following the [semantic versioning](https://semver.org/) style of [vX.X.X], click the "Generate release notes" button, and publish the release. For example: a new release with a tag named v1.0.2.
 
 ## Contributing
 
