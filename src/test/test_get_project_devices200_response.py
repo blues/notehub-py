@@ -108,7 +108,15 @@ class TestGetProjectDevices200Response(unittest.TestCase):
                         firmware_host = '', 
                         firmware_notecard = '', 
                         sku = '', 
-                        disabled = True, )
+                        disabled = True, 
+                        cellular_usage = [
+                            notehub_py.models.sim_usage.SimUsage(
+                                iccid = '', 
+                                used = 56, 
+                                limit = 56, 
+                                lifetime_used = 56, 
+                                last_updated = 56, )
+                            ], )
                     ],
                 has_more = True
             )
@@ -183,7 +191,15 @@ class TestGetProjectDevices200Response(unittest.TestCase):
                         firmware_host = '', 
                         firmware_notecard = '', 
                         sku = '', 
-                        disabled = True, )
+                        disabled = True, 
+                        cellular_usage = [
+                            notehub_py.models.sim_usage.SimUsage(
+                                iccid = '', 
+                                used = 56, 
+                                limit = 56, 
+                                lifetime_used = 56, 
+                                last_updated = 56, )
+                            ], )
                     ],
                 has_more = True,
         )

@@ -167,6 +167,7 @@ from notehub_py.models.radresponder import Radresponder
 from notehub_py.models.repository import Repository
 from notehub_py.models.role import Role
 from notehub_py.models.schema_property import SchemaProperty
+from notehub_py.models.sim_usage import SimUsage
 from notehub_py.models.slack import Slack
 from notehub_py.models.slack_bearer_notification import SlackBearerNotification
 from notehub_py.models.slack_web_hook_notification import SlackWebHookNotification

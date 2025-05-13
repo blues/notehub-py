@@ -32,6 +32,7 @@ from notehub_py.models.contact import Contact
 from notehub_py.models.device_tower_info import DeviceTowerInfo
 from notehub_py.models.dfu_env import DFUEnv
 from notehub_py.models.location import Location
+from notehub_py.models.sim_usage import SimUsage
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -59,6 +60,7 @@ class Device(BaseModel):
     firmware_notecard: Optional[StrictStr] = None
     sku: Optional[StrictStr] = None
     disabled: Optional[StrictBool] = None
+    cellular_usage: Optional[List[SimUsage]] = None
     __properties: ClassVar[List[str]] = [
         "uid",
         "serial_number",
@@ -78,6 +80,7 @@ class Device(BaseModel):
         "firmware_notecard",
         "sku",
         "disabled",
+        "cellular_usage",
     ]
 
     model_config = ConfigDict(
@@ -135,6 +138,13 @@ class Device(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of dfu
         if self.dfu:
             _dict["dfu"] = self.dfu.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in cellular_usage (list)
+        _items = []
+        if self.cellular_usage:
+            for _item in self.cellular_usage:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["cellular_usage"] = _items
         # set to None if last_activity (nullable) is None
         # and model_fields_set contains the field
         if self.last_activity is None and "last_activity" in self.model_fields_set:
@@ -226,6 +236,11 @@ class Device(BaseModel):
                 "firmware_notecard": obj.get("firmware_notecard"),
                 "sku": obj.get("sku"),
                 "disabled": obj.get("disabled"),
+                "cellular_usage": (
+                    [SimUsage.from_dict(_item) for _item in obj["cellular_usage"]]
+                    if obj.get("cellular_usage") is not None
+                    else None
+                ),
             }
         )
         return _obj

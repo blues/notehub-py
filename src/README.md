@@ -292,6 +292,7 @@ Class | Method | HTTP request | Description
  - [Repository](docs/Repository.md)
  - [Role](docs/Role.md)
  - [SchemaProperty](docs/SchemaProperty.md)
+ - [SimUsage](docs/SimUsage.md)
  - [Slack](docs/Slack.md)
  - [SlackBearerNotification](docs/SlackBearerNotification.md)
  - [SlackWebHookNotification](docs/SlackWebHookNotification.md)
