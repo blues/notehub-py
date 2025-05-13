@@ -148,6 +148,7 @@ from notehub_py.models.monitor import Monitor
 from notehub_py.models.monitor_alert_routes_inner import MonitorAlertRoutesInner
 from notehub_py.models.mqtt import Mqtt
 from notehub_py.models.note import Note
+from notehub_py.models.notefile_schema import NotefileSchema
 from notehub_py.models.notehub_route import NotehubRoute
 from notehub_py.models.notehub_route_schema import NotehubRouteSchema
 from notehub_py.models.post_provision_project_device_request import (
@@ -165,6 +166,7 @@ from notehub_py.models.question_data_response_map import QuestionDataResponseMap
 from notehub_py.models.radresponder import Radresponder
 from notehub_py.models.repository import Repository
 from notehub_py.models.role import Role
+from notehub_py.models.schema_property import SchemaProperty
 from notehub_py.models.slack import Slack
 from notehub_py.models.slack_bearer_notification import SlackBearerNotification
 from notehub_py.models.slack_web_hook_notification import SlackWebHookNotification
