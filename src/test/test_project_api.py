@@ -107,6 +107,13 @@ class TestProjectApi(unittest.TestCase):
         """Test case for get_fleet_environment_variables"""
         pass
 
+    def test_get_notefile_schemas(self) -> None:
+        """Test case for get_notefile_schemas
+
+        Get variable format for a notefile
+        """
+        pass
+
     def test_get_project(self) -> None:
         """Test case for get_project"""
         pass

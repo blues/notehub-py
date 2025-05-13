@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                                       | HTTP request                                                                       | Description |
-| -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ----------- |
+| Method                                                                                       | HTTP request                                                                       | Description                        |
+| -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------- |
 | [**clone_project**](ProjectApi.md#clone_project)                                             | **POST** /v1/projects/{projectUID}/clone                                           |
 | [**create_fleet**](ProjectApi.md#create_fleet)                                               | **POST** /v1/projects/{projectUID}/fleets                                          |
 | [**create_product**](ProjectApi.md#create_product)                                           | **POST** /v1/projects/{projectUID}/products                                        |
@@ -24,6 +24,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_firmware_info**](ProjectApi.md#get_firmware_info)                                     | **GET** /v1/projects/{projectUID}/firmware                                         |
 | [**get_fleet**](ProjectApi.md#get_fleet)                                                     | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}                                |
 | [**get_fleet_environment_variables**](ProjectApi.md#get_fleet_environment_variables)         | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables          |
+| [**get_notefile_schemas**](ProjectApi.md#get_notefile_schemas)                               | **GET** /v1/projects/{projectUID}/schemas                                          | Get variable format for a notefile |
 | [**get_project**](ProjectApi.md#get_project)                                                 | **GET** /v1/projects/{projectUID}                                                  |
 | [**get_project_by_product**](ProjectApi.md#get_project_by_product)                           | **GET** /v1/products/{productUID}/project                                          |
 | [**get_project_environment_variables**](ProjectApi.md#get_project_environment_variables)     | **GET** /v1/projects/{projectUID}/environment_variables                            |
@@ -1650,6 +1651,69 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ----------- | -------------------------------------------------------- | ---------------- |
 | **200**     | The response body from an environment variables request. | -                |
 | **0**       | The response body in case of an API error.               | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_notefile_schemas**
+
+> List[NotefileSchema] get_notefile_schemas(project_uid)
+
+Get variable format for a notefile
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.notefile_schema import NotefileSchema
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+
+    try:
+        # Get variable format for a notefile
+        api_response = api_instance.get_notefile_schemas(project_uid)
+        print("The response of ProjectApi->get_notefile_schemas:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->get_notefile_schemas: %s\n" % e)
+```
+
+### Parameters
+
+| Name            | Type    | Description | Notes |
+| --------------- | ------- | ----------- | ----- |
+| **project_uid** | **str** |             |
+
+### Return type
+
+[**List[NotefileSchema]**](NotefileSchema.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                         | Response headers |
+| ----------- | ----------------------------------- | ---------------- |
+| **200**     | List of notefile schema definitions | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
