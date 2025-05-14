@@ -15,7 +15,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 
-__version__ = "1.0.9"
+__version__ = "1.0.10"
 
 # import apis into sdk package
 from notehub_py.api.alert_api import AlertApi
@@ -167,6 +167,7 @@ from notehub_py.models.radresponder import Radresponder
 from notehub_py.models.repository import Repository
 from notehub_py.models.role import Role
 from notehub_py.models.schema_property import SchemaProperty
+from notehub_py.models.sim_usage import SimUsage
 from notehub_py.models.slack import Slack
 from notehub_py.models.slack_bearer_notification import SlackBearerNotification
 from notehub_py.models.slack_web_hook_notification import SlackWebHookNotification

@@ -104,6 +104,7 @@ docs/RepositoryApi.md
 docs/Role.md
 docs/RouteApi.md
 docs/SchemaProperty.md
+docs/SimUsage.md
 docs/Slack.md
 docs/SlackBearerNotification.md
 docs/SlackWebHookNotification.md
@@ -226,6 +227,7 @@ notehub_py/models/radresponder.py
 notehub_py/models/repository.py
 notehub_py/models/role.py
 notehub_py/models/schema_property.py
+notehub_py/models/sim_usage.py
 notehub_py/models/slack.py
 notehub_py/models/slack_bearer_notification.py
 notehub_py/models/slack_web_hook_notification.py
@@ -348,6 +350,7 @@ test/test_repository_api.py
 test/test_role.py
 test/test_route_api.py
 test/test_schema_property.py
+test/test_sim_usage.py
 test/test_slack.py
 test/test_slack_bearer_notification.py
 test/test_slack_web_hook_notification.py

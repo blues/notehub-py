@@ -22,6 +22,7 @@
 | **firmware_notecard**     | **str**                                   |             | [optional] |
 | **sku**                   | **str**                                   |             | [optional] |
 | **disabled**              | **bool**                                  |             | [optional] |
+| **cellular_usage**        | [**List[SimUsage]**](SimUsage.md)         |             | [optional] |
 
 ## Example
 

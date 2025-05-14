@@ -1199,7 +1199,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
+| **200**     | List of Devices                            | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1296,7 +1296,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
+| **200**     | List of Devices                            | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
