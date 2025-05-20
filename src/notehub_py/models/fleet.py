@@ -33,11 +33,21 @@ class Fleet(BaseModel):
     uid: StrictStr = Field(description="Fleet UID")
     label: StrictStr = Field(description="Fleet label")
     created: datetime = Field(description="RFC3339 timestamp in UTC")
+    environment_variables: Optional[Dict[str, StrictStr]] = Field(
+        default=None,
+        description="The environment variables for this device that have been set using the Notehub API or UI.",
+    )
     smart_rule: Optional[StrictStr] = Field(
         default=None,
         description="JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.",
     )
-    __properties: ClassVar[List[str]] = ["uid", "label", "created", "smart_rule"]
+    __properties: ClassVar[List[str]] = [
+        "uid",
+        "label",
+        "created",
+        "environment_variables",
+        "smart_rule",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +102,7 @@ class Fleet(BaseModel):
                 "uid": obj.get("uid"),
                 "label": obj.get("label"),
                 "created": obj.get("created"),
+                "environment_variables": obj.get("environment_variables"),
                 "smart_rule": obj.get("smart_rule"),
             }
         )
