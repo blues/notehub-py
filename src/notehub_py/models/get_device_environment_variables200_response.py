@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -35,9 +35,14 @@ class GetDeviceEnvironmentVariables200Response(BaseModel):
     environment_variables_env_default: Dict[str, StrictStr] = Field(
         description="The environment variables that have been set using the env.default request through the Notecard API."
     )
+    environment_variables_effective: Optional[Dict[str, StrictStr]] = Field(
+        default=None,
+        description="The environment variables as they will be seen by the device, fully resolved with project/fleet/device prioritization rules.",
+    )
     __properties: ClassVar[List[str]] = [
         "environment_variables",
         "environment_variables_env_default",
+        "environment_variables_effective",
     ]
 
     model_config = ConfigDict(
@@ -93,6 +98,9 @@ class GetDeviceEnvironmentVariables200Response(BaseModel):
                 "environment_variables": obj.get("environment_variables"),
                 "environment_variables_env_default": obj.get(
                     "environment_variables_env_default"
+                ),
+                "environment_variables_effective": obj.get(
+                    "environment_variables_effective"
                 ),
             }
         )

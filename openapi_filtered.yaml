@@ -3107,6 +3107,13 @@ components:
                   env.default request through the Notecard API.
                 additionalProperties:
                   type: string
+              environment_variables_effective:
+                type: object
+                description: The environment variables as they will be seen by the
+                  device, fully resolved with project/fleet/device prioritization
+                  rules.
+                additionalProperties:
+                  type: string
             required:
             - environment_variables
             - environment_variables_env_default
@@ -3498,6 +3505,12 @@ components:
           type: string
           format: date-time
           description: RFC3339 timestamp in UTC
+        environment_variables:
+          type: object
+          description: The environment variables for this device that have been set
+            using the Notehub API or UI.
+          additionalProperties:
+            type: string
         smart_rule:
           $ref: '#/components/schemas/FleetRule'
       required:
