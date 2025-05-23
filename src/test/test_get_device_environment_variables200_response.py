@@ -46,6 +46,9 @@ class TestGetDeviceEnvironmentVariables200Response(unittest.TestCase):
                     },
                 environment_variables_env_default = {
                     'key' : ''
+                    },
+                environment_variables_effective = {
+                    'key' : ''
                     }
             )
         else:
