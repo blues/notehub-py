@@ -162,6 +162,10 @@ class TestProjectApi(unittest.TestCase):
         """Test case for update_fleet"""
         pass
 
+    def test_upload_firmware(self) -> None:
+        """Test case for upload_firmware"""
+        pass
+
 
 if __name__ == "__main__":
     unittest.main()

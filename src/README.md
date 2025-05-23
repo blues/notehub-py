@@ -181,6 +181,7 @@ Class | Method | HTTP request | Description
 *ProjectApi* | [**put_project_environment_variables**](docs/ProjectApi.md#put_project_environment_variables) | **PUT** /v1/projects/{projectUID}/environment_variables | 
 *ProjectApi* | [**set_global_transformation**](docs/ProjectApi.md#set_global_transformation) | **POST** /v1/projects/{projectUID}/global-transformation | 
 *ProjectApi* | [**update_fleet**](docs/ProjectApi.md#update_fleet) | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID} | 
+*ProjectApi* | [**upload_firmware**](docs/ProjectApi.md#upload_firmware) | **PUT** /v1/projects/{projectUID}/firmware/{firmwareType}/{filename} | 
 *RepositoryApi* | [**create_repository**](docs/RepositoryApi.md#create_repository) | **POST** /v1/repositories | 
 *RepositoryApi* | [**create_repository_dataset**](docs/RepositoryApi.md#create_repository_dataset) | **PUT** /v1/repositories/{repositoryUID}/datasets | 
 *RepositoryApi* | [**delete_repository**](docs/RepositoryApi.md#delete_repository) | **DELETE** /v1/repositories/{repositoryUID} | 

@@ -37,6 +37,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**put_project_environment_variables**](ProjectApi.md#put_project_environment_variables)     | **PUT** /v1/projects/{projectUID}/environment_variables                            |
 | [**set_global_transformation**](ProjectApi.md#set_global_transformation)                     | **POST** /v1/projects/{projectUID}/global-transformation                           |
 | [**update_fleet**](ProjectApi.md#update_fleet)                                               | **PUT** /v1/projects/{projectUID}/fleets/{fleetUID}                                |
+| [**upload_firmware**](ProjectApi.md#upload_firmware)                                         | **PUT** /v1/projects/{projectUID}/firmware/{firmwareType}/{filename}               |
 
 # **clone_project**
 
@@ -2625,6 +2626,87 @@ with notehub_py.ApiClient(configuration) as api_client:
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | Successful operation                       | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upload_firmware**
+
+> FirmwareInfo upload_firmware(project_uid, firmware_type, filename, body)
+
+Upload firmware binary
+
+### Example
+
+- Api Key Authentication (api_key):
+
+```python
+import notehub_py
+from notehub_py.models.firmware_info import FirmwareInfo
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: api_key
+configuration.api_key['api_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api_key'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    firmware_type = 'firmware_type_example' # str |
+    filename = 'filename_example' # str |
+    body = None # bytearray | contents of the firmware binary
+
+    try:
+        api_response = api_instance.upload_firmware(project_uid, firmware_type, filename, body)
+        print("The response of ProjectApi->upload_firmware:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->upload_firmware: %s\n" % e)
+```
+
+### Parameters
+
+| Name              | Type          | Description                     | Notes |
+| ----------------- | ------------- | ------------------------------- | ----- |
+| **project_uid**   | **str**       |                                 |
+| **firmware_type** | **str**       |                                 |
+| **filename**      | **str**       |                                 |
+| **body**          | **bytearray** | contents of the firmware binary |
+
+### Return type
+
+[**FirmwareInfo**](FirmwareInfo.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+- **Content-Type**: application/octet-stream
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Upload successful                          | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
