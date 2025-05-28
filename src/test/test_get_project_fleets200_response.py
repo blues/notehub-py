@@ -42,6 +42,9 @@ class TestGetProjectFleets200Response(unittest.TestCase):
                         uid = '', 
                         label = '', 
                         created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        environment_variables = {
+                            'key' : ''
+                            }, 
                         smart_rule = '', )
                     ]
             )
@@ -52,6 +55,9 @@ class TestGetProjectFleets200Response(unittest.TestCase):
                         uid = '', 
                         label = '', 
                         created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        environment_variables = {
+                            'key' : ''
+                            }, 
                         smart_rule = '', )
                     ],
         )
