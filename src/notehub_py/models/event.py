@@ -47,6 +47,10 @@ class Event(BaseModel):
         default=None,
         description="Whether TLS was used on the connection between the device and notehub. Only available on _session.qo events.",
     )
+    transport: Optional[StrictStr] = Field(
+        default=None,
+        description='The transport used for this event, e.g., "cellular", "wifi", ", etc.',
+    )
     best_id: Optional[StrictStr] = Field(
         default=None,
         description="The device serial number, or the DeviceUID if the serial number is not set",
@@ -196,6 +200,7 @@ class Event(BaseModel):
         "event",
         "session",
         "tls",
+        "transport",
         "best_id",
         "device",
         "sn",
@@ -307,6 +312,7 @@ class Event(BaseModel):
                 "event": obj.get("event"),
                 "session": obj.get("session"),
                 "tls": obj.get("tls"),
+                "transport": obj.get("transport"),
                 "best_id": obj.get("best_id"),
                 "device": obj.get("device"),
                 "sn": obj.get("sn"),

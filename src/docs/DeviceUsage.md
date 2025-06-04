@@ -2,18 +2,18 @@
 
 ## Properties
 
-| Name                     | Type      | Description | Notes      |
-| ------------------------ | --------- | ----------- | ---------- |
-| **since**                | **float** |             | [optional] |
-| **duration**             | **float** |             | [optional] |
-| **bytes_rcvd**           | **float** |             | [optional] |
-| **bytes_sent**           | **float** |             | [optional] |
-| **bytes_rcvd_secondary** | **float** |             | [optional] |
-| **bytes_sent_secondary** | **float** |             | [optional] |
-| **sessions_tcp**         | **float** |             | [optional] |
-| **sessions_tls**         | **float** |             | [optional] |
-| **notes_rcvd**           | **float** |             | [optional] |
-| **note_sent**            | **float** |             | [optional] |
+| Name                     | Type    | Description         | Notes      |
+| ------------------------ | ------- | ------------------- | ---------- |
+| **since**                | **int** | Unix timestamp      | [optional] |
+| **duration**             | **int** | Duration in seconds | [optional] |
+| **bytes_rcvd**           | **int** |                     | [optional] |
+| **bytes_sent**           | **int** |                     | [optional] |
+| **bytes_rcvd_secondary** | **int** |                     | [optional] |
+| **bytes_sent_secondary** | **int** |                     | [optional] |
+| **sessions_tcp**         | **int** |                     | [optional] |
+| **sessions_tls**         | **int** |                     | [optional] |
+| **notes_rcvd**           | **int** |                     | [optional] |
+| **notes_sent**           | **int** |                     | [optional] |
 
 ## Example
 

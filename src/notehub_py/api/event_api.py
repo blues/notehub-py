@@ -48,7 +48,7 @@ class EventApi:
     @validate_call
     def get_fleet_events(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -107,8 +107,8 @@ class EventApi:
 
         Get Events of a Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param page_size:
@@ -164,7 +164,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_fleet_events_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
@@ -202,7 +202,7 @@ class EventApi:
     @validate_call
     def get_fleet_events_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -261,8 +261,8 @@ class EventApi:
 
         Get Events of a Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param page_size:
@@ -318,7 +318,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_fleet_events_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
@@ -356,7 +356,7 @@ class EventApi:
     @validate_call
     def get_fleet_events_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -415,8 +415,8 @@ class EventApi:
 
         Get Events of a Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param page_size:
@@ -472,7 +472,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_fleet_events_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
@@ -505,7 +505,7 @@ class EventApi:
 
     def _get_fleet_events_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         fleet_uid,
         page_size,
         page_num,
@@ -545,8 +545,8 @@ class EventApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if fleet_uid is not None:
             _path_params["fleetUID"] = fleet_uid
         # process the query parameters
@@ -624,7 +624,7 @@ class EventApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/fleets/{fleetUID}/events",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -640,7 +640,7 @@ class EventApi:
     @validate_call
     def get_fleet_events_by_cursor(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         cursor: Annotated[
@@ -679,8 +679,8 @@ class EventApi:
 
         Get Events of a Fleet by cursor
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param limit:
@@ -722,7 +722,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_fleet_events_by_cursor_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             limit=limit,
             cursor=cursor,
@@ -753,7 +753,7 @@ class EventApi:
     @validate_call
     def get_fleet_events_by_cursor_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         cursor: Annotated[
@@ -792,8 +792,8 @@ class EventApi:
 
         Get Events of a Fleet by cursor
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param limit:
@@ -835,7 +835,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_fleet_events_by_cursor_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             limit=limit,
             cursor=cursor,
@@ -866,7 +866,7 @@ class EventApi:
     @validate_call
     def get_fleet_events_by_cursor_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         cursor: Annotated[
@@ -905,8 +905,8 @@ class EventApi:
 
         Get Events of a Fleet by cursor
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param limit:
@@ -948,7 +948,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_fleet_events_by_cursor_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             limit=limit,
             cursor=cursor,
@@ -974,7 +974,7 @@ class EventApi:
 
     def _get_fleet_events_by_cursor_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         fleet_uid,
         limit,
         cursor,
@@ -1004,8 +1004,8 @@ class EventApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if fleet_uid is not None:
             _path_params["fleetUID"] = fleet_uid
         # process the query parameters
@@ -1055,7 +1055,7 @@ class EventApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/fleets/{fleetUID}/events-cursor",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1071,7 +1071,7 @@ class EventApi:
     @validate_call
     def get_project_events(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         device_uid: Annotated[
@@ -1132,8 +1132,8 @@ class EventApi:
 
         Get Events of a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -1189,7 +1189,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_project_events_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
@@ -1227,7 +1227,7 @@ class EventApi:
     @validate_call
     def get_project_events_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         device_uid: Annotated[
@@ -1288,8 +1288,8 @@ class EventApi:
 
         Get Events of a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -1345,7 +1345,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_project_events_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
@@ -1383,7 +1383,7 @@ class EventApi:
     @validate_call
     def get_project_events_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         device_uid: Annotated[
@@ -1444,8 +1444,8 @@ class EventApi:
 
         Get Events of a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -1501,7 +1501,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_project_events_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
@@ -1534,7 +1534,7 @@ class EventApi:
 
     def _get_project_events_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         page_size,
         page_num,
         device_uid,
@@ -1575,8 +1575,8 @@ class EventApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         if page_size is not None:
 
@@ -1656,7 +1656,7 @@ class EventApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/events",
+            resource_path="/v1/projects/{projectOrProductUID}/events",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1672,7 +1672,7 @@ class EventApi:
     @validate_call
     def get_project_events_by_cursor(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         cursor: Annotated[
             Optional[StrictStr],
@@ -1703,8 +1703,8 @@ class EventApi:
 
         Get Events of a Project by cursor
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param limit:
         :type limit: int
         :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
@@ -1742,7 +1742,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_project_events_by_cursor_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             limit=limit,
             cursor=cursor,
             sort_order=sort_order,
@@ -1771,7 +1771,7 @@ class EventApi:
     @validate_call
     def get_project_events_by_cursor_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         cursor: Annotated[
             Optional[StrictStr],
@@ -1802,8 +1802,8 @@ class EventApi:
 
         Get Events of a Project by cursor
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param limit:
         :type limit: int
         :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
@@ -1841,7 +1841,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_project_events_by_cursor_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             limit=limit,
             cursor=cursor,
             sort_order=sort_order,
@@ -1870,7 +1870,7 @@ class EventApi:
     @validate_call
     def get_project_events_by_cursor_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         cursor: Annotated[
             Optional[StrictStr],
@@ -1901,8 +1901,8 @@ class EventApi:
 
         Get Events of a Project by cursor
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param limit:
         :type limit: int
         :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
@@ -1940,7 +1940,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_project_events_by_cursor_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             limit=limit,
             cursor=cursor,
             sort_order=sort_order,
@@ -1964,7 +1964,7 @@ class EventApi:
 
     def _get_project_events_by_cursor_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         limit,
         cursor,
         sort_order,
@@ -1992,8 +1992,8 @@ class EventApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         if limit is not None:
 
@@ -2037,7 +2037,7 @@ class EventApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/events-cursor",
+            resource_path="/v1/projects/{projectOrProductUID}/events-cursor",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2053,7 +2053,7 @@ class EventApi:
     @validate_call
     def get_route_logs_by_event(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         event_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2071,8 +2071,8 @@ class EventApi:
 
         Get Route Logs by Event UID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param event_uid: (required)
         :type event_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2098,7 +2098,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_route_logs_by_event_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             event_uid=event_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2121,7 +2121,7 @@ class EventApi:
     @validate_call
     def get_route_logs_by_event_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         event_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2139,8 +2139,8 @@ class EventApi:
 
         Get Route Logs by Event UID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param event_uid: (required)
         :type event_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2166,7 +2166,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_route_logs_by_event_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             event_uid=event_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2189,7 +2189,7 @@ class EventApi:
     @validate_call
     def get_route_logs_by_event_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         event_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2207,8 +2207,8 @@ class EventApi:
 
         Get Route Logs by Event UID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param event_uid: (required)
         :type event_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2234,7 +2234,7 @@ class EventApi:
         """  # noqa: E501
 
         _param = self._get_route_logs_by_event_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             event_uid=event_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2252,7 +2252,7 @@ class EventApi:
 
     def _get_route_logs_by_event_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         event_uid,
         _request_auth,
         _content_type,
@@ -2272,8 +2272,8 @@ class EventApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if event_uid is not None:
             _path_params["eventUID"] = event_uid
         # process the query parameters
@@ -2291,7 +2291,7 @@ class EventApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/events/{eventUID}/route-logs",
+            resource_path="/v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

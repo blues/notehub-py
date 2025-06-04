@@ -79,7 +79,7 @@ class DeviceApi:
     @validate_call
     def delete_device_environment_variable(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         key: Annotated[
             StrictStr, Field(description="The environment variable key to delete.")
@@ -100,8 +100,8 @@ class DeviceApi:
 
         Delete environment variable of a device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param key: The environment variable key to delete. (required)
@@ -129,7 +129,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._delete_device_environment_variable_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             key=key,
             _request_auth=_request_auth,
@@ -153,7 +153,7 @@ class DeviceApi:
     @validate_call
     def delete_device_environment_variable_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         key: Annotated[
             StrictStr, Field(description="The environment variable key to delete.")
@@ -174,8 +174,8 @@ class DeviceApi:
 
         Delete environment variable of a device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param key: The environment variable key to delete. (required)
@@ -203,7 +203,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._delete_device_environment_variable_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             key=key,
             _request_auth=_request_auth,
@@ -227,7 +227,7 @@ class DeviceApi:
     @validate_call
     def delete_device_environment_variable_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         key: Annotated[
             StrictStr, Field(description="The environment variable key to delete.")
@@ -248,8 +248,8 @@ class DeviceApi:
 
         Delete environment variable of a device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param key: The environment variable key to delete. (required)
@@ -277,7 +277,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._delete_device_environment_variable_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             key=key,
             _request_auth=_request_auth,
@@ -296,7 +296,7 @@ class DeviceApi:
 
     def _delete_device_environment_variable_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         key,
         _request_auth,
@@ -317,8 +317,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         if key is not None:
@@ -338,7 +338,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="DELETE",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/environment_variables/{key}",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -354,7 +354,7 @@ class DeviceApi:
     @validate_call
     def delete_project_device(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         purge: StrictBool,
         _request_timeout: Union[
@@ -373,8 +373,8 @@ class DeviceApi:
 
         Delete Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param purge: (required)
@@ -402,7 +402,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._delete_project_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             purge=purge,
             _request_auth=_request_auth,
@@ -426,7 +426,7 @@ class DeviceApi:
     @validate_call
     def delete_project_device_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         purge: StrictBool,
         _request_timeout: Union[
@@ -445,8 +445,8 @@ class DeviceApi:
 
         Delete Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param purge: (required)
@@ -474,7 +474,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._delete_project_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             purge=purge,
             _request_auth=_request_auth,
@@ -498,7 +498,7 @@ class DeviceApi:
     @validate_call
     def delete_project_device_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         purge: StrictBool,
         _request_timeout: Union[
@@ -517,8 +517,8 @@ class DeviceApi:
 
         Delete Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param purge: (required)
@@ -546,7 +546,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._delete_project_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             purge=purge,
             _request_auth=_request_auth,
@@ -565,7 +565,7 @@ class DeviceApi:
 
     def _delete_project_device_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         purge,
         _request_auth,
@@ -586,8 +586,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -609,7 +609,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="DELETE",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -625,7 +625,7 @@ class DeviceApi:
     @validate_call
     def disable_device(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -643,8 +643,8 @@ class DeviceApi:
 
         Disable Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -670,7 +670,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._disable_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -693,7 +693,7 @@ class DeviceApi:
     @validate_call
     def disable_device_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -711,8 +711,8 @@ class DeviceApi:
 
         Disable Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -738,7 +738,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._disable_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -761,7 +761,7 @@ class DeviceApi:
     @validate_call
     def disable_device_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -779,8 +779,8 @@ class DeviceApi:
 
         Disable Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -806,7 +806,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._disable_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -824,7 +824,7 @@ class DeviceApi:
 
     def _disable_device_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         _request_auth,
         _content_type,
@@ -844,8 +844,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -863,7 +863,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/disable",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -879,7 +879,7 @@ class DeviceApi:
     @validate_call
     def disable_device_connectivity_assurance(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -897,8 +897,8 @@ class DeviceApi:
 
         Disable Connectivity Assurance
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -924,7 +924,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._disable_device_connectivity_assurance_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -947,7 +947,7 @@ class DeviceApi:
     @validate_call
     def disable_device_connectivity_assurance_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -965,8 +965,8 @@ class DeviceApi:
 
         Disable Connectivity Assurance
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -992,7 +992,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._disable_device_connectivity_assurance_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1015,7 +1015,7 @@ class DeviceApi:
     @validate_call
     def disable_device_connectivity_assurance_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1033,8 +1033,8 @@ class DeviceApi:
 
         Disable Connectivity Assurance
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1060,7 +1060,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._disable_device_connectivity_assurance_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1078,7 +1078,7 @@ class DeviceApi:
 
     def _disable_device_connectivity_assurance_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         _request_auth,
         _content_type,
@@ -1098,8 +1098,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -1117,7 +1117,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/disable-connectivity-assurance",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1133,7 +1133,7 @@ class DeviceApi:
     @validate_call
     def enable_device(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1151,8 +1151,8 @@ class DeviceApi:
 
         Enable Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1178,7 +1178,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._enable_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1201,7 +1201,7 @@ class DeviceApi:
     @validate_call
     def enable_device_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1219,8 +1219,8 @@ class DeviceApi:
 
         Enable Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1246,7 +1246,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._enable_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1269,7 +1269,7 @@ class DeviceApi:
     @validate_call
     def enable_device_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1287,8 +1287,8 @@ class DeviceApi:
 
         Enable Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1314,7 +1314,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._enable_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1332,7 +1332,7 @@ class DeviceApi:
 
     def _enable_device_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         _request_auth,
         _content_type,
@@ -1352,8 +1352,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -1371,7 +1371,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/enable",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1387,7 +1387,7 @@ class DeviceApi:
     @validate_call
     def enable_device_connectivity_assurance(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1405,8 +1405,8 @@ class DeviceApi:
 
         Enable Connectivity Assurance
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1432,7 +1432,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._enable_device_connectivity_assurance_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1455,7 +1455,7 @@ class DeviceApi:
     @validate_call
     def enable_device_connectivity_assurance_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1473,8 +1473,8 @@ class DeviceApi:
 
         Enable Connectivity Assurance
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1500,7 +1500,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._enable_device_connectivity_assurance_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1523,7 +1523,7 @@ class DeviceApi:
     @validate_call
     def enable_device_connectivity_assurance_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1541,8 +1541,8 @@ class DeviceApi:
 
         Enable Connectivity Assurance
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1568,7 +1568,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._enable_device_connectivity_assurance_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1586,7 +1586,7 @@ class DeviceApi:
 
     def _enable_device_connectivity_assurance_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         _request_auth,
         _content_type,
@@ -1606,8 +1606,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -1625,7 +1625,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/enable-connectivity-assurance",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1641,7 +1641,7 @@ class DeviceApi:
     @validate_call
     def get_device(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1659,8 +1659,8 @@ class DeviceApi:
 
         Get Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1686,7 +1686,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1709,7 +1709,7 @@ class DeviceApi:
     @validate_call
     def get_device_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1727,8 +1727,8 @@ class DeviceApi:
 
         Get Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1754,7 +1754,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1777,7 +1777,7 @@ class DeviceApi:
     @validate_call
     def get_device_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1795,8 +1795,8 @@ class DeviceApi:
 
         Get Device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1822,7 +1822,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1840,7 +1840,7 @@ class DeviceApi:
 
     def _get_device_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         _request_auth,
         _content_type,
@@ -1860,8 +1860,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -1879,7 +1879,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1895,7 +1895,7 @@ class DeviceApi:
     @validate_call
     def get_device_environment_variables(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1913,8 +1913,8 @@ class DeviceApi:
 
         Get environment variables of a device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1940,7 +1940,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1963,7 +1963,7 @@ class DeviceApi:
     @validate_call
     def get_device_environment_variables_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1981,8 +1981,8 @@ class DeviceApi:
 
         Get environment variables of a device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2008,7 +2008,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2031,7 +2031,7 @@ class DeviceApi:
     @validate_call
     def get_device_environment_variables_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2049,8 +2049,8 @@ class DeviceApi:
 
         Get environment variables of a device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2076,7 +2076,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2094,7 +2094,7 @@ class DeviceApi:
 
     def _get_device_environment_variables_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         _request_auth,
         _content_type,
@@ -2114,8 +2114,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -2133,7 +2133,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/environment_variables",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2403,7 +2403,7 @@ class DeviceApi:
     @validate_call
     def get_device_health_log(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2421,8 +2421,8 @@ class DeviceApi:
 
         Get Device Health Log
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2448,7 +2448,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_health_log_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2471,7 +2471,7 @@ class DeviceApi:
     @validate_call
     def get_device_health_log_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2489,8 +2489,8 @@ class DeviceApi:
 
         Get Device Health Log
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2516,7 +2516,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_health_log_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2539,7 +2539,7 @@ class DeviceApi:
     @validate_call
     def get_device_health_log_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2557,8 +2557,8 @@ class DeviceApi:
 
         Get Device Health Log
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2584,7 +2584,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_health_log_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2602,7 +2602,7 @@ class DeviceApi:
 
     def _get_device_health_log_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         _request_auth,
         _content_type,
@@ -2622,8 +2622,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -2641,7 +2641,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/health-log",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2657,7 +2657,7 @@ class DeviceApi:
     @validate_call
     def get_device_latest(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2675,8 +2675,8 @@ class DeviceApi:
 
         Get Device Latest Events
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2702,7 +2702,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_latest_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2725,7 +2725,7 @@ class DeviceApi:
     @validate_call
     def get_device_latest_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2743,8 +2743,8 @@ class DeviceApi:
 
         Get Device Latest Events
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2770,7 +2770,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_latest_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2793,7 +2793,7 @@ class DeviceApi:
     @validate_call
     def get_device_latest_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2811,8 +2811,8 @@ class DeviceApi:
 
         Get Device Latest Events
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2838,7 +2838,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_latest_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2856,7 +2856,7 @@ class DeviceApi:
 
     def _get_device_latest_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         _request_auth,
         _content_type,
@@ -2876,8 +2876,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -2895,7 +2895,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/latest",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2911,7 +2911,7 @@ class DeviceApi:
     @validate_call
     def get_device_public_key(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2929,8 +2929,8 @@ class DeviceApi:
 
         Get Device Public Key
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2956,7 +2956,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_public_key_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2979,7 +2979,7 @@ class DeviceApi:
     @validate_call
     def get_device_public_key_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -2997,8 +2997,8 @@ class DeviceApi:
 
         Get Device Public Key
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -3024,7 +3024,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_public_key_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3047,7 +3047,7 @@ class DeviceApi:
     @validate_call
     def get_device_public_key_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -3065,8 +3065,8 @@ class DeviceApi:
 
         Get Device Public Key
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -3092,7 +3092,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_public_key_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3110,7 +3110,7 @@ class DeviceApi:
 
     def _get_device_public_key_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         _request_auth,
         _content_type,
@@ -3130,8 +3130,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -3149,7 +3149,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/public-key",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3165,7 +3165,7 @@ class DeviceApi:
     @validate_call
     def get_device_sessions(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -3185,8 +3185,8 @@ class DeviceApi:
 
         Get Device Sessions
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param page_size:
@@ -3216,7 +3216,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_sessions_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             page_size=page_size,
             page_num=page_num,
@@ -3241,7 +3241,7 @@ class DeviceApi:
     @validate_call
     def get_device_sessions_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -3261,8 +3261,8 @@ class DeviceApi:
 
         Get Device Sessions
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param page_size:
@@ -3292,7 +3292,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_sessions_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             page_size=page_size,
             page_num=page_num,
@@ -3317,7 +3317,7 @@ class DeviceApi:
     @validate_call
     def get_device_sessions_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -3337,8 +3337,8 @@ class DeviceApi:
 
         Get Device Sessions
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param page_size:
@@ -3368,7 +3368,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_device_sessions_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             page_size=page_size,
             page_num=page_num,
@@ -3388,7 +3388,7 @@ class DeviceApi:
 
     def _get_device_sessions_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         page_size,
         page_num,
@@ -3410,8 +3410,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -3437,7 +3437,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/sessions",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3453,7 +3453,7 @@ class DeviceApi:
     @validate_call
     def get_project_device_public_keys(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         _request_timeout: Union[
@@ -3472,8 +3472,8 @@ class DeviceApi:
 
         Get Device Public Keys of a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -3501,7 +3501,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_project_device_public_keys_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             _request_auth=_request_auth,
@@ -3525,7 +3525,7 @@ class DeviceApi:
     @validate_call
     def get_project_device_public_keys_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         _request_timeout: Union[
@@ -3544,8 +3544,8 @@ class DeviceApi:
 
         Get Device Public Keys of a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -3573,7 +3573,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_project_device_public_keys_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             _request_auth=_request_auth,
@@ -3597,7 +3597,7 @@ class DeviceApi:
     @validate_call
     def get_project_device_public_keys_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         _request_timeout: Union[
@@ -3616,8 +3616,8 @@ class DeviceApi:
 
         Get Device Public Keys of a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -3645,7 +3645,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_project_device_public_keys_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             _request_auth=_request_auth,
@@ -3664,7 +3664,7 @@ class DeviceApi:
 
     def _get_project_device_public_keys_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         page_size,
         page_num,
         _request_auth,
@@ -3685,8 +3685,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         if page_size is not None:
 
@@ -3710,7 +3710,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/public-keys",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/public-keys",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3726,7 +3726,7 @@ class DeviceApi:
     @validate_call
     def get_project_devices(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         device_uid: Annotated[
@@ -3768,8 +3768,8 @@ class DeviceApi:
 
         Get Devices of a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -3815,7 +3815,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_project_devices_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
@@ -3848,7 +3848,7 @@ class DeviceApi:
     @validate_call
     def get_project_devices_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         device_uid: Annotated[
@@ -3890,8 +3890,8 @@ class DeviceApi:
 
         Get Devices of a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -3937,7 +3937,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_project_devices_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
@@ -3970,7 +3970,7 @@ class DeviceApi:
     @validate_call
     def get_project_devices_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         device_uid: Annotated[
@@ -4012,8 +4012,8 @@ class DeviceApi:
 
         Get Devices of a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -4059,7 +4059,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_project_devices_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
@@ -4087,7 +4087,7 @@ class DeviceApi:
 
     def _get_project_devices_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         page_size,
         page_num,
         device_uid,
@@ -4127,8 +4127,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         if page_size is not None:
 
@@ -4188,7 +4188,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices",
+            resource_path="/v1/projects/{projectOrProductUID}/devices",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4204,7 +4204,7 @@ class DeviceApi:
     @validate_call
     def get_project_fleet_devices(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -4246,8 +4246,8 @@ class DeviceApi:
 
         Get Devices of a Fleet within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param page_size:
@@ -4293,7 +4293,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_project_fleet_devices_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
@@ -4326,7 +4326,7 @@ class DeviceApi:
     @validate_call
     def get_project_fleet_devices_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -4368,8 +4368,8 @@ class DeviceApi:
 
         Get Devices of a Fleet within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param page_size:
@@ -4415,7 +4415,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_project_fleet_devices_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
@@ -4448,7 +4448,7 @@ class DeviceApi:
     @validate_call
     def get_project_fleet_devices_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -4490,8 +4490,8 @@ class DeviceApi:
 
         Get Devices of a Fleet within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param page_size:
@@ -4537,7 +4537,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._get_project_fleet_devices_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
@@ -4565,7 +4565,7 @@ class DeviceApi:
 
     def _get_project_fleet_devices_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         fleet_uid,
         page_size,
         page_num,
@@ -4604,8 +4604,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if fleet_uid is not None:
             _path_params["fleetUID"] = fleet_uid
         # process the query parameters
@@ -4663,7 +4663,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/fleets/{fleetUID}/devices",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4679,7 +4679,7 @@ class DeviceApi:
     @validate_call
     def handle_note_add(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note: Annotated[
@@ -4701,8 +4701,8 @@ class DeviceApi:
 
         Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -4732,7 +4732,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_add_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note=note,
@@ -4757,7 +4757,7 @@ class DeviceApi:
     @validate_call
     def handle_note_add_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note: Annotated[
@@ -4779,8 +4779,8 @@ class DeviceApi:
 
         Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -4810,7 +4810,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_add_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note=note,
@@ -4835,7 +4835,7 @@ class DeviceApi:
     @validate_call
     def handle_note_add_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note: Annotated[
@@ -4857,8 +4857,8 @@ class DeviceApi:
 
         Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -4888,7 +4888,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_add_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note=note,
@@ -4908,7 +4908,7 @@ class DeviceApi:
 
     def _handle_note_add_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         notefile_id,
         note,
@@ -4930,8 +4930,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         if notefile_id is not None:
@@ -4963,7 +4963,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4979,7 +4979,7 @@ class DeviceApi:
     @validate_call
     def handle_note_changes(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         tracker: Annotated[
@@ -5019,8 +5019,8 @@ class DeviceApi:
 
         Incrementally retrieve changes within a specific Notefile.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -5060,7 +5060,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_changes_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             tracker=tracker,
@@ -5090,7 +5090,7 @@ class DeviceApi:
     @validate_call
     def handle_note_changes_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         tracker: Annotated[
@@ -5130,8 +5130,8 @@ class DeviceApi:
 
         Incrementally retrieve changes within a specific Notefile.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -5171,7 +5171,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_changes_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             tracker=tracker,
@@ -5201,7 +5201,7 @@ class DeviceApi:
     @validate_call
     def handle_note_changes_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         tracker: Annotated[
@@ -5241,8 +5241,8 @@ class DeviceApi:
 
         Incrementally retrieve changes within a specific Notefile.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -5282,7 +5282,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_changes_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             tracker=tracker,
@@ -5307,7 +5307,7 @@ class DeviceApi:
 
     def _handle_note_changes_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         notefile_id,
         tracker,
@@ -5334,8 +5334,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         if notefile_id is not None:
@@ -5379,7 +5379,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/changes",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5395,7 +5395,7 @@ class DeviceApi:
     @validate_call
     def handle_note_create_add(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -5418,8 +5418,8 @@ class DeviceApi:
 
         Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -5451,7 +5451,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_create_add_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -5477,7 +5477,7 @@ class DeviceApi:
     @validate_call
     def handle_note_create_add_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -5500,8 +5500,8 @@ class DeviceApi:
 
         Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -5533,7 +5533,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_create_add_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -5559,7 +5559,7 @@ class DeviceApi:
     @validate_call
     def handle_note_create_add_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -5582,8 +5582,8 @@ class DeviceApi:
 
         Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -5615,7 +5615,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_create_add_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -5636,7 +5636,7 @@ class DeviceApi:
 
     def _handle_note_create_add_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         notefile_id,
         note_id,
@@ -5659,8 +5659,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         if notefile_id is not None:
@@ -5694,7 +5694,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5710,7 +5710,7 @@ class DeviceApi:
     @validate_call
     def handle_note_delete(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -5730,8 +5730,8 @@ class DeviceApi:
 
         Delete a note from a DB notefile
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -5761,7 +5761,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_delete_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -5786,7 +5786,7 @@ class DeviceApi:
     @validate_call
     def handle_note_delete_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -5806,8 +5806,8 @@ class DeviceApi:
 
         Delete a note from a DB notefile
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -5837,7 +5837,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_delete_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -5862,7 +5862,7 @@ class DeviceApi:
     @validate_call
     def handle_note_delete_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -5882,8 +5882,8 @@ class DeviceApi:
 
         Delete a note from a DB notefile
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -5913,7 +5913,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_delete_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -5933,7 +5933,7 @@ class DeviceApi:
 
     def _handle_note_delete_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         notefile_id,
         note_id,
@@ -5955,8 +5955,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         if notefile_id is not None:
@@ -5978,7 +5978,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="DELETE",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5994,7 +5994,7 @@ class DeviceApi:
     @validate_call
     def handle_note_get(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -6021,8 +6021,8 @@ class DeviceApi:
 
         Get a note from a DB notefile
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -6056,7 +6056,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_get_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -6083,7 +6083,7 @@ class DeviceApi:
     @validate_call
     def handle_note_get_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -6110,8 +6110,8 @@ class DeviceApi:
 
         Get a note from a DB notefile
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -6145,7 +6145,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_get_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -6172,7 +6172,7 @@ class DeviceApi:
     @validate_call
     def handle_note_get_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -6199,8 +6199,8 @@ class DeviceApi:
 
         Get a note from a DB notefile
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -6234,7 +6234,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_get_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -6256,7 +6256,7 @@ class DeviceApi:
 
     def _handle_note_get_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         notefile_id,
         note_id,
@@ -6280,8 +6280,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         if notefile_id is not None:
@@ -6311,7 +6311,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6327,7 +6327,7 @@ class DeviceApi:
     @validate_call
     def handle_note_signal(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         body: Annotated[
             Body,
@@ -6349,8 +6349,8 @@ class DeviceApi:
 
         Send a signal from Notehub to a Notecard.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param body: Body or payload of singnal to be sent to the device (required)
@@ -6378,7 +6378,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_signal_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             body=body,
             _request_auth=_request_auth,
@@ -6402,7 +6402,7 @@ class DeviceApi:
     @validate_call
     def handle_note_signal_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         body: Annotated[
             Body,
@@ -6424,8 +6424,8 @@ class DeviceApi:
 
         Send a signal from Notehub to a Notecard.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param body: Body or payload of singnal to be sent to the device (required)
@@ -6453,7 +6453,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_signal_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             body=body,
             _request_auth=_request_auth,
@@ -6477,7 +6477,7 @@ class DeviceApi:
     @validate_call
     def handle_note_signal_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         body: Annotated[
             Body,
@@ -6499,8 +6499,8 @@ class DeviceApi:
 
         Send a signal from Notehub to a Notecard.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param body: Body or payload of singnal to be sent to the device (required)
@@ -6528,7 +6528,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_signal_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             body=body,
             _request_auth=_request_auth,
@@ -6547,7 +6547,7 @@ class DeviceApi:
 
     def _handle_note_signal_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         body,
         _request_auth,
@@ -6568,8 +6568,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -6599,7 +6599,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/signal",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6615,7 +6615,7 @@ class DeviceApi:
     @validate_call
     def handle_note_update(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -6638,8 +6638,8 @@ class DeviceApi:
 
         Update a note in a DB notefile
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -6671,7 +6671,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_update_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -6697,7 +6697,7 @@ class DeviceApi:
     @validate_call
     def handle_note_update_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -6720,8 +6720,8 @@ class DeviceApi:
 
         Update a note in a DB notefile
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -6753,7 +6753,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_update_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -6779,7 +6779,7 @@ class DeviceApi:
     @validate_call
     def handle_note_update_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
@@ -6802,8 +6802,8 @@ class DeviceApi:
 
         Update a note in a DB notefile
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param notefile_id: (required)
@@ -6835,7 +6835,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_note_update_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
@@ -6856,7 +6856,7 @@ class DeviceApi:
 
     def _handle_note_update_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         notefile_id,
         note_id,
@@ -6879,8 +6879,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         if notefile_id is not None:
@@ -6914,7 +6914,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="PUT",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6930,7 +6930,7 @@ class DeviceApi:
     @validate_call
     def handle_notefile_changes(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         tracker: Annotated[
             Optional[StrictStr], Field(description="The change tracker ID.")
@@ -6955,8 +6955,8 @@ class DeviceApi:
 
         Used to perform queries on a single or multiple files to determine if new Notes are available to read
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param tracker: The change tracker ID.
@@ -6986,7 +6986,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_notefile_changes_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             tracker=tracker,
             files=files,
@@ -7011,7 +7011,7 @@ class DeviceApi:
     @validate_call
     def handle_notefile_changes_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         tracker: Annotated[
             Optional[StrictStr], Field(description="The change tracker ID.")
@@ -7036,8 +7036,8 @@ class DeviceApi:
 
         Used to perform queries on a single or multiple files to determine if new Notes are available to read
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param tracker: The change tracker ID.
@@ -7067,7 +7067,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_notefile_changes_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             tracker=tracker,
             files=files,
@@ -7092,7 +7092,7 @@ class DeviceApi:
     @validate_call
     def handle_notefile_changes_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         tracker: Annotated[
             Optional[StrictStr], Field(description="The change tracker ID.")
@@ -7117,8 +7117,8 @@ class DeviceApi:
 
         Used to perform queries on a single or multiple files to determine if new Notes are available to read
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param tracker: The change tracker ID.
@@ -7148,7 +7148,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_notefile_changes_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             tracker=tracker,
             files=files,
@@ -7168,7 +7168,7 @@ class DeviceApi:
 
     def _handle_notefile_changes_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         tracker,
         files,
@@ -7192,8 +7192,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -7219,7 +7219,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/files/changes",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7235,7 +7235,7 @@ class DeviceApi:
     @validate_call
     def handle_notefile_changes_pending(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -7253,8 +7253,8 @@ class DeviceApi:
 
         Returns info about file changes that are pending upload to Notehub or download to the Notecard.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -7280,7 +7280,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_notefile_changes_pending_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7303,7 +7303,7 @@ class DeviceApi:
     @validate_call
     def handle_notefile_changes_pending_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -7321,8 +7321,8 @@ class DeviceApi:
 
         Returns info about file changes that are pending upload to Notehub or download to the Notecard.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -7348,7 +7348,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_notefile_changes_pending_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7371,7 +7371,7 @@ class DeviceApi:
     @validate_call
     def handle_notefile_changes_pending_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -7389,8 +7389,8 @@ class DeviceApi:
 
         Returns info about file changes that are pending upload to Notehub or download to the Notecard.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -7416,7 +7416,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_notefile_changes_pending_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7434,7 +7434,7 @@ class DeviceApi:
 
     def _handle_notefile_changes_pending_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         _request_auth,
         _content_type,
@@ -7454,8 +7454,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -7473,7 +7473,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/files/changes/pending",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7489,7 +7489,7 @@ class DeviceApi:
     @validate_call
     def handle_notefile_delete(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         handle_notefile_delete_request: HandleNotefileDeleteRequest,
         _request_timeout: Union[
@@ -7508,8 +7508,8 @@ class DeviceApi:
 
         Deletes Notefiles and the Notes they contain.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param handle_notefile_delete_request: (required)
@@ -7537,7 +7537,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_notefile_delete_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             handle_notefile_delete_request=handle_notefile_delete_request,
             _request_auth=_request_auth,
@@ -7561,7 +7561,7 @@ class DeviceApi:
     @validate_call
     def handle_notefile_delete_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         handle_notefile_delete_request: HandleNotefileDeleteRequest,
         _request_timeout: Union[
@@ -7580,8 +7580,8 @@ class DeviceApi:
 
         Deletes Notefiles and the Notes they contain.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param handle_notefile_delete_request: (required)
@@ -7609,7 +7609,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_notefile_delete_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             handle_notefile_delete_request=handle_notefile_delete_request,
             _request_auth=_request_auth,
@@ -7633,7 +7633,7 @@ class DeviceApi:
     @validate_call
     def handle_notefile_delete_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         handle_notefile_delete_request: HandleNotefileDeleteRequest,
         _request_timeout: Union[
@@ -7652,8 +7652,8 @@ class DeviceApi:
 
         Deletes Notefiles and the Notes they contain.
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param handle_notefile_delete_request: (required)
@@ -7681,7 +7681,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._handle_notefile_delete_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             handle_notefile_delete_request=handle_notefile_delete_request,
             _request_auth=_request_auth,
@@ -7700,7 +7700,7 @@ class DeviceApi:
 
     def _handle_notefile_delete_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         handle_notefile_delete_request,
         _request_auth,
@@ -7721,8 +7721,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -7752,7 +7752,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="DELETE",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/files",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7768,7 +7768,7 @@ class DeviceApi:
     @validate_call
     def post_provision_project_device(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         post_provision_project_device_request: Annotated[
             PostProvisionProjectDeviceRequest,
@@ -7790,8 +7790,8 @@ class DeviceApi:
 
         Provision Device for a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param post_provision_project_device_request: Provision a device to a specific ProductUID (required)
@@ -7819,7 +7819,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._post_provision_project_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             post_provision_project_device_request=post_provision_project_device_request,
             _request_auth=_request_auth,
@@ -7843,7 +7843,7 @@ class DeviceApi:
     @validate_call
     def post_provision_project_device_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         post_provision_project_device_request: Annotated[
             PostProvisionProjectDeviceRequest,
@@ -7865,8 +7865,8 @@ class DeviceApi:
 
         Provision Device for a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param post_provision_project_device_request: Provision a device to a specific ProductUID (required)
@@ -7894,7 +7894,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._post_provision_project_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             post_provision_project_device_request=post_provision_project_device_request,
             _request_auth=_request_auth,
@@ -7918,7 +7918,7 @@ class DeviceApi:
     @validate_call
     def post_provision_project_device_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         post_provision_project_device_request: Annotated[
             PostProvisionProjectDeviceRequest,
@@ -7940,8 +7940,8 @@ class DeviceApi:
 
         Provision Device for a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param post_provision_project_device_request: Provision a device to a specific ProductUID (required)
@@ -7969,7 +7969,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._post_provision_project_device_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             post_provision_project_device_request=post_provision_project_device_request,
             _request_auth=_request_auth,
@@ -7988,7 +7988,7 @@ class DeviceApi:
 
     def _post_provision_project_device_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         post_provision_project_device_request,
         _request_auth,
@@ -8009,8 +8009,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -8040,7 +8040,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/provision",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8056,7 +8056,7 @@ class DeviceApi:
     @validate_call
     def put_device_environment_variables(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
@@ -8078,8 +8078,8 @@ class DeviceApi:
 
         Put environment variables of a device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param environment_variables: Environment variables to be added to the device (required)
@@ -8107,7 +8107,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._put_device_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
@@ -8131,7 +8131,7 @@ class DeviceApi:
     @validate_call
     def put_device_environment_variables_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
@@ -8153,8 +8153,8 @@ class DeviceApi:
 
         Put environment variables of a device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param environment_variables: Environment variables to be added to the device (required)
@@ -8182,7 +8182,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._put_device_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
@@ -8206,7 +8206,7 @@ class DeviceApi:
     @validate_call
     def put_device_environment_variables_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
@@ -8228,8 +8228,8 @@ class DeviceApi:
 
         Put environment variables of a device
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param environment_variables: Environment variables to be added to the device (required)
@@ -8257,7 +8257,7 @@ class DeviceApi:
         """  # noqa: E501
 
         _param = self._put_device_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
@@ -8276,7 +8276,7 @@ class DeviceApi:
 
     def _put_device_environment_variables_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         environment_variables,
         _request_auth,
@@ -8297,8 +8297,8 @@ class DeviceApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -8328,7 +8328,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="PUT",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/environment_variables",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

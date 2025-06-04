@@ -40,6 +40,7 @@ class TestEvent(unittest.TestCase):
                 event = '',
                 session = '',
                 tls = True,
+                transport = '',
                 best_id = '',
                 device = '',
                 sn = '',

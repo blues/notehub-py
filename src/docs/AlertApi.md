@@ -2,13 +2,13 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                   | HTTP request                             | Description |
-| ---------------------------------------- | ---------------------------------------- | ----------- |
-| [**get_alerts**](AlertApi.md#get_alerts) | **GET** /v1/projects/{projectUID}/alerts |
+| Method                                   | HTTP request                                      | Description |
+| ---------------------------------------- | ------------------------------------------------- | ----------- |
+| [**get_alerts**](AlertApi.md#get_alerts) | **GET** /v1/projects/{projectOrProductUID}/alerts |
 
 # **get_alerts**
 
-> GetAlerts200Response get_alerts(project_uid, page_size=page_size, page_num=page_num, monitor_uid=monitor_uid)
+> GetAlerts200Response get_alerts(project_or_product_uid, page_size=page_size, page_num=page_num, monitor_uid=monitor_uid)
 
 Get list of defined Alerts
 
@@ -43,13 +43,13 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.AlertApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     page_size = 50 # int |  (optional) (default to 50)
     page_num = 1 # int |  (optional) (default to 1)
     monitor_uid = 'monitor_uid_example' # str |  (optional)
 
     try:
-        api_response = api_instance.get_alerts(project_uid, page_size=page_size, page_num=page_num, monitor_uid=monitor_uid)
+        api_response = api_instance.get_alerts(project_or_product_uid, page_size=page_size, page_num=page_num, monitor_uid=monitor_uid)
         print("The response of AlertApi->get_alerts:\n")
         pprint(api_response)
     except Exception as e:
@@ -58,12 +58,12 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name            | Type    | Description | Notes                      |
-| --------------- | ------- | ----------- | -------------------------- |
-| **project_uid** | **str** |             |
-| **page_size**   | **int** |             | [optional] [default to 50] |
-| **page_num**    | **int** |             | [optional] [default to 1]  |
-| **monitor_uid** | **str** |             | [optional]                 |
+| Name                       | Type    | Description | Notes                      |
+| -------------------------- | ------- | ----------- | -------------------------- |
+| **project_or_product_uid** | **str** |             |
+| **page_size**              | **int** |             | [optional] [default to 50] |
+| **page_num**               | **int** |             | [optional] [default to 1]  |
+| **monitor_uid**            | **str** |             | [optional]                 |
 
 ### Return type
 

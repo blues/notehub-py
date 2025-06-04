@@ -2,17 +2,17 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                       | HTTP request                                                      | Description |
-| ---------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------- |
-| [**get_fleet_events**](EventApi.md#get_fleet_events)                         | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/events        |
-| [**get_fleet_events_by_cursor**](EventApi.md#get_fleet_events_by_cursor)     | **GET** /v1/projects/{projectUID}/fleets/{fleetUID}/events-cursor |
-| [**get_project_events**](EventApi.md#get_project_events)                     | **GET** /v1/projects/{projectUID}/events                          |
-| [**get_project_events_by_cursor**](EventApi.md#get_project_events_by_cursor) | **GET** /v1/projects/{projectUID}/events-cursor                   |
-| [**get_route_logs_by_event**](EventApi.md#get_route_logs_by_event)           | **GET** /v1/projects/{projectUID}/events/{eventUID}/route-logs    |
+| Method                                                                       | HTTP request                                                               | Description |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- |
+| [**get_fleet_events**](EventApi.md#get_fleet_events)                         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events        |
+| [**get_fleet_events_by_cursor**](EventApi.md#get_fleet_events_by_cursor)     | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor |
+| [**get_project_events**](EventApi.md#get_project_events)                     | **GET** /v1/projects/{projectOrProductUID}/events                          |
+| [**get_project_events_by_cursor**](EventApi.md#get_project_events_by_cursor) | **GET** /v1/projects/{projectOrProductUID}/events-cursor                   |
+| [**get_route_logs_by_event**](EventApi.md#get_route_logs_by_event)           | **GET** /v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs    |
 
 # **get_fleet_events**
 
-> GetProjectEvents200Response get_fleet_events(project_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
+> GetProjectEvents200Response get_fleet_events(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
 
 Get Events of a Fleet
 
@@ -47,7 +47,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.EventApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     fleet_uid = 'fleet_uid_example' # str |
     page_size = 50 # int |  (optional) (default to 50)
     page_num = 1 # int |  (optional) (default to 1)
@@ -66,7 +66,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     select_fields = 'select_fields_example' # str | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output. (optional)
 
     try:
-        api_response = api_instance.get_fleet_events(project_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
+        api_response = api_instance.get_fleet_events(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
         print("The response of EventApi->get_fleet_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -75,25 +75,25 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                  | Type                    | Description                                                                                                                                                      | Notes                                      |
-| --------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| **project_uid**       | **str**                 |                                                                                                                                                                  |
-| **fleet_uid**         | **str**                 |                                                                                                                                                                  |
-| **page_size**         | **int**                 |                                                                                                                                                                  | [optional] [default to 50]                 |
-| **page_num**          | **int**                 |                                                                                                                                                                  | [optional] [default to 1]                  |
-| **device_uid**        | [**List[str]**](str.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
-| **sort_by**           | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
-| **sort_order**        | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
-| **start_date**        | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **end_date**          | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **date_type**         | **str**                 | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
-| **system_files_only** | **bool**                |                                                                                                                                                                  | [optional]                                 |
-| **files**             | **str**                 |                                                                                                                                                                  | [optional]                                 |
-| **format**            | **str**                 | Response format (JSON or CSV)                                                                                                                                    | [optional] [default to &#39;json&#39;]     |
-| **serial_number**     | [**List[str]**](str.md) | Filter by Serial Number                                                                                                                                          | [optional]                                 |
-| **session_uid**       | [**List[str]**](str.md) | Filter by Session UID                                                                                                                                            | [optional]                                 |
-| **event_uid**         | [**List[str]**](str.md) | Filter by Event UID                                                                                                                                              | [optional]                                 |
-| **select_fields**     | **str**                 | Comma-separated list of fields to select from JSON payload (e.g., \&quot;field1,field2.subfield,field3\&quot;), this will reflect the columns in the CSV output. | [optional]                                 |
+| Name                       | Type                    | Description                                                                                                                                                      | Notes                                      |
+| -------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| **project_or_product_uid** | **str**                 |                                                                                                                                                                  |
+| **fleet_uid**              | **str**                 |                                                                                                                                                                  |
+| **page_size**              | **int**                 |                                                                                                                                                                  | [optional] [default to 50]                 |
+| **page_num**               | **int**                 |                                                                                                                                                                  | [optional] [default to 1]                  |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
+| **sort_by**                | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
+| **sort_order**             | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
+| **start_date**             | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **end_date**               | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **date_type**              | **str**                 | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
+| **system_files_only**      | **bool**                |                                                                                                                                                                  | [optional]                                 |
+| **files**                  | **str**                 |                                                                                                                                                                  | [optional]                                 |
+| **format**                 | **str**                 | Response format (JSON or CSV)                                                                                                                                    | [optional] [default to &#39;json&#39;]     |
+| **serial_number**          | [**List[str]**](str.md) | Filter by Serial Number                                                                                                                                          | [optional]                                 |
+| **session_uid**            | [**List[str]**](str.md) | Filter by Session UID                                                                                                                                            | [optional]                                 |
+| **event_uid**              | [**List[str]**](str.md) | Filter by Event UID                                                                                                                                              | [optional]                                 |
+| **select_fields**          | **str**                 | Comma-separated list of fields to select from JSON payload (e.g., \&quot;field1,field2.subfield,field3\&quot;), this will reflect the columns in the CSV output. | [optional]                                 |
 
 ### Return type
 
@@ -119,7 +119,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_fleet_events_by_cursor**
 
-> GetProjectEventsByCursor200Response get_fleet_events_by_cursor(project_uid, fleet_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, device_uid=device_uid, start_date=start_date, end_date=end_date)
+> GetProjectEventsByCursor200Response get_fleet_events_by_cursor(project_or_product_uid, fleet_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, device_uid=device_uid, start_date=start_date, end_date=end_date)
 
 Get Events of a Fleet by cursor
 
@@ -154,7 +154,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.EventApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     fleet_uid = 'fleet_uid_example' # str |
     limit = 50 # int |  (optional) (default to 50)
     cursor = 'cursor_example' # str | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.  (optional)
@@ -166,7 +166,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     end_date = 1657894210 # int | Unix timestamp (optional)
 
     try:
-        api_response = api_instance.get_fleet_events_by_cursor(project_uid, fleet_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, device_uid=device_uid, start_date=start_date, end_date=end_date)
+        api_response = api_instance.get_fleet_events_by_cursor(project_or_product_uid, fleet_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, device_uid=device_uid, start_date=start_date, end_date=end_date)
         print("The response of EventApi->get_fleet_events_by_cursor:\n")
         pprint(api_response)
     except Exception as e:
@@ -175,18 +175,18 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                  | Type                    | Description                                                                                                                                                                                                                                                                                                                                                                | Notes                                 |
-| --------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| **project_uid**       | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            |
-| **fleet_uid**         | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            |
-| **limit**             | **int**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to 50]            |
-| **cursor**            | **str**                 | A cursor, which can be obtained from the &#x60;next_cursor&#x60; value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. | [optional]                            |
-| **sort_order**        | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to &#39;asc&#39;] |
-| **system_files_only** | **bool**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **files**             | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **device_uid**        | [**List[str]**](str.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
-| **start_date**        | **int**                 | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
-| **end_date**          | **int**                 | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
+| Name                       | Type                    | Description                                                                                                                                                                                                                                                                                                                                                                | Notes                                 |
+| -------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **project_or_product_uid** | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            |
+| **fleet_uid**              | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            |
+| **limit**                  | **int**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to 50]            |
+| **cursor**                 | **str**                 | A cursor, which can be obtained from the &#x60;next_cursor&#x60; value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. | [optional]                            |
+| **sort_order**             | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to &#39;asc&#39;] |
+| **system_files_only**      | **bool**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **files**                  | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
+| **start_date**             | **int**                 | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
+| **end_date**               | **int**                 | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
 
 ### Return type
 
@@ -212,7 +212,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_project_events**
 
-> GetProjectEvents200Response get_project_events(project_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, fleet_uid=fleet_uid, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
+> GetProjectEvents200Response get_project_events(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, fleet_uid=fleet_uid, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
 
 Get Events of a Project
 
@@ -247,7 +247,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.EventApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     page_size = 50 # int |  (optional) (default to 50)
     page_num = 1 # int |  (optional) (default to 1)
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
@@ -266,7 +266,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     select_fields = 'select_fields_example' # str | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output. (optional)
 
     try:
-        api_response = api_instance.get_project_events(project_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, fleet_uid=fleet_uid, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
+        api_response = api_instance.get_project_events(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, fleet_uid=fleet_uid, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
         print("The response of EventApi->get_project_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -275,25 +275,25 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                  | Type                    | Description                                                                                                                                                      | Notes                                      |
-| --------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| **project_uid**       | **str**                 |                                                                                                                                                                  |
-| **page_size**         | **int**                 |                                                                                                                                                                  | [optional] [default to 50]                 |
-| **page_num**          | **int**                 |                                                                                                                                                                  | [optional] [default to 1]                  |
-| **device_uid**        | [**List[str]**](str.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
-| **sort_by**           | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
-| **sort_order**        | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
-| **start_date**        | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **end_date**          | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **date_type**         | **str**                 | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
-| **system_files_only** | **bool**                |                                                                                                                                                                  | [optional]                                 |
-| **files**             | **str**                 |                                                                                                                                                                  | [optional]                                 |
-| **format**            | **str**                 | Response format (JSON or CSV)                                                                                                                                    | [optional] [default to &#39;json&#39;]     |
-| **serial_number**     | [**List[str]**](str.md) | Filter by Serial Number                                                                                                                                          | [optional]                                 |
-| **fleet_uid**         | [**List[str]**](str.md) | Filter by Fleet UID                                                                                                                                              | [optional]                                 |
-| **session_uid**       | [**List[str]**](str.md) | Filter by Session UID                                                                                                                                            | [optional]                                 |
-| **event_uid**         | [**List[str]**](str.md) | Filter by Event UID                                                                                                                                              | [optional]                                 |
-| **select_fields**     | **str**                 | Comma-separated list of fields to select from JSON payload (e.g., \&quot;field1,field2.subfield,field3\&quot;), this will reflect the columns in the CSV output. | [optional]                                 |
+| Name                       | Type                    | Description                                                                                                                                                      | Notes                                      |
+| -------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| **project_or_product_uid** | **str**                 |                                                                                                                                                                  |
+| **page_size**              | **int**                 |                                                                                                                                                                  | [optional] [default to 50]                 |
+| **page_num**               | **int**                 |                                                                                                                                                                  | [optional] [default to 1]                  |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
+| **sort_by**                | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
+| **sort_order**             | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
+| **start_date**             | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **end_date**               | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **date_type**              | **str**                 | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
+| **system_files_only**      | **bool**                |                                                                                                                                                                  | [optional]                                 |
+| **files**                  | **str**                 |                                                                                                                                                                  | [optional]                                 |
+| **format**                 | **str**                 | Response format (JSON or CSV)                                                                                                                                    | [optional] [default to &#39;json&#39;]     |
+| **serial_number**          | [**List[str]**](str.md) | Filter by Serial Number                                                                                                                                          | [optional]                                 |
+| **fleet_uid**              | [**List[str]**](str.md) | Filter by Fleet UID                                                                                                                                              | [optional]                                 |
+| **session_uid**            | [**List[str]**](str.md) | Filter by Session UID                                                                                                                                            | [optional]                                 |
+| **event_uid**              | [**List[str]**](str.md) | Filter by Event UID                                                                                                                                              | [optional]                                 |
+| **select_fields**          | **str**                 | Comma-separated list of fields to select from JSON payload (e.g., \&quot;field1,field2.subfield,field3\&quot;), this will reflect the columns in the CSV output. | [optional]                                 |
 
 ### Return type
 
@@ -319,7 +319,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_project_events_by_cursor**
 
-> GetProjectEventsByCursor200Response get_project_events_by_cursor(project_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, fleet_uid=fleet_uid, device_uid=device_uid)
+> GetProjectEventsByCursor200Response get_project_events_by_cursor(project_or_product_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, fleet_uid=fleet_uid, device_uid=device_uid)
 
 Get Events of a Project by cursor
 
@@ -354,7 +354,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.EventApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     limit = 50 # int |  (optional) (default to 50)
     cursor = 'cursor_example' # str | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.  (optional)
     sort_order = 'asc' # str |  (optional) (default to 'asc')
@@ -364,7 +364,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
 
     try:
-        api_response = api_instance.get_project_events_by_cursor(project_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, fleet_uid=fleet_uid, device_uid=device_uid)
+        api_response = api_instance.get_project_events_by_cursor(project_or_product_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, fleet_uid=fleet_uid, device_uid=device_uid)
         print("The response of EventApi->get_project_events_by_cursor:\n")
         pprint(api_response)
     except Exception as e:
@@ -373,16 +373,16 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                  | Type                    | Description                                                                                                                                                                                                                                                                                                                                                                | Notes                                 |
-| --------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| **project_uid**       | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            |
-| **limit**             | **int**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to 50]            |
-| **cursor**            | **str**                 | A cursor, which can be obtained from the &#x60;next_cursor&#x60; value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. | [optional]                            |
-| **sort_order**        | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to &#39;asc&#39;] |
-| **system_files_only** | **bool**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **files**             | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **fleet_uid**         | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
-| **device_uid**        | [**List[str]**](str.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
+| Name                       | Type                    | Description                                                                                                                                                                                                                                                                                                                                                                | Notes                                 |
+| -------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **project_or_product_uid** | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            |
+| **limit**                  | **int**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to 50]            |
+| **cursor**                 | **str**                 | A cursor, which can be obtained from the &#x60;next_cursor&#x60; value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. | [optional]                            |
+| **sort_order**             | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional] [default to &#39;asc&#39;] |
+| **system_files_only**      | **bool**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **files**                  | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **fleet_uid**              | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
 
 ### Return type
 
@@ -408,7 +408,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_route_logs_by_event**
 
-> List[GetRouteLogsByRoute200ResponseInner] get_route_logs_by_event(project_uid, event_uid)
+> List[GetRouteLogsByRoute200ResponseInner] get_route_logs_by_event(project_or_product_uid, event_uid)
 
 Get Route Logs by Event UID
 
@@ -443,11 +443,11 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.EventApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     event_uid = '4506f411-dea6-44a0-9743-1130f57d7747' # str |
 
     try:
-        api_response = api_instance.get_route_logs_by_event(project_uid, event_uid)
+        api_response = api_instance.get_route_logs_by_event(project_or_product_uid, event_uid)
         print("The response of EventApi->get_route_logs_by_event:\n")
         pprint(api_response)
     except Exception as e:
@@ -456,10 +456,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name            | Type    | Description | Notes |
-| --------------- | ------- | ----------- | ----- |
-| **project_uid** | **str** |             |
-| **event_uid**   | **str** |             |
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **event_uid**              | **str** |             |
 
 ### Return type
 

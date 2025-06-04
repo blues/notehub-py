@@ -30,6 +30,10 @@ tags:
   description: Management of monitors
 - name: route
   description: Route operations
+- name: webhook
+  description: Webhook APIs for non-notecard event ingestion
+- name: external devices
+  description: APIs for events and sessions for external devices
 paths:
   /auth/login:
     post:
@@ -65,7 +69,7 @@ paths:
           description: Bad Request
         '500':
           description: Internal Server Error
-  /v1/projects/{projectUID}/routes:
+  /v1/projects/{projectOrProductUID}/routes:
     get:
       tags:
       - route
@@ -74,7 +78,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
         '200':
           description: Successful operation
@@ -126,7 +130,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
         description: Route to be Created
         required: true
@@ -166,7 +170,7 @@ paths:
                   timeout: 0
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/routes/{routeUID}:
+  /v1/projects/{projectOrProductUID}/routes/{routeUID}:
     get:
       tags:
       - route
@@ -175,7 +179,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/routeUIDParam'
       responses:
         '200':
@@ -212,7 +216,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/routeUIDParam'
       requestBody:
         description: Route settings to be updated
@@ -252,7 +256,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/routeUIDParam'
       responses:
         '200':
@@ -264,7 +268,7 @@ paths:
                 default: {}
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/routes/{routeUID}/route-logs:
+  /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs:
     get:
       tags:
       - route
@@ -273,7 +277,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/routeUIDParam'
       - $ref: '#/components/parameters/pageSizeParam'
       - $ref: '#/components/parameters/pageNumParam'
@@ -394,7 +398,7 @@ paths:
                 $ref: '#/components/schemas/Project'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/clone:
+  /v1/projects/{projectOrProductUID}/clone:
     post:
       tags:
       - project
@@ -403,12 +407,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - name: projectUID
-        in: path
-        required: true
-        schema:
-          type: string
-        description: The project UID to be cloned.
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
         description: Project to be cloned
         required: true
@@ -454,7 +453,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
         '200':
           description: Successful operation
@@ -472,15 +471,15 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
         '200':
           description: Successful operation
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/products:
+  /v1/projects/{projectOrProductUID}/products:
     parameters:
-    - $ref: '#/components/parameters/projectUIDParam'
+    - $ref: '#/components/parameters/projectOrProductUIDParam'
     get:
       tags:
       - project
@@ -544,9 +543,9 @@ paths:
                 $ref: '#/components/schemas/Product'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/fleets:
+  /v1/projects/{projectOrProductUID}/fleets:
     parameters:
-    - $ref: '#/components/parameters/projectUIDParam'
+    - $ref: '#/components/parameters/projectOrProductUIDParam'
     get:
       tags:
       - project
@@ -588,9 +587,9 @@ paths:
                 $ref: '#/components/schemas/Fleet'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/fleets/{fleetUID}:
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}:
     parameters:
-    - $ref: '#/components/parameters/projectUIDParam'
+    - $ref: '#/components/parameters/projectOrProductUIDParam'
     - $ref: '#/components/parameters/fleetUIDParam'
     put:
       tags:
@@ -657,9 +656,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fleet'
-  /v1/projects/{projectUID}/members:
+  /v1/projects/{projectOrProductUID}/members:
     parameters:
-    - $ref: '#/components/parameters/projectUIDParam'
+    - $ref: '#/components/parameters/projectOrProductUIDParam'
     get:
       tags:
       - project
@@ -683,7 +682,7 @@ paths:
                 - members
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices:
+  /v1/projects/{projectOrProductUID}/devices:
     get:
       tags:
       - device
@@ -692,7 +691,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/pageSizeParam'
       - $ref: '#/components/parameters/pageNumParam'
       - $ref: '#/components/parameters/deviceUIDParamQuery'
@@ -709,7 +708,7 @@ paths:
           $ref: '#/components/responses/DevicesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/provision:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision:
     post:
       tags:
       - device
@@ -718,7 +717,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
         description: Provision a device to a specific ProductUID
@@ -752,7 +751,7 @@ paths:
                 default: {}
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/fleets/{fleetUID}/devices:
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices:
     get:
       tags:
       - device
@@ -761,7 +760,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
       - $ref: '#/components/parameters/pageSizeParam'
       - $ref: '#/components/parameters/pageNumParam'
@@ -778,7 +777,7 @@ paths:
           $ref: '#/components/responses/DevicesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/public-keys:
+  /v1/projects/{projectOrProductUID}/devices/public-keys:
     get:
       tags:
       - device
@@ -787,7 +786,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/pageSizeParam'
       - $ref: '#/components/parameters/pageNumParam'
       responses:
@@ -814,9 +813,9 @@ paths:
                 - has_more
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}:
     parameters:
-    - $ref: '#/components/parameters/projectUIDParam'
+    - $ref: '#/components/parameters/projectOrProductUIDParam'
     - $ref: '#/components/parameters/deviceUIDParam'
     get:
       tags:
@@ -853,9 +852,9 @@ paths:
           description: Successful operation
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/fleets:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets:
     parameters:
-    - $ref: '#/components/parameters/projectUIDParam'
+    - $ref: '#/components/parameters/projectOrProductUIDParam'
     - $ref: '#/components/parameters/deviceUIDParam'
     get:
       tags:
@@ -934,7 +933,7 @@ paths:
           $ref: '#/components/responses/FleetsResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/public-key:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key:
     get:
       tags:
       - device
@@ -943,7 +942,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       responses:
         '200':
@@ -962,7 +961,7 @@ paths:
                 - key
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/latest:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest:
     get:
       tags:
       - device
@@ -971,14 +970,14 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       responses:
         '200':
           $ref: '#/components/responses/LatestResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/health-log:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log:
     get:
       tags:
       - device
@@ -987,7 +986,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       responses:
         '200':
@@ -1017,7 +1016,7 @@ paths:
                 - health_log
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/enable:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable:
     post:
       tags:
       - device
@@ -1026,14 +1025,14 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       responses:
         '200':
           description: Successful operation
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/disable:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable:
     post:
       tags:
       - device
@@ -1042,14 +1041,14 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       responses:
         '200':
           description: Successful operation
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/enable-connectivity-assurance:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance:
     post:
       tags:
       - device
@@ -1058,14 +1057,14 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       responses:
         '200':
           description: Successful operation
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/disable-connectivity-assurance:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance:
     post:
       tags:
       - device
@@ -1074,14 +1073,14 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       responses:
         '200':
           description: Successful operation
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/sessions:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions:
     get:
       tags:
       - device
@@ -1090,7 +1089,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       - $ref: '#/components/parameters/pageSizeParam'
       - $ref: '#/components/parameters/pageNumParam'
@@ -1099,7 +1098,7 @@ paths:
           $ref: '#/components/responses/SessionResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/events:
+  /v1/projects/{projectOrProductUID}/events:
     get:
       tags:
       - event
@@ -1108,7 +1107,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/pageSizeParam'
       - $ref: '#/components/parameters/pageNumParam'
       - $ref: '#/components/parameters/deviceUIDParamQuery'
@@ -1130,7 +1129,7 @@ paths:
           $ref: '#/components/responses/EventsResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/events-cursor:
+  /v1/projects/{projectOrProductUID}/events-cursor:
     get:
       tags:
       - event
@@ -1139,7 +1138,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/limitParam'
       - $ref: '#/components/parameters/cursorParam'
       - $ref: '#/components/parameters/sortOrderParam'
@@ -1152,7 +1151,7 @@ paths:
           $ref: '#/components/responses/EventsByCursorResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/events/{eventUID}/route-logs:
+  /v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs:
     get:
       tags:
       - event
@@ -1161,14 +1160,14 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/eventUIDParam'
       responses:
         '200':
           $ref: '#/components/responses/RouteLogsResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/fleets/{fleetUID}/events:
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events:
     get:
       tags:
       - event
@@ -1177,7 +1176,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
       - $ref: '#/components/parameters/pageSizeParam'
       - $ref: '#/components/parameters/pageNumParam'
@@ -1199,7 +1198,7 @@ paths:
           $ref: '#/components/responses/EventsResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/fleets/{fleetUID}/events-cursor:
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor:
     get:
       tags:
       - event
@@ -1208,7 +1207,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
       - $ref: '#/components/parameters/limitParam'
       - $ref: '#/components/parameters/cursorParam'
@@ -1223,9 +1222,9 @@ paths:
           $ref: '#/components/responses/EventsByCursorResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/environment_variables:
+  /v1/projects/{projectOrProductUID}/environment_variables:
     parameters:
-    - $ref: '#/components/parameters/projectUIDParam'
+    - $ref: '#/components/parameters/projectOrProductUIDParam'
     get:
       description: Get environment variables of a project
       tags:
@@ -1256,7 +1255,7 @@ paths:
           $ref: '#/components/responses/EnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/environment_variables/{key}:
+  /v1/projects/{projectOrProductUID}/environment_variables/{key}:
     delete:
       description: Delete an environment variable of a project by key
       tags:
@@ -1265,7 +1264,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - name: key
         in: path
         required: true
@@ -1277,7 +1276,7 @@ paths:
           $ref: '#/components/responses/EnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/global-transformation/enable:
+  /v1/projects/{projectOrProductUID}/global-transformation/enable:
     post:
       description: Enable the project-level event JSONata transformation
       tags:
@@ -1286,13 +1285,13 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
         '200':
           description: Successful operation
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/global-transformation/disable:
+  /v1/projects/{projectOrProductUID}/global-transformation/disable:
     post:
       description: Disable the project-level event JSONata transformation
       tags:
@@ -1301,13 +1300,13 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
         '200':
           description: Successful operation
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/global-transformation:
+  /v1/projects/{projectOrProductUID}/global-transformation:
     post:
       description: Set the project-level event JSONata transformation
       tags:
@@ -1316,7 +1315,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
         description: JSONata expression which will be applied to each event before
           it is persisted and routed
@@ -1331,9 +1330,9 @@ paths:
           description: Successful operation
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables:
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables:
     parameters:
-    - $ref: '#/components/parameters/projectUIDParam'
+    - $ref: '#/components/parameters/projectOrProductUIDParam'
     - $ref: '#/components/parameters/fleetUIDParam'
     get:
       description: Get environment variables of a fleet
@@ -1367,7 +1366,7 @@ paths:
           $ref: '#/components/responses/EnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key}:
+  /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key}:
     delete:
       description: Delete environment variables of a fleet
       tags:
@@ -1376,7 +1375,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
       - name: key
         in: path
@@ -1389,9 +1388,9 @@ paths:
           $ref: '#/components/responses/EnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables:
     parameters:
-    - $ref: '#/components/parameters/projectUIDParam'
+    - $ref: '#/components/parameters/projectOrProductUIDParam'
     - $ref: '#/components/parameters/deviceUIDParam'
     get:
       description: Get environment variables of a device
@@ -1425,7 +1424,7 @@ paths:
           $ref: '#/components/responses/EnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/environment_variables/{key}:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}:
     delete:
       description: Delete environment variable of a device
       tags:
@@ -1434,7 +1433,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       - name: key
         in: path
@@ -1483,7 +1482,7 @@ paths:
           $ref: '#/components/responses/EnvironmentVariablesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}:
     post:
       tags:
       - device
@@ -1493,7 +1492,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       - $ref: '#/components/parameters/notefileIDParam'
       requestBody:
@@ -1509,7 +1508,7 @@ paths:
           description: An empty object means success
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}:
     post:
       tags:
       - device
@@ -1519,7 +1518,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       - $ref: '#/components/parameters/notefileIDParam'
       - $ref: '#/components/parameters/noteIDParam'
@@ -1544,7 +1543,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       - $ref: '#/components/parameters/notefileIDParam'
       - $ref: '#/components/parameters/noteIDParam'
@@ -1561,7 +1560,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       - $ref: '#/components/parameters/notefileIDParam'
       - $ref: '#/components/parameters/noteIDParam'
@@ -1604,7 +1603,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       - $ref: '#/components/parameters/notefileIDParam'
       - $ref: '#/components/parameters/noteIDParam'
@@ -1621,7 +1620,7 @@ paths:
           description: An empty object means success
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/notes/{notefileID}/changes:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes:
     get:
       tags:
       - device
@@ -1630,7 +1629,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       - $ref: '#/components/parameters/notefileIDParam'
       - name: tracker
@@ -1689,7 +1688,7 @@ paths:
                       with the body of each Note and the time the Note was added.
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/files/changes:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes:
     get:
       tags:
       - device
@@ -1699,7 +1698,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       - name: tracker
         description: The change tracker ID.
@@ -1736,7 +1735,7 @@ paths:
                       total for each file.
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/files/changes/pending:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending:
     get:
       tags:
       - device
@@ -1746,7 +1745,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       responses:
         '200':
@@ -1772,7 +1771,7 @@ paths:
                       total for each file.
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/files:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files:
     delete:
       tags:
       - device
@@ -1781,7 +1780,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
         required: true
@@ -1800,7 +1799,7 @@ paths:
           description: An empty object means success
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/signal:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal:
     post:
       tags:
       - device
@@ -1809,7 +1808,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       requestBody:
         description: Body or payload of singnal to be sent to the device
@@ -1832,7 +1831,7 @@ paths:
                     description: true if the Notecard is connected to Notehub.
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/monitors:
+  /v1/projects/{projectOrProductUID}/monitors:
     get:
       tags:
       - monitor
@@ -1841,7 +1840,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
         '200':
           $ref: '#/components/responses/MonitorsResponse'
@@ -1855,7 +1854,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       requestBody:
         description: Body or payload of monitor to be created
         required: true
@@ -1873,7 +1872,7 @@ paths:
                 $ref: '#/components/schemas/Monitor'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/monitors/{monitorUID}:
+  /v1/projects/{projectOrProductUID}/monitors/{monitorUID}:
     get:
       tags:
       - monitor
@@ -1882,7 +1881,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/monitorUIDParam'
       responses:
         '200':
@@ -1901,7 +1900,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/monitorUIDParam'
       requestBody:
         description: Body or payload of monitor to be created
@@ -1928,7 +1927,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/monitorUIDParam'
       responses:
         '200':
@@ -1939,7 +1938,7 @@ paths:
                 $ref: '#/components/schemas/Monitor'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/alerts:
+  /v1/projects/{projectOrProductUID}/alerts:
     get:
       tags:
       - alert
@@ -1948,7 +1947,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/pageSizeParam'
       - $ref: '#/components/parameters/pageNumParam'
       - $ref: '#/components/parameters/monitorUIDQueryParam'
@@ -1957,7 +1956,7 @@ paths:
           $ref: '#/components/responses/AlertsResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/firmware/{firmwareType}/{filename}:
+  /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}:
     put:
       tags:
       - project
@@ -1966,7 +1965,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/firmwareTypeParam'
       - name: filename
         in: path
@@ -1991,7 +1990,7 @@ paths:
                 $ref: '#/components/schemas/FirmwareInfo'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/firmware:
+  /v1/projects/{projectOrProductUID}/firmware:
     get:
       tags:
       - project
@@ -2000,7 +1999,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/productQueryParam'
       - $ref: '#/components/parameters/firmwareTypeQueryParam'
       - $ref: '#/components/parameters/versionQueryParam'
@@ -2019,7 +2018,7 @@ paths:
                   $ref: '#/components/schemas/FirmwareInfo'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/dfu/{firmwareType}/history:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/history:
     get:
       tags:
       - project
@@ -2028,7 +2027,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       - $ref: '#/components/parameters/firmwareTypeParam'
       responses:
@@ -2040,7 +2039,7 @@ paths:
                 $ref: '#/components/schemas/DeviceDfuHistory'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/devices/{deviceUID}/dfu/{firmwareType}/status:
+  /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status:
     get:
       tags:
       - project
@@ -2049,7 +2048,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'
       - $ref: '#/components/parameters/firmwareTypeParam'
       responses:
@@ -2061,7 +2060,7 @@ paths:
                 $ref: '#/components/schemas/DeviceDfuStatus'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/dfu/{firmwareType}/history:
+  /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history:
     get:
       tags:
       - project
@@ -2071,7 +2070,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/firmwareTypeParam'
       - $ref: '#/components/parameters/pageSizeParam'
       - $ref: '#/components/parameters/pageNumParam'
@@ -2095,7 +2094,7 @@ paths:
                 $ref: '#/components/schemas/DeviceDfuHistoryPage'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/dfu/{firmwareType}/status:
+  /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status:
     get:
       tags:
       - project
@@ -2105,7 +2104,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/firmwareTypeParam'
       - $ref: '#/components/parameters/pageSizeParam'
       - $ref: '#/components/parameters/pageNumParam'
@@ -2129,7 +2128,7 @@ paths:
                 $ref: '#/components/schemas/DeviceDfuStatusPage'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/dfu/{firmwareType}/{action}:
+  /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}:
     post:
       tags:
       - project
@@ -2138,7 +2137,7 @@ paths:
       security:
       - api_key: []
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/firmwareTypeParam'
       - $ref: '#/components/parameters/dfuActionParam'
       - $ref: '#/components/parameters/deviceUIDParamQuery'
@@ -2412,14 +2411,14 @@ paths:
                 format: binary
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /v1/projects/{projectUID}/schemas:
+  /v1/projects/{projectOrProductUID}/schemas:
     get:
       tags:
       - project
       operationId: getNotefileSchemas
       summary: Get variable format for a notefile
       parameters:
-      - $ref: '#/components/parameters/projectUIDParam'
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
         '200':
           description: List of notefile schema definitions
@@ -2429,6 +2428,193 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/NotefileSchema'
+  /v1/projects/{projectOrProductUIDParam}/webhooks:
+    get:
+      tags:
+      - webhook
+      security:
+      - api_key: []
+      operationId: GetWebhooks
+      description: Retrieves all webhooks for the specified project
+      parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      responses:
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+        200:
+          description: Webhooks retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webhooks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WebhookSettings'
+  /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}:
+    post:
+      tags:
+      - webhook
+      security:
+      - api_key: []
+      operationId: CreateWebhook
+      description: Creates a webhook for the specified product with the given name.
+        The name | must be unique within the project.
+      parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - $ref: '#/components/parameters/webhookUIDParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookSettings'
+              properties: {}
+            example:
+              settings:
+                disabled: false
+                id: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
+                transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
+      responses:
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+        200:
+          description: Webhook created successfully
+    put:
+      tags:
+      - webhook
+      security:
+      - api_key: []
+      operationId: UpdateWebhook
+      description: Updates the configuration settings for the specified webhook. |
+        Webhook will be created if it does not exist. Update body will completely
+        replace the existing settings.
+      parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - $ref: '#/components/parameters/webhookUIDParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookSettings'
+              properties: {}
+            example:
+              disabled: false
+              transform: '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}'
+      responses:
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+        200:
+          description: Webhook updated successfully
+    get:
+      tags:
+      - webhook
+      security:
+      - api_key: []
+      operationId: GetWebhook
+      description: Retrieves the configuration settings for the specified webhook
+      parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - $ref: '#/components/parameters/webhookUIDParam'
+      responses:
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+        200:
+          description: Webhook settings retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSettings'
+    delete:
+      tags:
+      - webhook
+      security:
+      - api_key: []
+      operationId: DeleteWebhook
+      description: Deletes the specified webhook
+      parameters:
+      - $ref: '#/components/parameters/projectOrProductUIDParam'
+      - $ref: '#/components/parameters/webhookUIDParam'
+      responses:
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+        200:
+          description: Webhook deleted successfully
+  /v1/products/{productUID}/ext-devices/{deviceUID}/event:
+    post:
+      tags:
+      - external devices
+      security:
+      - api_key: []
+      operationId: CreateEventExtDevice
+      description: Creates an event using specified webhook
+      parameters:
+      - $ref: '#/components/parameters/productUIDParam'
+      - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        required: true
+        description: Event Object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+              properties: {}
+      responses:
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+        200:
+          description: Event Created Successfully
+  /v1/products/{productUID}/ext-devices/{deviceUID}/session/open:
+    post:
+      tags:
+      - external devices
+      security:
+      - api_key: []
+      operationId: ExtDeviceSessionOpen
+      description: Create a Session for the specified device.  | If a session is currently
+        open it will be closed and a new one opened.
+      parameters:
+      - $ref: '#/components/parameters/productUIDParam'
+      - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        required: true
+        description: Session Object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceSession'
+              properties: {}
+      responses:
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+        200:
+          description: Session Created Successfully
+  /v1/products/{productUID}/ext-devices/{deviceUID}/session/close:
+    post:
+      tags:
+      - external devices
+      security:
+      - api_key: []
+      operationId: ExtDeviceSessionClose
+      description: Closes the session for the specified device if open
+      parameters:
+      - $ref: '#/components/parameters/productUIDParam'
+      - $ref: '#/components/parameters/deviceUIDParam'
+      requestBody:
+        required: true
+        description: Session Object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceSession'
+              properties: {}
+      responses:
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+        200:
+          description: Session closed
 components:
   securitySchemes:
     api_key:
@@ -2448,8 +2634,8 @@ components:
 
         '
   parameters:
-    projectUIDParam:
-      name: projectUID
+    projectOrProductUIDParam:
+      name: projectOrProductUID
       in: path
       required: true
       schema:
@@ -2974,6 +3160,14 @@ components:
       schema:
         type: string
       description: The secret key used to access this repository
+    webhookUIDParam:
+      name: webhookUID
+      in: path
+      required: true
+      description: Webhook UID
+      schema:
+        type: string
+        example: Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8
   responses:
     ErrorResponse:
       description: The response body in case of an API error.
@@ -3709,6 +3903,10 @@ components:
           type: boolean
           description: Whether TLS was used on the connection between the device and
             notehub. Only available on _session.qo events.
+        transport:
+          type: string
+          description: The transport used for this event, e.g., "cellular", "wifi",
+            ", etc.
         best_id:
           type: string
           description: The device serial number, or the DeviceUID if the serial number
@@ -3921,8 +4119,13 @@ components:
     TowerLocation:
       type: object
       properties:
+        source:
+          description: The source of this location
+          type: string
         time:
-          type: number
+          type: integer
+          format: int64
+          description: Unix timestamp when this location was ascertained
         n:
           type: string
           description: Name of the location
@@ -3932,30 +4135,34 @@ components:
         lat:
           type: number
           format: double
+          description: Latitude
         lon:
           type: number
           format: double
+          description: Longitude
         zone:
           type: string
+          description: Timezone name
         mcc:
-          type: number
+          type: integer
+          description: Mobile Country Code
         mnc:
-          type: number
+          type: integer
+          description: Mobile Network Code
         lac:
-          type: number
+          type: integer
+          description: Location Area Code
         cid:
-          type: number
+          type: integer
+          description: Cell ID
         l:
           type: string
-          description: Open location code
+          description: Open Location Code
         z:
-          type: number
+          type: integer
           description: Timezone ID
-        count:
-          type: number
-          description: Number of times this location was recently used
         towers:
-          type: number
+          type: integer
           description: Number of triangulation points
     DeviceSession:
       type: object
@@ -3963,6 +4170,20 @@ components:
         session:
           type: string
           description: Session UID
+        session_began:
+          type: integer
+          description: UNIX timestamp of session start
+          format: int64
+        why_session_opened:
+          type: string
+          description: Reason for session opening
+        session_ended:
+          type: integer
+          description: UNIX timestamp of session end
+          format: int64
+        why_session_closed:
+          type: string
+          description: Reason for session closing
         device:
           type: string
           description: Device UID
@@ -3986,15 +4207,20 @@ components:
         triangulate:
           type: object
         rssi:
-          type: number
+          type: integer
+          format: int
         sinr:
-          type: number
+          type: integer
+          format: int
         rsrp:
-          type: number
+          type: integer
+          format: int
         rsrq:
-          type: number
+          type: integer
+          format: int
         bars:
-          type: number
+          type: integer
+          format: int
         rat:
           type: string
         bearer:
@@ -4009,24 +4235,31 @@ components:
           type: string
         apn:
           type: string
+        transport:
+          type: string
+          description: Type of network transport
         tower:
           $ref: '#/components/schemas/TowerLocation'
         tri:
           $ref: '#/components/schemas/TowerLocation'
         when:
-          type: number
+          type: integer
           description: Last known capture time of a note routed through this session
+            in Unix timestamp
+          format: int64
         where_when:
-          type: number
+          type: integer
+          format: int64
+          description: Unix timestamp of last GPS location
         where:
           type: string
-          description: Where OLC
+          description: Open Location Code from last GPS location
         where_lat:
           type: number
-          format: float
+          format: double
         where_lon:
           type: number
-          format: float
+          format: double
         where_location:
           type: string
         where_country:
@@ -4037,61 +4270,102 @@ components:
           type: boolean
         voltage:
           type: number
-          format: float
+          format: double
         temp:
           type: number
-          format: float
+          format: double
         continuous:
           type: boolean
+          description: Was this a continuous connection?
         tls:
           type: boolean
+          description: Was TLS used?
         work:
-          type: number
-          description: Last time work was done for this session
+          type: integer
+          description: Unix timestamp of the last time work was done for this session
+          format: int64
         events:
-          type: number
+          type: integer
           description: Number of events routed
+          format: int64
         moved:
-          type: number
+          type: integer
+          format: int64
         orientation:
           type: string
         hp_secs_total:
-          type: number
+          type: integer
+          description: Total number of seconds in high power mode
+          format: int64
         hp_secs_data:
-          type: number
+          type: integer
+          format: int64
         hp_secs_gps:
-          type: number
+          type: integer
+          format: int64
         hp_cycles_total:
-          type: number
+          type: integer
+          format: int64
         hp_cycles_data:
-          type: number
+          type: integer
+          format: int64
         hp_cycles_gps:
-          type: number
+          type: integer
+          format: int64
         period:
           $ref: '#/components/schemas/DeviceUsage'
+        power_charging:
+          type: boolean
+        power_usb:
+          type: boolean
+        power_primary:
+          type: boolean
+        power_mah:
+          type: number
+          format: double
+        penalty_secs:
+          type: integer
+          format: int64
+          description: Number of seconds in penalty in the prior session
+        failed_connects:
+          type: integer
+          format: int64
+          description: Number of failed connection attempts in the prior session
     DeviceUsage:
       type: object
       properties:
         since:
-          type: number
+          type: integer
+          description: Unix timestamp
+          format: int64
         duration:
-          type: number
+          type: integer
+          description: Duration in seconds
+          format: int64
         bytes_rcvd:
-          type: number
+          type: integer
+          format: int64
         bytes_sent:
-          type: number
+          type: integer
+          format: int64
         bytes_rcvd_secondary:
-          type: number
+          type: integer
+          format: int64
         bytes_sent_secondary:
-          type: number
+          type: integer
+          format: int64
         sessions_tcp:
-          type: number
+          type: integer
+          format: int64
         sessions_tls:
-          type: number
+          type: integer
+          format: int64
         notes_rcvd:
-          type: number
-        note_sent:
-          type: number
+          type: integer
+          format: int64
+        notes_sent:
+          type: integer
+          format: int64
     NotehubRoute:
       type: object
       properties:
@@ -5551,3 +5825,15 @@ components:
           type: integer
           format: int64
           description: Time this usage information was last updated
+    WebhookSettings:
+      type: object
+      properties:
+        disabled:
+          type: boolean
+          description: Flag indicating if the webhook is disabled
+        id:
+          type: string
+          description: Webhook ID
+        transform:
+          type: string
+          description: Transformation to be applied to the event
