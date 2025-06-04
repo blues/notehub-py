@@ -2,18 +2,18 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                             | HTTP request                                                   | Description |
-| ------------------------------------------------------------------ | -------------------------------------------------------------- | ----------- |
-| [**create_route**](RouteApi.md#create_route)                       | **POST** /v1/projects/{projectUID}/routes                      |
-| [**delete_route**](RouteApi.md#delete_route)                       | **DELETE** /v1/projects/{projectUID}/routes/{routeUID}         |
-| [**get_route**](RouteApi.md#get_route)                             | **GET** /v1/projects/{projectUID}/routes/{routeUID}            |
-| [**get_route_logs_by_route**](RouteApi.md#get_route_logs_by_route) | **GET** /v1/projects/{projectUID}/routes/{routeUID}/route-logs |
-| [**get_routes**](RouteApi.md#get_routes)                           | **GET** /v1/projects/{projectUID}/routes                       |
-| [**update_route**](RouteApi.md#update_route)                       | **PUT** /v1/projects/{projectUID}/routes/{routeUID}            |
+| Method                                                             | HTTP request                                                            | Description |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------- | ----------- |
+| [**create_route**](RouteApi.md#create_route)                       | **POST** /v1/projects/{projectOrProductUID}/routes                      |
+| [**delete_route**](RouteApi.md#delete_route)                       | **DELETE** /v1/projects/{projectOrProductUID}/routes/{routeUID}         |
+| [**get_route**](RouteApi.md#get_route)                             | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}            |
+| [**get_route_logs_by_route**](RouteApi.md#get_route_logs_by_route) | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs |
+| [**get_routes**](RouteApi.md#get_routes)                           | **GET** /v1/projects/{projectOrProductUID}/routes                       |
+| [**update_route**](RouteApi.md#update_route)                       | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID}            |
 
 # **create_route**
 
-> NotehubRoute create_route(project_uid, notehub_route)
+> NotehubRoute create_route(project_or_product_uid, notehub_route)
 
 Create Route within a Project
 
@@ -48,7 +48,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RouteApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     notehub_route = {
   "label": "Route Label",
   "type":"http",
@@ -61,7 +61,7 @@ with notehub_py.ApiClient(configuration) as api_client:
  # NotehubRoute | Route to be Created
 
     try:
-        api_response = api_instance.create_route(project_uid, notehub_route)
+        api_response = api_instance.create_route(project_or_product_uid, notehub_route)
         print("The response of RouteApi->create_route:\n")
         pprint(api_response)
     except Exception as e:
@@ -70,10 +70,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name              | Type                                | Description         | Notes |
-| ----------------- | ----------------------------------- | ------------------- | ----- |
-| **project_uid**   | **str**                             |                     |
-| **notehub_route** | [**NotehubRoute**](NotehubRoute.md) | Route to be Created |
+| Name                       | Type                                | Description         | Notes |
+| -------------------------- | ----------------------------------- | ------------------- | ----- |
+| **project_or_product_uid** | **str**                             |                     |
+| **notehub_route**          | [**NotehubRoute**](NotehubRoute.md) | Route to be Created |
 
 ### Return type
 
@@ -99,7 +99,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **delete_route**
 
-> object delete_route(project_uid, route_uid)
+> object delete_route(project_or_product_uid, route_uid)
 
 Delete single route within a project
 
@@ -133,11 +133,11 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RouteApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     route_uid = 'route:cbd20093cba58392c9f9bbdd0cdeb1a0' # str |
 
     try:
-        api_response = api_instance.delete_route(project_uid, route_uid)
+        api_response = api_instance.delete_route(project_or_product_uid, route_uid)
         print("The response of RouteApi->delete_route:\n")
         pprint(api_response)
     except Exception as e:
@@ -146,10 +146,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name            | Type    | Description | Notes |
-| --------------- | ------- | ----------- | ----- |
-| **project_uid** | **str** |             |
-| **route_uid**   | **str** |             |
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **route_uid**              | **str** |             |
 
 ### Return type
 
@@ -175,7 +175,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_route**
 
-> NotehubRoute get_route(project_uid, route_uid)
+> NotehubRoute get_route(project_or_product_uid, route_uid)
 
 Get single route within a project
 
@@ -210,11 +210,11 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RouteApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     route_uid = 'route:cbd20093cba58392c9f9bbdd0cdeb1a0' # str |
 
     try:
-        api_response = api_instance.get_route(project_uid, route_uid)
+        api_response = api_instance.get_route(project_or_product_uid, route_uid)
         print("The response of RouteApi->get_route:\n")
         pprint(api_response)
     except Exception as e:
@@ -223,10 +223,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name            | Type    | Description | Notes |
-| --------------- | ------- | ----------- | ----- |
-| **project_uid** | **str** |             |
-| **route_uid**   | **str** |             |
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **route_uid**              | **str** |             |
 
 ### Return type
 
@@ -252,7 +252,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_route_logs_by_route**
 
-> List[GetRouteLogsByRoute200ResponseInner] get_route_logs_by_route(project_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, files=files)
+> List[GetRouteLogsByRoute200ResponseInner] get_route_logs_by_route(project_or_product_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, files=files)
 
 Get Route Logs by Route UID
 
@@ -287,7 +287,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RouteApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     route_uid = 'route:cbd20093cba58392c9f9bbdd0cdeb1a0' # str |
     page_size = 50 # int |  (optional) (default to 50)
     page_num = 1 # int |  (optional) (default to 1)
@@ -300,7 +300,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     files = '_health.qo, data.qo' # str |  (optional)
 
     try:
-        api_response = api_instance.get_route_logs_by_route(project_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, files=files)
+        api_response = api_instance.get_route_logs_by_route(project_or_product_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, files=files)
         print("The response of RouteApi->get_route_logs_by_route:\n")
         pprint(api_response)
     except Exception as e:
@@ -309,19 +309,19 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                  | Type                    | Description    | Notes                                      |
-| --------------------- | ----------------------- | -------------- | ------------------------------------------ |
-| **project_uid**       | **str**                 |                |
-| **route_uid**         | **str**                 |                |
-| **page_size**         | **int**                 |                | [optional] [default to 50]                 |
-| **page_num**          | **int**                 |                | [optional] [default to 1]                  |
-| **device_uid**        | [**List[str]**](str.md) | A Device UID.  | [optional]                                 |
-| **sort_by**           | **str**                 |                | [optional] [default to &#39;captured&#39;] |
-| **sort_order**        | **str**                 |                | [optional] [default to &#39;asc&#39;]      |
-| **start_date**        | **int**                 | Unix timestamp | [optional]                                 |
-| **end_date**          | **int**                 | Unix timestamp | [optional]                                 |
-| **system_files_only** | **bool**                |                | [optional]                                 |
-| **files**             | **str**                 |                | [optional]                                 |
+| Name                       | Type                    | Description    | Notes                                      |
+| -------------------------- | ----------------------- | -------------- | ------------------------------------------ |
+| **project_or_product_uid** | **str**                 |                |
+| **route_uid**              | **str**                 |                |
+| **page_size**              | **int**                 |                | [optional] [default to 50]                 |
+| **page_num**               | **int**                 |                | [optional] [default to 1]                  |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.  | [optional]                                 |
+| **sort_by**                | **str**                 |                | [optional] [default to &#39;captured&#39;] |
+| **sort_order**             | **str**                 |                | [optional] [default to &#39;asc&#39;]      |
+| **start_date**             | **int**                 | Unix timestamp | [optional]                                 |
+| **end_date**               | **int**                 | Unix timestamp | [optional]                                 |
+| **system_files_only**      | **bool**                |                | [optional]                                 |
+| **files**                  | **str**                 |                | [optional]                                 |
 
 ### Return type
 
@@ -347,7 +347,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_routes**
 
-> List[UserDbRoute] get_routes(project_uid)
+> List[UserDbRoute] get_routes(project_or_product_uid)
 
 Get all Routes within a Project
 
@@ -382,10 +382,10 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RouteApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
 
     try:
-        api_response = api_instance.get_routes(project_uid)
+        api_response = api_instance.get_routes(project_or_product_uid)
         print("The response of RouteApi->get_routes:\n")
         pprint(api_response)
     except Exception as e:
@@ -394,9 +394,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name            | Type    | Description | Notes |
-| --------------- | ------- | ----------- | ----- |
-| **project_uid** | **str** |             |
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
 
 ### Return type
 
@@ -422,7 +422,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **update_route**
 
-> NotehubRoute update_route(project_uid, route_uid, notehub_route)
+> NotehubRoute update_route(project_or_product_uid, route_uid, notehub_route)
 
 Update route by UID
 
@@ -457,7 +457,7 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RouteApi(api_client)
-    project_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     route_uid = 'route:cbd20093cba58392c9f9bbdd0cdeb1a0' # str |
     notehub_route = {
   "http" {
@@ -473,7 +473,7 @@ with notehub_py.ApiClient(configuration) as api_client:
  # NotehubRoute | Route settings to be updated
 
     try:
-        api_response = api_instance.update_route(project_uid, route_uid, notehub_route)
+        api_response = api_instance.update_route(project_or_product_uid, route_uid, notehub_route)
         print("The response of RouteApi->update_route:\n")
         pprint(api_response)
     except Exception as e:
@@ -482,11 +482,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name              | Type                                | Description                  | Notes |
-| ----------------- | ----------------------------------- | ---------------------------- | ----- |
-| **project_uid**   | **str**                             |                              |
-| **route_uid**     | **str**                             |                              |
-| **notehub_route** | [**NotehubRoute**](NotehubRoute.md) | Route settings to be updated |
+| Name                       | Type                                | Description                  | Notes |
+| -------------------------- | ----------------------------------- | ---------------------------- | ----- |
+| **project_or_product_uid** | **str**                             |                              |
+| **route_uid**              | **str**                             |                              |
+| **notehub_route**          | [**NotehubRoute**](NotehubRoute.md) | Route settings to be updated |
 
 ### Return type
 

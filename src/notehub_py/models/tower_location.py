@@ -29,27 +29,32 @@ class TowerLocation(BaseModel):
     TowerLocation
     """  # noqa: E501
 
-    time: Optional[Union[StrictFloat, StrictInt]] = None
+    source: Optional[StrictStr] = Field(
+        default=None, description="The source of this location"
+    )
+    time: Optional[StrictInt] = Field(
+        default=None, description="Unix timestamp when this location was ascertained"
+    )
     n: Optional[StrictStr] = Field(default=None, description="Name of the location")
     c: Optional[StrictStr] = Field(default=None, description="Country code")
-    lat: Optional[Union[StrictFloat, StrictInt]] = None
-    lon: Optional[Union[StrictFloat, StrictInt]] = None
-    zone: Optional[StrictStr] = None
-    mcc: Optional[Union[StrictFloat, StrictInt]] = None
-    mnc: Optional[Union[StrictFloat, StrictInt]] = None
-    lac: Optional[Union[StrictFloat, StrictInt]] = None
-    cid: Optional[Union[StrictFloat, StrictInt]] = None
-    l: Optional[StrictStr] = Field(default=None, description="Open location code")
-    z: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Timezone ID"
+    lat: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Latitude"
     )
-    count: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Number of times this location was recently used"
+    lon: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Longitude"
     )
-    towers: Optional[Union[StrictFloat, StrictInt]] = Field(
+    zone: Optional[StrictStr] = Field(default=None, description="Timezone name")
+    mcc: Optional[StrictInt] = Field(default=None, description="Mobile Country Code")
+    mnc: Optional[StrictInt] = Field(default=None, description="Mobile Network Code")
+    lac: Optional[StrictInt] = Field(default=None, description="Location Area Code")
+    cid: Optional[StrictInt] = Field(default=None, description="Cell ID")
+    l: Optional[StrictStr] = Field(default=None, description="Open Location Code")
+    z: Optional[StrictInt] = Field(default=None, description="Timezone ID")
+    towers: Optional[StrictInt] = Field(
         default=None, description="Number of triangulation points"
     )
     __properties: ClassVar[List[str]] = [
+        "source",
         "time",
         "n",
         "c",
@@ -62,7 +67,6 @@ class TowerLocation(BaseModel):
         "cid",
         "l",
         "z",
-        "count",
         "towers",
     ]
 
@@ -116,6 +120,7 @@ class TowerLocation(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "source": obj.get("source"),
                 "time": obj.get("time"),
                 "n": obj.get("n"),
                 "c": obj.get("c"),
@@ -128,7 +133,6 @@ class TowerLocation(BaseModel):
                 "cid": obj.get("cid"),
                 "l": obj.get("l"),
                 "z": obj.get("z"),
-                "count": obj.get("count"),
                 "towers": obj.get("towers"),
             }
         )

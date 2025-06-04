@@ -41,6 +41,18 @@ class DeviceSession(BaseModel):
     """  # noqa: E501
 
     session: Optional[StrictStr] = Field(default=None, description="Session UID")
+    session_began: Optional[StrictInt] = Field(
+        default=None, description="UNIX timestamp of session start"
+    )
+    why_session_opened: Optional[StrictStr] = Field(
+        default=None, description="Reason for session opening"
+    )
+    session_ended: Optional[StrictInt] = Field(
+        default=None, description="UNIX timestamp of session end"
+    )
+    why_session_closed: Optional[StrictStr] = Field(
+        default=None, description="Reason for session closing"
+    )
     device: Optional[StrictStr] = Field(default=None, description="Device UID")
     sn: Optional[StrictStr] = Field(default=None, description="Device Serial Number")
     product: Optional[StrictStr] = Field(default=None, description="Product UID")
@@ -53,11 +65,11 @@ class DeviceSession(BaseModel):
     )
     scan: Optional[Union[StrictBytes, StrictStr]] = None
     triangulate: Optional[Dict[str, Any]] = None
-    rssi: Optional[Union[StrictFloat, StrictInt]] = None
-    sinr: Optional[Union[StrictFloat, StrictInt]] = None
-    rsrp: Optional[Union[StrictFloat, StrictInt]] = None
-    rsrq: Optional[Union[StrictFloat, StrictInt]] = None
-    bars: Optional[Union[StrictFloat, StrictInt]] = None
+    rssi: Optional[StrictInt] = None
+    sinr: Optional[StrictInt] = None
+    rsrp: Optional[StrictInt] = None
+    rsrq: Optional[StrictInt] = None
+    bars: Optional[StrictInt] = None
     rat: Optional[StrictStr] = None
     bearer: Optional[StrictStr] = None
     ip: Optional[StrictStr] = None
@@ -65,14 +77,21 @@ class DeviceSession(BaseModel):
     ssid: Optional[StrictStr] = None
     iccid: Optional[StrictStr] = None
     apn: Optional[StrictStr] = None
+    transport: Optional[StrictStr] = Field(
+        default=None, description="Type of network transport"
+    )
     tower: Optional[TowerLocation] = None
     tri: Optional[TowerLocation] = None
-    when: Optional[Union[StrictFloat, StrictInt]] = Field(
+    when: Optional[StrictInt] = Field(
         default=None,
-        description="Last known capture time of a note routed through this session",
+        description="Last known capture time of a note routed through this session in Unix timestamp",
     )
-    where_when: Optional[Union[StrictFloat, StrictInt]] = None
-    where: Optional[StrictStr] = Field(default=None, description="Where OLC")
+    where_when: Optional[StrictInt] = Field(
+        default=None, description="Unix timestamp of last GPS location"
+    )
+    where: Optional[StrictStr] = Field(
+        default=None, description="Open Location Code from last GPS location"
+    )
     where_lat: Optional[Union[StrictFloat, StrictInt]] = None
     where_lon: Optional[Union[StrictFloat, StrictInt]] = None
     where_location: Optional[StrictStr] = None
@@ -81,25 +100,45 @@ class DeviceSession(BaseModel):
     usage_actual: Optional[StrictBool] = None
     voltage: Optional[Union[StrictFloat, StrictInt]] = None
     temp: Optional[Union[StrictFloat, StrictInt]] = None
-    continuous: Optional[StrictBool] = None
-    tls: Optional[StrictBool] = None
-    work: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Last time work was done for this session"
+    continuous: Optional[StrictBool] = Field(
+        default=None, description="Was this a continuous connection?"
     )
-    events: Optional[Union[StrictFloat, StrictInt]] = Field(
+    tls: Optional[StrictBool] = Field(default=None, description="Was TLS used?")
+    work: Optional[StrictInt] = Field(
+        default=None,
+        description="Unix timestamp of the last time work was done for this session",
+    )
+    events: Optional[StrictInt] = Field(
         default=None, description="Number of events routed"
     )
-    moved: Optional[Union[StrictFloat, StrictInt]] = None
+    moved: Optional[StrictInt] = None
     orientation: Optional[StrictStr] = None
-    hp_secs_total: Optional[Union[StrictFloat, StrictInt]] = None
-    hp_secs_data: Optional[Union[StrictFloat, StrictInt]] = None
-    hp_secs_gps: Optional[Union[StrictFloat, StrictInt]] = None
-    hp_cycles_total: Optional[Union[StrictFloat, StrictInt]] = None
-    hp_cycles_data: Optional[Union[StrictFloat, StrictInt]] = None
-    hp_cycles_gps: Optional[Union[StrictFloat, StrictInt]] = None
+    hp_secs_total: Optional[StrictInt] = Field(
+        default=None, description="Total number of seconds in high power mode"
+    )
+    hp_secs_data: Optional[StrictInt] = None
+    hp_secs_gps: Optional[StrictInt] = None
+    hp_cycles_total: Optional[StrictInt] = None
+    hp_cycles_data: Optional[StrictInt] = None
+    hp_cycles_gps: Optional[StrictInt] = None
     period: Optional[DeviceUsage] = None
+    power_charging: Optional[StrictBool] = None
+    power_usb: Optional[StrictBool] = None
+    power_primary: Optional[StrictBool] = None
+    power_mah: Optional[Union[StrictFloat, StrictInt]] = None
+    penalty_secs: Optional[StrictInt] = Field(
+        default=None, description="Number of seconds in penalty in the prior session"
+    )
+    failed_connects: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of failed connection attempts in the prior session",
+    )
     __properties: ClassVar[List[str]] = [
         "session",
+        "session_began",
+        "why_session_opened",
+        "session_ended",
+        "why_session_closed",
         "device",
         "sn",
         "product",
@@ -119,6 +158,7 @@ class DeviceSession(BaseModel):
         "ssid",
         "iccid",
         "apn",
+        "transport",
         "tower",
         "tri",
         "when",
@@ -145,6 +185,12 @@ class DeviceSession(BaseModel):
         "hp_cycles_data",
         "hp_cycles_gps",
         "period",
+        "power_charging",
+        "power_usb",
+        "power_primary",
+        "power_mah",
+        "penalty_secs",
+        "failed_connects",
     ]
 
     model_config = ConfigDict(
@@ -207,6 +253,10 @@ class DeviceSession(BaseModel):
         _obj = cls.model_validate(
             {
                 "session": obj.get("session"),
+                "session_began": obj.get("session_began"),
+                "why_session_opened": obj.get("why_session_opened"),
+                "session_ended": obj.get("session_ended"),
+                "why_session_closed": obj.get("why_session_closed"),
                 "device": obj.get("device"),
                 "sn": obj.get("sn"),
                 "product": obj.get("product"),
@@ -226,6 +276,7 @@ class DeviceSession(BaseModel):
                 "ssid": obj.get("ssid"),
                 "iccid": obj.get("iccid"),
                 "apn": obj.get("apn"),
+                "transport": obj.get("transport"),
                 "tower": (
                     TowerLocation.from_dict(obj["tower"])
                     if obj.get("tower") is not None
@@ -264,6 +315,12 @@ class DeviceSession(BaseModel):
                     if obj.get("period") is not None
                     else None
                 ),
+                "power_charging": obj.get("power_charging"),
+                "power_usb": obj.get("power_usb"),
+                "power_primary": obj.get("power_primary"),
+                "power_mah": obj.get("power_mah"),
+                "penalty_secs": obj.get("penalty_secs"),
+                "failed_connects": obj.get("failed_connects"),
             }
         )
         return _obj

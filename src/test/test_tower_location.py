@@ -37,20 +37,20 @@ class TestTowerLocation(unittest.TestCase):
         model = TowerLocation()
         if include_optional:
             return TowerLocation(
-                time = 1.337,
+                source = '',
+                time = 56,
                 n = '',
                 c = '',
                 lat = 1.337,
                 lon = 1.337,
                 zone = '',
-                mcc = 1.337,
-                mnc = 1.337,
-                lac = 1.337,
-                cid = 1.337,
+                mcc = 56,
+                mnc = 56,
+                lac = 56,
+                cid = 56,
                 l = '',
-                z = 1.337,
-                count = 1.337,
-                towers = 1.337
+                z = 56,
+                towers = 56
             )
         else:
             return TowerLocation(
