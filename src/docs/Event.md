@@ -7,6 +7,7 @@
 | **event**              | **str**    | Event UID (globally unique)                                                                                                                            | [optional] |
 | **session**            | **str**    | Session UID (globally unique)                                                                                                                          | [optional] |
 | **tls**                | **bool**   | Whether TLS was used on the connection between the device and notehub. Only available on \_session.qo events.                                          | [optional] |
+| **transport**          | **str**    | The transport used for this event, e.g., \&quot;cellular\&quot;, \&quot;wifi\&quot;, \&quot;, etc.                                                     | [optional] |
 | **best_id**            | **str**    | The device serial number, or the DeviceUID if the serial number is not set                                                                             | [optional] |
 | **device**             | **str**    | Device UID (globally unique)                                                                                                                           | [optional] |
 | **sn**                 | **str**    | The device serial number                                                                                                                               | [optional] |

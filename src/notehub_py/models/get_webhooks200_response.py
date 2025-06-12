@@ -18,41 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.webhook_settings import WebhookSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class DeviceUsage(BaseModel):
+class GetWebhooks200Response(BaseModel):
     """
-    DeviceUsage
+    GetWebhooks200Response
     """  # noqa: E501
 
-    since: Optional[StrictInt] = Field(default=None, description="Unix timestamp")
-    duration: Optional[StrictInt] = Field(
-        default=None, description="Duration in seconds"
-    )
-    bytes_rcvd: Optional[StrictInt] = None
-    bytes_sent: Optional[StrictInt] = None
-    bytes_rcvd_secondary: Optional[StrictInt] = None
-    bytes_sent_secondary: Optional[StrictInt] = None
-    sessions_tcp: Optional[StrictInt] = None
-    sessions_tls: Optional[StrictInt] = None
-    notes_rcvd: Optional[StrictInt] = None
-    notes_sent: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = [
-        "since",
-        "duration",
-        "bytes_rcvd",
-        "bytes_sent",
-        "bytes_rcvd_secondary",
-        "bytes_sent_secondary",
-        "sessions_tcp",
-        "sessions_tls",
-        "notes_rcvd",
-        "notes_sent",
-    ]
+    webhooks: Optional[List[WebhookSettings]] = None
+    __properties: ClassVar[List[str]] = ["webhooks"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,7 +50,7 @@ class DeviceUsage(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of DeviceUsage from a JSON string"""
+        """Create an instance of GetWebhooks200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -91,11 +70,18 @@ class DeviceUsage(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in webhooks (list)
+        _items = []
+        if self.webhooks:
+            for _item in self.webhooks:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["webhooks"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of DeviceUsage from a dict"""
+        """Create an instance of GetWebhooks200Response from a dict"""
         if obj is None:
             return None
 
@@ -104,16 +90,11 @@ class DeviceUsage(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "since": obj.get("since"),
-                "duration": obj.get("duration"),
-                "bytes_rcvd": obj.get("bytes_rcvd"),
-                "bytes_sent": obj.get("bytes_sent"),
-                "bytes_rcvd_secondary": obj.get("bytes_rcvd_secondary"),
-                "bytes_sent_secondary": obj.get("bytes_sent_secondary"),
-                "sessions_tcp": obj.get("sessions_tcp"),
-                "sessions_tls": obj.get("sessions_tls"),
-                "notes_rcvd": obj.get("notes_rcvd"),
-                "notes_sent": obj.get("notes_sent"),
+                "webhooks": (
+                    [WebhookSettings.from_dict(_item) for _item in obj["webhooks"]]
+                    if obj.get("webhooks") is not None
+                    else None
+                )
             }
         )
         return _obj

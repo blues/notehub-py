@@ -42,7 +42,7 @@ class AlertApi:
     @validate_call
     def get_alerts(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         monitor_uid: Optional[StrictStr] = None,
@@ -62,8 +62,8 @@ class AlertApi:
 
         Get list of defined Alerts
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -93,7 +93,7 @@ class AlertApi:
         """  # noqa: E501
 
         _param = self._get_alerts_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             monitor_uid=monitor_uid,
@@ -118,7 +118,7 @@ class AlertApi:
     @validate_call
     def get_alerts_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         monitor_uid: Optional[StrictStr] = None,
@@ -138,8 +138,8 @@ class AlertApi:
 
         Get list of defined Alerts
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -169,7 +169,7 @@ class AlertApi:
         """  # noqa: E501
 
         _param = self._get_alerts_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             monitor_uid=monitor_uid,
@@ -194,7 +194,7 @@ class AlertApi:
     @validate_call
     def get_alerts_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         monitor_uid: Optional[StrictStr] = None,
@@ -214,8 +214,8 @@ class AlertApi:
 
         Get list of defined Alerts
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
@@ -245,7 +245,7 @@ class AlertApi:
         """  # noqa: E501
 
         _param = self._get_alerts_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
             monitor_uid=monitor_uid,
@@ -265,7 +265,7 @@ class AlertApi:
 
     def _get_alerts_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         page_size,
         page_num,
         monitor_uid,
@@ -287,8 +287,8 @@ class AlertApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         if page_size is not None:
 
@@ -316,7 +316,7 @@ class AlertApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/alerts",
+            resource_path="/v1/projects/{projectOrProductUID}/alerts",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

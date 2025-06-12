@@ -15,7 +15,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 
-__version__ = "1.0.12"
+__version__ = "1.0.13"
 
 # import apis into sdk package
 from notehub_py.api.alert_api import AlertApi
@@ -23,10 +23,12 @@ from notehub_py.api.authorization_api import AuthorizationApi
 from notehub_py.api.billing_account_api import BillingAccountApi
 from notehub_py.api.device_api import DeviceApi
 from notehub_py.api.event_api import EventApi
+from notehub_py.api.external_devices_api import ExternalDevicesApi
 from notehub_py.api.monitor_api import MonitorApi
 from notehub_py.api.project_api import ProjectApi
 from notehub_py.api.repository_api import RepositoryApi
 from notehub_py.api.route_api import RouteApi
+from notehub_py.api.webhook_api import WebhookApi
 
 # import ApiClient
 from notehub_py.api_response import ApiResponse
@@ -125,6 +127,7 @@ from notehub_py.models.get_projects200_response import GetProjects200Response
 from notehub_py.models.get_route_logs_by_route200_response_inner import (
     GetRouteLogsByRoute200ResponseInner,
 )
+from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.models.google import Google
 from notehub_py.models.handle_note_changes200_response import (
     HandleNoteChanges200Response,
@@ -182,3 +185,4 @@ from notehub_py.models.user_db_route import UserDbRoute
 from notehub_py.models.user_dfu_state_machine import UserDfuStateMachine
 from notehub_py.models.user_dfu_state_machine_status import UserDfuStateMachineStatus
 from notehub_py.models.user_firmware_info import UserFirmwareInfo
+from notehub_py.models.webhook_settings import WebhookSettings

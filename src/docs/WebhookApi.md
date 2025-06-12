@@ -1,20 +1,20 @@
-# notehub_py.MonitorApi
+# notehub_py.WebhookApi
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                             | HTTP request                                                        | Description |
-| -------------------------------------------------- | ------------------------------------------------------------------- | ----------- |
-| [**create_monitor**](MonitorApi.md#create_monitor) | **POST** /v1/projects/{projectOrProductUID}/monitors                |
-| [**delete_monitor**](MonitorApi.md#delete_monitor) | **DELETE** /v1/projects/{projectOrProductUID}/monitors/{monitorUID} |
-| [**get_monitor**](MonitorApi.md#get_monitor)       | **GET** /v1/projects/{projectOrProductUID}/monitors/{monitorUID}    |
-| [**get_monitors**](MonitorApi.md#get_monitors)     | **GET** /v1/projects/{projectOrProductUID}/monitors                 |
-| [**update_monitor**](MonitorApi.md#update_monitor) | **PUT** /v1/projects/{projectOrProductUID}/monitors/{monitorUID}    |
+| Method                                             | HTTP request                                                             | Description |
+| -------------------------------------------------- | ------------------------------------------------------------------------ | ----------- |
+| [**create_webhook**](WebhookApi.md#create_webhook) | **POST** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}   |
+| [**delete_webhook**](WebhookApi.md#delete_webhook) | **DELETE** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID} |
+| [**get_webhook**](WebhookApi.md#get_webhook)       | **GET** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}    |
+| [**get_webhooks**](WebhookApi.md#get_webhooks)     | **GET** /v1/projects/{projectOrProductUIDParam}/webhooks                 |
+| [**update_webhook**](WebhookApi.md#update_webhook) | **PUT** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}    |
 
-# **create_monitor**
+# **create_webhook**
 
-> Monitor create_monitor(project_or_product_uid, create_monitor)
+> create_webhook(project_or_product_uid, webhook_uid, webhook_settings)
 
-Create a new Monitor
+Creates a webhook for the specified product with the given name. The name | must be unique within the project.
 
 ### Example
 
@@ -22,8 +22,7 @@ Create a new Monitor
 
 ```python
 import notehub_py
-from notehub_py.models.create_monitor import CreateMonitor
-from notehub_py.models.monitor import Monitor
+from notehub_py.models.webhook_settings import WebhookSettings
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -47,28 +46,28 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = notehub_py.MonitorApi(api_client)
+    api_instance = notehub_py.WebhookApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    create_monitor = notehub_py.CreateMonitor() # CreateMonitor | Body or payload of monitor to be created
+    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
+    webhook_settings = {"settings":{"disabled":false,"id":"Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8","transform":"{\"device\":body.end_device_ids.dev_eui,\"sn\":body.end_device_ids.device_id,\"body\":body.uplink_message.decoded_payload,\"details\":body}"}} # WebhookSettings |
 
     try:
-        api_response = api_instance.create_monitor(project_or_product_uid, create_monitor)
-        print("The response of MonitorApi->create_monitor:\n")
-        pprint(api_response)
+        api_instance.create_webhook(project_or_product_uid, webhook_uid, webhook_settings)
     except Exception as e:
-        print("Exception when calling MonitorApi->create_monitor: %s\n" % e)
+        print("Exception when calling WebhookApi->create_webhook: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                       | Type                                  | Description                              | Notes |
-| -------------------------- | ------------------------------------- | ---------------------------------------- | ----- |
-| **project_or_product_uid** | **str**                               |                                          |
-| **create_monitor**         | [**CreateMonitor**](CreateMonitor.md) | Body or payload of monitor to be created |
+| Name                       | Type                                      | Description | Notes |
+| -------------------------- | ----------------------------------------- | ----------- | ----- |
+| **project_or_product_uid** | **str**                                   |             |
+| **webhook_uid**            | **str**                                   | Webhook UID |
+| **webhook_settings**       | [**WebhookSettings**](WebhookSettings.md) |             |
 
 ### Return type
 
-[**Monitor**](Monitor.md)
+void (empty response body)
 
 ### Authorization
 
@@ -83,16 +82,16 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **201**     | Successful operation                       | -                |
+| **200**     | Webhook created successfully               | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_monitor**
+# **delete_webhook**
 
-> Monitor delete_monitor(project_or_product_uid, monitor_uid)
+> delete_webhook(project_or_product_uid, webhook_uid)
 
-Delete Monitor
+Deletes the specified webhook
 
 ### Example
 
@@ -100,7 +99,6 @@ Delete Monitor
 
 ```python
 import notehub_py
-from notehub_py.models.monitor import Monitor
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -124,16 +122,14 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = notehub_py.MonitorApi(api_client)
+    api_instance = notehub_py.WebhookApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    monitor_uid = 'monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad' # str |
+    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
 
     try:
-        api_response = api_instance.delete_monitor(project_or_product_uid, monitor_uid)
-        print("The response of MonitorApi->delete_monitor:\n")
-        pprint(api_response)
+        api_instance.delete_webhook(project_or_product_uid, webhook_uid)
     except Exception as e:
-        print("Exception when calling MonitorApi->delete_monitor: %s\n" % e)
+        print("Exception when calling WebhookApi->delete_webhook: %s\n" % e)
 ```
 
 ### Parameters
@@ -141,11 +137,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 | Name                       | Type    | Description | Notes |
 | -------------------------- | ------- | ----------- | ----- |
 | **project_or_product_uid** | **str** |             |
-| **monitor_uid**            | **str** |             |
+| **webhook_uid**            | **str** | Webhook UID |
 
 ### Return type
 
-[**Monitor**](Monitor.md)
+void (empty response body)
 
 ### Authorization
 
@@ -160,16 +156,16 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
+| **200**     | Webhook deleted successfully               | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_monitor**
+# **get_webhook**
 
-> Monitor get_monitor(project_or_product_uid, monitor_uid)
+> WebhookSettings get_webhook(project_or_product_uid, webhook_uid)
 
-Get Monitor
+Retrieves the configuration settings for the specified webhook
 
 ### Example
 
@@ -177,7 +173,7 @@ Get Monitor
 
 ```python
 import notehub_py
-from notehub_py.models.monitor import Monitor
+from notehub_py.models.webhook_settings import WebhookSettings
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -201,16 +197,16 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = notehub_py.MonitorApi(api_client)
+    api_instance = notehub_py.WebhookApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    monitor_uid = 'monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad' # str |
+    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
 
     try:
-        api_response = api_instance.get_monitor(project_or_product_uid, monitor_uid)
-        print("The response of MonitorApi->get_monitor:\n")
+        api_response = api_instance.get_webhook(project_or_product_uid, webhook_uid)
+        print("The response of WebhookApi->get_webhook:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling MonitorApi->get_monitor: %s\n" % e)
+        print("Exception when calling WebhookApi->get_webhook: %s\n" % e)
 ```
 
 ### Parameters
@@ -218,11 +214,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 | Name                       | Type    | Description | Notes |
 | -------------------------- | ------- | ----------- | ----- |
 | **project_or_product_uid** | **str** |             |
-| **monitor_uid**            | **str** |             |
+| **webhook_uid**            | **str** | Webhook UID |
 
 ### Return type
 
-[**Monitor**](Monitor.md)
+[**WebhookSettings**](WebhookSettings.md)
 
 ### Authorization
 
@@ -237,16 +233,16 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
+| **200**     | Webhook settings retrieved successfully    | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_monitors**
+# **get_webhooks**
 
-> List[Monitor] get_monitors(project_or_product_uid)
+> GetWebhooks200Response get_webhooks(project_or_product_uid)
 
-Get list of defined Monitors
+Retrieves all webhooks for the specified project
 
 ### Example
 
@@ -254,7 +250,7 @@ Get list of defined Monitors
 
 ```python
 import notehub_py
-from notehub_py.models.monitor import Monitor
+from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -278,15 +274,15 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = notehub_py.MonitorApi(api_client)
+    api_instance = notehub_py.WebhookApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
 
     try:
-        api_response = api_instance.get_monitors(project_or_product_uid)
-        print("The response of MonitorApi->get_monitors:\n")
+        api_response = api_instance.get_webhooks(project_or_product_uid)
+        print("The response of WebhookApi->get_webhooks:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling MonitorApi->get_monitors: %s\n" % e)
+        print("Exception when calling WebhookApi->get_webhooks: %s\n" % e)
 ```
 
 ### Parameters
@@ -297,7 +293,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**List[Monitor]**](Monitor.md)
+[**GetWebhooks200Response**](GetWebhooks200Response.md)
 
 ### Authorization
 
@@ -312,16 +308,16 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The response body from GET /monitors       | -                |
+| **200**     | Webhooks retrieved successfully            | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_monitor**
+# **update_webhook**
 
-> Monitor update_monitor(project_or_product_uid, monitor_uid, monitor)
+> update_webhook(project_or_product_uid, webhook_uid, webhook_settings)
 
-Update Monitor
+Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
 
 ### Example
 
@@ -329,7 +325,7 @@ Update Monitor
 
 ```python
 import notehub_py
-from notehub_py.models.monitor import Monitor
+from notehub_py.models.webhook_settings import WebhookSettings
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -353,30 +349,28 @@ configuration.api_key['api_key'] = os.environ["API_KEY"]
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = notehub_py.MonitorApi(api_client)
+    api_instance = notehub_py.WebhookApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    monitor_uid = 'monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad' # str |
-    monitor = notehub_py.Monitor() # Monitor | Body or payload of monitor to be created
+    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
+    webhook_settings = {"disabled":false,"transform":"{\"device\":body.end_device_ids.dev_eui,\"sn\":body.end_device_ids.device_id,\"body\":body.uplink_message.decoded_payload,\"details\":body}"} # WebhookSettings |
 
     try:
-        api_response = api_instance.update_monitor(project_or_product_uid, monitor_uid, monitor)
-        print("The response of MonitorApi->update_monitor:\n")
-        pprint(api_response)
+        api_instance.update_webhook(project_or_product_uid, webhook_uid, webhook_settings)
     except Exception as e:
-        print("Exception when calling MonitorApi->update_monitor: %s\n" % e)
+        print("Exception when calling WebhookApi->update_webhook: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                       | Type                      | Description                              | Notes |
-| -------------------------- | ------------------------- | ---------------------------------------- | ----- |
-| **project_or_product_uid** | **str**                   |                                          |
-| **monitor_uid**            | **str**                   |                                          |
-| **monitor**                | [**Monitor**](Monitor.md) | Body or payload of monitor to be created |
+| Name                       | Type                                      | Description | Notes |
+| -------------------------- | ----------------------------------------- | ----------- | ----- |
+| **project_or_product_uid** | **str**                                   |             |
+| **webhook_uid**            | **str**                                   | Webhook UID |
+| **webhook_settings**       | [**WebhookSettings**](WebhookSettings.md) |             |
 
 ### Return type
 
-[**Monitor**](Monitor.md)
+void (empty response body)
 
 ### Authorization
 
@@ -391,7 +385,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
+| **200**     | Webhook updated successfully               | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

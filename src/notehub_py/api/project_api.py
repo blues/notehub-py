@@ -67,9 +67,7 @@ class ProjectApi:
     @validate_call
     def clone_project(
         self,
-        project_uid: Annotated[
-            StrictStr, Field(description="The project UID to be cloned.")
-        ],
+        project_or_product_uid: StrictStr,
         clone_project_request: Annotated[
             CloneProjectRequest, Field(description="Project to be cloned")
         ],
@@ -89,8 +87,8 @@ class ProjectApi:
 
         Clone a Project
 
-        :param project_uid: The project UID to be cloned. (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param clone_project_request: Project to be cloned (required)
         :type clone_project_request: CloneProjectRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -116,7 +114,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._clone_project_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             clone_project_request=clone_project_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -139,9 +137,7 @@ class ProjectApi:
     @validate_call
     def clone_project_with_http_info(
         self,
-        project_uid: Annotated[
-            StrictStr, Field(description="The project UID to be cloned.")
-        ],
+        project_or_product_uid: StrictStr,
         clone_project_request: Annotated[
             CloneProjectRequest, Field(description="Project to be cloned")
         ],
@@ -161,8 +157,8 @@ class ProjectApi:
 
         Clone a Project
 
-        :param project_uid: The project UID to be cloned. (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param clone_project_request: Project to be cloned (required)
         :type clone_project_request: CloneProjectRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -188,7 +184,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._clone_project_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             clone_project_request=clone_project_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -211,9 +207,7 @@ class ProjectApi:
     @validate_call
     def clone_project_without_preload_content(
         self,
-        project_uid: Annotated[
-            StrictStr, Field(description="The project UID to be cloned.")
-        ],
+        project_or_product_uid: StrictStr,
         clone_project_request: Annotated[
             CloneProjectRequest, Field(description="Project to be cloned")
         ],
@@ -233,8 +227,8 @@ class ProjectApi:
 
         Clone a Project
 
-        :param project_uid: The project UID to be cloned. (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param clone_project_request: Project to be cloned (required)
         :type clone_project_request: CloneProjectRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -260,7 +254,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._clone_project_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             clone_project_request=clone_project_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -278,7 +272,7 @@ class ProjectApi:
 
     def _clone_project_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         clone_project_request,
         _request_auth,
         _content_type,
@@ -298,8 +292,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -327,7 +321,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/clone",
+            resource_path="/v1/projects/{projectOrProductUID}/clone",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -343,7 +337,7 @@ class ProjectApi:
     @validate_call
     def create_fleet(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         create_fleet_request: Annotated[
             CreateFleetRequest, Field(description="Fleet to be added")
         ],
@@ -363,8 +357,8 @@ class ProjectApi:
 
         Create Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param create_fleet_request: Fleet to be added (required)
         :type create_fleet_request: CreateFleetRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -390,7 +384,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._create_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             create_fleet_request=create_fleet_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -413,7 +407,7 @@ class ProjectApi:
     @validate_call
     def create_fleet_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         create_fleet_request: Annotated[
             CreateFleetRequest, Field(description="Fleet to be added")
         ],
@@ -433,8 +427,8 @@ class ProjectApi:
 
         Create Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param create_fleet_request: Fleet to be added (required)
         :type create_fleet_request: CreateFleetRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -460,7 +454,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._create_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             create_fleet_request=create_fleet_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -483,7 +477,7 @@ class ProjectApi:
     @validate_call
     def create_fleet_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         create_fleet_request: Annotated[
             CreateFleetRequest, Field(description="Fleet to be added")
         ],
@@ -503,8 +497,8 @@ class ProjectApi:
 
         Create Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param create_fleet_request: Fleet to be added (required)
         :type create_fleet_request: CreateFleetRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -530,7 +524,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._create_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             create_fleet_request=create_fleet_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -548,7 +542,7 @@ class ProjectApi:
 
     def _create_fleet_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         create_fleet_request,
         _request_auth,
         _content_type,
@@ -568,8 +562,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -597,7 +591,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/fleets",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -613,7 +607,7 @@ class ProjectApi:
     @validate_call
     def create_product(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         create_product_request: Annotated[
             CreateProductRequest, Field(description="Product to be created")
         ],
@@ -633,8 +627,8 @@ class ProjectApi:
 
         Create Product within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param create_product_request: Product to be created (required)
         :type create_product_request: CreateProductRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -660,7 +654,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._create_product_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             create_product_request=create_product_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -683,7 +677,7 @@ class ProjectApi:
     @validate_call
     def create_product_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         create_product_request: Annotated[
             CreateProductRequest, Field(description="Product to be created")
         ],
@@ -703,8 +697,8 @@ class ProjectApi:
 
         Create Product within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param create_product_request: Product to be created (required)
         :type create_product_request: CreateProductRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -730,7 +724,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._create_product_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             create_product_request=create_product_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -753,7 +747,7 @@ class ProjectApi:
     @validate_call
     def create_product_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         create_product_request: Annotated[
             CreateProductRequest, Field(description="Product to be created")
         ],
@@ -773,8 +767,8 @@ class ProjectApi:
 
         Create Product within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param create_product_request: Product to be created (required)
         :type create_product_request: CreateProductRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -800,7 +794,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._create_product_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             create_product_request=create_product_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -818,7 +812,7 @@ class ProjectApi:
 
     def _create_product_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         create_product_request,
         _request_auth,
         _content_type,
@@ -838,8 +832,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -867,7 +861,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/products",
+            resource_path="/v1/projects/{projectOrProductUID}/products",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1138,7 +1132,7 @@ class ProjectApi:
     @validate_call
     def delete_device_fleets(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         delete_device_fleets_request: Annotated[
             DeleteDeviceFleetsRequest,
@@ -1162,8 +1156,8 @@ class ProjectApi:
 
         Remove Device from Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param delete_device_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
@@ -1191,7 +1185,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_device_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             delete_device_fleets_request=delete_device_fleets_request,
             _request_auth=_request_auth,
@@ -1215,7 +1209,7 @@ class ProjectApi:
     @validate_call
     def delete_device_fleets_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         delete_device_fleets_request: Annotated[
             DeleteDeviceFleetsRequest,
@@ -1239,8 +1233,8 @@ class ProjectApi:
 
         Remove Device from Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param delete_device_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
@@ -1268,7 +1262,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_device_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             delete_device_fleets_request=delete_device_fleets_request,
             _request_auth=_request_auth,
@@ -1292,7 +1286,7 @@ class ProjectApi:
     @validate_call
     def delete_device_fleets_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         delete_device_fleets_request: Annotated[
             DeleteDeviceFleetsRequest,
@@ -1316,8 +1310,8 @@ class ProjectApi:
 
         Remove Device from Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param delete_device_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
@@ -1345,7 +1339,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_device_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             delete_device_fleets_request=delete_device_fleets_request,
             _request_auth=_request_auth,
@@ -1364,7 +1358,7 @@ class ProjectApi:
 
     def _delete_device_fleets_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         delete_device_fleets_request,
         _request_auth,
@@ -1385,8 +1379,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -1416,7 +1410,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="DELETE",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/fleets",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1432,7 +1426,7 @@ class ProjectApi:
     @validate_call
     def delete_fleet(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1450,8 +1444,8 @@ class ProjectApi:
 
         Delete Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1477,7 +1471,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1500,7 +1494,7 @@ class ProjectApi:
     @validate_call
     def delete_fleet_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1518,8 +1512,8 @@ class ProjectApi:
 
         Delete Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1545,7 +1539,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1568,7 +1562,7 @@ class ProjectApi:
     @validate_call
     def delete_fleet_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -1586,8 +1580,8 @@ class ProjectApi:
 
         Delete Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1613,7 +1607,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1631,7 +1625,7 @@ class ProjectApi:
 
     def _delete_fleet_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         fleet_uid,
         _request_auth,
         _content_type,
@@ -1651,8 +1645,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if fleet_uid is not None:
             _path_params["fleetUID"] = fleet_uid
         # process the query parameters
@@ -1670,7 +1664,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="DELETE",
-            resource_path="/v1/projects/{projectUID}/fleets/{fleetUID}",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets/{fleetUID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1686,7 +1680,7 @@ class ProjectApi:
     @validate_call
     def delete_fleet_environment_variable(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         key: Annotated[
             StrictStr, Field(description="The environment variable key to delete.")
@@ -1707,8 +1701,8 @@ class ProjectApi:
 
         Delete environment variables of a fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param key: The environment variable key to delete. (required)
@@ -1736,7 +1730,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_fleet_environment_variable_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             key=key,
             _request_auth=_request_auth,
@@ -1760,7 +1754,7 @@ class ProjectApi:
     @validate_call
     def delete_fleet_environment_variable_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         key: Annotated[
             StrictStr, Field(description="The environment variable key to delete.")
@@ -1781,8 +1775,8 @@ class ProjectApi:
 
         Delete environment variables of a fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param key: The environment variable key to delete. (required)
@@ -1810,7 +1804,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_fleet_environment_variable_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             key=key,
             _request_auth=_request_auth,
@@ -1834,7 +1828,7 @@ class ProjectApi:
     @validate_call
     def delete_fleet_environment_variable_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         key: Annotated[
             StrictStr, Field(description="The environment variable key to delete.")
@@ -1855,8 +1849,8 @@ class ProjectApi:
 
         Delete environment variables of a fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param key: The environment variable key to delete. (required)
@@ -1884,7 +1878,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_fleet_environment_variable_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             key=key,
             _request_auth=_request_auth,
@@ -1903,7 +1897,7 @@ class ProjectApi:
 
     def _delete_fleet_environment_variable_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         fleet_uid,
         key,
         _request_auth,
@@ -1924,8 +1918,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if fleet_uid is not None:
             _path_params["fleetUID"] = fleet_uid
         if key is not None:
@@ -1945,7 +1939,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="DELETE",
-            resource_path="/v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables/{key}",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1961,7 +1955,7 @@ class ProjectApi:
     @validate_call
     def delete_project(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1978,8 +1972,8 @@ class ProjectApi:
 
         Delete a Project by ProjectUID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2003,7 +1997,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_project_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2025,7 +2019,7 @@ class ProjectApi:
     @validate_call
     def delete_project_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2042,8 +2036,8 @@ class ProjectApi:
 
         Delete a Project by ProjectUID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2067,7 +2061,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_project_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2089,7 +2083,7 @@ class ProjectApi:
     @validate_call
     def delete_project_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2106,8 +2100,8 @@ class ProjectApi:
 
         Delete a Project by ProjectUID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2131,7 +2125,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_project_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2148,7 +2142,7 @@ class ProjectApi:
 
     def _delete_project_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -2167,8 +2161,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -2200,7 +2194,7 @@ class ProjectApi:
     @validate_call
     def delete_project_environment_variable(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         key: Annotated[
             StrictStr, Field(description="The environment variable key to delete.")
         ],
@@ -2220,8 +2214,8 @@ class ProjectApi:
 
         Delete an environment variable of a project by key
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param key: The environment variable key to delete. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2247,7 +2241,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_project_environment_variable_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             key=key,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2270,7 +2264,7 @@ class ProjectApi:
     @validate_call
     def delete_project_environment_variable_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         key: Annotated[
             StrictStr, Field(description="The environment variable key to delete.")
         ],
@@ -2290,8 +2284,8 @@ class ProjectApi:
 
         Delete an environment variable of a project by key
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param key: The environment variable key to delete. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2317,7 +2311,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_project_environment_variable_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             key=key,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2340,7 +2334,7 @@ class ProjectApi:
     @validate_call
     def delete_project_environment_variable_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         key: Annotated[
             StrictStr, Field(description="The environment variable key to delete.")
         ],
@@ -2360,8 +2354,8 @@ class ProjectApi:
 
         Delete an environment variable of a project by key
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param key: The environment variable key to delete. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
@@ -2387,7 +2381,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._delete_project_environment_variable_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             key=key,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2405,7 +2399,7 @@ class ProjectApi:
 
     def _delete_project_environment_variable_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         key,
         _request_auth,
         _content_type,
@@ -2425,8 +2419,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if key is not None:
             _path_params["key"] = key
         # process the query parameters
@@ -2444,7 +2438,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="DELETE",
-            resource_path="/v1/projects/{projectUID}/environment_variables/{key}",
+            resource_path="/v1/projects/{projectOrProductUID}/environment_variables/{key}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2460,7 +2454,7 @@ class ProjectApi:
     @validate_call
     def dfu_action(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         action: StrictStr,
         device_uid: Annotated[
@@ -2506,8 +2500,8 @@ class ProjectApi:
 
         Update/cancel host or notecard firmware updates
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param action: (required)
@@ -2555,7 +2549,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._dfu_action_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             action=action,
             device_uid=device_uid,
@@ -2589,7 +2583,7 @@ class ProjectApi:
     @validate_call
     def dfu_action_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         action: StrictStr,
         device_uid: Annotated[
@@ -2635,8 +2629,8 @@ class ProjectApi:
 
         Update/cancel host or notecard firmware updates
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param action: (required)
@@ -2684,7 +2678,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._dfu_action_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             action=action,
             device_uid=device_uid,
@@ -2718,7 +2712,7 @@ class ProjectApi:
     @validate_call
     def dfu_action_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         action: StrictStr,
         device_uid: Annotated[
@@ -2764,8 +2758,8 @@ class ProjectApi:
 
         Update/cancel host or notecard firmware updates
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param action: (required)
@@ -2813,7 +2807,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._dfu_action_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             action=action,
             device_uid=device_uid,
@@ -2842,7 +2836,7 @@ class ProjectApi:
 
     def _dfu_action_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         firmware_type,
         action,
         device_uid,
@@ -2882,8 +2876,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if firmware_type is not None:
             _path_params["firmwareType"] = firmware_type
         if action is not None:
@@ -2951,7 +2945,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/dfu/{firmwareType}/{action}",
+            resource_path="/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2967,7 +2961,7 @@ class ProjectApi:
     @validate_call
     def disable_global_transformation(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2984,8 +2978,8 @@ class ProjectApi:
 
         Disable the project-level event JSONata transformation
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3009,7 +3003,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._disable_global_transformation_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3031,7 +3025,7 @@ class ProjectApi:
     @validate_call
     def disable_global_transformation_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3048,8 +3042,8 @@ class ProjectApi:
 
         Disable the project-level event JSONata transformation
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3073,7 +3067,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._disable_global_transformation_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3095,7 +3089,7 @@ class ProjectApi:
     @validate_call
     def disable_global_transformation_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3112,8 +3106,8 @@ class ProjectApi:
 
         Disable the project-level event JSONata transformation
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3137,7 +3131,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._disable_global_transformation_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3154,7 +3148,7 @@ class ProjectApi:
 
     def _disable_global_transformation_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -3173,8 +3167,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -3190,7 +3184,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/global-transformation/disable",
+            resource_path="/v1/projects/{projectOrProductUID}/global-transformation/disable",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3206,7 +3200,7 @@ class ProjectApi:
     @validate_call
     def enable_global_transformation(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3223,8 +3217,8 @@ class ProjectApi:
 
         Enable the project-level event JSONata transformation
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3248,7 +3242,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._enable_global_transformation_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3270,7 +3264,7 @@ class ProjectApi:
     @validate_call
     def enable_global_transformation_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3287,8 +3281,8 @@ class ProjectApi:
 
         Enable the project-level event JSONata transformation
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3312,7 +3306,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._enable_global_transformation_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3334,7 +3328,7 @@ class ProjectApi:
     @validate_call
     def enable_global_transformation_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3351,8 +3345,8 @@ class ProjectApi:
 
         Enable the project-level event JSONata transformation
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3376,7 +3370,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._enable_global_transformation_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3393,7 +3387,7 @@ class ProjectApi:
 
     def _enable_global_transformation_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -3412,8 +3406,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -3429,7 +3423,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/global-transformation/enable",
+            resource_path="/v1/projects/{projectOrProductUID}/global-transformation/enable",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3445,7 +3439,7 @@ class ProjectApi:
     @validate_call
     def get_device_dfu_history(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         firmware_type: StrictStr,
         _request_timeout: Union[
@@ -3464,8 +3458,8 @@ class ProjectApi:
 
         Get device DFU history for host or Notecard firmware
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param firmware_type: (required)
@@ -3493,7 +3487,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_device_dfu_history_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             firmware_type=firmware_type,
             _request_auth=_request_auth,
@@ -3517,7 +3511,7 @@ class ProjectApi:
     @validate_call
     def get_device_dfu_history_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         firmware_type: StrictStr,
         _request_timeout: Union[
@@ -3536,8 +3530,8 @@ class ProjectApi:
 
         Get device DFU history for host or Notecard firmware
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param firmware_type: (required)
@@ -3565,7 +3559,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_device_dfu_history_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             firmware_type=firmware_type,
             _request_auth=_request_auth,
@@ -3589,7 +3583,7 @@ class ProjectApi:
     @validate_call
     def get_device_dfu_history_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         firmware_type: StrictStr,
         _request_timeout: Union[
@@ -3608,8 +3602,8 @@ class ProjectApi:
 
         Get device DFU history for host or Notecard firmware
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param firmware_type: (required)
@@ -3637,7 +3631,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_device_dfu_history_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             firmware_type=firmware_type,
             _request_auth=_request_auth,
@@ -3656,7 +3650,7 @@ class ProjectApi:
 
     def _get_device_dfu_history_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         firmware_type,
         _request_auth,
@@ -3677,8 +3671,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         if firmware_type is not None:
@@ -3698,7 +3692,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/dfu/{firmwareType}/history",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/history",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3714,7 +3708,7 @@ class ProjectApi:
     @validate_call
     def get_device_dfu_status(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         firmware_type: StrictStr,
         _request_timeout: Union[
@@ -3733,8 +3727,8 @@ class ProjectApi:
 
         Get device DFU history for host or Notecard firmware
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param firmware_type: (required)
@@ -3762,7 +3756,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_device_dfu_status_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             firmware_type=firmware_type,
             _request_auth=_request_auth,
@@ -3786,7 +3780,7 @@ class ProjectApi:
     @validate_call
     def get_device_dfu_status_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         firmware_type: StrictStr,
         _request_timeout: Union[
@@ -3805,8 +3799,8 @@ class ProjectApi:
 
         Get device DFU history for host or Notecard firmware
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param firmware_type: (required)
@@ -3834,7 +3828,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_device_dfu_status_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             firmware_type=firmware_type,
             _request_auth=_request_auth,
@@ -3858,7 +3852,7 @@ class ProjectApi:
     @validate_call
     def get_device_dfu_status_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         firmware_type: StrictStr,
         _request_timeout: Union[
@@ -3877,8 +3871,8 @@ class ProjectApi:
 
         Get device DFU history for host or Notecard firmware
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param firmware_type: (required)
@@ -3906,7 +3900,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_device_dfu_status_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             firmware_type=firmware_type,
             _request_auth=_request_auth,
@@ -3925,7 +3919,7 @@ class ProjectApi:
 
     def _get_device_dfu_status_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         firmware_type,
         _request_auth,
@@ -3946,8 +3940,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         if firmware_type is not None:
@@ -3967,7 +3961,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/dfu/{firmwareType}/status",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3983,7 +3977,7 @@ class ProjectApi:
     @validate_call
     def get_device_fleets(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -4001,8 +3995,8 @@ class ProjectApi:
 
         Get Device Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -4028,7 +4022,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_device_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4051,7 +4045,7 @@ class ProjectApi:
     @validate_call
     def get_device_fleets_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -4069,8 +4063,8 @@ class ProjectApi:
 
         Get Device Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -4096,7 +4090,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_device_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4119,7 +4113,7 @@ class ProjectApi:
     @validate_call
     def get_device_fleets_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -4137,8 +4131,8 @@ class ProjectApi:
 
         Get Device Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -4164,7 +4158,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_device_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4182,7 +4176,7 @@ class ProjectApi:
 
     def _get_device_fleets_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         _request_auth,
         _content_type,
@@ -4202,8 +4196,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -4221,7 +4215,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/fleets",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4237,7 +4231,7 @@ class ProjectApi:
     @validate_call
     def get_devices_dfu_history(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -4282,8 +4276,8 @@ class ProjectApi:
 
         Get host or Notecard DFU history for all devices that match the filter criteria
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param page_size:
@@ -4335,7 +4329,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_devices_dfu_history_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
@@ -4371,7 +4365,7 @@ class ProjectApi:
     @validate_call
     def get_devices_dfu_history_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -4416,8 +4410,8 @@ class ProjectApi:
 
         Get host or Notecard DFU history for all devices that match the filter criteria
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param page_size:
@@ -4469,7 +4463,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_devices_dfu_history_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
@@ -4505,7 +4499,7 @@ class ProjectApi:
     @validate_call
     def get_devices_dfu_history_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -4550,8 +4544,8 @@ class ProjectApi:
 
         Get host or Notecard DFU history for all devices that match the filter criteria
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param page_size:
@@ -4603,7 +4597,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_devices_dfu_history_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
@@ -4634,7 +4628,7 @@ class ProjectApi:
 
     def _get_devices_dfu_history_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         firmware_type,
         page_size,
         page_num,
@@ -4676,8 +4670,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if firmware_type is not None:
             _path_params["firmwareType"] = firmware_type
         # process the query parameters
@@ -4747,7 +4741,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/dfu/{firmwareType}/history",
+            resource_path="/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/history",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4763,7 +4757,7 @@ class ProjectApi:
     @validate_call
     def get_devices_dfu_status(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -4808,8 +4802,8 @@ class ProjectApi:
 
         Get host or Notecard DFU history for all devices that match the filter criteria
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param page_size:
@@ -4861,7 +4855,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_devices_dfu_status_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
@@ -4897,7 +4891,7 @@ class ProjectApi:
     @validate_call
     def get_devices_dfu_status_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -4942,8 +4936,8 @@ class ProjectApi:
 
         Get host or Notecard DFU history for all devices that match the filter criteria
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param page_size:
@@ -4995,7 +4989,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_devices_dfu_status_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
@@ -5031,7 +5025,7 @@ class ProjectApi:
     @validate_call
     def get_devices_dfu_status_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -5076,8 +5070,8 @@ class ProjectApi:
 
         Get host or Notecard DFU history for all devices that match the filter criteria
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param page_size:
@@ -5129,7 +5123,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_devices_dfu_status_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
@@ -5160,7 +5154,7 @@ class ProjectApi:
 
     def _get_devices_dfu_status_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         firmware_type,
         page_size,
         page_num,
@@ -5202,8 +5196,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if firmware_type is not None:
             _path_params["firmwareType"] = firmware_type
         # process the query parameters
@@ -5273,7 +5267,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/dfu/{firmwareType}/status",
+            resource_path="/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5289,7 +5283,7 @@ class ProjectApi:
     @validate_call
     def get_firmware_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         product: Optional[StrictStr] = None,
         firmware_type: Optional[StrictStr] = None,
         version: Optional[StrictStr] = None,
@@ -5313,8 +5307,8 @@ class ProjectApi:
 
         Get Available Firmware Information
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param product:
         :type product: str
         :param firmware_type:
@@ -5352,7 +5346,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_firmware_info_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             product=product,
             firmware_type=firmware_type,
             version=version,
@@ -5381,7 +5375,7 @@ class ProjectApi:
     @validate_call
     def get_firmware_info_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         product: Optional[StrictStr] = None,
         firmware_type: Optional[StrictStr] = None,
         version: Optional[StrictStr] = None,
@@ -5405,8 +5399,8 @@ class ProjectApi:
 
         Get Available Firmware Information
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param product:
         :type product: str
         :param firmware_type:
@@ -5444,7 +5438,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_firmware_info_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             product=product,
             firmware_type=firmware_type,
             version=version,
@@ -5473,7 +5467,7 @@ class ProjectApi:
     @validate_call
     def get_firmware_info_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         product: Optional[StrictStr] = None,
         firmware_type: Optional[StrictStr] = None,
         version: Optional[StrictStr] = None,
@@ -5497,8 +5491,8 @@ class ProjectApi:
 
         Get Available Firmware Information
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param product:
         :type product: str
         :param firmware_type:
@@ -5536,7 +5530,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_firmware_info_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             product=product,
             firmware_type=firmware_type,
             version=version,
@@ -5560,7 +5554,7 @@ class ProjectApi:
 
     def _get_firmware_info_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         product,
         firmware_type,
         version,
@@ -5586,8 +5580,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         if product is not None:
 
@@ -5631,7 +5625,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/firmware",
+            resource_path="/v1/projects/{projectOrProductUID}/firmware",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5647,7 +5641,7 @@ class ProjectApi:
     @validate_call
     def get_fleet(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -5665,8 +5659,8 @@ class ProjectApi:
 
         Get Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -5692,7 +5686,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5715,7 +5709,7 @@ class ProjectApi:
     @validate_call
     def get_fleet_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -5733,8 +5727,8 @@ class ProjectApi:
 
         Get Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -5760,7 +5754,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5783,7 +5777,7 @@ class ProjectApi:
     @validate_call
     def get_fleet_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -5801,8 +5795,8 @@ class ProjectApi:
 
         Get Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -5828,7 +5822,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5846,7 +5840,7 @@ class ProjectApi:
 
     def _get_fleet_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         fleet_uid,
         _request_auth,
         _content_type,
@@ -5866,8 +5860,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if fleet_uid is not None:
             _path_params["fleetUID"] = fleet_uid
         # process the query parameters
@@ -5885,7 +5879,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/fleets/{fleetUID}",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets/{fleetUID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5901,7 +5895,7 @@ class ProjectApi:
     @validate_call
     def get_fleet_environment_variables(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -5919,8 +5913,8 @@ class ProjectApi:
 
         Get environment variables of a fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -5946,7 +5940,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_fleet_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5969,7 +5963,7 @@ class ProjectApi:
     @validate_call
     def get_fleet_environment_variables_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -5987,8 +5981,8 @@ class ProjectApi:
 
         Get environment variables of a fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -6014,7 +6008,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_fleet_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6037,7 +6031,7 @@ class ProjectApi:
     @validate_call
     def get_fleet_environment_variables_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -6055,8 +6049,8 @@ class ProjectApi:
 
         Get environment variables of a fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -6082,7 +6076,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_fleet_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6100,7 +6094,7 @@ class ProjectApi:
 
     def _get_fleet_environment_variables_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         fleet_uid,
         _request_auth,
         _content_type,
@@ -6120,8 +6114,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if fleet_uid is not None:
             _path_params["fleetUID"] = fleet_uid
         # process the query parameters
@@ -6139,7 +6133,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6155,7 +6149,7 @@ class ProjectApi:
     @validate_call
     def get_notefile_schemas(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6171,8 +6165,8 @@ class ProjectApi:
         """Get variable format for a notefile
 
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6196,7 +6190,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_notefile_schemas_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6218,7 +6212,7 @@ class ProjectApi:
     @validate_call
     def get_notefile_schemas_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6234,8 +6228,8 @@ class ProjectApi:
         """Get variable format for a notefile
 
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6259,7 +6253,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_notefile_schemas_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6281,7 +6275,7 @@ class ProjectApi:
     @validate_call
     def get_notefile_schemas_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6297,8 +6291,8 @@ class ProjectApi:
         """Get variable format for a notefile
 
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6322,7 +6316,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_notefile_schemas_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6339,7 +6333,7 @@ class ProjectApi:
 
     def _get_notefile_schemas_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -6358,8 +6352,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -6375,7 +6369,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/schemas",
+            resource_path="/v1/projects/{projectOrProductUID}/schemas",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6391,7 +6385,7 @@ class ProjectApi:
     @validate_call
     def get_project(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6408,8 +6402,8 @@ class ProjectApi:
 
         Get a Project by ProjectUID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6433,7 +6427,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6455,7 +6449,7 @@ class ProjectApi:
     @validate_call
     def get_project_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6472,8 +6466,8 @@ class ProjectApi:
 
         Get a Project by ProjectUID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6497,7 +6491,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6519,7 +6513,7 @@ class ProjectApi:
     @validate_call
     def get_project_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6536,8 +6530,8 @@ class ProjectApi:
 
         Get a Project by ProjectUID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6561,7 +6555,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6578,7 +6572,7 @@ class ProjectApi:
 
     def _get_project_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -6597,8 +6591,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -6869,7 +6863,7 @@ class ProjectApi:
     @validate_call
     def get_project_environment_variables(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6886,8 +6880,8 @@ class ProjectApi:
 
         Get environment variables of a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6911,7 +6905,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6933,7 +6927,7 @@ class ProjectApi:
     @validate_call
     def get_project_environment_variables_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6950,8 +6944,8 @@ class ProjectApi:
 
         Get environment variables of a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6975,7 +6969,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6997,7 +6991,7 @@ class ProjectApi:
     @validate_call
     def get_project_environment_variables_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7014,8 +7008,8 @@ class ProjectApi:
 
         Get environment variables of a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7039,7 +7033,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7056,7 +7050,7 @@ class ProjectApi:
 
     def _get_project_environment_variables_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -7075,8 +7069,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -7092,7 +7086,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/environment_variables",
+            resource_path="/v1/projects/{projectOrProductUID}/environment_variables",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7108,7 +7102,7 @@ class ProjectApi:
     @validate_call
     def get_project_fleets(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7125,8 +7119,8 @@ class ProjectApi:
 
         Get Project Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7150,7 +7144,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7172,7 +7166,7 @@ class ProjectApi:
     @validate_call
     def get_project_fleets_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7189,8 +7183,8 @@ class ProjectApi:
 
         Get Project Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7214,7 +7208,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7236,7 +7230,7 @@ class ProjectApi:
     @validate_call
     def get_project_fleets_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7253,8 +7247,8 @@ class ProjectApi:
 
         Get Project Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7278,7 +7272,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7295,7 +7289,7 @@ class ProjectApi:
 
     def _get_project_fleets_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -7314,8 +7308,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -7331,7 +7325,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/fleets",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7347,7 +7341,7 @@ class ProjectApi:
     @validate_call
     def get_project_members(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7364,8 +7358,8 @@ class ProjectApi:
 
         Get Project Members
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7389,7 +7383,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_members_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7411,7 +7405,7 @@ class ProjectApi:
     @validate_call
     def get_project_members_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7428,8 +7422,8 @@ class ProjectApi:
 
         Get Project Members
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7453,7 +7447,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_members_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7475,7 +7469,7 @@ class ProjectApi:
     @validate_call
     def get_project_members_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7492,8 +7486,8 @@ class ProjectApi:
 
         Get Project Members
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7517,7 +7511,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_members_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7534,7 +7528,7 @@ class ProjectApi:
 
     def _get_project_members_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -7553,8 +7547,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -7570,7 +7564,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/members",
+            resource_path="/v1/projects/{projectOrProductUID}/members",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7586,7 +7580,7 @@ class ProjectApi:
     @validate_call
     def get_project_products(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7603,8 +7597,8 @@ class ProjectApi:
 
         Get Products within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7628,7 +7622,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_products_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7650,7 +7644,7 @@ class ProjectApi:
     @validate_call
     def get_project_products_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7667,8 +7661,8 @@ class ProjectApi:
 
         Get Products within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7692,7 +7686,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_products_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7714,7 +7708,7 @@ class ProjectApi:
     @validate_call
     def get_project_products_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7731,8 +7725,8 @@ class ProjectApi:
 
         Get Products within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7756,7 +7750,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._get_project_products_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7773,7 +7767,7 @@ class ProjectApi:
 
     def _get_project_products_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -7792,8 +7786,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -7809,7 +7803,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/products",
+            resource_path="/v1/projects/{projectOrProductUID}/products",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8049,7 +8043,7 @@ class ProjectApi:
     @validate_call
     def put_device_fleets(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         put_device_fleets_request: Annotated[
             PutDeviceFleetsRequest,
@@ -8073,8 +8067,8 @@ class ProjectApi:
 
         Add Device to Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param put_device_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
@@ -8102,7 +8096,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._put_device_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             put_device_fleets_request=put_device_fleets_request,
             _request_auth=_request_auth,
@@ -8126,7 +8120,7 @@ class ProjectApi:
     @validate_call
     def put_device_fleets_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         put_device_fleets_request: Annotated[
             PutDeviceFleetsRequest,
@@ -8150,8 +8144,8 @@ class ProjectApi:
 
         Add Device to Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param put_device_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
@@ -8179,7 +8173,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._put_device_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             put_device_fleets_request=put_device_fleets_request,
             _request_auth=_request_auth,
@@ -8203,7 +8197,7 @@ class ProjectApi:
     @validate_call
     def put_device_fleets_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         put_device_fleets_request: Annotated[
             PutDeviceFleetsRequest,
@@ -8227,8 +8221,8 @@ class ProjectApi:
 
         Add Device to Fleets
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
         :param put_device_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
@@ -8256,7 +8250,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._put_device_fleets_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             put_device_fleets_request=put_device_fleets_request,
             _request_auth=_request_auth,
@@ -8275,7 +8269,7 @@ class ProjectApi:
 
     def _put_device_fleets_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         device_uid,
         put_device_fleets_request,
         _request_auth,
@@ -8296,8 +8290,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
@@ -8327,7 +8321,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="PUT",
-            resource_path="/v1/projects/{projectUID}/devices/{deviceUID}/fleets",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8343,7 +8337,7 @@ class ProjectApi:
     @validate_call
     def put_fleet_environment_variables(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
@@ -8365,8 +8359,8 @@ class ProjectApi:
 
         Put environment variables of a fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param environment_variables: Environment variables to be added to the fleet (required)
@@ -8394,7 +8388,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._put_fleet_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
@@ -8418,7 +8412,7 @@ class ProjectApi:
     @validate_call
     def put_fleet_environment_variables_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
@@ -8440,8 +8434,8 @@ class ProjectApi:
 
         Put environment variables of a fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param environment_variables: Environment variables to be added to the fleet (required)
@@ -8469,7 +8463,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._put_fleet_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
@@ -8493,7 +8487,7 @@ class ProjectApi:
     @validate_call
     def put_fleet_environment_variables_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
@@ -8515,8 +8509,8 @@ class ProjectApi:
 
         Put environment variables of a fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param environment_variables: Environment variables to be added to the fleet (required)
@@ -8544,7 +8538,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._put_fleet_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
@@ -8563,7 +8557,7 @@ class ProjectApi:
 
     def _put_fleet_environment_variables_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         fleet_uid,
         environment_variables,
         _request_auth,
@@ -8584,8 +8578,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if fleet_uid is not None:
             _path_params["fleetUID"] = fleet_uid
         # process the query parameters
@@ -8615,7 +8609,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="PUT",
-            resource_path="/v1/projects/{projectUID}/fleets/{fleetUID}/environment_variables",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8631,7 +8625,7 @@ class ProjectApi:
     @validate_call
     def put_project_environment_variables(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         environment_variables: Optional[EnvironmentVariables] = None,
         _request_timeout: Union[
             None,
@@ -8649,8 +8643,8 @@ class ProjectApi:
 
         Put environment variables of a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param environment_variables:
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
@@ -8676,7 +8670,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._put_project_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8699,7 +8693,7 @@ class ProjectApi:
     @validate_call
     def put_project_environment_variables_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         environment_variables: Optional[EnvironmentVariables] = None,
         _request_timeout: Union[
             None,
@@ -8717,8 +8711,8 @@ class ProjectApi:
 
         Put environment variables of a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param environment_variables:
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
@@ -8744,7 +8738,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._put_project_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8767,7 +8761,7 @@ class ProjectApi:
     @validate_call
     def put_project_environment_variables_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         environment_variables: Optional[EnvironmentVariables] = None,
         _request_timeout: Union[
             None,
@@ -8785,8 +8779,8 @@ class ProjectApi:
 
         Put environment variables of a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param environment_variables:
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
@@ -8812,7 +8806,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._put_project_environment_variables_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8830,7 +8824,7 @@ class ProjectApi:
 
     def _put_project_environment_variables_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         environment_variables,
         _request_auth,
         _content_type,
@@ -8850,8 +8844,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -8879,7 +8873,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="PUT",
-            resource_path="/v1/projects/{projectUID}/environment_variables",
+            resource_path="/v1/projects/{projectOrProductUID}/environment_variables",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8895,7 +8889,7 @@ class ProjectApi:
     @validate_call
     def set_global_transformation(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         body: Annotated[
             Dict[str, Any],
             Field(
@@ -8918,8 +8912,8 @@ class ProjectApi:
 
         Set the project-level event JSONata transformation
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param body: JSONata expression which will be applied to each event before it is persisted and routed (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one
@@ -8945,7 +8939,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._set_global_transformation_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8968,7 +8962,7 @@ class ProjectApi:
     @validate_call
     def set_global_transformation_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         body: Annotated[
             Dict[str, Any],
             Field(
@@ -8991,8 +8985,8 @@ class ProjectApi:
 
         Set the project-level event JSONata transformation
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param body: JSONata expression which will be applied to each event before it is persisted and routed (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one
@@ -9018,7 +9012,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._set_global_transformation_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -9041,7 +9035,7 @@ class ProjectApi:
     @validate_call
     def set_global_transformation_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         body: Annotated[
             Dict[str, Any],
             Field(
@@ -9064,8 +9058,8 @@ class ProjectApi:
 
         Set the project-level event JSONata transformation
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param body: JSONata expression which will be applied to each event before it is persisted and routed (required)
         :type body: object
         :param _request_timeout: timeout setting for this request. If one
@@ -9091,7 +9085,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._set_global_transformation_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -9109,7 +9103,7 @@ class ProjectApi:
 
     def _set_global_transformation_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         body,
         _request_auth,
         _content_type,
@@ -9129,8 +9123,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -9158,7 +9152,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/global-transformation",
+            resource_path="/v1/projects/{projectOrProductUID}/global-transformation",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9174,7 +9168,7 @@ class ProjectApi:
     @validate_call
     def update_fleet(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         update_fleet_request: Annotated[
             UpdateFleetRequest, Field(description="Fleet details to update")
@@ -9195,8 +9189,8 @@ class ProjectApi:
 
         Update Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param update_fleet_request: Fleet details to update (required)
@@ -9224,7 +9218,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._update_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             update_fleet_request=update_fleet_request,
             _request_auth=_request_auth,
@@ -9248,7 +9242,7 @@ class ProjectApi:
     @validate_call
     def update_fleet_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         update_fleet_request: Annotated[
             UpdateFleetRequest, Field(description="Fleet details to update")
@@ -9269,8 +9263,8 @@ class ProjectApi:
 
         Update Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param update_fleet_request: Fleet details to update (required)
@@ -9298,7 +9292,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._update_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             update_fleet_request=update_fleet_request,
             _request_auth=_request_auth,
@@ -9322,7 +9316,7 @@ class ProjectApi:
     @validate_call
     def update_fleet_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         update_fleet_request: Annotated[
             UpdateFleetRequest, Field(description="Fleet details to update")
@@ -9343,8 +9337,8 @@ class ProjectApi:
 
         Update Fleet
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
         :param update_fleet_request: Fleet details to update (required)
@@ -9372,7 +9366,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._update_fleet_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             update_fleet_request=update_fleet_request,
             _request_auth=_request_auth,
@@ -9391,7 +9385,7 @@ class ProjectApi:
 
     def _update_fleet_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         fleet_uid,
         update_fleet_request,
         _request_auth,
@@ -9412,8 +9406,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if fleet_uid is not None:
             _path_params["fleetUID"] = fleet_uid
         # process the query parameters
@@ -9443,7 +9437,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="PUT",
-            resource_path="/v1/projects/{projectUID}/fleets/{fleetUID}",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets/{fleetUID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9459,7 +9453,7 @@ class ProjectApi:
     @validate_call
     def upload_firmware(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         filename: StrictStr,
         body: Annotated[
@@ -9482,8 +9476,8 @@ class ProjectApi:
 
         Upload firmware binary
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param filename: (required)
@@ -9513,7 +9507,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._upload_firmware_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             filename=filename,
             body=body,
@@ -9538,7 +9532,7 @@ class ProjectApi:
     @validate_call
     def upload_firmware_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         filename: StrictStr,
         body: Annotated[
@@ -9561,8 +9555,8 @@ class ProjectApi:
 
         Upload firmware binary
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param filename: (required)
@@ -9592,7 +9586,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._upload_firmware_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             filename=filename,
             body=body,
@@ -9617,7 +9611,7 @@ class ProjectApi:
     @validate_call
     def upload_firmware_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         firmware_type: StrictStr,
         filename: StrictStr,
         body: Annotated[
@@ -9640,8 +9634,8 @@ class ProjectApi:
 
         Upload firmware binary
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param firmware_type: (required)
         :type firmware_type: str
         :param filename: (required)
@@ -9671,7 +9665,7 @@ class ProjectApi:
         """  # noqa: E501
 
         _param = self._upload_firmware_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             firmware_type=firmware_type,
             filename=filename,
             body=body,
@@ -9691,7 +9685,7 @@ class ProjectApi:
 
     def _upload_firmware_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         firmware_type,
         filename,
         body,
@@ -9713,8 +9707,8 @@ class ProjectApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if firmware_type is not None:
             _path_params["firmwareType"] = firmware_type
         if filename is not None:
@@ -9751,7 +9745,7 @@ class ProjectApi:
 
         return self.api_client.param_serialize(
             method="PUT",
-            resource_path="/v1/projects/{projectUID}/firmware/{firmwareType}/{filename}",
+            resource_path="/v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

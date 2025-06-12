@@ -46,7 +46,7 @@ class RouteApi:
     @validate_call
     def create_route(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         notehub_route: Annotated[
             NotehubRoute, Field(description="Route to be Created")
         ],
@@ -66,8 +66,8 @@ class RouteApi:
 
         Create Route within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param notehub_route: Route to be Created (required)
         :type notehub_route: NotehubRoute
         :param _request_timeout: timeout setting for this request. If one
@@ -93,7 +93,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._create_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             notehub_route=notehub_route,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -116,7 +116,7 @@ class RouteApi:
     @validate_call
     def create_route_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         notehub_route: Annotated[
             NotehubRoute, Field(description="Route to be Created")
         ],
@@ -136,8 +136,8 @@ class RouteApi:
 
         Create Route within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param notehub_route: Route to be Created (required)
         :type notehub_route: NotehubRoute
         :param _request_timeout: timeout setting for this request. If one
@@ -163,7 +163,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._create_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             notehub_route=notehub_route,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -186,7 +186,7 @@ class RouteApi:
     @validate_call
     def create_route_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         notehub_route: Annotated[
             NotehubRoute, Field(description="Route to be Created")
         ],
@@ -206,8 +206,8 @@ class RouteApi:
 
         Create Route within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param notehub_route: Route to be Created (required)
         :type notehub_route: NotehubRoute
         :param _request_timeout: timeout setting for this request. If one
@@ -233,7 +233,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._create_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             notehub_route=notehub_route,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -251,7 +251,7 @@ class RouteApi:
 
     def _create_route_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         notehub_route,
         _request_auth,
         _content_type,
@@ -271,8 +271,8 @@ class RouteApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -300,7 +300,7 @@ class RouteApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/v1/projects/{projectUID}/routes",
+            resource_path="/v1/projects/{projectOrProductUID}/routes",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -316,7 +316,7 @@ class RouteApi:
     @validate_call
     def delete_route(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -334,8 +334,8 @@ class RouteApi:
 
         Delete single route within a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -361,7 +361,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._delete_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -384,7 +384,7 @@ class RouteApi:
     @validate_call
     def delete_route_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -402,8 +402,8 @@ class RouteApi:
 
         Delete single route within a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -429,7 +429,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._delete_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -452,7 +452,7 @@ class RouteApi:
     @validate_call
     def delete_route_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -470,8 +470,8 @@ class RouteApi:
 
         Delete single route within a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -497,7 +497,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._delete_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -515,7 +515,7 @@ class RouteApi:
 
     def _delete_route_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         route_uid,
         _request_auth,
         _content_type,
@@ -535,8 +535,8 @@ class RouteApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if route_uid is not None:
             _path_params["routeUID"] = route_uid
         # process the query parameters
@@ -554,7 +554,7 @@ class RouteApi:
 
         return self.api_client.param_serialize(
             method="DELETE",
-            resource_path="/v1/projects/{projectUID}/routes/{routeUID}",
+            resource_path="/v1/projects/{projectOrProductUID}/routes/{routeUID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -570,7 +570,7 @@ class RouteApi:
     @validate_call
     def get_route(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -588,8 +588,8 @@ class RouteApi:
 
         Get single route within a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -615,7 +615,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._get_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -638,7 +638,7 @@ class RouteApi:
     @validate_call
     def get_route_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -656,8 +656,8 @@ class RouteApi:
 
         Get single route within a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -683,7 +683,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._get_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -706,7 +706,7 @@ class RouteApi:
     @validate_call
     def get_route_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         _request_timeout: Union[
             None,
@@ -724,8 +724,8 @@ class RouteApi:
 
         Get single route within a project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
@@ -751,7 +751,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._get_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -769,7 +769,7 @@ class RouteApi:
 
     def _get_route_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         route_uid,
         _request_auth,
         _content_type,
@@ -789,8 +789,8 @@ class RouteApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if route_uid is not None:
             _path_params["routeUID"] = route_uid
         # process the query parameters
@@ -808,7 +808,7 @@ class RouteApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/routes/{routeUID}",
+            resource_path="/v1/projects/{projectOrProductUID}/routes/{routeUID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -824,7 +824,7 @@ class RouteApi:
     @validate_call
     def get_route_logs_by_route(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -859,8 +859,8 @@ class RouteApi:
 
         Get Route Logs by Route UID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param page_size:
@@ -904,7 +904,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._get_route_logs_by_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             page_size=page_size,
             page_num=page_num,
@@ -936,7 +936,7 @@ class RouteApi:
     @validate_call
     def get_route_logs_by_route_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -971,8 +971,8 @@ class RouteApi:
 
         Get Route Logs by Route UID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param page_size:
@@ -1016,7 +1016,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._get_route_logs_by_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             page_size=page_size,
             page_num=page_num,
@@ -1048,7 +1048,7 @@ class RouteApi:
     @validate_call
     def get_route_logs_by_route_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
@@ -1083,8 +1083,8 @@ class RouteApi:
 
         Get Route Logs by Route UID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param page_size:
@@ -1128,7 +1128,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._get_route_logs_by_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             page_size=page_size,
             page_num=page_num,
@@ -1155,7 +1155,7 @@ class RouteApi:
 
     def _get_route_logs_by_route_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         route_uid,
         page_size,
         page_num,
@@ -1186,8 +1186,8 @@ class RouteApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if route_uid is not None:
             _path_params["routeUID"] = route_uid
         # process the query parameters
@@ -1241,7 +1241,7 @@ class RouteApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/routes/{routeUID}/route-logs",
+            resource_path="/v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1257,7 +1257,7 @@ class RouteApi:
     @validate_call
     def get_routes(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1274,8 +1274,8 @@ class RouteApi:
 
         Get all Routes within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1299,7 +1299,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._get_routes_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1321,7 +1321,7 @@ class RouteApi:
     @validate_call
     def get_routes_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1338,8 +1338,8 @@ class RouteApi:
 
         Get all Routes within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1363,7 +1363,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._get_routes_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1385,7 +1385,7 @@ class RouteApi:
     @validate_call
     def get_routes_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1402,8 +1402,8 @@ class RouteApi:
 
         Get all Routes within a Project
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1427,7 +1427,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._get_routes_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1444,7 +1444,7 @@ class RouteApi:
 
     def _get_routes_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -1463,8 +1463,8 @@ class RouteApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1480,7 +1480,7 @@ class RouteApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectUID}/routes",
+            resource_path="/v1/projects/{projectOrProductUID}/routes",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1496,7 +1496,7 @@ class RouteApi:
     @validate_call
     def update_route(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         notehub_route: Annotated[
             NotehubRoute, Field(description="Route settings to be updated")
@@ -1517,8 +1517,8 @@ class RouteApi:
 
         Update route by UID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param notehub_route: Route settings to be updated (required)
@@ -1546,7 +1546,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._update_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             notehub_route=notehub_route,
             _request_auth=_request_auth,
@@ -1570,7 +1570,7 @@ class RouteApi:
     @validate_call
     def update_route_with_http_info(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         notehub_route: Annotated[
             NotehubRoute, Field(description="Route settings to be updated")
@@ -1591,8 +1591,8 @@ class RouteApi:
 
         Update route by UID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param notehub_route: Route settings to be updated (required)
@@ -1620,7 +1620,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._update_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             notehub_route=notehub_route,
             _request_auth=_request_auth,
@@ -1644,7 +1644,7 @@ class RouteApi:
     @validate_call
     def update_route_without_preload_content(
         self,
-        project_uid: StrictStr,
+        project_or_product_uid: StrictStr,
         route_uid: StrictStr,
         notehub_route: Annotated[
             NotehubRoute, Field(description="Route settings to be updated")
@@ -1665,8 +1665,8 @@ class RouteApi:
 
         Update route by UID
 
-        :param project_uid: (required)
-        :type project_uid: str
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
         :param route_uid: (required)
         :type route_uid: str
         :param notehub_route: Route settings to be updated (required)
@@ -1694,7 +1694,7 @@ class RouteApi:
         """  # noqa: E501
 
         _param = self._update_route_serialize(
-            project_uid=project_uid,
+            project_or_product_uid=project_or_product_uid,
             route_uid=route_uid,
             notehub_route=notehub_route,
             _request_auth=_request_auth,
@@ -1713,7 +1713,7 @@ class RouteApi:
 
     def _update_route_serialize(
         self,
-        project_uid,
+        project_or_product_uid,
         route_uid,
         notehub_route,
         _request_auth,
@@ -1734,8 +1734,8 @@ class RouteApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if project_uid is not None:
-            _path_params["projectUID"] = project_uid
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
         if route_uid is not None:
             _path_params["routeUID"] = route_uid
         # process the query parameters
@@ -1765,7 +1765,7 @@ class RouteApi:
 
         return self.api_client.param_serialize(
             method="PUT",
-            resource_path="/v1/projects/{projectUID}/routes/{routeUID}",
+            resource_path="/v1/projects/{projectOrProductUID}/routes/{routeUID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

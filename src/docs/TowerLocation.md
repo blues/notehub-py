@@ -2,22 +2,22 @@
 
 ## Properties
 
-| Name       | Type      | Description                                     | Notes      |
-| ---------- | --------- | ----------------------------------------------- | ---------- |
-| **time**   | **float** |                                                 | [optional] |
-| **n**      | **str**   | Name of the location                            | [optional] |
-| **c**      | **str**   | Country code                                    | [optional] |
-| **lat**    | **float** |                                                 | [optional] |
-| **lon**    | **float** |                                                 | [optional] |
-| **zone**   | **str**   |                                                 | [optional] |
-| **mcc**    | **float** |                                                 | [optional] |
-| **mnc**    | **float** |                                                 | [optional] |
-| **lac**    | **float** |                                                 | [optional] |
-| **cid**    | **float** |                                                 | [optional] |
-| **l**      | **str**   | Open location code                              | [optional] |
-| **z**      | **float** | Timezone ID                                     | [optional] |
-| **count**  | **float** | Number of times this location was recently used | [optional] |
-| **towers** | **float** | Number of triangulation points                  | [optional] |
+| Name       | Type      | Description                                       | Notes      |
+| ---------- | --------- | ------------------------------------------------- | ---------- |
+| **source** | **str**   | The source of this location                       | [optional] |
+| **time**   | **int**   | Unix timestamp when this location was ascertained | [optional] |
+| **n**      | **str**   | Name of the location                              | [optional] |
+| **c**      | **str**   | Country code                                      | [optional] |
+| **lat**    | **float** | Latitude                                          | [optional] |
+| **lon**    | **float** | Longitude                                         | [optional] |
+| **zone**   | **str**   | Timezone name                                     | [optional] |
+| **mcc**    | **int**   | Mobile Country Code                               | [optional] |
+| **mnc**    | **int**   | Mobile Network Code                               | [optional] |
+| **lac**    | **int**   | Location Area Code                                | [optional] |
+| **cid**    | **int**   | Cell ID                                           | [optional] |
+| **l**      | **str**   | Open Location Code                                | [optional] |
+| **z**      | **int**   | Timezone ID                                       | [optional] |
+| **towers** | **int**   | Number of triangulation points                    | [optional] |
 
 ## Example
 
