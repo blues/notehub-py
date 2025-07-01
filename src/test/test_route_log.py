@@ -15,13 +15,11 @@ Do not edit the class manually.
 
 import unittest
 
-from notehub_py.models.get_route_logs_by_route200_response_inner import (
-    GetRouteLogsByRoute200ResponseInner,
-)
+from notehub_py.models.route_log import RouteLog
 
 
-class TestGetRouteLogsByRoute200ResponseInner(unittest.TestCase):
-    """GetRouteLogsByRoute200ResponseInner unit test stubs"""
+class TestRouteLog(unittest.TestCase):
+    """RouteLog unit test stubs"""
 
     def setUp(self):
         pass
@@ -29,16 +27,16 @@ class TestGetRouteLogsByRoute200ResponseInner(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> GetRouteLogsByRoute200ResponseInner:
-        """Test GetRouteLogsByRoute200ResponseInner
+    def make_instance(self, include_optional) -> RouteLog:
+        """Test RouteLog
         include_option is a boolean, when False only required
         params are included, when True both required and
         optional params are included"""
-        # uncomment below to create an instance of `GetRouteLogsByRoute200ResponseInner`
+        # uncomment below to create an instance of `RouteLog`
         """
-        model = GetRouteLogsByRoute200ResponseInner()
+        model = RouteLog()
         if include_optional:
-            return GetRouteLogsByRoute200ResponseInner(
+            return RouteLog(
                 var_date = '',
                 route_uid = '',
                 event_uid = '',
@@ -48,12 +46,12 @@ class TestGetRouteLogsByRoute200ResponseInner(unittest.TestCase):
                 url = ''
             )
         else:
-            return GetRouteLogsByRoute200ResponseInner(
+            return RouteLog(
         )
         """
 
-    def testGetRouteLogsByRoute200ResponseInner(self):
-        """Test GetRouteLogsByRoute200ResponseInner"""
+    def testRouteLog(self):
+        """Test RouteLog"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

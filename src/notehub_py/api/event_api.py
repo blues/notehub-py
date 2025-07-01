@@ -24,9 +24,7 @@ from notehub_py.models.get_project_events200_response import GetProjectEvents200
 from notehub_py.models.get_project_events_by_cursor200_response import (
     GetProjectEventsByCursor200Response,
 )
-from notehub_py.models.get_route_logs_by_route200_response_inner import (
-    GetRouteLogsByRoute200ResponseInner,
-)
+from notehub_py.models.route_log import RouteLog
 
 from notehub_py.api_client import ApiClient, RequestSerialized
 from notehub_py.api_response import ApiResponse
@@ -2066,7 +2064,7 @@ class EventApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[GetRouteLogsByRoute200ResponseInner]:
+    ) -> List[RouteLog]:
         """get_route_logs_by_event
 
         Get Route Logs by Event UID
@@ -2107,7 +2105,7 @@ class EventApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[GetRouteLogsByRoute200ResponseInner]",
+            "200": "List[RouteLog]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -2134,7 +2132,7 @@ class EventApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[GetRouteLogsByRoute200ResponseInner]]:
+    ) -> ApiResponse[List[RouteLog]]:
         """get_route_logs_by_event
 
         Get Route Logs by Event UID
@@ -2175,7 +2173,7 @@ class EventApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[GetRouteLogsByRoute200ResponseInner]",
+            "200": "List[RouteLog]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -2243,7 +2241,7 @@ class EventApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[GetRouteLogsByRoute200ResponseInner]",
+            "200": "List[RouteLog]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout

@@ -252,7 +252,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_route_logs_by_route**
 
-> List[GetRouteLogsByRoute200ResponseInner] get_route_logs_by_route(project_or_product_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, files=files)
+> List[RouteLog] get_route_logs_by_route(project_or_product_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, most_recent_only=most_recent_only, files=files)
 
 Get Route Logs by Route UID
 
@@ -262,7 +262,7 @@ Get Route Logs by Route UID
 
 ```python
 import notehub_py
-from notehub_py.models.get_route_logs_by_route200_response_inner import GetRouteLogsByRoute200ResponseInner
+from notehub_py.models.route_log import RouteLog
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -292,15 +292,16 @@ with notehub_py.ApiClient(configuration) as api_client:
     page_size = 50 # int |  (optional) (default to 50)
     page_num = 1 # int |  (optional) (default to 1)
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
-    sort_by = 'captured' # str |  (optional) (default to 'captured')
-    sort_order = 'asc' # str |  (optional) (default to 'asc')
+    sort_by = 'date' # str |  (optional) (default to 'date')
+    sort_order = 'desc' # str |  (optional) (default to 'desc')
     start_date = 1628631763 # int | Unix timestamp (optional)
     end_date = 1657894210 # int | Unix timestamp (optional)
     system_files_only = True # bool |  (optional)
+    most_recent_only = True # bool |  (optional)
     files = '_health.qo, data.qo' # str |  (optional)
 
     try:
-        api_response = api_instance.get_route_logs_by_route(project_or_product_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, files=files)
+        api_response = api_instance.get_route_logs_by_route(project_or_product_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, most_recent_only=most_recent_only, files=files)
         print("The response of RouteApi->get_route_logs_by_route:\n")
         pprint(api_response)
     except Exception as e:
@@ -309,23 +310,24 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                    | Description    | Notes                                      |
-| -------------------------- | ----------------------- | -------------- | ------------------------------------------ |
+| Name                       | Type                    | Description    | Notes                                  |
+| -------------------------- | ----------------------- | -------------- | -------------------------------------- |
 | **project_or_product_uid** | **str**                 |                |
 | **route_uid**              | **str**                 |                |
-| **page_size**              | **int**                 |                | [optional] [default to 50]                 |
-| **page_num**               | **int**                 |                | [optional] [default to 1]                  |
-| **device_uid**             | [**List[str]**](str.md) | A Device UID.  | [optional]                                 |
-| **sort_by**                | **str**                 |                | [optional] [default to &#39;captured&#39;] |
-| **sort_order**             | **str**                 |                | [optional] [default to &#39;asc&#39;]      |
-| **start_date**             | **int**                 | Unix timestamp | [optional]                                 |
-| **end_date**               | **int**                 | Unix timestamp | [optional]                                 |
-| **system_files_only**      | **bool**                |                | [optional]                                 |
-| **files**                  | **str**                 |                | [optional]                                 |
+| **page_size**              | **int**                 |                | [optional] [default to 50]             |
+| **page_num**               | **int**                 |                | [optional] [default to 1]              |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.  | [optional]                             |
+| **sort_by**                | **str**                 |                | [optional] [default to &#39;date&#39;] |
+| **sort_order**             | **str**                 |                | [optional] [default to &#39;desc&#39;] |
+| **start_date**             | **int**                 | Unix timestamp | [optional]                             |
+| **end_date**               | **int**                 | Unix timestamp | [optional]                             |
+| **system_files_only**      | **bool**                |                | [optional]                             |
+| **most_recent_only**       | **bool**                |                | [optional]                             |
+| **files**                  | **str**                 |                | [optional]                             |
 
 ### Return type
 
-[**List[GetRouteLogsByRoute200ResponseInner]**](GetRouteLogsByRoute200ResponseInner.md)
+[**List[RouteLog]**](RouteLog.md)
 
 ### Authorization
 
@@ -338,10 +340,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### HTTP response details
 
-| Status code | Description                                 | Response headers |
-| ----------- | ------------------------------------------- | ---------------- |
-| **200**     | The response body for a Route Logs request. | -                |
-| **0**       | The response body in case of an API error.  | -                |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Successful operation                       | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
