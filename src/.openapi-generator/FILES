@@ -68,7 +68,6 @@ docs/GetProjectFleets200Response.md
 docs/GetProjectMembers200Response.md
 docs/GetProjectProducts200Response.md
 docs/GetProjects200Response.md
-docs/GetRouteLogsByRoute200ResponseInner.md
 docs/GetWebhooks200Response.md
 docs/Google.md
 docs/HandleNoteChanges200Response.md
@@ -105,6 +104,7 @@ docs/Repository.md
 docs/RepositoryApi.md
 docs/Role.md
 docs/RouteApi.md
+docs/RouteLog.md
 docs/SchemaProperty.md
 docs/SimUsage.md
 docs/Slack.md
@@ -200,7 +200,6 @@ notehub_py/models/get_project_fleets200_response.py
 notehub_py/models/get_project_members200_response.py
 notehub_py/models/get_project_products200_response.py
 notehub_py/models/get_projects200_response.py
-notehub_py/models/get_route_logs_by_route200_response_inner.py
 notehub_py/models/get_webhooks200_response.py
 notehub_py/models/google.py
 notehub_py/models/handle_note_changes200_response.py
@@ -233,6 +232,7 @@ notehub_py/models/question_data_response_map.py
 notehub_py/models/radresponder.py
 notehub_py/models/repository.py
 notehub_py/models/role.py
+notehub_py/models/route_log.py
 notehub_py/models/schema_property.py
 notehub_py/models/sim_usage.py
 notehub_py/models/slack.py
@@ -322,7 +322,6 @@ test/test_get_project_fleets200_response.py
 test/test_get_project_members200_response.py
 test/test_get_project_products200_response.py
 test/test_get_projects200_response.py
-test/test_get_route_logs_by_route200_response_inner.py
 test/test_get_webhooks200_response.py
 test/test_google.py
 test/test_handle_note_changes200_response.py
@@ -359,6 +358,7 @@ test/test_repository.py
 test/test_repository_api.py
 test/test_role.py
 test/test_route_api.py
+test/test_route_log.py
 test/test_schema_property.py
 test/test_sim_usage.py
 test/test_slack.py

@@ -124,9 +124,6 @@ from notehub_py.models.get_project_products200_response import (
     GetProjectProducts200Response,
 )
 from notehub_py.models.get_projects200_response import GetProjects200Response
-from notehub_py.models.get_route_logs_by_route200_response_inner import (
-    GetRouteLogsByRoute200ResponseInner,
-)
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.models.google import Google
 from notehub_py.models.handle_note_changes200_response import (
@@ -169,6 +166,7 @@ from notehub_py.models.question_data_response_map import QuestionDataResponseMap
 from notehub_py.models.radresponder import Radresponder
 from notehub_py.models.repository import Repository
 from notehub_py.models.role import Role
+from notehub_py.models.route_log import RouteLog
 from notehub_py.models.schema_property import SchemaProperty
 from notehub_py.models.sim_usage import SimUsage
 from notehub_py.models.slack import Slack

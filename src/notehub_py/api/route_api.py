@@ -20,10 +20,8 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictStr, field_validator
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
-from notehub_py.models.get_route_logs_by_route200_response_inner import (
-    GetRouteLogsByRoute200ResponseInner,
-)
 from notehub_py.models.notehub_route import NotehubRoute
+from notehub_py.models.route_log import RouteLog
 from notehub_py.models.user_db_route import UserDbRoute
 
 from notehub_py.api_client import ApiClient, RequestSerialized
@@ -842,6 +840,7 @@ class RouteApi:
             Field(description="Unix timestamp"),
         ] = None,
         system_files_only: Optional[StrictBool] = None,
+        most_recent_only: Optional[StrictBool] = None,
         files: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -854,7 +853,7 @@ class RouteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[GetRouteLogsByRoute200ResponseInner]:
+    ) -> List[RouteLog]:
         """get_route_logs_by_route
 
         Get Route Logs by Route UID
@@ -879,6 +878,8 @@ class RouteApi:
         :type end_date: int
         :param system_files_only:
         :type system_files_only: bool
+        :param most_recent_only:
+        :type most_recent_only: bool
         :param files:
         :type files: str
         :param _request_timeout: timeout setting for this request. If one
@@ -914,6 +915,7 @@ class RouteApi:
             start_date=start_date,
             end_date=end_date,
             system_files_only=system_files_only,
+            most_recent_only=most_recent_only,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -922,7 +924,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[GetRouteLogsByRoute200ResponseInner]",
+            "200": "List[RouteLog]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -954,6 +956,7 @@ class RouteApi:
             Field(description="Unix timestamp"),
         ] = None,
         system_files_only: Optional[StrictBool] = None,
+        most_recent_only: Optional[StrictBool] = None,
         files: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -966,7 +969,7 @@ class RouteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[GetRouteLogsByRoute200ResponseInner]]:
+    ) -> ApiResponse[List[RouteLog]]:
         """get_route_logs_by_route
 
         Get Route Logs by Route UID
@@ -991,6 +994,8 @@ class RouteApi:
         :type end_date: int
         :param system_files_only:
         :type system_files_only: bool
+        :param most_recent_only:
+        :type most_recent_only: bool
         :param files:
         :type files: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1026,6 +1031,7 @@ class RouteApi:
             start_date=start_date,
             end_date=end_date,
             system_files_only=system_files_only,
+            most_recent_only=most_recent_only,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1034,7 +1040,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[GetRouteLogsByRoute200ResponseInner]",
+            "200": "List[RouteLog]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1066,6 +1072,7 @@ class RouteApi:
             Field(description="Unix timestamp"),
         ] = None,
         system_files_only: Optional[StrictBool] = None,
+        most_recent_only: Optional[StrictBool] = None,
         files: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1103,6 +1110,8 @@ class RouteApi:
         :type end_date: int
         :param system_files_only:
         :type system_files_only: bool
+        :param most_recent_only:
+        :type most_recent_only: bool
         :param files:
         :type files: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1138,6 +1147,7 @@ class RouteApi:
             start_date=start_date,
             end_date=end_date,
             system_files_only=system_files_only,
+            most_recent_only=most_recent_only,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1146,7 +1156,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[GetRouteLogsByRoute200ResponseInner]",
+            "200": "List[RouteLog]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1165,6 +1175,7 @@ class RouteApi:
         start_date,
         end_date,
         system_files_only,
+        most_recent_only,
         files,
         _request_auth,
         _content_type,
@@ -1222,6 +1233,10 @@ class RouteApi:
         if system_files_only is not None:
 
             _query_params.append(("systemFilesOnly", system_files_only))
+
+        if most_recent_only is not None:
+
+            _query_params.append(("mostRecentOnly", most_recent_only))
 
         if files is not None:
 

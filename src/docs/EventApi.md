@@ -408,7 +408,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_route_logs_by_event**
 
-> List[GetRouteLogsByRoute200ResponseInner] get_route_logs_by_event(project_or_product_uid, event_uid)
+> List[RouteLog] get_route_logs_by_event(project_or_product_uid, event_uid)
 
 Get Route Logs by Event UID
 
@@ -418,7 +418,7 @@ Get Route Logs by Event UID
 
 ```python
 import notehub_py
-from notehub_py.models.get_route_logs_by_route200_response_inner import GetRouteLogsByRoute200ResponseInner
+from notehub_py.models.route_log import RouteLog
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -463,7 +463,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**List[GetRouteLogsByRoute200ResponseInner]**](GetRouteLogsByRoute200ResponseInner.md)
+[**List[RouteLog]**](RouteLog.md)
 
 ### Authorization
 
@@ -476,9 +476,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### HTTP response details
 
-| Status code | Description                                 | Response headers |
-| ----------- | ------------------------------------------- | ---------------- |
-| **200**     | The response body for a Route Logs request. | -                |
-| **0**       | The response body in case of an API error.  | -                |
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Successful operation                       | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
