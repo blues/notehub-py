@@ -201,11 +201,11 @@ Class | Method | HTTP request | Description
 *RouteApi* | [**get_route_logs_by_route**](docs/RouteApi.md#get_route_logs_by_route) | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs | 
 *RouteApi* | [**get_routes**](docs/RouteApi.md#get_routes) | **GET** /v1/projects/{projectOrProductUID}/routes | 
 *RouteApi* | [**update_route**](docs/RouteApi.md#update_route) | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID} | 
-*WebhookApi* | [**create_webhook**](docs/WebhookApi.md#create_webhook) | **POST** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID} | 
-*WebhookApi* | [**delete_webhook**](docs/WebhookApi.md#delete_webhook) | **DELETE** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID} | 
-*WebhookApi* | [**get_webhook**](docs/WebhookApi.md#get_webhook) | **GET** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID} | 
-*WebhookApi* | [**get_webhooks**](docs/WebhookApi.md#get_webhooks) | **GET** /v1/projects/{projectOrProductUIDParam}/webhooks | 
-*WebhookApi* | [**update_webhook**](docs/WebhookApi.md#update_webhook) | **PUT** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID} | 
+*WebhookApi* | [**create_webhook**](docs/WebhookApi.md#create_webhook) | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
+*WebhookApi* | [**delete_webhook**](docs/WebhookApi.md#delete_webhook) | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
+*WebhookApi* | [**get_webhook**](docs/WebhookApi.md#get_webhook) | **GET** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
+*WebhookApi* | [**get_webhooks**](docs/WebhookApi.md#get_webhooks) | **GET** /v1/projects/{projectOrProductUID}/webhooks | 
+*WebhookApi* | [**update_webhook**](docs/WebhookApi.md#update_webhook) | **PUT** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
 
 
 ## Documentation For Models

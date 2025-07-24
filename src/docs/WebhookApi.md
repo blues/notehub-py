@@ -2,13 +2,13 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                             | HTTP request                                                             | Description |
-| -------------------------------------------------- | ------------------------------------------------------------------------ | ----------- |
-| [**create_webhook**](WebhookApi.md#create_webhook) | **POST** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}   |
-| [**delete_webhook**](WebhookApi.md#delete_webhook) | **DELETE** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID} |
-| [**get_webhook**](WebhookApi.md#get_webhook)       | **GET** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}    |
-| [**get_webhooks**](WebhookApi.md#get_webhooks)     | **GET** /v1/projects/{projectOrProductUIDParam}/webhooks                 |
-| [**update_webhook**](WebhookApi.md#update_webhook) | **PUT** /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}    |
+| Method                                             | HTTP request                                                        | Description |
+| -------------------------------------------------- | ------------------------------------------------------------------- | ----------- |
+| [**create_webhook**](WebhookApi.md#create_webhook) | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}   |
+| [**delete_webhook**](WebhookApi.md#delete_webhook) | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} |
+| [**get_webhook**](WebhookApi.md#get_webhook)       | **GET** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}    |
+| [**get_webhooks**](WebhookApi.md#get_webhooks)     | **GET** /v1/projects/{projectOrProductUID}/webhooks                 |
+| [**update_webhook**](WebhookApi.md#update_webhook) | **PUT** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}    |
 
 # **create_webhook**
 
