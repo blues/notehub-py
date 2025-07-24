@@ -2441,7 +2441,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/NotefileSchema'
-  /v1/projects/{projectOrProductUIDParam}/webhooks:
+  /v1/projects/{projectOrProductUID}/webhooks:
     get:
       tags:
       - webhook
@@ -2465,7 +2465,7 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/WebhookSettings'
-  /v1/projects/{projectOrProductUIDParam}/webhooks/{webhookUID}:
+  /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}:
     post:
       tags:
       - webhook
