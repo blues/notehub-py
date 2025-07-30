@@ -43,6 +43,8 @@ docs/DeviceTowerInfo.md
 docs/DeviceUsage.md
 docs/DfuActionRequest.md
 docs/EmailNotification.md
+docs/EnvTreeJsonNode.md
+docs/EnvVar.md
 docs/EnvironmentVariables.md
 docs/Error.md
 docs/Event.md
@@ -177,6 +179,8 @@ notehub_py/models/dfu_action_request.py
 notehub_py/models/dfu_env.py
 notehub_py/models/dfu_state.py
 notehub_py/models/email_notification.py
+notehub_py/models/env_tree_json_node.py
+notehub_py/models/env_var.py
 notehub_py/models/environment_variables.py
 notehub_py/models/error.py
 notehub_py/models/event.py
@@ -297,6 +301,8 @@ test/test_dfu_action_request.py
 test/test_dfu_env.py
 test/test_dfu_state.py
 test/test_email_notification.py
+test/test_env_tree_json_node.py
+test/test_env_var.py
 test/test_environment_variables.py
 test/test_error.py
 test/test_event.py

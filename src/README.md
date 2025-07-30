@@ -116,6 +116,7 @@ Class | Method | HTTP request | Description
 *DeviceApi* | [**enable_device**](docs/DeviceApi.md#enable_device) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable | 
 *DeviceApi* | [**enable_device_connectivity_assurance**](docs/DeviceApi.md#enable_device_connectivity_assurance) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance | 
 *DeviceApi* | [**get_device**](docs/DeviceApi.md#get_device) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID} | 
+*DeviceApi* | [**get_device_environment_hierarchy**](docs/DeviceApi.md#get_device_environment_hierarchy) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy | Get environment variable hierarchy for a device
 *DeviceApi* | [**get_device_environment_variables**](docs/DeviceApi.md#get_device_environment_variables) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables | 
 *DeviceApi* | [**get_device_environment_variables_by_pin**](docs/DeviceApi.md#get_device_environment_variables_by_pin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin | 
 *DeviceApi* | [**get_device_health_log**](docs/DeviceApi.md#get_device_health_log) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log | 
@@ -170,10 +171,12 @@ Class | Method | HTTP request | Description
 *ProjectApi* | [**get_devices_dfu_status**](docs/ProjectApi.md#get_devices_dfu_status) | **GET** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status | 
 *ProjectApi* | [**get_firmware_info**](docs/ProjectApi.md#get_firmware_info) | **GET** /v1/projects/{projectOrProductUID}/firmware | 
 *ProjectApi* | [**get_fleet**](docs/ProjectApi.md#get_fleet) | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID} | 
+*ProjectApi* | [**get_fleet_environment_hierarchy**](docs/ProjectApi.md#get_fleet_environment_hierarchy) | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy | Get environment variable hierarchy for a device
 *ProjectApi* | [**get_fleet_environment_variables**](docs/ProjectApi.md#get_fleet_environment_variables) | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables | 
 *ProjectApi* | [**get_notefile_schemas**](docs/ProjectApi.md#get_notefile_schemas) | **GET** /v1/projects/{projectOrProductUID}/schemas | Get variable format for a notefile
 *ProjectApi* | [**get_project**](docs/ProjectApi.md#get_project) | **GET** /v1/projects/{projectUID} | 
 *ProjectApi* | [**get_project_by_product**](docs/ProjectApi.md#get_project_by_product) | **GET** /v1/products/{productUID}/project | 
+*ProjectApi* | [**get_project_environment_hierarchy**](docs/ProjectApi.md#get_project_environment_hierarchy) | **GET** /v1/projects/{projectOrProductUID}/environment_hierarchy | Get environment variable hierarchy for a device
 *ProjectApi* | [**get_project_environment_variables**](docs/ProjectApi.md#get_project_environment_variables) | **GET** /v1/projects/{projectOrProductUID}/environment_variables | 
 *ProjectApi* | [**get_project_fleets**](docs/ProjectApi.md#get_project_fleets) | **GET** /v1/projects/{projectOrProductUID}/fleets | 
 *ProjectApi* | [**get_project_members**](docs/ProjectApi.md#get_project_members) | **GET** /v1/projects/{projectOrProductUID}/members | 
@@ -245,6 +248,8 @@ Class | Method | HTTP request | Description
  - [DeviceUsage](docs/DeviceUsage.md)
  - [DfuActionRequest](docs/DfuActionRequest.md)
  - [EmailNotification](docs/EmailNotification.md)
+ - [EnvTreeJsonNode](docs/EnvTreeJsonNode.md)
+ - [EnvVar](docs/EnvVar.md)
  - [EnvironmentVariables](docs/EnvironmentVariables.md)
  - [Error](docs/Error.md)
  - [Event](docs/Event.md)

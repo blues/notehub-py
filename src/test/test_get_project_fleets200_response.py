@@ -45,7 +45,8 @@ class TestGetProjectFleets200Response(unittest.TestCase):
                         environment_variables = {
                             'key' : ''
                             }, 
-                        smart_rule = '', )
+                        smart_rule = '', 
+                        watchdog_mins = 56, )
                     ]
             )
         else:
@@ -58,7 +59,8 @@ class TestGetProjectFleets200Response(unittest.TestCase):
                         environment_variables = {
                             'key' : ''
                             }, 
-                        smart_rule = '', )
+                        smart_rule = '', 
+                        watchdog_mins = 56, )
                     ],
         )
         """

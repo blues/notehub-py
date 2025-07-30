@@ -77,6 +77,8 @@ from notehub_py.models.device_tower_info import DeviceTowerInfo
 from notehub_py.models.device_usage import DeviceUsage
 from notehub_py.models.dfu_action_request import DfuActionRequest
 from notehub_py.models.email_notification import EmailNotification
+from notehub_py.models.env_tree_json_node import EnvTreeJsonNode
+from notehub_py.models.env_var import EnvVar
 from notehub_py.models.environment_variables import EnvironmentVariables
 from notehub_py.models.error import Error
 from notehub_py.models.event import Event

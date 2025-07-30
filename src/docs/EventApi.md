@@ -54,8 +54,8 @@ with notehub_py.ApiClient(configuration) as api_client:
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
     sort_by = 'captured' # str |  (optional) (default to 'captured')
     sort_order = 'asc' # str |  (optional) (default to 'asc')
-    start_date = 1628631763 # int | Unix timestamp (optional)
-    end_date = 1657894210 # int | Unix timestamp (optional)
+    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
     date_type = 'captured' # str | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (optional) (default to 'captured')
     system_files_only = True # bool |  (optional)
     files = '_health.qo, data.qo' # str |  (optional)
@@ -84,8 +84,8 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
 | **sort_by**                | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
 | **sort_order**             | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
-| **start_date**             | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **end_date**               | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp                                                                                                  | [optional]                                 |
+| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp                                                                                                    | [optional]                                 |
 | **date_type**              | **str**                 | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
 | **system_files_only**      | **bool**                |                                                                                                                                                                  | [optional]                                 |
 | **files**                  | **str**                 |                                                                                                                                                                  | [optional]                                 |
@@ -162,8 +162,8 @@ with notehub_py.ApiClient(configuration) as api_client:
     system_files_only = True # bool |  (optional)
     files = '_health.qo, data.qo' # str |  (optional)
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
-    start_date = 1628631763 # int | Unix timestamp (optional)
-    end_date = 1657894210 # int | Unix timestamp (optional)
+    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
 
     try:
         api_response = api_instance.get_fleet_events_by_cursor(project_or_product_uid, fleet_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, device_uid=device_uid, start_date=start_date, end_date=end_date)
@@ -185,8 +185,8 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **system_files_only**      | **bool**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **files**                  | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
-| **start_date**             | **int**                 | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
-| **end_date**               | **int**                 | Unix timestamp                                                                                                                                                                                                                                                                                                                                                             | [optional]                            |
+| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp                                                                                                                                                                                                                                                                                                            | [optional]                            |
+| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp                                                                                                                                                                                                                                                                                                              | [optional]                            |
 
 ### Return type
 
@@ -253,8 +253,8 @@ with notehub_py.ApiClient(configuration) as api_client:
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
     sort_by = 'captured' # str |  (optional) (default to 'captured')
     sort_order = 'asc' # str |  (optional) (default to 'asc')
-    start_date = 1628631763 # int | Unix timestamp (optional)
-    end_date = 1657894210 # int | Unix timestamp (optional)
+    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
     date_type = 'captured' # str | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (optional) (default to 'captured')
     system_files_only = True # bool |  (optional)
     files = '_health.qo, data.qo' # str |  (optional)
@@ -283,8 +283,8 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
 | **sort_by**                | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
 | **sort_order**             | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
-| **start_date**             | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
-| **end_date**               | **int**                 | Unix timestamp                                                                                                                                                   | [optional]                                 |
+| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp                                                                                                  | [optional]                                 |
+| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp                                                                                                    | [optional]                                 |
 | **date_type**              | **str**                 | Which date to filter on, either &#39;captured&#39; or &#39;uploaded&#39;. This will apply to the startDate and endDate parameters                                | [optional] [default to &#39;captured&#39;] |
 | **system_files_only**      | **bool**                |                                                                                                                                                                  | [optional]                                 |
 | **files**                  | **str**                 |                                                                                                                                                                  | [optional]                                 |

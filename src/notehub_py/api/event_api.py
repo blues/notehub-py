@@ -57,11 +57,15 @@ class EventApi:
         sort_order: Optional[StrictStr] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         date_type: Annotated[
             Optional[StrictStr],
@@ -119,9 +123,9 @@ class EventApi:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
         :type date_type: str
@@ -211,11 +215,15 @@ class EventApi:
         sort_order: Optional[StrictStr] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         date_type: Annotated[
             Optional[StrictStr],
@@ -273,9 +281,9 @@ class EventApi:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
         :type date_type: str
@@ -365,11 +373,15 @@ class EventApi:
         sort_order: Optional[StrictStr] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         date_type: Annotated[
             Optional[StrictStr],
@@ -427,9 +439,9 @@ class EventApi:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
         :type date_type: str
@@ -655,11 +667,15 @@ class EventApi:
         ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -693,9 +709,9 @@ class EventApi:
         :type files: str
         :param device_uid: A Device UID.
         :type device_uid: List[str]
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -768,11 +784,15 @@ class EventApi:
         ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -806,9 +826,9 @@ class EventApi:
         :type files: str
         :param device_uid: A Device UID.
         :type device_uid: List[str]
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -881,11 +901,15 @@ class EventApi:
         ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -919,9 +943,9 @@ class EventApi:
         :type files: str
         :param device_uid: A Device UID.
         :type device_uid: List[str]
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1079,11 +1103,15 @@ class EventApi:
         sort_order: Optional[StrictStr] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         date_type: Annotated[
             Optional[StrictStr],
@@ -1142,9 +1170,9 @@ class EventApi:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
         :type date_type: str
@@ -1235,11 +1263,15 @@ class EventApi:
         sort_order: Optional[StrictStr] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         date_type: Annotated[
             Optional[StrictStr],
@@ -1298,9 +1330,9 @@ class EventApi:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
         :type date_type: str
@@ -1391,11 +1423,15 @@ class EventApi:
         sort_order: Optional[StrictStr] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         date_type: Annotated[
             Optional[StrictStr],
@@ -1454,9 +1490,9 @@ class EventApi:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
         :type date_type: str

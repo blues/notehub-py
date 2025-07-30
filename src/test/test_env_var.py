@@ -15,11 +15,11 @@ Do not edit the class manually.
 
 import unittest
 
-from notehub_py.models.update_fleet_request import UpdateFleetRequest
+from notehub_py.models.env_var import EnvVar
 
 
-class TestUpdateFleetRequest(unittest.TestCase):
-    """UpdateFleetRequest unit test stubs"""
+class TestEnvVar(unittest.TestCase):
+    """EnvVar unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,33 +27,28 @@ class TestUpdateFleetRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> UpdateFleetRequest:
-        """Test UpdateFleetRequest
+    def make_instance(self, include_optional) -> EnvVar:
+        """Test EnvVar
         include_option is a boolean, when False only required
         params are included, when True both required and
         optional params are included"""
-        # uncomment below to create an instance of `UpdateFleetRequest`
+        # uncomment below to create an instance of `EnvVar`
         """
-        model = UpdateFleetRequest()
+        model = EnvVar()
         if include_optional:
-            return UpdateFleetRequest(
-                label = '',
-                add_devices = [
-                    ''
-                    ],
-                remove_devices = [
-                    ''
-                    ],
-                smart_rule = '',
-                watchdog_mins = 56
+            return EnvVar(
+                key = '',
+                value = '',
+                used = True,
+                precedence = None
             )
         else:
-            return UpdateFleetRequest(
+            return EnvVar(
         )
         """
 
-    def testUpdateFleetRequest(self):
-        """Test UpdateFleetRequest"""
+    def testEnvVar(self):
+        """Test EnvVar"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

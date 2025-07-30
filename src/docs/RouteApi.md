@@ -294,8 +294,8 @@ with notehub_py.ApiClient(configuration) as api_client:
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
     sort_by = 'date' # str |  (optional) (default to 'date')
     sort_order = 'desc' # str |  (optional) (default to 'desc')
-    start_date = 1628631763 # int | Unix timestamp (optional)
-    end_date = 1657894210 # int | Unix timestamp (optional)
+    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
     system_files_only = True # bool |  (optional)
     most_recent_only = True # bool |  (optional)
     files = '_health.qo, data.qo' # str |  (optional)
@@ -310,20 +310,20 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                    | Description    | Notes                                  |
-| -------------------------- | ----------------------- | -------------- | -------------------------------------- |
-| **project_or_product_uid** | **str**                 |                |
-| **route_uid**              | **str**                 |                |
-| **page_size**              | **int**                 |                | [optional] [default to 50]             |
-| **page_num**               | **int**                 |                | [optional] [default to 1]              |
-| **device_uid**             | [**List[str]**](str.md) | A Device UID.  | [optional]                             |
-| **sort_by**                | **str**                 |                | [optional] [default to &#39;date&#39;] |
-| **sort_order**             | **str**                 |                | [optional] [default to &#39;desc&#39;] |
-| **start_date**             | **int**                 | Unix timestamp | [optional]                             |
-| **end_date**               | **int**                 | Unix timestamp | [optional]                             |
-| **system_files_only**      | **bool**                |                | [optional]                             |
-| **most_recent_only**       | **bool**                |                | [optional]                             |
-| **files**                  | **str**                 |                | [optional]                             |
+| Name                       | Type                    | Description                                                     | Notes                                  |
+| -------------------------- | ----------------------- | --------------------------------------------------------------- | -------------------------------------- |
+| **project_or_product_uid** | **str**                 |                                                                 |
+| **route_uid**              | **str**                 |                                                                 |
+| **page_size**              | **int**                 |                                                                 | [optional] [default to 50]             |
+| **page_num**               | **int**                 |                                                                 | [optional] [default to 1]              |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                   | [optional]                             |
+| **sort_by**                | **str**                 |                                                                 | [optional] [default to &#39;date&#39;] |
+| **sort_order**             | **str**                 |                                                                 | [optional] [default to &#39;desc&#39;] |
+| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional]                             |
+| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional]                             |
+| **system_files_only**      | **bool**                |                                                                 | [optional]                             |
+| **most_recent_only**       | **bool**                |                                                                 | [optional]                             |
+| **files**                  | **str**                 |                                                                 | [optional]                             |
 
 ### Return type
 

@@ -18,41 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class Fleet(BaseModel):
+class EnvVar(BaseModel):
     """
-    Fleet
+    EnvVar
     """  # noqa: E501
 
-    uid: StrictStr = Field(description="Fleet UID")
-    label: StrictStr = Field(description="Fleet label")
-    created: datetime = Field(description="RFC3339 timestamp in UTC")
-    environment_variables: Optional[Dict[str, StrictStr]] = Field(
-        default=None,
-        description="The environment variables for this device that have been set using the Notehub API or UI.",
-    )
-    smart_rule: Optional[StrictStr] = Field(
-        default=None,
-        description="JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.",
-    )
-    watchdog_mins: Optional[StrictInt] = Field(
-        default=None,
-        description="A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog",
-    )
-    __properties: ClassVar[List[str]] = [
-        "uid",
-        "label",
-        "created",
-        "environment_variables",
-        "smart_rule",
-        "watchdog_mins",
-    ]
+    key: Optional[StrictStr] = None
+    value: Optional[StrictStr] = None
+    used: Optional[StrictBool] = None
+    precedence: Optional[Int] = None
+    __properties: ClassVar[List[str]] = ["key", "value", "used", "precedence"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,7 +52,7 @@ class Fleet(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Fleet from a JSON string"""
+        """Create an instance of EnvVar from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -91,11 +72,14 @@ class Fleet(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of precedence
+        if self.precedence:
+            _dict["precedence"] = self.precedence.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Fleet from a dict"""
+        """Create an instance of EnvVar from a dict"""
         if obj is None:
             return None
 
@@ -104,12 +88,14 @@ class Fleet(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "uid": obj.get("uid"),
-                "label": obj.get("label"),
-                "created": obj.get("created"),
-                "environment_variables": obj.get("environment_variables"),
-                "smart_rule": obj.get("smart_rule"),
-                "watchdog_mins": obj.get("watchdog_mins"),
+                "key": obj.get("key"),
+                "value": obj.get("value"),
+                "used": obj.get("used"),
+                "precedence": (
+                    Int.from_dict(obj["precedence"])
+                    if obj.get("precedence") is not None
+                    else None
+                ),
             }
         )
         return _obj

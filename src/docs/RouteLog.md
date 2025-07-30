@@ -11,6 +11,7 @@
 | **status**    | **str**  | The status of the event.                    | [optional] |
 | **text**      | **str**  | The response body of the route.             | [optional] |
 | **url**       | **str**  | The URL of the route.                       | [optional] |
+| **duration**  | **int**  | The duration of the route in milliseconds   | [optional] |
 
 ## Example
 

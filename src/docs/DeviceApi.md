@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                                              | HTTP request                                                                                   | Description |
-| --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------- |
+| Method                                                                                              | HTTP request                                                                                   | Description                                     |
+| --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [**delete_device_environment_variable**](DeviceApi.md#delete_device_environment_variable)           | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}  |
 | [**delete_project_device**](DeviceApi.md#delete_project_device)                                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
 | [**disable_device**](DeviceApi.md#disable_device)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable                        |
@@ -11,6 +11,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**enable_device**](DeviceApi.md#enable_device)                                                     | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable                         |
 | [**enable_device_connectivity_assurance**](DeviceApi.md#enable_device_connectivity_assurance)       | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance  |
 | [**get_device**](DeviceApi.md#get_device)                                                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                                 |
+| [**get_device_environment_hierarchy**](DeviceApi.md#get_device_environment_hierarchy)               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy           | Get environment variable hierarchy for a device |
 | [**get_device_environment_variables**](DeviceApi.md#get_device_environment_variables)               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
 | [**get_device_environment_variables_by_pin**](DeviceApi.md#get_device_environment_variables_by_pin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
 | [**get_device_health_log**](DeviceApi.md#get_device_health_log)                                     | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log                      |
@@ -562,6 +563,73 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_device_environment_hierarchy**
+
+> EnvTreeJsonNode get_device_environment_hierarchy(project_or_product_uid, device_uid)
+
+Get environment variable hierarchy for a device
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.env_tree_json_node import EnvTreeJsonNode
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+
+    try:
+        # Get environment variable hierarchy for a device
+        api_response = api_instance.get_device_environment_hierarchy(project_or_product_uid, device_uid)
+        print("The response of DeviceApi->get_device_environment_hierarchy:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_device_environment_hierarchy: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **device_uid**             | **str** |             |
+
+### Return type
+
+[**EnvTreeJsonNode**](EnvTreeJsonNode.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                         | Response headers |
+| ----------- | --------------------------------------------------- | ---------------- |
+| **200**     | Successfully retrieved device environment hierarchy | -                |
+| **404**     | Project or device not found                         | -                |
+| **500**     | Server error                                        | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_device_environment_variables**
 
 > GetDeviceEnvironmentVariables200Response get_device_environment_variables(project_or_product_uid, device_uid)
@@ -949,7 +1017,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_device_sessions**
 
-> GetDeviceSessions200Response get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num)
+> GetDeviceSessions200Response get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num, start_date=start_date, end_date=end_date)
 
 Get Device Sessions
 
@@ -988,9 +1056,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     device_uid = 'dev:000000000000000' # str |
     page_size = 50 # int |  (optional) (default to 50)
     page_num = 1 # int |  (optional) (default to 1)
+    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
 
     try:
-        api_response = api_instance.get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num)
+        api_response = api_instance.get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num, start_date=start_date, end_date=end_date)
         print("The response of DeviceApi->get_device_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -999,12 +1069,14 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description | Notes                      |
-| -------------------------- | ------- | ----------- | -------------------------- |
-| **project_or_product_uid** | **str** |             |
-| **device_uid**             | **str** |             |
-| **page_size**              | **int** |             | [optional] [default to 50] |
-| **page_num**               | **int** |             | [optional] [default to 1]  |
+| Name                       | Type    | Description                                                     | Notes                      |
+| -------------------------- | ------- | --------------------------------------------------------------- | -------------------------- |
+| **project_or_product_uid** | **str** |                                                                 |
+| **device_uid**             | **str** |                                                                 |
+| **page_size**              | **int** |                                                                 | [optional] [default to 50] |
+| **page_num**               | **int** |                                                                 | [optional] [default to 1]  |
+| **start_date**             | **int** | Start date for filtering results, specified as a Unix timestamp | [optional]                 |
+| **end_date**               | **int** | End date for filtering results, specified as a Unix timestamp   | [optional]                 |
 
 ### Return type
 

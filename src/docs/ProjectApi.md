@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                                       | HTTP request                                                                                | Description                        |
-| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------- |
+| Method                                                                                       | HTTP request                                                                                | Description                                     |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [**clone_project**](ProjectApi.md#clone_project)                                             | **POST** /v1/projects/{projectOrProductUID}/clone                                           |
 | [**create_fleet**](ProjectApi.md#create_fleet)                                               | **POST** /v1/projects/{projectOrProductUID}/fleets                                          |
 | [**create_product**](ProjectApi.md#create_product)                                           | **POST** /v1/projects/{projectOrProductUID}/products                                        |
@@ -23,10 +23,12 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_devices_dfu_status**](ProjectApi.md#get_devices_dfu_status)                           | **GET** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status                        |
 | [**get_firmware_info**](ProjectApi.md#get_firmware_info)                                     | **GET** /v1/projects/{projectOrProductUID}/firmware                                         |
 | [**get_fleet**](ProjectApi.md#get_fleet)                                                     | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                                |
+| [**get_fleet_environment_hierarchy**](ProjectApi.md#get_fleet_environment_hierarchy)         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy          | Get environment variable hierarchy for a device |
 | [**get_fleet_environment_variables**](ProjectApi.md#get_fleet_environment_variables)         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
-| [**get_notefile_schemas**](ProjectApi.md#get_notefile_schemas)                               | **GET** /v1/projects/{projectOrProductUID}/schemas                                          | Get variable format for a notefile |
+| [**get_notefile_schemas**](ProjectApi.md#get_notefile_schemas)                               | **GET** /v1/projects/{projectOrProductUID}/schemas                                          | Get variable format for a notefile              |
 | [**get_project**](ProjectApi.md#get_project)                                                 | **GET** /v1/projects/{projectUID}                                                           |
 | [**get_project_by_product**](ProjectApi.md#get_project_by_product)                           | **GET** /v1/products/{productUID}/project                                                   |
+| [**get_project_environment_hierarchy**](ProjectApi.md#get_project_environment_hierarchy)     | **GET** /v1/projects/{projectOrProductUID}/environment_hierarchy                            | Get environment variable hierarchy for a device |
 | [**get_project_environment_variables**](ProjectApi.md#get_project_environment_variables)     | **GET** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**get_project_fleets**](ProjectApi.md#get_project_fleets)                                   | **GET** /v1/projects/{projectOrProductUID}/fleets                                           |
 | [**get_project_members**](ProjectApi.md#get_project_members)                                 | **GET** /v1/projects/{projectOrProductUID}/members                                          |
@@ -1578,6 +1580,73 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_fleet_environment_hierarchy**
+
+> EnvTreeJsonNode get_fleet_environment_hierarchy(project_or_product_uid, fleet_uid)
+
+Get environment variable hierarchy for a device
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.env_tree_json_node import EnvTreeJsonNode
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    fleet_uid = 'fleet_uid_example' # str |
+
+    try:
+        # Get environment variable hierarchy for a device
+        api_response = api_instance.get_fleet_environment_hierarchy(project_or_product_uid, fleet_uid)
+        print("The response of ProjectApi->get_fleet_environment_hierarchy:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->get_fleet_environment_hierarchy: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **fleet_uid**              | **str** |             |
+
+### Return type
+
+[**EnvTreeJsonNode**](EnvTreeJsonNode.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                        | Response headers |
+| ----------- | -------------------------------------------------- | ---------------- |
+| **200**     | Successfully retrieved fleet environment hierarchy | -                |
+| **404**     | Project or device not found                        | -                |
+| **500**     | Server error                                       | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_fleet_environment_variables**
 
 > EnvironmentVariables get_fleet_environment_variables(project_or_product_uid, fleet_uid)
@@ -1865,6 +1934,71 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | Successful operation                       | -                |
 | **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_project_environment_hierarchy**
+
+> EnvTreeJsonNode get_project_environment_hierarchy(project_or_product_uid)
+
+Get environment variable hierarchy for a device
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.env_tree_json_node import EnvTreeJsonNode
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+
+    try:
+        # Get environment variable hierarchy for a device
+        api_response = api_instance.get_project_environment_hierarchy(project_or_product_uid)
+        print("The response of ProjectApi->get_project_environment_hierarchy:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->get_project_environment_hierarchy: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+
+### Return type
+
+[**EnvTreeJsonNode**](EnvTreeJsonNode.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                          | Response headers |
+| ----------- | ---------------------------------------------------- | ---------------- |
+| **200**     | Successfully retrieved project environment hierarchy | -                |
+| **404**     | Project or device not found                          | -                |
+| **500**     | Server error                                         | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
