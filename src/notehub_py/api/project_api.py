@@ -6133,7 +6133,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = []
+        _auth_settings: List[str] = ["api_key"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -7343,7 +7343,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = []
+        _auth_settings: List[str] = ["api_key"]
 
         return self.api_client.param_serialize(
             method="GET",

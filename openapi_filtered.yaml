@@ -1281,6 +1281,8 @@ paths:
       tags:
       - project
       operationId: getProjectEnvironmentHierarchy
+      security:
+      - api_key: []
       parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       responses:
@@ -1411,6 +1413,8 @@ paths:
       tags:
       - project
       operationId: getFleetEnvironmentHierarchy
+      security:
+      - api_key: []
       parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/fleetUIDParam'
@@ -1489,6 +1493,8 @@ paths:
       tags:
       - device
       operationId: getDeviceEnvironmentHierarchy
+      security:
+      - api_key: []
       parameters:
       - $ref: '#/components/parameters/projectOrProductUIDParam'
       - $ref: '#/components/parameters/deviceUIDParam'

@@ -571,6 +571,8 @@ Get environment variable hierarchy for a device
 
 ### Example
 
+- Api Key Authentication (api_key):
+
 ```python
 import notehub_py
 from notehub_py.models.env_tree_json_node import EnvTreeJsonNode
@@ -583,6 +585,16 @@ configuration = notehub_py.Configuration(
     host = "https://api.notefile.net"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: api_key
+configuration.api_key['api_key'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['api_key'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -613,7 +625,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-No authorization required
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
