@@ -55,6 +55,13 @@ class TestDeviceApi(unittest.TestCase):
         """Test case for get_device"""
         pass
 
+    def test_get_device_environment_hierarchy(self) -> None:
+        """Test case for get_device_environment_hierarchy
+
+        Get environment variable hierarchy for a device
+        """
+        pass
+
     def test_get_device_environment_variables(self) -> None:
         """Test case for get_device_environment_variables"""
         pass

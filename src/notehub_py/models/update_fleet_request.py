@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -46,11 +46,16 @@ class UpdateFleetRequest(BaseModel):
         default=None,
         description="JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.",
     )
+    watchdog_mins: Optional[StrictInt] = Field(
+        default=None,
+        description="A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog",
+    )
     __properties: ClassVar[List[str]] = [
         "label",
         "addDevices",
         "removeDevices",
         "smart_rule",
+        "watchdog_mins",
     ]
 
     model_config = ConfigDict(
@@ -107,6 +112,7 @@ class UpdateFleetRequest(BaseModel):
                 "addDevices": obj.get("addDevices"),
                 "removeDevices": obj.get("removeDevices"),
                 "smart_rule": obj.get("smart_rule"),
+                "watchdog_mins": obj.get("watchdog_mins"),
             }
         )
         return _obj

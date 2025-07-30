@@ -833,11 +833,15 @@ class RouteApi:
         sort_order: Optional[StrictStr] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         system_files_only: Optional[StrictBool] = None,
         most_recent_only: Optional[StrictBool] = None,
@@ -872,9 +876,9 @@ class RouteApi:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param system_files_only:
         :type system_files_only: bool
@@ -949,11 +953,15 @@ class RouteApi:
         sort_order: Optional[StrictStr] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         system_files_only: Optional[StrictBool] = None,
         most_recent_only: Optional[StrictBool] = None,
@@ -988,9 +996,9 @@ class RouteApi:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param system_files_only:
         :type system_files_only: bool
@@ -1065,11 +1073,15 @@ class RouteApi:
         sort_order: Optional[StrictStr] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         end_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(description="Unix timestamp"),
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
         ] = None,
         system_files_only: Optional[StrictBool] = None,
         most_recent_only: Optional[StrictBool] = None,
@@ -1104,9 +1116,9 @@ class RouteApi:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param start_date: Unix timestamp
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
-        :param end_date: Unix timestamp
+        :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
         :param system_files_only:
         :type system_files_only: bool

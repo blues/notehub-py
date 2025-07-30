@@ -103,6 +103,13 @@ class TestProjectApi(unittest.TestCase):
         """Test case for get_fleet"""
         pass
 
+    def test_get_fleet_environment_hierarchy(self) -> None:
+        """Test case for get_fleet_environment_hierarchy
+
+        Get environment variable hierarchy for a device
+        """
+        pass
+
     def test_get_fleet_environment_variables(self) -> None:
         """Test case for get_fleet_environment_variables"""
         pass
@@ -120,6 +127,13 @@ class TestProjectApi(unittest.TestCase):
 
     def test_get_project_by_product(self) -> None:
         """Test case for get_project_by_product"""
+        pass
+
+    def test_get_project_environment_hierarchy(self) -> None:
+        """Test case for get_project_environment_hierarchy
+
+        Get environment variable hierarchy for a device
+        """
         pass
 
     def test_get_project_environment_variables(self) -> None:

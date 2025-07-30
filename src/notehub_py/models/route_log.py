@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -48,6 +48,9 @@ class RouteLog(BaseModel):
         default=None, description="The response body of the route."
     )
     url: Optional[StrictStr] = Field(default=None, description="The URL of the route.")
+    duration: Optional[StrictInt] = Field(
+        default=None, description="The duration of the route in milliseconds"
+    )
     __properties: ClassVar[List[str]] = [
         "date",
         "routeUID",
@@ -56,6 +59,7 @@ class RouteLog(BaseModel):
         "status",
         "text",
         "url",
+        "duration",
     ]
 
     model_config = ConfigDict(
@@ -115,6 +119,7 @@ class RouteLog(BaseModel):
                 "status": obj.get("status"),
                 "text": obj.get("text"),
                 "url": obj.get("url"),
+                "duration": obj.get("duration"),
             }
         )
         return _obj

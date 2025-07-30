@@ -43,7 +43,8 @@ class TestRouteLog(unittest.TestCase):
                 attn = True,
                 status = '',
                 text = '',
-                url = ''
+                url = '',
+                duration = 56
             )
         else:
             return RouteLog(
