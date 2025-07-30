@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "notehub_py"
-version = "1.0.14"
+version = "1.0.15"
 description = "Notehub API"
 authors = ["Blues Engineering <engineering@blues.io>"]
 license = "MIT"
