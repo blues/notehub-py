@@ -8,6 +8,12 @@ docs/Alert.md
 docs/AlertApi.md
 docs/AlertDataInner.md
 docs/AlertNotificationsInner.md
+docs/AnalyticsEventsData.md
+docs/AnalyticsEventsResponse.md
+docs/AnalyticsRouteLogsData.md
+docs/AnalyticsRouteLogsResponse.md
+docs/AnalyticsSessionsData.md
+docs/AnalyticsSessionsResponse.md
 docs/AuthorizationApi.md
 docs/Aws.md
 docs/Azure.md
@@ -92,6 +98,10 @@ docs/Note.md
 docs/NotefileSchema.md
 docs/NotehubRoute.md
 docs/NotehubRouteSchema.md
+docs/PersonalAccessToken.md
+docs/PersonalAccessTokenCreatedBy.md
+docs/PersonalAccessTokenInfo.md
+docs/PersonalAccessTokenSecret.md
 docs/PostProvisionProjectDeviceRequest.md
 docs/Product.md
 docs/Project.md
@@ -103,7 +113,6 @@ docs/QuestionDataResponseLineChart.md
 docs/QuestionDataResponseMap.md
 docs/Radresponder.md
 docs/Repository.md
-docs/RepositoryApi.md
 docs/Role.md
 docs/RouteApi.md
 docs/RouteLog.md
@@ -136,7 +145,6 @@ notehub_py/api/event_api.py
 notehub_py/api/external_devices_api.py
 notehub_py/api/monitor_api.py
 notehub_py/api/project_api.py
-notehub_py/api/repository_api.py
 notehub_py/api/route_api.py
 notehub_py/api/webhook_api.py
 notehub_py/api_client.py
@@ -147,6 +155,12 @@ notehub_py/models/__init__.py
 notehub_py/models/alert.py
 notehub_py/models/alert_data_inner.py
 notehub_py/models/alert_notifications_inner.py
+notehub_py/models/analytics_events_data.py
+notehub_py/models/analytics_events_response.py
+notehub_py/models/analytics_route_logs_data.py
+notehub_py/models/analytics_route_logs_response.py
+notehub_py/models/analytics_sessions_data.py
+notehub_py/models/analytics_sessions_response.py
 notehub_py/models/aws.py
 notehub_py/models/azure.py
 notehub_py/models/billing_account.py
@@ -225,6 +239,10 @@ notehub_py/models/note.py
 notehub_py/models/notefile_schema.py
 notehub_py/models/notehub_route.py
 notehub_py/models/notehub_route_schema.py
+notehub_py/models/personal_access_token.py
+notehub_py/models/personal_access_token_created_by.py
+notehub_py/models/personal_access_token_info.py
+notehub_py/models/personal_access_token_secret.py
 notehub_py/models/post_provision_project_device_request.py
 notehub_py/models/product.py
 notehub_py/models/project.py
@@ -266,6 +284,12 @@ test/test_alert.py
 test/test_alert_api.py
 test/test_alert_data_inner.py
 test/test_alert_notifications_inner.py
+test/test_analytics_events_data.py
+test/test_analytics_events_response.py
+test/test_analytics_route_logs_data.py
+test/test_analytics_route_logs_response.py
+test/test_analytics_sessions_data.py
+test/test_analytics_sessions_response.py
 test/test_authorization_api.py
 test/test_aws.py
 test/test_azure.py
@@ -350,6 +374,10 @@ test/test_note.py
 test/test_notefile_schema.py
 test/test_notehub_route.py
 test/test_notehub_route_schema.py
+test/test_personal_access_token.py
+test/test_personal_access_token_created_by.py
+test/test_personal_access_token_info.py
+test/test_personal_access_token_secret.py
 test/test_post_provision_project_device_request.py
 test/test_product.py
 test/test_project.py
@@ -361,7 +389,6 @@ test/test_question_data_response_line_chart.py
 test/test_question_data_response_map.py
 test/test_radresponder.py
 test/test_repository.py
-test/test_repository_api.py
 test/test_role.py
 test/test_route_api.py
 test/test_route_log.py

@@ -55,7 +55,7 @@ class AuthorizationApi:
     ) -> Login200Response:
         """login
 
-        Gets a session token from the API from a username and password.
+        Gets an API key from username and password
 
         :param login_request: (required)
         :type login_request: LoginRequest
@@ -121,7 +121,7 @@ class AuthorizationApi:
     ) -> ApiResponse[Login200Response]:
         """login
 
-        Gets a session token from the API from a username and password.
+        Gets an API key from username and password
 
         :param login_request: (required)
         :type login_request: LoginRequest
@@ -187,7 +187,7 @@ class AuthorizationApi:
     ) -> RESTResponseType:
         """login
 
-        Gets a session token from the API from a username and password.
+        Gets an API key from username and password
 
         :param login_request: (required)
         :type login_request: LoginRequest
