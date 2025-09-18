@@ -37,8 +37,8 @@ class TestPersonalAccessTokenSecret(unittest.TestCase):
         model = PersonalAccessTokenSecret()
         if include_optional:
             return PersonalAccessTokenSecret(
-                uid = '',
-                secret = ''
+                secret = '',
+                uid = ''
             )
         else:
             return PersonalAccessTokenSecret(

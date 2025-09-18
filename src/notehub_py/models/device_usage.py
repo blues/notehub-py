@@ -29,29 +29,29 @@ class DeviceUsage(BaseModel):
     DeviceUsage
     """  # noqa: E501
 
-    since: Optional[StrictInt] = Field(default=None, description="Unix timestamp")
+    bytes_rcvd: Optional[StrictInt] = None
+    bytes_rcvd_secondary: Optional[StrictInt] = None
+    bytes_sent: Optional[StrictInt] = None
+    bytes_sent_secondary: Optional[StrictInt] = None
     duration: Optional[StrictInt] = Field(
         default=None, description="Duration in seconds"
     )
-    bytes_rcvd: Optional[StrictInt] = None
-    bytes_sent: Optional[StrictInt] = None
-    bytes_rcvd_secondary: Optional[StrictInt] = None
-    bytes_sent_secondary: Optional[StrictInt] = None
-    sessions_tcp: Optional[StrictInt] = None
-    sessions_tls: Optional[StrictInt] = None
     notes_rcvd: Optional[StrictInt] = None
     notes_sent: Optional[StrictInt] = None
+    sessions_tcp: Optional[StrictInt] = None
+    sessions_tls: Optional[StrictInt] = None
+    since: Optional[StrictInt] = Field(default=None, description="Unix timestamp")
     __properties: ClassVar[List[str]] = [
-        "since",
-        "duration",
         "bytes_rcvd",
-        "bytes_sent",
         "bytes_rcvd_secondary",
+        "bytes_sent",
         "bytes_sent_secondary",
-        "sessions_tcp",
-        "sessions_tls",
+        "duration",
         "notes_rcvd",
         "notes_sent",
+        "sessions_tcp",
+        "sessions_tls",
+        "since",
     ]
 
     model_config = ConfigDict(
@@ -104,16 +104,16 @@ class DeviceUsage(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "since": obj.get("since"),
-                "duration": obj.get("duration"),
                 "bytes_rcvd": obj.get("bytes_rcvd"),
-                "bytes_sent": obj.get("bytes_sent"),
                 "bytes_rcvd_secondary": obj.get("bytes_rcvd_secondary"),
+                "bytes_sent": obj.get("bytes_sent"),
                 "bytes_sent_secondary": obj.get("bytes_sent_secondary"),
-                "sessions_tcp": obj.get("sessions_tcp"),
-                "sessions_tls": obj.get("sessions_tls"),
+                "duration": obj.get("duration"),
                 "notes_rcvd": obj.get("notes_rcvd"),
                 "notes_sent": obj.get("notes_sent"),
+                "sessions_tcp": obj.get("sessions_tcp"),
+                "sessions_tls": obj.get("sessions_tls"),
+                "since": obj.get("since"),
             }
         )
         return _obj

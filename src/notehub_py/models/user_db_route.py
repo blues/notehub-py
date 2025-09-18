@@ -29,12 +29,12 @@ class UserDbRoute(BaseModel):
     UserDbRoute
     """  # noqa: E501
 
-    uid: Optional[StrictStr] = "route:8d65a087d5d290ce5bdf03aeff2becc0"
-    label: Optional[StrictStr] = "success route"
-    type: Optional[StrictStr] = "http"
-    modified: Optional[StrictStr] = "2020-03-09T17:58:37Z"
     disabled: Optional[StrictBool] = False
-    __properties: ClassVar[List[str]] = ["uid", "label", "type", "modified", "disabled"]
+    label: Optional[StrictStr] = "success route"
+    modified: Optional[StrictStr] = "2020-03-09T17:58:37Z"
+    type: Optional[StrictStr] = "http"
+    uid: Optional[StrictStr] = "route:8d65a087d5d290ce5bdf03aeff2becc0"
+    __properties: ClassVar[List[str]] = ["disabled", "label", "modified", "type", "uid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,24 +86,24 @@ class UserDbRoute(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "uid": (
-                    obj.get("uid")
-                    if obj.get("uid") is not None
-                    else "route:8d65a087d5d290ce5bdf03aeff2becc0"
+                "disabled": (
+                    obj.get("disabled") if obj.get("disabled") is not None else False
                 ),
                 "label": (
                     obj.get("label")
                     if obj.get("label") is not None
                     else "success route"
                 ),
-                "type": obj.get("type") if obj.get("type") is not None else "http",
                 "modified": (
                     obj.get("modified")
                     if obj.get("modified") is not None
                     else "2020-03-09T17:58:37Z"
                 ),
-                "disabled": (
-                    obj.get("disabled") if obj.get("disabled") is not None else False
+                "type": obj.get("type") if obj.get("type") is not None else "http",
+                "uid": (
+                    obj.get("uid")
+                    if obj.get("uid") is not None
+                    else "route:8d65a087d5d290ce5bdf03aeff2becc0"
                 ),
             }
         )

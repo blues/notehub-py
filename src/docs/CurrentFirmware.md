@@ -4,8 +4,8 @@
 
 | Name         | Type                        | Description | Notes      |
 | ------------ | --------------------------- | ----------- | ---------- |
-| **version**  | **str**                     |             | [optional] |
 | **metadata** | [**Firmware**](Firmware.md) |             | [optional] |
+| **version**  | **str**                     |             | [optional] |
 
 ## Example
 

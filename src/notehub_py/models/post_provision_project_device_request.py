@@ -29,16 +29,16 @@ class PostProvisionProjectDeviceRequest(BaseModel):
     PostProvisionProjectDeviceRequest
     """  # noqa: E501
 
-    product_uid: StrictStr = Field(
-        description="The ProductUID that the device should use."
-    )
     device_sn: Optional[StrictStr] = Field(
         default=None, description="The serial number to assign to the device."
     )
     fleet_uids: Optional[List[StrictStr]] = Field(
         default=None, description="The fleetUIDs to provision the device to."
     )
-    __properties: ClassVar[List[str]] = ["product_uid", "device_sn", "fleet_uids"]
+    product_uid: StrictStr = Field(
+        description="The ProductUID that the device should use."
+    )
+    __properties: ClassVar[List[str]] = ["device_sn", "fleet_uids", "product_uid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,9 +95,9 @@ class PostProvisionProjectDeviceRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "product_uid": obj.get("product_uid"),
                 "device_sn": obj.get("device_sn"),
                 "fleet_uids": obj.get("fleet_uids"),
+                "product_uid": obj.get("product_uid"),
             }
         )
         return _obj

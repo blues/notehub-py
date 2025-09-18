@@ -21,8 +21,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from notehub_py.models.http_filter import HttpFilter
-from notehub_py.models.http_transform import HttpTransform
+from notehub_py.models.aws_filter import AwsFilter
+from notehub_py.models.aws_transform import AwsTransform
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,28 +32,28 @@ class Google(BaseModel):
     Route settings specific to Google routes.
     """  # noqa: E501
 
+    filter: Optional[AwsFilter] = None
     fleets: Optional[Annotated[List[StrictStr], Field(min_length=0)]] = Field(
         default=None,
         description="list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets",
     )
-    filter: Optional[HttpFilter] = None
-    transform: Optional[HttpTransform] = None
     throttle_ms: Optional[StrictInt] = None
-    url: Optional[StrictStr] = None
     timeout: Optional[StrictInt] = Field(
         default=15, description="Timeout in seconds for each request"
     )
     token: Optional[StrictStr] = Field(
         default=None, description="Optional authentication token"
     )
+    transform: Optional[AwsTransform] = None
+    url: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
-        "fleets",
         "filter",
-        "transform",
+        "fleets",
         "throttle_ms",
-        "url",
         "timeout",
         "token",
+        "transform",
+        "url",
     ]
 
     model_config = ConfigDict(
@@ -112,21 +112,21 @@ class Google(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "fleets": obj.get("fleets"),
                 "filter": (
-                    HttpFilter.from_dict(obj["filter"])
+                    AwsFilter.from_dict(obj["filter"])
                     if obj.get("filter") is not None
                     else None
                 ),
+                "fleets": obj.get("fleets"),
+                "throttle_ms": obj.get("throttle_ms"),
+                "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
+                "token": obj.get("token"),
                 "transform": (
-                    HttpTransform.from_dict(obj["transform"])
+                    AwsTransform.from_dict(obj["transform"])
                     if obj.get("transform") is not None
                     else None
                 ),
-                "throttle_ms": obj.get("throttle_ms"),
                 "url": obj.get("url"),
-                "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
-                "token": obj.get("token"),
             }
         )
         return _obj

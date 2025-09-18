@@ -4,10 +4,10 @@
 
 | Name                           | Type          | Description | Notes      |
 | ------------------------------ | ------------- | ----------- | ---------- |
-| **uid**                        | **str**       |             |
-| **label**                      | **str**       |             |
 | **auto_provision_fleets**      | **List[str]** |             | [optional] |
 | **disable_devices_by_default** | **bool**      |             |
+| **label**                      | **str**       |             |
+| **uid**                        | **str**       |             |
 
 ## Example
 

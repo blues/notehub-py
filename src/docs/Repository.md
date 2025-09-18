@@ -4,10 +4,10 @@
 
 | Name             | Type          | Description                                   | Notes      |
 | ---------------- | ------------- | --------------------------------------------- | ---------- |
-| **uid**          | **str**       | The unique identifier for the data repository | [optional] |
-| **name**         | **str**       | repository name                               | [optional] |
 | **fleet_uids**   | **List[str]** |                                               | [optional] |
+| **name**         | **str**       | repository name                               | [optional] |
 | **project_uids** | **List[str]** |                                               | [optional] |
+| **uid**          | **str**       | The unique identifier for the data repository | [optional] |
 
 ## Example
 

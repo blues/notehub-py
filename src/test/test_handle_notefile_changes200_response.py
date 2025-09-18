@@ -39,9 +39,9 @@ class TestHandleNotefileChanges200Response(unittest.TestCase):
         model = HandleNotefileChanges200Response()
         if include_optional:
             return HandleNotefileChanges200Response(
-                total = 56,
                 changes = 56,
-                info = None
+                info = None,
+                total = 56
             )
         else:
             return HandleNotefileChanges200Response(

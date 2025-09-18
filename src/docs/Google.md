@@ -4,15 +4,15 @@ Route settings specific to Google routes.
 
 ## Properties
 
-| Name            | Type                                  | Description                                                                   | Notes                      |
-| --------------- | ------------------------------------- | ----------------------------------------------------------------------------- | -------------------------- |
-| **fleets**      | **List[str]**                         | list of Fleet UIDs to apply route to, if any. If empty, applies to all Fleets | [optional]                 |
-| **filter**      | [**HttpFilter**](HttpFilter.md)       |                                                                               | [optional]                 |
-| **transform**   | [**HttpTransform**](HttpTransform.md) |                                                                               | [optional]                 |
-| **throttle_ms** | **int**                               |                                                                               | [optional]                 |
-| **url**         | **str**                               |                                                                               | [optional]                 |
-| **timeout**     | **int**                               | Timeout in seconds for each request                                           | [optional] [default to 15] |
-| **token**       | **str**                               | Optional authentication token                                                 | [optional]                 |
+| Name            | Type                                | Description                                                                   | Notes                      |
+| --------------- | ----------------------------------- | ----------------------------------------------------------------------------- | -------------------------- |
+| **filter**      | [**AwsFilter**](AwsFilter.md)       |                                                                               | [optional]                 |
+| **fleets**      | **List[str]**                       | list of Fleet UIDs to apply route to, if any. If empty, applies to all Fleets | [optional]                 |
+| **throttle_ms** | **int**                             |                                                                               | [optional]                 |
+| **timeout**     | **int**                             | Timeout in seconds for each request                                           | [optional] [default to 15] |
+| **token**       | **str**                             | Optional authentication token                                                 | [optional]                 |
+| **transform**   | [**AwsTransform**](AwsTransform.md) |                                                                               | [optional]                 |
+| **url**         | **str**                             |                                                                               | [optional]                 |
 
 ## Example
 

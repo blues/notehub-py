@@ -4,9 +4,9 @@
 
 | Name         | Type    | Description                                        | Notes      |
 | ------------ | ------- | -------------------------------------------------- | ---------- |
-| **name**     | **str** | The name of the field                              | [optional] |
 | **datatype** | **int** | The datatype of the field                          | [optional] |
 | **jsonata**  | **str** | the JSONata expression used to populate this field | [optional] |
+| **name**     | **str** | The name of the field                              | [optional] |
 
 ## Example
 

@@ -30,10 +30,6 @@ class DeviceDfuStateMachine(BaseModel):
     Represents a single request to update the host or Notecard firmware
     """  # noqa: E501
 
-    requested_version: Optional[StrictStr] = Field(
-        default=None,
-        description="Version of the firmware that was requested to be installed",
-    )
     current_version: Optional[StrictStr] = Field(
         default=None,
         description="Version of the firmware that was installed prior to this request",
@@ -41,11 +37,15 @@ class DeviceDfuStateMachine(BaseModel):
     initiated: Optional[StrictStr] = Field(
         default=None, description="RFC3339 datetime of when this update was requested"
     )
+    requested_version: Optional[StrictStr] = Field(
+        default=None,
+        description="Version of the firmware that was requested to be installed",
+    )
     updates: Optional[List[DeviceDfuStateMachineNode]] = None
     __properties: ClassVar[List[str]] = [
-        "requested_version",
         "current_version",
         "initiated",
+        "requested_version",
         "updates",
     ]
 
@@ -106,9 +106,9 @@ class DeviceDfuStateMachine(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "requested_version": obj.get("requested_version"),
                 "current_version": obj.get("current_version"),
                 "initiated": obj.get("initiated"),
+                "requested_version": obj.get("requested_version"),
                 "updates": (
                     [
                         DeviceDfuStateMachineNode.from_dict(_item)

@@ -30,29 +30,29 @@ class EnvTreeJsonNode(BaseModel):
     EnvTreeJsonNode
     """  # noqa: E501
 
-    var_count: Int
-    inherited_var_count: Int
-    type: StrictStr
-    variables: List[EnvVar]
+    app_label: Optional[StrictStr] = None
+    app_uid: Optional[StrictStr] = None
     children: List[EnvTreeJsonNode]
     device_uid: Optional[StrictStr] = None
     fleet_label: Optional[StrictStr] = None
     fleet_uid: Optional[StrictStr] = None
-    app_uid: Optional[StrictStr] = None
-    app_label: Optional[StrictStr] = None
+    inherited_var_count: Int
+    type: StrictStr
     url: Optional[StrictStr] = None
+    var_count: Int
+    variables: List[EnvVar]
     __properties: ClassVar[List[str]] = [
-        "var_count",
-        "inherited_var_count",
-        "type",
-        "variables",
+        "app_label",
+        "app_uid",
         "children",
         "device_uid",
         "fleet_label",
         "fleet_uid",
-        "app_uid",
-        "app_label",
+        "inherited_var_count",
+        "type",
         "url",
+        "var_count",
+        "variables",
     ]
 
     model_config = ConfigDict(
@@ -92,19 +92,6 @@ class EnvTreeJsonNode(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of var_count
-        if self.var_count:
-            _dict["var_count"] = self.var_count.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of inherited_var_count
-        if self.inherited_var_count:
-            _dict["inherited_var_count"] = self.inherited_var_count.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in variables (list)
-        _items = []
-        if self.variables:
-            for _item in self.variables:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["variables"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in children (list)
         _items = []
         if self.children:
@@ -112,6 +99,19 @@ class EnvTreeJsonNode(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict["children"] = _items
+        # override the default output from pydantic by calling `to_dict()` of inherited_var_count
+        if self.inherited_var_count:
+            _dict["inherited_var_count"] = self.inherited_var_count.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of var_count
+        if self.var_count:
+            _dict["var_count"] = self.var_count.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in variables (list)
+        _items = []
+        if self.variables:
+            for _item in self.variables:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["variables"] = _items
         return _dict
 
     @classmethod
@@ -125,22 +125,8 @@ class EnvTreeJsonNode(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "var_count": (
-                    Int.from_dict(obj["var_count"])
-                    if obj.get("var_count") is not None
-                    else None
-                ),
-                "inherited_var_count": (
-                    Int.from_dict(obj["inherited_var_count"])
-                    if obj.get("inherited_var_count") is not None
-                    else None
-                ),
-                "type": obj.get("type"),
-                "variables": (
-                    [EnvVar.from_dict(_item) for _item in obj["variables"]]
-                    if obj.get("variables") is not None
-                    else None
-                ),
+                "app_label": obj.get("app_label"),
+                "app_uid": obj.get("app_uid"),
                 "children": (
                     [EnvTreeJsonNode.from_dict(_item) for _item in obj["children"]]
                     if obj.get("children") is not None
@@ -149,9 +135,23 @@ class EnvTreeJsonNode(BaseModel):
                 "device_uid": obj.get("device_uid"),
                 "fleet_label": obj.get("fleet_label"),
                 "fleet_uid": obj.get("fleet_uid"),
-                "app_uid": obj.get("app_uid"),
-                "app_label": obj.get("app_label"),
+                "inherited_var_count": (
+                    Int.from_dict(obj["inherited_var_count"])
+                    if obj.get("inherited_var_count") is not None
+                    else None
+                ),
+                "type": obj.get("type"),
                 "url": obj.get("url"),
+                "var_count": (
+                    Int.from_dict(obj["var_count"])
+                    if obj.get("var_count") is not None
+                    else None
+                ),
+                "variables": (
+                    [EnvVar.from_dict(_item) for _item in obj["variables"]]
+                    if obj.get("variables") is not None
+                    else None
+                ),
             }
         )
         return _obj

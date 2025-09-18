@@ -29,14 +29,14 @@ class DataSetField(BaseModel):
     DataSetField
     """  # noqa: E501
 
-    name: Optional[StrictStr] = Field(default=None, description="The name of the field")
     datatype: Optional[StrictInt] = Field(
         default=None, description="The datatype of the field"
     )
     jsonata: Optional[StrictStr] = Field(
         default=None, description="the JSONata expression used to populate this field"
     )
-    __properties: ClassVar[List[str]] = ["name", "datatype", "jsonata"]
+    name: Optional[StrictStr] = Field(default=None, description="The name of the field")
+    __properties: ClassVar[List[str]] = ["datatype", "jsonata", "name"]
 
     @field_validator("datatype")
     def datatype_validate_enum(cls, value):
@@ -98,9 +98,9 @@ class DataSetField(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "name": obj.get("name"),
                 "datatype": obj.get("datatype"),
                 "jsonata": obj.get("jsonata"),
+                "name": obj.get("name"),
             }
         )
         return _obj

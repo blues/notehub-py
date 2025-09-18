@@ -37,15 +37,15 @@ class TestCloneProjectRequest(unittest.TestCase):
         model = CloneProjectRequest()
         if include_optional:
             return CloneProjectRequest(
-                label = '',
                 billing_account_uid = '',
+                disable_clone_fleets = True,
                 disable_clone_routes = True,
-                disable_clone_fleets = True
+                label = ''
             )
         else:
             return CloneProjectRequest(
-                label = '',
                 billing_account_uid = '',
+                label = '',
         )
         """
 

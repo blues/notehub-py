@@ -37,29 +37,30 @@ class TestUploadMetadata(unittest.TestCase):
         model = UploadMetadata()
         if include_optional:
             return UploadMetadata(
-                name = '',
-                length = 56,
-                md5 = '',
+                contains = '',
                 crc32 = 56,
                 created = 56,
-                modified = 56,
-                source = '',
-                contains = '',
-                found = '',
-                type = '',
-                tags = '',
-                notes = '',
                 firmware = notehub_py.models.firmware.Firmware(
+                    builder = '', 
+                    built = '', 
+                    firmware = '', 
                     org = '', 
                     product = '', 
-                    version = '', 
                     target = '', 
+                    ver_build = 56, 
                     ver_major = 56, 
                     ver_minor = 56, 
                     ver_patch = 56, 
-                    ver_build = 56, 
-                    built = '', 
-                    builder = '', )
+                    version = '', ),
+                found = '',
+                length = 56,
+                md5 = '',
+                modified = 56,
+                name = '',
+                notes = '',
+                source = '',
+                tags = '',
+                type = ''
             )
         else:
             return UploadMetadata(

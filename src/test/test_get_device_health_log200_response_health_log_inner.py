@@ -41,15 +41,15 @@ class TestGetDeviceHealthLog200ResponseHealthLogInner(unittest.TestCase):
         model = GetDeviceHealthLog200ResponseHealthLogInner()
         if include_optional:
             return GetDeviceHealthLog200ResponseHealthLogInner(
-                when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 alert = True,
-                text = ''
+                text = '',
+                when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else:
             return GetDeviceHealthLog200ResponseHealthLogInner(
-                when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 alert = True,
                 text = '',
+                when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )
         """
 

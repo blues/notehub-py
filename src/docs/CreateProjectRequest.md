@@ -4,8 +4,8 @@
 
 | Name                    | Type    | Description                                                                                                                                                     | Notes |
 | ----------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| **label**               | **str** | The label for the project.                                                                                                                                      |
 | **billing_account_uid** | **str** | The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned. |
+| **label**               | **str** | The label for the project.                                                                                                                                      |
 
 ## Example
 

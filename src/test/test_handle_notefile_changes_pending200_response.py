@@ -41,10 +41,10 @@ class TestHandleNotefileChangesPending200Response(unittest.TestCase):
         model = HandleNotefileChangesPending200Response()
         if include_optional:
             return HandleNotefileChangesPending200Response(
-                total = 56,
                 changes = 56,
+                info = None,
                 pending = True,
-                info = None
+                total = 56
             )
         else:
             return HandleNotefileChangesPending200Response(

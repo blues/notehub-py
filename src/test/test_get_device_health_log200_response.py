@@ -41,18 +41,18 @@ class TestGetDeviceHealthLog200Response(unittest.TestCase):
             return GetDeviceHealthLog200Response(
                 health_log = [
                     notehub_py.models.get_device_health_log_200_response_health_log_inner.getDeviceHealthLog_200_response_health_log_inner(
-                        when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         alert = True, 
-                        text = '', )
+                        text = '', 
+                        when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ]
             )
         else:
             return GetDeviceHealthLog200Response(
                 health_log = [
                     notehub_py.models.get_device_health_log_200_response_health_log_inner.getDeviceHealthLog_200_response_health_log_inner(
-                        when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         alert = True, 
-                        text = '', )
+                        text = '', 
+                        when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
         )
         """

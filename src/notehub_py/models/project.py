@@ -32,19 +32,19 @@ class Project(BaseModel):
     Project
     """  # noqa: E501
 
-    uid: StrictStr
-    label: StrictStr
-    created: datetime
-    role: Optional[Role] = None
     administrative_contact: Optional[Contact] = None
+    created: datetime
+    label: StrictStr
+    role: Optional[Role] = None
     technical_contact: Optional[Contact] = None
+    uid: StrictStr
     __properties: ClassVar[List[str]] = [
-        "uid",
-        "label",
-        "created",
-        "role",
         "administrative_contact",
+        "created",
+        "label",
+        "role",
         "technical_contact",
+        "uid",
     ]
 
     model_config = ConfigDict(
@@ -90,11 +90,6 @@ class Project(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of technical_contact
         if self.technical_contact:
             _dict["technical_contact"] = self.technical_contact.to_dict()
-        # set to None if role (nullable) is None
-        # and model_fields_set contains the field
-        if self.role is None and "role" in self.model_fields_set:
-            _dict["role"] = None
-
         # set to None if administrative_contact (nullable) is None
         # and model_fields_set contains the field
         if (
@@ -102,6 +97,11 @@ class Project(BaseModel):
             and "administrative_contact" in self.model_fields_set
         ):
             _dict["administrative_contact"] = None
+
+        # set to None if role (nullable) is None
+        # and model_fields_set contains the field
+        if self.role is None and "role" in self.model_fields_set:
+            _dict["role"] = None
 
         # set to None if technical_contact (nullable) is None
         # and model_fields_set contains the field
@@ -124,20 +124,20 @@ class Project(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "uid": obj.get("uid"),
-                "label": obj.get("label"),
-                "created": obj.get("created"),
-                "role": obj.get("role"),
                 "administrative_contact": (
                     Contact.from_dict(obj["administrative_contact"])
                     if obj.get("administrative_contact") is not None
                     else None
                 ),
+                "created": obj.get("created"),
+                "label": obj.get("label"),
+                "role": obj.get("role"),
                 "technical_contact": (
                     Contact.from_dict(obj["technical_contact"])
                     if obj.get("technical_contact") is not None
                     else None
                 ),
+                "uid": obj.get("uid"),
             }
         )
         return _obj

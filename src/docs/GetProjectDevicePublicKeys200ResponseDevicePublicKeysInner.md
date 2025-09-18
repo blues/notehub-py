@@ -4,8 +4,8 @@
 
 | Name    | Type    | Description | Notes      |
 | ------- | ------- | ----------- | ---------- |
-| **uid** | **str** |             | [optional] |
 | **key** | **str** |             | [optional] |
+| **uid** | **str** |             | [optional] |
 
 ## Example
 

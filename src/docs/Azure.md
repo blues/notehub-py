@@ -4,17 +4,17 @@ Route settings specific to Azure routes. Only used for Azure route types
 
 ## Properties
 
-| Name                     | Type                                  | Description                                                                                    | Notes                      |
-| ------------------------ | ------------------------------------- | ---------------------------------------------------------------------------------------------- | -------------------------- |
-| **fleets**               | **List[str]**                         | list of Fleet UIDs to apply route to, if any. If empty, applies to all Fleets                  | [optional]                 |
-| **filter**               | [**HttpFilter**](HttpFilter.md)       |                                                                                                | [optional]                 |
-| **transform**            | [**HttpTransform**](HttpTransform.md) |                                                                                                | [optional]                 |
-| **throttle_ms**          | **int**                               |                                                                                                | [optional]                 |
-| **url**                  | **str**                               |                                                                                                | [optional]                 |
-| **timeout**              | **int**                               | Timeout in seconds for each request                                                            | [optional] [default to 15] |
-| **functions_key_secret** | **str**                               | This value is input-only and will be omitted from the response and replaced with a placeholder | [optional]                 |
-| **sas_policy_name**      | **str**                               |                                                                                                | [optional]                 |
-| **sas_policy_key**       | **str**                               | This value is input-only and will be omitted from the response and replaced with a placeholder | [optional]                 |
+| Name                     | Type                                | Description                                                                                    | Notes                      |
+| ------------------------ | ----------------------------------- | ---------------------------------------------------------------------------------------------- | -------------------------- |
+| **filter**               | [**AwsFilter**](AwsFilter.md)       |                                                                                                | [optional]                 |
+| **fleets**               | **List[str]**                       | list of Fleet UIDs to apply route to, if any. If empty, applies to all Fleets                  | [optional]                 |
+| **functions_key_secret** | **str**                             | This value is input-only and will be omitted from the response and replaced with a placeholder | [optional]                 |
+| **sas_policy_key**       | **str**                             | This value is input-only and will be omitted from the response and replaced with a placeholder | [optional]                 |
+| **sas_policy_name**      | **str**                             |                                                                                                | [optional]                 |
+| **throttle_ms**          | **int**                             |                                                                                                | [optional]                 |
+| **timeout**              | **int**                             | Timeout in seconds for each request                                                            | [optional] [default to 15] |
+| **transform**            | [**AwsTransform**](AwsTransform.md) |                                                                                                | [optional]                 |
+| **url**                  | **str**                             |                                                                                                | [optional]                 |
 
 ## Example
 

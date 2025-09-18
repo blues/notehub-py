@@ -37,19 +37,19 @@ class TestCurrentFirmware(unittest.TestCase):
         model = CurrentFirmware()
         if include_optional:
             return CurrentFirmware(
-                version = '',
                 metadata = notehub_py.models.firmware.Firmware(
+                    builder = '', 
+                    built = '', 
+                    firmware = '', 
                     org = '', 
                     product = '', 
-                    firmware = '', 
-                    version = '', 
                     target = '', 
+                    ver_build = 56, 
                     ver_major = 56, 
                     ver_minor = 56, 
                     ver_patch = 56, 
-                    ver_build = 56, 
-                    built = '', 
-                    builder = '', )
+                    version = '', ),
+                version = ''
             )
         else:
             return CurrentFirmware(

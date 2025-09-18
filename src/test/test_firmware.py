@@ -37,17 +37,17 @@ class TestFirmware(unittest.TestCase):
         model = Firmware()
         if include_optional:
             return Firmware(
+                builder = '',
+                built = '',
+                firmware = '',
                 org = '',
                 product = '',
-                firmware = '',
-                version = '',
                 target = '',
+                ver_build = 56,
                 ver_major = 56,
                 ver_minor = 56,
                 ver_patch = 56,
-                ver_build = 56,
-                built = '',
-                builder = ''
+                version = ''
             )
         else:
             return Firmware(

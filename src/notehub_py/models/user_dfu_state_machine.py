@@ -32,15 +32,15 @@ class UserDfuStateMachine(BaseModel):
     UserDfuStateMachine
     """  # noqa: E501
 
-    status: Optional[UserDfuStateMachineStatus] = None
     created: Optional[datetime] = None
     from_version: Optional[StrictStr] = None
     metadata: Optional[UploadMetadata] = None
+    status: Optional[UserDfuStateMachineStatus] = None
     __properties: ClassVar[List[str]] = [
-        "status",
         "created",
         "from_version",
         "metadata",
+        "status",
     ]
 
     model_config = ConfigDict(
@@ -80,12 +80,12 @@ class UserDfuStateMachine(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of status
-        if self.status:
-            _dict["status"] = self.status.to_dict()
         # override the default output from pydantic by calling `to_dict()` of metadata
         if self.metadata:
             _dict["metadata"] = self.metadata.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of status
+        if self.status:
+            _dict["status"] = self.status.to_dict()
         # set to None if created (nullable) is None
         # and model_fields_set contains the field
         if self.created is None and "created" in self.model_fields_set:
@@ -104,16 +104,16 @@ class UserDfuStateMachine(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "status": (
-                    UserDfuStateMachineStatus.from_dict(obj["status"])
-                    if obj.get("status") is not None
-                    else None
-                ),
                 "created": obj.get("created"),
                 "from_version": obj.get("from_version"),
                 "metadata": (
                     UploadMetadata.from_dict(obj["metadata"])
                     if obj.get("metadata") is not None
+                    else None
+                ),
+                "status": (
+                    UserDfuStateMachineStatus.from_dict(obj["status"])
+                    if obj.get("status") is not None
                     else None
                 ),
             }

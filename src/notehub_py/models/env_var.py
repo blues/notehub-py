@@ -30,10 +30,10 @@ class EnvVar(BaseModel):
     """  # noqa: E501
 
     key: Optional[StrictStr] = None
-    value: Optional[StrictStr] = None
-    used: Optional[StrictBool] = None
     precedence: Optional[Int] = None
-    __properties: ClassVar[List[str]] = ["key", "value", "used", "precedence"]
+    used: Optional[StrictBool] = None
+    value: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["key", "precedence", "used", "value"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,13 +89,13 @@ class EnvVar(BaseModel):
         _obj = cls.model_validate(
             {
                 "key": obj.get("key"),
-                "value": obj.get("value"),
-                "used": obj.get("used"),
                 "precedence": (
                     Int.from_dict(obj["precedence"])
                     if obj.get("precedence") is not None
                     else None
                 ),
+                "used": obj.get("used"),
+                "value": obj.get("value"),
             }
         )
         return _obj

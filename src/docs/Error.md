@@ -4,12 +4,12 @@
 
 | Name        | Type       | Description                                             | Notes      |
 | ----------- | ---------- | ------------------------------------------------------- | ---------- |
-| **err**     | **str**    | Human readable error message.                           |
 | **code**    | **int**    | The HTTP error code associated with the error.          |
-| **status**  | **str**    | Machine readable representation of the HTTP error code. |
-| **request** | **str**    |                                                         | [optional] |
-| **details** | **object** |                                                         | [optional] |
 | **debug**   | **str**    |                                                         | [optional] |
+| **details** | **object** |                                                         | [optional] |
+| **err**     | **str**    | Human readable error message.                           |
+| **request** | **str**    |                                                         | [optional] |
+| **status**  | **str**    | Machine readable representation of the HTTP error code. |
 
 ## Example
 

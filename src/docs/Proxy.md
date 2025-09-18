@@ -6,11 +6,11 @@ Route settings specific to Proxy routes.
 
 | Name             | Type               | Description                                                                   | Notes                      |
 | ---------------- | ------------------ | ----------------------------------------------------------------------------- | -------------------------- |
-| **fleets**       | **List[str]**      | list of Fleet UIDs to apply route to, if any. If empty, applies to all Fleets | [optional]                 |
-| **url**          | **str**            |                                                                               | [optional]                 |
 | **alias**        | **str**            |                                                                               | [optional]                 |
+| **fleets**       | **List[str]**      | list of Fleet UIDs to apply route to, if any. If empty, applies to all Fleets | [optional]                 |
 | **http_headers** | **Dict[str, str]** |                                                                               | [optional]                 |
 | **timeout**      | **int**            | Timeout in seconds for each request                                           | [optional] [default to 15] |
+| **url**          | **str**            |                                                                               | [optional]                 |
 
 ## Example
 

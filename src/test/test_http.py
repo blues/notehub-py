@@ -37,23 +37,23 @@ class TestHttp(unittest.TestCase):
         model = Http()
         if include_optional:
             return Http(
+                disable_http_headers = True,
+                filter = notehub_py.models.aws_filter.aws_filter(
+                    files = [
+                        ''
+                        ], 
+                    system_notefiles = True, 
+                    type = 'all', ),
                 fleets = [
                     ''
                     ],
-                filter = notehub_py.models.http_filter.http_filter(
-                    type = 'all', 
-                    system_notefiles = True, 
-                    files = [
-                        ''
-                        ], ),
-                transform = notehub_py.models.http_transform.http_transform(
+                http_headers = {"headerName1":"headerValue1","headerName2":"headerValue2"},
+                throttle_ms = 56,
+                timeout = 56,
+                transform = notehub_py.models.aws_transform.aws_transform(
                     format = '', 
                     jsonata = '', ),
-                throttle_ms = 56,
-                url = '',
-                http_headers = {"headerName1":"headerValue1","headerName2":"headerValue2"},
-                disable_http_headers = True,
-                timeout = 56
+                url = ''
             )
         else:
             return Http(

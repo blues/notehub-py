@@ -40,13 +40,13 @@ class AlertNotificationsInner(BaseModel):
     notification_type: Optional[StrictStr] = Field(
         default=None, description="The type of notification"
     )
-    status: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="The status of the notification"
-    )
     recipients: Optional[StrictStr] = Field(
         default=None, description="The recipients of the notification"
     )
-    __properties: ClassVar[List[str]] = ["notification_type", "status", "recipients"]
+    status: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="The status of the notification"
+    )
+    __properties: ClassVar[List[str]] = ["notification_type", "recipients", "status"]
 
     @field_validator("notification_type")
     def notification_type_validate_enum(cls, value):
@@ -109,8 +109,8 @@ class AlertNotificationsInner(BaseModel):
         _obj = cls.model_validate(
             {
                 "notification_type": obj.get("notification_type"),
-                "status": obj.get("status"),
                 "recipients": obj.get("recipients"),
+                "status": obj.get("status"),
             }
         )
         return _obj

@@ -29,13 +29,13 @@ class Repository(BaseModel):
     Repository
     """  # noqa: E501
 
+    fleet_uids: Optional[List[StrictStr]] = None
+    name: Optional[StrictStr] = Field(default=None, description="repository name")
+    project_uids: Optional[List[StrictStr]] = None
     uid: Optional[StrictStr] = Field(
         default=None, description="The unique identifier for the data repository"
     )
-    name: Optional[StrictStr] = Field(default=None, description="repository name")
-    fleet_uids: Optional[List[StrictStr]] = Field(default=None, alias="fleetUIDs")
-    project_uids: Optional[List[StrictStr]] = Field(default=None, alias="projectUIDs")
-    __properties: ClassVar[List[str]] = ["uid", "name", "fleetUIDs", "projectUIDs"]
+    __properties: ClassVar[List[str]] = ["fleet_uids", "name", "project_uids", "uid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,10 +87,10 @@ class Repository(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "uid": obj.get("uid"),
+                "fleet_uids": obj.get("fleet_uids"),
                 "name": obj.get("name"),
-                "fleetUIDs": obj.get("fleetUIDs"),
-                "projectUIDs": obj.get("projectUIDs"),
+                "project_uids": obj.get("project_uids"),
+                "uid": obj.get("uid"),
             }
         )
         return _obj

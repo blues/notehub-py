@@ -37,11 +37,11 @@ class TestMonitorAlertRoutesInner(unittest.TestCase):
         model = MonitorAlertRoutesInner()
         if include_optional:
             return MonitorAlertRoutesInner(
-                url = '',
                 message_type = 'text',
                 text = '',
-                token = '',
+                url = '',
                 channel = '',
+                token = '',
                 email = 'example@blues.com'
             )
         else:

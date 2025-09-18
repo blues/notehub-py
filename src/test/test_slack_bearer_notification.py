@@ -37,10 +37,10 @@ class TestSlackBearerNotification(unittest.TestCase):
         model = SlackBearerNotification()
         if include_optional:
             return SlackBearerNotification(
-                token = '',
                 channel = '',
                 message_type = 'text',
-                text = ''
+                text = '',
+                token = ''
             )
         else:
             return SlackBearerNotification(

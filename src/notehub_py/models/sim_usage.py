@@ -32,28 +32,24 @@ class SimUsage(BaseModel):
     iccid: Optional[StrictStr] = Field(
         default=None, description="ICCID of the SIM card"
     )
-    used: Optional[StrictInt] = Field(
-        default=None, description="Bytes used on the SIMs current data plan"
+    last_updated: Optional[StrictInt] = Field(
+        default=None, description="Time this usage information was last updated"
+    )
+    lifetime_used: Optional[StrictInt] = Field(
+        default=None, description="Total number of bytes used by SIM"
     )
     limit: Optional[StrictInt] = Field(
         default=None, description="Limit in bytes of the SIMs current data plan"
     )
-    lifetime_used: Optional[StrictInt] = Field(
-        default=None,
-        description="Total number of bytes used by SIM",
-        alias="lifetimeUsed",
-    )
-    last_updated: Optional[StrictInt] = Field(
-        default=None,
-        description="Time this usage information was last updated",
-        alias="lastUpdated",
+    used: Optional[StrictInt] = Field(
+        default=None, description="Bytes used on the SIMs current data plan"
     )
     __properties: ClassVar[List[str]] = [
         "iccid",
-        "used",
+        "last_updated",
+        "lifetime_used",
         "limit",
-        "lifetimeUsed",
-        "lastUpdated",
+        "used",
     ]
 
     model_config = ConfigDict(
@@ -107,10 +103,10 @@ class SimUsage(BaseModel):
         _obj = cls.model_validate(
             {
                 "iccid": obj.get("iccid"),
-                "used": obj.get("used"),
+                "last_updated": obj.get("last_updated"),
+                "lifetime_used": obj.get("lifetime_used"),
                 "limit": obj.get("limit"),
-                "lifetimeUsed": obj.get("lifetimeUsed"),
-                "lastUpdated": obj.get("lastUpdated"),
+                "used": obj.get("used"),
             }
         )
         return _obj

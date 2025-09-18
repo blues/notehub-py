@@ -30,24 +30,24 @@ class SchemaProperty(BaseModel):
     SchemaProperty
     """  # noqa: E501
 
+    items: Optional[List[SchemaProperty]] = Field(
+        default=None, description="Used if type is array"
+    )
     name: Optional[StrictStr] = Field(
         default=None,
         description="Name of the field (optional for array/object children)",
     )
-    type: StrictStr
-    updated_at: datetime = Field(alias="updatedAt")
-    items: Optional[List[SchemaProperty]] = Field(
-        default=None, description="Used if type is array"
-    )
     properties: Optional[List[SchemaProperty]] = Field(
         default=None, description="Used if type is object"
     )
+    type: StrictStr
+    updated_at: Optional[datetime] = None
     __properties: ClassVar[List[str]] = [
-        "name",
-        "type",
-        "updatedAt",
         "items",
+        "name",
         "properties",
+        "type",
+        "updated_at",
     ]
 
     @field_validator("type")
@@ -123,19 +123,19 @@ class SchemaProperty(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "name": obj.get("name"),
-                "type": obj.get("type"),
-                "updatedAt": obj.get("updatedAt"),
                 "items": (
                     [SchemaProperty.from_dict(_item) for _item in obj["items"]]
                     if obj.get("items") is not None
                     else None
                 ),
+                "name": obj.get("name"),
                 "properties": (
                     [SchemaProperty.from_dict(_item) for _item in obj["properties"]]
                     if obj.get("properties") is not None
                     else None
                 ),
+                "type": obj.get("type"),
+                "updated_at": obj.get("updated_at"),
             }
         )
         return _obj

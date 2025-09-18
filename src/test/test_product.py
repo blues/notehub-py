@@ -37,18 +37,18 @@ class TestProduct(unittest.TestCase):
         model = Product()
         if include_optional:
             return Product(
-                uid = '',
-                label = '',
                 auto_provision_fleets = [
                     ''
                     ],
-                disable_devices_by_default = True
+                disable_devices_by_default = True,
+                label = '',
+                uid = ''
             )
         else:
             return Product(
-                uid = '',
-                label = '',
                 disable_devices_by_default = True,
+                label = '',
+                uid = '',
         )
         """
 

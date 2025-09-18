@@ -40,8 +40,8 @@ class TestAlertDataInner(unittest.TestCase):
                 alert_source = 'app',
                 source = '',
                 source_type = 'event',
-                value = 1.337,
                 source_uid = '',
+                value = 1.337,
                 when = ''
             )
         else:

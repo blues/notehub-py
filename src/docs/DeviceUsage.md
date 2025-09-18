@@ -4,16 +4,16 @@
 
 | Name                     | Type    | Description         | Notes      |
 | ------------------------ | ------- | ------------------- | ---------- |
-| **since**                | **int** | Unix timestamp      | [optional] |
-| **duration**             | **int** | Duration in seconds | [optional] |
 | **bytes_rcvd**           | **int** |                     | [optional] |
-| **bytes_sent**           | **int** |                     | [optional] |
 | **bytes_rcvd_secondary** | **int** |                     | [optional] |
+| **bytes_sent**           | **int** |                     | [optional] |
 | **bytes_sent_secondary** | **int** |                     | [optional] |
-| **sessions_tcp**         | **int** |                     | [optional] |
-| **sessions_tls**         | **int** |                     | [optional] |
+| **duration**             | **int** | Duration in seconds | [optional] |
 | **notes_rcvd**           | **int** |                     | [optional] |
 | **notes_sent**           | **int** |                     | [optional] |
+| **sessions_tcp**         | **int** |                     | [optional] |
+| **sessions_tls**         | **int** |                     | [optional] |
+| **since**                | **int** | Unix timestamp      | [optional] |
 
 ## Example
 

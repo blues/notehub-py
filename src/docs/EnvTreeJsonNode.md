@@ -4,17 +4,17 @@
 
 | Name                    | Type                                            | Description | Notes      |
 | ----------------------- | ----------------------------------------------- | ----------- | ---------- |
-| **var_count**           | [**Int**](Int.md)                               |             |
-| **inherited_var_count** | [**Int**](Int.md)                               |             |
-| **type**                | **str**                                         |             |
-| **variables**           | [**List[EnvVar]**](EnvVar.md)                   |             |
+| **app_label**           | **str**                                         |             | [optional] |
+| **app_uid**             | **str**                                         |             | [optional] |
 | **children**            | [**List[EnvTreeJsonNode]**](EnvTreeJsonNode.md) |             |
 | **device_uid**          | **str**                                         |             | [optional] |
 | **fleet_label**         | **str**                                         |             | [optional] |
 | **fleet_uid**           | **str**                                         |             | [optional] |
-| **app_uid**             | **str**                                         |             | [optional] |
-| **app_label**           | **str**                                         |             | [optional] |
+| **inherited_var_count** | [**Int**](Int.md)                               |             |
+| **type**                | **str**                                         |             |
 | **url**                 | **str**                                         |             | [optional] |
+| **var_count**           | [**Int**](Int.md)                               |             |
+| **variables**           | [**List[EnvVar]**](EnvVar.md)                   |             |
 
 ## Example
 

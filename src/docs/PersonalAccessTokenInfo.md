@@ -4,9 +4,9 @@
 
 | Name            | Type         | Description                                            | Notes      |
 | --------------- | ------------ | ------------------------------------------------------ | ---------- |
-| **name**        | **str**      |                                                        | [optional] |
 | **description** | **str**      |                                                        | [optional] |
 | **expires_at**  | **datetime** | New expiration timestamp for the personal access token | [optional] |
+| **name**        | **str**      |                                                        | [optional] |
 | **suspended**   | **bool**     | if true, the token is temporarily suspended            | [optional] |
 
 ## Example

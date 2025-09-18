@@ -29,9 +29,6 @@ class SlackBearerNotification(BaseModel):
     SlackBearerNotification
     """  # noqa: E501
 
-    token: Optional[StrictStr] = Field(
-        default=None, description="The bearer token for the Slack app."
-    )
     channel: Optional[StrictStr] = Field(
         default=None, description="The channel to send the message to."
     )
@@ -41,7 +38,10 @@ class SlackBearerNotification(BaseModel):
     text: Optional[StrictStr] = Field(
         default=None, description="The text of the message, or the blocks definition"
     )
-    __properties: ClassVar[List[str]] = ["token", "channel", "message_type", "text"]
+    token: Optional[StrictStr] = Field(
+        default=None, description="The bearer token for the Slack app."
+    )
+    __properties: ClassVar[List[str]] = ["channel", "message_type", "text", "token"]
 
     @field_validator("message_type")
     def message_type_validate_enum(cls, value):
@@ -103,10 +103,10 @@ class SlackBearerNotification(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "token": obj.get("token"),
                 "channel": obj.get("channel"),
                 "message_type": obj.get("message_type"),
                 "text": obj.get("text"),
+                "token": obj.get("token"),
             }
         )
         return _obj

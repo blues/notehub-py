@@ -27,6 +27,7 @@ from notehub_py.api.external_devices_api import ExternalDevicesApi
 from notehub_py.api.monitor_api import MonitorApi
 from notehub_py.api.project_api import ProjectApi
 from notehub_py.api.route_api import RouteApi
+from notehub_py.api.usage_api import UsageApi
 from notehub_py.api.webhook_api import WebhookApi
 
 # import ApiClient
@@ -44,13 +45,9 @@ from notehub_py.exceptions import ApiException
 from notehub_py.models.alert import Alert
 from notehub_py.models.alert_data_inner import AlertDataInner
 from notehub_py.models.alert_notifications_inner import AlertNotificationsInner
-from notehub_py.models.analytics_events_data import AnalyticsEventsData
-from notehub_py.models.analytics_events_response import AnalyticsEventsResponse
-from notehub_py.models.analytics_route_logs_data import AnalyticsRouteLogsData
-from notehub_py.models.analytics_route_logs_response import AnalyticsRouteLogsResponse
-from notehub_py.models.analytics_sessions_data import AnalyticsSessionsData
-from notehub_py.models.analytics_sessions_response import AnalyticsSessionsResponse
 from notehub_py.models.aws import Aws
+from notehub_py.models.aws_filter import AwsFilter
+from notehub_py.models.aws_transform import AwsTransform
 from notehub_py.models.azure import Azure
 from notehub_py.models.billing_account import BillingAccount
 from notehub_py.models.billing_account_role import BillingAccountRole
@@ -66,16 +63,15 @@ from notehub_py.models.current_firmware import CurrentFirmware
 from notehub_py.models.dfu_env import DFUEnv
 from notehub_py.models.dfu_state import DFUState
 from notehub_py.models.data_field import DataField
-from notehub_py.models.data_set import DataSet
 from notehub_py.models.data_set_field import DataSetField
 from notehub_py.models.delete_device_fleets_request import DeleteDeviceFleetsRequest
 from notehub_py.models.device import Device
 from notehub_py.models.device_dfu_history import DeviceDfuHistory
+from notehub_py.models.device_dfu_history_current import DeviceDfuHistoryCurrent
 from notehub_py.models.device_dfu_history_page import DeviceDfuHistoryPage
 from notehub_py.models.device_dfu_state_machine import DeviceDfuStateMachine
 from notehub_py.models.device_dfu_state_machine_node import DeviceDfuStateMachineNode
 from notehub_py.models.device_dfu_status import DeviceDfuStatus
-from notehub_py.models.device_dfu_status_current import DeviceDfuStatusCurrent
 from notehub_py.models.device_dfu_status_page import DeviceDfuStatusPage
 from notehub_py.models.device_session import DeviceSession
 from notehub_py.models.device_tower_info import DeviceTowerInfo
@@ -94,9 +90,10 @@ from notehub_py.models.get_alerts200_response import GetAlerts200Response
 from notehub_py.models.get_billing_accounts200_response import (
     GetBillingAccounts200Response,
 )
-from notehub_py.models.get_device_environment_variables200_response import (
-    GetDeviceEnvironmentVariables200Response,
+from notehub_py.models.get_device_environment_variables_by_pin200_response import (
+    GetDeviceEnvironmentVariablesByPin200Response,
 )
+from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
 from notehub_py.models.get_device_health_log200_response import (
     GetDeviceHealthLog200Response,
 )
@@ -123,7 +120,6 @@ from notehub_py.models.get_project_events200_response import GetProjectEvents200
 from notehub_py.models.get_project_events_by_cursor200_response import (
     GetProjectEventsByCursor200Response,
 )
-from notehub_py.models.get_project_fleets200_response import GetProjectFleets200Response
 from notehub_py.models.get_project_members200_response import (
     GetProjectMembers200Response,
 )
@@ -146,8 +142,6 @@ from notehub_py.models.handle_notefile_changes_pending200_response import (
 )
 from notehub_py.models.handle_notefile_delete_request import HandleNotefileDeleteRequest
 from notehub_py.models.http import Http
-from notehub_py.models.http_filter import HttpFilter
-from notehub_py.models.http_transform import HttpTransform
 from notehub_py.models.location import Location
 from notehub_py.models.login200_response import Login200Response
 from notehub_py.models.login_request import LoginRequest
@@ -158,6 +152,8 @@ from notehub_py.models.note import Note
 from notehub_py.models.notefile_schema import NotefileSchema
 from notehub_py.models.notehub_route import NotehubRoute
 from notehub_py.models.notehub_route_schema import NotehubRouteSchema
+from notehub_py.models.o_auth2_error import OAuth2Error
+from notehub_py.models.o_auth2_token_response import OAuth2TokenResponse
 from notehub_py.models.personal_access_token import PersonalAccessToken
 from notehub_py.models.personal_access_token_created_by import (
     PersonalAccessTokenCreatedBy,
@@ -172,10 +168,6 @@ from notehub_py.models.project import Project
 from notehub_py.models.project_member import ProjectMember
 from notehub_py.models.proxy import Proxy
 from notehub_py.models.put_device_fleets_request import PutDeviceFleetsRequest
-from notehub_py.models.question_data_response_line_chart import (
-    QuestionDataResponseLineChart,
-)
-from notehub_py.models.question_data_response_map import QuestionDataResponseMap
 from notehub_py.models.radresponder import Radresponder
 from notehub_py.models.repository import Repository
 from notehub_py.models.role import Role
@@ -184,14 +176,21 @@ from notehub_py.models.schema_property import SchemaProperty
 from notehub_py.models.sim_usage import SimUsage
 from notehub_py.models.slack import Slack
 from notehub_py.models.slack_bearer_notification import SlackBearerNotification
+from notehub_py.models.slack_transform import SlackTransform
 from notehub_py.models.slack_web_hook_notification import SlackWebHookNotification
 from notehub_py.models.snowflake import Snowflake
-from notehub_py.models.snowflake_transform import SnowflakeTransform
 from notehub_py.models.thingworx import Thingworx
 from notehub_py.models.tower_location import TowerLocation
 from notehub_py.models.twilio import Twilio
 from notehub_py.models.update_fleet_request import UpdateFleetRequest
 from notehub_py.models.upload_metadata import UploadMetadata
+from notehub_py.models.usage_data import UsageData
+from notehub_py.models.usage_events_data import UsageEventsData
+from notehub_py.models.usage_events_response import UsageEventsResponse
+from notehub_py.models.usage_route_logs_data import UsageRouteLogsData
+from notehub_py.models.usage_route_logs_response import UsageRouteLogsResponse
+from notehub_py.models.usage_sessions_data import UsageSessionsData
+from notehub_py.models.usage_sessions_response import UsageSessionsResponse
 from notehub_py.models.user_db_route import UserDbRoute
 from notehub_py.models.user_dfu_state_machine import UserDfuStateMachine
 from notehub_py.models.user_dfu_state_machine_status import UserDfuStateMachineStatus

@@ -6,9 +6,9 @@ The user that created this key
 
 | Name      | Type    | Description | Notes      |
 | --------- | ------- | ----------- | ---------- |
-| **uid**   | **str** |             | [optional] |
 | **email** | **str** |             | [optional] |
 | **name**  | **str** |             | [optional] |
+| **uid**   | **str** |             | [optional] |
 
 ## Example
 

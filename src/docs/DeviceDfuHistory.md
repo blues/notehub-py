@@ -4,8 +4,8 @@
 
 | Name           | Type                                                        | Description | Notes      |
 | -------------- | ----------------------------------------------------------- | ----------- | ---------- |
+| **current**    | [**DeviceDfuHistoryCurrent**](DeviceDfuHistoryCurrent.md)   |             | [optional] |
 | **device_uid** | **str**                                                     | Device UID  | [optional] |
-| **current**    | [**DeviceDfuStatusCurrent**](DeviceDfuStatusCurrent.md)     |             | [optional] |
 | **history**    | [**List[DeviceDfuStateMachine]**](DeviceDfuStateMachine.md) |             | [optional] |
 
 ## Example

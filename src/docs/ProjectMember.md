@@ -4,8 +4,8 @@
 
 | Name      | Type                | Description                                                                                                             | Notes |
 | --------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----- |
-| **name**  | **str**             |                                                                                                                         |
 | **email** | **str**             | The email address of the project member. This property will only be populated if the viewer is an owner of the project. |
+| **name**  | **str**             |                                                                                                                         |
 | **role**  | [**Role**](Role.md) |                                                                                                                         |
 
 ## Example

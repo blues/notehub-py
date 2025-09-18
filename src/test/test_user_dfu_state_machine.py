@@ -37,36 +37,37 @@ class TestUserDfuStateMachine(unittest.TestCase):
         model = UserDfuStateMachine()
         if include_optional:
             return UserDfuStateMachine(
-                status = notehub_py.models.user_dfu_state_machine_status.UserDfuStateMachineStatus(
-                    phase = '', 
-                    phase_description = '', 
-                    date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ),
                 created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 from_version = '',
                 metadata = notehub_py.models.upload_metadata.UploadMetadata(
-                    name = '', 
-                    length = 56, 
-                    md5 = '', 
+                    contains = '', 
                     crc32 = 56, 
                     created = 56, 
-                    modified = 56, 
-                    source = '', 
-                    contains = '', 
-                    found = '', 
-                    type = '', 
-                    tags = '', 
-                    notes = '', 
                     firmware = notehub_py.models.firmware.Firmware(
+                        builder = '', 
+                        built = '', 
                         org = '', 
                         product = '', 
-                        version = '', 
                         target = '', 
+                        ver_build = 56, 
                         ver_major = 56, 
                         ver_minor = 56, 
                         ver_patch = 56, 
-                        ver_build = 56, 
-                        built = '', 
-                        builder = '', ), )
+                        version = '', ), 
+                    found = '', 
+                    length = 56, 
+                    md5 = '', 
+                    modified = 56, 
+                    name = '', 
+                    notes = '', 
+                    source = '', 
+                    tags = '', 
+                    type = '', ),
+                status = notehub_py.models.user_dfu_state_machine_status.UserDfuStateMachineStatus(
+                    date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    phase = '', 
+                    phase_description = '', 
+                    status = '', )
             )
         else:
             return UserDfuStateMachine(

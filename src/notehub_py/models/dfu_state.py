@@ -37,13 +37,19 @@ class DFUState(BaseModel):
     DFUState
     """  # noqa: E501
 
-    type: Optional[StrictStr] = None
-    file: Optional[StrictStr] = Field(default=None, description="Firmware filename")
-    length: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Length of firmware file"
+    began: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="The time when the DFU began"
     )
     crc32: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="Used for image verification"
+    )
+    errors: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="The number of consecutive errors the DFU process has encountered",
+    )
+    file: Optional[StrictStr] = Field(default=None, description="Firmware filename")
+    length: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Length of firmware file"
     )
     md5: Optional[StrictStr] = Field(
         default=None, description="Used for image verification"
@@ -52,22 +58,16 @@ class DFUState(BaseModel):
         default=None,
         description='* "idle"          - nothing downloading or downloaded * "error"         - halted and in the error state * "downloading"   - transferring data from cloud to module * "sideloading"   - transferring data via request to module * "ready"         - DFU data is ready/verified and waiting on external storage * "ready-retry"   - DFU data is ready/verified and retrying * "updating"      - currently updating * "completed"     - DFU is done successfully ',
     )
-    status: Optional[StrictStr] = Field(default=None, description="Status message")
-    began: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="The time when the DFU began"
+    read: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="The amount the notecard has read of the image from notehub",
     )
     retry: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None,
         description="Value of _fw_retry environment var at time of DFU initialization",
     )
-    errors: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None,
-        description="The number of consecutive errors the DFU process has encountered",
-    )
-    read: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None,
-        description="The amount the notecard has read of the image from notehub",
-    )
+    status: Optional[StrictStr] = Field(default=None, description="Status message")
+    type: Optional[StrictStr] = None
     updated: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="Last updated timestamp"
     )
@@ -76,30 +76,20 @@ class DFUState(BaseModel):
         description="Last known version, which is generally a JSON object contained within the firmware image",
     )
     __properties: ClassVar[List[str]] = [
-        "type",
+        "began",
+        "crc32",
+        "errors",
         "file",
         "length",
-        "crc32",
         "md5",
         "mode",
-        "status",
-        "began",
-        "retry",
-        "errors",
         "read",
+        "retry",
+        "status",
+        "type",
         "updated",
         "version",
     ]
-
-    @field_validator("type")
-    def type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(["card", "user"]):
-            raise ValueError("must be one of enum values ('card', 'user')")
-        return value
 
     @field_validator("mode")
     def mode_validate_enum(cls, value):
@@ -122,6 +112,16 @@ class DFUState(BaseModel):
             raise ValueError(
                 "must be one of enum values ('idle', 'error', 'downloading', 'sideloading', 'ready', 'ready-retry', 'updating', 'completed')"
             )
+        return value
+
+    @field_validator("type")
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["card", "user"]):
+            raise ValueError("must be one of enum values ('card', 'user')")
         return value
 
     model_config = ConfigDict(
@@ -174,17 +174,17 @@ class DFUState(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "type": obj.get("type"),
+                "began": obj.get("began"),
+                "crc32": obj.get("crc32"),
+                "errors": obj.get("errors"),
                 "file": obj.get("file"),
                 "length": obj.get("length"),
-                "crc32": obj.get("crc32"),
                 "md5": obj.get("md5"),
                 "mode": obj.get("mode"),
-                "status": obj.get("status"),
-                "began": obj.get("began"),
-                "retry": obj.get("retry"),
-                "errors": obj.get("errors"),
                 "read": obj.get("read"),
+                "retry": obj.get("retry"),
+                "status": obj.get("status"),
+                "type": obj.get("type"),
                 "updated": obj.get("updated"),
                 "version": obj.get("version"),
             }

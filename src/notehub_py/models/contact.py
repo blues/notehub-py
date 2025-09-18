@@ -29,11 +29,11 @@ class Contact(BaseModel):
     Contact
     """  # noqa: E501
 
-    name: Optional[StrictStr] = None
     email: Optional[StrictStr] = None
-    role: Optional[StrictStr] = None
+    name: Optional[StrictStr] = None
     organization: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["name", "email", "role", "organization"]
+    role: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["email", "name", "organization", "role"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,10 +85,10 @@ class Contact(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "name": obj.get("name"),
                 "email": obj.get("email"),
-                "role": obj.get("role"),
+                "name": obj.get("name"),
                 "organization": obj.get("organization"),
+                "role": obj.get("role"),
             }
         )
         return _obj

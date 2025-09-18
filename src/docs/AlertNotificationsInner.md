@@ -5,8 +5,8 @@
 | Name                  | Type      | Description                        | Notes      |
 | --------------------- | --------- | ---------------------------------- | ---------- |
 | **notification_type** | **str**   | The type of notification           | [optional] |
-| **status**            | **float** | The status of the notification     | [optional] |
 | **recipients**        | **str**   | The recipients of the notification | [optional] |
+| **status**            | **float** | The status of the notification     | [optional] |
 
 ## Example
 

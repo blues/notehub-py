@@ -29,29 +29,29 @@ class Firmware(BaseModel):
     Firmware
     """  # noqa: E501
 
+    builder: Optional[StrictStr] = None
+    built: Optional[StrictStr] = None
+    firmware: Optional[StrictStr] = None
     org: Optional[StrictStr] = None
     product: Optional[StrictStr] = None
-    firmware: Optional[StrictStr] = None
-    version: Optional[StrictStr] = None
     target: Optional[StrictStr] = None
+    ver_build: Optional[StrictInt] = None
     ver_major: Optional[StrictInt] = None
     ver_minor: Optional[StrictInt] = None
     ver_patch: Optional[StrictInt] = None
-    ver_build: Optional[StrictInt] = None
-    built: Optional[StrictStr] = None
-    builder: Optional[StrictStr] = None
+    version: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
+        "builder",
+        "built",
+        "firmware",
         "org",
         "product",
-        "firmware",
-        "version",
         "target",
+        "ver_build",
         "ver_major",
         "ver_minor",
         "ver_patch",
-        "ver_build",
-        "built",
-        "builder",
+        "version",
     ]
 
     model_config = ConfigDict(
@@ -104,17 +104,17 @@ class Firmware(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "builder": obj.get("builder"),
+                "built": obj.get("built"),
+                "firmware": obj.get("firmware"),
                 "org": obj.get("org"),
                 "product": obj.get("product"),
-                "firmware": obj.get("firmware"),
-                "version": obj.get("version"),
                 "target": obj.get("target"),
+                "ver_build": obj.get("ver_build"),
                 "ver_major": obj.get("ver_major"),
                 "ver_minor": obj.get("ver_minor"),
                 "ver_patch": obj.get("ver_patch"),
-                "ver_build": obj.get("ver_build"),
-                "built": obj.get("built"),
-                "builder": obj.get("builder"),
+                "version": obj.get("version"),
             }
         )
         return _obj

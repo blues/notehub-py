@@ -4,25 +4,25 @@
 
 | Name                      | Type                                      | Description | Notes      |
 | ------------------------- | ----------------------------------------- | ----------- | ---------- |
-| **uid**                   | **str**                                   |             |
-| **serial_number**         | **str**                                   |             | [optional] |
-| **provisioned**           | **datetime**                              |             |
-| **last_activity**         | **datetime**                              |             | [optional] |
+| **cellular_usage**        | [**List[SimUsage]**](SimUsage.md)         |             | [optional] |
 | **contact**               | [**Contact**](Contact.md)                 |             | [optional] |
-| **product_uid**           | **str**                                   |             |
-| **fleet_uids**            | **List[str]**                             |             |
-| **tower_info**            | [**DeviceTowerInfo**](DeviceTowerInfo.md) |             | [optional] |
-| **tower_location**        | [**Location**](Location.md)               |             | [optional] |
-| **gps_location**          | [**Location**](Location.md)               |             | [optional] |
-| **triangulated_location** | [**Location**](Location.md)               |             | [optional] |
-| **voltage**               | **float**                                 |             |
-| **temperature**           | **float**                                 |             |
 | **dfu**                   | [**DFUEnv**](DFUEnv.md)                   |             | [optional] |
+| **disabled**              | **bool**                                  |             | [optional] |
 | **firmware_host**         | **str**                                   |             | [optional] |
 | **firmware_notecard**     | **str**                                   |             | [optional] |
+| **fleet_uids**            | **List[str]**                             |             |
+| **gps_location**          | [**Location**](Location.md)               |             | [optional] |
+| **last_activity**         | **datetime**                              |             | [optional] |
+| **product_uid**           | **str**                                   |             |
+| **provisioned**           | **datetime**                              |             |
+| **serial_number**         | **str**                                   |             | [optional] |
 | **sku**                   | **str**                                   |             | [optional] |
-| **disabled**              | **bool**                                  |             | [optional] |
-| **cellular_usage**        | [**List[SimUsage]**](SimUsage.md)         |             | [optional] |
+| **temperature**           | **float**                                 |             |
+| **tower_info**            | [**DeviceTowerInfo**](DeviceTowerInfo.md) |             | [optional] |
+| **tower_location**        | [**Location**](Location.md)               |             | [optional] |
+| **triangulated_location** | [**Location**](Location.md)               |             | [optional] |
+| **uid**                   | **str**                                   |             |
+| **voltage**               | **float**                                 |             |
 
 ## Example
 

@@ -41,8 +41,8 @@ class TestGetProjectMembers200Response(unittest.TestCase):
             return GetProjectMembers200Response(
                 members = [
                     notehub_py.models.project_member.ProjectMember(
-                        name = '', 
                         email = '', 
+                        name = '', 
                         role = 'owner', )
                     ]
             )
@@ -50,8 +50,8 @@ class TestGetProjectMembers200Response(unittest.TestCase):
             return GetProjectMembers200Response(
                 members = [
                     notehub_py.models.project_member.ProjectMember(
-                        name = '', 
                         email = '', 
+                        name = '', 
                         role = 'owner', )
                     ],
         )

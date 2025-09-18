@@ -30,22 +30,22 @@ class Proxy(BaseModel):
     Route settings specific to Proxy routes.
     """  # noqa: E501
 
+    alias: Optional[StrictStr] = None
     fleets: Optional[Annotated[List[StrictStr], Field(min_length=0)]] = Field(
         default=None,
         description="list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets",
     )
-    url: Optional[StrictStr] = None
-    alias: Optional[StrictStr] = None
     http_headers: Optional[Dict[str, StrictStr]] = None
     timeout: Optional[StrictInt] = Field(
         default=15, description="Timeout in seconds for each request"
     )
+    url: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
-        "fleets",
-        "url",
         "alias",
+        "fleets",
         "http_headers",
         "timeout",
+        "url",
     ]
 
     model_config = ConfigDict(
@@ -98,11 +98,11 @@ class Proxy(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "fleets": obj.get("fleets"),
-                "url": obj.get("url"),
                 "alias": obj.get("alias"),
+                "fleets": obj.get("fleets"),
                 "http_headers": obj.get("http_headers"),
                 "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
+                "url": obj.get("url"),
             }
         )
         return _obj

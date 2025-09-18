@@ -4,8 +4,8 @@
 
 | Name         | Type                                        | Description | Notes |
 | ------------ | ------------------------------------------- | ----------- | ----- |
-| **sessions** | [**List[DeviceSession]**](DeviceSession.md) |             |
 | **has_more** | **bool**                                    |             |
+| **sessions** | [**List[DeviceSession]**](DeviceSession.md) |             |
 
 ## Example
 

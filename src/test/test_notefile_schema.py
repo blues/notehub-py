@@ -40,21 +40,21 @@ class TestNotefileSchema(unittest.TestCase):
                 notefile = '',
                 properties = [
                     notehub_py.models.schema_property.SchemaProperty(
-                        name = '', 
-                        type = 'string', 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         items = [
                             notehub_py.models.schema_property.SchemaProperty(
                                 name = '', 
-                                type = 'string', 
-                                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                 properties = [
                                     
-                                    ], )
+                                    ], 
+                                type = 'string', 
+                                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                             ], 
+                        name = '', 
                         properties = [
                             
-                            ], )
+                            ], 
+                        type = 'string', 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ]
             )
         else:
@@ -62,21 +62,21 @@ class TestNotefileSchema(unittest.TestCase):
                 notefile = '',
                 properties = [
                     notehub_py.models.schema_property.SchemaProperty(
-                        name = '', 
-                        type = 'string', 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         items = [
                             notehub_py.models.schema_property.SchemaProperty(
                                 name = '', 
-                                type = 'string', 
-                                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                 properties = [
                                     
-                                    ], )
+                                    ], 
+                                type = 'string', 
+                                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                             ], 
+                        name = '', 
                         properties = [
                             
-                            ], )
+                            ], 
+                        type = 'string', 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
         )
         """

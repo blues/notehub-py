@@ -37,10 +37,10 @@ class TestUpdateFleetRequest(unittest.TestCase):
         model = UpdateFleetRequest()
         if include_optional:
             return UpdateFleetRequest(
-                label = '',
                 add_devices = [
                     ''
                     ],
+                label = '',
                 remove_devices = [
                     ''
                     ],

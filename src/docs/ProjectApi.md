@@ -353,7 +353,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **delete_device_fleets**
 
-> GetProjectFleets200Response delete_device_fleets(project_or_product_uid, device_uid, delete_device_fleets_request)
+> GetDeviceFleets200Response delete_device_fleets(project_or_product_uid, device_uid, delete_device_fleets_request)
 
 Remove Device from Fleets
 
@@ -364,7 +364,7 @@ Remove Device from Fleets
 ```python
 import notehub_py
 from notehub_py.models.delete_device_fleets_request import DeleteDeviceFleetsRequest
-from notehub_py.models.get_project_fleets200_response import GetProjectFleets200Response
+from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -411,7 +411,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
 
 ### Authorization
 
@@ -1134,7 +1134,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_device_fleets**
 
-> GetProjectFleets200Response get_device_fleets(project_or_product_uid, device_uid)
+> GetDeviceFleets200Response get_device_fleets(project_or_product_uid, device_uid)
 
 Get Device Fleets
 
@@ -1144,7 +1144,7 @@ Get Device Fleets
 
 ```python
 import notehub_py
-from notehub_py.models.get_project_fleets200_response import GetProjectFleets200Response
+from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -1189,7 +1189,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
 
 ### Authorization
 
@@ -2103,7 +2103,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_project_fleets**
 
-> GetProjectFleets200Response get_project_fleets(project_or_product_uid)
+> GetDeviceFleets200Response get_project_fleets(project_or_product_uid)
 
 Get Project Fleets
 
@@ -2113,7 +2113,7 @@ Get Project Fleets
 
 ```python
 import notehub_py
-from notehub_py.models.get_project_fleets200_response import GetProjectFleets200Response
+from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -2156,7 +2156,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
 
 ### Authorization
 
@@ -2400,7 +2400,7 @@ This endpoint does not need any parameter.
 
 # **put_device_fleets**
 
-> GetProjectFleets200Response put_device_fleets(project_or_product_uid, device_uid, put_device_fleets_request)
+> GetDeviceFleets200Response put_device_fleets(project_or_product_uid, device_uid, put_device_fleets_request)
 
 Add Device to Fleets
 
@@ -2410,7 +2410,7 @@ Add Device to Fleets
 
 ```python
 import notehub_py
-from notehub_py.models.get_project_fleets200_response import GetProjectFleets200Response
+from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
 from notehub_py.models.put_device_fleets_request import PutDeviceFleetsRequest
 from notehub_py.rest import ApiException
 from pprint import pprint
@@ -2458,7 +2458,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**GetProjectFleets200Response**](GetProjectFleets200Response.md)
+[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
 
 ### Authorization
 

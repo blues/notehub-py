@@ -4,10 +4,10 @@
 
 | Name        | Type    | Description | Notes      |
 | ----------- | ------- | ----------- | ---------- |
+| **cell_id** | **int** |             | [optional] |
+| **lac**     | **int** |             | [optional] |
 | **mcc**     | **int** |             | [optional] |
 | **mnc**     | **int** |             | [optional] |
-| **lac**     | **int** |             | [optional] |
-| **cell_id** | **int** |             | [optional] |
 
 ## Example
 

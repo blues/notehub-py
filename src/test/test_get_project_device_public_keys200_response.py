@@ -41,8 +41,8 @@ class TestGetProjectDevicePublicKeys200Response(unittest.TestCase):
             return GetProjectDevicePublicKeys200Response(
                 device_public_keys = [
                     notehub_py.models.get_project_device_public_keys_200_response_device_public_keys_inner.getProjectDevicePublicKeys_200_response_device_public_keys_inner(
-                        uid = '', 
-                        key = '', )
+                        key = '', 
+                        uid = '', )
                     ],
                 has_more = True
             )
@@ -50,8 +50,8 @@ class TestGetProjectDevicePublicKeys200Response(unittest.TestCase):
             return GetProjectDevicePublicKeys200Response(
                 device_public_keys = [
                     notehub_py.models.get_project_device_public_keys_200_response_device_public_keys_inner.getProjectDevicePublicKeys_200_response_device_public_keys_inner(
-                        uid = '', 
-                        key = '', )
+                        key = '', 
+                        uid = '', )
                     ],
                 has_more = True,
         )

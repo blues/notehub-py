@@ -38,8 +38,8 @@ class TestAlertNotificationsInner(unittest.TestCase):
         if include_optional:
             return AlertNotificationsInner(
                 notification_type = 'email',
-                status = 1.337,
-                recipients = ''
+                recipients = '',
+                status = 1.337
             )
         else:
             return AlertNotificationsInner(

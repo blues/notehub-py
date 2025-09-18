@@ -4,20 +4,20 @@
 
 | Name              | Type                                                            | Description                                  | Notes      |
 | ----------------- | --------------------------------------------------------------- | -------------------------------------------- | ---------- |
-| **uid**           | **str**                                                         | Alert UID                                    | [optional] |
-| **monitor_uid**   | **str**                                                         | Monitor UID                                  | [optional] |
-| **monitor_name**  | **str**                                                         | Monitor Name                                 | [optional] |
-| **device_uid**    | **str**                                                         | Device UID                                   | [optional] |
-| **created_at**    | **int**                                                         | The time the alert was created               | [optional] |
-| **value**         | **float**                                                       | The value that triggered the alert           | [optional] |
-| **resolved**      | **bool**                                                        | If true, the alert has been resolved         | [optional] |
-| **version**       | **int**                                                         | The version of the alert                     | [optional] |
 | **alert_source**  | **str**                                                         | The source of the alert                      | [optional] |
-| **source**        | **str**                                                         | The UID of the source of the alert           | [optional] |
-| **monitor_type**  | **str**                                                         | The type of monitor that triggered the alert | [optional] |
-| **field_name**    | **str**                                                         | The field name that triggered the alert      | [optional] |
+| **created_at**    | **int**                                                         | The time the alert was created               | [optional] |
 | **data**          | [**List[AlertDataInner]**](AlertDataInner.md)                   |                                              | [optional] |
+| **device_uid**    | **str**                                                         | Device UID                                   | [optional] |
+| **field_name**    | **str**                                                         | The field name that triggered the alert      | [optional] |
+| **monitor_name**  | **str**                                                         | Monitor Name                                 | [optional] |
+| **monitor_type**  | **str**                                                         | The type of monitor that triggered the alert | [optional] |
+| **monitor_uid**   | **str**                                                         | Monitor UID                                  | [optional] |
 | **notifications** | [**List[AlertNotificationsInner]**](AlertNotificationsInner.md) |                                              | [optional] |
+| **resolved**      | **bool**                                                        | If true, the alert has been resolved         | [optional] |
+| **source**        | **str**                                                         | The UID of the source of the alert           | [optional] |
+| **uid**           | **str**                                                         | Alert UID                                    | [optional] |
+| **value**         | **float**                                                       | The value that triggered the alert           | [optional] |
+| **version**       | **int**                                                         | The version of the alert                     | [optional] |
 
 ## Example
 

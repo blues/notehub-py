@@ -7,8 +7,8 @@
 | **alert_source** | **str**   | The source of the alert            | [optional] |
 | **source**       | **str**   | The UID of the source of the alert | [optional] |
 | **source_type**  | **str**   | The type of source.                | [optional] |
-| **value**        | **float** | The value that triggered the alert | [optional] |
 | **source_uid**   | **str**   | The UID of the source of the alert | [optional] |
+| **value**        | **float** | The value that triggered the alert | [optional] |
 | **when**         | **str**   | The time the alert was created     | [optional] |
 
 ## Example

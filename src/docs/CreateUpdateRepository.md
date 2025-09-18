@@ -4,8 +4,8 @@
 
 | Name             | Type          | Description | Notes      |
 | ---------------- | ------------- | ----------- | ---------- |
-| **name**         | **str**       |             | [optional] |
 | **fleet_uids**   | **List[str]** |             | [optional] |
+| **name**         | **str**       |             | [optional] |
 | **project_uids** | **List[str]** |             | [optional] |
 
 ## Example

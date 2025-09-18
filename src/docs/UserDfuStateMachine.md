@@ -4,10 +4,10 @@
 
 | Name             | Type                                                          | Description | Notes      |
 | ---------------- | ------------------------------------------------------------- | ----------- | ---------- |
-| **status**       | [**UserDfuStateMachineStatus**](UserDfuStateMachineStatus.md) |             | [optional] |
 | **created**      | **datetime**                                                  |             | [optional] |
 | **from_version** | **str**                                                       |             | [optional] |
 | **metadata**     | [**UploadMetadata**](UploadMetadata.md)                       |             | [optional] |
+| **status**       | [**UserDfuStateMachineStatus**](UserDfuStateMachineStatus.md) |             | [optional] |
 
 ## Example
 

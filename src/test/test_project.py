@@ -37,26 +37,26 @@ class TestProject(unittest.TestCase):
         model = Project()
         if include_optional:
             return Project(
-                uid = '',
-                label = '',
-                created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                role = 'owner',
                 administrative_contact = notehub_py.models.contact.Contact(
-                    name = '', 
                     email = '', 
-                    role = '', 
-                    organization = '', ),
+                    name = '', 
+                    organization = '', 
+                    role = '', ),
+                created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                label = '',
+                role = 'owner',
                 technical_contact = notehub_py.models.contact.Contact(
-                    name = '', 
                     email = '', 
-                    role = '', 
-                    organization = '', )
+                    name = '', 
+                    organization = '', 
+                    role = '', ),
+                uid = ''
             )
         else:
             return Project(
-                uid = '',
-                label = '',
                 created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                label = '',
+                uid = '',
         )
         """
 

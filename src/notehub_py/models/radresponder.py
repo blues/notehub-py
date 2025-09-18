@@ -30,23 +30,23 @@ class Radresponder(BaseModel):
     Route settings specific to RadResponder routes.  Only used for RadResponder route types
     """  # noqa: E501
 
-    fleets: Optional[Annotated[List[StrictStr], Field(min_length=0)]] = Field(
-        default=None,
-        description="list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets",
-    )
-    test_api: Optional[StrictBool] = False
-    data_feed_key: Optional[StrictStr] = None
     client_id: Optional[StrictStr] = None
     client_secret: Optional[StrictStr] = Field(
         default=None,
         description="This value is input-only and will be omitted from the response and replaced with a placeholder",
     )
+    data_feed_key: Optional[StrictStr] = None
+    fleets: Optional[Annotated[List[StrictStr], Field(min_length=0)]] = Field(
+        default=None,
+        description="list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets",
+    )
+    test_api: Optional[StrictBool] = False
     __properties: ClassVar[List[str]] = [
-        "fleets",
-        "test_api",
-        "data_feed_key",
         "client_id",
         "client_secret",
+        "data_feed_key",
+        "fleets",
+        "test_api",
     ]
 
     model_config = ConfigDict(
@@ -99,13 +99,13 @@ class Radresponder(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "client_id": obj.get("client_id"),
+                "client_secret": obj.get("client_secret"),
+                "data_feed_key": obj.get("data_feed_key"),
                 "fleets": obj.get("fleets"),
                 "test_api": (
                     obj.get("test_api") if obj.get("test_api") is not None else False
                 ),
-                "data_feed_key": obj.get("data_feed_key"),
-                "client_id": obj.get("client_id"),
-                "client_secret": obj.get("client_secret"),
             }
         )
         return _obj

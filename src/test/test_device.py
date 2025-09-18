@@ -37,99 +37,99 @@ class TestDevice(unittest.TestCase):
         model = Device()
         if include_optional:
             return Device(
-                uid = '',
-                serial_number = '',
-                provisioned = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                last_activity = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                contact = notehub_py.models.contact.Contact(
-                    name = '', 
-                    email = '', 
-                    role = '', 
-                    organization = '', ),
-                product_uid = '',
-                fleet_uids = [
-                    ''
-                    ],
-                tower_info = notehub_py.models.device_tower_info.Device_tower_info(
-                    mcc = 56, 
-                    mnc = 56, 
-                    lac = 56, 
-                    cell_id = 56, ),
-                tower_location = notehub_py.models.location.Location(
-                    when = '', 
-                    name = '', 
-                    country = '', 
-                    timezone = '', 
-                    latitude = 1.337, 
-                    longitude = 1.337, ),
-                gps_location = notehub_py.models.location.Location(
-                    when = '', 
-                    name = '', 
-                    country = '', 
-                    timezone = '', 
-                    latitude = 1.337, 
-                    longitude = 1.337, ),
-                triangulated_location = notehub_py.models.location.Location(
-                    when = '', 
-                    name = '', 
-                    country = '', 
-                    timezone = '', 
-                    latitude = 1.337, 
-                    longitude = 1.337, ),
-                voltage = 1.337,
-                temperature = 1.337,
-                dfu = notehub_py.models.dfu_env.DFUEnv(
-                    card = notehub_py.models.dfu_state.DFUState(
-                        type = 'card', 
-                        file = '', 
-                        length = 1.337, 
-                        crc32 = 1.337, 
-                        md5 = '', 
-                        mode = 'idle', 
-                        status = '', 
-                        began = 1.337, 
-                        retry = 1.337, 
-                        errors = 1.337, 
-                        read = 1.337, 
-                        updated = 1.337, 
-                        version = '', ), 
-                    user = notehub_py.models.dfu_state.DFUState(
-                        type = 'card', 
-                        file = '', 
-                        length = 1.337, 
-                        crc32 = 1.337, 
-                        md5 = '', 
-                        mode = 'idle', 
-                        status = '', 
-                        began = 1.337, 
-                        retry = 1.337, 
-                        errors = 1.337, 
-                        read = 1.337, 
-                        updated = 1.337, 
-                        version = '', ), ),
-                firmware_host = '',
-                firmware_notecard = '',
-                sku = '',
-                disabled = True,
                 cellular_usage = [
                     notehub_py.models.sim_usage.SimUsage(
                         iccid = '', 
-                        used = 56, 
-                        limit = 56, 
+                        last_updated = 56, 
                         lifetime_used = 56, 
-                        last_updated = 56, )
-                    ]
-            )
-        else:
-            return Device(
-                uid = '',
-                provisioned = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                product_uid = '',
+                        limit = 56, 
+                        used = 56, )
+                    ],
+                contact = notehub_py.models.contact.Contact(
+                    email = '', 
+                    name = '', 
+                    organization = '', 
+                    role = '', ),
+                dfu = notehub_py.models.dfu_env.DFUEnv(
+                    card = notehub_py.models.dfu_state.DFUState(
+                        began = 1.337, 
+                        crc32 = 1.337, 
+                        errors = 1.337, 
+                        file = '', 
+                        length = 1.337, 
+                        md5 = '', 
+                        mode = 'idle', 
+                        read = 1.337, 
+                        retry = 1.337, 
+                        status = '', 
+                        type = 'card', 
+                        updated = 1.337, 
+                        version = '', ), 
+                    user = notehub_py.models.dfu_state.DFUState(
+                        began = 1.337, 
+                        crc32 = 1.337, 
+                        errors = 1.337, 
+                        file = '', 
+                        length = 1.337, 
+                        md5 = '', 
+                        mode = 'idle', 
+                        read = 1.337, 
+                        retry = 1.337, 
+                        status = '', 
+                        type = 'card', 
+                        updated = 1.337, 
+                        version = '', ), ),
+                disabled = True,
+                firmware_host = '',
+                firmware_notecard = '',
                 fleet_uids = [
                     ''
                     ],
-                voltage = 1.337,
+                gps_location = notehub_py.models.location.Location(
+                    country = '', 
+                    latitude = 1.337, 
+                    longitude = 1.337, 
+                    name = '', 
+                    timezone = '', 
+                    when = '', ),
+                last_activity = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                product_uid = '',
+                provisioned = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                serial_number = '',
+                sku = '',
                 temperature = 1.337,
+                tower_info = notehub_py.models.device_tower_info.Device_tower_info(
+                    cell_id = 56, 
+                    lac = 56, 
+                    mcc = 56, 
+                    mnc = 56, ),
+                tower_location = notehub_py.models.location.Location(
+                    country = '', 
+                    latitude = 1.337, 
+                    longitude = 1.337, 
+                    name = '', 
+                    timezone = '', 
+                    when = '', ),
+                triangulated_location = notehub_py.models.location.Location(
+                    country = '', 
+                    latitude = 1.337, 
+                    longitude = 1.337, 
+                    name = '', 
+                    timezone = '', 
+                    when = '', ),
+                uid = '',
+                voltage = 1.337
+            )
+        else:
+            return Device(
+                fleet_uids = [
+                    ''
+                    ],
+                product_uid = '',
+                provisioned = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                temperature = 1.337,
+                uid = '',
+                voltage = 1.337,
         )
         """
 

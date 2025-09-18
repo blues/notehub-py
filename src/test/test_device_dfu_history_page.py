@@ -39,25 +39,25 @@ class TestDeviceDfuHistoryPage(unittest.TestCase):
             return DeviceDfuHistoryPage(
                 devices = [
                     notehub_py.models.device_dfu_history.DeviceDfuHistory(
-                        device_uid = '', 
-                        current = notehub_py.models.device_dfu_status_current.DeviceDfuStatus_current(
-                            version = '', 
-                            organization = '', 
-                            description = '', 
-                            product = '', 
+                        current = notehub_py.models.device_dfu_history_current.DeviceDfuHistory_current(
+                            builder = '', 
                             built = '', 
-                            builder = '', ), 
+                            description = '', 
+                            organization = '', 
+                            product = '', 
+                            version = '', ), 
+                        device_uid = '', 
                         history = [
                             notehub_py.models.device_dfu_state_machine.DeviceDfuStateMachine(
-                                requested_version = '', 
                                 current_version = '', 
                                 initiated = '', 
+                                requested_version = '', 
                                 updates = [
                                     notehub_py.models.device_dfu_state_machine_node.DeviceDfuStateMachineNode(
-                                        status = '', 
-                                        phase = '', 
                                         datetime = '', 
-                                        description = '', )
+                                        description = '', 
+                                        phase = '', 
+                                        status = '', )
                                     ], )
                             ], )
                     ],

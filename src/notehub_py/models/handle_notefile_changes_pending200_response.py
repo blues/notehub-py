@@ -29,20 +29,20 @@ class HandleNotefileChangesPending200Response(BaseModel):
     HandleNotefileChangesPending200Response
     """  # noqa: E501
 
-    total: Optional[StrictInt] = Field(
-        default=None, description="The total number of files."
-    )
     changes: Optional[StrictInt] = Field(
         default=None, description="The number of pending changes in the Notefile."
-    )
-    pending: Optional[StrictBool] = Field(
-        default=None, description="Whether there are pending changes."
     )
     info: Optional[Dict[str, Any]] = Field(
         default=None,
         description="An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file.",
     )
-    __properties: ClassVar[List[str]] = ["total", "changes", "pending", "info"]
+    pending: Optional[StrictBool] = Field(
+        default=None, description="Whether there are pending changes."
+    )
+    total: Optional[StrictInt] = Field(
+        default=None, description="The total number of files."
+    )
+    __properties: ClassVar[List[str]] = ["changes", "info", "pending", "total"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,10 +94,10 @@ class HandleNotefileChangesPending200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "total": obj.get("total"),
                 "changes": obj.get("changes"),
-                "pending": obj.get("pending"),
                 "info": obj.get("info"),
+                "pending": obj.get("pending"),
+                "total": obj.get("total"),
             }
         )
         return _obj

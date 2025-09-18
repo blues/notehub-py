@@ -37,226 +37,226 @@ class Event(BaseModel):
     Event
     """  # noqa: E501
 
-    event: Optional[StrictStr] = Field(
-        default=None, description="Event UID (globally unique)"
+    app: Optional[StrictStr] = Field(
+        default=None, description="App UID (globally unique)"
     )
-    session: Optional[StrictStr] = Field(
-        default=None, description="Session UID (globally unique)"
+    bars: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Bars. Only available on _session.qo events."
     )
-    tls: Optional[StrictBool] = Field(
-        default=None,
-        description="Whether TLS was used on the connection between the device and notehub. Only available on _session.qo events.",
-    )
-    transport: Optional[StrictStr] = Field(
-        default=None,
-        description='The transport used for this event, e.g., "cellular", "wifi", ", etc.',
-    )
+    best_country: Optional[StrictStr] = Field(default=None, description="Country")
     best_id: Optional[StrictStr] = Field(
         default=None,
         description="The device serial number, or the DeviceUID if the serial number is not set",
     )
-    device: Optional[StrictStr] = Field(
-        default=None, description="Device UID (globally unique)"
+    best_lat: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Latitude"
     )
-    sn: Optional[StrictStr] = Field(
-        default=None, description="The device serial number"
-    )
-    product: Optional[StrictStr] = Field(
-        default=None, description="Product UID (globally unique)"
-    )
-    app: Optional[StrictStr] = Field(
-        default=None, description="App UID (globally unique)"
-    )
-    received: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="The unix timestamp when the event was received"
-    )
-    req: Optional[StrictStr] = Field(default=None, description="The notecard request")
-    when: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="When the event was captured on the device"
-    )
-    file: Optional[StrictStr] = Field(
-        default=None, description="The notefile associated with this event"
-    )
-    note: Optional[StrictStr] = Field(
-        default=None, description="The note ID in the notefile"
-    )
-    updates: Optional[Union[StrictFloat, StrictInt]] = None
-    body: Optional[Dict[str, Any]] = Field(
-        default=None, description="A JSON object containing event details"
-    )
-    payload: Optional[StrictStr] = Field(
-        default=None, description="A base64-encoded binary payload"
-    )
+    best_location: Optional[StrictStr] = Field(default=None, description="Location")
     best_location_type: Optional[StrictStr] = Field(
         default=None, description='One of "gps", "triangulated", or "tower"'
     )
     best_location_when: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="Unix timestamp"
     )
-    best_lat: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Latitude"
-    )
     best_lon: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="Longitude"
     )
-    best_location: Optional[StrictStr] = Field(default=None, description="Location")
-    best_country: Optional[StrictStr] = Field(default=None, description="Country")
     best_timezone: Optional[StrictStr] = Field(default=None, description="Timezone")
-    where_olc: Optional[StrictStr] = Field(
-        default=None, description="Open Location Code"
+    body: Optional[Dict[str, Any]] = Field(
+        default=None, description="A JSON object containing event details"
     )
-    where_when: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Unix timestamp"
+    bssid: Optional[StrictStr] = Field(
+        default=None, description="BSSID. Only available on _session.qo events."
     )
-    where_lat: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Latitude"
+    device: Optional[StrictStr] = Field(
+        default=None, description="Device UID (globally unique)"
     )
-    where_lon: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Longitude"
+    environment: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description='Routed environment variables beginning with "$". Only available on _session.qo events.',
     )
-    where_location: Optional[StrictStr] = Field(default=None, description="Location")
-    where_country: Optional[StrictStr] = Field(default=None, description="Country")
-    where_timezone: Optional[StrictStr] = Field(default=None, description="Timezone")
-    tower_when: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Unix timestamp"
+    event: Optional[StrictStr] = Field(
+        default=None, description="Event UID (globally unique)"
     )
-    tower_lat: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Latitude"
-    )
-    tower_lon: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Longitude"
-    )
-    tower_country: Optional[StrictStr] = Field(default=None, description="Country")
-    tower_location: Optional[StrictStr] = Field(default=None, description="Location")
-    tower_timezone: Optional[StrictStr] = Field(default=None, description="Timezone")
-    tower_id: Optional[StrictStr] = Field(default=None, description="Tower ID")
-    tri_when: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Unix timestamp"
-    )
-    tri_lat: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Latitude"
-    )
-    tri_lon: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Longitude"
-    )
-    tri_location: Optional[StrictStr] = Field(default=None, description="Location")
-    tri_country: Optional[StrictStr] = Field(default=None, description="Country")
-    tri_timezone: Optional[StrictStr] = Field(default=None, description="Timezone")
-    tri_points: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Triangulation points"
+    file: Optional[StrictStr] = Field(
+        default=None, description="The notefile associated with this event"
     )
     moved: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None,
         description="The number of times the device was sensed to have moved between the last session and this session. Only available on _session.qo events.",
     )
+    note: Optional[StrictStr] = Field(
+        default=None, description="The note ID in the notefile"
+    )
+    ordering_code: Optional[StrictStr] = Field(
+        default=None, description="Ordering code. Only available on _session.qo events."
+    )
     orientation: Optional[StrictStr] = Field(
         default=None,
         description="The orientation of the device. Only available on _session.qo events.",
     )
-    rssi: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None,
-        description="Received Signal Strength Indicator (RSSI) is an estimated measurement of how well a device can receive signals. Only available on _session.qo events.",
+    payload: Optional[StrictStr] = Field(
+        default=None, description="A base64-encoded binary payload"
     )
-    sinr: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="SINR. Only available on _session.qo events."
+    product: Optional[StrictStr] = Field(
+        default=None, description="Product UID (globally unique)"
     )
+    rat: Optional[StrictStr] = Field(
+        default=None, description="Rat. Only available on _session.qo events."
+    )
+    received: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="The unix timestamp when the event was received"
+    )
+    req: Optional[StrictStr] = Field(default=None, description="The notecard request")
     rsrp: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="RSRP. Only available on _session.qo events."
     )
     rsrq: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="RSRQ. Only available on _session.qo events."
     )
-    rat: Optional[StrictStr] = Field(
-        default=None, description="Rat. Only available on _session.qo events."
-    )
-    bars: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Bars. Only available on _session.qo events."
-    )
-    voltage: Optional[Union[StrictFloat, StrictInt]] = Field(
+    rssi: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None,
-        description="Device voltage. Only available on _session.qo events.",
+        description="Received Signal Strength Indicator (RSSI) is an estimated measurement of how well a device can receive signals. Only available on _session.qo events.",
+    )
+    session: Optional[StrictStr] = Field(
+        default=None, description="Session UID (globally unique)"
+    )
+    sinr: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="SINR. Only available on _session.qo events."
+    )
+    sku: Optional[StrictStr] = Field(
+        default=None, description="SKU. Only available on _session.qo events."
+    )
+    sn: Optional[StrictStr] = Field(
+        default=None, description="The device serial number"
+    )
+    ssid: Optional[StrictStr] = Field(
+        default=None, description="SSID. Only available on _session.qo events."
     )
     temp: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None,
         description="Device temperature. Only available on _session.qo events.",
     )
-    environment: Optional[Dict[str, Any]] = Field(
+    tls: Optional[StrictBool] = Field(
         default=None,
-        description='Routed environment variables beginning with "$". Only available on _session.qo events.',
+        description="Whether TLS was used on the connection between the device and notehub. Only available on _session.qo events.",
     )
-    sku: Optional[StrictStr] = Field(
-        default=None, description="SKU. Only available on _session.qo events."
+    tower_country: Optional[StrictStr] = Field(default=None, description="Country")
+    tower_id: Optional[StrictStr] = Field(default=None, description="Tower ID")
+    tower_lat: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Latitude"
     )
-    ordering_code: Optional[StrictStr] = Field(
-        default=None, description="Ordering code. Only available on _session.qo events."
+    tower_location: Optional[StrictStr] = Field(default=None, description="Location")
+    tower_lon: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Longitude"
     )
-    ssid: Optional[StrictStr] = Field(
-        default=None, description="SSID. Only available on _session.qo events."
+    tower_timezone: Optional[StrictStr] = Field(default=None, description="Timezone")
+    tower_when: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Unix timestamp"
     )
-    bssid: Optional[StrictStr] = Field(
-        default=None, description="BSSID. Only available on _session.qo events."
+    transport: Optional[StrictStr] = Field(
+        default=None,
+        description='The transport used for this event, e.g., "cellular", "wifi", ", etc.',
+    )
+    tri_country: Optional[StrictStr] = Field(default=None, description="Country")
+    tri_lat: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Latitude"
+    )
+    tri_location: Optional[StrictStr] = Field(default=None, description="Location")
+    tri_lon: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Longitude"
+    )
+    tri_points: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Triangulation points"
+    )
+    tri_timezone: Optional[StrictStr] = Field(default=None, description="Timezone")
+    tri_when: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Unix timestamp"
+    )
+    updates: Optional[Union[StrictFloat, StrictInt]] = None
+    voltage: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Device voltage. Only available on _session.qo events.",
+    )
+    when: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="When the event was captured on the device"
+    )
+    where_country: Optional[StrictStr] = Field(default=None, description="Country")
+    where_lat: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Latitude"
+    )
+    where_location: Optional[StrictStr] = Field(default=None, description="Location")
+    where_lon: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Longitude"
+    )
+    where_olc: Optional[StrictStr] = Field(
+        default=None, description="Open Location Code"
+    )
+    where_timezone: Optional[StrictStr] = Field(default=None, description="Timezone")
+    where_when: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Unix timestamp"
     )
     __properties: ClassVar[List[str]] = [
-        "event",
-        "session",
-        "tls",
-        "transport",
-        "best_id",
-        "device",
-        "sn",
-        "product",
         "app",
-        "received",
-        "req",
-        "when",
-        "file",
-        "note",
-        "updates",
-        "body",
-        "payload",
+        "bars",
+        "best_country",
+        "best_id",
+        "best_lat",
+        "best_location",
         "best_location_type",
         "best_location_when",
-        "best_lat",
         "best_lon",
-        "best_location",
-        "best_country",
         "best_timezone",
-        "where_olc",
-        "where_when",
-        "where_lat",
-        "where_lon",
-        "where_location",
-        "where_country",
-        "where_timezone",
-        "tower_when",
-        "tower_lat",
-        "tower_lon",
-        "tower_country",
-        "tower_location",
-        "tower_timezone",
-        "tower_id",
-        "tri_when",
-        "tri_lat",
-        "tri_lon",
-        "tri_location",
-        "tri_country",
-        "tri_timezone",
-        "tri_points",
+        "body",
+        "bssid",
+        "device",
+        "environment",
+        "event",
+        "file",
         "moved",
+        "note",
+        "ordering_code",
         "orientation",
-        "rssi",
-        "sinr",
+        "payload",
+        "product",
+        "rat",
+        "received",
+        "req",
         "rsrp",
         "rsrq",
-        "rat",
-        "bars",
-        "voltage",
-        "temp",
-        "environment",
+        "rssi",
+        "session",
+        "sinr",
         "sku",
-        "ordering_code",
+        "sn",
         "ssid",
-        "bssid",
+        "temp",
+        "tls",
+        "tower_country",
+        "tower_id",
+        "tower_lat",
+        "tower_location",
+        "tower_lon",
+        "tower_timezone",
+        "tower_when",
+        "transport",
+        "tri_country",
+        "tri_lat",
+        "tri_location",
+        "tri_lon",
+        "tri_points",
+        "tri_timezone",
+        "tri_when",
+        "updates",
+        "voltage",
+        "when",
+        "where_country",
+        "where_lat",
+        "where_location",
+        "where_lon",
+        "where_olc",
+        "where_timezone",
+        "where_when",
     ]
 
     model_config = ConfigDict(
@@ -309,66 +309,66 @@ class Event(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "event": obj.get("event"),
-                "session": obj.get("session"),
-                "tls": obj.get("tls"),
-                "transport": obj.get("transport"),
-                "best_id": obj.get("best_id"),
-                "device": obj.get("device"),
-                "sn": obj.get("sn"),
-                "product": obj.get("product"),
                 "app": obj.get("app"),
-                "received": obj.get("received"),
-                "req": obj.get("req"),
-                "when": obj.get("when"),
-                "file": obj.get("file"),
-                "note": obj.get("note"),
-                "updates": obj.get("updates"),
-                "body": obj.get("body"),
-                "payload": obj.get("payload"),
+                "bars": obj.get("bars"),
+                "best_country": obj.get("best_country"),
+                "best_id": obj.get("best_id"),
+                "best_lat": obj.get("best_lat"),
+                "best_location": obj.get("best_location"),
                 "best_location_type": obj.get("best_location_type"),
                 "best_location_when": obj.get("best_location_when"),
-                "best_lat": obj.get("best_lat"),
                 "best_lon": obj.get("best_lon"),
-                "best_location": obj.get("best_location"),
-                "best_country": obj.get("best_country"),
                 "best_timezone": obj.get("best_timezone"),
-                "where_olc": obj.get("where_olc"),
-                "where_when": obj.get("where_when"),
-                "where_lat": obj.get("where_lat"),
-                "where_lon": obj.get("where_lon"),
-                "where_location": obj.get("where_location"),
-                "where_country": obj.get("where_country"),
-                "where_timezone": obj.get("where_timezone"),
-                "tower_when": obj.get("tower_when"),
-                "tower_lat": obj.get("tower_lat"),
-                "tower_lon": obj.get("tower_lon"),
-                "tower_country": obj.get("tower_country"),
-                "tower_location": obj.get("tower_location"),
-                "tower_timezone": obj.get("tower_timezone"),
-                "tower_id": obj.get("tower_id"),
-                "tri_when": obj.get("tri_when"),
-                "tri_lat": obj.get("tri_lat"),
-                "tri_lon": obj.get("tri_lon"),
-                "tri_location": obj.get("tri_location"),
-                "tri_country": obj.get("tri_country"),
-                "tri_timezone": obj.get("tri_timezone"),
-                "tri_points": obj.get("tri_points"),
+                "body": obj.get("body"),
+                "bssid": obj.get("bssid"),
+                "device": obj.get("device"),
+                "environment": obj.get("environment"),
+                "event": obj.get("event"),
+                "file": obj.get("file"),
                 "moved": obj.get("moved"),
+                "note": obj.get("note"),
+                "ordering_code": obj.get("ordering_code"),
                 "orientation": obj.get("orientation"),
-                "rssi": obj.get("rssi"),
-                "sinr": obj.get("sinr"),
+                "payload": obj.get("payload"),
+                "product": obj.get("product"),
+                "rat": obj.get("rat"),
+                "received": obj.get("received"),
+                "req": obj.get("req"),
                 "rsrp": obj.get("rsrp"),
                 "rsrq": obj.get("rsrq"),
-                "rat": obj.get("rat"),
-                "bars": obj.get("bars"),
-                "voltage": obj.get("voltage"),
-                "temp": obj.get("temp"),
-                "environment": obj.get("environment"),
+                "rssi": obj.get("rssi"),
+                "session": obj.get("session"),
+                "sinr": obj.get("sinr"),
                 "sku": obj.get("sku"),
-                "ordering_code": obj.get("ordering_code"),
+                "sn": obj.get("sn"),
                 "ssid": obj.get("ssid"),
-                "bssid": obj.get("bssid"),
+                "temp": obj.get("temp"),
+                "tls": obj.get("tls"),
+                "tower_country": obj.get("tower_country"),
+                "tower_id": obj.get("tower_id"),
+                "tower_lat": obj.get("tower_lat"),
+                "tower_location": obj.get("tower_location"),
+                "tower_lon": obj.get("tower_lon"),
+                "tower_timezone": obj.get("tower_timezone"),
+                "tower_when": obj.get("tower_when"),
+                "transport": obj.get("transport"),
+                "tri_country": obj.get("tri_country"),
+                "tri_lat": obj.get("tri_lat"),
+                "tri_location": obj.get("tri_location"),
+                "tri_lon": obj.get("tri_lon"),
+                "tri_points": obj.get("tri_points"),
+                "tri_timezone": obj.get("tri_timezone"),
+                "tri_when": obj.get("tri_when"),
+                "updates": obj.get("updates"),
+                "voltage": obj.get("voltage"),
+                "when": obj.get("when"),
+                "where_country": obj.get("where_country"),
+                "where_lat": obj.get("where_lat"),
+                "where_location": obj.get("where_location"),
+                "where_lon": obj.get("where_lon"),
+                "where_olc": obj.get("where_olc"),
+                "where_timezone": obj.get("where_timezone"),
+                "where_when": obj.get("where_when"),
             }
         )
         return _obj

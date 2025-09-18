@@ -108,6 +108,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AlertApi* | [**get_alerts**](docs/AlertApi.md#get_alerts) | **GET** /v1/projects/{projectOrProductUID}/alerts | 
 *AuthorizationApi* | [**login**](docs/AuthorizationApi.md#login) | **POST** /auth/login | 
+*AuthorizationApi* | [**o_auth2_client_credentials**](docs/AuthorizationApi.md#o_auth2_client_credentials) | **POST** /oauth2/token | Issue an OAuth 2.0 access token (Client Credentials)
 *BillingAccountApi* | [**get_billing_accounts**](docs/BillingAccountApi.md#get_billing_accounts) | **GET** /v1/billing-accounts | 
 *DeviceApi* | [**delete_device_environment_variable**](docs/DeviceApi.md#delete_device_environment_variable) | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key} | 
 *DeviceApi* | [**delete_project_device**](docs/DeviceApi.md#delete_project_device) | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID} | 
@@ -194,6 +195,10 @@ Class | Method | HTTP request | Description
 *RouteApi* | [**get_route_logs_by_route**](docs/RouteApi.md#get_route_logs_by_route) | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs | 
 *RouteApi* | [**get_routes**](docs/RouteApi.md#get_routes) | **GET** /v1/projects/{projectOrProductUID}/routes | 
 *RouteApi* | [**update_route**](docs/RouteApi.md#update_route) | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID} | 
+*UsageApi* | [**get_project_data_usage**](docs/UsageApi.md#get_project_data_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/data | 
+*UsageApi* | [**get_project_events_usage**](docs/UsageApi.md#get_project_events_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/events | 
+*UsageApi* | [**get_route_logs_usage**](docs/UsageApi.md#get_route_logs_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/route-logs | 
+*UsageApi* | [**get_sessions_usage**](docs/UsageApi.md#get_sessions_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/sessions | 
 *WebhookApi* | [**create_webhook**](docs/WebhookApi.md#create_webhook) | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
 *WebhookApi* | [**delete_webhook**](docs/WebhookApi.md#delete_webhook) | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
 *WebhookApi* | [**get_webhook**](docs/WebhookApi.md#get_webhook) | **GET** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
@@ -206,13 +211,9 @@ Class | Method | HTTP request | Description
  - [Alert](docs/Alert.md)
  - [AlertDataInner](docs/AlertDataInner.md)
  - [AlertNotificationsInner](docs/AlertNotificationsInner.md)
- - [AnalyticsEventsData](docs/AnalyticsEventsData.md)
- - [AnalyticsEventsResponse](docs/AnalyticsEventsResponse.md)
- - [AnalyticsRouteLogsData](docs/AnalyticsRouteLogsData.md)
- - [AnalyticsRouteLogsResponse](docs/AnalyticsRouteLogsResponse.md)
- - [AnalyticsSessionsData](docs/AnalyticsSessionsData.md)
- - [AnalyticsSessionsResponse](docs/AnalyticsSessionsResponse.md)
  - [Aws](docs/Aws.md)
+ - [AwsFilter](docs/AwsFilter.md)
+ - [AwsTransform](docs/AwsTransform.md)
  - [Azure](docs/Azure.md)
  - [BillingAccount](docs/BillingAccount.md)
  - [BillingAccountRole](docs/BillingAccountRole.md)
@@ -228,16 +229,15 @@ Class | Method | HTTP request | Description
  - [DFUEnv](docs/DFUEnv.md)
  - [DFUState](docs/DFUState.md)
  - [DataField](docs/DataField.md)
- - [DataSet](docs/DataSet.md)
  - [DataSetField](docs/DataSetField.md)
  - [DeleteDeviceFleetsRequest](docs/DeleteDeviceFleetsRequest.md)
  - [Device](docs/Device.md)
  - [DeviceDfuHistory](docs/DeviceDfuHistory.md)
+ - [DeviceDfuHistoryCurrent](docs/DeviceDfuHistoryCurrent.md)
  - [DeviceDfuHistoryPage](docs/DeviceDfuHistoryPage.md)
  - [DeviceDfuStateMachine](docs/DeviceDfuStateMachine.md)
  - [DeviceDfuStateMachineNode](docs/DeviceDfuStateMachineNode.md)
  - [DeviceDfuStatus](docs/DeviceDfuStatus.md)
- - [DeviceDfuStatusCurrent](docs/DeviceDfuStatusCurrent.md)
  - [DeviceDfuStatusPage](docs/DeviceDfuStatusPage.md)
  - [DeviceSession](docs/DeviceSession.md)
  - [DeviceTowerInfo](docs/DeviceTowerInfo.md)
@@ -254,7 +254,8 @@ Class | Method | HTTP request | Description
  - [Fleet](docs/Fleet.md)
  - [GetAlerts200Response](docs/GetAlerts200Response.md)
  - [GetBillingAccounts200Response](docs/GetBillingAccounts200Response.md)
- - [GetDeviceEnvironmentVariables200Response](docs/GetDeviceEnvironmentVariables200Response.md)
+ - [GetDeviceEnvironmentVariablesByPin200Response](docs/GetDeviceEnvironmentVariablesByPin200Response.md)
+ - [GetDeviceFleets200Response](docs/GetDeviceFleets200Response.md)
  - [GetDeviceHealthLog200Response](docs/GetDeviceHealthLog200Response.md)
  - [GetDeviceHealthLog200ResponseHealthLogInner](docs/GetDeviceHealthLog200ResponseHealthLogInner.md)
  - [GetDeviceLatest200Response](docs/GetDeviceLatest200Response.md)
@@ -265,7 +266,6 @@ Class | Method | HTTP request | Description
  - [GetProjectDevices200Response](docs/GetProjectDevices200Response.md)
  - [GetProjectEvents200Response](docs/GetProjectEvents200Response.md)
  - [GetProjectEventsByCursor200Response](docs/GetProjectEventsByCursor200Response.md)
- - [GetProjectFleets200Response](docs/GetProjectFleets200Response.md)
  - [GetProjectMembers200Response](docs/GetProjectMembers200Response.md)
  - [GetProjectProducts200Response](docs/GetProjectProducts200Response.md)
  - [GetProjects200Response](docs/GetProjects200Response.md)
@@ -278,8 +278,6 @@ Class | Method | HTTP request | Description
  - [HandleNotefileChangesPending200Response](docs/HandleNotefileChangesPending200Response.md)
  - [HandleNotefileDeleteRequest](docs/HandleNotefileDeleteRequest.md)
  - [Http](docs/Http.md)
- - [HttpFilter](docs/HttpFilter.md)
- - [HttpTransform](docs/HttpTransform.md)
  - [Location](docs/Location.md)
  - [Login200Response](docs/Login200Response.md)
  - [LoginRequest](docs/LoginRequest.md)
@@ -290,6 +288,8 @@ Class | Method | HTTP request | Description
  - [NotefileSchema](docs/NotefileSchema.md)
  - [NotehubRoute](docs/NotehubRoute.md)
  - [NotehubRouteSchema](docs/NotehubRouteSchema.md)
+ - [OAuth2Error](docs/OAuth2Error.md)
+ - [OAuth2TokenResponse](docs/OAuth2TokenResponse.md)
  - [PersonalAccessToken](docs/PersonalAccessToken.md)
  - [PersonalAccessTokenCreatedBy](docs/PersonalAccessTokenCreatedBy.md)
  - [PersonalAccessTokenInfo](docs/PersonalAccessTokenInfo.md)
@@ -300,8 +300,6 @@ Class | Method | HTTP request | Description
  - [ProjectMember](docs/ProjectMember.md)
  - [Proxy](docs/Proxy.md)
  - [PutDeviceFleetsRequest](docs/PutDeviceFleetsRequest.md)
- - [QuestionDataResponseLineChart](docs/QuestionDataResponseLineChart.md)
- - [QuestionDataResponseMap](docs/QuestionDataResponseMap.md)
  - [Radresponder](docs/Radresponder.md)
  - [Repository](docs/Repository.md)
  - [Role](docs/Role.md)
@@ -310,14 +308,21 @@ Class | Method | HTTP request | Description
  - [SimUsage](docs/SimUsage.md)
  - [Slack](docs/Slack.md)
  - [SlackBearerNotification](docs/SlackBearerNotification.md)
+ - [SlackTransform](docs/SlackTransform.md)
  - [SlackWebHookNotification](docs/SlackWebHookNotification.md)
  - [Snowflake](docs/Snowflake.md)
- - [SnowflakeTransform](docs/SnowflakeTransform.md)
  - [Thingworx](docs/Thingworx.md)
  - [TowerLocation](docs/TowerLocation.md)
  - [Twilio](docs/Twilio.md)
  - [UpdateFleetRequest](docs/UpdateFleetRequest.md)
  - [UploadMetadata](docs/UploadMetadata.md)
+ - [UsageData](docs/UsageData.md)
+ - [UsageEventsData](docs/UsageEventsData.md)
+ - [UsageEventsResponse](docs/UsageEventsResponse.md)
+ - [UsageRouteLogsData](docs/UsageRouteLogsData.md)
+ - [UsageRouteLogsResponse](docs/UsageRouteLogsResponse.md)
+ - [UsageSessionsData](docs/UsageSessionsData.md)
+ - [UsageSessionsResponse](docs/UsageSessionsResponse.md)
  - [UserDbRoute](docs/UserDbRoute.md)
  - [UserDfuStateMachine](docs/UserDfuStateMachine.md)
  - [UserDfuStateMachineStatus](docs/UserDfuStateMachineStatus.md)

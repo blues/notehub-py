@@ -37,30 +37,30 @@ class TestMonitor(unittest.TestCase):
         model = Monitor()
         if include_optional:
             return Monitor(
-                uid = '',
-                name = '',
-                description = '',
-                source_type = 'event',
-                disabled = True,
+                aggregate_function = 'none',
+                aggregate_window = '10m or 5h30m40s',
                 alert = True,
-                notefile_filter = [
-                    ''
-                    ],
-                fleet_filter = [
-                    ''
-                    ],
-                source_selector = 'body.temperature',
-                condition_type = 'greater_than',
-                threshold = 56,
                 alert_routes = [
                     null
                     ],
+                condition_type = 'greater_than',
+                description = '',
+                disabled = True,
+                fleet_filter = [
+                    ''
+                    ],
                 last_routed_at = '',
-                silenced = True,
+                name = '',
+                notefile_filter = [
+                    ''
+                    ],
+                per_device = True,
                 routing_cooldown_period = '10m or 5h30m40s',
-                aggregate_function = 'none',
-                aggregate_window = '10m or 5h30m40s',
-                per_device = True
+                silenced = True,
+                source_selector = 'body.temperature',
+                source_type = 'event',
+                threshold = 56,
+                uid = ''
             )
         else:
             return Monitor(

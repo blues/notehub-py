@@ -37,13 +37,13 @@ class TestRadresponder(unittest.TestCase):
         model = Radresponder()
         if include_optional:
             return Radresponder(
+                client_id = '',
+                client_secret = '',
+                data_feed_key = '',
                 fleets = [
                     ''
                     ],
-                test_api = True,
-                data_feed_key = '',
-                client_id = '',
-                client_secret = ''
+                test_api = True
             )
         else:
             return Radresponder(

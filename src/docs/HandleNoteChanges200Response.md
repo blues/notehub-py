@@ -4,9 +4,9 @@
 
 | Name        | Type       | Description                                                                                                       | Notes      |
 | ----------- | ---------- | ----------------------------------------------------------------------------------------------------------------- | ---------- |
-| **total**   | **int**    | The total number of notes.                                                                                        | [optional] |
 | **changes** | **int**    | The number of pending changes in the Notefile.                                                                    | [optional] |
 | **notes**   | **object** | An object with a key for each note and a value object with the body of each Note and the time the Note was added. | [optional] |
+| **total**   | **int**    | The total number of notes.                                                                                        | [optional] |
 
 ## Example
 

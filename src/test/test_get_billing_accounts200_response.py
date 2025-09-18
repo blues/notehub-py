@@ -41,9 +41,9 @@ class TestGetBillingAccounts200Response(unittest.TestCase):
             return GetBillingAccounts200Response(
                 billing_accounts = [
                     notehub_py.models.billing_account.BillingAccount(
-                        uid = '', 
                         name = '', 
-                        role = 'billing_admin', )
+                        role = 'billing_admin', 
+                        uid = '', )
                     ]
             )
         else:

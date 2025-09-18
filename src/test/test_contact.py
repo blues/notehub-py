@@ -37,10 +37,10 @@ class TestContact(unittest.TestCase):
         model = Contact()
         if include_optional:
             return Contact(
-                name = '',
                 email = '',
-                role = '',
-                organization = ''
+                name = '',
+                organization = '',
+                role = ''
             )
         else:
             return Contact(

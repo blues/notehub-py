@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,10 +29,10 @@ class CreateUpdateRepository(BaseModel):
     CreateUpdateRepository
     """  # noqa: E501
 
+    fleet_uids: Optional[List[StrictStr]] = None
     name: Optional[StrictStr] = None
-    fleet_uids: Optional[List[StrictStr]] = Field(default=None, alias="fleetUIDs")
-    project_uids: Optional[List[StrictStr]] = Field(default=None, alias="projectUIDs")
-    __properties: ClassVar[List[str]] = ["name", "fleetUIDs", "projectUIDs"]
+    project_uids: Optional[List[StrictStr]] = None
+    __properties: ClassVar[List[str]] = ["fleet_uids", "name", "project_uids"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,9 +84,9 @@ class CreateUpdateRepository(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "fleet_uids": obj.get("fleet_uids"),
                 "name": obj.get("name"),
-                "fleetUIDs": obj.get("fleetUIDs"),
-                "projectUIDs": obj.get("projectUIDs"),
+                "project_uids": obj.get("project_uids"),
             }
         )
         return _obj

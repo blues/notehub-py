@@ -29,9 +29,9 @@ class GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner(BaseModel):
     GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner
     """  # noqa: E501
 
-    uid: Optional[StrictStr] = None
     key: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["uid", "key"]
+    uid: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["key", "uid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,5 +81,5 @@ class GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"uid": obj.get("uid"), "key": obj.get("key")})
+        _obj = cls.model_validate({"key": obj.get("key"), "uid": obj.get("uid")})
         return _obj

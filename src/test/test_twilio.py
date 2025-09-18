@@ -37,22 +37,22 @@ class TestTwilio(unittest.TestCase):
         model = Twilio()
         if include_optional:
             return Twilio(
+                account_sid = '',
+                auth_token = '',
+                filter = notehub_py.models.aws_filter.aws_filter(
+                    files = [
+                        ''
+                        ], 
+                    system_notefiles = True, 
+                    type = 'all', ),
                 fleets = [
                     ''
                     ],
-                filter = notehub_py.models.http_filter.http_filter(
-                    type = 'all', 
-                    system_notefiles = True, 
-                    files = [
-                        ''
-                        ], ),
-                timeout = 56,
-                account_sid = '',
-                auth_token = '',
-                to = '',
                 var_from = '',
                 message = '',
-                throttle_ms = 56
+                throttle_ms = 56,
+                timeout = 56,
+                to = ''
             )
         else:
             return Twilio(

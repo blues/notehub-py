@@ -37,17 +37,17 @@ class TestPersonalAccessToken(unittest.TestCase):
         model = PersonalAccessToken()
         if include_optional:
             return PersonalAccessToken(
-                uid = '',
-                name = '',
-                description = '',
-                created_by = notehub_py.models.personal_access_token_created_by.PersonalAccessToken_created_by(
-                    uid = '', 
-                    email = '', 
-                    name = '', ),
-                expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                created_by = notehub_py.models.personal_access_token_created_by.PersonalAccessToken_created_by(
+                    email = '', 
+                    name = '', 
+                    uid = '', ),
+                description = '',
+                expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 last_used = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                suspended = True
+                name = '',
+                suspended = True,
+                uid = ''
             )
         else:
             return PersonalAccessToken(

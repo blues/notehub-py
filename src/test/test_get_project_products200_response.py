@@ -41,12 +41,12 @@ class TestGetProjectProducts200Response(unittest.TestCase):
             return GetProjectProducts200Response(
                 products = [
                     notehub_py.models.product.Product(
-                        uid = '', 
-                        label = '', 
                         auto_provision_fleets = [
                             ''
                             ], 
-                        disable_devices_by_default = True, )
+                        disable_devices_by_default = True, 
+                        label = '', 
+                        uid = '', )
                     ]
             )
         else:

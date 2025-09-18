@@ -21,8 +21,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from notehub_py.models.http_filter import HttpFilter
-from notehub_py.models.snowflake_transform import SnowflakeTransform
+from notehub_py.models.aws_filter import AwsFilter
+from notehub_py.models.slack_transform import SlackTransform
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,54 +32,54 @@ class Slack(BaseModel):
     Route settings specific to Slack routes.  Only used for Slack route types
     """  # noqa: E501
 
+    bearer: Optional[StrictStr] = Field(
+        default=None,
+        description='The Bearer Token for Slack messaging, if the "slack-bearer" type is selected',
+    )
+    blocks: Optional[StrictStr] = Field(
+        default=None,
+        description="The Blocks message to be sent.  If populated, this field overrides the text field within the Slack Messaging API.  Placeholders are available for this field.",
+    )
+    channel: Optional[StrictStr] = Field(
+        default=None,
+        description='The Channel ID for Bearer Token method, if the "slack-bearer" type is selected',
+    )
+    filter: Optional[AwsFilter] = None
     fleets: Optional[Annotated[List[StrictStr], Field(min_length=0)]] = Field(
         default=None,
         description="list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets",
     )
-    filter: Optional[HttpFilter] = None
-    transform: Optional[SnowflakeTransform] = None
+    slack_type: Optional[StrictStr] = Field(
+        default=None,
+        description='The type of Slack message.  Must be one of "slack-bearer" for Bearer Token or "slack-webhook" for Webhook messages',
+    )
+    text: Optional[StrictStr] = Field(
+        default=None,
+        description="The simple text message to be sent, if the blocks message field is not in use.  Placeholders are available for this field.",
+    )
     throttle_ms: Optional[StrictInt] = Field(
         default=None, description="Minimum time between requests in Miliseconds"
     )
     timeout: Optional[StrictInt] = Field(
         default=15, description="Timeout in seconds for each request"
     )
-    slack_type: Optional[StrictStr] = Field(
-        default=None,
-        description='The type of Slack message.  Must be one of "slack-bearer" for Bearer Token or "slack-webhook" for Webhook messages',
-    )
-    bearer: Optional[StrictStr] = Field(
-        default=None,
-        description='The Bearer Token for Slack messaging, if the "slack-bearer" type is selected',
-    )
-    channel: Optional[StrictStr] = Field(
-        default=None,
-        description='The Channel ID for Bearer Token method, if the "slack-bearer" type is selected',
-    )
+    transform: Optional[SlackTransform] = None
     webhook_url: Optional[StrictStr] = Field(
         default=None,
         description='The Webhook URL for Slack Messaging if the "slack-webhook" type is selected',
     )
-    text: Optional[StrictStr] = Field(
-        default=None,
-        description="The simple text message to be sent, if the blocks message field is not in use.  Placeholders are available for this field.",
-    )
-    blocks: Optional[StrictStr] = Field(
-        default=None,
-        description="The Blocks message to be sent.  If populated, this field overrides the text field within the Slack Messaging API.  Placeholders are available for this field.",
-    )
     __properties: ClassVar[List[str]] = [
-        "fleets",
+        "bearer",
+        "blocks",
+        "channel",
         "filter",
-        "transform",
+        "fleets",
+        "slack_type",
+        "text",
         "throttle_ms",
         "timeout",
-        "slack_type",
-        "bearer",
-        "channel",
+        "transform",
         "webhook_url",
-        "text",
-        "blocks",
     ]
 
     model_config = ConfigDict(
@@ -138,25 +138,25 @@ class Slack(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "fleets": obj.get("fleets"),
+                "bearer": obj.get("bearer"),
+                "blocks": obj.get("blocks"),
+                "channel": obj.get("channel"),
                 "filter": (
-                    HttpFilter.from_dict(obj["filter"])
+                    AwsFilter.from_dict(obj["filter"])
                     if obj.get("filter") is not None
                     else None
                 ),
+                "fleets": obj.get("fleets"),
+                "slack_type": obj.get("slack_type"),
+                "text": obj.get("text"),
+                "throttle_ms": obj.get("throttle_ms"),
+                "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
                 "transform": (
-                    SnowflakeTransform.from_dict(obj["transform"])
+                    SlackTransform.from_dict(obj["transform"])
                     if obj.get("transform") is not None
                     else None
                 ),
-                "throttle_ms": obj.get("throttle_ms"),
-                "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
-                "slack_type": obj.get("slack_type"),
-                "bearer": obj.get("bearer"),
-                "channel": obj.get("channel"),
                 "webhook_url": obj.get("webhook_url"),
-                "text": obj.get("text"),
-                "blocks": obj.get("blocks"),
             }
         )
         return _obj

@@ -30,9 +30,9 @@ class GetDeviceSessions200Response(BaseModel):
     GetDeviceSessions200Response
     """  # noqa: E501
 
-    sessions: List[DeviceSession]
     has_more: StrictBool
-    __properties: ClassVar[List[str]] = ["sessions", "has_more"]
+    sessions: List[DeviceSession]
+    __properties: ClassVar[List[str]] = ["has_more", "sessions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,12 +91,12 @@ class GetDeviceSessions200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "has_more": obj.get("has_more"),
                 "sessions": (
                     [DeviceSession.from_dict(_item) for _item in obj["sessions"]]
                     if obj.get("sessions") is not None
                     else None
                 ),
-                "has_more": obj.get("has_more"),
             }
         )
         return _obj

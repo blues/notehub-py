@@ -37,24 +37,24 @@ class TestAzure(unittest.TestCase):
         model = Azure()
         if include_optional:
             return Azure(
+                filter = notehub_py.models.aws_filter.aws_filter(
+                    files = [
+                        ''
+                        ], 
+                    system_notefiles = True, 
+                    type = 'all', ),
                 fleets = [
                     ''
                     ],
-                filter = notehub_py.models.http_filter.http_filter(
-                    type = 'all', 
-                    system_notefiles = True, 
-                    files = [
-                        ''
-                        ], ),
-                transform = notehub_py.models.http_transform.http_transform(
+                functions_key_secret = '',
+                sas_policy_key = '',
+                sas_policy_name = '',
+                throttle_ms = 56,
+                timeout = 56,
+                transform = notehub_py.models.aws_transform.aws_transform(
                     format = '', 
                     jsonata = '', ),
-                throttle_ms = 56,
-                url = '',
-                timeout = 56,
-                functions_key_secret = '',
-                sas_policy_name = '',
-                sas_policy_key = ''
+                url = ''
             )
         else:
             return Azure(

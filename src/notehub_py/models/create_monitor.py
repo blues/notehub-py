@@ -39,45 +39,6 @@ class CreateMonitor(BaseModel):
     CreateMonitor
     """  # noqa: E501
 
-    uid: Optional[StrictStr] = None
-    name: StrictStr
-    description: StrictStr
-    source_type: Optional[StrictStr] = Field(
-        default=None,
-        description='The type of source to monitor. Currently only "event" is supported.',
-    )
-    disabled: Optional[StrictBool] = Field(
-        default=None, description="If true, the monitor will not be evaluated."
-    )
-    alert: Optional[StrictBool] = Field(
-        default=None, description="If true, the monitor is in alert state."
-    )
-    notefile_filter: List[StrictStr]
-    fleet_filter: Optional[List[StrictStr]] = None
-    source_selector: Optional[StrictStr] = Field(
-        default=None,
-        description="A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.",
-    )
-    condition_type: Optional[StrictStr] = Field(
-        default=None,
-        description="A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]",
-    )
-    threshold: Optional[StrictInt] = Field(
-        default=None,
-        description="The type of condition to apply to the value selected by the source_selector",
-    )
-    alert_routes: List[MonitorAlertRoutesInner]
-    last_routed_at: Optional[StrictStr] = Field(
-        default=None, description="The last time the monitor was evaluated and routed."
-    )
-    silenced: Optional[StrictBool] = Field(
-        default=None,
-        description="If true, alerts will be created, but no notifications will be sent.",
-    )
-    routing_cooldown_period: Optional[Annotated[str, Field(strict=True)]] = Field(
-        default=None,
-        description="The time period to wait before routing another event after the monitor | has been triggered. It follows the format of a number followed by a time unit.",
-    )
     aggregate_function: Optional[StrictStr] = Field(
         default=None,
         description="Aggregate function to apply to the selected values before applying the condition. [none, sum, average, max, min]",
@@ -86,39 +47,90 @@ class CreateMonitor(BaseModel):
         default=None,
         description="The time window to aggregate the selected values. It follows the format of a number followed by a time unit",
     )
+    alert: Optional[StrictBool] = Field(
+        default=None, description="If true, the monitor is in alert state."
+    )
+    alert_routes: List[MonitorAlertRoutesInner]
+    condition_type: Optional[StrictStr] = Field(
+        default=None,
+        description="A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]",
+    )
+    description: StrictStr
+    disabled: Optional[StrictBool] = Field(
+        default=None, description="If true, the monitor will not be evaluated."
+    )
+    fleet_filter: Optional[List[StrictStr]] = None
+    last_routed_at: Optional[StrictStr] = Field(
+        default=None, description="The last time the monitor was evaluated and routed."
+    )
+    name: StrictStr
+    notefile_filter: List[StrictStr]
     per_device: Optional[StrictBool] = Field(
         default=None,
         description="Only relevant when using an aggregate_function. If true, the monitor will be evaluated per device, | rather than across the set of selected devices. If true then if a single device matches the specified criteria, | and alert will be created, otherwise the aggregate function will be applied across all devices.",
     )
+    routing_cooldown_period: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None,
+        description="The time period to wait before routing another event after the monitor | has been triggered. It follows the format of a number followed by a time unit.",
+    )
+    silenced: Optional[StrictBool] = Field(
+        default=None,
+        description="If true, alerts will be created, but no notifications will be sent.",
+    )
+    source_selector: Optional[StrictStr] = Field(
+        default=None,
+        description="A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.",
+    )
+    source_type: Optional[StrictStr] = Field(
+        default=None,
+        description='The type of source to monitor. Currently only "event" is supported.',
+    )
+    threshold: Optional[StrictInt] = Field(
+        default=None,
+        description="The type of condition to apply to the value selected by the source_selector",
+    )
+    uid: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
-        "uid",
-        "name",
-        "description",
-        "source_type",
-        "disabled",
-        "alert",
-        "notefile_filter",
-        "fleet_filter",
-        "source_selector",
-        "condition_type",
-        "threshold",
-        "alert_routes",
-        "last_routed_at",
-        "silenced",
-        "routing_cooldown_period",
         "aggregate_function",
         "aggregate_window",
+        "alert",
+        "alert_routes",
+        "condition_type",
+        "description",
+        "disabled",
+        "fleet_filter",
+        "last_routed_at",
+        "name",
+        "notefile_filter",
         "per_device",
+        "routing_cooldown_period",
+        "silenced",
+        "source_selector",
+        "source_type",
+        "threshold",
+        "uid",
     ]
 
-    @field_validator("source_type")
-    def source_type_validate_enum(cls, value):
+    @field_validator("aggregate_function")
+    def aggregate_function_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["event"]):
-            raise ValueError("must be one of enum values ('event')")
+        if value not in set(["none", "sum", "average", "max", "min"]):
+            raise ValueError(
+                "must be one of enum values ('none', 'sum', 'average', 'max', 'min')"
+            )
+        return value
+
+    @field_validator("aggregate_window")
+    def aggregate_window_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^[0-9]+[smh]$", value):
+            raise ValueError(r"must validate the regular expression /^[0-9]+[smh]$/")
         return value
 
     @field_validator("condition_type")
@@ -152,26 +164,14 @@ class CreateMonitor(BaseModel):
             raise ValueError(r"must validate the regular expression /^[0-9]+[smh]$/")
         return value
 
-    @field_validator("aggregate_function")
-    def aggregate_function_validate_enum(cls, value):
+    @field_validator("source_type")
+    def source_type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["none", "sum", "average", "max", "min"]):
-            raise ValueError(
-                "must be one of enum values ('none', 'sum', 'average', 'max', 'min')"
-            )
-        return value
-
-    @field_validator("aggregate_window")
-    def aggregate_window_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if value is None:
-            return value
-
-        if not re.match(r"^[0-9]+[smh]$", value):
-            raise ValueError(r"must validate the regular expression /^[0-9]+[smh]$/")
+        if value not in set(["event"]):
+            raise ValueError("must be one of enum values ('event')")
         return value
 
     model_config = ConfigDict(
@@ -231,17 +231,9 @@ class CreateMonitor(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "uid": obj.get("uid"),
-                "name": obj.get("name"),
-                "description": obj.get("description"),
-                "source_type": obj.get("source_type"),
-                "disabled": obj.get("disabled"),
+                "aggregate_function": obj.get("aggregate_function"),
+                "aggregate_window": obj.get("aggregate_window"),
                 "alert": obj.get("alert"),
-                "notefile_filter": obj.get("notefile_filter"),
-                "fleet_filter": obj.get("fleet_filter"),
-                "source_selector": obj.get("source_selector"),
-                "condition_type": obj.get("condition_type"),
-                "threshold": obj.get("threshold"),
                 "alert_routes": (
                     [
                         MonitorAlertRoutesInner.from_dict(_item)
@@ -250,12 +242,20 @@ class CreateMonitor(BaseModel):
                     if obj.get("alert_routes") is not None
                     else None
                 ),
+                "condition_type": obj.get("condition_type"),
+                "description": obj.get("description"),
+                "disabled": obj.get("disabled"),
+                "fleet_filter": obj.get("fleet_filter"),
                 "last_routed_at": obj.get("last_routed_at"),
-                "silenced": obj.get("silenced"),
-                "routing_cooldown_period": obj.get("routing_cooldown_period"),
-                "aggregate_function": obj.get("aggregate_function"),
-                "aggregate_window": obj.get("aggregate_window"),
+                "name": obj.get("name"),
+                "notefile_filter": obj.get("notefile_filter"),
                 "per_device": obj.get("per_device"),
+                "routing_cooldown_period": obj.get("routing_cooldown_period"),
+                "silenced": obj.get("silenced"),
+                "source_selector": obj.get("source_selector"),
+                "source_type": obj.get("source_type"),
+                "threshold": obj.get("threshold"),
+                "uid": obj.get("uid"),
             }
         )
         return _obj

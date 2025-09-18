@@ -37,23 +37,23 @@ class NotehubRoute(BaseModel):
     NotehubRoute
     """  # noqa: E501
 
-    uid: Optional[StrictStr] = Field(default=None, description="Route UID")
-    label: Optional[StrictStr] = Field(default=None, description="Route Label")
-    route_type: Optional[StrictStr] = Field(
-        default="http", description="Type of route."
-    )
-    modified: Optional[StrictStr] = Field(default=None, description="Last Modified")
     disabled: Optional[StrictBool] = Field(
         default=False, description="Is route disabled?"
     )
+    label: Optional[StrictStr] = Field(default=None, description="Route Label")
+    modified: Optional[StrictStr] = Field(default=None, description="Last Modified")
+    route_type: Optional[StrictStr] = Field(
+        default="http", description="Type of route."
+    )
     var_schema: Optional[NotehubRouteSchema] = Field(default=None, alias="schema")
+    uid: Optional[StrictStr] = Field(default=None, description="Route UID")
     __properties: ClassVar[List[str]] = [
-        "uid",
-        "label",
-        "route_type",
-        "modified",
         "disabled",
+        "label",
+        "modified",
+        "route_type",
         "schema",
+        "uid",
     ]
 
     @field_validator("route_type")
@@ -144,22 +144,22 @@ class NotehubRoute(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "uid": obj.get("uid"),
+                "disabled": (
+                    obj.get("disabled") if obj.get("disabled") is not None else False
+                ),
                 "label": obj.get("label"),
+                "modified": obj.get("modified"),
                 "route_type": (
                     obj.get("route_type")
                     if obj.get("route_type") is not None
                     else "http"
-                ),
-                "modified": obj.get("modified"),
-                "disabled": (
-                    obj.get("disabled") if obj.get("disabled") is not None else False
                 ),
                 "schema": (
                     NotehubRouteSchema.from_dict(obj["schema"])
                     if obj.get("schema") is not None
                     else None
                 ),
+                "uid": obj.get("uid"),
             }
         )
         return _obj

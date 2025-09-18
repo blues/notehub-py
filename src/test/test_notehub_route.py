@@ -37,12 +37,12 @@ class TestNotehubRoute(unittest.TestCase):
         model = NotehubRoute()
         if include_optional:
             return NotehubRoute(
-                uid = '',
-                label = '',
-                route_type = 'http',
-                modified = '',
                 disabled = True,
-                var_schema = None
+                label = '',
+                modified = '',
+                route_type = 'http',
+                var_schema = None,
+                uid = ''
             )
         else:
             return NotehubRoute(

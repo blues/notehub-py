@@ -29,12 +29,6 @@ class DeviceDfuStateMachineNode(BaseModel):
     Represents a single request to update the host or Notecard firmware
     """  # noqa: E501
 
-    status: Optional[StrictStr] = Field(
-        default=None, description="Status for this step in the firmware update process"
-    )
-    phase: Optional[StrictStr] = Field(
-        default=None, description="Phase for this step in the firmware update process"
-    )
     datetime: Optional[StrictStr] = Field(
         default=None,
         description="RFC3339 compatible datetime of when this status update happened",
@@ -42,7 +36,13 @@ class DeviceDfuStateMachineNode(BaseModel):
     description: Optional[StrictStr] = Field(
         default=None, description="Additional information"
     )
-    __properties: ClassVar[List[str]] = ["status", "phase", "datetime", "description"]
+    phase: Optional[StrictStr] = Field(
+        default=None, description="Phase for this step in the firmware update process"
+    )
+    status: Optional[StrictStr] = Field(
+        default=None, description="Status for this step in the firmware update process"
+    )
+    __properties: ClassVar[List[str]] = ["datetime", "description", "phase", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,10 +94,10 @@ class DeviceDfuStateMachineNode(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "status": obj.get("status"),
-                "phase": obj.get("phase"),
                 "datetime": obj.get("datetime"),
                 "description": obj.get("description"),
+                "phase": obj.get("phase"),
+                "status": obj.get("status"),
             }
         )
         return _obj

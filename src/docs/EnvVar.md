@@ -5,9 +5,9 @@
 | Name           | Type              | Description | Notes      |
 | -------------- | ----------------- | ----------- | ---------- |
 | **key**        | **str**           |             | [optional] |
-| **value**      | **str**           |             | [optional] |
-| **used**       | **bool**          |             | [optional] |
 | **precedence** | [**Int**](Int.md) |             | [optional] |
+| **used**       | **bool**          |             | [optional] |
+| **value**      | **str**           |             | [optional] |
 
 ## Example
 

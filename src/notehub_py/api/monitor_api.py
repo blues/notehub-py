@@ -44,7 +44,7 @@ class MonitorApi:
     def create_monitor(
         self,
         project_or_product_uid: StrictStr,
-        create_monitor: Annotated[
+        body: Annotated[
             CreateMonitor, Field(description="Body or payload of monitor to be created")
         ],
         _request_timeout: Union[
@@ -65,8 +65,8 @@ class MonitorApi:
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param create_monitor: Body or payload of monitor to be created (required)
-        :type create_monitor: CreateMonitor
+        :param body: Body or payload of monitor to be created (required)
+        :type body: Monitor
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -91,7 +91,7 @@ class MonitorApi:
 
         _param = self._create_monitor_serialize(
             project_or_product_uid=project_or_product_uid,
-            create_monitor=create_monitor,
+            body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -114,7 +114,7 @@ class MonitorApi:
     def create_monitor_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        create_monitor: Annotated[
+        body: Annotated[
             CreateMonitor, Field(description="Body or payload of monitor to be created")
         ],
         _request_timeout: Union[
@@ -135,8 +135,8 @@ class MonitorApi:
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param create_monitor: Body or payload of monitor to be created (required)
-        :type create_monitor: CreateMonitor
+        :param body: Body or payload of monitor to be created (required)
+        :type body: Monitor
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -161,7 +161,7 @@ class MonitorApi:
 
         _param = self._create_monitor_serialize(
             project_or_product_uid=project_or_product_uid,
-            create_monitor=create_monitor,
+            body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -184,7 +184,7 @@ class MonitorApi:
     def create_monitor_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        create_monitor: Annotated[
+        body: Annotated[
             CreateMonitor, Field(description="Body or payload of monitor to be created")
         ],
         _request_timeout: Union[
@@ -205,8 +205,8 @@ class MonitorApi:
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param create_monitor: Body or payload of monitor to be created (required)
-        :type create_monitor: CreateMonitor
+        :param body: Body or payload of monitor to be created (required)
+        :type body: Monitor
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -231,7 +231,7 @@ class MonitorApi:
 
         _param = self._create_monitor_serialize(
             project_or_product_uid=project_or_product_uid,
-            create_monitor=create_monitor,
+            body=body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -249,7 +249,7 @@ class MonitorApi:
     def _create_monitor_serialize(
         self,
         project_or_product_uid,
-        create_monitor,
+        body,
         _request_auth,
         _content_type,
         _headers,
@@ -274,8 +274,8 @@ class MonitorApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_monitor is not None:
-            _body_params = create_monitor
+        if body is not None:
+            _body_params = body
 
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.api_client.select_header_accept(

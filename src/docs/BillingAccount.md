@@ -4,9 +4,9 @@
 
 | Name     | Type                                            | Description | Notes |
 | -------- | ----------------------------------------------- | ----------- | ----- |
-| **uid**  | **str**                                         |             |
 | **name** | **str**                                         |             |
 | **role** | [**BillingAccountRole**](BillingAccountRole.md) |             |
+| **uid**  | **str**                                         |             |
 
 ## Example
 

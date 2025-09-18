@@ -34,7 +34,7 @@ from notehub_py.models.env_tree_json_node import EnvTreeJsonNode
 from notehub_py.models.environment_variables import EnvironmentVariables
 from notehub_py.models.firmware_info import FirmwareInfo
 from notehub_py.models.fleet import Fleet
-from notehub_py.models.get_project_fleets200_response import GetProjectFleets200Response
+from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
 from notehub_py.models.get_project_members200_response import (
     GetProjectMembers200Response,
 )
@@ -1152,7 +1152,7 @@ class ProjectApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetProjectFleets200Response:
+    ) -> GetDeviceFleets200Response:
         """delete_device_fleets
 
         Remove Device from Fleets
@@ -1196,7 +1196,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1229,7 +1229,7 @@ class ProjectApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetProjectFleets200Response]:
+    ) -> ApiResponse[GetDeviceFleets200Response]:
         """delete_device_fleets
 
         Remove Device from Fleets
@@ -1273,7 +1273,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1350,7 +1350,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -3991,7 +3991,7 @@ class ProjectApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetProjectFleets200Response:
+    ) -> GetDeviceFleets200Response:
         """get_device_fleets
 
         Get Device Fleets
@@ -4032,7 +4032,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -4059,7 +4059,7 @@ class ProjectApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetProjectFleets200Response]:
+    ) -> ApiResponse[GetDeviceFleets200Response]:
         """get_device_fleets
 
         Get Device Fleets
@@ -4100,7 +4100,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -4168,7 +4168,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -7614,7 +7614,7 @@ class ProjectApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetProjectFleets200Response:
+    ) -> GetDeviceFleets200Response:
         """get_project_fleets
 
         Get Project Fleets
@@ -7652,7 +7652,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -7678,7 +7678,7 @@ class ProjectApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetProjectFleets200Response]:
+    ) -> ApiResponse[GetDeviceFleets200Response]:
         """get_project_fleets
 
         Get Project Fleets
@@ -7716,7 +7716,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -7780,7 +7780,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -8562,7 +8562,7 @@ class ProjectApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetProjectFleets200Response:
+    ) -> GetDeviceFleets200Response:
         """put_device_fleets
 
         Add Device to Fleets
@@ -8606,7 +8606,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -8639,7 +8639,7 @@ class ProjectApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetProjectFleets200Response]:
+    ) -> ApiResponse[GetDeviceFleets200Response]:
         """put_device_fleets
 
         Add Device to Fleets
@@ -8683,7 +8683,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -8760,7 +8760,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectFleets200Response",
+            "200": "GetDeviceFleets200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout

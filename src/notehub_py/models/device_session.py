@@ -40,157 +40,157 @@ class DeviceSession(BaseModel):
     DeviceSession
     """  # noqa: E501
 
-    session: Optional[StrictStr] = Field(default=None, description="Session UID")
-    session_began: Optional[StrictInt] = Field(
-        default=None, description="UNIX timestamp of session start"
-    )
-    why_session_opened: Optional[StrictStr] = Field(
-        default=None, description="Reason for session opening"
-    )
-    session_ended: Optional[StrictInt] = Field(
-        default=None, description="UNIX timestamp of session end"
-    )
-    why_session_closed: Optional[StrictStr] = Field(
-        default=None, description="Reason for session closing"
-    )
-    device: Optional[StrictStr] = Field(default=None, description="Device UID")
-    sn: Optional[StrictStr] = Field(default=None, description="Device Serial Number")
-    product: Optional[StrictStr] = Field(default=None, description="Product UID")
-    fleets: Optional[List[StrictStr]] = Field(
-        default=None, description="Array of Fleet UIDs"
-    )
+    apn: Optional[StrictStr] = None
+    bars: Optional[StrictInt] = None
+    bearer: Optional[StrictStr] = None
+    bssid: Optional[StrictStr] = None
     cell: Optional[StrictStr] = Field(
         default=None,
         description='Cell ID where the session originated and quality ("mcc,mnc,lac,cellid")',
     )
-    scan: Optional[Union[StrictBytes, StrictStr]] = None
-    triangulate: Optional[Dict[str, Any]] = None
-    rssi: Optional[StrictInt] = None
-    sinr: Optional[StrictInt] = None
-    rsrp: Optional[StrictInt] = None
-    rsrq: Optional[StrictInt] = None
-    bars: Optional[StrictInt] = None
-    rat: Optional[StrictStr] = None
-    bearer: Optional[StrictStr] = None
-    ip: Optional[StrictStr] = None
-    bssid: Optional[StrictStr] = None
-    ssid: Optional[StrictStr] = None
-    iccid: Optional[StrictStr] = None
-    apn: Optional[StrictStr] = None
-    transport: Optional[StrictStr] = Field(
-        default=None, description="Type of network transport"
-    )
-    tower: Optional[TowerLocation] = None
-    tri: Optional[TowerLocation] = None
-    when: Optional[StrictInt] = Field(
-        default=None,
-        description="Last known capture time of a note routed through this session in Unix timestamp",
-    )
-    where_when: Optional[StrictInt] = Field(
-        default=None, description="Unix timestamp of last GPS location"
-    )
-    where: Optional[StrictStr] = Field(
-        default=None, description="Open Location Code from last GPS location"
-    )
-    where_lat: Optional[Union[StrictFloat, StrictInt]] = None
-    where_lon: Optional[Union[StrictFloat, StrictInt]] = None
-    where_location: Optional[StrictStr] = None
-    where_country: Optional[StrictStr] = None
-    where_timezone: Optional[StrictStr] = None
-    usage_actual: Optional[StrictBool] = None
-    voltage: Optional[Union[StrictFloat, StrictInt]] = None
-    temp: Optional[Union[StrictFloat, StrictInt]] = None
     continuous: Optional[StrictBool] = Field(
         default=None, description="Was this a continuous connection?"
     )
-    tls: Optional[StrictBool] = Field(default=None, description="Was TLS used?")
-    work: Optional[StrictInt] = Field(
-        default=None,
-        description="Unix timestamp of the last time work was done for this session",
-    )
+    device: Optional[StrictStr] = Field(default=None, description="Device UID")
     events: Optional[StrictInt] = Field(
         default=None, description="Number of events routed"
-    )
-    moved: Optional[StrictInt] = None
-    orientation: Optional[StrictStr] = None
-    hp_secs_total: Optional[StrictInt] = Field(
-        default=None, description="Total number of seconds in high power mode"
-    )
-    hp_secs_data: Optional[StrictInt] = None
-    hp_secs_gps: Optional[StrictInt] = None
-    hp_cycles_total: Optional[StrictInt] = None
-    hp_cycles_data: Optional[StrictInt] = None
-    hp_cycles_gps: Optional[StrictInt] = None
-    period: Optional[DeviceUsage] = None
-    power_charging: Optional[StrictBool] = None
-    power_usb: Optional[StrictBool] = None
-    power_primary: Optional[StrictBool] = None
-    power_mah: Optional[Union[StrictFloat, StrictInt]] = None
-    penalty_secs: Optional[StrictInt] = Field(
-        default=None, description="Number of seconds in penalty in the prior session"
     )
     failed_connects: Optional[StrictInt] = Field(
         default=None,
         description="Number of failed connection attempts in the prior session",
     )
+    fleets: Optional[List[StrictStr]] = Field(
+        default=None, description="Array of Fleet UIDs"
+    )
+    hp_cycles_data: Optional[StrictInt] = None
+    hp_cycles_gps: Optional[StrictInt] = None
+    hp_cycles_total: Optional[StrictInt] = None
+    hp_secs_data: Optional[StrictInt] = None
+    hp_secs_gps: Optional[StrictInt] = None
+    hp_secs_total: Optional[StrictInt] = Field(
+        default=None, description="Total number of seconds in high power mode"
+    )
+    iccid: Optional[StrictStr] = None
+    ip: Optional[StrictStr] = None
+    moved: Optional[StrictInt] = None
+    orientation: Optional[StrictStr] = None
+    penalty_secs: Optional[StrictInt] = Field(
+        default=None, description="Number of seconds in penalty in the prior session"
+    )
+    period: Optional[DeviceUsage] = None
+    power_charging: Optional[StrictBool] = None
+    power_mah: Optional[Union[StrictFloat, StrictInt]] = None
+    power_primary: Optional[StrictBool] = None
+    power_usb: Optional[StrictBool] = None
+    product: Optional[StrictStr] = Field(default=None, description="Product UID")
+    rat: Optional[StrictStr] = None
+    rsrp: Optional[StrictInt] = None
+    rsrq: Optional[StrictInt] = None
+    rssi: Optional[StrictInt] = None
+    scan: Optional[Union[StrictBytes, StrictStr]] = None
+    session: Optional[StrictStr] = Field(default=None, description="Session UID")
+    session_began: Optional[StrictInt] = Field(
+        default=None, description="UNIX timestamp of session start"
+    )
+    session_ended: Optional[StrictInt] = Field(
+        default=None, description="UNIX timestamp of session end"
+    )
+    sinr: Optional[StrictInt] = None
+    sn: Optional[StrictStr] = Field(default=None, description="Device Serial Number")
+    ssid: Optional[StrictStr] = None
+    temp: Optional[Union[StrictFloat, StrictInt]] = None
+    tls: Optional[StrictBool] = Field(default=None, description="Was TLS used?")
+    tower: Optional[TowerLocation] = None
+    transport: Optional[StrictStr] = Field(
+        default=None, description="Type of network transport"
+    )
+    tri: Optional[TowerLocation] = None
+    triangulate: Optional[Dict[str, Any]] = None
+    usage_actual: Optional[StrictBool] = None
+    voltage: Optional[Union[StrictFloat, StrictInt]] = None
+    when: Optional[StrictInt] = Field(
+        default=None,
+        description="Last known capture time of a note routed through this session in Unix timestamp",
+    )
+    where: Optional[StrictStr] = Field(
+        default=None, description="Open Location Code from last GPS location"
+    )
+    where_country: Optional[StrictStr] = None
+    where_lat: Optional[Union[StrictFloat, StrictInt]] = None
+    where_location: Optional[StrictStr] = None
+    where_lon: Optional[Union[StrictFloat, StrictInt]] = None
+    where_timezone: Optional[StrictStr] = None
+    where_when: Optional[StrictInt] = Field(
+        default=None, description="Unix timestamp of last GPS location"
+    )
+    why_session_closed: Optional[StrictStr] = Field(
+        default=None, description="Reason for session closing"
+    )
+    why_session_opened: Optional[StrictStr] = Field(
+        default=None, description="Reason for session opening"
+    )
+    work: Optional[StrictInt] = Field(
+        default=None,
+        description="Unix timestamp of the last time work was done for this session",
+    )
     __properties: ClassVar[List[str]] = [
-        "session",
-        "session_began",
-        "why_session_opened",
-        "session_ended",
-        "why_session_closed",
-        "device",
-        "sn",
-        "product",
-        "fleets",
-        "cell",
-        "scan",
-        "triangulate",
-        "rssi",
-        "sinr",
-        "rsrp",
-        "rsrq",
-        "bars",
-        "rat",
-        "bearer",
-        "ip",
-        "bssid",
-        "ssid",
-        "iccid",
         "apn",
-        "transport",
-        "tower",
-        "tri",
-        "when",
-        "where_when",
-        "where",
-        "where_lat",
-        "where_lon",
-        "where_location",
-        "where_country",
-        "where_timezone",
-        "usage_actual",
-        "voltage",
-        "temp",
+        "bars",
+        "bearer",
+        "bssid",
+        "cell",
         "continuous",
-        "tls",
-        "work",
+        "device",
         "events",
-        "moved",
-        "orientation",
-        "hp_secs_total",
-        "hp_secs_data",
-        "hp_secs_gps",
-        "hp_cycles_total",
+        "failed_connects",
+        "fleets",
         "hp_cycles_data",
         "hp_cycles_gps",
+        "hp_cycles_total",
+        "hp_secs_data",
+        "hp_secs_gps",
+        "hp_secs_total",
+        "iccid",
+        "ip",
+        "moved",
+        "orientation",
+        "penalty_secs",
         "period",
         "power_charging",
-        "power_usb",
-        "power_primary",
         "power_mah",
-        "penalty_secs",
-        "failed_connects",
+        "power_primary",
+        "power_usb",
+        "product",
+        "rat",
+        "rsrp",
+        "rsrq",
+        "rssi",
+        "scan",
+        "session",
+        "session_began",
+        "session_ended",
+        "sinr",
+        "sn",
+        "ssid",
+        "temp",
+        "tls",
+        "tower",
+        "transport",
+        "tri",
+        "triangulate",
+        "usage_actual",
+        "voltage",
+        "when",
+        "where",
+        "where_country",
+        "where_lat",
+        "where_location",
+        "where_lon",
+        "where_timezone",
+        "where_when",
+        "why_session_closed",
+        "why_session_opened",
+        "work",
     ]
 
     model_config = ConfigDict(
@@ -230,15 +230,15 @@ class DeviceSession(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of period
+        if self.period:
+            _dict["period"] = self.period.to_dict()
         # override the default output from pydantic by calling `to_dict()` of tower
         if self.tower:
             _dict["tower"] = self.tower.to_dict()
         # override the default output from pydantic by calling `to_dict()` of tri
         if self.tri:
             _dict["tri"] = self.tri.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of period
-        if self.period:
-            _dict["period"] = self.period.to_dict()
         return _dict
 
     @classmethod
@@ -252,75 +252,75 @@ class DeviceSession(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "session": obj.get("session"),
-                "session_began": obj.get("session_began"),
-                "why_session_opened": obj.get("why_session_opened"),
-                "session_ended": obj.get("session_ended"),
-                "why_session_closed": obj.get("why_session_closed"),
-                "device": obj.get("device"),
-                "sn": obj.get("sn"),
-                "product": obj.get("product"),
-                "fleets": obj.get("fleets"),
-                "cell": obj.get("cell"),
-                "scan": obj.get("scan"),
-                "triangulate": obj.get("triangulate"),
-                "rssi": obj.get("rssi"),
-                "sinr": obj.get("sinr"),
-                "rsrp": obj.get("rsrp"),
-                "rsrq": obj.get("rsrq"),
-                "bars": obj.get("bars"),
-                "rat": obj.get("rat"),
-                "bearer": obj.get("bearer"),
-                "ip": obj.get("ip"),
-                "bssid": obj.get("bssid"),
-                "ssid": obj.get("ssid"),
-                "iccid": obj.get("iccid"),
                 "apn": obj.get("apn"),
-                "transport": obj.get("transport"),
-                "tower": (
-                    TowerLocation.from_dict(obj["tower"])
-                    if obj.get("tower") is not None
-                    else None
-                ),
-                "tri": (
-                    TowerLocation.from_dict(obj["tri"])
-                    if obj.get("tri") is not None
-                    else None
-                ),
-                "when": obj.get("when"),
-                "where_when": obj.get("where_when"),
-                "where": obj.get("where"),
-                "where_lat": obj.get("where_lat"),
-                "where_lon": obj.get("where_lon"),
-                "where_location": obj.get("where_location"),
-                "where_country": obj.get("where_country"),
-                "where_timezone": obj.get("where_timezone"),
-                "usage_actual": obj.get("usage_actual"),
-                "voltage": obj.get("voltage"),
-                "temp": obj.get("temp"),
+                "bars": obj.get("bars"),
+                "bearer": obj.get("bearer"),
+                "bssid": obj.get("bssid"),
+                "cell": obj.get("cell"),
                 "continuous": obj.get("continuous"),
-                "tls": obj.get("tls"),
-                "work": obj.get("work"),
+                "device": obj.get("device"),
                 "events": obj.get("events"),
-                "moved": obj.get("moved"),
-                "orientation": obj.get("orientation"),
-                "hp_secs_total": obj.get("hp_secs_total"),
-                "hp_secs_data": obj.get("hp_secs_data"),
-                "hp_secs_gps": obj.get("hp_secs_gps"),
-                "hp_cycles_total": obj.get("hp_cycles_total"),
+                "failed_connects": obj.get("failed_connects"),
+                "fleets": obj.get("fleets"),
                 "hp_cycles_data": obj.get("hp_cycles_data"),
                 "hp_cycles_gps": obj.get("hp_cycles_gps"),
+                "hp_cycles_total": obj.get("hp_cycles_total"),
+                "hp_secs_data": obj.get("hp_secs_data"),
+                "hp_secs_gps": obj.get("hp_secs_gps"),
+                "hp_secs_total": obj.get("hp_secs_total"),
+                "iccid": obj.get("iccid"),
+                "ip": obj.get("ip"),
+                "moved": obj.get("moved"),
+                "orientation": obj.get("orientation"),
+                "penalty_secs": obj.get("penalty_secs"),
                 "period": (
                     DeviceUsage.from_dict(obj["period"])
                     if obj.get("period") is not None
                     else None
                 ),
                 "power_charging": obj.get("power_charging"),
-                "power_usb": obj.get("power_usb"),
-                "power_primary": obj.get("power_primary"),
                 "power_mah": obj.get("power_mah"),
-                "penalty_secs": obj.get("penalty_secs"),
-                "failed_connects": obj.get("failed_connects"),
+                "power_primary": obj.get("power_primary"),
+                "power_usb": obj.get("power_usb"),
+                "product": obj.get("product"),
+                "rat": obj.get("rat"),
+                "rsrp": obj.get("rsrp"),
+                "rsrq": obj.get("rsrq"),
+                "rssi": obj.get("rssi"),
+                "scan": obj.get("scan"),
+                "session": obj.get("session"),
+                "session_began": obj.get("session_began"),
+                "session_ended": obj.get("session_ended"),
+                "sinr": obj.get("sinr"),
+                "sn": obj.get("sn"),
+                "ssid": obj.get("ssid"),
+                "temp": obj.get("temp"),
+                "tls": obj.get("tls"),
+                "tower": (
+                    TowerLocation.from_dict(obj["tower"])
+                    if obj.get("tower") is not None
+                    else None
+                ),
+                "transport": obj.get("transport"),
+                "tri": (
+                    TowerLocation.from_dict(obj["tri"])
+                    if obj.get("tri") is not None
+                    else None
+                ),
+                "triangulate": obj.get("triangulate"),
+                "usage_actual": obj.get("usage_actual"),
+                "voltage": obj.get("voltage"),
+                "when": obj.get("when"),
+                "where": obj.get("where"),
+                "where_country": obj.get("where_country"),
+                "where_lat": obj.get("where_lat"),
+                "where_location": obj.get("where_location"),
+                "where_lon": obj.get("where_lon"),
+                "where_timezone": obj.get("where_timezone"),
+                "where_when": obj.get("where_when"),
+                "why_session_closed": obj.get("why_session_closed"),
+                "why_session_opened": obj.get("why_session_opened"),
+                "work": obj.get("work"),
             }
         )
         return _obj

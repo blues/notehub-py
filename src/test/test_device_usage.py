@@ -37,16 +37,16 @@ class TestDeviceUsage(unittest.TestCase):
         model = DeviceUsage()
         if include_optional:
             return DeviceUsage(
-                since = 56,
-                duration = 56,
                 bytes_rcvd = 56,
-                bytes_sent = 56,
                 bytes_rcvd_secondary = 56,
+                bytes_sent = 56,
                 bytes_sent_secondary = 56,
+                duration = 56,
+                notes_rcvd = 56,
+                notes_sent = 56,
                 sessions_tcp = 56,
                 sessions_tls = 56,
-                notes_rcvd = 56,
-                notes_sent = 56
+                since = 56
             )
         else:
             return DeviceUsage(

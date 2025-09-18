@@ -31,6 +31,13 @@ class TestAuthorizationApi(unittest.TestCase):
         """Test case for login"""
         pass
 
+    def test_o_auth2_client_credentials(self) -> None:
+        """Test case for o_auth2_client_credentials
+
+        Issue an OAuth 2.0 access token (Client Credentials)
+        """
+        pass
+
 
 if __name__ == "__main__":
     unittest.main()

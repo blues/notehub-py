@@ -4,8 +4,8 @@
 
 | Name       | Type    | Description                  | Notes      |
 | ---------- | ------- | ---------------------------- | ---------- |
-| **uid**    | **str** | Unique and public identifier | [optional] |
 | **secret** | **str** | The secret                   | [optional] |
+| **uid**    | **str** | Unique and public identifier | [optional] |
 
 ## Example
 

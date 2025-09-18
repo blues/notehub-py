@@ -4,12 +4,12 @@
 
 | Name                       | Type                      | Description | Notes      |
 | -------------------------- | ------------------------- | ----------- | ---------- |
-| **uid**                    | **str**                   |             |
-| **label**                  | **str**                   |             |
-| **created**                | **datetime**              |             |
-| **role**                   | [**Role**](Role.md)       |             | [optional] |
 | **administrative_contact** | [**Contact**](Contact.md) |             | [optional] |
+| **created**                | **datetime**              |             |
+| **label**                  | **str**                   |             |
+| **role**                   | [**Role**](Role.md)       |             | [optional] |
 | **technical_contact**      | [**Contact**](Contact.md) |             | [optional] |
+| **uid**                    | **str**                   |             |
 
 ## Example
 
