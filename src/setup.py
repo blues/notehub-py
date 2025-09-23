@@ -28,7 +28,7 @@ NAME = "notehub-py"
 VERSION = "1.0.16"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
-    "urllib3 >= 1.25.3, < 2.1.0",
+    "urllib3 >= 2.5.0",
     "python-dateutil",
     "pydantic >= 2",
     "typing-extensions >= 4.7.1",
