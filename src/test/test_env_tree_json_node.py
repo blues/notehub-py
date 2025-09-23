@@ -37,116 +37,116 @@ class TestEnvTreeJsonNode(unittest.TestCase):
         model = EnvTreeJsonNode()
         if include_optional:
             return EnvTreeJsonNode(
-                var_count = None,
-                inherited_var_count = None,
-                type = '',
-                variables = [
-                    notehub_py.models.env_var.EnvVar(
-                        key = '', 
-                        value = '', 
-                        used = True, 
-                        precedence = null, )
-                    ],
+                app_label = '',
+                app_uid = '',
                 children = [
                     notehub_py.models.env_tree_json_node.EnvTreeJsonNode(
-                        var_count = null, 
-                        inherited_var_count = null, 
-                        type = '', 
-                        variables = [
-                            notehub_py.models.env_var.EnvVar(
-                                key = '', 
-                                value = '', 
-                                used = True, 
-                                precedence = null, )
-                            ], 
+                        app_label = '', 
+                        app_uid = '', 
                         children = [
                             notehub_py.models.env_tree_json_node.EnvTreeJsonNode(
-                                var_count = null, 
-                                inherited_var_count = null, 
-                                type = '', 
-                                variables = [
-                                    notehub_py.models.env_var.EnvVar(
-                                        key = '', 
-                                        value = '', 
-                                        used = True, 
-                                        precedence = null, )
-                                    ], 
+                                app_label = '', 
+                                app_uid = '', 
                                 children = [
                                     
                                     ], 
                                 device_uid = '', 
                                 fleet_label = '', 
                                 fleet_uid = '', 
-                                app_uid = '', 
-                                app_label = '', 
-                                url = '', )
+                                inherited_var_count = null, 
+                                type = '', 
+                                url = '', 
+                                var_count = null, 
+                                variables = [
+                                    notehub_py.models.env_var.EnvVar(
+                                        key = '', 
+                                        precedence = null, 
+                                        used = True, 
+                                        value = '', )
+                                    ], )
                             ], 
                         device_uid = '', 
                         fleet_label = '', 
                         fleet_uid = '', 
-                        app_uid = '', 
-                        app_label = '', 
-                        url = '', )
+                        inherited_var_count = null, 
+                        type = '', 
+                        url = '', 
+                        var_count = null, 
+                        variables = [
+                            notehub_py.models.env_var.EnvVar(
+                                key = '', 
+                                precedence = null, 
+                                used = True, 
+                                value = '', )
+                            ], )
                     ],
                 device_uid = '',
                 fleet_label = '',
                 fleet_uid = '',
-                app_uid = '',
-                app_label = '',
-                url = ''
-            )
-        else:
-            return EnvTreeJsonNode(
-                var_count = None,
                 inherited_var_count = None,
                 type = '',
+                url = '',
+                var_count = None,
                 variables = [
                     notehub_py.models.env_var.EnvVar(
                         key = '', 
-                        value = '', 
+                        precedence = null, 
                         used = True, 
-                        precedence = null, )
-                    ],
+                        value = '', )
+                    ]
+            )
+        else:
+            return EnvTreeJsonNode(
                 children = [
                     notehub_py.models.env_tree_json_node.EnvTreeJsonNode(
-                        var_count = null, 
-                        inherited_var_count = null, 
-                        type = '', 
-                        variables = [
-                            notehub_py.models.env_var.EnvVar(
-                                key = '', 
-                                value = '', 
-                                used = True, 
-                                precedence = null, )
-                            ], 
+                        app_label = '', 
+                        app_uid = '', 
                         children = [
                             notehub_py.models.env_tree_json_node.EnvTreeJsonNode(
-                                var_count = null, 
-                                inherited_var_count = null, 
-                                type = '', 
-                                variables = [
-                                    notehub_py.models.env_var.EnvVar(
-                                        key = '', 
-                                        value = '', 
-                                        used = True, 
-                                        precedence = null, )
-                                    ], 
+                                app_label = '', 
+                                app_uid = '', 
                                 children = [
                                     
                                     ], 
                                 device_uid = '', 
                                 fleet_label = '', 
                                 fleet_uid = '', 
-                                app_uid = '', 
-                                app_label = '', 
-                                url = '', )
+                                inherited_var_count = null, 
+                                type = '', 
+                                url = '', 
+                                var_count = null, 
+                                variables = [
+                                    notehub_py.models.env_var.EnvVar(
+                                        key = '', 
+                                        precedence = null, 
+                                        used = True, 
+                                        value = '', )
+                                    ], )
                             ], 
                         device_uid = '', 
                         fleet_label = '', 
                         fleet_uid = '', 
-                        app_uid = '', 
-                        app_label = '', 
-                        url = '', )
+                        inherited_var_count = null, 
+                        type = '', 
+                        url = '', 
+                        var_count = null, 
+                        variables = [
+                            notehub_py.models.env_var.EnvVar(
+                                key = '', 
+                                precedence = null, 
+                                used = True, 
+                                value = '', )
+                            ], )
+                    ],
+                inherited_var_count = None,
+                type = '',
+                var_count = None,
+                variables = [
+                    notehub_py.models.env_var.EnvVar(
+                        key = '', 
+                        precedence = null, 
+                        used = True, 
+                        value = '', )
                     ],
         )
         """

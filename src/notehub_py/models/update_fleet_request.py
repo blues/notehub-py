@@ -29,13 +29,13 @@ class UpdateFleetRequest(BaseModel):
     UpdateFleetRequest
     """  # noqa: E501
 
-    label: Optional[StrictStr] = Field(
-        default=None, description="The label for the Fleet."
-    )
     add_devices: Optional[List[StrictStr]] = Field(
         default=None,
         description="List of DeviceUIDs to add to fleet",
         alias="addDevices",
+    )
+    label: Optional[StrictStr] = Field(
+        default=None, description="The label for the Fleet."
     )
     remove_devices: Optional[List[StrictStr]] = Field(
         default=None,
@@ -51,8 +51,8 @@ class UpdateFleetRequest(BaseModel):
         description="A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog",
     )
     __properties: ClassVar[List[str]] = [
-        "label",
         "addDevices",
+        "label",
         "removeDevices",
         "smart_rule",
         "watchdog_mins",
@@ -108,8 +108,8 @@ class UpdateFleetRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "label": obj.get("label"),
                 "addDevices": obj.get("addDevices"),
+                "label": obj.get("label"),
                 "removeDevices": obj.get("removeDevices"),
                 "smart_rule": obj.get("smart_rule"),
                 "watchdog_mins": obj.get("watchdog_mins"),

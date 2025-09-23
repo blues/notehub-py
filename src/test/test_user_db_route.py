@@ -37,11 +37,11 @@ class TestUserDbRoute(unittest.TestCase):
         model = UserDbRoute()
         if include_optional:
             return UserDbRoute(
-                uid = 'route:8d65a087d5d290ce5bdf03aeff2becc0',
+                disabled = True,
                 label = 'success route',
-                type = 'http',
                 modified = '2020-03-09T17:58:37Z',
-                disabled = True
+                type = 'http',
+                uid = 'route:8d65a087d5d290ce5bdf03aeff2becc0'
             )
         else:
             return UserDbRoute(

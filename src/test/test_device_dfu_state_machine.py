@@ -37,15 +37,15 @@ class TestDeviceDfuStateMachine(unittest.TestCase):
         model = DeviceDfuStateMachine()
         if include_optional:
             return DeviceDfuStateMachine(
-                requested_version = '',
                 current_version = '',
                 initiated = '',
+                requested_version = '',
                 updates = [
                     notehub_py.models.device_dfu_state_machine_node.DeviceDfuStateMachineNode(
-                        status = '', 
-                        phase = '', 
                         datetime = '', 
-                        description = '', )
+                        description = '', 
+                        phase = '', 
+                        status = '', )
                     ]
             )
         else:

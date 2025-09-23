@@ -4,14 +4,14 @@
 
 | Name            | Type                                                                | Description                           | Notes      |
 | --------------- | ------------------------------------------------------------------- | ------------------------------------- | ---------- |
-| **uid**         | **str**                                                             | Unique and public identifier          | [optional] |
-| **name**        | **str**                                                             | Name for this API Key                 | [optional] |
-| **description** | **str**                                                             | Optional description for this API Key | [optional] |
-| **created_by**  | [**PersonalAccessTokenCreatedBy**](PersonalAccessTokenCreatedBy.md) |                                       | [optional] |
-| **expires_at**  | **datetime**                                                        | When the key expires                  | [optional] |
 | **created_at**  | **datetime**                                                        | When the key was created              | [optional] |
+| **created_by**  | [**PersonalAccessTokenCreatedBy**](PersonalAccessTokenCreatedBy.md) |                                       | [optional] |
+| **description** | **str**                                                             | Optional description for this API Key | [optional] |
+| **expires_at**  | **datetime**                                                        | When the key expires                  | [optional] |
 | **last_used**   | **datetime**                                                        | When it was last used, if ever        | [optional] |
+| **name**        | **str**                                                             | Name for this API Key                 | [optional] |
 | **suspended**   | **bool**                                                            | if true, this token cannot be used    | [optional] |
+| **uid**         | **str**                                                             | Unique and public identifier          | [optional] |
 
 ## Example
 

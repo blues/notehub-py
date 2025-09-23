@@ -29,20 +29,20 @@ class CreateProductRequest(BaseModel):
     CreateProductRequest
     """  # noqa: E501
 
-    product_uid: StrictStr = Field(
-        description="The requested uid for the Product. Will be prefixed with the user's reversed email."
-    )
-    label: StrictStr = Field(description="The label for the Product.")
     auto_provision_fleets: Optional[List[StrictStr]] = None
     disable_devices_by_default: Optional[StrictBool] = Field(
         default=None,
         description="If `true`, devices provisioned to this product will be automatically disabled by default.",
     )
+    label: StrictStr = Field(description="The label for the Product.")
+    product_uid: StrictStr = Field(
+        description="The requested uid for the Product. Will be prefixed with the user's reversed email."
+    )
     __properties: ClassVar[List[str]] = [
-        "product_uid",
-        "label",
         "auto_provision_fleets",
         "disable_devices_by_default",
+        "label",
+        "product_uid",
     ]
 
     model_config = ConfigDict(
@@ -95,10 +95,10 @@ class CreateProductRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "product_uid": obj.get("product_uid"),
-                "label": obj.get("label"),
                 "auto_provision_fleets": obj.get("auto_provision_fleets"),
                 "disable_devices_by_default": obj.get("disable_devices_by_default"),
+                "label": obj.get("label"),
+                "product_uid": obj.get("product_uid"),
             }
         )
         return _obj

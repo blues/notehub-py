@@ -37,22 +37,22 @@ class TestThingworx(unittest.TestCase):
         model = Thingworx()
         if include_optional:
             return Thingworx(
+                app_key = '',
+                filter = notehub_py.models.aws_filter.aws_filter(
+                    files = [
+                        ''
+                        ], 
+                    system_notefiles = True, 
+                    type = 'all', ),
                 fleets = [
                     ''
                     ],
-                filter = notehub_py.models.http_filter.http_filter(
-                    type = 'all', 
-                    system_notefiles = True, 
-                    files = [
-                        ''
-                        ], ),
-                transform = notehub_py.models.http_transform.http_transform(
+                throttle_ms = 56,
+                timeout = 56,
+                transform = notehub_py.models.aws_transform.aws_transform(
                     format = '', 
                     jsonata = '', ),
-                throttle_ms = 56,
-                url = '',
-                timeout = 56,
-                app_key = ''
+                url = ''
             )
         else:
             return Thingworx(

@@ -37,13 +37,13 @@ class TestProxy(unittest.TestCase):
         model = Proxy()
         if include_optional:
             return Proxy(
+                alias = '',
                 fleets = [
                     ''
                     ],
-                url = '',
-                alias = '',
                 http_headers = {"headerName1":"headerValue1","headerName2":"headerValue2"},
-                timeout = 56
+                timeout = 56,
+                url = ''
             )
         else:
             return Proxy(

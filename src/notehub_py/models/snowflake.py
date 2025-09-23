@@ -21,8 +21,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from notehub_py.models.http_filter import HttpFilter
-from notehub_py.models.snowflake_transform import SnowflakeTransform
+from notehub_py.models.aws_filter import AwsFilter
+from notehub_py.models.slack_transform import SlackTransform
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,36 +32,36 @@ class Snowflake(BaseModel):
     Route settings specific to Snowflake routes.  Only used for Snowflake route types
     """  # noqa: E501
 
+    account_name: Optional[StrictStr] = None
+    filter: Optional[AwsFilter] = None
     fleets: Optional[Annotated[List[StrictStr], Field(min_length=0)]] = Field(
         default=None,
         description="list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets",
     )
-    filter: Optional[HttpFilter] = None
-    transform: Optional[SnowflakeTransform] = None
-    timeout: Optional[StrictInt] = Field(
-        default=15, description="Timeout in seconds for each request"
-    )
     organization_name: Optional[StrictStr] = None
-    account_name: Optional[StrictStr] = None
-    user_name: Optional[StrictStr] = None
-    private_key_name: Optional[StrictStr] = Field(
-        default="present",
-        description='Name of PEM key.  If omitted, defaults to "present"',
-    )
     pem: Optional[StrictStr] = Field(
         default=None,
         description="PEM key with \\n newlines. This value is input-only and will be omitted from the response and replaced with a placeholder",
     )
+    private_key_name: Optional[StrictStr] = Field(
+        default="present",
+        description='Name of PEM key.  If omitted, defaults to "present"',
+    )
+    timeout: Optional[StrictInt] = Field(
+        default=15, description="Timeout in seconds for each request"
+    )
+    transform: Optional[SlackTransform] = None
+    user_name: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
-        "fleets",
-        "filter",
-        "transform",
-        "timeout",
-        "organization_name",
         "account_name",
-        "user_name",
-        "private_key_name",
+        "filter",
+        "fleets",
+        "organization_name",
         "pem",
+        "private_key_name",
+        "timeout",
+        "transform",
+        "user_name",
     ]
 
     model_config = ConfigDict(
@@ -120,27 +120,27 @@ class Snowflake(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "fleets": obj.get("fleets"),
+                "account_name": obj.get("account_name"),
                 "filter": (
-                    HttpFilter.from_dict(obj["filter"])
+                    AwsFilter.from_dict(obj["filter"])
                     if obj.get("filter") is not None
                     else None
                 ),
-                "transform": (
-                    SnowflakeTransform.from_dict(obj["transform"])
-                    if obj.get("transform") is not None
-                    else None
-                ),
-                "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
+                "fleets": obj.get("fleets"),
                 "organization_name": obj.get("organization_name"),
-                "account_name": obj.get("account_name"),
-                "user_name": obj.get("user_name"),
+                "pem": obj.get("pem"),
                 "private_key_name": (
                     obj.get("private_key_name")
                     if obj.get("private_key_name") is not None
                     else "present"
                 ),
-                "pem": obj.get("pem"),
+                "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
+                "transform": (
+                    SlackTransform.from_dict(obj["transform"])
+                    if obj.get("transform") is not None
+                    else None
+                ),
+                "user_name": obj.get("user_name"),
             }
         )
         return _obj

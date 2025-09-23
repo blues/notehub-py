@@ -30,23 +30,23 @@ class Error(BaseModel):
     Error
     """  # noqa: E501
 
-    err: StrictStr = Field(description="Human readable error message.")
     code: Annotated[int, Field(le=599, strict=True, ge=300)] = Field(
         description="The HTTP error code associated with the error."
     )
+    debug: Optional[StrictStr] = None
+    details: Optional[Dict[str, Any]] = None
+    err: StrictStr = Field(description="Human readable error message.")
+    request: Optional[StrictStr] = None
     status: StrictStr = Field(
         description="Machine readable representation of the HTTP error code."
     )
-    request: Optional[StrictStr] = None
-    details: Optional[Dict[str, Any]] = None
-    debug: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
-        "err",
         "code",
-        "status",
-        "request",
-        "details",
         "debug",
+        "details",
+        "err",
+        "request",
+        "status",
     ]
 
     model_config = ConfigDict(
@@ -99,12 +99,12 @@ class Error(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "err": obj.get("err"),
                 "code": obj.get("code"),
-                "status": obj.get("status"),
-                "request": obj.get("request"),
-                "details": obj.get("details"),
                 "debug": obj.get("debug"),
+                "details": obj.get("details"),
+                "err": obj.get("err"),
+                "request": obj.get("request"),
+                "status": obj.get("status"),
             }
         )
         return _obj

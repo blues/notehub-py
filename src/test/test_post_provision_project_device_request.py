@@ -39,11 +39,11 @@ class TestPostProvisionProjectDeviceRequest(unittest.TestCase):
         model = PostProvisionProjectDeviceRequest()
         if include_optional:
             return PostProvisionProjectDeviceRequest(
-                product_uid = '',
                 device_sn = '',
                 fleet_uids = [
                     ''
-                    ]
+                    ],
+                product_uid = ''
             )
         else:
             return PostProvisionProjectDeviceRequest(

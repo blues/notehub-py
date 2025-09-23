@@ -38,10 +38,10 @@ class TestSimUsage(unittest.TestCase):
         if include_optional:
             return SimUsage(
                 iccid = '',
-                used = 56,
-                limit = 56,
+                last_updated = 56,
                 lifetime_used = 56,
-                last_updated = 56
+                limit = 56,
+                used = 56
             )
         else:
             return SimUsage(

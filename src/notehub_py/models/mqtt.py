@@ -21,8 +21,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from notehub_py.models.http_filter import HttpFilter
-from notehub_py.models.http_transform import HttpTransform
+from notehub_py.models.aws_filter import AwsFilter
+from notehub_py.models.aws_transform import AwsTransform
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,24 +32,7 @@ class Mqtt(BaseModel):
     Route settings specific to MQTT routes.  Only used for MQTT route types
     """  # noqa: E501
 
-    fleets: Optional[Annotated[List[StrictStr], Field(min_length=0)]] = Field(
-        default=None,
-        description="list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets",
-    )
-    filter: Optional[HttpFilter] = None
-    transform: Optional[HttpTransform] = None
-    throttle_ms: Optional[StrictInt] = None
-    timeout: Optional[StrictInt] = Field(
-        default=15, description="Timeout in seconds for each request"
-    )
     broker: Optional[StrictStr] = None
-    port: Optional[StrictInt] = None
-    username: Optional[StrictStr] = None
-    password: Optional[StrictStr] = Field(
-        default=None,
-        description="This value is input-only and will be omitted from the response and replaced with a placeholder",
-    )
-    topic: Optional[StrictStr] = None
     certificate: Optional[StrictStr] = Field(
         default=None,
         description="Certificate with \\n newlines.  This value is input-only and will be omitted from the response and replaced with a placeholder",
@@ -57,28 +40,45 @@ class Mqtt(BaseModel):
     certificate_name: Optional[StrictStr] = Field(
         default=None, description="Name of certificate."
     )
+    filter: Optional[AwsFilter] = None
+    fleets: Optional[Annotated[List[StrictStr], Field(min_length=0)]] = Field(
+        default=None,
+        description="list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets",
+    )
     key: Optional[StrictStr] = Field(
         default=None,
         description="Key with \\n newlines.  This value is input-only and will be omitted from the response and replaced with a placeholder",
     )
+    password: Optional[StrictStr] = Field(
+        default=None,
+        description="This value is input-only and will be omitted from the response and replaced with a placeholder",
+    )
+    port: Optional[StrictInt] = None
     private_key_name: Optional[StrictStr] = Field(
         default=None, description="Name of key"
     )
+    throttle_ms: Optional[StrictInt] = None
+    timeout: Optional[StrictInt] = Field(
+        default=15, description="Timeout in seconds for each request"
+    )
+    topic: Optional[StrictStr] = None
+    transform: Optional[AwsTransform] = None
+    username: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
-        "fleets",
-        "filter",
-        "transform",
-        "throttle_ms",
-        "timeout",
         "broker",
-        "port",
-        "username",
-        "password",
-        "topic",
         "certificate",
         "certificate_name",
+        "filter",
+        "fleets",
         "key",
+        "password",
+        "port",
         "private_key_name",
+        "throttle_ms",
+        "timeout",
+        "topic",
+        "transform",
+        "username",
     ]
 
     model_config = ConfigDict(
@@ -137,28 +137,28 @@ class Mqtt(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "fleets": obj.get("fleets"),
+                "broker": obj.get("broker"),
+                "certificate": obj.get("certificate"),
+                "certificate_name": obj.get("certificate_name"),
                 "filter": (
-                    HttpFilter.from_dict(obj["filter"])
+                    AwsFilter.from_dict(obj["filter"])
                     if obj.get("filter") is not None
                     else None
                 ),
+                "fleets": obj.get("fleets"),
+                "key": obj.get("key"),
+                "password": obj.get("password"),
+                "port": obj.get("port"),
+                "private_key_name": obj.get("private_key_name"),
+                "throttle_ms": obj.get("throttle_ms"),
+                "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
+                "topic": obj.get("topic"),
                 "transform": (
-                    HttpTransform.from_dict(obj["transform"])
+                    AwsTransform.from_dict(obj["transform"])
                     if obj.get("transform") is not None
                     else None
                 ),
-                "throttle_ms": obj.get("throttle_ms"),
-                "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
-                "broker": obj.get("broker"),
-                "port": obj.get("port"),
                 "username": obj.get("username"),
-                "password": obj.get("password"),
-                "topic": obj.get("topic"),
-                "certificate": obj.get("certificate"),
-                "certificate_name": obj.get("certificate_name"),
-                "key": obj.get("key"),
-                "private_key_name": obj.get("private_key_name"),
             }
         )
         return _obj

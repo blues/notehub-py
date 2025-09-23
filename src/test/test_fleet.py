@@ -37,20 +37,20 @@ class TestFleet(unittest.TestCase):
         model = Fleet()
         if include_optional:
             return Fleet(
-                uid = '',
-                label = '',
                 created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 environment_variables = {
                     'key' : ''
                     },
+                label = '',
                 smart_rule = '',
+                uid = '',
                 watchdog_mins = 56
             )
         else:
             return Fleet(
-                uid = '',
-                label = '',
                 created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                label = '',
+                uid = '',
         )
         """
 

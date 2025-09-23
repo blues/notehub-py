@@ -33,35 +33,35 @@ class PersonalAccessToken(BaseModel):
     PersonalAccessToken
     """  # noqa: E501
 
-    uid: Optional[StrictStr] = Field(
-        default=None, description="Unique and public identifier"
+    created_at: Optional[datetime] = Field(
+        default=None, description="When the key was created"
     )
-    name: Optional[StrictStr] = Field(default=None, description="Name for this API Key")
+    created_by: Optional[PersonalAccessTokenCreatedBy] = None
     description: Optional[StrictStr] = Field(
         default=None, description="Optional description for this API Key"
     )
-    created_by: Optional[PersonalAccessTokenCreatedBy] = None
     expires_at: Optional[datetime] = Field(
         default=None, description="When the key expires"
-    )
-    created_at: Optional[datetime] = Field(
-        default=None, description="When the key was created"
     )
     last_used: Optional[datetime] = Field(
         default=None, description="When it was last used, if ever"
     )
+    name: Optional[StrictStr] = Field(default=None, description="Name for this API Key")
     suspended: Optional[StrictBool] = Field(
         default=None, description="if true, this token cannot be used"
     )
+    uid: Optional[StrictStr] = Field(
+        default=None, description="Unique and public identifier"
+    )
     __properties: ClassVar[List[str]] = [
-        "uid",
-        "name",
-        "description",
-        "created_by",
-        "expires_at",
         "created_at",
+        "created_by",
+        "description",
+        "expires_at",
         "last_used",
+        "name",
         "suspended",
+        "uid",
     ]
 
     model_config = ConfigDict(
@@ -127,18 +127,18 @@ class PersonalAccessToken(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "uid": obj.get("uid"),
-                "name": obj.get("name"),
-                "description": obj.get("description"),
+                "created_at": obj.get("created_at"),
                 "created_by": (
                     PersonalAccessTokenCreatedBy.from_dict(obj["created_by"])
                     if obj.get("created_by") is not None
                     else None
                 ),
+                "description": obj.get("description"),
                 "expires_at": obj.get("expires_at"),
-                "created_at": obj.get("created_at"),
                 "last_used": obj.get("last_used"),
+                "name": obj.get("name"),
                 "suspended": obj.get("suspended"),
+                "uid": obj.get("uid"),
             }
         )
         return _obj

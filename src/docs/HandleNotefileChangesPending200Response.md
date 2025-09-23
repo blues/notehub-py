@@ -4,10 +4,10 @@
 
 | Name        | Type       | Description                                                                                                                            | Notes      |
 | ----------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **total**   | **int**    | The total number of files.                                                                                                             | [optional] |
 | **changes** | **int**    | The number of pending changes in the Notefile.                                                                                         | [optional] |
-| **pending** | **bool**   | Whether there are pending changes.                                                                                                     | [optional] |
 | **info**    | **object** | An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file. | [optional] |
+| **pending** | **bool**   | Whether there are pending changes.                                                                                                     | [optional] |
+| **total**   | **int**    | The total number of files.                                                                                                             | [optional] |
 
 ## Example
 

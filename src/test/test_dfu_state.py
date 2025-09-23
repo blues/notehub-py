@@ -37,17 +37,17 @@ class TestDFUState(unittest.TestCase):
         model = DFUState()
         if include_optional:
             return DFUState(
-                type = 'card',
+                began = 1.337,
+                crc32 = 1.337,
+                errors = 1.337,
                 file = '',
                 length = 1.337,
-                crc32 = 1.337,
                 md5 = '',
                 mode = 'idle',
-                status = '',
-                began = 1.337,
-                retry = 1.337,
-                errors = 1.337,
                 read = 1.337,
+                retry = 1.337,
+                status = '',
+                type = 'card',
                 updated = 1.337,
                 version = ''
             )

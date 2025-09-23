@@ -37,24 +37,24 @@ class TestSnowflake(unittest.TestCase):
         model = Snowflake()
         if include_optional:
             return Snowflake(
+                account_name = '',
+                filter = notehub_py.models.aws_filter.aws_filter(
+                    files = [
+                        ''
+                        ], 
+                    system_notefiles = True, 
+                    type = 'all', ),
                 fleets = [
                     ''
                     ],
-                filter = notehub_py.models.http_filter.http_filter(
-                    type = 'all', 
-                    system_notefiles = True, 
-                    files = [
-                        ''
-                        ], ),
-                transform = notehub_py.models.snowflake_transform.snowflake_transform(
+                organization_name = '',
+                pem = '-----BEGIN PRIVATE KEY-----\nMIIEvwIBA...SleBlvA==\n-----END PRIVATE KEY-----',
+                private_key_name = 'present',
+                timeout = 56,
+                transform = notehub_py.models.slack_transform.slack_transform(
                     format = 'jsonata', 
                     jsonata = '', ),
-                timeout = 56,
-                organization_name = '',
-                account_name = '',
-                user_name = '',
-                private_key_name = 'present',
-                pem = '-----BEGIN PRIVATE KEY-----\nMIIEvwIBA...SleBlvA==\n-----END PRIVATE KEY-----'
+                user_name = ''
             )
         else:
             return Snowflake(

@@ -21,8 +21,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from notehub_py.models.http_filter import HttpFilter
-from notehub_py.models.http_transform import HttpTransform
+from notehub_py.models.aws_filter import AwsFilter
+from notehub_py.models.aws_transform import AwsTransform
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,43 +32,43 @@ class Aws(BaseModel):
     Route settings specific to AWS routes.
     """  # noqa: E501
 
-    fleets: Optional[Annotated[List[StrictStr], Field(min_length=0)]] = Field(
-        default=None,
-        description="list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets",
-    )
-    filter: Optional[HttpFilter] = None
-    transform: Optional[HttpTransform] = None
-    throttle_ms: Optional[StrictInt] = None
-    url: Optional[StrictStr] = None
-    http_headers: Optional[Dict[str, StrictStr]] = None
-    disable_http_headers: Optional[StrictBool] = False
-    timeout: Optional[StrictInt] = Field(
-        default=15, description="Timeout in seconds for each request"
-    )
-    region: Optional[StrictStr] = None
     access_key_id: Optional[StrictStr] = None
     access_key_secret: Optional[StrictStr] = Field(
         default=None,
         description="This value is input-only and will be omitted from the response and replaced with a placeholder",
     )
-    message_group_id: Optional[StrictStr] = None
-    message_deduplication_id: Optional[StrictStr] = None
     channel: Optional[StrictStr] = None
+    disable_http_headers: Optional[StrictBool] = False
+    filter: Optional[AwsFilter] = None
+    fleets: Optional[Annotated[List[StrictStr], Field(min_length=0)]] = Field(
+        default=None,
+        description="list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets",
+    )
+    http_headers: Optional[Dict[str, StrictStr]] = None
+    message_deduplication_id: Optional[StrictStr] = None
+    message_group_id: Optional[StrictStr] = None
+    region: Optional[StrictStr] = None
+    throttle_ms: Optional[StrictInt] = None
+    timeout: Optional[StrictInt] = Field(
+        default=15, description="Timeout in seconds for each request"
+    )
+    transform: Optional[AwsTransform] = None
+    url: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
-        "fleets",
-        "filter",
-        "transform",
-        "throttle_ms",
-        "url",
-        "http_headers",
-        "disable_http_headers",
-        "timeout",
-        "region",
         "access_key_id",
         "access_key_secret",
-        "message_group_id",
-        "message_deduplication_id",
         "channel",
+        "disable_http_headers",
+        "filter",
+        "fleets",
+        "http_headers",
+        "message_deduplication_id",
+        "message_group_id",
+        "region",
+        "throttle_ms",
+        "timeout",
+        "transform",
+        "url",
     ]
 
     model_config = ConfigDict(
@@ -127,32 +127,32 @@ class Aws(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "fleets": obj.get("fleets"),
-                "filter": (
-                    HttpFilter.from_dict(obj["filter"])
-                    if obj.get("filter") is not None
-                    else None
-                ),
-                "transform": (
-                    HttpTransform.from_dict(obj["transform"])
-                    if obj.get("transform") is not None
-                    else None
-                ),
-                "throttle_ms": obj.get("throttle_ms"),
-                "url": obj.get("url"),
-                "http_headers": obj.get("http_headers"),
+                "access_key_id": obj.get("access_key_id"),
+                "access_key_secret": obj.get("access_key_secret"),
+                "channel": obj.get("channel"),
                 "disable_http_headers": (
                     obj.get("disable_http_headers")
                     if obj.get("disable_http_headers") is not None
                     else False
                 ),
-                "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
-                "region": obj.get("region"),
-                "access_key_id": obj.get("access_key_id"),
-                "access_key_secret": obj.get("access_key_secret"),
-                "message_group_id": obj.get("message_group_id"),
+                "filter": (
+                    AwsFilter.from_dict(obj["filter"])
+                    if obj.get("filter") is not None
+                    else None
+                ),
+                "fleets": obj.get("fleets"),
+                "http_headers": obj.get("http_headers"),
                 "message_deduplication_id": obj.get("message_deduplication_id"),
-                "channel": obj.get("channel"),
+                "message_group_id": obj.get("message_group_id"),
+                "region": obj.get("region"),
+                "throttle_ms": obj.get("throttle_ms"),
+                "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
+                "transform": (
+                    AwsTransform.from_dict(obj["transform"])
+                    if obj.get("transform") is not None
+                    else None
+                ),
+                "url": obj.get("url"),
             }
         )
         return _obj

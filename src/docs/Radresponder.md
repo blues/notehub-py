@@ -6,11 +6,11 @@ Route settings specific to RadResponder routes. Only used for RadResponder route
 
 | Name              | Type          | Description                                                                                    | Notes                         |
 | ----------------- | ------------- | ---------------------------------------------------------------------------------------------- | ----------------------------- |
-| **fleets**        | **List[str]** | list of Fleet UIDs to apply route to, if any. If empty, applies to all Fleets                  | [optional]                    |
-| **test_api**      | **bool**      |                                                                                                | [optional] [default to False] |
-| **data_feed_key** | **str**       |                                                                                                | [optional]                    |
 | **client_id**     | **str**       |                                                                                                | [optional]                    |
 | **client_secret** | **str**       | This value is input-only and will be omitted from the response and replaced with a placeholder | [optional]                    |
+| **data_feed_key** | **str**       |                                                                                                | [optional]                    |
+| **fleets**        | **List[str]** | list of Fleet UIDs to apply route to, if any. If empty, applies to all Fleets                  | [optional]                    |
+| **test_api**      | **bool**      |                                                                                                | [optional] [default to False] |
 
 ## Example
 

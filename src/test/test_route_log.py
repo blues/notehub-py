@@ -37,14 +37,14 @@ class TestRouteLog(unittest.TestCase):
         model = RouteLog()
         if include_optional:
             return RouteLog(
-                var_date = '',
-                route_uid = '',
-                event_uid = '',
                 attn = True,
+                var_date = '',
+                duration = 56,
+                event_uid = '',
+                route_uid = '',
                 status = '',
                 text = '',
-                url = '',
-                duration = 56
+                url = ''
             )
         else:
             return RouteLog(

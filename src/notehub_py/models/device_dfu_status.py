@@ -20,8 +20,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.device_dfu_history_current import DeviceDfuHistoryCurrent
 from notehub_py.models.device_dfu_state_machine import DeviceDfuStateMachine
-from notehub_py.models.device_dfu_status_current import DeviceDfuStatusCurrent
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,16 +31,16 @@ class DeviceDfuStatus(BaseModel):
     DeviceDfuStatus
     """  # noqa: E501
 
+    current: Optional[DeviceDfuHistoryCurrent] = None
     device_uid: Optional[StrictStr] = Field(default=None, description="Device UID")
     dfu_in_progress: Optional[StrictBool] = Field(
         default=None, description="true if there is a DFU currently in progress"
     )
-    current: Optional[DeviceDfuStatusCurrent] = None
     status: Optional[DeviceDfuStateMachine] = None
     __properties: ClassVar[List[str]] = [
+        "current",
         "device_uid",
         "dfu_in_progress",
-        "current",
         "status",
     ]
 
@@ -100,13 +100,13 @@ class DeviceDfuStatus(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "device_uid": obj.get("device_uid"),
-                "dfu_in_progress": obj.get("dfu_in_progress"),
                 "current": (
-                    DeviceDfuStatusCurrent.from_dict(obj["current"])
+                    DeviceDfuHistoryCurrent.from_dict(obj["current"])
                     if obj.get("current") is not None
                     else None
                 ),
+                "device_uid": obj.get("device_uid"),
+                "dfu_in_progress": obj.get("dfu_in_progress"),
                 "status": (
                     DeviceDfuStateMachine.from_dict(obj["status"])
                     if obj.get("status") is not None

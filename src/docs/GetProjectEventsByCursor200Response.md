@@ -5,8 +5,8 @@
 | Name            | Type                        | Description                                                                                                                                                                                                                     | Notes |
 | --------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
 | **events**      | [**List[Event]**](Event.md) |                                                                                                                                                                                                                                 |
-| **next_cursor** | **str**                     | The cursor value of the next result, which is intended to be used as the \&quot;cursor\&quot; parameter value of the next call to this method. An empty string is returned if there are no more results after this results set. |
 | **has_more**    | **bool**                    | True if there are more events                                                                                                                                                                                                   |
+| **next_cursor** | **str**                     | The cursor value of the next result, which is intended to be used as the \&quot;cursor\&quot; parameter value of the next call to this method. An empty string is returned if there are no more results after this results set. |
 
 ## Example
 

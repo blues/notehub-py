@@ -21,8 +21,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from notehub_py.models.http_filter import HttpFilter
-from notehub_py.models.http_transform import HttpTransform
+from notehub_py.models.aws_filter import AwsFilter
+from notehub_py.models.aws_transform import AwsTransform
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,30 +32,30 @@ class Http(BaseModel):
     Route settings specific to HTTP routes.
     """  # noqa: E501
 
+    disable_http_headers: Optional[StrictBool] = False
+    filter: Optional[AwsFilter] = None
     fleets: Optional[Annotated[List[StrictStr], Field(min_length=0)]] = Field(
         default=None,
         description="list of Fleet UIDs to apply route to, if any.  If empty, applies to all Fleets",
     )
-    filter: Optional[HttpFilter] = None
-    transform: Optional[HttpTransform] = None
+    http_headers: Optional[Dict[str, StrictStr]] = None
     throttle_ms: Optional[StrictInt] = Field(
         default=None, description="Minimum time between requests in Miliseconds"
     )
-    url: Optional[StrictStr] = Field(default=None, description="Route URL")
-    http_headers: Optional[Dict[str, StrictStr]] = None
-    disable_http_headers: Optional[StrictBool] = False
     timeout: Optional[StrictInt] = Field(
         default=15, description="Timeout in seconds for each request"
     )
+    transform: Optional[AwsTransform] = None
+    url: Optional[StrictStr] = Field(default=None, description="Route URL")
     __properties: ClassVar[List[str]] = [
-        "fleets",
-        "filter",
-        "transform",
-        "throttle_ms",
-        "url",
-        "http_headers",
         "disable_http_headers",
+        "filter",
+        "fleets",
+        "http_headers",
+        "throttle_ms",
         "timeout",
+        "transform",
+        "url",
     ]
 
     model_config = ConfigDict(
@@ -114,26 +114,26 @@ class Http(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "fleets": obj.get("fleets"),
-                "filter": (
-                    HttpFilter.from_dict(obj["filter"])
-                    if obj.get("filter") is not None
-                    else None
-                ),
-                "transform": (
-                    HttpTransform.from_dict(obj["transform"])
-                    if obj.get("transform") is not None
-                    else None
-                ),
-                "throttle_ms": obj.get("throttle_ms"),
-                "url": obj.get("url"),
-                "http_headers": obj.get("http_headers"),
                 "disable_http_headers": (
                     obj.get("disable_http_headers")
                     if obj.get("disable_http_headers") is not None
                     else False
                 ),
+                "filter": (
+                    AwsFilter.from_dict(obj["filter"])
+                    if obj.get("filter") is not None
+                    else None
+                ),
+                "fleets": obj.get("fleets"),
+                "http_headers": obj.get("http_headers"),
+                "throttle_ms": obj.get("throttle_ms"),
                 "timeout": obj.get("timeout") if obj.get("timeout") is not None else 15,
+                "transform": (
+                    AwsTransform.from_dict(obj["transform"])
+                    if obj.get("transform") is not None
+                    else None
+                ),
+                "url": obj.get("url"),
             }
         )
         return _obj

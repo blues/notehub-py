@@ -30,19 +30,19 @@ class PersonalAccessTokenInfo(BaseModel):
     PersonalAccessTokenInfo
     """  # noqa: E501
 
-    name: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
     expires_at: Optional[datetime] = Field(
         default=None,
         description="New expiration timestamp for the personal access token",
     )
+    name: Optional[StrictStr] = None
     suspended: Optional[StrictBool] = Field(
         default=None, description="if true, the token is temporarily suspended"
     )
     __properties: ClassVar[List[str]] = [
-        "name",
         "description",
         "expires_at",
+        "name",
         "suspended",
     ]
 
@@ -101,9 +101,9 @@ class PersonalAccessTokenInfo(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "name": obj.get("name"),
                 "description": obj.get("description"),
                 "expires_at": obj.get("expires_at"),
+                "name": obj.get("name"),
                 "suspended": obj.get("suspended"),
             }
         )

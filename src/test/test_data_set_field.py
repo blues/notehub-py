@@ -37,9 +37,9 @@ class TestDataSetField(unittest.TestCase):
         model = DataSetField()
         if include_optional:
             return DataSetField(
-                name = '',
                 datatype = 0,
-                jsonata = ''
+                jsonata = '',
+                name = ''
             )
         else:
             return DataSetField(

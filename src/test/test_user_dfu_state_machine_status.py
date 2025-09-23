@@ -37,9 +37,9 @@ class TestUserDfuStateMachineStatus(unittest.TestCase):
         model = UserDfuStateMachineStatus()
         if include_optional:
             return UserDfuStateMachineStatus(
+                var_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 phase = '',
                 phase_description = '',
-                var_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 status = ''
             )
         else:

@@ -37,21 +37,21 @@ class TestLocation(unittest.TestCase):
         model = Location()
         if include_optional:
             return Location(
-                when = '',
-                name = '',
                 country = '',
-                timezone = '',
                 latitude = 1.337,
-                longitude = 1.337
+                longitude = 1.337,
+                name = '',
+                timezone = '',
+                when = ''
             )
         else:
             return Location(
-                when = '',
-                name = '',
                 country = '',
-                timezone = '',
                 latitude = 1.337,
                 longitude = 1.337,
+                name = '',
+                timezone = '',
+                when = '',
         )
         """
 

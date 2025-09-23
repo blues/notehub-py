@@ -644,7 +644,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_device_environment_variables**
 
-> GetDeviceEnvironmentVariables200Response get_device_environment_variables(project_or_product_uid, device_uid)
+> GetDeviceEnvironmentVariablesByPin200Response get_device_environment_variables(project_or_product_uid, device_uid)
 
 Get environment variables of a device
 
@@ -654,7 +654,7 @@ Get environment variables of a device
 
 ```python
 import notehub_py
-from notehub_py.models.get_device_environment_variables200_response import GetDeviceEnvironmentVariables200Response
+from notehub_py.models.get_device_environment_variables_by_pin200_response import GetDeviceEnvironmentVariablesByPin200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -699,7 +699,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**GetDeviceEnvironmentVariables200Response**](GetDeviceEnvironmentVariables200Response.md)
+[**GetDeviceEnvironmentVariablesByPin200Response**](GetDeviceEnvironmentVariablesByPin200Response.md)
 
 ### Authorization
 
@@ -721,7 +721,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_device_environment_variables_by_pin**
 
-> GetDeviceEnvironmentVariables200Response get_device_environment_variables_by_pin(product_uid, device_uid)
+> GetDeviceEnvironmentVariablesByPin200Response get_device_environment_variables_by_pin(product_uid, device_uid)
 
 Get environment variables of a device with device pin authorization
 
@@ -731,7 +731,7 @@ Get environment variables of a device with device pin authorization
 
 ```python
 import notehub_py
-from notehub_py.models.get_device_environment_variables200_response import GetDeviceEnvironmentVariables200Response
+from notehub_py.models.get_device_environment_variables_by_pin200_response import GetDeviceEnvironmentVariablesByPin200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -776,7 +776,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**GetDeviceEnvironmentVariables200Response**](GetDeviceEnvironmentVariables200Response.md)
+[**GetDeviceEnvironmentVariablesByPin200Response**](GetDeviceEnvironmentVariablesByPin200Response.md)
 
 ### Authorization
 

@@ -37,9 +37,9 @@ class TestSlackWebHookNotification(unittest.TestCase):
         model = SlackWebHookNotification()
         if include_optional:
             return SlackWebHookNotification(
-                url = '',
                 message_type = 'text',
-                text = ''
+                text = '',
+                url = ''
             )
         else:
             return SlackWebHookNotification(

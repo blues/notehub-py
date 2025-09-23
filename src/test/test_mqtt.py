@@ -37,29 +37,29 @@ class TestMqtt(unittest.TestCase):
         model = Mqtt()
         if include_optional:
             return Mqtt(
+                broker = '',
+                certificate = '-----BEGIN CERTIFICATE-----\nMIIBpTCCA...JgVLttUY=\n-----END CERTIFICATE-----',
+                certificate_name = '',
+                filter = notehub_py.models.aws_filter.aws_filter(
+                    files = [
+                        ''
+                        ], 
+                    system_notefiles = True, 
+                    type = 'all', ),
                 fleets = [
                     ''
                     ],
-                filter = notehub_py.models.http_filter.http_filter(
-                    type = 'all', 
-                    system_notefiles = True, 
-                    files = [
-                        ''
-                        ], ),
-                transform = notehub_py.models.http_transform.http_transform(
-                    format = '', 
-                    jsonata = '', ),
+                key = '-----BEGIN PRIVATE KEY-----\nMIIEvwIBA...SleBlvA==\n-----END PRIVATE KEY-----',
+                password = '',
+                port = 56,
+                private_key_name = '',
                 throttle_ms = 56,
                 timeout = 56,
-                broker = '',
-                port = 56,
-                username = '',
-                password = '',
                 topic = '',
-                certificate = '-----BEGIN CERTIFICATE-----\nMIIBpTCCA...JgVLttUY=\n-----END CERTIFICATE-----',
-                certificate_name = '',
-                key = '-----BEGIN PRIVATE KEY-----\nMIIEvwIBA...SleBlvA==\n-----END PRIVATE KEY-----',
-                private_key_name = ''
+                transform = notehub_py.models.aws_transform.aws_transform(
+                    format = '', 
+                    jsonata = '', ),
+                username = ''
             )
         else:
             return Mqtt(

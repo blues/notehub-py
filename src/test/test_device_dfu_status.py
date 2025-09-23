@@ -37,25 +37,25 @@ class TestDeviceDfuStatus(unittest.TestCase):
         model = DeviceDfuStatus()
         if include_optional:
             return DeviceDfuStatus(
+                current = notehub_py.models.device_dfu_history_current.DeviceDfuHistory_current(
+                    builder = '', 
+                    built = '', 
+                    description = '', 
+                    organization = '', 
+                    product = '', 
+                    version = '', ),
                 device_uid = '',
                 dfu_in_progress = True,
-                current = notehub_py.models.device_dfu_status_current.DeviceDfuStatus_current(
-                    version = '', 
-                    organization = '', 
-                    description = '', 
-                    product = '', 
-                    built = '', 
-                    builder = '', ),
                 status = notehub_py.models.device_dfu_state_machine.DeviceDfuStateMachine(
-                    requested_version = '', 
                     current_version = '', 
                     initiated = '', 
+                    requested_version = '', 
                     updates = [
                         notehub_py.models.device_dfu_state_machine_node.DeviceDfuStateMachineNode(
-                            status = '', 
-                            phase = '', 
                             datetime = '', 
-                            description = '', )
+                            description = '', 
+                            phase = '', 
+                            status = '', )
                         ], )
             )
         else:

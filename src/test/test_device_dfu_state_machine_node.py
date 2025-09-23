@@ -37,10 +37,10 @@ class TestDeviceDfuStateMachineNode(unittest.TestCase):
         model = DeviceDfuStateMachineNode()
         if include_optional:
             return DeviceDfuStateMachineNode(
-                status = '',
-                phase = '',
                 datetime = '',
-                description = ''
+                description = '',
+                phase = '',
+                status = ''
             )
         else:
             return DeviceDfuStateMachineNode(

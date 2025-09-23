@@ -20,8 +20,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.device_dfu_history_current import DeviceDfuHistoryCurrent
 from notehub_py.models.device_dfu_state_machine import DeviceDfuStateMachine
-from notehub_py.models.device_dfu_status_current import DeviceDfuStatusCurrent
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,10 +31,10 @@ class DeviceDfuHistory(BaseModel):
     DeviceDfuHistory
     """  # noqa: E501
 
+    current: Optional[DeviceDfuHistoryCurrent] = None
     device_uid: Optional[StrictStr] = Field(default=None, description="Device UID")
-    current: Optional[DeviceDfuStatusCurrent] = None
     history: Optional[List[DeviceDfuStateMachine]] = None
-    __properties: ClassVar[List[str]] = ["device_uid", "current", "history"]
+    __properties: ClassVar[List[str]] = ["current", "device_uid", "history"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,12 +96,12 @@ class DeviceDfuHistory(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "device_uid": obj.get("device_uid"),
                 "current": (
-                    DeviceDfuStatusCurrent.from_dict(obj["current"])
+                    DeviceDfuHistoryCurrent.from_dict(obj["current"])
                     if obj.get("current") is not None
                     else None
                 ),
+                "device_uid": obj.get("device_uid"),
                 "history": (
                     [DeviceDfuStateMachine.from_dict(_item) for _item in obj["history"]]
                     if obj.get("history") is not None

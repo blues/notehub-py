@@ -29,9 +29,9 @@ class LoginRequest(BaseModel):
     LoginRequest
     """  # noqa: E501
 
-    username: Optional[StrictStr] = None
     password: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["username", "password"]
+    username: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["password", "username"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +82,6 @@ class LoginRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"username": obj.get("username"), "password": obj.get("password")}
+            {"password": obj.get("password"), "username": obj.get("username")}
         )
         return _obj

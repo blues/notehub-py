@@ -29,10 +29,10 @@ class PersonalAccessTokenCreatedBy(BaseModel):
     The user that created this key
     """  # noqa: E501
 
-    uid: Optional[StrictStr] = None
     email: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["uid", "email", "name"]
+    uid: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["email", "name", "uid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +83,6 @@ class PersonalAccessTokenCreatedBy(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"uid": obj.get("uid"), "email": obj.get("email"), "name": obj.get("name")}
+            {"email": obj.get("email"), "name": obj.get("name"), "uid": obj.get("uid")}
         )
         return _obj

@@ -30,11 +30,11 @@ class UserDfuStateMachineStatus(BaseModel):
     UserDfuStateMachineStatus
     """  # noqa: E501
 
+    var_date: Optional[datetime] = Field(default=None, alias="date")
     phase: Optional[StrictStr] = None
     phase_description: Optional[StrictStr] = None
-    var_date: Optional[datetime] = Field(default=None, alias="date")
     status: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["phase", "phase_description", "date", "status"]
+    __properties: ClassVar[List[str]] = ["date", "phase", "phase_description", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,9 +91,9 @@ class UserDfuStateMachineStatus(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "date": obj.get("date"),
                 "phase": obj.get("phase"),
                 "phase_description": obj.get("phase_description"),
-                "date": obj.get("date"),
                 "status": obj.get("status"),
             }
         )

@@ -39,9 +39,9 @@ class TestPersonalAccessTokenCreatedBy(unittest.TestCase):
         model = PersonalAccessTokenCreatedBy()
         if include_optional:
             return PersonalAccessTokenCreatedBy(
-                uid = '',
                 email = '',
-                name = ''
+                name = '',
+                uid = ''
             )
         else:
             return PersonalAccessTokenCreatedBy(

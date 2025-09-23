@@ -46,11 +46,11 @@ class AlertDataInner(BaseModel):
     source_type: Optional[StrictStr] = Field(
         default=None, description="The type of source."
     )
-    value: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="The value that triggered the alert"
-    )
     source_uid: Optional[StrictStr] = Field(
         default=None, description="The UID of the source of the alert"
+    )
+    value: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="The value that triggered the alert"
     )
     when: Optional[StrictStr] = Field(
         default=None, description="The time the alert was created"
@@ -59,8 +59,8 @@ class AlertDataInner(BaseModel):
         "alert_source",
         "source",
         "source_type",
-        "value",
         "source_uid",
+        "value",
         "when",
     ]
 
@@ -137,8 +137,8 @@ class AlertDataInner(BaseModel):
                 "alert_source": obj.get("alert_source"),
                 "source": obj.get("source"),
                 "source_type": obj.get("source_type"),
-                "value": obj.get("value"),
                 "source_uid": obj.get("source_uid"),
+                "value": obj.get("value"),
                 "when": obj.get("when"),
             }
         )

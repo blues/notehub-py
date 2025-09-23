@@ -41,8 +41,8 @@ class TestGetProjectDevicePublicKeys200ResponseDevicePublicKeysInner(unittest.Te
         model = GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner()
         if include_optional:
             return GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner(
-                uid = '',
-                key = ''
+                key = '',
+                uid = ''
             )
         else:
             return GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner(

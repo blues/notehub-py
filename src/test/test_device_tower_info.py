@@ -37,10 +37,10 @@ class TestDeviceTowerInfo(unittest.TestCase):
         model = DeviceTowerInfo()
         if include_optional:
             return DeviceTowerInfo(
-                mcc = 56,
-                mnc = 56,
+                cell_id = 56,
                 lac = 56,
-                cell_id = 56
+                mcc = 56,
+                mnc = 56
             )
         else:
             return DeviceTowerInfo(

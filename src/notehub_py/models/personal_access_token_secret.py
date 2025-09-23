@@ -29,11 +29,11 @@ class PersonalAccessTokenSecret(BaseModel):
     PersonalAccessTokenSecret
     """  # noqa: E501
 
+    secret: Optional[StrictStr] = Field(default=None, description="The secret")
     uid: Optional[StrictStr] = Field(
         default=None, description="Unique and public identifier"
     )
-    secret: Optional[StrictStr] = Field(default=None, description="The secret")
-    __properties: ClassVar[List[str]] = ["uid", "secret"]
+    __properties: ClassVar[List[str]] = ["secret", "uid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,5 +83,5 @@ class PersonalAccessTokenSecret(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"uid": obj.get("uid"), "secret": obj.get("secret")})
+        _obj = cls.model_validate({"secret": obj.get("secret"), "uid": obj.get("uid")})
         return _obj

@@ -4,11 +4,11 @@
 
 | Name             | Type    | Description                                       | Notes      |
 | ---------------- | ------- | ------------------------------------------------- | ---------- |
-| **url**          | **str** | The URL of the Slack webhook.                     | [optional] |
 | **message_type** | **str** | text or blocks                                    | [optional] |
 | **text**         | **str** | The text of the message, or the blocks definition | [optional] |
-| **token**        | **str** | The bearer token for the Slack app.               | [optional] |
+| **url**          | **str** | The URL of the Slack webhook.                     | [optional] |
 | **channel**      | **str** | The channel to send the message to.               | [optional] |
+| **token**        | **str** | The bearer token for the Slack app.               | [optional] |
 | **email**        | **str** | Email Address                                     | [optional] |
 
 ## Example

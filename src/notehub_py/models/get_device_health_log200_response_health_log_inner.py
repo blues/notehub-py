@@ -30,10 +30,10 @@ class GetDeviceHealthLog200ResponseHealthLogInner(BaseModel):
     GetDeviceHealthLog200ResponseHealthLogInner
     """  # noqa: E501
 
-    when: datetime
     alert: StrictBool
     text: StrictStr
-    __properties: ClassVar[List[str]] = ["when", "alert", "text"]
+    when: datetime
+    __properties: ClassVar[List[str]] = ["alert", "text", "when"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,9 +85,9 @@ class GetDeviceHealthLog200ResponseHealthLogInner(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "when": obj.get("when"),
                 "alert": obj.get("alert"),
                 "text": obj.get("text"),
+                "when": obj.get("when"),
             }
         )
         return _obj

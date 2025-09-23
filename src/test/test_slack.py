@@ -37,26 +37,26 @@ class TestSlack(unittest.TestCase):
         model = Slack()
         if include_optional:
             return Slack(
+                bearer = 'xoxb-1234-56789abcdefghijklmnop',
+                blocks = '',
+                channel = 'C8675309',
+                filter = notehub_py.models.aws_filter.aws_filter(
+                    files = [
+                        ''
+                        ], 
+                    system_notefiles = True, 
+                    type = 'all', ),
                 fleets = [
                     ''
                     ],
-                filter = notehub_py.models.http_filter.http_filter(
-                    type = 'all', 
-                    system_notefiles = True, 
-                    files = [
-                        ''
-                        ], ),
-                transform = notehub_py.models.snowflake_transform.snowflake_transform(
-                    format = 'jsonata', 
-                    jsonata = '', ),
+                slack_type = '',
+                text = '[.device] reported temp(s) of [.body.temp] at [.body.location]',
                 throttle_ms = 56,
                 timeout = 56,
-                slack_type = '',
-                bearer = 'xoxb-1234-56789abcdefghijklmnop',
-                channel = 'C8675309',
-                webhook_url = 'https://hooks.slack.com/services/FOO4BAR/THIS4THAT/123xYzaBC456',
-                text = '[.device] reported temp(s) of [.body.temp] at [.body.location]',
-                blocks = ''
+                transform = notehub_py.models.slack_transform.slack_transform(
+                    format = 'jsonata', 
+                    jsonata = '', ),
+                webhook_url = 'https://hooks.slack.com/services/FOO4BAR/THIS4THAT/123xYzaBC456'
             )
         else:
             return Slack(

@@ -4,19 +4,19 @@
 
 | Name         | Type                        | Description | Notes      |
 | ------------ | --------------------------- | ----------- | ---------- |
-| **name**     | **str**                     |             | [optional] |
-| **length**   | **int**                     |             | [optional] |
-| **md5**      | **str**                     |             | [optional] |
+| **contains** | **str**                     |             | [optional] |
 | **crc32**    | **int**                     |             | [optional] |
 | **created**  | **int**                     |             | [optional] |
-| **modified** | **int**                     |             | [optional] |
-| **source**   | **str**                     |             | [optional] |
-| **contains** | **str**                     |             | [optional] |
-| **found**    | **str**                     |             | [optional] |
-| **type**     | **str**                     |             | [optional] |
-| **tags**     | **str**                     |             | [optional] |
-| **notes**    | **str**                     |             | [optional] |
 | **firmware** | [**Firmware**](Firmware.md) |             | [optional] |
+| **found**    | **str**                     |             | [optional] |
+| **length**   | **int**                     |             | [optional] |
+| **md5**      | **str**                     |             | [optional] |
+| **modified** | **int**                     |             | [optional] |
+| **name**     | **str**                     |             | [optional] |
+| **notes**    | **str**                     |             | [optional] |
+| **source**   | **str**                     |             | [optional] |
+| **tags**     | **str**                     |             | [optional] |
+| **type**     | **str**                     |             | [optional] |
 
 ## Example
 

@@ -31,11 +31,11 @@ class GetProjectEventsByCursor200Response(BaseModel):
     """  # noqa: E501
 
     events: List[Event]
+    has_more: StrictBool = Field(description="True if there are more events")
     next_cursor: StrictStr = Field(
         description='The cursor value of the next result, which is intended to be used as the "cursor" parameter value of the next call to this method. An empty string is returned if there are no more results after this results set. '
     )
-    has_more: StrictBool = Field(description="True if there are more events")
-    __properties: ClassVar[List[str]] = ["events", "next_cursor", "has_more"]
+    __properties: ClassVar[List[str]] = ["events", "has_more", "next_cursor"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -99,8 +99,8 @@ class GetProjectEventsByCursor200Response(BaseModel):
                     if obj.get("events") is not None
                     else None
                 ),
-                "next_cursor": obj.get("next_cursor"),
                 "has_more": obj.get("has_more"),
+                "next_cursor": obj.get("next_cursor"),
             }
         )
         return _obj

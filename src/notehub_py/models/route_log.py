@@ -29,18 +29,17 @@ class RouteLog(BaseModel):
     RouteLog
     """  # noqa: E501
 
-    var_date: Optional[StrictStr] = Field(
-        default=None, description="The date of the logs.", alias="date"
-    )
-    route_uid: Optional[StrictStr] = Field(
-        default=None, description="The route UID.", alias="routeUID"
-    )
-    event_uid: Optional[StrictStr] = Field(
-        default=None, description="The event UID.", alias="eventUID"
-    )
     attn: Optional[StrictBool] = Field(
         default=None, description="If true, an error was returned when routing"
     )
+    var_date: Optional[StrictStr] = Field(
+        default=None, description="The date of the logs.", alias="date"
+    )
+    duration: Optional[StrictInt] = Field(
+        default=None, description="The duration of the route in milliseconds"
+    )
+    event_uid: Optional[StrictStr] = Field(default=None, description="The event UID.")
+    route_uid: Optional[StrictStr] = Field(default=None, description="The route UID.")
     status: Optional[StrictStr] = Field(
         default=None, description="The status of the event."
     )
@@ -48,18 +47,15 @@ class RouteLog(BaseModel):
         default=None, description="The response body of the route."
     )
     url: Optional[StrictStr] = Field(default=None, description="The URL of the route.")
-    duration: Optional[StrictInt] = Field(
-        default=None, description="The duration of the route in milliseconds"
-    )
     __properties: ClassVar[List[str]] = [
-        "date",
-        "routeUID",
-        "eventUID",
         "attn",
+        "date",
+        "duration",
+        "event_uid",
+        "route_uid",
         "status",
         "text",
         "url",
-        "duration",
     ]
 
     model_config = ConfigDict(
@@ -112,14 +108,14 @@ class RouteLog(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "date": obj.get("date"),
-                "routeUID": obj.get("routeUID"),
-                "eventUID": obj.get("eventUID"),
                 "attn": obj.get("attn"),
+                "date": obj.get("date"),
+                "duration": obj.get("duration"),
+                "event_uid": obj.get("event_uid"),
+                "route_uid": obj.get("route_uid"),
                 "status": obj.get("status"),
                 "text": obj.get("text"),
                 "url": obj.get("url"),
-                "duration": obj.get("duration"),
             }
         )
         return _obj

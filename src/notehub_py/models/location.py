@@ -29,19 +29,19 @@ class Location(BaseModel):
     Location
     """  # noqa: E501
 
-    when: StrictStr
-    name: StrictStr
     country: StrictStr
-    timezone: StrictStr
     latitude: Union[StrictFloat, StrictInt]
     longitude: Union[StrictFloat, StrictInt]
+    name: StrictStr
+    timezone: StrictStr
+    when: StrictStr
     __properties: ClassVar[List[str]] = [
-        "when",
-        "name",
         "country",
-        "timezone",
         "latitude",
         "longitude",
+        "name",
+        "timezone",
+        "when",
     ]
 
     model_config = ConfigDict(
@@ -94,12 +94,12 @@ class Location(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "when": obj.get("when"),
-                "name": obj.get("name"),
                 "country": obj.get("country"),
-                "timezone": obj.get("timezone"),
                 "latitude": obj.get("latitude"),
                 "longitude": obj.get("longitude"),
+                "name": obj.get("name"),
+                "timezone": obj.get("timezone"),
+                "when": obj.get("when"),
             }
         )
         return _obj

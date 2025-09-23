@@ -37,14 +37,14 @@ class TestProjectMember(unittest.TestCase):
         model = ProjectMember()
         if include_optional:
             return ProjectMember(
-                name = '',
                 email = '',
+                name = '',
                 role = 'owner'
             )
         else:
             return ProjectMember(
-                name = '',
                 email = '',
+                name = '',
                 role = 'owner',
         )
         """

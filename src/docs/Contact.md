@@ -4,10 +4,10 @@
 
 | Name             | Type    | Description | Notes      |
 | ---------------- | ------- | ----------- | ---------- |
-| **name**         | **str** |             | [optional] |
 | **email**        | **str** |             | [optional] |
-| **role**         | **str** |             | [optional] |
+| **name**         | **str** |             | [optional] |
 | **organization** | **str** |             | [optional] |
+| **role**         | **str** |             | [optional] |
 
 ## Example
 

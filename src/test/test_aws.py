@@ -37,29 +37,29 @@ class TestAws(unittest.TestCase):
         model = Aws()
         if include_optional:
             return Aws(
+                access_key_id = '',
+                access_key_secret = '',
+                channel = '',
+                disable_http_headers = True,
+                filter = notehub_py.models.aws_filter.aws_filter(
+                    files = [
+                        ''
+                        ], 
+                    system_notefiles = True, 
+                    type = 'all', ),
                 fleets = [
                     ''
                     ],
-                filter = notehub_py.models.http_filter.http_filter(
-                    type = 'all', 
-                    system_notefiles = True, 
-                    files = [
-                        ''
-                        ], ),
-                transform = notehub_py.models.http_transform.http_transform(
+                http_headers = {"headerName1":"headerValue1","headerName2":"headerValue2"},
+                message_deduplication_id = '',
+                message_group_id = '',
+                region = '',
+                throttle_ms = 56,
+                timeout = 56,
+                transform = notehub_py.models.aws_transform.aws_transform(
                     format = '', 
                     jsonata = '', ),
-                throttle_ms = 56,
-                url = '',
-                http_headers = {"headerName1":"headerValue1","headerName2":"headerValue2"},
-                disable_http_headers = True,
-                timeout = 56,
-                region = '',
-                access_key_id = '',
-                access_key_secret = '',
-                message_group_id = '',
-                message_deduplication_id = '',
-                channel = ''
+                url = ''
             )
         else:
             return Aws(

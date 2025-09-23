@@ -37,10 +37,10 @@ class TestCreateUpdateRepository(unittest.TestCase):
         model = CreateUpdateRepository()
         if include_optional:
             return CreateUpdateRepository(
-                name = '',
                 fleet_uids = [
                     ''
                     ],
+                name = '',
                 project_uids = [
                     ''
                     ]

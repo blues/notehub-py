@@ -4,9 +4,9 @@
 
 | Name                  | Type         | Description | Notes      |
 | --------------------- | ------------ | ----------- | ---------- |
+| **var_date**          | **datetime** |             | [optional] |
 | **phase**             | **str**      |             | [optional] |
 | **phase_description** | **str**      |             | [optional] |
-| **var_date**          | **datetime** |             | [optional] |
 | **status**            | **str**      |             | [optional] |
 
 ## Example

@@ -39,13 +39,13 @@ class TestGetDevicePublicKey200Response(unittest.TestCase):
         model = GetDevicePublicKey200Response()
         if include_optional:
             return GetDevicePublicKey200Response(
-                uid = '',
-                key = ''
+                key = '',
+                uid = ''
             )
         else:
             return GetDevicePublicKey200Response(
-                uid = '',
                 key = '',
+                uid = '',
         )
         """
 

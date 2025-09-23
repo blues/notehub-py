@@ -4,11 +4,11 @@
 
 | Name           | Type                                          | Description                                            | Notes      |
 | -------------- | --------------------------------------------- | ------------------------------------------------------ | ---------- |
-| **name**       | **str**                                       | Name of the field (optional for array/object children) | [optional] |
-| **type**       | **str**                                       |                                                        |
-| **updated_at** | **datetime**                                  |                                                        |
 | **items**      | [**List[SchemaProperty]**](SchemaProperty.md) | Used if type is array                                  | [optional] |
+| **name**       | **str**                                       | Name of the field (optional for array/object children) | [optional] |
 | **properties** | [**List[SchemaProperty]**](SchemaProperty.md) | Used if type is object                                 | [optional] |
+| **type**       | **str**                                       |                                                        |
+| **updated_at** | **datetime**                                  |                                                        | [optional] |
 
 ## Example
 

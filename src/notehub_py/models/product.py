@@ -29,15 +29,15 @@ class Product(BaseModel):
     Product
     """  # noqa: E501
 
-    uid: StrictStr
-    label: StrictStr
     auto_provision_fleets: Optional[List[StrictStr]] = None
     disable_devices_by_default: StrictBool
+    label: StrictStr
+    uid: StrictStr
     __properties: ClassVar[List[str]] = [
-        "uid",
-        "label",
         "auto_provision_fleets",
         "disable_devices_by_default",
+        "label",
+        "uid",
     ]
 
     model_config = ConfigDict(
@@ -98,10 +98,10 @@ class Product(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "uid": obj.get("uid"),
-                "label": obj.get("label"),
                 "auto_provision_fleets": obj.get("auto_provision_fleets"),
                 "disable_devices_by_default": obj.get("disable_devices_by_default"),
+                "label": obj.get("label"),
+                "uid": obj.get("uid"),
             }
         )
         return _obj

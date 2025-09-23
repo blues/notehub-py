@@ -30,12 +30,12 @@ class ProjectMember(BaseModel):
     ProjectMember
     """  # noqa: E501
 
-    name: StrictStr
     email: StrictStr = Field(
         description="The email address of the project member. This property will only be populated if the viewer is an owner of the project. "
     )
+    name: StrictStr
     role: Optional[Role]
-    __properties: ClassVar[List[str]] = ["name", "email", "role"]
+    __properties: ClassVar[List[str]] = ["email", "name", "role"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,8 +92,8 @@ class ProjectMember(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "name": obj.get("name"),
                 "email": obj.get("email"),
+                "name": obj.get("name"),
                 "role": obj.get("role"),
             }
         )

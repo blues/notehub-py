@@ -24,8 +24,8 @@ from notehub_py.models.body import Body
 from notehub_py.models.device import Device
 from notehub_py.models.env_tree_json_node import EnvTreeJsonNode
 from notehub_py.models.environment_variables import EnvironmentVariables
-from notehub_py.models.get_device_environment_variables200_response import (
-    GetDeviceEnvironmentVariables200Response,
+from notehub_py.models.get_device_environment_variables_by_pin200_response import (
+    GetDeviceEnvironmentVariablesByPin200Response,
 )
 from notehub_py.models.get_device_health_log200_response import (
     GetDeviceHealthLog200Response,
@@ -2166,7 +2166,7 @@ class DeviceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetDeviceEnvironmentVariables200Response:
+    ) -> GetDeviceEnvironmentVariablesByPin200Response:
         """get_device_environment_variables
 
         Get environment variables of a device
@@ -2207,7 +2207,7 @@ class DeviceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceEnvironmentVariables200Response",
+            "200": "GetDeviceEnvironmentVariablesByPin200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -2234,7 +2234,7 @@ class DeviceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetDeviceEnvironmentVariables200Response]:
+    ) -> ApiResponse[GetDeviceEnvironmentVariablesByPin200Response]:
         """get_device_environment_variables
 
         Get environment variables of a device
@@ -2275,7 +2275,7 @@ class DeviceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceEnvironmentVariables200Response",
+            "200": "GetDeviceEnvironmentVariablesByPin200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -2343,7 +2343,7 @@ class DeviceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceEnvironmentVariables200Response",
+            "200": "GetDeviceEnvironmentVariablesByPin200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -2420,7 +2420,7 @@ class DeviceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetDeviceEnvironmentVariables200Response:
+    ) -> GetDeviceEnvironmentVariablesByPin200Response:
         """get_device_environment_variables_by_pin
 
         Get environment variables of a device with device pin authorization
@@ -2461,7 +2461,7 @@ class DeviceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceEnvironmentVariables200Response",
+            "200": "GetDeviceEnvironmentVariablesByPin200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -2488,7 +2488,7 @@ class DeviceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetDeviceEnvironmentVariables200Response]:
+    ) -> ApiResponse[GetDeviceEnvironmentVariablesByPin200Response]:
         """get_device_environment_variables_by_pin
 
         Get environment variables of a device with device pin authorization
@@ -2529,7 +2529,7 @@ class DeviceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceEnvironmentVariables200Response",
+            "200": "GetDeviceEnvironmentVariablesByPin200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -2597,7 +2597,7 @@ class DeviceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceEnvironmentVariables200Response",
+            "200": "GetDeviceEnvironmentVariablesByPin200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout

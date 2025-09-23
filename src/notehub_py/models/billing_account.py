@@ -30,10 +30,10 @@ class BillingAccount(BaseModel):
     BillingAccount
     """  # noqa: E501
 
-    uid: StrictStr
     name: StrictStr
     role: BillingAccountRole
-    __properties: ClassVar[List[str]] = ["uid", "name", "role"]
+    uid: StrictStr
+    __properties: ClassVar[List[str]] = ["name", "role", "uid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +84,6 @@ class BillingAccount(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"uid": obj.get("uid"), "name": obj.get("name"), "role": obj.get("role")}
+            {"name": obj.get("name"), "role": obj.get("role"), "uid": obj.get("uid")}
         )
         return _obj

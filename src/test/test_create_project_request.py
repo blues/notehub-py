@@ -37,13 +37,13 @@ class TestCreateProjectRequest(unittest.TestCase):
         model = CreateProjectRequest()
         if include_optional:
             return CreateProjectRequest(
-                label = '',
-                billing_account_uid = ''
+                billing_account_uid = '',
+                label = ''
             )
         else:
             return CreateProjectRequest(
-                label = '',
                 billing_account_uid = '',
+                label = '',
         )
         """
 

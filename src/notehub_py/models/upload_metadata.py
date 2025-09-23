@@ -30,33 +30,33 @@ class UploadMetadata(BaseModel):
     UploadMetadata
     """  # noqa: E501
 
-    name: Optional[StrictStr] = None
-    length: Optional[StrictInt] = None
-    md5: Optional[StrictStr] = None
+    contains: Optional[StrictStr] = None
     crc32: Optional[StrictInt] = None
     created: Optional[StrictInt] = None
-    modified: Optional[StrictInt] = None
-    source: Optional[StrictStr] = None
-    contains: Optional[StrictStr] = None
-    found: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
-    tags: Optional[StrictStr] = None
-    notes: Optional[StrictStr] = None
     firmware: Optional[Firmware] = None
+    found: Optional[StrictStr] = None
+    length: Optional[StrictInt] = None
+    md5: Optional[StrictStr] = None
+    modified: Optional[StrictInt] = None
+    name: Optional[StrictStr] = None
+    notes: Optional[StrictStr] = None
+    source: Optional[StrictStr] = None
+    tags: Optional[StrictStr] = None
+    type: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
-        "name",
-        "length",
-        "md5",
+        "contains",
         "crc32",
         "created",
-        "modified",
-        "source",
-        "contains",
-        "found",
-        "type",
-        "tags",
-        "notes",
         "firmware",
+        "found",
+        "length",
+        "md5",
+        "modified",
+        "name",
+        "notes",
+        "source",
+        "tags",
+        "type",
     ]
 
     model_config = ConfigDict(
@@ -117,23 +117,23 @@ class UploadMetadata(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "name": obj.get("name"),
-                "length": obj.get("length"),
-                "md5": obj.get("md5"),
+                "contains": obj.get("contains"),
                 "crc32": obj.get("crc32"),
                 "created": obj.get("created"),
-                "modified": obj.get("modified"),
-                "source": obj.get("source"),
-                "contains": obj.get("contains"),
-                "found": obj.get("found"),
-                "type": obj.get("type"),
-                "tags": obj.get("tags"),
-                "notes": obj.get("notes"),
                 "firmware": (
                     Firmware.from_dict(obj["firmware"])
                     if obj.get("firmware") is not None
                     else None
                 ),
+                "found": obj.get("found"),
+                "length": obj.get("length"),
+                "md5": obj.get("md5"),
+                "modified": obj.get("modified"),
+                "name": obj.get("name"),
+                "notes": obj.get("notes"),
+                "source": obj.get("source"),
+                "tags": obj.get("tags"),
+                "type": obj.get("type"),
             }
         )
         return _obj

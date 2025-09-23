@@ -29,9 +29,6 @@ class HandleNoteChanges200Response(BaseModel):
     HandleNoteChanges200Response
     """  # noqa: E501
 
-    total: Optional[StrictInt] = Field(
-        default=None, description="The total number of notes."
-    )
     changes: Optional[StrictInt] = Field(
         default=None, description="The number of pending changes in the Notefile."
     )
@@ -39,7 +36,10 @@ class HandleNoteChanges200Response(BaseModel):
         default=None,
         description="An object with a key for each note and a value object with the body of each Note and the time the Note was added.",
     )
-    __properties: ClassVar[List[str]] = ["total", "changes", "notes"]
+    total: Optional[StrictInt] = Field(
+        default=None, description="The total number of notes."
+    )
+    __properties: ClassVar[List[str]] = ["changes", "notes", "total"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,9 +91,9 @@ class HandleNoteChanges200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "total": obj.get("total"),
                 "changes": obj.get("changes"),
                 "notes": obj.get("notes"),
+                "total": obj.get("total"),
             }
         )
         return _obj

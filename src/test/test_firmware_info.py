@@ -37,18 +37,18 @@ class TestFirmwareInfo(unittest.TestCase):
         model = FirmwareInfo()
         if include_optional:
             return FirmwareInfo(
+                built = '',
+                created = '',
+                description = '',
                 filename = '',
-                version = '',
                 md5 = '',
                 organization = '',
-                built = '',
                 product = '',
-                description = '',
+                published = True,
                 tags = '',
-                type = '',
-                created = '',
                 target = '',
-                published = True
+                type = '',
+                version = ''
             )
         else:
             return FirmwareInfo(

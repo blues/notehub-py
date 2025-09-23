@@ -29,11 +29,11 @@ class CreateProjectRequest(BaseModel):
     CreateProjectRequest
     """  # noqa: E501
 
-    label: StrictStr = Field(description="The label for the project.")
     billing_account_uid: StrictStr = Field(
         description="The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned. "
     )
-    __properties: ClassVar[List[str]] = ["label", "billing_account_uid"]
+    label: StrictStr = Field(description="The label for the project.")
+    __properties: ClassVar[List[str]] = ["billing_account_uid", "label"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,8 +85,8 @@ class CreateProjectRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "label": obj.get("label"),
                 "billing_account_uid": obj.get("billing_account_uid"),
+                "label": obj.get("label"),
             }
         )
         return _obj

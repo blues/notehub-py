@@ -4,20 +4,20 @@
 
 | Name       | Type      | Description                                       | Notes      |
 | ---------- | --------- | ------------------------------------------------- | ---------- |
-| **source** | **str**   | The source of this location                       | [optional] |
-| **time**   | **int**   | Unix timestamp when this location was ascertained | [optional] |
-| **n**      | **str**   | Name of the location                              | [optional] |
 | **c**      | **str**   | Country code                                      | [optional] |
-| **lat**    | **float** | Latitude                                          | [optional] |
-| **lon**    | **float** | Longitude                                         | [optional] |
-| **zone**   | **str**   | Timezone name                                     | [optional] |
-| **mcc**    | **int**   | Mobile Country Code                               | [optional] |
-| **mnc**    | **int**   | Mobile Network Code                               | [optional] |
-| **lac**    | **int**   | Location Area Code                                | [optional] |
 | **cid**    | **int**   | Cell ID                                           | [optional] |
 | **l**      | **str**   | Open Location Code                                | [optional] |
-| **z**      | **int**   | Timezone ID                                       | [optional] |
+| **lac**    | **int**   | Location Area Code                                | [optional] |
+| **lat**    | **float** | Latitude                                          | [optional] |
+| **lon**    | **float** | Longitude                                         | [optional] |
+| **mcc**    | **int**   | Mobile Country Code                               | [optional] |
+| **mnc**    | **int**   | Mobile Network Code                               | [optional] |
+| **n**      | **str**   | Name of the location                              | [optional] |
+| **source** | **str**   | The source of this location                       | [optional] |
+| **time**   | **int**   | Unix timestamp when this location was ascertained | [optional] |
 | **towers** | **int**   | Number of triangulation points                    | [optional] |
+| **z**      | **int**   | Timezone ID                                       | [optional] |
+| **zone**   | **str**   | Timezone name                                     | [optional] |
 
 ## Example
 

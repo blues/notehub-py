@@ -30,9 +30,9 @@ class CurrentFirmware(BaseModel):
     CurrentFirmware
     """  # noqa: E501
 
-    version: Optional[StrictStr] = None
     metadata: Optional[Firmware] = None
-    __properties: ClassVar[List[str]] = ["version", "metadata"]
+    version: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["metadata", "version"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,12 +92,12 @@ class CurrentFirmware(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "version": obj.get("version"),
                 "metadata": (
                     Firmware.from_dict(obj["metadata"])
                     if obj.get("metadata") is not None
                     else None
                 ),
+                "version": obj.get("version"),
             }
         )
         return _obj

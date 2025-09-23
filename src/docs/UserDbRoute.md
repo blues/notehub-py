@@ -4,11 +4,11 @@
 
 | Name         | Type     | Description | Notes                                                            |
 | ------------ | -------- | ----------- | ---------------------------------------------------------------- |
-| **uid**      | **str**  |             | [optional] [default to 'route:8d65a087d5d290ce5bdf03aeff2becc0'] |
-| **label**    | **str**  |             | [optional] [default to 'success route']                          |
-| **type**     | **str**  |             | [optional] [default to 'http']                                   |
-| **modified** | **str**  |             | [optional] [default to '2020-03-09T17:58:37Z']                   |
 | **disabled** | **bool** |             | [optional] [default to False]                                    |
+| **label**    | **str**  |             | [optional] [default to 'success route']                          |
+| **modified** | **str**  |             | [optional] [default to '2020-03-09T17:58:37Z']                   |
+| **type**     | **str**  |             | [optional] [default to 'http']                                   |
+| **uid**      | **str**  |             | [optional] [default to 'route:8d65a087d5d290ce5bdf03aeff2becc0'] |
 
 ## Example
 

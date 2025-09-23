@@ -4,14 +4,14 @@
 
 | Name          | Type     | Description                                 | Notes      |
 | ------------- | -------- | ------------------------------------------- | ---------- |
-| **var_date**  | **str**  | The date of the logs.                       | [optional] |
-| **route_uid** | **str**  | The route UID.                              | [optional] |
-| **event_uid** | **str**  | The event UID.                              | [optional] |
 | **attn**      | **bool** | If true, an error was returned when routing | [optional] |
+| **var_date**  | **str**  | The date of the logs.                       | [optional] |
+| **duration**  | **int**  | The duration of the route in milliseconds   | [optional] |
+| **event_uid** | **str**  | The event UID.                              | [optional] |
+| **route_uid** | **str**  | The route UID.                              | [optional] |
 | **status**    | **str**  | The status of the event.                    | [optional] |
 | **text**      | **str**  | The response body of the route.             | [optional] |
 | **url**       | **str**  | The URL of the route.                       | [optional] |
-| **duration**  | **int**  | The duration of the route in milliseconds   | [optional] |
 
 ## Example
 

@@ -4,22 +4,22 @@ Route settings specific to AWS routes.
 
 ## Properties
 
-| Name                         | Type                                  | Description                                                                                    | Notes                         |
-| ---------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------- |
-| **fleets**                   | **List[str]**                         | list of Fleet UIDs to apply route to, if any. If empty, applies to all Fleets                  | [optional]                    |
-| **filter**                   | [**HttpFilter**](HttpFilter.md)       |                                                                                                | [optional]                    |
-| **transform**                | [**HttpTransform**](HttpTransform.md) |                                                                                                | [optional]                    |
-| **throttle_ms**              | **int**                               |                                                                                                | [optional]                    |
-| **url**                      | **str**                               |                                                                                                | [optional]                    |
-| **http_headers**             | **Dict[str, str]**                    |                                                                                                | [optional]                    |
-| **disable_http_headers**     | **bool**                              |                                                                                                | [optional] [default to False] |
-| **timeout**                  | **int**                               | Timeout in seconds for each request                                                            | [optional] [default to 15]    |
-| **region**                   | **str**                               |                                                                                                | [optional]                    |
-| **access_key_id**            | **str**                               |                                                                                                | [optional]                    |
-| **access_key_secret**        | **str**                               | This value is input-only and will be omitted from the response and replaced with a placeholder | [optional]                    |
-| **message_group_id**         | **str**                               |                                                                                                | [optional]                    |
-| **message_deduplication_id** | **str**                               |                                                                                                | [optional]                    |
-| **channel**                  | **str**                               |                                                                                                | [optional]                    |
+| Name                         | Type                                | Description                                                                                    | Notes                         |
+| ---------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------- |
+| **access_key_id**            | **str**                             |                                                                                                | [optional]                    |
+| **access_key_secret**        | **str**                             | This value is input-only and will be omitted from the response and replaced with a placeholder | [optional]                    |
+| **channel**                  | **str**                             |                                                                                                | [optional]                    |
+| **disable_http_headers**     | **bool**                            |                                                                                                | [optional] [default to False] |
+| **filter**                   | [**AwsFilter**](AwsFilter.md)       |                                                                                                | [optional]                    |
+| **fleets**                   | **List[str]**                       | list of Fleet UIDs to apply route to, if any. If empty, applies to all Fleets                  | [optional]                    |
+| **http_headers**             | **Dict[str, str]**                  |                                                                                                | [optional]                    |
+| **message_deduplication_id** | **str**                             |                                                                                                | [optional]                    |
+| **message_group_id**         | **str**                             |                                                                                                | [optional]                    |
+| **region**                   | **str**                             |                                                                                                | [optional]                    |
+| **throttle_ms**              | **int**                             |                                                                                                | [optional]                    |
+| **timeout**                  | **int**                             | Timeout in seconds for each request                                                            | [optional] [default to 15]    |
+| **transform**                | [**AwsTransform**](AwsTransform.md) |                                                                                                | [optional]                    |
+| **url**                      | **str**                             |                                                                                                | [optional]                    |
 
 ## Example
 

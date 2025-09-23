@@ -29,16 +29,16 @@ class SlackWebHookNotification(BaseModel):
     SlackWebHookNotification
     """  # noqa: E501
 
-    url: Optional[StrictStr] = Field(
-        default=None, description="The URL of the Slack webhook."
-    )
     message_type: Optional[StrictStr] = Field(
         default=None, description="text or blocks"
     )
     text: Optional[StrictStr] = Field(
         default=None, description="The text of the message, or the blocks definition"
     )
-    __properties: ClassVar[List[str]] = ["url", "message_type", "text"]
+    url: Optional[StrictStr] = Field(
+        default=None, description="The URL of the Slack webhook."
+    )
+    __properties: ClassVar[List[str]] = ["message_type", "text", "url"]
 
     @field_validator("message_type")
     def message_type_validate_enum(cls, value):
@@ -100,9 +100,9 @@ class SlackWebHookNotification(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "url": obj.get("url"),
                 "message_type": obj.get("message_type"),
                 "text": obj.get("text"),
+                "url": obj.get("url"),
             }
         )
         return _obj

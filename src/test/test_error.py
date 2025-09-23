@@ -37,17 +37,17 @@ class TestError(unittest.TestCase):
         model = Error()
         if include_optional:
             return Error(
-                err = '',
                 code = 300,
-                status = '',
-                request = '',
+                debug = '',
                 details = None,
-                debug = ''
+                err = '',
+                request = '',
+                status = ''
             )
         else:
             return Error(
-                err = '',
                 code = 300,
+                err = '',
                 status = '',
         )
         """

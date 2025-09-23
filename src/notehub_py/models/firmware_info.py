@@ -29,53 +29,53 @@ class FirmwareInfo(BaseModel):
     FirmwareInfo
     """  # noqa: E501
 
-    filename: Optional[StrictStr] = Field(
-        default=None, description="The name of the firmware file."
-    )
-    version: Optional[StrictStr] = Field(
-        default=None, description="The version of the firmware."
-    )
-    md5: Optional[StrictStr] = Field(
-        default=None, description="The MD5 hash of the firmware file.", alias="MD5"
-    )
-    organization: Optional[StrictStr] = Field(
-        default=None, description="The organization that owns the firmware."
-    )
     built: Optional[StrictStr] = Field(
         default=None, description="The date the firmware was built."
     )
-    product: Optional[StrictStr] = Field(
-        default=None, description="The product that the firmware is for."
+    created: Optional[StrictStr] = Field(
+        default=None, description="The date the firmware was created."
     )
     description: Optional[StrictStr] = Field(
         default=None, description="A description of the firmware."
     )
-    tags: Optional[StrictStr] = Field(
-        default=None, description="A list of tags associated with the firmware."
+    filename: Optional[StrictStr] = Field(
+        default=None, description="The name of the firmware file."
     )
-    type: Optional[StrictStr] = Field(default=None, description="The type of firmware.")
-    created: Optional[StrictStr] = Field(
-        default=None, description="The date the firmware was created."
+    md5: Optional[StrictStr] = Field(
+        default=None, description="The MD5 hash of the firmware file."
     )
-    target: Optional[StrictStr] = Field(
-        default=None, description="The target device for the firmware."
+    organization: Optional[StrictStr] = Field(
+        default=None, description="The organization that owns the firmware."
+    )
+    product: Optional[StrictStr] = Field(
+        default=None, description="The product that the firmware is for."
     )
     published: Optional[StrictBool] = Field(
         default=None, description="True if the firmware is published."
     )
+    tags: Optional[StrictStr] = Field(
+        default=None, description="A list of tags associated with the firmware."
+    )
+    target: Optional[StrictStr] = Field(
+        default=None, description="The target device for the firmware."
+    )
+    type: Optional[StrictStr] = Field(default=None, description="The type of firmware.")
+    version: Optional[StrictStr] = Field(
+        default=None, description="The version of the firmware."
+    )
     __properties: ClassVar[List[str]] = [
-        "filename",
-        "version",
-        "MD5",
-        "organization",
         "built",
-        "product",
-        "description",
-        "tags",
-        "type",
         "created",
-        "target",
+        "description",
+        "filename",
+        "md5",
+        "organization",
+        "product",
         "published",
+        "tags",
+        "target",
+        "type",
+        "version",
     ]
 
     model_config = ConfigDict(
@@ -128,18 +128,18 @@ class FirmwareInfo(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "filename": obj.get("filename"),
-                "version": obj.get("version"),
-                "MD5": obj.get("MD5"),
-                "organization": obj.get("organization"),
                 "built": obj.get("built"),
-                "product": obj.get("product"),
-                "description": obj.get("description"),
-                "tags": obj.get("tags"),
-                "type": obj.get("type"),
                 "created": obj.get("created"),
-                "target": obj.get("target"),
+                "description": obj.get("description"),
+                "filename": obj.get("filename"),
+                "md5": obj.get("md5"),
+                "organization": obj.get("organization"),
+                "product": obj.get("product"),
                 "published": obj.get("published"),
+                "tags": obj.get("tags"),
+                "target": obj.get("target"),
+                "type": obj.get("type"),
+                "version": obj.get("version"),
             }
         )
         return _obj

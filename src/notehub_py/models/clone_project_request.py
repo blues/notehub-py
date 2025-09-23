@@ -29,23 +29,23 @@ class CloneProjectRequest(BaseModel):
     CloneProjectRequest
     """  # noqa: E501
 
-    label: StrictStr = Field(description="The label for the project.")
     billing_account_uid: StrictStr = Field(
         description="The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned."
-    )
-    disable_clone_routes: Optional[StrictBool] = Field(
-        default=None,
-        description="Whether to disallow the cloning of the routes from the parent project.  Default is false if not specified.",
     )
     disable_clone_fleets: Optional[StrictBool] = Field(
         default=None,
         description="Whether to disallow the cloning of the fleets from the parent project.  Default is false if not specified.",
     )
+    disable_clone_routes: Optional[StrictBool] = Field(
+        default=None,
+        description="Whether to disallow the cloning of the routes from the parent project.  Default is false if not specified.",
+    )
+    label: StrictStr = Field(description="The label for the project.")
     __properties: ClassVar[List[str]] = [
-        "label",
         "billing_account_uid",
-        "disable_clone_routes",
         "disable_clone_fleets",
+        "disable_clone_routes",
+        "label",
     ]
 
     model_config = ConfigDict(
@@ -98,10 +98,10 @@ class CloneProjectRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "label": obj.get("label"),
                 "billing_account_uid": obj.get("billing_account_uid"),
-                "disable_clone_routes": obj.get("disable_clone_routes"),
                 "disable_clone_fleets": obj.get("disable_clone_fleets"),
+                "disable_clone_routes": obj.get("disable_clone_routes"),
+                "label": obj.get("label"),
             }
         )
         return _obj

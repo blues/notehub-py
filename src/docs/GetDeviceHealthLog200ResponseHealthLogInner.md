@@ -4,9 +4,9 @@
 
 | Name      | Type         | Description | Notes |
 | --------- | ------------ | ----------- | ----- |
-| **when**  | **datetime** |             |
 | **alert** | **bool**     |             |
 | **text**  | **str**      |             |
+| **when**  | **datetime** |             |
 
 ## Example
 

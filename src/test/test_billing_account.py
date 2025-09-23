@@ -37,15 +37,15 @@ class TestBillingAccount(unittest.TestCase):
         model = BillingAccount()
         if include_optional:
             return BillingAccount(
-                uid = '',
                 name = '',
-                role = 'billing_admin'
+                role = 'billing_admin',
+                uid = ''
             )
         else:
             return BillingAccount(
-                uid = '',
                 name = '',
                 role = 'billing_admin',
+                uid = '',
         )
         """
 

@@ -5,10 +5,10 @@
 | Name              | Type    | Description                                  | Notes      |
 | ----------------- | ------- | -------------------------------------------- | ---------- |
 | **iccid**         | **str** | ICCID of the SIM card                        | [optional] |
-| **used**          | **int** | Bytes used on the SIMs current data plan     | [optional] |
-| **limit**         | **int** | Limit in bytes of the SIMs current data plan | [optional] |
-| **lifetime_used** | **int** | Total number of bytes used by SIM            | [optional] |
 | **last_updated**  | **int** | Time this usage information was last updated | [optional] |
+| **lifetime_used** | **int** | Total number of bytes used by SIM            | [optional] |
+| **limit**         | **int** | Limit in bytes of the SIMs current data plan | [optional] |
+| **used**          | **int** | Bytes used on the SIMs current data plan     | [optional] |
 
 ## Example
 

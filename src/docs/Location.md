@@ -4,12 +4,12 @@
 
 | Name          | Type      | Description | Notes |
 | ------------- | --------- | ----------- | ----- |
-| **when**      | **str**   |             |
-| **name**      | **str**   |             |
 | **country**   | **str**   |             |
-| **timezone**  | **str**   |             |
 | **latitude**  | **float** |             |
 | **longitude** | **float** |             |
+| **name**      | **str**   |             |
+| **timezone**  | **str**   |             |
+| **when**      | **str**   |             |
 
 ## Example
 

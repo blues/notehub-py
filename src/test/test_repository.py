@@ -37,14 +37,14 @@ class TestRepository(unittest.TestCase):
         model = Repository()
         if include_optional:
             return Repository(
-                uid = '',
-                name = '',
                 fleet_uids = [
                     ''
                     ],
+                name = '',
                 project_uids = [
                     ''
-                    ]
+                    ],
+                uid = ''
             )
         else:
             return Repository(

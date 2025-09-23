@@ -30,27 +30,27 @@ class Fleet(BaseModel):
     Fleet
     """  # noqa: E501
 
-    uid: StrictStr = Field(description="Fleet UID")
-    label: StrictStr = Field(description="Fleet label")
     created: datetime = Field(description="RFC3339 timestamp in UTC")
     environment_variables: Optional[Dict[str, StrictStr]] = Field(
         default=None,
         description="The environment variables for this device that have been set using the Notehub API or UI.",
     )
+    label: StrictStr = Field(description="Fleet label")
     smart_rule: Optional[StrictStr] = Field(
         default=None,
         description="JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.",
     )
+    uid: StrictStr = Field(description="Fleet UID")
     watchdog_mins: Optional[StrictInt] = Field(
         default=None,
         description="A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog",
     )
     __properties: ClassVar[List[str]] = [
-        "uid",
-        "label",
         "created",
         "environment_variables",
+        "label",
         "smart_rule",
+        "uid",
         "watchdog_mins",
     ]
 
@@ -104,11 +104,11 @@ class Fleet(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "uid": obj.get("uid"),
-                "label": obj.get("label"),
                 "created": obj.get("created"),
                 "environment_variables": obj.get("environment_variables"),
+                "label": obj.get("label"),
                 "smart_rule": obj.get("smart_rule"),
+                "uid": obj.get("uid"),
                 "watchdog_mins": obj.get("watchdog_mins"),
             }
         )

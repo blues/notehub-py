@@ -4,9 +4,9 @@
 
 | Name             | Type    | Description                                       | Notes      |
 | ---------------- | ------- | ------------------------------------------------- | ---------- |
-| **url**          | **str** | The URL of the Slack webhook.                     | [optional] |
 | **message_type** | **str** | text or blocks                                    | [optional] |
 | **text**         | **str** | The text of the message, or the blocks definition | [optional] |
+| **url**          | **str** | The URL of the Slack webhook.                     | [optional] |
 
 ## Example
 

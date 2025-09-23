@@ -37,40 +37,40 @@ class TestCreateMonitor(unittest.TestCase):
         model = CreateMonitor()
         if include_optional:
             return CreateMonitor(
-                uid = '',
-                name = '',
-                description = '',
-                source_type = 'event',
-                disabled = True,
+                aggregate_function = 'none',
+                aggregate_window = '10m or 5h30m40s',
                 alert = True,
-                notefile_filter = [
-                    ''
+                alert_routes = [
+                    null
                     ],
+                condition_type = 'greater_than',
+                description = '',
+                disabled = True,
                 fleet_filter = [
                     ''
                     ],
-                source_selector = 'body.temperature',
-                condition_type = 'greater_than',
-                threshold = 56,
-                alert_routes = [
-                    null
-                    ],
                 last_routed_at = '',
-                silenced = True,
-                routing_cooldown_period = '10m or 5h30m40s',
-                aggregate_function = 'none',
-                aggregate_window = '10m or 5h30m40s',
-                per_device = True
-            )
-        else:
-            return CreateMonitor(
                 name = '',
-                description = '',
                 notefile_filter = [
                     ''
                     ],
+                per_device = True,
+                routing_cooldown_period = '10m or 5h30m40s',
+                silenced = True,
+                source_selector = 'body.temperature',
+                source_type = 'event',
+                threshold = 56,
+                uid = ''
+            )
+        else:
+            return CreateMonitor(
                 alert_routes = [
                     null
+                    ],
+                description = '',
+                name = '',
+                notefile_filter = [
+                    ''
                     ],
         )
         """

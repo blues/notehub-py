@@ -39,33 +39,33 @@ class TestGetAlerts200Response(unittest.TestCase):
             return GetAlerts200Response(
                 alerts = [
                     notehub_py.models.alert.Alert(
-                        uid = '', 
-                        monitor_uid = '', 
-                        monitor_name = '', 
-                        device_uid = '', 
-                        created_at = 56, 
-                        value = 1.337, 
-                        resolved = True, 
-                        version = 56, 
                         alert_source = 'app', 
-                        source = '', 
-                        monitor_type = 'event', 
-                        field_name = '', 
+                        created_at = 56, 
                         data = [
                             notehub_py.models.alert_data_inner.Alert_data_inner(
                                 alert_source = 'app', 
                                 source = '', 
                                 source_type = 'event', 
-                                value = 1.337, 
                                 source_uid = '', 
+                                value = 1.337, 
                                 when = '', )
                             ], 
+                        device_uid = '', 
+                        field_name = '', 
+                        monitor_name = '', 
+                        monitor_type = 'event', 
+                        monitor_uid = '', 
                         notifications = [
                             notehub_py.models.alert_notifications_inner.Alert_notifications_inner(
                                 notification_type = 'email', 
-                                status = 1.337, 
-                                recipients = '', )
-                            ], )
+                                recipients = '', 
+                                status = 1.337, )
+                            ], 
+                        resolved = True, 
+                        source = '', 
+                        uid = '', 
+                        value = 1.337, 
+                        version = 56, )
                     ],
                 has_more = True
             )
@@ -73,33 +73,33 @@ class TestGetAlerts200Response(unittest.TestCase):
             return GetAlerts200Response(
                 alerts = [
                     notehub_py.models.alert.Alert(
-                        uid = '', 
-                        monitor_uid = '', 
-                        monitor_name = '', 
-                        device_uid = '', 
-                        created_at = 56, 
-                        value = 1.337, 
-                        resolved = True, 
-                        version = 56, 
                         alert_source = 'app', 
-                        source = '', 
-                        monitor_type = 'event', 
-                        field_name = '', 
+                        created_at = 56, 
                         data = [
                             notehub_py.models.alert_data_inner.Alert_data_inner(
                                 alert_source = 'app', 
                                 source = '', 
                                 source_type = 'event', 
-                                value = 1.337, 
                                 source_uid = '', 
+                                value = 1.337, 
                                 when = '', )
                             ], 
+                        device_uid = '', 
+                        field_name = '', 
+                        monitor_name = '', 
+                        monitor_type = 'event', 
+                        monitor_uid = '', 
                         notifications = [
                             notehub_py.models.alert_notifications_inner.Alert_notifications_inner(
                                 notification_type = 'email', 
-                                status = 1.337, 
-                                recipients = '', )
-                            ], )
+                                recipients = '', 
+                                status = 1.337, )
+                            ], 
+                        resolved = True, 
+                        source = '', 
+                        uid = '', 
+                        value = 1.337, 
+                        version = 56, )
                     ],
                 has_more = True,
         )

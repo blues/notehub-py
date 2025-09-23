@@ -4,17 +4,17 @@
 
 | Name          | Type    | Description | Notes      |
 | ------------- | ------- | ----------- | ---------- |
+| **builder**   | **str** |             | [optional] |
+| **built**     | **str** |             | [optional] |
+| **firmware**  | **str** |             | [optional] |
 | **org**       | **str** |             | [optional] |
 | **product**   | **str** |             | [optional] |
-| **firmware**  | **str** |             | [optional] |
-| **version**   | **str** |             | [optional] |
 | **target**    | **str** |             | [optional] |
+| **ver_build** | **int** |             | [optional] |
 | **ver_major** | **int** |             | [optional] |
 | **ver_minor** | **int** |             | [optional] |
 | **ver_patch** | **int** |             | [optional] |
-| **ver_build** | **int** |             | [optional] |
-| **built**     | **str** |             | [optional] |
-| **builder**   | **str** |             | [optional] |
+| **version**   | **str** |             | [optional] |
 
 ## Example
 

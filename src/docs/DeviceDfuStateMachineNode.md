@@ -6,10 +6,10 @@ Represents a single request to update the host or Notecard firmware
 
 | Name            | Type    | Description                                                     | Notes      |
 | --------------- | ------- | --------------------------------------------------------------- | ---------- |
-| **status**      | **str** | Status for this step in the firmware update process             | [optional] |
-| **phase**       | **str** | Phase for this step in the firmware update process              | [optional] |
 | **datetime**    | **str** | RFC3339 compatible datetime of when this status update happened | [optional] |
 | **description** | **str** | Additional information                                          | [optional] |
+| **phase**       | **str** | Phase for this step in the firmware update process              | [optional] |
+| **status**      | **str** | Status for this step in the firmware update process             | [optional] |
 
 ## Example
 

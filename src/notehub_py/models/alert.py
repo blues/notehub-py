@@ -40,51 +40,51 @@ class Alert(BaseModel):
     Alert
     """  # noqa: E501
 
-    uid: Optional[StrictStr] = Field(default=None, description="Alert UID")
-    monitor_uid: Optional[StrictStr] = Field(default=None, description="Monitor UID")
-    monitor_name: Optional[StrictStr] = Field(default=None, description="Monitor Name")
-    device_uid: Optional[StrictStr] = Field(default=None, description="Device UID")
+    alert_source: Optional[StrictStr] = Field(
+        default=None, description="The source of the alert"
+    )
     created_at: Optional[StrictInt] = Field(
         default=None, description="The time the alert was created"
     )
-    value: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="The value that triggered the alert"
+    data: Optional[List[AlertDataInner]] = None
+    device_uid: Optional[StrictStr] = Field(default=None, description="Device UID")
+    field_name: Optional[StrictStr] = Field(
+        default=None, description="The field name that triggered the alert"
     )
+    monitor_name: Optional[StrictStr] = Field(default=None, description="Monitor Name")
+    monitor_type: Optional[StrictStr] = Field(
+        default=None, description="The type of monitor that triggered the alert"
+    )
+    monitor_uid: Optional[StrictStr] = Field(default=None, description="Monitor UID")
+    notifications: Optional[List[AlertNotificationsInner]] = None
     resolved: Optional[StrictBool] = Field(
         default=None, description="If true, the alert has been resolved"
-    )
-    version: Optional[StrictInt] = Field(
-        default=None, description="The version of the alert"
-    )
-    alert_source: Optional[StrictStr] = Field(
-        default=None, description="The source of the alert"
     )
     source: Optional[StrictStr] = Field(
         default=None, description="The UID of the source of the alert"
     )
-    monitor_type: Optional[StrictStr] = Field(
-        default=None, description="The type of monitor that triggered the alert"
+    uid: Optional[StrictStr] = Field(default=None, description="Alert UID")
+    value: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="The value that triggered the alert"
     )
-    field_name: Optional[StrictStr] = Field(
-        default=None, description="The field name that triggered the alert"
+    version: Optional[StrictInt] = Field(
+        default=None, description="The version of the alert"
     )
-    data: Optional[List[AlertDataInner]] = None
-    notifications: Optional[List[AlertNotificationsInner]] = None
     __properties: ClassVar[List[str]] = [
-        "uid",
-        "monitor_uid",
-        "monitor_name",
-        "device_uid",
-        "created_at",
-        "value",
-        "resolved",
-        "version",
         "alert_source",
-        "source",
-        "monitor_type",
-        "field_name",
+        "created_at",
         "data",
+        "device_uid",
+        "field_name",
+        "monitor_name",
+        "monitor_type",
+        "monitor_uid",
         "notifications",
+        "resolved",
+        "source",
+        "uid",
+        "value",
+        "version",
     ]
 
     @field_validator("alert_source")
@@ -171,23 +171,18 @@ class Alert(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "uid": obj.get("uid"),
-                "monitor_uid": obj.get("monitor_uid"),
-                "monitor_name": obj.get("monitor_name"),
-                "device_uid": obj.get("device_uid"),
-                "created_at": obj.get("created_at"),
-                "value": obj.get("value"),
-                "resolved": obj.get("resolved"),
-                "version": obj.get("version"),
                 "alert_source": obj.get("alert_source"),
-                "source": obj.get("source"),
-                "monitor_type": obj.get("monitor_type"),
-                "field_name": obj.get("field_name"),
+                "created_at": obj.get("created_at"),
                 "data": (
                     [AlertDataInner.from_dict(_item) for _item in obj["data"]]
                     if obj.get("data") is not None
                     else None
                 ),
+                "device_uid": obj.get("device_uid"),
+                "field_name": obj.get("field_name"),
+                "monitor_name": obj.get("monitor_name"),
+                "monitor_type": obj.get("monitor_type"),
+                "monitor_uid": obj.get("monitor_uid"),
                 "notifications": (
                     [
                         AlertNotificationsInner.from_dict(_item)
@@ -196,6 +191,11 @@ class Alert(BaseModel):
                     if obj.get("notifications") is not None
                     else None
                 ),
+                "resolved": obj.get("resolved"),
+                "source": obj.get("source"),
+                "uid": obj.get("uid"),
+                "value": obj.get("value"),
+                "version": obj.get("version"),
             }
         )
         return _obj

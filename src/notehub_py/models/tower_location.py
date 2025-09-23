@@ -29,45 +29,45 @@ class TowerLocation(BaseModel):
     TowerLocation
     """  # noqa: E501
 
-    source: Optional[StrictStr] = Field(
-        default=None, description="The source of this location"
-    )
-    time: Optional[StrictInt] = Field(
-        default=None, description="Unix timestamp when this location was ascertained"
-    )
-    n: Optional[StrictStr] = Field(default=None, description="Name of the location")
     c: Optional[StrictStr] = Field(default=None, description="Country code")
+    cid: Optional[StrictInt] = Field(default=None, description="Cell ID")
+    l: Optional[StrictStr] = Field(default=None, description="Open Location Code")
+    lac: Optional[StrictInt] = Field(default=None, description="Location Area Code")
     lat: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="Latitude"
     )
     lon: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="Longitude"
     )
-    zone: Optional[StrictStr] = Field(default=None, description="Timezone name")
     mcc: Optional[StrictInt] = Field(default=None, description="Mobile Country Code")
     mnc: Optional[StrictInt] = Field(default=None, description="Mobile Network Code")
-    lac: Optional[StrictInt] = Field(default=None, description="Location Area Code")
-    cid: Optional[StrictInt] = Field(default=None, description="Cell ID")
-    l: Optional[StrictStr] = Field(default=None, description="Open Location Code")
-    z: Optional[StrictInt] = Field(default=None, description="Timezone ID")
+    n: Optional[StrictStr] = Field(default=None, description="Name of the location")
+    source: Optional[StrictStr] = Field(
+        default=None, description="The source of this location"
+    )
+    time: Optional[StrictInt] = Field(
+        default=None, description="Unix timestamp when this location was ascertained"
+    )
     towers: Optional[StrictInt] = Field(
         default=None, description="Number of triangulation points"
     )
+    z: Optional[StrictInt] = Field(default=None, description="Timezone ID")
+    zone: Optional[StrictStr] = Field(default=None, description="Timezone name")
     __properties: ClassVar[List[str]] = [
-        "source",
-        "time",
-        "n",
         "c",
-        "lat",
-        "lon",
-        "zone",
-        "mcc",
-        "mnc",
-        "lac",
         "cid",
         "l",
-        "z",
+        "lac",
+        "lat",
+        "lon",
+        "mcc",
+        "mnc",
+        "n",
+        "source",
+        "time",
         "towers",
+        "z",
+        "zone",
     ]
 
     model_config = ConfigDict(
@@ -120,20 +120,20 @@ class TowerLocation(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "source": obj.get("source"),
-                "time": obj.get("time"),
-                "n": obj.get("n"),
                 "c": obj.get("c"),
-                "lat": obj.get("lat"),
-                "lon": obj.get("lon"),
-                "zone": obj.get("zone"),
-                "mcc": obj.get("mcc"),
-                "mnc": obj.get("mnc"),
-                "lac": obj.get("lac"),
                 "cid": obj.get("cid"),
                 "l": obj.get("l"),
-                "z": obj.get("z"),
+                "lac": obj.get("lac"),
+                "lat": obj.get("lat"),
+                "lon": obj.get("lon"),
+                "mcc": obj.get("mcc"),
+                "mnc": obj.get("mnc"),
+                "n": obj.get("n"),
+                "source": obj.get("source"),
+                "time": obj.get("time"),
                 "towers": obj.get("towers"),
+                "z": obj.get("z"),
+                "zone": obj.get("zone"),
             }
         )
         return _obj

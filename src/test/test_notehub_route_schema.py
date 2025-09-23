@@ -37,57 +37,57 @@ class TestNotehubRouteSchema(unittest.TestCase):
         model = NotehubRouteSchema()
         if include_optional:
             return NotehubRouteSchema(
+                disable_http_headers = True,
+                filter = notehub_py.models.aws_filter.aws_filter(
+                    files = [
+                        ''
+                        ], 
+                    system_notefiles = True, 
+                    type = 'all', ),
                 fleets = [
                     ''
                     ],
-                filter = notehub_py.models.http_filter.http_filter(
-                    type = 'all', 
-                    system_notefiles = True, 
-                    files = [
-                        ''
-                        ], ),
-                transform = notehub_py.models.snowflake_transform.snowflake_transform(
+                http_headers = {headerName1=headerValue1, headerName2=headerValue2},
+                throttle_ms = 56,
+                timeout = 56,
+                transform = notehub_py.models.slack_transform.slack_transform(
                     format = 'jsonata', 
                     jsonata = '', ),
-                throttle_ms = 56,
                 url = '',
-                http_headers = {headerName1=headerValue1, headerName2=headerValue2},
-                disable_http_headers = True,
-                timeout = 56,
                 token = '',
                 alias = '',
                 broker = '',
-                port = 56,
-                username = '',
-                password = '',
-                topic = '',
                 certificate = '-----BEGIN CERTIFICATE-----\nMIIBpTCCA...JgVLttUY=\n-----END CERTIFICATE-----',
                 certificate_name = '',
                 key = '-----BEGIN PRIVATE KEY-----\nMIIEvwIBA...SleBlvA==\n-----END PRIVATE KEY-----',
+                password = '',
+                port = 56,
                 private_key_name = 'present',
-                region = '',
+                topic = '',
+                username = '',
                 access_key_id = '',
                 access_key_secret = '',
-                message_group_id = '',
-                message_deduplication_id = '',
                 channel = 'C8675309',
-                test_api = True,
-                data_feed_key = '',
+                message_deduplication_id = '',
+                message_group_id = '',
+                region = '',
                 client_id = '',
                 client_secret = '',
+                data_feed_key = '',
+                test_api = True,
                 functions_key_secret = '',
-                sas_policy_name = '',
                 sas_policy_key = '',
+                sas_policy_name = '',
                 app_key = '',
-                organization_name = '',
                 account_name = '',
-                user_name = '',
+                organization_name = '',
                 pem = '-----BEGIN PRIVATE KEY-----\nMIIEvwIBA...SleBlvA==\n-----END PRIVATE KEY-----',
-                slack_type = '',
+                user_name = '',
                 bearer = 'xoxb-1234-56789abcdefghijklmnop',
-                webhook_url = 'https://hooks.slack.com/services/FOO4BAR/THIS4THAT/123xYzaBC456',
+                blocks = '',
+                slack_type = '',
                 text = '[.device] reported temp(s) of [.body.temp] at [.body.location]',
-                blocks = ''
+                webhook_url = 'https://hooks.slack.com/services/FOO4BAR/THIS4THAT/123xYzaBC456'
             )
         else:
             return NotehubRouteSchema(

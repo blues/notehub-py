@@ -29,11 +29,11 @@ class DeviceTowerInfo(BaseModel):
     DeviceTowerInfo
     """  # noqa: E501
 
+    cell_id: Optional[StrictInt] = None
+    lac: Optional[StrictInt] = None
     mcc: Optional[StrictInt] = None
     mnc: Optional[StrictInt] = None
-    lac: Optional[StrictInt] = None
-    cell_id: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["mcc", "mnc", "lac", "cell_id"]
+    __properties: ClassVar[List[str]] = ["cell_id", "lac", "mcc", "mnc"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,10 +85,10 @@ class DeviceTowerInfo(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "cell_id": obj.get("cell_id"),
+                "lac": obj.get("lac"),
                 "mcc": obj.get("mcc"),
                 "mnc": obj.get("mnc"),
-                "lac": obj.get("lac"),
-                "cell_id": obj.get("cell_id"),
             }
         )
         return _obj

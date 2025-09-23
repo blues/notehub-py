@@ -2,12 +2,12 @@
 
 ## Properties
 
-| Name                | Type                                                    | Description                                  | Notes      |
-| ------------------- | ------------------------------------------------------- | -------------------------------------------- | ---------- |
-| **device_uid**      | **str**                                                 | Device UID                                   | [optional] |
-| **dfu_in_progress** | **bool**                                                | true if there is a DFU currently in progress | [optional] |
-| **current**         | [**DeviceDfuStatusCurrent**](DeviceDfuStatusCurrent.md) |                                              | [optional] |
-| **status**          | [**DeviceDfuStateMachine**](DeviceDfuStateMachine.md)   |                                              | [optional] |
+| Name                | Type                                                      | Description                                  | Notes      |
+| ------------------- | --------------------------------------------------------- | -------------------------------------------- | ---------- |
+| **current**         | [**DeviceDfuHistoryCurrent**](DeviceDfuHistoryCurrent.md) |                                              | [optional] |
+| **device_uid**      | **str**                                                   | Device UID                                   | [optional] |
+| **dfu_in_progress** | **bool**                                                  | true if there is a DFU currently in progress | [optional] |
+| **status**          | [**DeviceDfuStateMachine**](DeviceDfuStateMachine.md)     |                                              | [optional] |
 
 ## Example
 

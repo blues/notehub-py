@@ -39,18 +39,19 @@ class TestGetProjects200Response(unittest.TestCase):
             return GetProjects200Response(
                 projects = [
                     notehub_py.models.project.Project(
-                        uid = '', 
-                        label = '', 
-                        created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        role = 'owner', 
                         administrative_contact = notehub_py.models.contact.Contact(
-                            name = '', 
                             email = '', 
-                            organization = '', ), 
+                            name = '', 
+                            organization = '', 
+                            role = '', ), 
+                        created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        label = '', 
+                        role = 'owner', 
                         technical_contact = notehub_py.models.contact.Contact(
-                            name = '', 
                             email = '', 
-                            organization = '', ), )
+                            name = '', 
+                            organization = '', ), 
+                        uid = '', )
                     ]
             )
         else:

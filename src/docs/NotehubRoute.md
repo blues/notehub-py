@@ -4,12 +4,12 @@
 
 | Name           | Type                                            | Description        | Notes                          |
 | -------------- | ----------------------------------------------- | ------------------ | ------------------------------ |
-| **uid**        | **str**                                         | Route UID          | [optional]                     |
-| **label**      | **str**                                         | Route Label        | [optional]                     |
-| **route_type** | **str**                                         | Type of route.     | [optional] [default to 'http'] |
-| **modified**   | **str**                                         | Last Modified      | [optional]                     |
 | **disabled**   | **bool**                                        | Is route disabled? | [optional] [default to False]  |
+| **label**      | **str**                                         | Route Label        | [optional]                     |
+| **modified**   | **str**                                         | Last Modified      | [optional]                     |
+| **route_type** | **str**                                         | Type of route.     | [optional] [default to 'http'] |
 | **var_schema** | [**NotehubRouteSchema**](NotehubRouteSchema.md) |                    | [optional]                     |
+| **uid**        | **str**                                         | Route UID          | [optional]                     |
 
 ## Example
 
