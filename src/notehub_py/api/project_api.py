@@ -318,7 +318,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="POST",
@@ -588,7 +588,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="POST",
@@ -858,7 +858,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="POST",
@@ -1113,7 +1113,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="POST",
@@ -1407,7 +1407,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="DELETE",
@@ -1661,7 +1661,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="DELETE",
@@ -1936,7 +1936,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="DELETE",
@@ -2175,7 +2175,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="DELETE",
@@ -2435,7 +2435,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="DELETE",
@@ -2942,7 +2942,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="POST",
@@ -3181,7 +3181,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="POST",
@@ -3420,7 +3420,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="POST",
@@ -3689,7 +3689,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -3958,7 +3958,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -4212,7 +4212,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -4738,7 +4738,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -5264,7 +5264,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -5622,7 +5622,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -5876,7 +5876,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -6133,7 +6133,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -6387,7 +6387,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -6862,7 +6862,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -7101,7 +7101,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -7343,7 +7343,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -7582,7 +7582,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -7821,7 +7821,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -8060,7 +8060,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -8299,7 +8299,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -8523,7 +8523,7 @@ class ProjectApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -8817,7 +8817,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="PUT",
@@ -9105,7 +9105,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="PUT",
@@ -9369,7 +9369,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="PUT",
@@ -9648,7 +9648,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="POST",
@@ -9933,7 +9933,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="PUT",
@@ -9960,6 +9960,18 @@ class ProjectApi:
             Union[StrictBytes, StrictStr],
             Field(description="contents of the firmware binary"),
         ],
+        version: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty"
+            ),
+        ] = None,
+        notes: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Optional notes describing what's different about this firmware version"
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9984,6 +9996,10 @@ class ProjectApi:
         :type filename: str
         :param body: contents of the firmware binary (required)
         :type body: bytearray
+        :param version: Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty
+        :type version: str
+        :param notes: Optional notes describing what's different about this firmware version
+        :type notes: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10011,6 +10027,8 @@ class ProjectApi:
             firmware_type=firmware_type,
             filename=filename,
             body=body,
+            version=version,
+            notes=notes,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10039,6 +10057,18 @@ class ProjectApi:
             Union[StrictBytes, StrictStr],
             Field(description="contents of the firmware binary"),
         ],
+        version: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty"
+            ),
+        ] = None,
+        notes: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Optional notes describing what's different about this firmware version"
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10063,6 +10093,10 @@ class ProjectApi:
         :type filename: str
         :param body: contents of the firmware binary (required)
         :type body: bytearray
+        :param version: Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty
+        :type version: str
+        :param notes: Optional notes describing what's different about this firmware version
+        :type notes: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10090,6 +10124,8 @@ class ProjectApi:
             firmware_type=firmware_type,
             filename=filename,
             body=body,
+            version=version,
+            notes=notes,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10118,6 +10154,18 @@ class ProjectApi:
             Union[StrictBytes, StrictStr],
             Field(description="contents of the firmware binary"),
         ],
+        version: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty"
+            ),
+        ] = None,
+        notes: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Optional notes describing what's different about this firmware version"
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10142,6 +10190,10 @@ class ProjectApi:
         :type filename: str
         :param body: contents of the firmware binary (required)
         :type body: bytearray
+        :param version: Firmware version (optional). If not provided, the version will be extracted from firmware binary if available, otherwise left empty
+        :type version: str
+        :param notes: Optional notes describing what's different about this firmware version
+        :type notes: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -10169,6 +10221,8 @@ class ProjectApi:
             firmware_type=firmware_type,
             filename=filename,
             body=body,
+            version=version,
+            notes=notes,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -10189,6 +10243,8 @@ class ProjectApi:
         firmware_type,
         filename,
         body,
+        version,
+        notes,
         _request_auth,
         _content_type,
         _headers,
@@ -10214,6 +10270,14 @@ class ProjectApi:
         if filename is not None:
             _path_params["filename"] = filename
         # process the query parameters
+        if version is not None:
+
+            _query_params.append(("version", version))
+
+        if notes is not None:
+
+            _query_params.append(("notes", notes))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -10241,7 +10305,7 @@ class ProjectApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="PUT",

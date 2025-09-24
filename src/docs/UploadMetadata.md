@@ -2,21 +2,22 @@
 
 ## Properties
 
-| Name         | Type                        | Description | Notes      |
-| ------------ | --------------------------- | ----------- | ---------- |
-| **contains** | **str**                     |             | [optional] |
-| **crc32**    | **int**                     |             | [optional] |
-| **created**  | **int**                     |             | [optional] |
-| **firmware** | [**Firmware**](Firmware.md) |             | [optional] |
-| **found**    | **str**                     |             | [optional] |
-| **length**   | **int**                     |             | [optional] |
-| **md5**      | **str**                     |             | [optional] |
-| **modified** | **int**                     |             | [optional] |
-| **name**     | **str**                     |             | [optional] |
-| **notes**    | **str**                     |             | [optional] |
-| **source**   | **str**                     |             | [optional] |
-| **tags**     | **str**                     |             | [optional] |
-| **type**     | **str**                     |             | [optional] |
+| Name         | Type                        | Description                                              | Notes      |
+| ------------ | --------------------------- | -------------------------------------------------------- | ---------- |
+| **contains** | **str**                     |                                                          | [optional] |
+| **crc32**    | **int**                     |                                                          | [optional] |
+| **created**  | **int**                     |                                                          | [optional] |
+| **firmware** | [**Firmware**](Firmware.md) |                                                          | [optional] |
+| **found**    | **str**                     |                                                          | [optional] |
+| **length**   | **int**                     |                                                          | [optional] |
+| **md5**      | **str**                     |                                                          | [optional] |
+| **modified** | **int**                     |                                                          | [optional] |
+| **name**     | **str**                     |                                                          | [optional] |
+| **notes**    | **str**                     |                                                          | [optional] |
+| **source**   | **str**                     |                                                          | [optional] |
+| **tags**     | **str**                     |                                                          | [optional] |
+| **type**     | **str**                     |                                                          | [optional] |
+| **version**  | **str**                     | User-specified version string provided at time of upload | [optional] |
 
 ## Example
 

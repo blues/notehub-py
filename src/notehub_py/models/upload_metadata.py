@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.firmware import Firmware
 from typing import Optional, Set
@@ -43,6 +43,10 @@ class UploadMetadata(BaseModel):
     source: Optional[StrictStr] = None
     tags: Optional[StrictStr] = None
     type: Optional[StrictStr] = None
+    version: Optional[StrictStr] = Field(
+        default=None,
+        description="User-specified version string provided at time of upload",
+    )
     __properties: ClassVar[List[str]] = [
         "contains",
         "crc32",
@@ -57,6 +61,7 @@ class UploadMetadata(BaseModel):
         "source",
         "tags",
         "type",
+        "version",
     ]
 
     model_config = ConfigDict(
@@ -134,6 +139,7 @@ class UploadMetadata(BaseModel):
                 "source": obj.get("source"),
                 "tags": obj.get("tags"),
                 "type": obj.get("type"),
+                "version": obj.get("version"),
             }
         )
         return _obj

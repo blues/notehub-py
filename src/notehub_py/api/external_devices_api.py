@@ -301,7 +301,7 @@ class ExternalDevicesApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="POST",
@@ -580,7 +580,7 @@ class ExternalDevicesApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="POST",
@@ -859,7 +859,7 @@ class ExternalDevicesApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["api_key"]
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="POST",

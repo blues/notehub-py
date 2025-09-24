@@ -18,7 +18,7 @@ Create a new Monitor
 
 ### Example
 
-- Api Key Authentication (api_key):
+- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -38,11 +38,10 @@ configuration = notehub_py.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: api_key
-configuration.api_key['api_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['api_key'] = 'Bearer'
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -72,7 +71,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -96,7 +95,7 @@ Delete Monitor
 
 ### Example
 
-- Api Key Authentication (api_key):
+- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -115,11 +114,10 @@ configuration = notehub_py.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: api_key
-configuration.api_key['api_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['api_key'] = 'Bearer'
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -149,7 +147,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -173,7 +171,7 @@ Get Monitor
 
 ### Example
 
-- Api Key Authentication (api_key):
+- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -192,11 +190,10 @@ configuration = notehub_py.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: api_key
-configuration.api_key['api_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['api_key'] = 'Bearer'
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -226,7 +223,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -250,7 +247,7 @@ Get list of defined Monitors
 
 ### Example
 
-- Api Key Authentication (api_key):
+- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -269,11 +266,10 @@ configuration = notehub_py.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: api_key
-configuration.api_key['api_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['api_key'] = 'Bearer'
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -301,7 +297,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -325,7 +321,7 @@ Update Monitor
 
 ### Example
 
-- Api Key Authentication (api_key):
+- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -344,11 +340,10 @@ configuration = notehub_py.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: api_key
-configuration.api_key['api_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['api_key'] = 'Bearer'
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -380,7 +375,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
