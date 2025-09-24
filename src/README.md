@@ -75,11 +75,10 @@ configuration = notehub_py.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: api_key
-configuration.api_key['api_key'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['api_key'] = 'Bearer'
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 
 # Enter a context with an instance of the API client
@@ -335,12 +334,10 @@ Class | Method | HTTP request | Description
 
 
 Authentication schemes defined for the API:
-<a id="api_key"></a>
-### api_key
+<a id="personalAccessToken"></a>
+### personalAccessToken
 
-- **Type**: API key
-- **API key parameter name**: X-Session-Token
-- **Location**: HTTP header
+- **Type**: Bearer authentication
 
 <a id="pin"></a>
 ### pin

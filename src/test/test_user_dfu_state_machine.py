@@ -62,7 +62,8 @@ class TestUserDfuStateMachine(unittest.TestCase):
                     notes = '', 
                     source = '', 
                     tags = '', 
-                    type = '', ),
+                    type = '', 
+                    version = '', ),
                 status = notehub_py.models.user_dfu_state_machine_status.UserDfuStateMachineStatus(
                     date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     phase = '', 

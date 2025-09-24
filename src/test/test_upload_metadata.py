@@ -60,7 +60,8 @@ class TestUploadMetadata(unittest.TestCase):
                 notes = '',
                 source = '',
                 tags = '',
-                type = ''
+                type = '',
+                version = ''
             )
         else:
             return UploadMetadata(

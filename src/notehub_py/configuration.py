@@ -395,14 +395,12 @@ class Configuration:
         :return: The Auth Settings information dict.
         """
         auth = {}
-        if "api_key" in self.api_key:
-            auth["api_key"] = {
-                "type": "api_key",
+        if self.access_token is not None:
+            auth["personalAccessToken"] = {
+                "type": "bearer",
                 "in": "header",
-                "key": "X-Session-Token",
-                "value": self.get_api_key_with_prefix(
-                    "api_key",
-                ),
+                "key": "Authorization",
+                "value": "Bearer " + self.access_token,
             }
         if "pin" in self.api_key:
             auth["pin"] = {
