@@ -17,6 +17,7 @@ docs/BillingAccount.md
 docs/BillingAccountApi.md
 docs/BillingAccountRole.md
 docs/Body.md
+docs/CellularPlan.md
 docs/CloneProjectRequest.md
 docs/Contact.md
 docs/CreateFleetRequest.md
@@ -29,6 +30,7 @@ docs/DFUEnv.md
 docs/DFUState.md
 docs/DataField.md
 docs/DataSetField.md
+docs/DataUsage.md
 docs/DeleteDeviceFleetsRequest.md
 docs/Device.md
 docs/DeviceApi.md
@@ -61,15 +63,16 @@ docs/GetDeviceFleets200Response.md
 docs/GetDeviceHealthLog200Response.md
 docs/GetDeviceHealthLog200ResponseHealthLogInner.md
 docs/GetDeviceLatest200Response.md
+docs/GetDevicePlans200Response.md
 docs/GetDevicePublicKey200Response.md
 docs/GetDeviceSessions200Response.md
+docs/GetProducts200Response.md
 docs/GetProjectDevicePublicKeys200Response.md
 docs/GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner.md
 docs/GetProjectDevices200Response.md
 docs/GetProjectEvents200Response.md
 docs/GetProjectEventsByCursor200Response.md
 docs/GetProjectMembers200Response.md
-docs/GetProjectProducts200Response.md
 docs/GetProjects200Response.md
 docs/GetWebhooks200Response.md
 docs/Google.md
@@ -109,6 +112,7 @@ docs/Repository.md
 docs/Role.md
 docs/RouteApi.md
 docs/RouteLog.md
+docs/SatellitePlan.md
 docs/SchemaProperty.md
 docs/SimUsage.md
 docs/Slack.md
@@ -164,6 +168,7 @@ notehub_py/models/azure.py
 notehub_py/models/billing_account.py
 notehub_py/models/billing_account_role.py
 notehub_py/models/body.py
+notehub_py/models/cellular_plan.py
 notehub_py/models/clone_project_request.py
 notehub_py/models/contact.py
 notehub_py/models/create_fleet_request.py
@@ -174,6 +179,7 @@ notehub_py/models/create_update_repository.py
 notehub_py/models/current_firmware.py
 notehub_py/models/data_field.py
 notehub_py/models/data_set_field.py
+notehub_py/models/data_usage.py
 notehub_py/models/delete_device_fleets_request.py
 notehub_py/models/device.py
 notehub_py/models/device_dfu_history.py
@@ -205,15 +211,16 @@ notehub_py/models/get_device_fleets200_response.py
 notehub_py/models/get_device_health_log200_response.py
 notehub_py/models/get_device_health_log200_response_health_log_inner.py
 notehub_py/models/get_device_latest200_response.py
+notehub_py/models/get_device_plans200_response.py
 notehub_py/models/get_device_public_key200_response.py
 notehub_py/models/get_device_sessions200_response.py
+notehub_py/models/get_products200_response.py
 notehub_py/models/get_project_device_public_keys200_response.py
 notehub_py/models/get_project_device_public_keys200_response_device_public_keys_inner.py
 notehub_py/models/get_project_devices200_response.py
 notehub_py/models/get_project_events200_response.py
 notehub_py/models/get_project_events_by_cursor200_response.py
 notehub_py/models/get_project_members200_response.py
-notehub_py/models/get_project_products200_response.py
 notehub_py/models/get_projects200_response.py
 notehub_py/models/get_webhooks200_response.py
 notehub_py/models/google.py
@@ -250,6 +257,7 @@ notehub_py/models/radresponder.py
 notehub_py/models/repository.py
 notehub_py/models/role.py
 notehub_py/models/route_log.py
+notehub_py/models/satellite_plan.py
 notehub_py/models/schema_property.py
 notehub_py/models/sim_usage.py
 notehub_py/models/slack.py
@@ -295,6 +303,7 @@ test/test_billing_account.py
 test/test_billing_account_api.py
 test/test_billing_account_role.py
 test/test_body.py
+test/test_cellular_plan.py
 test/test_clone_project_request.py
 test/test_contact.py
 test/test_create_fleet_request.py
@@ -305,6 +314,7 @@ test/test_create_update_repository.py
 test/test_current_firmware.py
 test/test_data_field.py
 test/test_data_set_field.py
+test/test_data_usage.py
 test/test_delete_device_fleets_request.py
 test/test_device.py
 test/test_device_api.py
@@ -339,15 +349,16 @@ test/test_get_device_fleets200_response.py
 test/test_get_device_health_log200_response.py
 test/test_get_device_health_log200_response_health_log_inner.py
 test/test_get_device_latest200_response.py
+test/test_get_device_plans200_response.py
 test/test_get_device_public_key200_response.py
 test/test_get_device_sessions200_response.py
+test/test_get_products200_response.py
 test/test_get_project_device_public_keys200_response.py
 test/test_get_project_device_public_keys200_response_device_public_keys_inner.py
 test/test_get_project_devices200_response.py
 test/test_get_project_events200_response.py
 test/test_get_project_events_by_cursor200_response.py
 test/test_get_project_members200_response.py
-test/test_get_project_products200_response.py
 test/test_get_projects200_response.py
 test/test_get_webhooks200_response.py
 test/test_google.py
@@ -387,6 +398,7 @@ test/test_repository.py
 test/test_role.py
 test/test_route_api.py
 test/test_route_log.py
+test/test_satellite_plan.py
 test/test_schema_property.py
 test/test_sim_usage.py
 test/test_slack.py

@@ -55,6 +55,10 @@ class TestProjectApi(unittest.TestCase):
         """Test case for delete_fleet_environment_variable"""
         pass
 
+    def test_delete_product(self) -> None:
+        """Test case for delete_product"""
+        pass
+
     def test_delete_project(self) -> None:
         """Test case for delete_project"""
         pass
@@ -121,6 +125,10 @@ class TestProjectApi(unittest.TestCase):
         """
         pass
 
+    def test_get_products(self) -> None:
+        """Test case for get_products"""
+        pass
+
     def test_get_project(self) -> None:
         """Test case for get_project"""
         pass
@@ -146,10 +154,6 @@ class TestProjectApi(unittest.TestCase):
 
     def test_get_project_members(self) -> None:
         """Test case for get_project_members"""
-        pass
-
-    def test_get_project_products(self) -> None:
-        """Test case for get_project_products"""
         pass
 
     def test_get_projects(self) -> None:

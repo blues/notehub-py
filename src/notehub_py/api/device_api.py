@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
+from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from notehub_py.models.body import Body
@@ -31,6 +31,7 @@ from notehub_py.models.get_device_health_log200_response import (
     GetDeviceHealthLog200Response,
 )
 from notehub_py.models.get_device_latest200_response import GetDeviceLatest200Response
+from notehub_py.models.get_device_plans200_response import GetDevicePlans200Response
 from notehub_py.models.get_device_public_key200_response import (
     GetDevicePublicKey200Response,
 )
@@ -2663,6 +2664,22 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
+        start_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        end_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        log_type: Annotated[
+            Optional[List[StrictStr]],
+            Field(description="Return only specified log types"),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2683,6 +2700,12 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
+        :type start_date: int
+        :param end_date: End date for filtering results, specified as a Unix timestamp
+        :type end_date: int
+        :param log_type: Return only specified log types
+        :type log_type: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2708,6 +2731,9 @@ class DeviceApi:
         _param = self._get_device_health_log_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
+            start_date=start_date,
+            end_date=end_date,
+            log_type=log_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2731,6 +2757,22 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
+        start_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        end_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        log_type: Annotated[
+            Optional[List[StrictStr]],
+            Field(description="Return only specified log types"),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2751,6 +2793,12 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
+        :type start_date: int
+        :param end_date: End date for filtering results, specified as a Unix timestamp
+        :type end_date: int
+        :param log_type: Return only specified log types
+        :type log_type: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2776,6 +2824,9 @@ class DeviceApi:
         _param = self._get_device_health_log_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
+            start_date=start_date,
+            end_date=end_date,
+            log_type=log_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2799,6 +2850,22 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
+        start_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        end_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        log_type: Annotated[
+            Optional[List[StrictStr]],
+            Field(description="Return only specified log types"),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2819,6 +2886,12 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
+        :type start_date: int
+        :param end_date: End date for filtering results, specified as a Unix timestamp
+        :type end_date: int
+        :param log_type: Return only specified log types
+        :type log_type: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2844,6 +2917,9 @@ class DeviceApi:
         _param = self._get_device_health_log_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
+            start_date=start_date,
+            end_date=end_date,
+            log_type=log_type,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2862,6 +2938,9 @@ class DeviceApi:
         self,
         project_or_product_uid,
         device_uid,
+        start_date,
+        end_date,
+        log_type,
         _request_auth,
         _content_type,
         _headers,
@@ -2870,7 +2949,9 @@ class DeviceApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            "log_type": "multi",
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -2885,6 +2966,18 @@ class DeviceApi:
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
+        if start_date is not None:
+
+            _query_params.append(("startDate", start_date))
+
+        if end_date is not None:
+
+            _query_params.append(("endDate", end_date))
+
+        if log_type is not None:
+
+            _query_params.append(("log_type", log_type))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -3154,6 +3247,260 @@ class DeviceApi:
         return self.api_client.param_serialize(
             method="GET",
             resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    def get_device_plans(
+        self,
+        project_or_product_uid: StrictStr,
+        device_uid: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetDevicePlans200Response:
+        """get_device_plans
+
+        Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param device_uid: (required)
+        :type device_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_device_plans_serialize(
+            project_or_product_uid=project_or_product_uid,
+            device_uid=device_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDevicePlans200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_device_plans_with_http_info(
+        self,
+        project_or_product_uid: StrictStr,
+        device_uid: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetDevicePlans200Response]:
+        """get_device_plans
+
+        Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param device_uid: (required)
+        :type device_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_device_plans_serialize(
+            project_or_product_uid=project_or_product_uid,
+            device_uid=device_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDevicePlans200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_device_plans_without_preload_content(
+        self,
+        project_or_product_uid: StrictStr,
+        device_uid: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """get_device_plans
+
+        Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param device_uid: (required)
+        :type device_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_device_plans_serialize(
+            project_or_product_uid=project_or_product_uid,
+            device_uid=device_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDevicePlans200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_device_plans_serialize(
+        self,
+        project_or_product_uid,
+        device_uid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
+        if device_uid is not None:
+            _path_params["deviceUID"] = device_uid
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )
+
+        # authentication setting
+        _auth_settings: List[str] = []
+
+        return self.api_client.param_serialize(
+            method="GET",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

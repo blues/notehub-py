@@ -11,7 +11,8 @@ All URIs are relative to *https://api.notefile.net*
 | [**delete_device_fleets**](ProjectApi.md#delete_device_fleets)                               | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                    |
 | [**delete_fleet**](ProjectApi.md#delete_fleet)                                               | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                             |
 | [**delete_fleet_environment_variable**](ProjectApi.md#delete_fleet_environment_variable)     | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key} |
-| [**delete_project**](ProjectApi.md#delete_project)                                           | **DELETE** /v1/projects/{projectUID}                                                        |
+| [**delete_product**](ProjectApi.md#delete_product)                                           | **DELETE** /v1/projects/{projectOrProductUID}/products/{productUID}                         |
+| [**delete_project**](ProjectApi.md#delete_project)                                           | **DELETE** /v1/projects/{projectOrProductUID}                                               |
 | [**delete_project_environment_variable**](ProjectApi.md#delete_project_environment_variable) | **DELETE** /v1/projects/{projectOrProductUID}/environment_variables/{key}                   |
 | [**dfu_action**](ProjectApi.md#dfu_action)                                                   | **POST** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}                     |
 | [**disable_global_transformation**](ProjectApi.md#disable_global_transformation)             | **POST** /v1/projects/{projectOrProductUID}/global-transformation/disable                   |
@@ -26,13 +27,13 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_fleet_environment_hierarchy**](ProjectApi.md#get_fleet_environment_hierarchy)         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy          | Get environment variable hierarchy for a device |
 | [**get_fleet_environment_variables**](ProjectApi.md#get_fleet_environment_variables)         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
 | [**get_notefile_schemas**](ProjectApi.md#get_notefile_schemas)                               | **GET** /v1/projects/{projectOrProductUID}/schemas                                          | Get variable format for a notefile              |
-| [**get_project**](ProjectApi.md#get_project)                                                 | **GET** /v1/projects/{projectUID}                                                           |
+| [**get_products**](ProjectApi.md#get_products)                                               | **GET** /v1/projects/{projectOrProductUID}/products                                         |
+| [**get_project**](ProjectApi.md#get_project)                                                 | **GET** /v1/projects/{projectOrProductUID}                                                  |
 | [**get_project_by_product**](ProjectApi.md#get_project_by_product)                           | **GET** /v1/products/{productUID}/project                                                   |
 | [**get_project_environment_hierarchy**](ProjectApi.md#get_project_environment_hierarchy)     | **GET** /v1/projects/{projectOrProductUID}/environment_hierarchy                            | Get environment variable hierarchy for a device |
 | [**get_project_environment_variables**](ProjectApi.md#get_project_environment_variables)     | **GET** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**get_project_fleets**](ProjectApi.md#get_project_fleets)                                   | **GET** /v1/projects/{projectOrProductUID}/fleets                                           |
 | [**get_project_members**](ProjectApi.md#get_project_members)                                 | **GET** /v1/projects/{projectOrProductUID}/members                                          |
-| [**get_project_products**](ProjectApi.md#get_project_products)                               | **GET** /v1/projects/{projectOrProductUID}/products                                         |
 | [**get_projects**](ProjectApi.md#get_projects)                                               | **GET** /v1/projects                                                                        |
 | [**put_device_fleets**](ProjectApi.md#put_device_fleets)                                     | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                       |
 | [**put_fleet_environment_variables**](ProjectApi.md#put_fleet_environment_variables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
@@ -574,6 +575,79 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ----------- | -------------------------------------------------------- | ---------------- |
 | **200**     | The response body from an environment variables request. | -                |
 | **0**       | The response body in case of an API error.               | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_product**
+
+> delete_product(project_or_product_uid, product_uid)
+
+Delete a product
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    product_uid = 'com.blues.bridge:sensors' # str |
+
+    try:
+        api_instance.delete_product(project_or_product_uid, product_uid)
+    except Exception as e:
+        print("Exception when calling ProjectApi->delete_product: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **product_uid**            | **str** |             |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **204**     | Successful operation                       | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1778,6 +1852,80 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_products**
+
+> GetProducts200Response get_products(project_or_product_uid)
+
+Get Products within a Project
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.get_products200_response import GetProducts200Response
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+
+    try:
+        api_response = api_instance.get_products(project_or_product_uid)
+        print("The response of ProjectApi->get_products:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->get_products: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+
+### Return type
+
+[**GetProducts200Response**](GetProducts200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Successful operation                       | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_project**
 
 > Project get_project(project_or_product_uid)
@@ -2205,80 +2353,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 ### Return type
 
 [**GetProjectMembers200Response**](GetProjectMembers200Response.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_project_products**
-
-> GetProjectProducts200Response get_project_products(project_or_product_uid)
-
-Get Products within a Project
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.get_project_products200_response import GetProjectProducts200Response
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.ProjectApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-
-    try:
-        api_response = api_instance.get_project_products(project_or_product_uid)
-        print("The response of ProjectApi->get_project_products:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ProjectApi->get_project_products: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type    | Description | Notes |
-| -------------------------- | ------- | ----------- | ----- |
-| **project_or_product_uid** | **str** |             |
-
-### Return type
-
-[**GetProjectProducts200Response**](GetProjectProducts200Response.md)
 
 ### Authorization
 

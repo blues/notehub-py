@@ -18,20 +18,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
-from notehub_py.models.product import Product
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class GetProjectProducts200Response(BaseModel):
+class DataUsage(BaseModel):
     """
-    GetProjectProducts200Response
+    DataUsage
     """  # noqa: E501
 
-    products: Optional[List[Product]] = None
-    __properties: ClassVar[List[str]] = ["products"]
+    kb_remaining: Union[StrictFloat, StrictInt] = Field(
+        description="Kilobytes remaining in the plan"
+    )
+    kb_total: Union[StrictFloat, StrictInt] = Field(
+        description="Total Kilobytes included in the plan"
+    )
+    kb_used: Union[StrictFloat, StrictInt] = Field(description="Kilobytes used to date")
+    __properties: ClassVar[List[str]] = ["kb_remaining", "kb_total", "kb_used"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +55,7 @@ class GetProjectProducts200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetProjectProducts200Response from a JSON string"""
+        """Create an instance of DataUsage from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,18 +75,11 @@ class GetProjectProducts200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in products (list)
-        _items = []
-        if self.products:
-            for _item in self.products:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["products"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetProjectProducts200Response from a dict"""
+        """Create an instance of DataUsage from a dict"""
         if obj is None:
             return None
 
@@ -90,11 +88,9 @@ class GetProjectProducts200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "products": (
-                    [Product.from_dict(_item) for _item in obj["products"]]
-                    if obj.get("products") is not None
-                    else None
-                )
+                "kb_remaining": obj.get("kb_remaining"),
+                "kb_total": obj.get("kb_total"),
+                "kb_used": obj.get("kb_used"),
             }
         )
         return _obj

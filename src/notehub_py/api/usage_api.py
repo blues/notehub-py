@@ -421,7 +421,7 @@ class UsageApi:
     ) -> UsageEventsResponse:
         """get_project_events_usage
 
-        Get events usage for a project with time range and period aggregation
+        Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -513,7 +513,7 @@ class UsageApi:
     ) -> ApiResponse[UsageEventsResponse]:
         """get_project_events_usage
 
-        Get events usage for a project with time range and period aggregation
+        Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -605,7 +605,7 @@ class UsageApi:
     ) -> RESTResponseType:
         """get_project_events_usage
 
-        Get events usage for a project with time range and period aggregation
+        Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -766,7 +766,7 @@ class UsageApi:
     ) -> UsageRouteLogsResponse:
         """get_route_logs_usage
 
-        Get route logs usage for a project with time range and period aggregation
+        Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -858,7 +858,7 @@ class UsageApi:
     ) -> ApiResponse[UsageRouteLogsResponse]:
         """get_route_logs_usage
 
-        Get route logs usage for a project with time range and period aggregation
+        Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -950,7 +950,7 @@ class UsageApi:
     ) -> RESTResponseType:
         """get_route_logs_usage
 
-        Get route logs usage for a project with time range and period aggregation
+        Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1111,7 +1111,7 @@ class UsageApi:
     ) -> UsageSessionsResponse:
         """get_sessions_usage
 
-        Get sessions usage for a project with time range and period aggregation
+        Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1203,7 +1203,7 @@ class UsageApi:
     ) -> ApiResponse[UsageSessionsResponse]:
         """get_sessions_usage
 
-        Get sessions usage for a project with time range and period aggregation
+        Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1295,7 +1295,7 @@ class UsageApi:
     ) -> RESTResponseType:
         """get_sessions_usage
 
-        Get sessions usage for a project with time range and period aggregation
+        Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
