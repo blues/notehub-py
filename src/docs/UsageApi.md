@@ -84,7 +84,7 @@ No authorization required
 
 > UsageEventsResponse get_project_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid)
 
-Get events usage for a project with time range and period aggregation
+Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
 ### Example
 
@@ -166,7 +166,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > UsageRouteLogsResponse get_route_logs_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid)
 
-Get route logs usage for a project with time range and period aggregation
+Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
 ### Example
 
@@ -248,7 +248,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > UsageSessionsResponse get_sessions_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid)
 
-Get sessions usage for a project with time range and period aggregation
+Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
 ### Example
 

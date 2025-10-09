@@ -15,13 +15,11 @@ Do not edit the class manually.
 
 import unittest
 
-from notehub_py.models.get_project_products200_response import (
-    GetProjectProducts200Response,
-)
+from notehub_py.models.get_products200_response import GetProducts200Response
 
 
-class TestGetProjectProducts200Response(unittest.TestCase):
-    """GetProjectProducts200Response unit test stubs"""
+class TestGetProducts200Response(unittest.TestCase):
+    """GetProducts200Response unit test stubs"""
 
     def setUp(self):
         pass
@@ -29,16 +27,16 @@ class TestGetProjectProducts200Response(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> GetProjectProducts200Response:
-        """Test GetProjectProducts200Response
+    def make_instance(self, include_optional) -> GetProducts200Response:
+        """Test GetProducts200Response
         include_option is a boolean, when False only required
         params are included, when True both required and
         optional params are included"""
-        # uncomment below to create an instance of `GetProjectProducts200Response`
+        # uncomment below to create an instance of `GetProducts200Response`
         """
-        model = GetProjectProducts200Response()
+        model = GetProducts200Response()
         if include_optional:
-            return GetProjectProducts200Response(
+            return GetProducts200Response(
                 products = [
                     notehub_py.models.product.Product(
                         auto_provision_fleets = [
@@ -50,12 +48,12 @@ class TestGetProjectProducts200Response(unittest.TestCase):
                     ]
             )
         else:
-            return GetProjectProducts200Response(
+            return GetProducts200Response(
         )
         """
 
-    def testGetProjectProducts200Response(self):
-        """Test GetProjectProducts200Response"""
+    def testGetProducts200Response(self):
+        """Test GetProducts200Response"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

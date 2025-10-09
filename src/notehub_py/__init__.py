@@ -52,6 +52,7 @@ from notehub_py.models.azure import Azure
 from notehub_py.models.billing_account import BillingAccount
 from notehub_py.models.billing_account_role import BillingAccountRole
 from notehub_py.models.body import Body
+from notehub_py.models.cellular_plan import CellularPlan
 from notehub_py.models.clone_project_request import CloneProjectRequest
 from notehub_py.models.contact import Contact
 from notehub_py.models.create_fleet_request import CreateFleetRequest
@@ -64,6 +65,7 @@ from notehub_py.models.dfu_env import DFUEnv
 from notehub_py.models.dfu_state import DFUState
 from notehub_py.models.data_field import DataField
 from notehub_py.models.data_set_field import DataSetField
+from notehub_py.models.data_usage import DataUsage
 from notehub_py.models.delete_device_fleets_request import DeleteDeviceFleetsRequest
 from notehub_py.models.device import Device
 from notehub_py.models.device_dfu_history import DeviceDfuHistory
@@ -101,12 +103,14 @@ from notehub_py.models.get_device_health_log200_response_health_log_inner import
     GetDeviceHealthLog200ResponseHealthLogInner,
 )
 from notehub_py.models.get_device_latest200_response import GetDeviceLatest200Response
+from notehub_py.models.get_device_plans200_response import GetDevicePlans200Response
 from notehub_py.models.get_device_public_key200_response import (
     GetDevicePublicKey200Response,
 )
 from notehub_py.models.get_device_sessions200_response import (
     GetDeviceSessions200Response,
 )
+from notehub_py.models.get_products200_response import GetProducts200Response
 from notehub_py.models.get_project_device_public_keys200_response import (
     GetProjectDevicePublicKeys200Response,
 )
@@ -122,9 +126,6 @@ from notehub_py.models.get_project_events_by_cursor200_response import (
 )
 from notehub_py.models.get_project_members200_response import (
     GetProjectMembers200Response,
-)
-from notehub_py.models.get_project_products200_response import (
-    GetProjectProducts200Response,
 )
 from notehub_py.models.get_projects200_response import GetProjects200Response
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
@@ -172,6 +173,7 @@ from notehub_py.models.radresponder import Radresponder
 from notehub_py.models.repository import Repository
 from notehub_py.models.role import Role
 from notehub_py.models.route_log import RouteLog
+from notehub_py.models.satellite_plan import SatellitePlan
 from notehub_py.models.schema_property import SchemaProperty
 from notehub_py.models.sim_usage import SimUsage
 from notehub_py.models.slack import Slack

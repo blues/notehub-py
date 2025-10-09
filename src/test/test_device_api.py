@@ -78,6 +78,10 @@ class TestDeviceApi(unittest.TestCase):
         """Test case for get_device_latest"""
         pass
 
+    def test_get_device_plans(self) -> None:
+        """Test case for get_device_plans"""
+        pass
+
     def test_get_device_public_key(self) -> None:
         """Test case for get_device_public_key"""
         pass

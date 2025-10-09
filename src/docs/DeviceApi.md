@@ -16,6 +16,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_device_environment_variables_by_pin**](DeviceApi.md#get_device_environment_variables_by_pin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
 | [**get_device_health_log**](DeviceApi.md#get_device_health_log)                                     | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log                      |
 | [**get_device_latest**](DeviceApi.md#get_device_latest)                                             | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest                          |
+| [**get_device_plans**](DeviceApi.md#get_device_plans)                                               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans                           |
 | [**get_device_public_key**](DeviceApi.md#get_device_public_key)                                     | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key                      |
 | [**get_device_sessions**](DeviceApi.md#get_device_sessions)                                         | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions                        |
 | [**get_project_device_public_keys**](DeviceApi.md#get_project_device_public_keys)                   | **GET** /v1/projects/{projectOrProductUID}/devices/public-keys                                 |
@@ -789,7 +790,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_device_health_log**
 
-> GetDeviceHealthLog200Response get_device_health_log(project_or_product_uid, device_uid)
+> GetDeviceHealthLog200Response get_device_health_log(project_or_product_uid, device_uid, start_date=start_date, end_date=end_date, log_type=log_type)
 
 Get Device Health Log
 
@@ -825,9 +826,12 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.DeviceApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
+    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
+    log_type = ['log_type_example'] # List[str] | Return only specified log types (optional)
 
     try:
-        api_response = api_instance.get_device_health_log(project_or_product_uid, device_uid)
+        api_response = api_instance.get_device_health_log(project_or_product_uid, device_uid, start_date=start_date, end_date=end_date, log_type=log_type)
         print("The response of DeviceApi->get_device_health_log:\n")
         pprint(api_response)
     except Exception as e:
@@ -836,10 +840,13 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description | Notes |
-| -------------------------- | ------- | ----------- | ----- |
-| **project_or_product_uid** | **str** |             |
-| **device_uid**             | **str** |             |
+| Name                       | Type                    | Description                                                     | Notes      |
+| -------------------------- | ----------------------- | --------------------------------------------------------------- | ---------- |
+| **project_or_product_uid** | **str**                 |                                                                 |
+| **device_uid**             | **str**                 |                                                                 |
+| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional] |
+| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional] |
+| **log_type**               | [**List[str]**](str.md) | Return only specified log types                                 | [optional] |
 
 ### Return type
 
@@ -936,6 +943,71 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ----------- | ---------------------------------------------- | ---------------- |
 | **200**     | The response body for a Latest Events request. | -                |
 | **0**       | The response body in case of an API error.     | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_device_plans**
+
+> GetDevicePlans200Response get_device_plans(project_or_product_uid, device_uid)
+
+Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.get_device_plans200_response import GetDevicePlans200Response
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+
+    try:
+        api_response = api_instance.get_device_plans(project_or_product_uid, device_uid)
+        print("The response of DeviceApi->get_device_plans:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_device_plans: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **device_uid**             | **str** |             |
+
+### Return type
+
+[**GetDevicePlans200Response**](GetDevicePlans200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Response body for /plans                   | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
