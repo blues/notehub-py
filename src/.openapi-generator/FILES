@@ -125,14 +125,11 @@ docs/TowerLocation.md
 docs/Twilio.md
 docs/UpdateFleetRequest.md
 docs/UploadMetadata.md
-docs/UsageApi.md
 docs/UsageData.md
 docs/UsageEventsData.md
 docs/UsageEventsResponse.md
 docs/UsageRouteLogsData.md
-docs/UsageRouteLogsResponse.md
 docs/UsageSessionsData.md
-docs/UsageSessionsResponse.md
 docs/UserDbRoute.md
 docs/UserDfuStateMachine.md
 docs/UserDfuStateMachineStatus.md
@@ -151,7 +148,6 @@ notehub_py/api/external_devices_api.py
 notehub_py/api/monitor_api.py
 notehub_py/api/project_api.py
 notehub_py/api/route_api.py
-notehub_py/api/usage_api.py
 notehub_py/api/webhook_api.py
 notehub_py/api_client.py
 notehub_py/api_response.py
@@ -274,9 +270,7 @@ notehub_py/models/usage_data.py
 notehub_py/models/usage_events_data.py
 notehub_py/models/usage_events_response.py
 notehub_py/models/usage_route_logs_data.py
-notehub_py/models/usage_route_logs_response.py
 notehub_py/models/usage_sessions_data.py
-notehub_py/models/usage_sessions_response.py
 notehub_py/models/user_db_route.py
 notehub_py/models/user_dfu_state_machine.py
 notehub_py/models/user_dfu_state_machine_status.py
@@ -411,14 +405,11 @@ test/test_tower_location.py
 test/test_twilio.py
 test/test_update_fleet_request.py
 test/test_upload_metadata.py
-test/test_usage_api.py
 test/test_usage_data.py
 test/test_usage_events_data.py
 test/test_usage_events_response.py
 test/test_usage_route_logs_data.py
-test/test_usage_route_logs_response.py
 test/test_usage_sessions_data.py
-test/test_usage_sessions_response.py
 test/test_user_db_route.py
 test/test_user_dfu_state_machine.py
 test/test_user_dfu_state_machine_status.py

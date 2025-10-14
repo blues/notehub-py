@@ -196,10 +196,6 @@ Class | Method | HTTP request | Description
 *RouteApi* | [**get_route_logs_by_route**](docs/RouteApi.md#get_route_logs_by_route) | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs | 
 *RouteApi* | [**get_routes**](docs/RouteApi.md#get_routes) | **GET** /v1/projects/{projectOrProductUID}/routes | 
 *RouteApi* | [**update_route**](docs/RouteApi.md#update_route) | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID} | 
-*UsageApi* | [**get_project_data_usage**](docs/UsageApi.md#get_project_data_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/data | 
-*UsageApi* | [**get_project_events_usage**](docs/UsageApi.md#get_project_events_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/events | 
-*UsageApi* | [**get_route_logs_usage**](docs/UsageApi.md#get_route_logs_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/route-logs | 
-*UsageApi* | [**get_sessions_usage**](docs/UsageApi.md#get_sessions_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/sessions | 
 *WebhookApi* | [**create_webhook**](docs/WebhookApi.md#create_webhook) | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
 *WebhookApi* | [**delete_webhook**](docs/WebhookApi.md#delete_webhook) | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
 *WebhookApi* | [**get_webhook**](docs/WebhookApi.md#get_webhook) | **GET** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
@@ -325,9 +321,7 @@ Class | Method | HTTP request | Description
  - [UsageEventsData](docs/UsageEventsData.md)
  - [UsageEventsResponse](docs/UsageEventsResponse.md)
  - [UsageRouteLogsData](docs/UsageRouteLogsData.md)
- - [UsageRouteLogsResponse](docs/UsageRouteLogsResponse.md)
  - [UsageSessionsData](docs/UsageSessionsData.md)
- - [UsageSessionsResponse](docs/UsageSessionsResponse.md)
  - [UserDbRoute](docs/UserDbRoute.md)
  - [UserDfuStateMachine](docs/UserDfuStateMachine.md)
  - [UserDfuStateMachineStatus](docs/UserDfuStateMachineStatus.md)

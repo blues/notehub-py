@@ -163,9 +163,7 @@ from notehub_py.models.usage_data import UsageData
 from notehub_py.models.usage_events_data import UsageEventsData
 from notehub_py.models.usage_events_response import UsageEventsResponse
 from notehub_py.models.usage_route_logs_data import UsageRouteLogsData
-from notehub_py.models.usage_route_logs_response import UsageRouteLogsResponse
 from notehub_py.models.usage_sessions_data import UsageSessionsData
-from notehub_py.models.usage_sessions_response import UsageSessionsResponse
 from notehub_py.models.user_db_route import UserDbRoute
 from notehub_py.models.user_dfu_state_machine import UserDfuStateMachine
 from notehub_py.models.user_dfu_state_machine_status import UserDfuStateMachineStatus
