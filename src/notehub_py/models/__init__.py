@@ -65,6 +65,10 @@ from notehub_py.models.get_alerts200_response import GetAlerts200Response
 from notehub_py.models.get_billing_accounts200_response import (
     GetBillingAccounts200Response,
 )
+from notehub_py.models.get_data_usage200_response import GetDataUsage200Response
+from notehub_py.models.get_data_usage200_response_data_inner import (
+    GetDataUsage200ResponseDataInner,
+)
 from notehub_py.models.get_device_environment_variables_by_pin200_response import (
     GetDeviceEnvironmentVariablesByPin200Response,
 )
@@ -101,6 +105,7 @@ from notehub_py.models.get_project_members200_response import (
     GetProjectMembers200Response,
 )
 from notehub_py.models.get_projects200_response import GetProjects200Response
+from notehub_py.models.get_sessions_usage200_response import GetSessionsUsage200Response
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.models.google import Google
 from notehub_py.models.handle_note_changes200_response import (

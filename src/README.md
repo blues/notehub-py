@@ -196,6 +196,9 @@ Class | Method | HTTP request | Description
 *RouteApi* | [**get_route_logs_by_route**](docs/RouteApi.md#get_route_logs_by_route) | **GET** /v1/projects/{projectOrProductUID}/routes/{routeUID}/route-logs | 
 *RouteApi* | [**get_routes**](docs/RouteApi.md#get_routes) | **GET** /v1/projects/{projectOrProductUID}/routes | 
 *RouteApi* | [**update_route**](docs/RouteApi.md#update_route) | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID} | 
+*UsageApi* | [**get_data_usage**](docs/UsageApi.md#get_data_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/data | 
+*UsageApi* | [**get_project_events_usage**](docs/UsageApi.md#get_project_events_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/events | 
+*UsageApi* | [**get_sessions_usage**](docs/UsageApi.md#get_sessions_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/sessions | 
 *WebhookApi* | [**create_webhook**](docs/WebhookApi.md#create_webhook) | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
 *WebhookApi* | [**delete_webhook**](docs/WebhookApi.md#delete_webhook) | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
 *WebhookApi* | [**get_webhook**](docs/WebhookApi.md#get_webhook) | **GET** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
@@ -253,6 +256,8 @@ Class | Method | HTTP request | Description
  - [Fleet](docs/Fleet.md)
  - [GetAlerts200Response](docs/GetAlerts200Response.md)
  - [GetBillingAccounts200Response](docs/GetBillingAccounts200Response.md)
+ - [GetDataUsage200Response](docs/GetDataUsage200Response.md)
+ - [GetDataUsage200ResponseDataInner](docs/GetDataUsage200ResponseDataInner.md)
  - [GetDeviceEnvironmentVariablesByPin200Response](docs/GetDeviceEnvironmentVariablesByPin200Response.md)
  - [GetDeviceFleets200Response](docs/GetDeviceFleets200Response.md)
  - [GetDeviceHealthLog200Response](docs/GetDeviceHealthLog200Response.md)
@@ -269,6 +274,7 @@ Class | Method | HTTP request | Description
  - [GetProjectEventsByCursor200Response](docs/GetProjectEventsByCursor200Response.md)
  - [GetProjectMembers200Response](docs/GetProjectMembers200Response.md)
  - [GetProjects200Response](docs/GetProjects200Response.md)
+ - [GetSessionsUsage200Response](docs/GetSessionsUsage200Response.md)
  - [GetWebhooks200Response](docs/GetWebhooks200Response.md)
  - [Google](docs/Google.md)
  - [HandleNoteChanges200Response](docs/HandleNoteChanges200Response.md)
