@@ -27,16 +27,12 @@ class TestUsageApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_get_project_data_usage(self) -> None:
-        """Test case for get_project_data_usage"""
+    def test_get_data_usage(self) -> None:
+        """Test case for get_data_usage"""
         pass
 
     def test_get_project_events_usage(self) -> None:
         """Test case for get_project_events_usage"""
-        pass
-
-    def test_get_route_logs_usage(self) -> None:
-        """Test case for get_route_logs_usage"""
         pass
 
     def test_get_sessions_usage(self) -> None:

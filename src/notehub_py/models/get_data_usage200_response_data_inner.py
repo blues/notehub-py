@@ -18,20 +18,51 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
-from notehub_py.models.usage_route_logs_data import UsageRouteLogsData
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.usage_data import UsageData
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class UsageRouteLogsResponse(BaseModel):
+class GetDataUsage200ResponseDataInner(BaseModel):
     """
-    UsageRouteLogsResponse
+    GetDataUsage200ResponseDataInner
     """  # noqa: E501
 
-    data: List[UsageRouteLogsData]
-    __properties: ClassVar[List[str]] = ["data"]
+    data: List[UsageData]
+    device: Optional[StrictStr] = Field(
+        default=None,
+        description="The device UID this usage data belongs to (only present when aggregate is 'device')",
+    )
+    fleet: Optional[StrictStr] = Field(
+        default=None,
+        description="The fleet UID this usage data belongs to (only present when aggregate is 'fleet')",
+    )
+    iccid: Optional[StrictStr] = Field(
+        default=None,
+        description="The ICCID of the cellular SIM card (only present when type is 'cellular')",
+    )
+    imsi: Optional[StrictStr] = Field(
+        default=None,
+        description="The IMSI of the satellite device (only present when type is 'satellite')",
+    )
+    type: StrictStr = Field(description="The type of connectivity")
+    __properties: ClassVar[List[str]] = [
+        "data",
+        "device",
+        "fleet",
+        "iccid",
+        "imsi",
+        "type",
+    ]
+
+    @field_validator("type")
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(["cellular", "satellite"]):
+            raise ValueError("must be one of enum values ('cellular', 'satellite')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +81,7 @@ class UsageRouteLogsResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UsageRouteLogsResponse from a JSON string"""
+        """Create an instance of GetDataUsage200ResponseDataInner from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -81,7 +112,7 @@ class UsageRouteLogsResponse(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UsageRouteLogsResponse from a dict"""
+        """Create an instance of GetDataUsage200ResponseDataInner from a dict"""
         if obj is None:
             return None
 
@@ -91,10 +122,15 @@ class UsageRouteLogsResponse(BaseModel):
         _obj = cls.model_validate(
             {
                 "data": (
-                    [UsageRouteLogsData.from_dict(_item) for _item in obj["data"]]
+                    [UsageData.from_dict(_item) for _item in obj["data"]]
                     if obj.get("data") is not None
                     else None
-                )
+                ),
+                "device": obj.get("device"),
+                "fleet": obj.get("fleet"),
+                "iccid": obj.get("iccid"),
+                "imsi": obj.get("imsi"),
+                "type": obj.get("type"),
             }
         )
         return _obj

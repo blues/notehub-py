@@ -37,15 +37,14 @@ class TestUsageRouteLogsData(unittest.TestCase):
         model = UsageRouteLogsData()
         if include_optional:
             return UsageRouteLogsData(
-                device = '',
                 failed_routes = 4,
                 period = '2025-07-23T00:00Z',
+                route = '',
                 successful_routes = 38,
                 total_routes = 42
             )
         else:
             return UsageRouteLogsData(
-                device = '',
                 failed_routes = 4,
                 period = '2025-07-23T00:00Z',
                 successful_routes = 38,

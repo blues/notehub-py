@@ -53,14 +53,14 @@ class TestEnvTreeJsonNode(unittest.TestCase):
                                 device_uid = '', 
                                 fleet_label = '', 
                                 fleet_uid = '', 
-                                inherited_var_count = null, 
+                                inherited_var_count = 56, 
                                 type = '', 
                                 url = '', 
-                                var_count = null, 
+                                var_count = 56, 
                                 variables = [
                                     notehub_py.models.env_var.EnvVar(
                                         key = '', 
-                                        precedence = null, 
+                                        precedence = 56, 
                                         used = True, 
                                         value = '', )
                                     ], )
@@ -68,14 +68,14 @@ class TestEnvTreeJsonNode(unittest.TestCase):
                         device_uid = '', 
                         fleet_label = '', 
                         fleet_uid = '', 
-                        inherited_var_count = null, 
+                        inherited_var_count = 56, 
                         type = '', 
                         url = '', 
-                        var_count = null, 
+                        var_count = 56, 
                         variables = [
                             notehub_py.models.env_var.EnvVar(
                                 key = '', 
-                                precedence = null, 
+                                precedence = 56, 
                                 used = True, 
                                 value = '', )
                             ], )
@@ -83,14 +83,14 @@ class TestEnvTreeJsonNode(unittest.TestCase):
                 device_uid = '',
                 fleet_label = '',
                 fleet_uid = '',
-                inherited_var_count = None,
+                inherited_var_count = 56,
                 type = '',
                 url = '',
-                var_count = None,
+                var_count = 56,
                 variables = [
                     notehub_py.models.env_var.EnvVar(
                         key = '', 
-                        precedence = null, 
+                        precedence = 56, 
                         used = True, 
                         value = '', )
                     ]
@@ -111,14 +111,14 @@ class TestEnvTreeJsonNode(unittest.TestCase):
                                 device_uid = '', 
                                 fleet_label = '', 
                                 fleet_uid = '', 
-                                inherited_var_count = null, 
+                                inherited_var_count = 56, 
                                 type = '', 
                                 url = '', 
-                                var_count = null, 
+                                var_count = 56, 
                                 variables = [
                                     notehub_py.models.env_var.EnvVar(
                                         key = '', 
-                                        precedence = null, 
+                                        precedence = 56, 
                                         used = True, 
                                         value = '', )
                                     ], )
@@ -126,25 +126,25 @@ class TestEnvTreeJsonNode(unittest.TestCase):
                         device_uid = '', 
                         fleet_label = '', 
                         fleet_uid = '', 
-                        inherited_var_count = null, 
+                        inherited_var_count = 56, 
                         type = '', 
                         url = '', 
-                        var_count = null, 
+                        var_count = 56, 
                         variables = [
                             notehub_py.models.env_var.EnvVar(
                                 key = '', 
-                                precedence = null, 
+                                precedence = 56, 
                                 used = True, 
                                 value = '', )
                             ], )
                     ],
-                inherited_var_count = None,
+                inherited_var_count = 56,
                 type = '',
-                var_count = None,
+                var_count = 56,
                 variables = [
                     notehub_py.models.env_var.EnvVar(
                         key = '', 
-                        precedence = null, 
+                        precedence = 56, 
                         used = True, 
                         value = '', )
                     ],

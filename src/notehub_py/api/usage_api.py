@@ -20,10 +20,9 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
+from notehub_py.models.get_data_usage200_response import GetDataUsage200Response
+from notehub_py.models.get_sessions_usage200_response import GetSessionsUsage200Response
 from notehub_py.models.usage_events_response import UsageEventsResponse
-from notehub_py.models.usage_route_logs_response import UsageRouteLogsResponse
-from notehub_py.models.usage_sessions_response import UsageSessionsResponse
-from notehub_py.models.object import object
 
 from notehub_py.api_client import ApiClient, RequestSerialized
 from notehub_py.api_response import ApiResponse
@@ -43,7 +42,7 @@ class UsageApi:
         self.api_client = api_client
 
     @validate_call
-    def get_project_data_usage(
+    def get_data_usage(
         self,
         project_or_product_uid: StrictStr,
         period: Annotated[StrictStr, Field(description="Period type for aggregation")],
@@ -62,6 +61,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -73,8 +75,8 @@ class UsageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
-        """get_project_data_usage
+    ) -> GetDataUsage200Response:
+        """get_data_usage
 
         Get data usage in bytes for a project with time range and period aggregation
 
@@ -88,6 +90,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -110,12 +114,13 @@ class UsageApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_project_data_usage_serialize(
+        _param = self._get_data_usage_serialize(
             project_or_product_uid=project_or_product_uid,
             period=period,
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -123,7 +128,7 @@ class UsageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[object]",
+            "200": "GetDataUsage200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -135,7 +140,7 @@ class UsageApi:
         ).data
 
     @validate_call
-    def get_project_data_usage_with_http_info(
+    def get_data_usage_with_http_info(
         self,
         project_or_product_uid: StrictStr,
         period: Annotated[StrictStr, Field(description="Period type for aggregation")],
@@ -154,6 +159,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -165,8 +173,8 @@ class UsageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
-        """get_project_data_usage
+    ) -> ApiResponse[GetDataUsage200Response]:
+        """get_data_usage
 
         Get data usage in bytes for a project with time range and period aggregation
 
@@ -180,6 +188,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -202,12 +212,13 @@ class UsageApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_project_data_usage_serialize(
+        _param = self._get_data_usage_serialize(
             project_or_product_uid=project_or_product_uid,
             period=period,
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -215,7 +226,7 @@ class UsageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[object]",
+            "200": "GetDataUsage200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -227,7 +238,7 @@ class UsageApi:
         )
 
     @validate_call
-    def get_project_data_usage_without_preload_content(
+    def get_data_usage_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
         period: Annotated[StrictStr, Field(description="Period type for aggregation")],
@@ -245,6 +256,9 @@ class UsageApi:
         ] = None,
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
         _request_timeout: Union[
             None,
@@ -258,7 +272,7 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_project_data_usage
+        """get_data_usage
 
         Get data usage in bytes for a project with time range and period aggregation
 
@@ -272,6 +286,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -294,12 +310,13 @@ class UsageApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_project_data_usage_serialize(
+        _param = self._get_data_usage_serialize(
             project_or_product_uid=project_or_product_uid,
             period=period,
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -307,20 +324,21 @@ class UsageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[object]",
+            "200": "GetDataUsage200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
         )
         return response_data.response
 
-    def _get_project_data_usage_serialize(
+    def _get_data_usage_serialize(
         self,
         project_or_product_uid,
         period,
         start_date,
         end_date,
         device_uid,
+        aggregate,
         _request_auth,
         _content_type,
         _headers,
@@ -360,6 +378,10 @@ class UsageApi:
 
             _query_params.append(("period", period))
 
+        if aggregate is not None:
+
+            _query_params.append(("aggregate", aggregate))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -370,7 +392,7 @@ class UsageApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = []
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",
@@ -407,6 +429,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -433,6 +458,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -461,6 +488,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -499,6 +527,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -525,6 +556,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -553,6 +586,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -591,6 +625,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -617,6 +654,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -645,6 +684,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -666,6 +706,7 @@ class UsageApi:
         start_date,
         end_date,
         device_uid,
+        aggregate,
         _request_auth,
         _content_type,
         _headers,
@@ -704,6 +745,10 @@ class UsageApi:
         if period is not None:
 
             _query_params.append(("period", period))
+
+        if aggregate is not None:
+
+            _query_params.append(("aggregate", aggregate))
 
         # process the header parameters
         # process the form parameters
@@ -720,351 +765,6 @@ class UsageApi:
         return self.api_client.param_serialize(
             method="GET",
             resource_path="/v1/projects/{projectOrProductUID}/usage/events",
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth,
-        )
-
-    @validate_call
-    def get_route_logs_usage(
-        self,
-        project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
-        start_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="Start date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        end_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="End date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UsageRouteLogsResponse:
-        """get_route_logs_usage
-
-        Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
-        :type period: str
-        :param start_date: Start date for filtering results, specified as a Unix timestamp
-        :type start_date: int
-        :param end_date: End date for filtering results, specified as a Unix timestamp
-        :type end_date: int
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_route_logs_usage_serialize(
-            project_or_product_uid=project_or_product_uid,
-            period=period,
-            start_date=start_date,
-            end_date=end_date,
-            device_uid=device_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UsageRouteLogsResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def get_route_logs_usage_with_http_info(
-        self,
-        project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
-        start_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="Start date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        end_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="End date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UsageRouteLogsResponse]:
-        """get_route_logs_usage
-
-        Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
-        :type period: str
-        :param start_date: Start date for filtering results, specified as a Unix timestamp
-        :type start_date: int
-        :param end_date: End date for filtering results, specified as a Unix timestamp
-        :type end_date: int
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_route_logs_usage_serialize(
-            project_or_product_uid=project_or_product_uid,
-            period=period,
-            start_date=start_date,
-            end_date=end_date,
-            device_uid=device_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UsageRouteLogsResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def get_route_logs_usage_without_preload_content(
-        self,
-        project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
-        start_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="Start date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        end_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="End date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """get_route_logs_usage
-
-        Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
-        :type period: str
-        :param start_date: Start date for filtering results, specified as a Unix timestamp
-        :type start_date: int
-        :param end_date: End date for filtering results, specified as a Unix timestamp
-        :type end_date: int
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_route_logs_usage_serialize(
-            project_or_product_uid=project_or_product_uid,
-            period=period,
-            start_date=start_date,
-            end_date=end_date,
-            device_uid=device_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UsageRouteLogsResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _get_route_logs_usage_serialize(
-        self,
-        project_or_product_uid,
-        period,
-        start_date,
-        end_date,
-        device_uid,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-            "deviceUID": "multi",
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if project_or_product_uid is not None:
-            _path_params["projectOrProductUID"] = project_or_product_uid
-        # process the query parameters
-        if start_date is not None:
-
-            _query_params.append(("startDate", start_date))
-
-        if end_date is not None:
-
-            _query_params.append(("endDate", end_date))
-
-        if device_uid is not None:
-
-            _query_params.append(("deviceUID", device_uid))
-
-        if period is not None:
-
-            _query_params.append(("period", period))
-
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(
-            ["application/json"]
-        )
-
-        # authentication setting
-        _auth_settings: List[str] = ["personalAccessToken"]
-
-        return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/v1/projects/{projectOrProductUID}/usage/route-logs",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1097,6 +797,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1108,7 +811,7 @@ class UsageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UsageSessionsResponse:
+    ) -> GetSessionsUsage200Response:
         """get_sessions_usage
 
         Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
@@ -1123,6 +826,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1151,6 +856,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1158,7 +864,7 @@ class UsageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UsageSessionsResponse",
+            "200": "GetSessionsUsage200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1189,6 +895,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1200,7 +909,7 @@ class UsageApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UsageSessionsResponse]:
+    ) -> ApiResponse[GetSessionsUsage200Response]:
         """get_sessions_usage
 
         Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
@@ -1215,6 +924,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1243,6 +954,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1250,7 +962,7 @@ class UsageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UsageSessionsResponse",
+            "200": "GetSessionsUsage200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1281,6 +993,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1307,6 +1022,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1335,6 +1052,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1342,7 +1060,7 @@ class UsageApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UsageSessionsResponse",
+            "200": "GetSessionsUsage200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1356,6 +1074,7 @@ class UsageApi:
         start_date,
         end_date,
         device_uid,
+        aggregate,
         _request_auth,
         _content_type,
         _headers,
@@ -1394,6 +1113,10 @@ class UsageApi:
         if period is not None:
 
             _query_params.append(("period", period))
+
+        if aggregate is not None:
+
+            _query_params.append(("aggregate", aggregate))
 
         # process the header parameters
         # process the form parameters

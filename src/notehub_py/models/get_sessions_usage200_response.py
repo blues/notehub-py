@@ -25,13 +25,13 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class UsageSessionsResponse(BaseModel):
+class GetSessionsUsage200Response(BaseModel):
     """
-    UsageSessionsResponse
+    GetSessionsUsage200Response
     """  # noqa: E501
 
-    data: List[UsageSessionsData]
-    __properties: ClassVar[List[str]] = ["data"]
+    sessions: List[UsageSessionsData]
+    __properties: ClassVar[List[str]] = ["sessions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +50,7 @@ class UsageSessionsResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UsageSessionsResponse from a JSON string"""
+        """Create an instance of GetSessionsUsage200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,18 +70,18 @@ class UsageSessionsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in sessions (list)
         _items = []
-        if self.data:
-            for _item in self.data:
+        if self.sessions:
+            for _item in self.sessions:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["data"] = _items
+            _dict["sessions"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UsageSessionsResponse from a dict"""
+        """Create an instance of GetSessionsUsage200Response from a dict"""
         if obj is None:
             return None
 
@@ -90,9 +90,9 @@ class UsageSessionsResponse(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "data": (
-                    [UsageSessionsData.from_dict(_item) for _item in obj["data"]]
-                    if obj.get("data") is not None
+                "sessions": (
+                    [UsageSessionsData.from_dict(_item) for _item in obj["sessions"]]
+                    if obj.get("sessions") is not None
                     else None
                 )
             }

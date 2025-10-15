@@ -2,9 +2,10 @@
 
 ## Properties
 
-| Name                | Type         | Description | Notes |
-| ------------------- | ------------ | ----------- | ----- |
-| **device**          | **str**      |             |
+| Name                | Type         | Description | Notes      |
+| ------------------- | ------------ | ----------- | ---------- |
+| **device**          | **str**      |             | [optional] |
+| **fleet**           | **str**      |             | [optional] |
 | **period**          | **datetime** |             |
 | **platform_events** | **int**      |             |
 | **total_events**    | **int**      |             |

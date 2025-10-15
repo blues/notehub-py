@@ -58,6 +58,8 @@ docs/FirmwareInfo.md
 docs/Fleet.md
 docs/GetAlerts200Response.md
 docs/GetBillingAccounts200Response.md
+docs/GetDataUsage200Response.md
+docs/GetDataUsage200ResponseDataInner.md
 docs/GetDeviceEnvironmentVariablesByPin200Response.md
 docs/GetDeviceFleets200Response.md
 docs/GetDeviceHealthLog200Response.md
@@ -74,6 +76,7 @@ docs/GetProjectEvents200Response.md
 docs/GetProjectEventsByCursor200Response.md
 docs/GetProjectMembers200Response.md
 docs/GetProjects200Response.md
+docs/GetSessionsUsage200Response.md
 docs/GetWebhooks200Response.md
 docs/Google.md
 docs/HandleNoteChanges200Response.md
@@ -130,9 +133,7 @@ docs/UsageData.md
 docs/UsageEventsData.md
 docs/UsageEventsResponse.md
 docs/UsageRouteLogsData.md
-docs/UsageRouteLogsResponse.md
 docs/UsageSessionsData.md
-docs/UsageSessionsResponse.md
 docs/UserDbRoute.md
 docs/UserDfuStateMachine.md
 docs/UserDfuStateMachineStatus.md
@@ -206,6 +207,8 @@ notehub_py/models/firmware_info.py
 notehub_py/models/fleet.py
 notehub_py/models/get_alerts200_response.py
 notehub_py/models/get_billing_accounts200_response.py
+notehub_py/models/get_data_usage200_response.py
+notehub_py/models/get_data_usage200_response_data_inner.py
 notehub_py/models/get_device_environment_variables_by_pin200_response.py
 notehub_py/models/get_device_fleets200_response.py
 notehub_py/models/get_device_health_log200_response.py
@@ -222,6 +225,7 @@ notehub_py/models/get_project_events200_response.py
 notehub_py/models/get_project_events_by_cursor200_response.py
 notehub_py/models/get_project_members200_response.py
 notehub_py/models/get_projects200_response.py
+notehub_py/models/get_sessions_usage200_response.py
 notehub_py/models/get_webhooks200_response.py
 notehub_py/models/google.py
 notehub_py/models/handle_note_changes200_response.py
@@ -274,9 +278,7 @@ notehub_py/models/usage_data.py
 notehub_py/models/usage_events_data.py
 notehub_py/models/usage_events_response.py
 notehub_py/models/usage_route_logs_data.py
-notehub_py/models/usage_route_logs_response.py
 notehub_py/models/usage_sessions_data.py
-notehub_py/models/usage_sessions_response.py
 notehub_py/models/user_db_route.py
 notehub_py/models/user_dfu_state_machine.py
 notehub_py/models/user_dfu_state_machine_status.py
@@ -344,6 +346,8 @@ test/test_firmware_info.py
 test/test_fleet.py
 test/test_get_alerts200_response.py
 test/test_get_billing_accounts200_response.py
+test/test_get_data_usage200_response.py
+test/test_get_data_usage200_response_data_inner.py
 test/test_get_device_environment_variables_by_pin200_response.py
 test/test_get_device_fleets200_response.py
 test/test_get_device_health_log200_response.py
@@ -360,6 +364,7 @@ test/test_get_project_events200_response.py
 test/test_get_project_events_by_cursor200_response.py
 test/test_get_project_members200_response.py
 test/test_get_projects200_response.py
+test/test_get_sessions_usage200_response.py
 test/test_get_webhooks200_response.py
 test/test_google.py
 test/test_handle_note_changes200_response.py
@@ -416,9 +421,7 @@ test/test_usage_data.py
 test/test_usage_events_data.py
 test/test_usage_events_response.py
 test/test_usage_route_logs_data.py
-test/test_usage_route_logs_response.py
 test/test_usage_sessions_data.py
-test/test_usage_sessions_response.py
 test/test_user_db_route.py
 test/test_user_dfu_state_machine.py
 test/test_user_dfu_state_machine_status.py

@@ -15,11 +15,11 @@ Do not edit the class manually.
 
 import unittest
 
-from notehub_py.models.usage_sessions_response import UsageSessionsResponse
+from notehub_py.models.get_sessions_usage200_response import GetSessionsUsage200Response
 
 
-class TestUsageSessionsResponse(unittest.TestCase):
-    """UsageSessionsResponse unit test stubs"""
+class TestGetSessionsUsage200Response(unittest.TestCase):
+    """GetSessionsUsage200Response unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,29 +27,31 @@ class TestUsageSessionsResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> UsageSessionsResponse:
-        """Test UsageSessionsResponse
+    def make_instance(self, include_optional) -> GetSessionsUsage200Response:
+        """Test GetSessionsUsage200Response
         include_option is a boolean, when False only required
         params are included, when True both required and
         optional params are included"""
-        # uncomment below to create an instance of `UsageSessionsResponse`
+        # uncomment below to create an instance of `GetSessionsUsage200Response`
         """
-        model = UsageSessionsResponse()
+        model = GetSessionsUsage200Response()
         if include_optional:
-            return UsageSessionsResponse(
-                data = [
+            return GetSessionsUsage200Response(
+                sessions = [
                     notehub_py.models.usage_sessions_data.UsageSessionsData(
-                        device = '', 
+                        device = 'dev:123456789012345', 
+                        fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
                         period = '2025-07-23T00:00Z', 
                         sessions = 12, 
                         total_bytes = 1048576, )
                     ]
             )
         else:
-            return UsageSessionsResponse(
-                data = [
+            return GetSessionsUsage200Response(
+                sessions = [
                     notehub_py.models.usage_sessions_data.UsageSessionsData(
-                        device = '', 
+                        device = 'dev:123456789012345', 
+                        fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
                         period = '2025-07-23T00:00Z', 
                         sessions = 12, 
                         total_bytes = 1048576, )
@@ -57,8 +59,8 @@ class TestUsageSessionsResponse(unittest.TestCase):
         )
         """
 
-    def testUsageSessionsResponse(self):
-        """Test UsageSessionsResponse"""
+    def testGetSessionsUsage200Response(self):
+        """Test GetSessionsUsage200Response"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

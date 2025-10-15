@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.env_var import EnvVar
 from typing import Optional, Set
@@ -36,10 +36,10 @@ class EnvTreeJsonNode(BaseModel):
     device_uid: Optional[StrictStr] = None
     fleet_label: Optional[StrictStr] = None
     fleet_uid: Optional[StrictStr] = None
-    inherited_var_count: Int
+    inherited_var_count: StrictInt
     type: StrictStr
     url: Optional[StrictStr] = None
-    var_count: Int
+    var_count: StrictInt
     variables: List[EnvVar]
     __properties: ClassVar[List[str]] = [
         "app_label",
@@ -99,12 +99,6 @@ class EnvTreeJsonNode(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict["children"] = _items
-        # override the default output from pydantic by calling `to_dict()` of inherited_var_count
-        if self.inherited_var_count:
-            _dict["inherited_var_count"] = self.inherited_var_count.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of var_count
-        if self.var_count:
-            _dict["var_count"] = self.var_count.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in variables (list)
         _items = []
         if self.variables:
@@ -135,18 +129,10 @@ class EnvTreeJsonNode(BaseModel):
                 "device_uid": obj.get("device_uid"),
                 "fleet_label": obj.get("fleet_label"),
                 "fleet_uid": obj.get("fleet_uid"),
-                "inherited_var_count": (
-                    Int.from_dict(obj["inherited_var_count"])
-                    if obj.get("inherited_var_count") is not None
-                    else None
-                ),
+                "inherited_var_count": obj.get("inherited_var_count"),
                 "type": obj.get("type"),
                 "url": obj.get("url"),
-                "var_count": (
-                    Int.from_dict(obj["var_count"])
-                    if obj.get("var_count") is not None
-                    else None
-                ),
+                "var_count": obj.get("var_count"),
                 "variables": (
                     [EnvVar.from_dict(_item) for _item in obj["variables"]]
                     if obj.get("variables") is not None

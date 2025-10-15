@@ -39,7 +39,8 @@ class TestUsageEventsResponse(unittest.TestCase):
             return UsageEventsResponse(
                 data = [
                     notehub_py.models.usage_events_data.UsageEventsData(
-                        device = '', 
+                        device = 'dev:123456789012345', 
+                        fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
                         period = '2025-07-23T00:00Z', 
                         platform_events = 15, 
                         total_events = 42, )
@@ -49,7 +50,8 @@ class TestUsageEventsResponse(unittest.TestCase):
             return UsageEventsResponse(
                 data = [
                     notehub_py.models.usage_events_data.UsageEventsData(
-                        device = '', 
+                        device = 'dev:123456789012345', 
+                        fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
                         period = '2025-07-23T00:00Z', 
                         platform_events = 15, 
                         total_events = 42, )

@@ -2,13 +2,13 @@
 
 ## Properties
 
-| Name                  | Type         | Description | Notes |
-| --------------------- | ------------ | ----------- | ----- |
-| **device**            | **str**      |             |
-| **failed_routes**     | **int**      |             |
-| **period**            | **datetime** |             |
-| **successful_routes** | **int**      |             |
-| **total_routes**      | **int**      |             |
+| Name                  | Type         | Description                                                              | Notes      |
+| --------------------- | ------------ | ------------------------------------------------------------------------ | ---------- |
+| **failed_routes**     | **int**      |                                                                          |
+| **period**            | **datetime** |                                                                          |
+| **route**             | **str**      | The route serial number (only present when aggregate is &#39;route&#39;) | [optional] |
+| **successful_routes** | **int**      |                                                                          |
+| **total_routes**      | **int**      |                                                                          |
 
 ## Example
 

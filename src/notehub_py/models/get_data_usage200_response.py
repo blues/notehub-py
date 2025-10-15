@@ -18,22 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.get_data_usage200_response_data_inner import (
+    GetDataUsage200ResponseDataInner,
+)
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class EnvVar(BaseModel):
+class GetDataUsage200Response(BaseModel):
     """
-    EnvVar
+    GetDataUsage200Response
     """  # noqa: E501
 
-    key: Optional[StrictStr] = None
-    precedence: Optional[StrictInt] = None
-    used: Optional[StrictBool] = None
-    value: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["key", "precedence", "used", "value"]
+    data: Optional[List[GetDataUsage200ResponseDataInner]] = None
+    __properties: ClassVar[List[str]] = ["data"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +52,7 @@ class EnvVar(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of EnvVar from a JSON string"""
+        """Create an instance of GetDataUsage200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,11 +72,18 @@ class EnvVar(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
+        _items = []
+        if self.data:
+            for _item in self.data:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["data"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of EnvVar from a dict"""
+        """Create an instance of GetDataUsage200Response from a dict"""
         if obj is None:
             return None
 
@@ -85,10 +92,14 @@ class EnvVar(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "key": obj.get("key"),
-                "precedence": obj.get("precedence"),
-                "used": obj.get("used"),
-                "value": obj.get("value"),
+                "data": (
+                    [
+                        GetDataUsage200ResponseDataInner.from_dict(_item)
+                        for _item in obj["data"]
+                    ]
+                    if obj.get("data") is not None
+                    else None
+                )
             }
         )
         return _obj

@@ -20,7 +20,7 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,12 +30,14 @@ class UsageEventsData(BaseModel):
     UsageEventsData
     """  # noqa: E501
 
-    device: StrictStr
+    device: Optional[StrictStr] = None
+    fleet: Optional[StrictStr] = None
     period: datetime
     platform_events: StrictInt
     total_events: StrictInt
     __properties: ClassVar[List[str]] = [
         "device",
+        "fleet",
         "period",
         "platform_events",
         "total_events",
@@ -92,6 +94,7 @@ class UsageEventsData(BaseModel):
         _obj = cls.model_validate(
             {
                 "device": obj.get("device"),
+                "fleet": obj.get("fleet"),
                 "period": obj.get("period"),
                 "platform_events": obj.get("platform_events"),
                 "total_events": obj.get("total_events"),
