@@ -31,7 +31,14 @@ class GetDataUsage200ResponseDataInner(BaseModel):
     """  # noqa: E501
 
     data: List[UsageData]
-    device: StrictStr = Field(description="The device UID this usage data belongs to")
+    device: Optional[StrictStr] = Field(
+        default=None,
+        description="The device UID this usage data belongs to (only present when aggregate is 'device')",
+    )
+    fleet: Optional[StrictStr] = Field(
+        default=None,
+        description="The fleet UID this usage data belongs to (only present when aggregate is 'fleet')",
+    )
     iccid: Optional[StrictStr] = Field(
         default=None,
         description="The ICCID of the cellular SIM card (only present when type is 'cellular')",
@@ -41,7 +48,14 @@ class GetDataUsage200ResponseDataInner(BaseModel):
         description="The IMSI of the satellite device (only present when type is 'satellite')",
     )
     type: StrictStr = Field(description="The type of connectivity")
-    __properties: ClassVar[List[str]] = ["data", "device", "iccid", "imsi", "type"]
+    __properties: ClassVar[List[str]] = [
+        "data",
+        "device",
+        "fleet",
+        "iccid",
+        "imsi",
+        "type",
+    ]
 
     @field_validator("type")
     def type_validate_enum(cls, value):
@@ -113,6 +127,7 @@ class GetDataUsage200ResponseDataInner(BaseModel):
                     else None
                 ),
                 "device": obj.get("device"),
+                "fleet": obj.get("fleet"),
                 "iccid": obj.get("iccid"),
                 "imsi": obj.get("imsi"),
                 "type": obj.get("type"),

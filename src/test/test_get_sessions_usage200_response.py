@@ -39,7 +39,8 @@ class TestGetSessionsUsage200Response(unittest.TestCase):
             return GetSessionsUsage200Response(
                 sessions = [
                     notehub_py.models.usage_sessions_data.UsageSessionsData(
-                        device = '', 
+                        device = 'dev:123456789012345', 
+                        fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
                         period = '2025-07-23T00:00Z', 
                         sessions = 12, 
                         total_bytes = 1048576, )
@@ -49,7 +50,8 @@ class TestGetSessionsUsage200Response(unittest.TestCase):
             return GetSessionsUsage200Response(
                 sessions = [
                     notehub_py.models.usage_sessions_data.UsageSessionsData(
-                        device = '', 
+                        device = 'dev:123456789012345', 
+                        fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
                         period = '2025-07-23T00:00Z', 
                         sessions = 12, 
                         total_bytes = 1048576, )

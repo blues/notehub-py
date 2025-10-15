@@ -37,14 +37,14 @@ class TestUsageSessionsData(unittest.TestCase):
         model = UsageSessionsData()
         if include_optional:
             return UsageSessionsData(
-                device = '',
+                device = 'dev:123456789012345',
+                fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d',
                 period = '2025-07-23T00:00Z',
                 sessions = 12,
                 total_bytes = 1048576
             )
         else:
             return UsageSessionsData(
-                device = '',
                 period = '2025-07-23T00:00Z',
                 sessions = 12,
                 total_bytes = 1048576,

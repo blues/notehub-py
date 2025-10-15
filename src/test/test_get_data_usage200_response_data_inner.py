@@ -47,6 +47,7 @@ class TestGetDataUsage200ResponseDataInner(unittest.TestCase):
                         total_bytes = 1048576, )
                     ],
                 device = 'dev:123456789012345',
+                fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d',
                 iccid = '12345678901234567890',
                 imsi = '123456789012345',
                 type = 'cellular'
@@ -60,7 +61,6 @@ class TestGetDataUsage200ResponseDataInner(unittest.TestCase):
                         period = '2025-07-23T00:00Z', 
                         total_bytes = 1048576, )
                     ],
-                device = 'dev:123456789012345',
                 type = 'cellular',
         )
         """

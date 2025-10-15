@@ -37,14 +37,14 @@ class TestUsageEventsData(unittest.TestCase):
         model = UsageEventsData()
         if include_optional:
             return UsageEventsData(
-                device = '',
+                device = 'dev:123456789012345',
+                fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d',
                 period = '2025-07-23T00:00Z',
                 platform_events = 15,
                 total_events = 42
             )
         else:
             return UsageEventsData(
-                device = '',
                 period = '2025-07-23T00:00Z',
                 platform_events = 15,
                 total_events = 42,

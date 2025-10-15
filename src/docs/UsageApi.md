@@ -10,7 +10,7 @@ All URIs are relative to *https://api.notefile.net*
 
 # **get_data_usage**
 
-> GetDataUsage200Response get_data_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid)
+> GetDataUsage200Response get_data_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
 
 Get data usage in bytes for a project with time range and period aggregation
 
@@ -38,9 +38,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
     end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
+    aggregate = 'device' # str | Aggregation level for results (optional) (default to 'device')
 
     try:
-        api_response = api_instance.get_data_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid)
+        api_response = api_instance.get_data_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
         print("The response of UsageApi->get_data_usage:\n")
         pprint(api_response)
     except Exception as e:
@@ -49,13 +50,14 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                    | Description                                                     | Notes      |
-| -------------------------- | ----------------------- | --------------------------------------------------------------- | ---------- |
+| Name                       | Type                    | Description                                                     | Notes                                    |
+| -------------------------- | ----------------------- | --------------------------------------------------------------- | ---------------------------------------- |
 | **project_or_product_uid** | **str**                 |                                                                 |
 | **period**                 | **str**                 | Period type for aggregation                                     |
-| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional] |
-| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional] |
-| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                   | [optional] |
+| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
+| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                   | [optional]                               |
+| **aggregate**              | **str**                 | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
 
 ### Return type
 
@@ -81,7 +83,7 @@ No authorization required
 
 # **get_project_events_usage**
 
-> UsageEventsResponse get_project_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid)
+> UsageEventsResponse get_project_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
 
 Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
@@ -120,9 +122,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
     end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
+    aggregate = 'device' # str | Aggregation level for results (optional) (default to 'device')
 
     try:
-        api_response = api_instance.get_project_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid)
+        api_response = api_instance.get_project_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
         print("The response of UsageApi->get_project_events_usage:\n")
         pprint(api_response)
     except Exception as e:
@@ -131,13 +134,14 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                    | Description                                                     | Notes      |
-| -------------------------- | ----------------------- | --------------------------------------------------------------- | ---------- |
+| Name                       | Type                    | Description                                                     | Notes                                    |
+| -------------------------- | ----------------------- | --------------------------------------------------------------- | ---------------------------------------- |
 | **project_or_product_uid** | **str**                 |                                                                 |
 | **period**                 | **str**                 | Period type for aggregation                                     |
-| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional] |
-| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional] |
-| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                   | [optional] |
+| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
+| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                   | [optional]                               |
+| **aggregate**              | **str**                 | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
 
 ### Return type
 
@@ -163,7 +167,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_sessions_usage**
 
-> GetSessionsUsage200Response get_sessions_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid)
+> GetSessionsUsage200Response get_sessions_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
 
 Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
@@ -202,9 +206,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
     end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
+    aggregate = 'device' # str | Aggregation level for results (optional) (default to 'device')
 
     try:
-        api_response = api_instance.get_sessions_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid)
+        api_response = api_instance.get_sessions_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
         print("The response of UsageApi->get_sessions_usage:\n")
         pprint(api_response)
     except Exception as e:
@@ -213,13 +218,14 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                    | Description                                                     | Notes      |
-| -------------------------- | ----------------------- | --------------------------------------------------------------- | ---------- |
+| Name                       | Type                    | Description                                                     | Notes                                    |
+| -------------------------- | ----------------------- | --------------------------------------------------------------- | ---------------------------------------- |
 | **project_or_product_uid** | **str**                 |                                                                 |
 | **period**                 | **str**                 | Period type for aggregation                                     |
-| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional] |
-| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional] |
-| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                   | [optional] |
+| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
+| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                   | [optional]                               |
+| **aggregate**              | **str**                 | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
 
 ### Return type
 

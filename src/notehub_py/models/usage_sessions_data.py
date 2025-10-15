@@ -20,7 +20,7 @@ import json
 
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,11 +30,18 @@ class UsageSessionsData(BaseModel):
     UsageSessionsData
     """  # noqa: E501
 
-    device: StrictStr
+    device: Optional[StrictStr] = None
+    fleet: Optional[StrictStr] = None
     period: datetime
     sessions: StrictInt
     total_bytes: StrictInt
-    __properties: ClassVar[List[str]] = ["device", "period", "sessions", "total_bytes"]
+    __properties: ClassVar[List[str]] = [
+        "device",
+        "fleet",
+        "period",
+        "sessions",
+        "total_bytes",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,6 +94,7 @@ class UsageSessionsData(BaseModel):
         _obj = cls.model_validate(
             {
                 "device": obj.get("device"),
+                "fleet": obj.get("fleet"),
                 "period": obj.get("period"),
                 "sessions": obj.get("sessions"),
                 "total_bytes": obj.get("total_bytes"),

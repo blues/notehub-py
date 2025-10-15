@@ -19,8 +19,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,15 +30,18 @@ class UsageRouteLogsData(BaseModel):
     UsageRouteLogsData
     """  # noqa: E501
 
-    device: StrictStr
     failed_routes: StrictInt
     period: datetime
+    route: Optional[StrictStr] = Field(
+        default=None,
+        description="The route serial number (only present when aggregate is 'route')",
+    )
     successful_routes: StrictInt
     total_routes: StrictInt
     __properties: ClassVar[List[str]] = [
-        "device",
         "failed_routes",
         "period",
+        "route",
         "successful_routes",
         "total_routes",
     ]
@@ -93,9 +96,9 @@ class UsageRouteLogsData(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "device": obj.get("device"),
                 "failed_routes": obj.get("failed_routes"),
                 "period": obj.get("period"),
+                "route": obj.get("route"),
                 "successful_routes": obj.get("successful_routes"),
                 "total_routes": obj.get("total_routes"),
             }

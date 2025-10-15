@@ -61,6 +61,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -87,6 +90,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -115,6 +120,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -153,6 +159,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -179,6 +188,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -207,6 +218,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -245,6 +257,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -271,6 +286,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -299,6 +316,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -320,6 +338,7 @@ class UsageApi:
         start_date,
         end_date,
         device_uid,
+        aggregate,
         _request_auth,
         _content_type,
         _headers,
@@ -358,6 +377,10 @@ class UsageApi:
         if period is not None:
 
             _query_params.append(("period", period))
+
+        if aggregate is not None:
+
+            _query_params.append(("aggregate", aggregate))
 
         # process the header parameters
         # process the form parameters
@@ -406,6 +429,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -432,6 +458,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -460,6 +488,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -498,6 +527,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -524,6 +556,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -552,6 +586,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -590,6 +625,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -616,6 +654,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -644,6 +684,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -665,6 +706,7 @@ class UsageApi:
         start_date,
         end_date,
         device_uid,
+        aggregate,
         _request_auth,
         _content_type,
         _headers,
@@ -703,6 +745,10 @@ class UsageApi:
         if period is not None:
 
             _query_params.append(("period", period))
+
+        if aggregate is not None:
+
+            _query_params.append(("aggregate", aggregate))
 
         # process the header parameters
         # process the form parameters
@@ -751,6 +797,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -777,6 +826,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -805,6 +856,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -843,6 +895,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -869,6 +924,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -897,6 +954,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -935,6 +993,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        aggregate: Annotated[
+            Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -961,6 +1022,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param aggregate: Aggregation level for results
+        :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -989,6 +1052,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1010,6 +1074,7 @@ class UsageApi:
         start_date,
         end_date,
         device_uid,
+        aggregate,
         _request_auth,
         _content_type,
         _headers,
@@ -1048,6 +1113,10 @@ class UsageApi:
         if period is not None:
 
             _query_params.append(("period", period))
+
+        if aggregate is not None:
+
+            _query_params.append(("aggregate", aggregate))
 
         # process the header parameters
         # process the form parameters
