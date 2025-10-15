@@ -38,7 +38,7 @@ class TestEnvVar(unittest.TestCase):
         if include_optional:
             return EnvVar(
                 key = '',
-                precedence = None,
+                precedence = 56,
                 used = True,
                 value = ''
             )

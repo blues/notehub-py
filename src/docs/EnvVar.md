@@ -2,12 +2,12 @@
 
 ## Properties
 
-| Name           | Type              | Description | Notes      |
-| -------------- | ----------------- | ----------- | ---------- |
-| **key**        | **str**           |             | [optional] |
-| **precedence** | [**Int**](Int.md) |             | [optional] |
-| **used**       | **bool**          |             | [optional] |
-| **value**      | **str**           |             | [optional] |
+| Name           | Type     | Description | Notes      |
+| -------------- | -------- | ----------- | ---------- |
+| **key**        | **str**  |             | [optional] |
+| **precedence** | **int**  |             | [optional] |
+| **used**       | **bool** |             | [optional] |
+| **value**      | **str**  |             | [optional] |
 
 ## Example
 

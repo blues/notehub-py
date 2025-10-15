@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,7 +30,7 @@ class EnvVar(BaseModel):
     """  # noqa: E501
 
     key: Optional[StrictStr] = None
-    precedence: Optional[Int] = None
+    precedence: Optional[StrictInt] = None
     used: Optional[StrictBool] = None
     value: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["key", "precedence", "used", "value"]
@@ -72,9 +72,6 @@ class EnvVar(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of precedence
-        if self.precedence:
-            _dict["precedence"] = self.precedence.to_dict()
         return _dict
 
     @classmethod
@@ -89,11 +86,7 @@ class EnvVar(BaseModel):
         _obj = cls.model_validate(
             {
                 "key": obj.get("key"),
-                "precedence": (
-                    Int.from_dict(obj["precedence"])
-                    if obj.get("precedence") is not None
-                    else None
-                ),
+                "precedence": obj.get("precedence"),
                 "used": obj.get("used"),
                 "value": obj.get("value"),
             }

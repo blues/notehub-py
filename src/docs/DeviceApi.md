@@ -954,6 +954,8 @@ Get Data Plans associated with the device, this include the primary sim, any ext
 
 ### Example
 
+- Bearer Authentication (personalAccessToken):
+
 ```python
 import notehub_py
 from notehub_py.models.get_device_plans200_response import GetDevicePlans200Response
@@ -966,6 +968,15 @@ configuration = notehub_py.Configuration(
     host = "https://api.notefile.net"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -995,7 +1006,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-No authorization required
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 

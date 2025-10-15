@@ -392,7 +392,7 @@ class UsageApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = []
+        _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
             method="GET",

@@ -10,10 +10,10 @@
 | **device_uid**          | **str**                                         |             | [optional] |
 | **fleet_label**         | **str**                                         |             | [optional] |
 | **fleet_uid**           | **str**                                         |             | [optional] |
-| **inherited_var_count** | [**Int**](Int.md)                               |             |
+| **inherited_var_count** | **int**                                         |             |
 | **type**                | **str**                                         |             |
 | **url**                 | **str**                                         |             | [optional] |
-| **var_count**           | [**Int**](Int.md)                               |             |
+| **var_count**           | **int**                                         |             |
 | **variables**           | [**List[EnvVar]**](EnvVar.md)                   |             |
 
 ## Example
