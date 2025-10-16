@@ -18,11 +18,11 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictStr, field_validator
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from notehub_py.models.notehub_route import NotehubRoute
+from notehub_py.models.notehub_route_summary import NotehubRouteSummary
 from notehub_py.models.route_log import RouteLog
-from notehub_py.models.user_db_route import UserDbRoute
 
 from notehub_py.api_client import ApiClient, RequestSerialized
 from notehub_py.api_response import ApiResponse
@@ -46,7 +46,7 @@ class RouteApi:
         self,
         project_or_product_uid: StrictStr,
         notehub_route: Annotated[
-            NotehubRoute, Field(description="Route to be Created")
+            NotehubRoute, Field(description="Route to be created")
         ],
         _request_timeout: Union[
             None,
@@ -66,7 +66,7 @@ class RouteApi:
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param notehub_route: Route to be Created (required)
+        :param notehub_route: Route to be created (required)
         :type notehub_route: NotehubRoute
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -100,7 +100,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "NotehubRoute",
+            "201": "NotehubRoute",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -116,7 +116,7 @@ class RouteApi:
         self,
         project_or_product_uid: StrictStr,
         notehub_route: Annotated[
-            NotehubRoute, Field(description="Route to be Created")
+            NotehubRoute, Field(description="Route to be created")
         ],
         _request_timeout: Union[
             None,
@@ -136,7 +136,7 @@ class RouteApi:
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param notehub_route: Route to be Created (required)
+        :param notehub_route: Route to be created (required)
         :type notehub_route: NotehubRoute
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -170,7 +170,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "NotehubRoute",
+            "201": "NotehubRoute",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -186,7 +186,7 @@ class RouteApi:
         self,
         project_or_product_uid: StrictStr,
         notehub_route: Annotated[
-            NotehubRoute, Field(description="Route to be Created")
+            NotehubRoute, Field(description="Route to be created")
         ],
         _request_timeout: Union[
             None,
@@ -206,7 +206,7 @@ class RouteApi:
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param notehub_route: Route to be Created (required)
+        :param notehub_route: Route to be created (required)
         :type notehub_route: NotehubRoute
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -240,7 +240,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "NotehubRoute",
+            "201": "NotehubRoute",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -327,7 +327,7 @@ class RouteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> None:
         """delete_route
 
         Delete single route within a project
@@ -368,7 +368,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "object",
+            "204": None,
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -395,7 +395,7 @@ class RouteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[None]:
         """delete_route
 
         Delete single route within a project
@@ -436,7 +436,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "object",
+            "204": None,
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -504,7 +504,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "object",
+            "204": None,
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1296,7 +1296,7 @@ class RouteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[UserDbRoute]:
+    ) -> List[NotehubRouteSummary]:
         """get_routes
 
         Get all Routes within a Project
@@ -1334,7 +1334,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[UserDbRoute]",
+            "200": "List[NotehubRouteSummary]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1360,7 +1360,7 @@ class RouteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[UserDbRoute]]:
+    ) -> ApiResponse[List[NotehubRouteSummary]]:
         """get_routes
 
         Get all Routes within a Project
@@ -1398,7 +1398,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[UserDbRoute]",
+            "200": "List[NotehubRouteSummary]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1462,7 +1462,7 @@ class RouteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[UserDbRoute]",
+            "200": "List[NotehubRouteSummary]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout

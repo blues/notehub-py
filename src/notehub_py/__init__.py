@@ -45,12 +45,11 @@ from notehub_py.exceptions import ApiException
 from notehub_py.models.alert import Alert
 from notehub_py.models.alert_data_inner import AlertDataInner
 from notehub_py.models.alert_notifications_inner import AlertNotificationsInner
-from notehub_py.models.aws import Aws
-from notehub_py.models.aws_filter import AwsFilter
-from notehub_py.models.aws_transform import AwsTransform
-from notehub_py.models.azure import Azure
+from notehub_py.models.aws_route import AwsRoute
+from notehub_py.models.azure_route import AzureRoute
 from notehub_py.models.billing_account import BillingAccount
 from notehub_py.models.billing_account_role import BillingAccountRole
+from notehub_py.models.blynk_route import BlynkRoute
 from notehub_py.models.body import Body
 from notehub_py.models.cellular_plan import CellularPlan
 from notehub_py.models.clone_project_request import CloneProjectRequest
@@ -66,6 +65,7 @@ from notehub_py.models.dfu_state import DFUState
 from notehub_py.models.data_field import DataField
 from notehub_py.models.data_set_field import DataSetField
 from notehub_py.models.data_usage import DataUsage
+from notehub_py.models.datacake_route import DatacakeRoute
 from notehub_py.models.delete_device_fleets_request import DeleteDeviceFleetsRequest
 from notehub_py.models.device import Device
 from notehub_py.models.device_dfu_history import DeviceDfuHistory
@@ -85,6 +85,7 @@ from notehub_py.models.env_var import EnvVar
 from notehub_py.models.environment_variables import EnvironmentVariables
 from notehub_py.models.error import Error
 from notehub_py.models.event import Event
+from notehub_py.models.filter import Filter
 from notehub_py.models.firmware import Firmware
 from notehub_py.models.firmware_info import FirmwareInfo
 from notehub_py.models.fleet import Fleet
@@ -134,7 +135,7 @@ from notehub_py.models.get_project_members200_response import (
 from notehub_py.models.get_projects200_response import GetProjects200Response
 from notehub_py.models.get_sessions_usage200_response import GetSessionsUsage200Response
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
-from notehub_py.models.google import Google
+from notehub_py.models.google_route import GoogleRoute
 from notehub_py.models.handle_note_changes200_response import (
     HandleNoteChanges200Response,
 )
@@ -147,17 +148,17 @@ from notehub_py.models.handle_notefile_changes_pending200_response import (
     HandleNotefileChangesPending200Response,
 )
 from notehub_py.models.handle_notefile_delete_request import HandleNotefileDeleteRequest
-from notehub_py.models.http import Http
+from notehub_py.models.http_route import HttpRoute
 from notehub_py.models.location import Location
 from notehub_py.models.login200_response import Login200Response
 from notehub_py.models.login_request import LoginRequest
 from notehub_py.models.monitor import Monitor
 from notehub_py.models.monitor_alert_routes_inner import MonitorAlertRoutesInner
-from notehub_py.models.mqtt import Mqtt
+from notehub_py.models.mqtt_route import MqttRoute
 from notehub_py.models.note import Note
 from notehub_py.models.notefile_schema import NotefileSchema
 from notehub_py.models.notehub_route import NotehubRoute
-from notehub_py.models.notehub_route_schema import NotehubRouteSchema
+from notehub_py.models.notehub_route_summary import NotehubRouteSummary
 from notehub_py.models.o_auth2_error import OAuth2Error
 from notehub_py.models.o_auth2_token_response import OAuth2TokenResponse
 from notehub_py.models.personal_access_token import PersonalAccessToken
@@ -172,23 +173,25 @@ from notehub_py.models.post_provision_project_device_request import (
 from notehub_py.models.product import Product
 from notehub_py.models.project import Project
 from notehub_py.models.project_member import ProjectMember
-from notehub_py.models.proxy import Proxy
+from notehub_py.models.proxy_route import ProxyRoute
 from notehub_py.models.put_device_fleets_request import PutDeviceFleetsRequest
-from notehub_py.models.radresponder import Radresponder
+from notehub_py.models.qubitro_route import QubitroRoute
+from notehub_py.models.rad_route import RadRoute
 from notehub_py.models.repository import Repository
 from notehub_py.models.role import Role
 from notehub_py.models.route_log import RouteLog
+from notehub_py.models.route_transform_settings import RouteTransformSettings
+from notehub_py.models.s3_archive_route import S3ArchiveRoute
 from notehub_py.models.satellite_plan import SatellitePlan
 from notehub_py.models.schema_property import SchemaProperty
 from notehub_py.models.sim_usage import SimUsage
-from notehub_py.models.slack import Slack
 from notehub_py.models.slack_bearer_notification import SlackBearerNotification
-from notehub_py.models.slack_transform import SlackTransform
+from notehub_py.models.slack_route import SlackRoute
 from notehub_py.models.slack_web_hook_notification import SlackWebHookNotification
-from notehub_py.models.snowflake import Snowflake
-from notehub_py.models.thingworx import Thingworx
+from notehub_py.models.snowflake_route import SnowflakeRoute
+from notehub_py.models.thingworx_route import ThingworxRoute
 from notehub_py.models.tower_location import TowerLocation
-from notehub_py.models.twilio import Twilio
+from notehub_py.models.twilio_route import TwilioRoute
 from notehub_py.models.update_fleet_request import UpdateFleetRequest
 from notehub_py.models.upload_metadata import UploadMetadata
 from notehub_py.models.usage_data import UsageData
@@ -196,7 +199,6 @@ from notehub_py.models.usage_events_data import UsageEventsData
 from notehub_py.models.usage_events_response import UsageEventsResponse
 from notehub_py.models.usage_route_logs_data import UsageRouteLogsData
 from notehub_py.models.usage_sessions_data import UsageSessionsData
-from notehub_py.models.user_db_route import UserDbRoute
 from notehub_py.models.user_dfu_state_machine import UserDfuStateMachine
 from notehub_py.models.user_dfu_state_machine_status import UserDfuStateMachineStatus
 from notehub_py.models.user_firmware_info import UserFirmwareInfo
