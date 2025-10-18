@@ -18,78 +18,77 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import (
-    BaseModel,
-    ConfigDict,
-    Field,
-    StrictBool,
-    StrictStr,
-    field_validator,
-)
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from notehub_py.models.notehub_route_schema import NotehubRouteSchema
+from notehub_py.models.aws_route import AwsRoute
+from notehub_py.models.azure_route import AzureRoute
+from notehub_py.models.blynk_route import BlynkRoute
+from notehub_py.models.datacake_route import DatacakeRoute
+from notehub_py.models.google_route import GoogleRoute
+from notehub_py.models.http_route import HttpRoute
+from notehub_py.models.mqtt_route import MqttRoute
+from notehub_py.models.proxy_route import ProxyRoute
+from notehub_py.models.qubitro_route import QubitroRoute
+from notehub_py.models.rad_route import RadRoute
+from notehub_py.models.s3_archive_route import S3ArchiveRoute
+from notehub_py.models.slack_route import SlackRoute
+from notehub_py.models.snowflake_route import SnowflakeRoute
+from notehub_py.models.thingworx_route import ThingworxRoute
+from notehub_py.models.twilio_route import TwilioRoute
 from typing import Optional, Set
 from typing_extensions import Self
 
 
 class NotehubRoute(BaseModel):
     """
-    NotehubRoute
+    Route resource as stored/returned by the server.
     """  # noqa: E501
 
-    disabled: Optional[StrictBool] = Field(
-        default=False, description="Is route disabled?"
+    aws: Optional[AwsRoute] = None
+    azure: Optional[AzureRoute] = None
+    blynk: Optional[BlynkRoute] = None
+    datacake: Optional[DatacakeRoute] = None
+    disabled: Optional[StrictBool] = False
+    google: Optional[GoogleRoute] = None
+    http: Optional[HttpRoute] = None
+    label: Optional[StrictStr] = None
+    modified: Optional[datetime] = None
+    mqtt: Optional[MqttRoute] = None
+    proxy: Optional[ProxyRoute] = None
+    qubitro: Optional[QubitroRoute] = None
+    radnote: Optional[RadRoute] = None
+    s3archive: Optional[S3ArchiveRoute] = None
+    slack: Optional[SlackRoute] = None
+    snowflake: Optional[SnowflakeRoute] = None
+    thingworx: Optional[ThingworxRoute] = None
+    twilio: Optional[TwilioRoute] = None
+    type: Optional[StrictStr] = Field(
+        default=None, description="Mirrors hublib.RouteType."
     )
-    label: Optional[StrictStr] = Field(default=None, description="Route Label")
-    modified: Optional[StrictStr] = Field(default=None, description="Last Modified")
-    route_type: Optional[StrictStr] = Field(
-        default="http", description="Type of route."
-    )
-    var_schema: Optional[NotehubRouteSchema] = Field(default=None, alias="schema")
-    uid: Optional[StrictStr] = Field(default=None, description="Route UID")
+    uid: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
+        "aws",
+        "azure",
+        "blynk",
+        "datacake",
         "disabled",
+        "google",
+        "http",
         "label",
         "modified",
-        "route_type",
-        "schema",
+        "mqtt",
+        "proxy",
+        "qubitro",
+        "radnote",
+        "s3archive",
+        "slack",
+        "snowflake",
+        "thingworx",
+        "twilio",
+        "type",
         "uid",
     ]
-
-    @field_validator("route_type")
-    def route_type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(
-            [
-                "http",
-                "proxy",
-                "google-function",
-                "mqtt",
-                "aws-lambda",
-                "aws-lambda-with-access-key",
-                "aws-sqs",
-                "aws-sqs-with-access-key",
-                "aws-sqs-fifo",
-                "aws-sqs-fifo-with-access-key",
-                "aws-iot-analytics",
-                "radnote-radresp-fixed-survey",
-                "radnote-radresp-mobile-survey",
-                "azure-function",
-                "azure-function-with-key",
-                "azure-service-bus-with-sas-token",
-                "thingworx",
-                "snowflake",
-                "slack-bearer",
-                "slack-webhook",
-            ]
-        ):
-            raise ValueError(
-                "must be one of enum values ('http', 'proxy', 'google-function', 'mqtt', 'aws-lambda', 'aws-lambda-with-access-key', 'aws-sqs', 'aws-sqs-with-access-key', 'aws-sqs-fifo', 'aws-sqs-fifo-with-access-key', 'aws-iot-analytics', 'radnote-radresp-fixed-survey', 'radnote-radresp-mobile-survey', 'azure-function', 'azure-function-with-key', 'azure-service-bus-with-sas-token', 'thingworx', 'snowflake', 'slack-bearer', 'slack-webhook')"
-            )
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -120,17 +119,66 @@ class NotehubRoute(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: Set[str] = set(
+            [
+                "modified",
+                "uid",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of var_schema
-        if self.var_schema:
-            _dict["schema"] = self.var_schema.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of aws
+        if self.aws:
+            _dict["aws"] = self.aws.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of azure
+        if self.azure:
+            _dict["azure"] = self.azure.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of blynk
+        if self.blynk:
+            _dict["blynk"] = self.blynk.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of datacake
+        if self.datacake:
+            _dict["datacake"] = self.datacake.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of google
+        if self.google:
+            _dict["google"] = self.google.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of http
+        if self.http:
+            _dict["http"] = self.http.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of mqtt
+        if self.mqtt:
+            _dict["mqtt"] = self.mqtt.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of proxy
+        if self.proxy:
+            _dict["proxy"] = self.proxy.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of qubitro
+        if self.qubitro:
+            _dict["qubitro"] = self.qubitro.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of radnote
+        if self.radnote:
+            _dict["radnote"] = self.radnote.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of s3archive
+        if self.s3archive:
+            _dict["s3archive"] = self.s3archive.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of slack
+        if self.slack:
+            _dict["slack"] = self.slack.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of snowflake
+        if self.snowflake:
+            _dict["snowflake"] = self.snowflake.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of thingworx
+        if self.thingworx:
+            _dict["thingworx"] = self.thingworx.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of twilio
+        if self.twilio:
+            _dict["twilio"] = self.twilio.to_dict()
         return _dict
 
     @classmethod
@@ -144,21 +192,87 @@ class NotehubRoute(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "aws": (
+                    AwsRoute.from_dict(obj["aws"])
+                    if obj.get("aws") is not None
+                    else None
+                ),
+                "azure": (
+                    AzureRoute.from_dict(obj["azure"])
+                    if obj.get("azure") is not None
+                    else None
+                ),
+                "blynk": (
+                    BlynkRoute.from_dict(obj["blynk"])
+                    if obj.get("blynk") is not None
+                    else None
+                ),
+                "datacake": (
+                    DatacakeRoute.from_dict(obj["datacake"])
+                    if obj.get("datacake") is not None
+                    else None
+                ),
                 "disabled": (
                     obj.get("disabled") if obj.get("disabled") is not None else False
                 ),
-                "label": obj.get("label"),
-                "modified": obj.get("modified"),
-                "route_type": (
-                    obj.get("route_type")
-                    if obj.get("route_type") is not None
-                    else "http"
-                ),
-                "schema": (
-                    NotehubRouteSchema.from_dict(obj["schema"])
-                    if obj.get("schema") is not None
+                "google": (
+                    GoogleRoute.from_dict(obj["google"])
+                    if obj.get("google") is not None
                     else None
                 ),
+                "http": (
+                    HttpRoute.from_dict(obj["http"])
+                    if obj.get("http") is not None
+                    else None
+                ),
+                "label": obj.get("label"),
+                "modified": obj.get("modified"),
+                "mqtt": (
+                    MqttRoute.from_dict(obj["mqtt"])
+                    if obj.get("mqtt") is not None
+                    else None
+                ),
+                "proxy": (
+                    ProxyRoute.from_dict(obj["proxy"])
+                    if obj.get("proxy") is not None
+                    else None
+                ),
+                "qubitro": (
+                    QubitroRoute.from_dict(obj["qubitro"])
+                    if obj.get("qubitro") is not None
+                    else None
+                ),
+                "radnote": (
+                    RadRoute.from_dict(obj["radnote"])
+                    if obj.get("radnote") is not None
+                    else None
+                ),
+                "s3archive": (
+                    S3ArchiveRoute.from_dict(obj["s3archive"])
+                    if obj.get("s3archive") is not None
+                    else None
+                ),
+                "slack": (
+                    SlackRoute.from_dict(obj["slack"])
+                    if obj.get("slack") is not None
+                    else None
+                ),
+                "snowflake": (
+                    SnowflakeRoute.from_dict(obj["snowflake"])
+                    if obj.get("snowflake") is not None
+                    else None
+                ),
+                "thingworx": (
+                    ThingworxRoute.from_dict(obj["thingworx"])
+                    if obj.get("thingworx") is not None
+                    else None
+                ),
+                "twilio": (
+                    TwilioRoute.from_dict(obj["twilio"])
+                    if obj.get("twilio") is not None
+                    else None
+                ),
+                "type": obj.get("type"),
                 "uid": obj.get("uid"),
             }
         )

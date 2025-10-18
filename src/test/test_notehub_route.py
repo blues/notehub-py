@@ -37,11 +37,263 @@ class TestNotehubRoute(unittest.TestCase):
         model = NotehubRoute()
         if include_optional:
             return NotehubRoute(
+                aws = notehub_py.models.aws_route.AwsRoute(
+                    access_key_id = '', 
+                    access_key_secret = '', 
+                    channel = '', 
+                    disable_http_headers = True, 
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    http_headers = {
+                        'key' : ''
+                        }, 
+                    message_deduplication_id = '', 
+                    message_group_id = '', 
+                    region = '', 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), 
+                    url = '', ),
+                azure = notehub_py.models.azure_route.AzureRoute(
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    functions_key_secret = '', 
+                    sas_policy_key = '', 
+                    sas_policy_name = '', 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), 
+                    url = '', ),
+                blynk = notehub_py.models.blynk_route.BlynkRoute(
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    region = '', 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), ),
+                datacake = notehub_py.models.datacake_route.DatacakeRoute(
+                    disable_http_headers = True, 
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    http_headers = {
+                        'key' : ''
+                        }, 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), 
+                    url = '', ),
                 disabled = True,
+                google = notehub_py.models.google_route.GoogleRoute(
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    token = '', 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), 
+                    url = '', ),
+                http = notehub_py.models.http_route.HttpRoute(
+                    disable_http_headers = True, 
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    http_headers = {
+                        'key' : ''
+                        }, 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), 
+                    url = '', ),
                 label = '',
-                modified = '',
-                route_type = 'http',
-                var_schema = None,
+                modified = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                mqtt = notehub_py.models.mqtt_route.MqttRoute(
+                    broker = '', 
+                    certificate = '', 
+                    certificate_name = '', 
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    key = '', 
+                    password = '', 
+                    port = '', 
+                    private_key_name = '', 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    topic = '', 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), 
+                    username = '', ),
+                proxy = notehub_py.models.proxy_route.ProxyRoute(
+                    alias = '', 
+                    fleets = [
+                        ''
+                        ], 
+                    http_headers = {
+                        'key' : ''
+                        }, 
+                    timeout = 56, 
+                    url = '', ),
+                qubitro = notehub_py.models.qubitro_route.QubitroRoute(
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    project_id = '', 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), 
+                    webhook_signing_key = '', ),
+                radnote = notehub_py.models.rad_route.RadRoute(
+                    client_id = '', 
+                    client_secret = '', 
+                    data_feed_key = '', 
+                    event_id = 56, 
+                    fleets = [
+                        ''
+                        ], 
+                    test_api = True, 
+                    throttle_ms = 56, ),
+                s3archive = notehub_py.models.s3_archive_route.S3ArchiveRoute(
+                    archive_count_exceeds = 56, 
+                    archive_every_mins = 56, 
+                    archive_id = '', 
+                    bucket_endpoint = '', 
+                    bucket_name = '', 
+                    bucket_region = '', 
+                    file_access = '', 
+                    file_folder = '', 
+                    file_format = '', 
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    key_id = '', 
+                    key_secret = '', 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), 
+                    url = '', ),
+                slack = notehub_py.models.slack_route.SlackRoute(
+                    bearer = '', 
+                    blocks = '', 
+                    channel = '', 
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    text = '', 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), 
+                    webhook_url = '', ),
+                snowflake = notehub_py.models.snowflake_route.SnowflakeRoute(
+                    account_name = '', 
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    organization_name = '', 
+                    pem = '', 
+                    private_key_name = '', 
+                    timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), 
+                    user_name = '', ),
+                thingworx = notehub_py.models.thingworx_route.ThingworxRoute(
+                    app_key = '', 
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', ), 
+                    url = '', ),
+                twilio = notehub_py.models.twilio_route.TwilioRoute(
+                    account_sid = '', 
+                    auth_token = '', 
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    from = '', 
+                    message = '', 
+                    throttle_ms = 56, 
+                    timeout = 56, 
+                    to = '', ),
+                type = '',
                 uid = ''
             )
         else:

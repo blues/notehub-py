@@ -1,15 +1,31 @@
 # NotehubRoute
 
+Route resource as stored/returned by the server.
+
 ## Properties
 
-| Name           | Type                                            | Description        | Notes                          |
-| -------------- | ----------------------------------------------- | ------------------ | ------------------------------ |
-| **disabled**   | **bool**                                        | Is route disabled? | [optional] [default to False]  |
-| **label**      | **str**                                         | Route Label        | [optional]                     |
-| **modified**   | **str**                                         | Last Modified      | [optional]                     |
-| **route_type** | **str**                                         | Type of route.     | [optional] [default to 'http'] |
-| **var_schema** | [**NotehubRouteSchema**](NotehubRouteSchema.md) |                    | [optional]                     |
-| **uid**        | **str**                                         | Route UID          | [optional]                     |
+| Name          | Type                                    | Description               | Notes                         |
+| ------------- | --------------------------------------- | ------------------------- | ----------------------------- |
+| **aws**       | [**AwsRoute**](AwsRoute.md)             |                           | [optional]                    |
+| **azure**     | [**AzureRoute**](AzureRoute.md)         |                           | [optional]                    |
+| **blynk**     | [**BlynkRoute**](BlynkRoute.md)         |                           | [optional]                    |
+| **datacake**  | [**DatacakeRoute**](DatacakeRoute.md)   |                           | [optional]                    |
+| **disabled**  | **bool**                                |                           | [optional] [default to False] |
+| **google**    | [**GoogleRoute**](GoogleRoute.md)       |                           | [optional]                    |
+| **http**      | [**HttpRoute**](HttpRoute.md)           |                           | [optional]                    |
+| **label**     | **str**                                 |                           | [optional]                    |
+| **modified**  | **datetime**                            |                           | [optional] [readonly]         |
+| **mqtt**      | [**MqttRoute**](MqttRoute.md)           |                           | [optional]                    |
+| **proxy**     | [**ProxyRoute**](ProxyRoute.md)         |                           | [optional]                    |
+| **qubitro**   | [**QubitroRoute**](QubitroRoute.md)     |                           | [optional]                    |
+| **radnote**   | [**RadRoute**](RadRoute.md)             |                           | [optional]                    |
+| **s3archive** | [**S3ArchiveRoute**](S3ArchiveRoute.md) |                           | [optional]                    |
+| **slack**     | [**SlackRoute**](SlackRoute.md)         |                           | [optional]                    |
+| **snowflake** | [**SnowflakeRoute**](SnowflakeRoute.md) |                           | [optional]                    |
+| **thingworx** | [**ThingworxRoute**](ThingworxRoute.md) |                           | [optional]                    |
+| **twilio**    | [**TwilioRoute**](TwilioRoute.md)       |                           | [optional]                    |
+| **type**      | **str**                                 | Mirrors hublib.RouteType. | [optional]                    |
+| **uid**       | **str**                                 |                           | [optional] [readonly]         |
 
 ## Example
 
