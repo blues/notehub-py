@@ -57,6 +57,7 @@ docs/Filter.md
 docs/Firmware.md
 docs/FirmwareInfo.md
 docs/Fleet.md
+docs/FleetConnectivityAssurance.md
 docs/GetAlerts200Response.md
 docs/GetBillingAccounts200Response.md
 docs/GetDataUsage200Response.md
@@ -208,6 +209,7 @@ notehub_py/models/filter.py
 notehub_py/models/firmware.py
 notehub_py/models/firmware_info.py
 notehub_py/models/fleet.py
+notehub_py/models/fleet_connectivity_assurance.py
 notehub_py/models/get_alerts200_response.py
 notehub_py/models/get_billing_accounts200_response.py
 notehub_py/models/get_data_usage200_response.py
@@ -349,6 +351,7 @@ test/test_filter.py
 test/test_firmware.py
 test/test_firmware_info.py
 test/test_fleet.py
+test/test_fleet_connectivity_assurance.py
 test/test_get_alerts200_response.py
 test/test_get_billing_accounts200_response.py
 test/test_get_data_usage200_response.py

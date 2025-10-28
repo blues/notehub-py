@@ -197,7 +197,7 @@ Class | Method | HTTP request | Description
 *RouteApi* | [**get_routes**](docs/RouteApi.md#get_routes) | **GET** /v1/projects/{projectOrProductUID}/routes | 
 *RouteApi* | [**update_route**](docs/RouteApi.md#update_route) | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID} | 
 *UsageApi* | [**get_data_usage**](docs/UsageApi.md#get_data_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/data | 
-*UsageApi* | [**get_project_events_usage**](docs/UsageApi.md#get_project_events_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/events | 
+*UsageApi* | [**get_events_usage**](docs/UsageApi.md#get_events_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/events | 
 *UsageApi* | [**get_sessions_usage**](docs/UsageApi.md#get_sessions_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/sessions | 
 *WebhookApi* | [**create_webhook**](docs/WebhookApi.md#create_webhook) | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
 *WebhookApi* | [**delete_webhook**](docs/WebhookApi.md#delete_webhook) | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID} | 
@@ -255,6 +255,7 @@ Class | Method | HTTP request | Description
  - [Firmware](docs/Firmware.md)
  - [FirmwareInfo](docs/FirmwareInfo.md)
  - [Fleet](docs/Fleet.md)
+ - [FleetConnectivityAssurance](docs/FleetConnectivityAssurance.md)
  - [GetAlerts200Response](docs/GetAlerts200Response.md)
  - [GetBillingAccounts200Response](docs/GetBillingAccounts200Response.md)
  - [GetDataUsage200Response](docs/GetDataUsage200Response.md)

@@ -39,7 +39,7 @@ class TestUsageRouteLogsData(unittest.TestCase):
             return UsageRouteLogsData(
                 failed_routes = 4,
                 period = '2025-07-23T00:00Z',
-                route = '',
+                route = 'route:cbd20093cba58392c9f9bbdd0cdeb1a0',
                 successful_routes = 38,
                 total_routes = 42
             )

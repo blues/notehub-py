@@ -43,7 +43,8 @@ class TestUsageEventsResponse(unittest.TestCase):
                         fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
                         period = '2025-07-23T00:00Z', 
                         platform_events = 15, 
-                        total_events = 42, )
+                        total_events = 42, 
+                        watchdog_events = 10, )
                     ]
             )
         else:
@@ -54,7 +55,8 @@ class TestUsageEventsResponse(unittest.TestCase):
                         fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
                         period = '2025-07-23T00:00Z', 
                         platform_events = 15, 
-                        total_events = 42, )
+                        total_events = 42, 
+                        watchdog_events = 10, )
                     ],
         )
         """

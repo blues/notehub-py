@@ -31,8 +31,8 @@ class TestUsageApi(unittest.TestCase):
         """Test case for get_data_usage"""
         pass
 
-    def test_get_project_events_usage(self) -> None:
-        """Test case for get_project_events_usage"""
+    def test_get_events_usage(self) -> None:
+        """Test case for get_events_usage"""
         pass
 
     def test_get_sessions_usage(self) -> None:

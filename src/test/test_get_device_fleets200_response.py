@@ -39,6 +39,7 @@ class TestGetDeviceFleets200Response(unittest.TestCase):
             return GetDeviceFleets200Response(
                 fleets = [
                     notehub_py.models.fleet.Fleet(
+                        connectivity_assurance = {"enabled":true}, 
                         created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         environment_variables = {
                             'key' : ''
@@ -53,6 +54,7 @@ class TestGetDeviceFleets200Response(unittest.TestCase):
             return GetDeviceFleets200Response(
                 fleets = [
                     notehub_py.models.fleet.Fleet(
+                        connectivity_assurance = {"enabled":true}, 
                         created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         environment_variables = {
                             'key' : ''

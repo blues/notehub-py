@@ -2,11 +2,11 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                               | HTTP request                                              | Description |
-| -------------------------------------------------------------------- | --------------------------------------------------------- | ----------- |
-| [**get_data_usage**](UsageApi.md#get_data_usage)                     | **GET** /v1/projects/{projectOrProductUID}/usage/data     |
-| [**get_project_events_usage**](UsageApi.md#get_project_events_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/events   |
-| [**get_sessions_usage**](UsageApi.md#get_sessions_usage)             | **GET** /v1/projects/{projectOrProductUID}/usage/sessions |
+| Method                                                   | HTTP request                                              | Description |
+| -------------------------------------------------------- | --------------------------------------------------------- | ----------- |
+| [**get_data_usage**](UsageApi.md#get_data_usage)         | **GET** /v1/projects/{projectOrProductUID}/usage/data     |
+| [**get_events_usage**](UsageApi.md#get_events_usage)     | **GET** /v1/projects/{projectOrProductUID}/usage/events   |
+| [**get_sessions_usage**](UsageApi.md#get_sessions_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/sessions |
 
 # **get_data_usage**
 
@@ -92,9 +92,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_project_events_usage**
+# **get_events_usage**
 
-> UsageEventsResponse get_project_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
+> UsageEventsResponse get_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
 
 Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
@@ -136,11 +136,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     aggregate = 'device' # str | Aggregation level for results (optional) (default to 'device')
 
     try:
-        api_response = api_instance.get_project_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
-        print("The response of UsageApi->get_project_events_usage:\n")
+        api_response = api_instance.get_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
+        print("The response of UsageApi->get_events_usage:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling UsageApi->get_project_events_usage: %s\n" % e)
+        print("Exception when calling UsageApi->get_events_usage: %s\n" % e)
 ```
 
 ### Parameters

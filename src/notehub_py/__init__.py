@@ -89,6 +89,7 @@ from notehub_py.models.filter import Filter
 from notehub_py.models.firmware import Firmware
 from notehub_py.models.firmware_info import FirmwareInfo
 from notehub_py.models.fleet import Fleet
+from notehub_py.models.fleet_connectivity_assurance import FleetConnectivityAssurance
 from notehub_py.models.get_alerts200_response import GetAlerts200Response
 from notehub_py.models.get_billing_accounts200_response import (
     GetBillingAccounts200Response,

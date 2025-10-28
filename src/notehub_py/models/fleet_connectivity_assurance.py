@@ -18,33 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class UsageRouteLogsData(BaseModel):
+class FleetConnectivityAssurance(BaseModel):
     """
-    UsageRouteLogsData
+    FleetConnectivityAssurance
     """  # noqa: E501
 
-    failed_routes: StrictInt
-    period: datetime
-    route: Optional[StrictStr] = Field(
-        default=None,
-        description="The route UID (only present when aggregate is 'route')",
+    enabled: StrictBool = Field(
+        description="Whether Connectivity Assurance is enabled for this fleet"
     )
-    successful_routes: StrictInt
-    total_routes: StrictInt
-    __properties: ClassVar[List[str]] = [
-        "failed_routes",
-        "period",
-        "route",
-        "successful_routes",
-        "total_routes",
-    ]
+    __properties: ClassVar[List[str]] = ["enabled"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -63,7 +51,7 @@ class UsageRouteLogsData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UsageRouteLogsData from a JSON string"""
+        """Create an instance of FleetConnectivityAssurance from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -87,20 +75,12 @@ class UsageRouteLogsData(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UsageRouteLogsData from a dict"""
+        """Create an instance of FleetConnectivityAssurance from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "failed_routes": obj.get("failed_routes"),
-                "period": obj.get("period"),
-                "route": obj.get("route"),
-                "successful_routes": obj.get("successful_routes"),
-                "total_routes": obj.get("total_routes"),
-            }
-        )
+        _obj = cls.model_validate({"enabled": obj.get("enabled")})
         return _obj

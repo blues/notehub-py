@@ -15,11 +15,11 @@ Do not edit the class manually.
 
 import unittest
 
-from notehub_py.models.create_fleet_request import CreateFleetRequest
+from notehub_py.models.fleet_connectivity_assurance import FleetConnectivityAssurance
 
 
-class TestCreateFleetRequest(unittest.TestCase):
-    """CreateFleetRequest unit test stubs"""
+class TestFleetConnectivityAssurance(unittest.TestCase):
+    """FleetConnectivityAssurance unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,27 +27,26 @@ class TestCreateFleetRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> CreateFleetRequest:
-        """Test CreateFleetRequest
+    def make_instance(self, include_optional) -> FleetConnectivityAssurance:
+        """Test FleetConnectivityAssurance
         include_option is a boolean, when False only required
         params are included, when True both required and
         optional params are included"""
-        # uncomment below to create an instance of `CreateFleetRequest`
+        # uncomment below to create an instance of `FleetConnectivityAssurance`
         """
-        model = CreateFleetRequest()
+        model = FleetConnectivityAssurance()
         if include_optional:
-            return CreateFleetRequest(
-                connectivity_assurance = {"enabled":true},
-                label = '',
-                smart_rule = ''
+            return FleetConnectivityAssurance(
+                enabled = True
             )
         else:
-            return CreateFleetRequest(
+            return FleetConnectivityAssurance(
+                enabled = True,
         )
         """
 
-    def testCreateFleetRequest(self):
-        """Test CreateFleetRequest"""
+    def testFleetConnectivityAssurance(self):
+        """Test FleetConnectivityAssurance"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

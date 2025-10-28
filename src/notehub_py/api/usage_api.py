@@ -410,7 +410,7 @@ class UsageApi:
         )
 
     @validate_call
-    def get_project_events_usage(
+    def get_events_usage(
         self,
         project_or_product_uid: StrictStr,
         period: Annotated[StrictStr, Field(description="Period type for aggregation")],
@@ -444,7 +444,7 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UsageEventsResponse:
-        """get_project_events_usage
+        """get_events_usage
 
         Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
@@ -482,7 +482,7 @@ class UsageApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_project_events_usage_serialize(
+        _param = self._get_events_usage_serialize(
             project_or_product_uid=project_or_product_uid,
             period=period,
             start_date=start_date,
@@ -508,7 +508,7 @@ class UsageApi:
         ).data
 
     @validate_call
-    def get_project_events_usage_with_http_info(
+    def get_events_usage_with_http_info(
         self,
         project_or_product_uid: StrictStr,
         period: Annotated[StrictStr, Field(description="Period type for aggregation")],
@@ -542,7 +542,7 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[UsageEventsResponse]:
-        """get_project_events_usage
+        """get_events_usage
 
         Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
@@ -580,7 +580,7 @@ class UsageApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_project_events_usage_serialize(
+        _param = self._get_events_usage_serialize(
             project_or_product_uid=project_or_product_uid,
             period=period,
             start_date=start_date,
@@ -606,7 +606,7 @@ class UsageApi:
         )
 
     @validate_call
-    def get_project_events_usage_without_preload_content(
+    def get_events_usage_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
         period: Annotated[StrictStr, Field(description="Period type for aggregation")],
@@ -640,7 +640,7 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_project_events_usage
+        """get_events_usage
 
         Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
@@ -678,7 +678,7 @@ class UsageApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._get_project_events_usage_serialize(
+        _param = self._get_events_usage_serialize(
             project_or_product_uid=project_or_product_uid,
             period=period,
             start_date=start_date,
@@ -699,7 +699,7 @@ class UsageApi:
         )
         return response_data.response
 
-    def _get_project_events_usage_serialize(
+    def _get_events_usage_serialize(
         self,
         project_or_product_uid,
         period,

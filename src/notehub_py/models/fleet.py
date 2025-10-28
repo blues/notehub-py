@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.fleet_connectivity_assurance import FleetConnectivityAssurance
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,6 +31,7 @@ class Fleet(BaseModel):
     Fleet
     """  # noqa: E501
 
+    connectivity_assurance: Optional[FleetConnectivityAssurance] = None
     created: datetime = Field(description="RFC3339 timestamp in UTC")
     environment_variables: Optional[Dict[str, StrictStr]] = Field(
         default=None,
@@ -46,6 +48,7 @@ class Fleet(BaseModel):
         description="A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog",
     )
     __properties: ClassVar[List[str]] = [
+        "connectivity_assurance",
         "created",
         "environment_variables",
         "label",
@@ -91,6 +94,17 @@ class Fleet(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of connectivity_assurance
+        if self.connectivity_assurance:
+            _dict["connectivity_assurance"] = self.connectivity_assurance.to_dict()
+        # set to None if connectivity_assurance (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.connectivity_assurance is None
+            and "connectivity_assurance" in self.model_fields_set
+        ):
+            _dict["connectivity_assurance"] = None
+
         return _dict
 
     @classmethod
@@ -104,6 +118,11 @@ class Fleet(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "connectivity_assurance": (
+                    FleetConnectivityAssurance.from_dict(obj["connectivity_assurance"])
+                    if obj.get("connectivity_assurance") is not None
+                    else None
+                ),
                 "created": obj.get("created"),
                 "environment_variables": obj.get("environment_variables"),
                 "label": obj.get("label"),

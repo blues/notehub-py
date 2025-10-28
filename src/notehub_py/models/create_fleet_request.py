@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.fleet_connectivity_assurance import FleetConnectivityAssurance
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,6 +30,7 @@ class CreateFleetRequest(BaseModel):
     CreateFleetRequest
     """  # noqa: E501
 
+    connectivity_assurance: Optional[FleetConnectivityAssurance] = None
     label: Optional[StrictStr] = Field(
         default=None, description="The label, or name,  for the Fleet."
     )
@@ -36,7 +38,11 @@ class CreateFleetRequest(BaseModel):
         default=None,
         description="JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.",
     )
-    __properties: ClassVar[List[str]] = ["label", "smart_rule"]
+    __properties: ClassVar[List[str]] = [
+        "connectivity_assurance",
+        "label",
+        "smart_rule",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -75,6 +81,17 @@ class CreateFleetRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of connectivity_assurance
+        if self.connectivity_assurance:
+            _dict["connectivity_assurance"] = self.connectivity_assurance.to_dict()
+        # set to None if connectivity_assurance (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.connectivity_assurance is None
+            and "connectivity_assurance" in self.model_fields_set
+        ):
+            _dict["connectivity_assurance"] = None
+
         return _dict
 
     @classmethod
@@ -87,6 +104,14 @@ class CreateFleetRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"label": obj.get("label"), "smart_rule": obj.get("smart_rule")}
+            {
+                "connectivity_assurance": (
+                    FleetConnectivityAssurance.from_dict(obj["connectivity_assurance"])
+                    if obj.get("connectivity_assurance") is not None
+                    else None
+                ),
+                "label": obj.get("label"),
+                "smart_rule": obj.get("smart_rule"),
+            }
         )
         return _obj
