@@ -15,7 +15,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 
-__version__ = "2.2.1"
+__version__ = "2.3.0"
 
 # import apis into sdk package
 from notehub_py.api.alert_api import AlertApi

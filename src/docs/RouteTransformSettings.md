@@ -4,10 +4,11 @@ Settings for transforming route payloads before delivery. Supports format select
 
 ## Properties
 
-| Name        | Type    | Description                                                                                           | Notes      |
-| ----------- | ------- | ----------------------------------------------------------------------------------------------------- | ---------- |
-| **format**  | **str** | Output format for transformed data (e.g., \&quot;json\&quot;, \&quot;xml\&quot;, \&quot;text\&quot;). | [optional] |
-| **jsonata** | **str** | JSONata expression used to transform the data payload.                                                | [optional] |
+| Name           | Type    | Description                                                                                           | Notes      |
+| -------------- | ------- | ----------------------------------------------------------------------------------------------------- | ---------- |
+| **format**     | **str** | Output format for transformed data (e.g., \&quot;json\&quot;, \&quot;xml\&quot;, \&quot;text\&quot;). | [optional] |
+| **jsonata**    | **str** | JSONata expression used to transform the data payload (outgoing).                                     | [optional] |
+| **jsonata_in** | **str** | JSONata expression used to transform the data payload (incoming).                                     | [optional] |
 
 ## Example
 

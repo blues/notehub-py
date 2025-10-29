@@ -59,7 +59,8 @@ class TestNotehubRoute(unittest.TestCase):
                     timeout = 56, 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     url = '', ),
                 azure = notehub_py.models.azure_route.AzureRoute(
                     filter = notehub_py.models.filter.Filter(
@@ -76,7 +77,8 @@ class TestNotehubRoute(unittest.TestCase):
                     timeout = 56, 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     url = '', ),
                 blynk = notehub_py.models.blynk_route.BlynkRoute(
                     filter = notehub_py.models.filter.Filter(
@@ -91,7 +93,8 @@ class TestNotehubRoute(unittest.TestCase):
                     timeout = 56, 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), ),
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), ),
                 datacake = notehub_py.models.datacake_route.DatacakeRoute(
                     disable_http_headers = True, 
                     filter = notehub_py.models.filter.Filter(
@@ -108,7 +111,8 @@ class TestNotehubRoute(unittest.TestCase):
                     timeout = 56, 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     url = '', ),
                 disabled = True,
                 google = notehub_py.models.google_route.GoogleRoute(
@@ -124,7 +128,8 @@ class TestNotehubRoute(unittest.TestCase):
                     token = '', 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     url = '', ),
                 http = notehub_py.models.http_route.HttpRoute(
                     disable_http_headers = True, 
@@ -142,7 +147,8 @@ class TestNotehubRoute(unittest.TestCase):
                     timeout = 56, 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     url = '', ),
                 label = '',
                 modified = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -166,7 +172,8 @@ class TestNotehubRoute(unittest.TestCase):
                     topic = '', 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     username = '', ),
                 proxy = notehub_py.models.proxy_route.ProxyRoute(
                     alias = '', 
@@ -177,6 +184,10 @@ class TestNotehubRoute(unittest.TestCase):
                         'key' : ''
                         }, 
                     timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     url = '', ),
                 qubitro = notehub_py.models.qubitro_route.QubitroRoute(
                     filter = notehub_py.models.filter.Filter(
@@ -191,7 +202,8 @@ class TestNotehubRoute(unittest.TestCase):
                     timeout = 56, 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     webhook_signing_key = '', ),
                 radnote = notehub_py.models.rad_route.RadRoute(
                     client_id = '', 
@@ -226,7 +238,8 @@ class TestNotehubRoute(unittest.TestCase):
                     timeout = 56, 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     url = '', ),
                 slack = notehub_py.models.slack_route.SlackRoute(
                     bearer = '', 
@@ -244,7 +257,8 @@ class TestNotehubRoute(unittest.TestCase):
                     timeout = 56, 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     webhook_url = '', ),
                 snowflake = notehub_py.models.snowflake_route.SnowflakeRoute(
                     account_name = '', 
@@ -261,7 +275,8 @@ class TestNotehubRoute(unittest.TestCase):
                     timeout = 56, 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     user_name = '', ),
                 thingworx = notehub_py.models.thingworx_route.ThingworxRoute(
                     app_key = '', 
@@ -276,7 +291,8 @@ class TestNotehubRoute(unittest.TestCase):
                     timeout = 56, 
                     transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                         format = 'json', 
-                        jsonata = '$.body.data', ), 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
                     url = '', ),
                 twilio = notehub_py.models.twilio_route.TwilioRoute(
                     account_sid = '', 
