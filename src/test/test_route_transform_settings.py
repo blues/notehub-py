@@ -38,7 +38,8 @@ class TestRouteTransformSettings(unittest.TestCase):
         if include_optional:
             return RouteTransformSettings(
                 format = 'json',
-                jsonata = '$.body.data'
+                jsonata = '$.body.data',
+                jsonata_in = '$.body.data'
             )
         else:
             return RouteTransformSettings(

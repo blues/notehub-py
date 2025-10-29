@@ -35,9 +35,13 @@ class RouteTransformSettings(BaseModel):
     )
     jsonata: Optional[StrictStr] = Field(
         default=None,
-        description="JSONata expression used to transform the data payload.",
+        description="JSONata expression used to transform the data payload (outgoing).",
     )
-    __properties: ClassVar[List[str]] = ["format", "jsonata"]
+    jsonata_in: Optional[StrictStr] = Field(
+        default=None,
+        description="JSONata expression used to transform the data payload (incoming).",
+    )
+    __properties: ClassVar[List[str]] = ["format", "jsonata", "jsonata_in"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,6 +92,10 @@ class RouteTransformSettings(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"format": obj.get("format"), "jsonata": obj.get("jsonata")}
+            {
+                "format": obj.get("format"),
+                "jsonata": obj.get("jsonata"),
+                "jsonata_in": obj.get("jsonata_in"),
+            }
         )
         return _obj

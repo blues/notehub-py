@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.route_transform_settings import RouteTransformSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,12 +34,14 @@ class ProxyRoute(BaseModel):
     fleets: Optional[List[StrictStr]] = None
     http_headers: Optional[Dict[str, StrictStr]] = None
     timeout: Optional[StrictInt] = None
+    transform: Optional[RouteTransformSettings] = None
     url: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
         "alias",
         "fleets",
         "http_headers",
         "timeout",
+        "transform",
         "url",
     ]
 
@@ -79,6 +82,9 @@ class ProxyRoute(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of transform
+        if self.transform:
+            _dict["transform"] = self.transform.to_dict()
         return _dict
 
     @classmethod
@@ -96,6 +102,11 @@ class ProxyRoute(BaseModel):
                 "fleets": obj.get("fleets"),
                 "http_headers": obj.get("http_headers"),
                 "timeout": obj.get("timeout"),
+                "transform": (
+                    RouteTransformSettings.from_dict(obj["transform"])
+                    if obj.get("transform") is not None
+                    else None
+                ),
                 "url": obj.get("url"),
             }
         )

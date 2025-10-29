@@ -59,7 +59,8 @@ class TestS3ArchiveRoute(unittest.TestCase):
                 timeout = 56,
                 transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
                     format = 'json', 
-                    jsonata = '$.body.data', ),
+                    jsonata = '$.body.data', 
+                    jsonata_in = '$.body.data', ),
                 url = ''
             )
         else:

@@ -2,13 +2,14 @@
 
 ## Properties
 
-| Name             | Type               | Description | Notes      |
-| ---------------- | ------------------ | ----------- | ---------- |
-| **alias**        | **str**            |             | [optional] |
-| **fleets**       | **List[str]**      |             | [optional] |
-| **http_headers** | **Dict[str, str]** |             | [optional] |
-| **timeout**      | **int**            |             | [optional] |
-| **url**          | **str**            |             | [optional] |
+| Name             | Type                                                    | Description | Notes      |
+| ---------------- | ------------------------------------------------------- | ----------- | ---------- |
+| **alias**        | **str**                                                 |             | [optional] |
+| **fleets**       | **List[str]**                                           |             | [optional] |
+| **http_headers** | **Dict[str, str]**                                      |             | [optional] |
+| **timeout**      | **int**                                                 |             | [optional] |
+| **transform**    | [**RouteTransformSettings**](RouteTransformSettings.md) |             | [optional] |
+| **url**          | **str**                                                 |             | [optional] |
 
 ## Example
 
