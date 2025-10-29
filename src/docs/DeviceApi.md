@@ -1532,7 +1532,7 @@ void (empty response body)
 
 # **handle_note_changes**
 
-> HandleNoteChanges200Response handle_note_changes(project_or_product_uid, device_uid, notefile_id, tracker=tracker, max=max, start=start, stop=stop, deleted=deleted, delete=delete)
+> HandleNoteChanges200Response handle_note_changes(project_or_product_uid, device_uid, notefile_id, max=max, deleted=deleted, delete=delete)
 
 Incrementally retrieve changes within a specific Notefile.
 
@@ -1569,15 +1569,12 @@ with notehub_py.ApiClient(configuration) as api_client:
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
     notefile_id = 'notefile_id_example' # str |
-    tracker = 'tracker_example' # str | The change tracker ID. (optional)
     max = 56 # int | The maximum number of Notes to return in the request. (optional)
-    start = True # bool | true to reset the tracker to the beginning. (optional)
-    stop = True # bool | true to delete the tracker. (optional)
     deleted = True # bool | true to return deleted notes. (optional)
     delete = True # bool | true to delete the notes returned by the request. (optional)
 
     try:
-        api_response = api_instance.handle_note_changes(project_or_product_uid, device_uid, notefile_id, tracker=tracker, max=max, start=start, stop=stop, deleted=deleted, delete=delete)
+        api_response = api_instance.handle_note_changes(project_or_product_uid, device_uid, notefile_id, max=max, deleted=deleted, delete=delete)
         print("The response of DeviceApi->handle_note_changes:\n")
         pprint(api_response)
     except Exception as e:
@@ -1591,10 +1588,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **project_or_product_uid** | **str**  |                                                       |
 | **device_uid**             | **str**  |                                                       |
 | **notefile_id**            | **str**  |                                                       |
-| **tracker**                | **str**  | The change tracker ID.                                | [optional] |
 | **max**                    | **int**  | The maximum number of Notes to return in the request. | [optional] |
-| **start**                  | **bool** | true to reset the tracker to the beginning.           | [optional] |
-| **stop**                   | **bool** | true to delete the tracker.                           | [optional] |
 | **deleted**                | **bool** | true to return deleted notes.                         | [optional] |
 | **delete**                 | **bool** | true to delete the notes returned by the request.     | [optional] |
 
@@ -2022,7 +2016,7 @@ void (empty response body)
 
 # **handle_notefile_changes**
 
-> HandleNotefileChanges200Response handle_notefile_changes(project_or_product_uid, device_uid, tracker=tracker, files=files)
+> HandleNotefileChanges200Response handle_notefile_changes(project_or_product_uid, device_uid, files=files)
 
 Used to perform queries on a single or multiple files to determine if new Notes are available to read
 
@@ -2058,11 +2052,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.DeviceApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
-    tracker = 'tracker_example' # str | The change tracker ID. (optional)
     files = ['files_example'] # List[str] | One or more files to obtain change information from. (optional)
 
     try:
-        api_response = api_instance.handle_notefile_changes(project_or_product_uid, device_uid, tracker=tracker, files=files)
+        api_response = api_instance.handle_notefile_changes(project_or_product_uid, device_uid, files=files)
         print("The response of DeviceApi->handle_notefile_changes:\n")
         pprint(api_response)
     except Exception as e:
@@ -2075,7 +2068,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 | -------------------------- | ----------------------- | ---------------------------------------------------- | ---------- |
 | **project_or_product_uid** | **str**                 |                                                      |
 | **device_uid**             | **str**                 |                                                      |
-| **tracker**                | **str**                 | The change tracker ID.                               | [optional] |
 | **files**                  | [**List[str]**](str.md) | One or more files to obtain change information from. | [optional] |
 
 ### Return type

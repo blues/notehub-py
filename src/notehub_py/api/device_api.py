@@ -5651,19 +5651,9 @@ class DeviceApi:
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         max: Annotated[
             Optional[StrictInt],
             Field(description="The maximum number of Notes to return in the request."),
-        ] = None,
-        start: Annotated[
-            Optional[StrictBool],
-            Field(description="true to reset the tracker to the beginning."),
-        ] = None,
-        stop: Annotated[
-            Optional[StrictBool], Field(description="true to delete the tracker.")
         ] = None,
         deleted: Annotated[
             Optional[StrictBool], Field(description="true to return deleted notes.")
@@ -5694,14 +5684,8 @@ class DeviceApi:
         :type device_uid: str
         :param notefile_id: (required)
         :type notefile_id: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param max: The maximum number of Notes to return in the request.
         :type max: int
-        :param start: true to reset the tracker to the beginning.
-        :type start: bool
-        :param stop: true to delete the tracker.
-        :type stop: bool
         :param deleted: true to return deleted notes.
         :type deleted: bool
         :param delete: true to delete the notes returned by the request.
@@ -5732,10 +5716,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
-            tracker=tracker,
             max=max,
-            start=start,
-            stop=stop,
             deleted=deleted,
             delete=delete,
             _request_auth=_request_auth,
@@ -5762,19 +5743,9 @@ class DeviceApi:
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         max: Annotated[
             Optional[StrictInt],
             Field(description="The maximum number of Notes to return in the request."),
-        ] = None,
-        start: Annotated[
-            Optional[StrictBool],
-            Field(description="true to reset the tracker to the beginning."),
-        ] = None,
-        stop: Annotated[
-            Optional[StrictBool], Field(description="true to delete the tracker.")
         ] = None,
         deleted: Annotated[
             Optional[StrictBool], Field(description="true to return deleted notes.")
@@ -5805,14 +5776,8 @@ class DeviceApi:
         :type device_uid: str
         :param notefile_id: (required)
         :type notefile_id: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param max: The maximum number of Notes to return in the request.
         :type max: int
-        :param start: true to reset the tracker to the beginning.
-        :type start: bool
-        :param stop: true to delete the tracker.
-        :type stop: bool
         :param deleted: true to return deleted notes.
         :type deleted: bool
         :param delete: true to delete the notes returned by the request.
@@ -5843,10 +5808,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
-            tracker=tracker,
             max=max,
-            start=start,
-            stop=stop,
             deleted=deleted,
             delete=delete,
             _request_auth=_request_auth,
@@ -5873,19 +5835,9 @@ class DeviceApi:
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         max: Annotated[
             Optional[StrictInt],
             Field(description="The maximum number of Notes to return in the request."),
-        ] = None,
-        start: Annotated[
-            Optional[StrictBool],
-            Field(description="true to reset the tracker to the beginning."),
-        ] = None,
-        stop: Annotated[
-            Optional[StrictBool], Field(description="true to delete the tracker.")
         ] = None,
         deleted: Annotated[
             Optional[StrictBool], Field(description="true to return deleted notes.")
@@ -5916,14 +5868,8 @@ class DeviceApi:
         :type device_uid: str
         :param notefile_id: (required)
         :type notefile_id: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param max: The maximum number of Notes to return in the request.
         :type max: int
-        :param start: true to reset the tracker to the beginning.
-        :type start: bool
-        :param stop: true to delete the tracker.
-        :type stop: bool
         :param deleted: true to return deleted notes.
         :type deleted: bool
         :param delete: true to delete the notes returned by the request.
@@ -5954,10 +5900,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
-            tracker=tracker,
             max=max,
-            start=start,
-            stop=stop,
             deleted=deleted,
             delete=delete,
             _request_auth=_request_auth,
@@ -5979,10 +5922,7 @@ class DeviceApi:
         project_or_product_uid,
         device_uid,
         notefile_id,
-        tracker,
         max,
-        start,
-        stop,
         deleted,
         delete,
         _request_auth,
@@ -6010,21 +5950,9 @@ class DeviceApi:
         if notefile_id is not None:
             _path_params["notefileID"] = notefile_id
         # process the query parameters
-        if tracker is not None:
-
-            _query_params.append(("tracker", tracker))
-
         if max is not None:
 
             _query_params.append(("max", max))
-
-        if start is not None:
-
-            _query_params.append(("start", start))
-
-        if stop is not None:
-
-            _query_params.append(("stop", stop))
 
         if deleted is not None:
 
@@ -7601,9 +7529,6 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         files: Annotated[
             Optional[List[StrictStr]],
             Field(description="One or more files to obtain change information from."),
@@ -7628,8 +7553,6 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param files: One or more files to obtain change information from.
         :type files: List[str]
         :param _request_timeout: timeout setting for this request. If one
@@ -7657,7 +7580,6 @@ class DeviceApi:
         _param = self._handle_notefile_changes_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            tracker=tracker,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7682,9 +7604,6 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         files: Annotated[
             Optional[List[StrictStr]],
             Field(description="One or more files to obtain change information from."),
@@ -7709,8 +7628,6 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param files: One or more files to obtain change information from.
         :type files: List[str]
         :param _request_timeout: timeout setting for this request. If one
@@ -7738,7 +7655,6 @@ class DeviceApi:
         _param = self._handle_notefile_changes_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            tracker=tracker,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7763,9 +7679,6 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         files: Annotated[
             Optional[List[StrictStr]],
             Field(description="One or more files to obtain change information from."),
@@ -7790,8 +7703,6 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param files: One or more files to obtain change information from.
         :type files: List[str]
         :param _request_timeout: timeout setting for this request. If one
@@ -7819,7 +7730,6 @@ class DeviceApi:
         _param = self._handle_notefile_changes_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            tracker=tracker,
             files=files,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7839,7 +7749,6 @@ class DeviceApi:
         self,
         project_or_product_uid,
         device_uid,
-        tracker,
         files,
         _request_auth,
         _content_type,
@@ -7866,10 +7775,6 @@ class DeviceApi:
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
-        if tracker is not None:
-
-            _query_params.append(("tracker", tracker))
-
         if files is not None:
 
             _query_params.append(("files", files))
