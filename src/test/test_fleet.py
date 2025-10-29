@@ -37,6 +37,7 @@ class TestFleet(unittest.TestCase):
         model = Fleet()
         if include_optional:
             return Fleet(
+                connectivity_assurance = {"enabled":true},
                 created = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 environment_variables = {
                     'key' : ''

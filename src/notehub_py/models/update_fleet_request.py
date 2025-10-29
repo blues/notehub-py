@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.fleet_connectivity_assurance import FleetConnectivityAssurance
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,6 +35,7 @@ class UpdateFleetRequest(BaseModel):
         description="List of DeviceUIDs to add to fleet",
         alias="addDevices",
     )
+    connectivity_assurance: Optional[FleetConnectivityAssurance] = None
     label: Optional[StrictStr] = Field(
         default=None, description="The label for the Fleet."
     )
@@ -52,6 +54,7 @@ class UpdateFleetRequest(BaseModel):
     )
     __properties: ClassVar[List[str]] = [
         "addDevices",
+        "connectivity_assurance",
         "label",
         "removeDevices",
         "smart_rule",
@@ -95,6 +98,17 @@ class UpdateFleetRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of connectivity_assurance
+        if self.connectivity_assurance:
+            _dict["connectivity_assurance"] = self.connectivity_assurance.to_dict()
+        # set to None if connectivity_assurance (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.connectivity_assurance is None
+            and "connectivity_assurance" in self.model_fields_set
+        ):
+            _dict["connectivity_assurance"] = None
+
         return _dict
 
     @classmethod
@@ -109,6 +123,11 @@ class UpdateFleetRequest(BaseModel):
         _obj = cls.model_validate(
             {
                 "addDevices": obj.get("addDevices"),
+                "connectivity_assurance": (
+                    FleetConnectivityAssurance.from_dict(obj["connectivity_assurance"])
+                    if obj.get("connectivity_assurance") is not None
+                    else None
+                ),
                 "label": obj.get("label"),
                 "removeDevices": obj.get("removeDevices"),
                 "smart_rule": obj.get("smart_rule"),

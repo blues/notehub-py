@@ -34,7 +34,7 @@ class UsageRouteLogsData(BaseModel):
     period: datetime
     route: Optional[StrictStr] = Field(
         default=None,
-        description="The route serial number (only present when aggregate is 'route')",
+        description="The route UID (only present when aggregate is 'route')",
     )
     successful_routes: StrictInt
     total_routes: StrictInt

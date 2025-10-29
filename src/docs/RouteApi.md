@@ -48,16 +48,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.RouteApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    notehub_route = {
-  "label": "Route Label",
-  "type":"http",
-  "http": {
-    "fleets": ["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],
-    "throttle_ms": 100,
-    "url": "http://route.url"
-  }
-}
- # NotehubRoute | Route to be Created
+    notehub_route = {"http":{"disable_http_headers":false,"filter":{},"fleets":["fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d"],"http_headers":{"X-My-Header":"value"},"throttle_ms":100,"timeout":5000,"transform":{},"url":"https://example.com/ingest"},"label":"Route Label"} # NotehubRoute | Route to be created
 
     try:
         api_response = api_instance.create_route(project_or_product_uid, notehub_route)
@@ -72,7 +63,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | Name                       | Type                                | Description         | Notes |
 | -------------------------- | ----------------------------------- | ------------------- | ----- |
 | **project_or_product_uid** | **str**                             |                     |
-| **notehub_route**          | [**NotehubRoute**](NotehubRoute.md) | Route to be Created |
+| **notehub_route**          | [**NotehubRoute**](NotehubRoute.md) | Route to be created |
 
 ### Return type
 
@@ -91,14 +82,14 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
+| **201**     | Created                                    | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_route**
 
-> object delete_route(project_or_product_uid, route_uid)
+> delete_route(project_or_product_uid, route_uid)
 
 Delete single route within a project
 
@@ -135,9 +126,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     route_uid = 'route:cbd20093cba58392c9f9bbdd0cdeb1a0' # str |
 
     try:
-        api_response = api_instance.delete_route(project_or_product_uid, route_uid)
-        print("The response of RouteApi->delete_route:\n")
-        pprint(api_response)
+        api_instance.delete_route(project_or_product_uid, route_uid)
     except Exception as e:
         print("Exception when calling RouteApi->delete_route: %s\n" % e)
 ```
@@ -151,7 +140,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-**object**
+void (empty response body)
 
 ### Authorization
 
@@ -166,7 +155,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
+| **204**     | Successful operation                       | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -345,7 +334,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_routes**
 
-> List[UserDbRoute] get_routes(project_or_product_uid)
+> List[NotehubRouteSummary] get_routes(project_or_product_uid)
 
 Get all Routes within a Project
 
@@ -355,7 +344,7 @@ Get all Routes within a Project
 
 ```python
 import notehub_py
-from notehub_py.models.user_db_route import UserDbRoute
+from notehub_py.models.notehub_route_summary import NotehubRouteSummary
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -397,7 +386,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**List[UserDbRoute]**](UserDbRoute.md)
+[**List[NotehubRouteSummary]**](NotehubRouteSummary.md)
 
 ### Authorization
 

@@ -37,6 +37,7 @@ class TestCreateFleetRequest(unittest.TestCase):
         model = CreateFleetRequest()
         if include_optional:
             return CreateFleetRequest(
+                connectivity_assurance = {"enabled":true},
                 label = '',
                 smart_rule = ''
             )

@@ -40,6 +40,7 @@ class TestUpdateFleetRequest(unittest.TestCase):
                 add_devices = [
                     ''
                     ],
+                connectivity_assurance = {"enabled":true},
                 label = '',
                 remove_devices = [
                     ''
