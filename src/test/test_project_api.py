@@ -27,6 +27,18 @@ class TestProjectApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_add_device_to_fleets(self) -> None:
+        """Test case for add_device_to_fleets"""
+        pass
+
+    def test_add_fleet_environment_variables(self) -> None:
+        """Test case for add_fleet_environment_variables"""
+        pass
+
+    def test_add_project_environment_variables(self) -> None:
+        """Test case for add_project_environment_variables"""
+        pass
+
     def test_clone_project(self) -> None:
         """Test case for clone_project"""
         pass
@@ -43,8 +55,8 @@ class TestProjectApi(unittest.TestCase):
         """Test case for create_project"""
         pass
 
-    def test_delete_device_fleets(self) -> None:
-        """Test case for delete_device_fleets"""
+    def test_delete_device_from_fleets(self) -> None:
+        """Test case for delete_device_from_fleets"""
         pass
 
     def test_delete_fleet(self) -> None:
@@ -67,16 +79,12 @@ class TestProjectApi(unittest.TestCase):
         """Test case for delete_project_environment_variable"""
         pass
 
-    def test_dfu_action(self) -> None:
-        """Test case for dfu_action"""
+    def test_disable_global_event_transformation(self) -> None:
+        """Test case for disable_global_event_transformation"""
         pass
 
-    def test_disable_global_transformation(self) -> None:
-        """Test case for disable_global_transformation"""
-        pass
-
-    def test_enable_global_transformation(self) -> None:
-        """Test case for enable_global_transformation"""
+    def test_enable_global_event_transformation(self) -> None:
+        """Test case for enable_global_event_transformation"""
         pass
 
     def test_get_device_dfu_history(self) -> None:
@@ -118,6 +126,10 @@ class TestProjectApi(unittest.TestCase):
         """Test case for get_fleet_environment_variables"""
         pass
 
+    def test_get_fleets(self) -> None:
+        """Test case for get_fleets"""
+        pass
+
     def test_get_notefile_schemas(self) -> None:
         """Test case for get_notefile_schemas
 
@@ -148,10 +160,6 @@ class TestProjectApi(unittest.TestCase):
         """Test case for get_project_environment_variables"""
         pass
 
-    def test_get_project_fleets(self) -> None:
-        """Test case for get_project_fleets"""
-        pass
-
     def test_get_project_members(self) -> None:
         """Test case for get_project_members"""
         pass
@@ -160,20 +168,12 @@ class TestProjectApi(unittest.TestCase):
         """Test case for get_projects"""
         pass
 
-    def test_put_device_fleets(self) -> None:
-        """Test case for put_device_fleets"""
+    def test_perform_dfu_action(self) -> None:
+        """Test case for perform_dfu_action"""
         pass
 
-    def test_put_fleet_environment_variables(self) -> None:
-        """Test case for put_fleet_environment_variables"""
-        pass
-
-    def test_put_project_environment_variables(self) -> None:
-        """Test case for put_project_environment_variables"""
-        pass
-
-    def test_set_global_transformation(self) -> None:
-        """Test case for set_global_transformation"""
+    def test_set_global_event_transformation(self) -> None:
+        """Test case for set_global_event_transformation"""
         pass
 
     def test_update_fleet(self) -> None:

@@ -40,7 +40,7 @@ class TestGetDeviceHealthLog200Response(unittest.TestCase):
         if include_optional:
             return GetDeviceHealthLog200Response(
                 health_log = [
-                    notehub_py.models.get_device_health_log_200_response_health_log_inner.getDeviceHealthLog_200_response_health_log_inner(
+                    notehub_py.models.get_device_health_log_200_response_health_log_inner.GetDeviceHealthLog_200_response_health_log_inner(
                         alert = True, 
                         text = '', 
                         when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
@@ -49,7 +49,7 @@ class TestGetDeviceHealthLog200Response(unittest.TestCase):
         else:
             return GetDeviceHealthLog200Response(
                 health_log = [
-                    notehub_py.models.get_device_health_log_200_response_health_log_inner.getDeviceHealthLog_200_response_health_log_inner(
+                    notehub_py.models.get_device_health_log_200_response_health_log_inner.GetDeviceHealthLog_200_response_health_log_inner(
                         alert = True, 
                         text = '', 
                         when = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )

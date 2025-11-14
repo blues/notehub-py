@@ -4,19 +4,21 @@ All URIs are relative to *https://api.notefile.net*
 
 | Method                                                                                       | HTTP request                                                                                | Description                                     |
 | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| [**add_device_to_fleets**](ProjectApi.md#add_device_to_fleets)                               | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                       |
+| [**add_fleet_environment_variables**](ProjectApi.md#add_fleet_environment_variables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
+| [**add_project_environment_variables**](ProjectApi.md#add_project_environment_variables)     | **PUT** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**clone_project**](ProjectApi.md#clone_project)                                             | **POST** /v1/projects/{projectOrProductUID}/clone                                           |
 | [**create_fleet**](ProjectApi.md#create_fleet)                                               | **POST** /v1/projects/{projectOrProductUID}/fleets                                          |
 | [**create_product**](ProjectApi.md#create_product)                                           | **POST** /v1/projects/{projectOrProductUID}/products                                        |
 | [**create_project**](ProjectApi.md#create_project)                                           | **POST** /v1/projects                                                                       |
-| [**delete_device_fleets**](ProjectApi.md#delete_device_fleets)                               | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                    |
+| [**delete_device_from_fleets**](ProjectApi.md#delete_device_from_fleets)                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                    |
 | [**delete_fleet**](ProjectApi.md#delete_fleet)                                               | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                             |
 | [**delete_fleet_environment_variable**](ProjectApi.md#delete_fleet_environment_variable)     | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key} |
 | [**delete_product**](ProjectApi.md#delete_product)                                           | **DELETE** /v1/projects/{projectOrProductUID}/products/{productUID}                         |
 | [**delete_project**](ProjectApi.md#delete_project)                                           | **DELETE** /v1/projects/{projectOrProductUID}                                               |
 | [**delete_project_environment_variable**](ProjectApi.md#delete_project_environment_variable) | **DELETE** /v1/projects/{projectOrProductUID}/environment_variables/{key}                   |
-| [**dfu_action**](ProjectApi.md#dfu_action)                                                   | **POST** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}                     |
-| [**disable_global_transformation**](ProjectApi.md#disable_global_transformation)             | **POST** /v1/projects/{projectOrProductUID}/global-transformation/disable                   |
-| [**enable_global_transformation**](ProjectApi.md#enable_global_transformation)               | **POST** /v1/projects/{projectOrProductUID}/global-transformation/enable                    |
+| [**disable_global_event_transformation**](ProjectApi.md#disable_global_event_transformation) | **POST** /v1/projects/{projectOrProductUID}/global-transformation/disable                   |
+| [**enable_global_event_transformation**](ProjectApi.md#enable_global_event_transformation)   | **POST** /v1/projects/{projectOrProductUID}/global-transformation/enable                    |
 | [**get_device_dfu_history**](ProjectApi.md#get_device_dfu_history)                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/history   |
 | [**get_device_dfu_status**](ProjectApi.md#get_device_dfu_status)                             | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status    |
 | [**get_device_fleets**](ProjectApi.md#get_device_fleets)                                     | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                       |
@@ -26,21 +28,252 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_fleet**](ProjectApi.md#get_fleet)                                                     | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                                |
 | [**get_fleet_environment_hierarchy**](ProjectApi.md#get_fleet_environment_hierarchy)         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy          | Get environment variable hierarchy for a device |
 | [**get_fleet_environment_variables**](ProjectApi.md#get_fleet_environment_variables)         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
+| [**get_fleets**](ProjectApi.md#get_fleets)                                                   | **GET** /v1/projects/{projectOrProductUID}/fleets                                           |
 | [**get_notefile_schemas**](ProjectApi.md#get_notefile_schemas)                               | **GET** /v1/projects/{projectOrProductUID}/schemas                                          | Get variable format for a notefile              |
 | [**get_products**](ProjectApi.md#get_products)                                               | **GET** /v1/projects/{projectOrProductUID}/products                                         |
 | [**get_project**](ProjectApi.md#get_project)                                                 | **GET** /v1/projects/{projectOrProductUID}                                                  |
 | [**get_project_by_product**](ProjectApi.md#get_project_by_product)                           | **GET** /v1/products/{productUID}/project                                                   |
 | [**get_project_environment_hierarchy**](ProjectApi.md#get_project_environment_hierarchy)     | **GET** /v1/projects/{projectOrProductUID}/environment_hierarchy                            | Get environment variable hierarchy for a device |
 | [**get_project_environment_variables**](ProjectApi.md#get_project_environment_variables)     | **GET** /v1/projects/{projectOrProductUID}/environment_variables                            |
-| [**get_project_fleets**](ProjectApi.md#get_project_fleets)                                   | **GET** /v1/projects/{projectOrProductUID}/fleets                                           |
 | [**get_project_members**](ProjectApi.md#get_project_members)                                 | **GET** /v1/projects/{projectOrProductUID}/members                                          |
 | [**get_projects**](ProjectApi.md#get_projects)                                               | **GET** /v1/projects                                                                        |
-| [**put_device_fleets**](ProjectApi.md#put_device_fleets)                                     | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                       |
-| [**put_fleet_environment_variables**](ProjectApi.md#put_fleet_environment_variables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
-| [**put_project_environment_variables**](ProjectApi.md#put_project_environment_variables)     | **PUT** /v1/projects/{projectOrProductUID}/environment_variables                            |
-| [**set_global_transformation**](ProjectApi.md#set_global_transformation)                     | **POST** /v1/projects/{projectOrProductUID}/global-transformation                           |
+| [**perform_dfu_action**](ProjectApi.md#perform_dfu_action)                                   | **POST** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}                     |
+| [**set_global_event_transformation**](ProjectApi.md#set_global_event_transformation)         | **POST** /v1/projects/{projectOrProductUID}/global-transformation                           |
 | [**update_fleet**](ProjectApi.md#update_fleet)                                               | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                                |
 | [**upload_firmware**](ProjectApi.md#upload_firmware)                                         | **PUT** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
+
+# **add_device_to_fleets**
+
+> GetDeviceFleets200Response add_device_to_fleets(project_or_product_uid, device_uid, add_device_to_fleets_request)
+
+Add Device to Fleets
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.add_device_to_fleets_request import AddDeviceToFleetsRequest
+from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+    add_device_to_fleets_request = notehub_py.AddDeviceToFleetsRequest() # AddDeviceToFleetsRequest | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+
+    try:
+        api_response = api_instance.add_device_to_fleets(project_or_product_uid, device_uid, add_device_to_fleets_request)
+        print("The response of ProjectApi->add_device_to_fleets:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->add_device_to_fleets: %s\n" % e)
+```
+
+### Parameters
+
+| Name                             | Type                                                        | Description                                                                                                                                                                                                                                                                                      | Notes |
+| -------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- |
+| **project_or_product_uid**       | **str**                                                     |                                                                                                                                                                                                                                                                                                  |
+| **device_uid**                   | **str**                                                     |                                                                                                                                                                                                                                                                                                  |
+| **add_device_to_fleets_request** | [**AddDeviceToFleetsRequest**](AddDeviceToFleetsRequest.md) | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. |
+
+### Return type
+
+[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | The response body from a fleets endpoint.  | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **add_fleet_environment_variables**
+
+> EnvironmentVariables add_fleet_environment_variables(project_or_product_uid, fleet_uid, environment_variables)
+
+Add environment variables of a fleet
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.environment_variables import EnvironmentVariables
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    fleet_uid = 'fleet_uid_example' # str |
+    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the fleet
+
+    try:
+        api_response = api_instance.add_fleet_environment_variables(project_or_product_uid, fleet_uid, environment_variables)
+        print("The response of ProjectApi->add_fleet_environment_variables:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->add_fleet_environment_variables: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type                                                | Description                                    | Notes |
+| -------------------------- | --------------------------------------------------- | ---------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**                                             |                                                |
+| **fleet_uid**              | **str**                                             |                                                |
+| **environment_variables**  | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the fleet |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                              | Response headers |
+| ----------- | -------------------------------------------------------- | ---------------- |
+| **200**     | The response body from an environment variables request. | -                |
+| **0**       | The response body in case of an API error.               | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **add_project_environment_variables**
+
+> EnvironmentVariables add_project_environment_variables(project_or_product_uid, environment_variables=environment_variables)
+
+Add environment variables of a project
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.environment_variables import EnvironmentVariables
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables |  (optional)
+
+    try:
+        api_response = api_instance.add_project_environment_variables(project_or_product_uid, environment_variables=environment_variables)
+        print("The response of ProjectApi->add_project_environment_variables:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->add_project_environment_variables: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type                                                | Description | Notes      |
+| -------------------------- | --------------------------------------------------- | ----------- | ---------- |
+| **project_or_product_uid** | **str**                                             |             |
+| **environment_variables**  | [**EnvironmentVariables**](EnvironmentVariables.md) |             | [optional] |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                              | Response headers |
+| ----------- | -------------------------------------------------------- | ---------------- |
+| **200**     | The response body from an environment variables request. | -                |
+| **0**       | The response body in case of an API error.               | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **clone_project**
 
@@ -348,9 +581,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_device_fleets**
+# **delete_device_from_fleets**
 
-> GetDeviceFleets200Response delete_device_fleets(project_or_product_uid, device_uid, delete_device_fleets_request)
+> GetDeviceFleets200Response delete_device_from_fleets(project_or_product_uid, device_uid, delete_device_from_fleets_request)
 
 Remove Device from Fleets
 
@@ -360,7 +593,7 @@ Remove Device from Fleets
 
 ```python
 import notehub_py
-from notehub_py.models.delete_device_fleets_request import DeleteDeviceFleetsRequest
+from notehub_py.models.delete_device_from_fleets_request import DeleteDeviceFromFleetsRequest
 from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
@@ -387,23 +620,23 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.ProjectApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
-    delete_device_fleets_request = notehub_py.DeleteDeviceFleetsRequest() # DeleteDeviceFleetsRequest | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+    delete_device_from_fleets_request = notehub_py.DeleteDeviceFromFleetsRequest() # DeleteDeviceFromFleetsRequest | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
 
     try:
-        api_response = api_instance.delete_device_fleets(project_or_product_uid, device_uid, delete_device_fleets_request)
-        print("The response of ProjectApi->delete_device_fleets:\n")
+        api_response = api_instance.delete_device_from_fleets(project_or_product_uid, device_uid, delete_device_from_fleets_request)
+        print("The response of ProjectApi->delete_device_from_fleets:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ProjectApi->delete_device_fleets: %s\n" % e)
+        print("Exception when calling ProjectApi->delete_device_from_fleets: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                             | Type                                                          | Description                                                                                                                                                                                                                                                                                           | Notes |
-| -------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| **project_or_product_uid**       | **str**                                                       |                                                                                                                                                                                                                                                                                                       |
-| **device_uid**                   | **str**                                                       |                                                                                                                                                                                                                                                                                                       |
-| **delete_device_fleets_request** | [**DeleteDeviceFleetsRequest**](DeleteDeviceFleetsRequest.md) | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. |
+| Name                                  | Type                                                                  | Description                                                                                                                                                                                                                                                                                           | Notes |
+| ------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **project_or_product_uid**            | **str**                                                               |                                                                                                                                                                                                                                                                                                       |
+| **device_uid**                        | **str**                                                               |                                                                                                                                                                                                                                                                                                       |
+| **delete_device_from_fleets_request** | [**DeleteDeviceFromFleetsRequest**](DeleteDeviceFromFleetsRequest.md) | The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. |
 
 ### Return type
 
@@ -798,105 +1031,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **dfu_action**
+# **disable_global_event_transformation**
 
-> dfu_action(project_or_product_uid, firmware_type, action, device_uid=device_uid, tag=tag, serial_number=serial_number, fleet_uid=fleet_uid, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku, dfu_action_request=dfu_action_request)
-
-Update/cancel host or notecard firmware updates
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.dfu_action_request import DfuActionRequest
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.ProjectApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    firmware_type = 'firmware_type_example' # str |
-    action = 'action_example' # str |
-    device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
-    tag = ['tag_example'] # List[str] | Tag filter (optional)
-    serial_number = ['serial_number_example'] # List[str] | Serial number filter (optional)
-    fleet_uid = 'fleet_uid_example' # str |  (optional)
-    notecard_firmware = ['notecard_firmware_example'] # List[str] | Firmware version filter (optional)
-    location = ['location_example'] # List[str] | Location filter (optional)
-    host_firmware = ['host_firmware_example'] # List[str] | Host firmware filter (optional)
-    product_uid = ['product_uid_example'] # List[str] |  (optional)
-    sku = ['sku_example'] # List[str] | SKU filter (optional)
-    dfu_action_request = notehub_py.DfuActionRequest() # DfuActionRequest | Which firmware in the case of an update action (optional)
-
-    try:
-        api_instance.dfu_action(project_or_product_uid, firmware_type, action, device_uid=device_uid, tag=tag, serial_number=serial_number, fleet_uid=fleet_uid, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku, dfu_action_request=dfu_action_request)
-    except Exception as e:
-        print("Exception when calling ProjectApi->dfu_action: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type                                        | Description                                    | Notes      |
-| -------------------------- | ------------------------------------------- | ---------------------------------------------- | ---------- |
-| **project_or_product_uid** | **str**                                     |                                                |
-| **firmware_type**          | **str**                                     |                                                |
-| **action**                 | **str**                                     |                                                |
-| **device_uid**             | [**List[str]**](str.md)                     | A Device UID.                                  | [optional] |
-| **tag**                    | [**List[str]**](str.md)                     | Tag filter                                     | [optional] |
-| **serial_number**          | [**List[str]**](str.md)                     | Serial number filter                           | [optional] |
-| **fleet_uid**              | **str**                                     |                                                | [optional] |
-| **notecard_firmware**      | [**List[str]**](str.md)                     | Firmware version filter                        | [optional] |
-| **location**               | [**List[str]**](str.md)                     | Location filter                                | [optional] |
-| **host_firmware**          | [**List[str]**](str.md)                     | Host firmware filter                           | [optional] |
-| **product_uid**            | [**List[str]**](str.md)                     |                                                | [optional] |
-| **sku**                    | [**List[str]**](str.md)                     | SKU filter                                     | [optional] |
-| **dfu_action_request**     | [**DfuActionRequest**](DfuActionRequest.md) | Which firmware in the case of an update action | [optional] |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Success                                    | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **disable_global_transformation**
-
-> disable_global_transformation(project_or_product_uid)
+> disable_global_event_transformation(project_or_product_uid)
 
 Disable the project-level event JSONata transformation
 
@@ -932,9 +1069,9 @@ with notehub_py.ApiClient(configuration) as api_client:
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
 
     try:
-        api_instance.disable_global_transformation(project_or_product_uid)
+        api_instance.disable_global_event_transformation(project_or_product_uid)
     except Exception as e:
-        print("Exception when calling ProjectApi->disable_global_transformation: %s\n" % e)
+        print("Exception when calling ProjectApi->disable_global_event_transformation: %s\n" % e)
 ```
 
 ### Parameters
@@ -965,9 +1102,9 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **enable_global_transformation**
+# **enable_global_event_transformation**
 
-> enable_global_transformation(project_or_product_uid)
+> enable_global_event_transformation(project_or_product_uid)
 
 Enable the project-level event JSONata transformation
 
@@ -1003,9 +1140,9 @@ with notehub_py.ApiClient(configuration) as api_client:
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
 
     try:
-        api_instance.enable_global_transformation(project_or_product_uid)
+        api_instance.enable_global_event_transformation(project_or_product_uid)
     except Exception as e:
-        print("Exception when calling ProjectApi->enable_global_transformation: %s\n" % e)
+        print("Exception when calling ProjectApi->enable_global_event_transformation: %s\n" % e)
 ```
 
 ### Parameters
@@ -1789,6 +1926,80 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_fleets**
+
+> GetDeviceFleets200Response get_fleets(project_or_product_uid)
+
+Get Project Fleets
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+
+    try:
+        api_response = api_instance.get_fleets(project_or_product_uid)
+        print("The response of ProjectApi->get_fleets:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->get_fleets: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+
+### Return type
+
+[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | The response body from a fleets endpoint.  | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_notefile_schemas**
 
 > List[NotefileSchema] get_notefile_schemas(project_or_product_uid)
@@ -2224,80 +2435,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_project_fleets**
-
-> GetDeviceFleets200Response get_project_fleets(project_or_product_uid)
-
-Get Project Fleets
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.ProjectApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-
-    try:
-        api_response = api_instance.get_project_fleets(project_or_product_uid)
-        print("The response of ProjectApi->get_project_fleets:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ProjectApi->get_project_fleets: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type    | Description | Notes |
-| -------------------------- | ------- | ----------- | ----- |
-| **project_or_product_uid** | **str** |             |
-
-### Return type
-
-[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The response body from a fleets endpoint.  | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **get_project_members**
 
 > GetProjectMembers200Response get_project_members(project_or_product_uid)
@@ -2443,11 +2580,11 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **put_device_fleets**
+# **perform_dfu_action**
 
-> GetDeviceFleets200Response put_device_fleets(project_or_product_uid, device_uid, put_device_fleets_request)
+> perform_dfu_action(project_or_product_uid, firmware_type, action, device_uid=device_uid, tag=tag, serial_number=serial_number, fleet_uid=fleet_uid, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku, dfu_action_request=dfu_action_request)
 
-Add Device to Fleets
+Update/cancel host or notecard firmware updates
 
 ### Example
 
@@ -2455,8 +2592,7 @@ Add Device to Fleets
 
 ```python
 import notehub_py
-from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
-from notehub_py.models.put_device_fleets_request import PutDeviceFleetsRequest
+from notehub_py.models.dfu_action_request import DfuActionRequest
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -2481,28 +2617,46 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.ProjectApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    put_device_fleets_request = notehub_py.PutDeviceFleetsRequest() # PutDeviceFleetsRequest | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.
+    firmware_type = 'firmware_type_example' # str |
+    action = 'action_example' # str |
+    device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
+    tag = ['tag_example'] # List[str] | Tag filter (optional)
+    serial_number = ['serial_number_example'] # List[str] | Serial number filter (optional)
+    fleet_uid = 'fleet_uid_example' # str |  (optional)
+    notecard_firmware = ['notecard_firmware_example'] # List[str] | Firmware version filter (optional)
+    location = ['location_example'] # List[str] | Location filter (optional)
+    host_firmware = ['host_firmware_example'] # List[str] | Host firmware filter (optional)
+    product_uid = ['product_uid_example'] # List[str] |  (optional)
+    sku = ['sku_example'] # List[str] | SKU filter (optional)
+    dfu_action_request = notehub_py.DfuActionRequest() # DfuActionRequest | Which firmware in the case of an update action (optional)
 
     try:
-        api_response = api_instance.put_device_fleets(project_or_product_uid, device_uid, put_device_fleets_request)
-        print("The response of ProjectApi->put_device_fleets:\n")
-        pprint(api_response)
+        api_instance.perform_dfu_action(project_or_product_uid, firmware_type, action, device_uid=device_uid, tag=tag, serial_number=serial_number, fleet_uid=fleet_uid, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku, dfu_action_request=dfu_action_request)
     except Exception as e:
-        print("Exception when calling ProjectApi->put_device_fleets: %s\n" % e)
+        print("Exception when calling ProjectApi->perform_dfu_action: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                          | Type                                                    | Description                                                                                                                                                                                                                                                                                      | Notes |
-| ----------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- |
-| **project_or_product_uid**    | **str**                                                 |                                                                                                                                                                                                                                                                                                  |
-| **device_uid**                | **str**                                                 |                                                                                                                                                                                                                                                                                                  |
-| **put_device_fleets_request** | [**PutDeviceFleetsRequest**](PutDeviceFleetsRequest.md) | The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. |
+| Name                       | Type                                        | Description                                    | Notes      |
+| -------------------------- | ------------------------------------------- | ---------------------------------------------- | ---------- |
+| **project_or_product_uid** | **str**                                     |                                                |
+| **firmware_type**          | **str**                                     |                                                |
+| **action**                 | **str**                                     |                                                |
+| **device_uid**             | [**List[str]**](str.md)                     | A Device UID.                                  | [optional] |
+| **tag**                    | [**List[str]**](str.md)                     | Tag filter                                     | [optional] |
+| **serial_number**          | [**List[str]**](str.md)                     | Serial number filter                           | [optional] |
+| **fleet_uid**              | **str**                                     |                                                | [optional] |
+| **notecard_firmware**      | [**List[str]**](str.md)                     | Firmware version filter                        | [optional] |
+| **location**               | [**List[str]**](str.md)                     | Location filter                                | [optional] |
+| **host_firmware**          | [**List[str]**](str.md)                     | Host firmware filter                           | [optional] |
+| **product_uid**            | [**List[str]**](str.md)                     |                                                | [optional] |
+| **sku**                    | [**List[str]**](str.md)                     | SKU filter                                     | [optional] |
+| **dfu_action_request**     | [**DfuActionRequest**](DfuActionRequest.md) | Which firmware in the case of an update action | [optional] |
 
 ### Return type
 
-[**GetDeviceFleets200Response**](GetDeviceFleets200Response.md)
+void (empty response body)
 
 ### Authorization
 
@@ -2517,168 +2671,14 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The response body from a fleets endpoint.  | -                |
+| **200**     | Success                                    | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **put_fleet_environment_variables**
+# **set_global_event_transformation**
 
-> EnvironmentVariables put_fleet_environment_variables(project_or_product_uid, fleet_uid, environment_variables)
-
-Put environment variables of a fleet
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.environment_variables import EnvironmentVariables
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.ProjectApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    fleet_uid = 'fleet_uid_example' # str |
-    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the fleet
-
-    try:
-        api_response = api_instance.put_fleet_environment_variables(project_or_product_uid, fleet_uid, environment_variables)
-        print("The response of ProjectApi->put_fleet_environment_variables:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ProjectApi->put_fleet_environment_variables: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type                                                | Description                                    | Notes |
-| -------------------------- | --------------------------------------------------- | ---------------------------------------------- | ----- |
-| **project_or_product_uid** | **str**                                             |                                                |
-| **fleet_uid**              | **str**                                             |                                                |
-| **environment_variables**  | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the fleet |
-
-### Return type
-
-[**EnvironmentVariables**](EnvironmentVariables.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **put_project_environment_variables**
-
-> EnvironmentVariables put_project_environment_variables(project_or_product_uid, environment_variables=environment_variables)
-
-Put environment variables of a project
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.environment_variables import EnvironmentVariables
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.ProjectApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables |  (optional)
-
-    try:
-        api_response = api_instance.put_project_environment_variables(project_or_product_uid, environment_variables=environment_variables)
-        print("The response of ProjectApi->put_project_environment_variables:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ProjectApi->put_project_environment_variables: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type                                                | Description | Notes      |
-| -------------------------- | --------------------------------------------------- | ----------- | ---------- |
-| **project_or_product_uid** | **str**                                             |             |
-| **environment_variables**  | [**EnvironmentVariables**](EnvironmentVariables.md) |             | [optional] |
-
-### Return type
-
-[**EnvironmentVariables**](EnvironmentVariables.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **set_global_transformation**
-
-> set_global_transformation(project_or_product_uid, body)
+> set_global_event_transformation(project_or_product_uid, body)
 
 Set the project-level event JSONata transformation
 
@@ -2715,9 +2715,9 @@ with notehub_py.ApiClient(configuration) as api_client:
     body = None # object | JSONata expression which will be applied to each event before it is persisted and routed
 
     try:
-        api_instance.set_global_transformation(project_or_product_uid, body)
+        api_instance.set_global_event_transformation(project_or_product_uid, body)
     except Exception as e:
-        print("Exception when calling ProjectApi->set_global_transformation: %s\n" % e)
+        print("Exception when calling ProjectApi->set_global_event_transformation: %s\n" % e)
 ```
 
 ### Parameters

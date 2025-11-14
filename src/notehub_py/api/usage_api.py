@@ -61,6 +61,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -90,6 +93,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -120,6 +125,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -159,6 +165,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -188,6 +197,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -218,6 +229,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -257,6 +269,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -286,6 +301,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -316,6 +333,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -338,6 +356,7 @@ class UsageApi:
         start_date,
         end_date,
         device_uid,
+        fleet_uid,
         aggregate,
         _request_auth,
         _content_type,
@@ -349,6 +368,7 @@ class UsageApi:
 
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
+            "fleetUID": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -373,6 +393,10 @@ class UsageApi:
         if device_uid is not None:
 
             _query_params.append(("deviceUID", device_uid))
+
+        if fleet_uid is not None:
+
+            _query_params.append(("fleetUID", fleet_uid))
 
         if period is not None:
 
@@ -429,6 +453,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -458,6 +485,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -488,6 +517,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -527,6 +557,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -556,6 +589,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -586,6 +621,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -625,6 +661,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -654,6 +693,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -684,6 +725,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -706,6 +748,7 @@ class UsageApi:
         start_date,
         end_date,
         device_uid,
+        fleet_uid,
         aggregate,
         _request_auth,
         _content_type,
@@ -717,6 +760,7 @@ class UsageApi:
 
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
+            "fleetUID": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -741,6 +785,10 @@ class UsageApi:
         if device_uid is not None:
 
             _query_params.append(("deviceUID", device_uid))
+
+        if fleet_uid is not None:
+
+            _query_params.append(("fleetUID", fleet_uid))
 
         if period is not None:
 
@@ -797,6 +845,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -826,6 +877,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -856,6 +909,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -895,6 +949,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -924,6 +981,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -954,6 +1013,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -993,6 +1053,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -1022,6 +1085,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1052,6 +1117,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1074,6 +1140,7 @@ class UsageApi:
         start_date,
         end_date,
         device_uid,
+        fleet_uid,
         aggregate,
         _request_auth,
         _content_type,
@@ -1085,6 +1152,7 @@ class UsageApi:
 
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
+            "fleetUID": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -1109,6 +1177,10 @@ class UsageApi:
         if device_uid is not None:
 
             _query_params.append(("deviceUID", device_uid))
+
+        if fleet_uid is not None:
+
+            _query_params.append(("fleetUID", fleet_uid))
 
         if period is not None:
 

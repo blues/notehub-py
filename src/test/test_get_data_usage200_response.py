@@ -38,7 +38,7 @@ class TestGetDataUsage200Response(unittest.TestCase):
         if include_optional:
             return GetDataUsage200Response(
                 data = [
-                    notehub_py.models.get_data_usage_200_response_data_inner.getDataUsage_200_response_data_inner(
+                    notehub_py.models.get_data_usage_200_response_data_inner.GetDataUsage_200_response_data_inner(
                         data = [
                             notehub_py.models.usage_data.UsageData(
                                 bytes_received = 524288, 

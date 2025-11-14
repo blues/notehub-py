@@ -20,9 +20,9 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
-from notehub_py.models.get_project_events200_response import GetProjectEvents200Response
-from notehub_py.models.get_project_events_by_cursor200_response import (
-    GetProjectEventsByCursor200Response,
+from notehub_py.models.get_events200_response import GetEvents200Response
+from notehub_py.models.get_events_by_cursor200_response import (
+    GetEventsByCursor200Response,
 )
 from notehub_py.models.route_log import RouteLog
 
@@ -42,6 +42,1000 @@ class EventApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+    @validate_call
+    def get_events(
+        self,
+        project_or_product_uid: StrictStr,
+        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        sort_by: Optional[StrictStr] = None,
+        sort_order: Optional[StrictStr] = None,
+        start_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        end_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        date_type: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
+            ),
+        ] = None,
+        system_files_only: Optional[StrictBool] = None,
+        files: Optional[StrictStr] = None,
+        format: Annotated[
+            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
+        ] = None,
+        serial_number: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
+        ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
+        session_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Session UID")
+        ] = None,
+        event_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Event UID")
+        ] = None,
+        select_fields: Annotated[
+            Optional[StrictStr],
+            Field(
+                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
+            ),
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetEvents200Response:
+        """get_events
+
+        Get Events of a Project
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param page_size:
+        :type page_size: int
+        :param page_num:
+        :type page_num: int
+        :param device_uid: A Device UID.
+        :type device_uid: List[str]
+        :param sort_by:
+        :type sort_by: str
+        :param sort_order:
+        :type sort_order: str
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
+        :type start_date: int
+        :param end_date: End date for filtering results, specified as a Unix timestamp
+        :type end_date: int
+        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+        :type date_type: str
+        :param system_files_only:
+        :type system_files_only: bool
+        :param files:
+        :type files: str
+        :param format: Response format (JSON or CSV)
+        :type format: str
+        :param serial_number: Filter by Serial Number
+        :type serial_number: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
+        :param session_uid: Filter by Session UID
+        :type session_uid: List[str]
+        :param event_uid: Filter by Event UID
+        :type event_uid: List[str]
+        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+        :type select_fields: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_events_serialize(
+            project_or_product_uid=project_or_product_uid,
+            page_size=page_size,
+            page_num=page_num,
+            device_uid=device_uid,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            start_date=start_date,
+            end_date=end_date,
+            date_type=date_type,
+            system_files_only=system_files_only,
+            files=files,
+            format=format,
+            serial_number=serial_number,
+            fleet_uid=fleet_uid,
+            session_uid=session_uid,
+            event_uid=event_uid,
+            select_fields=select_fields,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetEvents200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_events_with_http_info(
+        self,
+        project_or_product_uid: StrictStr,
+        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        sort_by: Optional[StrictStr] = None,
+        sort_order: Optional[StrictStr] = None,
+        start_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        end_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        date_type: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
+            ),
+        ] = None,
+        system_files_only: Optional[StrictBool] = None,
+        files: Optional[StrictStr] = None,
+        format: Annotated[
+            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
+        ] = None,
+        serial_number: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
+        ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
+        session_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Session UID")
+        ] = None,
+        event_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Event UID")
+        ] = None,
+        select_fields: Annotated[
+            Optional[StrictStr],
+            Field(
+                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
+            ),
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetEvents200Response]:
+        """get_events
+
+        Get Events of a Project
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param page_size:
+        :type page_size: int
+        :param page_num:
+        :type page_num: int
+        :param device_uid: A Device UID.
+        :type device_uid: List[str]
+        :param sort_by:
+        :type sort_by: str
+        :param sort_order:
+        :type sort_order: str
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
+        :type start_date: int
+        :param end_date: End date for filtering results, specified as a Unix timestamp
+        :type end_date: int
+        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+        :type date_type: str
+        :param system_files_only:
+        :type system_files_only: bool
+        :param files:
+        :type files: str
+        :param format: Response format (JSON or CSV)
+        :type format: str
+        :param serial_number: Filter by Serial Number
+        :type serial_number: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
+        :param session_uid: Filter by Session UID
+        :type session_uid: List[str]
+        :param event_uid: Filter by Event UID
+        :type event_uid: List[str]
+        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+        :type select_fields: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_events_serialize(
+            project_or_product_uid=project_or_product_uid,
+            page_size=page_size,
+            page_num=page_num,
+            device_uid=device_uid,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            start_date=start_date,
+            end_date=end_date,
+            date_type=date_type,
+            system_files_only=system_files_only,
+            files=files,
+            format=format,
+            serial_number=serial_number,
+            fleet_uid=fleet_uid,
+            session_uid=session_uid,
+            event_uid=event_uid,
+            select_fields=select_fields,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetEvents200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_events_without_preload_content(
+        self,
+        project_or_product_uid: StrictStr,
+        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        sort_by: Optional[StrictStr] = None,
+        sort_order: Optional[StrictStr] = None,
+        start_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        end_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        date_type: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
+            ),
+        ] = None,
+        system_files_only: Optional[StrictBool] = None,
+        files: Optional[StrictStr] = None,
+        format: Annotated[
+            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
+        ] = None,
+        serial_number: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
+        ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
+        session_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Session UID")
+        ] = None,
+        event_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Event UID")
+        ] = None,
+        select_fields: Annotated[
+            Optional[StrictStr],
+            Field(
+                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
+            ),
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """get_events
+
+        Get Events of a Project
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param page_size:
+        :type page_size: int
+        :param page_num:
+        :type page_num: int
+        :param device_uid: A Device UID.
+        :type device_uid: List[str]
+        :param sort_by:
+        :type sort_by: str
+        :param sort_order:
+        :type sort_order: str
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
+        :type start_date: int
+        :param end_date: End date for filtering results, specified as a Unix timestamp
+        :type end_date: int
+        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+        :type date_type: str
+        :param system_files_only:
+        :type system_files_only: bool
+        :param files:
+        :type files: str
+        :param format: Response format (JSON or CSV)
+        :type format: str
+        :param serial_number: Filter by Serial Number
+        :type serial_number: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
+        :param session_uid: Filter by Session UID
+        :type session_uid: List[str]
+        :param event_uid: Filter by Event UID
+        :type event_uid: List[str]
+        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+        :type select_fields: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_events_serialize(
+            project_or_product_uid=project_or_product_uid,
+            page_size=page_size,
+            page_num=page_num,
+            device_uid=device_uid,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            start_date=start_date,
+            end_date=end_date,
+            date_type=date_type,
+            system_files_only=system_files_only,
+            files=files,
+            format=format,
+            serial_number=serial_number,
+            fleet_uid=fleet_uid,
+            session_uid=session_uid,
+            event_uid=event_uid,
+            select_fields=select_fields,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetEvents200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_events_serialize(
+        self,
+        project_or_product_uid,
+        page_size,
+        page_num,
+        device_uid,
+        sort_by,
+        sort_order,
+        start_date,
+        end_date,
+        date_type,
+        system_files_only,
+        files,
+        format,
+        serial_number,
+        fleet_uid,
+        session_uid,
+        event_uid,
+        select_fields,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            "deviceUID": "multi",
+            "serialNumber": "multi",
+            "fleetUID": "multi",
+            "sessionUID": "multi",
+            "eventUID": "multi",
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
+        # process the query parameters
+        if page_size is not None:
+
+            _query_params.append(("pageSize", page_size))
+
+        if page_num is not None:
+
+            _query_params.append(("pageNum", page_num))
+
+        if device_uid is not None:
+
+            _query_params.append(("deviceUID", device_uid))
+
+        if sort_by is not None:
+
+            _query_params.append(("sortBy", sort_by))
+
+        if sort_order is not None:
+
+            _query_params.append(("sortOrder", sort_order))
+
+        if start_date is not None:
+
+            _query_params.append(("startDate", start_date))
+
+        if end_date is not None:
+
+            _query_params.append(("endDate", end_date))
+
+        if date_type is not None:
+
+            _query_params.append(("dateType", date_type))
+
+        if system_files_only is not None:
+
+            _query_params.append(("systemFilesOnly", system_files_only))
+
+        if files is not None:
+
+            _query_params.append(("files", files))
+
+        if format is not None:
+
+            _query_params.append(("format", format))
+
+        if serial_number is not None:
+
+            _query_params.append(("serialNumber", serial_number))
+
+        if fleet_uid is not None:
+
+            _query_params.append(("fleetUID", fleet_uid))
+
+        if session_uid is not None:
+
+            _query_params.append(("sessionUID", session_uid))
+
+        if event_uid is not None:
+
+            _query_params.append(("eventUID", event_uid))
+
+        if select_fields is not None:
+
+            _query_params.append(("selectFields", select_fields))
+
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json", "text/csv"]
+        )
+
+        # authentication setting
+        _auth_settings: List[str] = ["personalAccessToken"]
+
+        return self.api_client.param_serialize(
+            method="GET",
+            resource_path="/v1/projects/{projectOrProductUID}/events",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    def get_events_by_cursor(
+        self,
+        project_or_product_uid: StrictStr,
+        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
+            ),
+        ] = None,
+        sort_order: Optional[StrictStr] = None,
+        system_files_only: Optional[StrictBool] = None,
+        files: Optional[StrictStr] = None,
+        fleet_uid: Optional[StrictStr] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetEventsByCursor200Response:
+        """get_events_by_cursor
+
+        Get Events of a Project by cursor
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param limit:
+        :type limit: int
+        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
+        :type cursor: str
+        :param sort_order:
+        :type sort_order: str
+        :param system_files_only:
+        :type system_files_only: bool
+        :param files:
+        :type files: str
+        :param fleet_uid:
+        :type fleet_uid: str
+        :param device_uid: A Device UID.
+        :type device_uid: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_events_by_cursor_serialize(
+            project_or_product_uid=project_or_product_uid,
+            limit=limit,
+            cursor=cursor,
+            sort_order=sort_order,
+            system_files_only=system_files_only,
+            files=files,
+            fleet_uid=fleet_uid,
+            device_uid=device_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetEventsByCursor200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_events_by_cursor_with_http_info(
+        self,
+        project_or_product_uid: StrictStr,
+        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
+            ),
+        ] = None,
+        sort_order: Optional[StrictStr] = None,
+        system_files_only: Optional[StrictBool] = None,
+        files: Optional[StrictStr] = None,
+        fleet_uid: Optional[StrictStr] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetEventsByCursor200Response]:
+        """get_events_by_cursor
+
+        Get Events of a Project by cursor
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param limit:
+        :type limit: int
+        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
+        :type cursor: str
+        :param sort_order:
+        :type sort_order: str
+        :param system_files_only:
+        :type system_files_only: bool
+        :param files:
+        :type files: str
+        :param fleet_uid:
+        :type fleet_uid: str
+        :param device_uid: A Device UID.
+        :type device_uid: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_events_by_cursor_serialize(
+            project_or_product_uid=project_or_product_uid,
+            limit=limit,
+            cursor=cursor,
+            sort_order=sort_order,
+            system_files_only=system_files_only,
+            files=files,
+            fleet_uid=fleet_uid,
+            device_uid=device_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetEventsByCursor200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_events_by_cursor_without_preload_content(
+        self,
+        project_or_product_uid: StrictStr,
+        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
+            ),
+        ] = None,
+        sort_order: Optional[StrictStr] = None,
+        system_files_only: Optional[StrictBool] = None,
+        files: Optional[StrictStr] = None,
+        fleet_uid: Optional[StrictStr] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """get_events_by_cursor
+
+        Get Events of a Project by cursor
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param limit:
+        :type limit: int
+        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
+        :type cursor: str
+        :param sort_order:
+        :type sort_order: str
+        :param system_files_only:
+        :type system_files_only: bool
+        :param files:
+        :type files: str
+        :param fleet_uid:
+        :type fleet_uid: str
+        :param device_uid: A Device UID.
+        :type device_uid: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_events_by_cursor_serialize(
+            project_or_product_uid=project_or_product_uid,
+            limit=limit,
+            cursor=cursor,
+            sort_order=sort_order,
+            system_files_only=system_files_only,
+            files=files,
+            fleet_uid=fleet_uid,
+            device_uid=device_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetEventsByCursor200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_events_by_cursor_serialize(
+        self,
+        project_or_product_uid,
+        limit,
+        cursor,
+        sort_order,
+        system_files_only,
+        files,
+        fleet_uid,
+        device_uid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            "deviceUID": "multi",
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
+        # process the query parameters
+        if limit is not None:
+
+            _query_params.append(("limit", limit))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
+
+        if sort_order is not None:
+
+            _query_params.append(("sortOrder", sort_order))
+
+        if system_files_only is not None:
+
+            _query_params.append(("systemFilesOnly", system_files_only))
+
+        if files is not None:
+
+            _query_params.append(("files", files))
+
+        if fleet_uid is not None:
+
+            _query_params.append(("fleetUID", fleet_uid))
+
+        if device_uid is not None:
+
+            _query_params.append(("deviceUID", device_uid))
+
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )
+
+        # authentication setting
+        _auth_settings: List[str] = ["personalAccessToken"]
+
+        return self.api_client.param_serialize(
+            method="GET",
+            resource_path="/v1/projects/{projectOrProductUID}/events-cursor",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
 
     @validate_call
     def get_fleet_events(
@@ -104,7 +1098,7 @@ class EventApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetProjectEvents200Response:
+    ) -> GetEvents200Response:
         """get_fleet_events
 
         Get Events of a Fleet
@@ -190,7 +1184,7 @@ class EventApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEvents200Response",
+            "200": "GetEvents200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -262,7 +1256,7 @@ class EventApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetProjectEvents200Response]:
+    ) -> ApiResponse[GetEvents200Response]:
         """get_fleet_events
 
         Get Events of a Fleet
@@ -348,7 +1342,7 @@ class EventApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEvents200Response",
+            "200": "GetEvents200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -506,7 +1500,7 @@ class EventApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEvents200Response",
+            "200": "GetEvents200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -688,7 +1682,7 @@ class EventApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetProjectEventsByCursor200Response:
+    ) -> GetEventsByCursor200Response:
         """get_fleet_events_by_cursor
 
         Get Events of a Fleet by cursor
@@ -753,7 +1747,7 @@ class EventApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEventsByCursor200Response",
+            "200": "GetEventsByCursor200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -805,7 +1799,7 @@ class EventApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetProjectEventsByCursor200Response]:
+    ) -> ApiResponse[GetEventsByCursor200Response]:
         """get_fleet_events_by_cursor
 
         Get Events of a Fleet by cursor
@@ -870,7 +1864,7 @@ class EventApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEventsByCursor200Response",
+            "200": "GetEventsByCursor200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -987,7 +1981,7 @@ class EventApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEventsByCursor200Response",
+            "200": "GetEventsByCursor200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -1078,1000 +2072,6 @@ class EventApi:
         return self.api_client.param_serialize(
             method="GET",
             resource_path="/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor",
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth,
-        )
-
-    @validate_call
-    def get_project_events(
-        self,
-        project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
-        page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        sort_by: Optional[StrictStr] = None,
-        sort_order: Optional[StrictStr] = None,
-        start_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="Start date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        end_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="End date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        date_type: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
-            ),
-        ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        format: Annotated[
-            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
-        ] = None,
-        serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
-        ] = None,
-        fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
-        ] = None,
-        session_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Session UID")
-        ] = None,
-        event_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Event UID")
-        ] = None,
-        select_fields: Annotated[
-            Optional[StrictStr],
-            Field(
-                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetProjectEvents200Response:
-        """get_project_events
-
-        Get Events of a Project
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param page_size:
-        :type page_size: int
-        :param page_num:
-        :type page_num: int
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param sort_by:
-        :type sort_by: str
-        :param sort_order:
-        :type sort_order: str
-        :param start_date: Start date for filtering results, specified as a Unix timestamp
-        :type start_date: int
-        :param end_date: End date for filtering results, specified as a Unix timestamp
-        :type end_date: int
-        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
-        :type date_type: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param format: Response format (JSON or CSV)
-        :type format: str
-        :param serial_number: Filter by Serial Number
-        :type serial_number: List[str]
-        :param fleet_uid: Filter by Fleet UID
-        :type fleet_uid: List[str]
-        :param session_uid: Filter by Session UID
-        :type session_uid: List[str]
-        :param event_uid: Filter by Event UID
-        :type event_uid: List[str]
-        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-        :type select_fields: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_project_events_serialize(
-            project_or_product_uid=project_or_product_uid,
-            page_size=page_size,
-            page_num=page_num,
-            device_uid=device_uid,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            start_date=start_date,
-            end_date=end_date,
-            date_type=date_type,
-            system_files_only=system_files_only,
-            files=files,
-            format=format,
-            serial_number=serial_number,
-            fleet_uid=fleet_uid,
-            session_uid=session_uid,
-            event_uid=event_uid,
-            select_fields=select_fields,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEvents200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def get_project_events_with_http_info(
-        self,
-        project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
-        page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        sort_by: Optional[StrictStr] = None,
-        sort_order: Optional[StrictStr] = None,
-        start_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="Start date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        end_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="End date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        date_type: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
-            ),
-        ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        format: Annotated[
-            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
-        ] = None,
-        serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
-        ] = None,
-        fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
-        ] = None,
-        session_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Session UID")
-        ] = None,
-        event_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Event UID")
-        ] = None,
-        select_fields: Annotated[
-            Optional[StrictStr],
-            Field(
-                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetProjectEvents200Response]:
-        """get_project_events
-
-        Get Events of a Project
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param page_size:
-        :type page_size: int
-        :param page_num:
-        :type page_num: int
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param sort_by:
-        :type sort_by: str
-        :param sort_order:
-        :type sort_order: str
-        :param start_date: Start date for filtering results, specified as a Unix timestamp
-        :type start_date: int
-        :param end_date: End date for filtering results, specified as a Unix timestamp
-        :type end_date: int
-        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
-        :type date_type: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param format: Response format (JSON or CSV)
-        :type format: str
-        :param serial_number: Filter by Serial Number
-        :type serial_number: List[str]
-        :param fleet_uid: Filter by Fleet UID
-        :type fleet_uid: List[str]
-        :param session_uid: Filter by Session UID
-        :type session_uid: List[str]
-        :param event_uid: Filter by Event UID
-        :type event_uid: List[str]
-        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-        :type select_fields: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_project_events_serialize(
-            project_or_product_uid=project_or_product_uid,
-            page_size=page_size,
-            page_num=page_num,
-            device_uid=device_uid,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            start_date=start_date,
-            end_date=end_date,
-            date_type=date_type,
-            system_files_only=system_files_only,
-            files=files,
-            format=format,
-            serial_number=serial_number,
-            fleet_uid=fleet_uid,
-            session_uid=session_uid,
-            event_uid=event_uid,
-            select_fields=select_fields,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEvents200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def get_project_events_without_preload_content(
-        self,
-        project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
-        page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        sort_by: Optional[StrictStr] = None,
-        sort_order: Optional[StrictStr] = None,
-        start_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="Start date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        end_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="End date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        date_type: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
-            ),
-        ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        format: Annotated[
-            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
-        ] = None,
-        serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
-        ] = None,
-        fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
-        ] = None,
-        session_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Session UID")
-        ] = None,
-        event_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Event UID")
-        ] = None,
-        select_fields: Annotated[
-            Optional[StrictStr],
-            Field(
-                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """get_project_events
-
-        Get Events of a Project
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param page_size:
-        :type page_size: int
-        :param page_num:
-        :type page_num: int
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param sort_by:
-        :type sort_by: str
-        :param sort_order:
-        :type sort_order: str
-        :param start_date: Start date for filtering results, specified as a Unix timestamp
-        :type start_date: int
-        :param end_date: End date for filtering results, specified as a Unix timestamp
-        :type end_date: int
-        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
-        :type date_type: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param format: Response format (JSON or CSV)
-        :type format: str
-        :param serial_number: Filter by Serial Number
-        :type serial_number: List[str]
-        :param fleet_uid: Filter by Fleet UID
-        :type fleet_uid: List[str]
-        :param session_uid: Filter by Session UID
-        :type session_uid: List[str]
-        :param event_uid: Filter by Event UID
-        :type event_uid: List[str]
-        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
-        :type select_fields: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_project_events_serialize(
-            project_or_product_uid=project_or_product_uid,
-            page_size=page_size,
-            page_num=page_num,
-            device_uid=device_uid,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            start_date=start_date,
-            end_date=end_date,
-            date_type=date_type,
-            system_files_only=system_files_only,
-            files=files,
-            format=format,
-            serial_number=serial_number,
-            fleet_uid=fleet_uid,
-            session_uid=session_uid,
-            event_uid=event_uid,
-            select_fields=select_fields,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEvents200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _get_project_events_serialize(
-        self,
-        project_or_product_uid,
-        page_size,
-        page_num,
-        device_uid,
-        sort_by,
-        sort_order,
-        start_date,
-        end_date,
-        date_type,
-        system_files_only,
-        files,
-        format,
-        serial_number,
-        fleet_uid,
-        session_uid,
-        event_uid,
-        select_fields,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-            "deviceUID": "multi",
-            "serialNumber": "multi",
-            "fleetUID": "multi",
-            "sessionUID": "multi",
-            "eventUID": "multi",
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if project_or_product_uid is not None:
-            _path_params["projectOrProductUID"] = project_or_product_uid
-        # process the query parameters
-        if page_size is not None:
-
-            _query_params.append(("pageSize", page_size))
-
-        if page_num is not None:
-
-            _query_params.append(("pageNum", page_num))
-
-        if device_uid is not None:
-
-            _query_params.append(("deviceUID", device_uid))
-
-        if sort_by is not None:
-
-            _query_params.append(("sortBy", sort_by))
-
-        if sort_order is not None:
-
-            _query_params.append(("sortOrder", sort_order))
-
-        if start_date is not None:
-
-            _query_params.append(("startDate", start_date))
-
-        if end_date is not None:
-
-            _query_params.append(("endDate", end_date))
-
-        if date_type is not None:
-
-            _query_params.append(("dateType", date_type))
-
-        if system_files_only is not None:
-
-            _query_params.append(("systemFilesOnly", system_files_only))
-
-        if files is not None:
-
-            _query_params.append(("files", files))
-
-        if format is not None:
-
-            _query_params.append(("format", format))
-
-        if serial_number is not None:
-
-            _query_params.append(("serialNumber", serial_number))
-
-        if fleet_uid is not None:
-
-            _query_params.append(("fleetUID", fleet_uid))
-
-        if session_uid is not None:
-
-            _query_params.append(("sessionUID", session_uid))
-
-        if event_uid is not None:
-
-            _query_params.append(("eventUID", event_uid))
-
-        if select_fields is not None:
-
-            _query_params.append(("selectFields", select_fields))
-
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(
-            ["application/json", "text/csv"]
-        )
-
-        # authentication setting
-        _auth_settings: List[str] = ["personalAccessToken"]
-
-        return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/v1/projects/{projectOrProductUID}/events",
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth,
-        )
-
-    @validate_call
-    def get_project_events_by_cursor(
-        self,
-        project_or_product_uid: StrictStr,
-        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
-            ),
-        ] = None,
-        sort_order: Optional[StrictStr] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        fleet_uid: Optional[StrictStr] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetProjectEventsByCursor200Response:
-        """get_project_events_by_cursor
-
-        Get Events of a Project by cursor
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param limit:
-        :type limit: int
-        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-        :type cursor: str
-        :param sort_order:
-        :type sort_order: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param fleet_uid:
-        :type fleet_uid: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_project_events_by_cursor_serialize(
-            project_or_product_uid=project_or_product_uid,
-            limit=limit,
-            cursor=cursor,
-            sort_order=sort_order,
-            system_files_only=system_files_only,
-            files=files,
-            fleet_uid=fleet_uid,
-            device_uid=device_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEventsByCursor200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def get_project_events_by_cursor_with_http_info(
-        self,
-        project_or_product_uid: StrictStr,
-        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
-            ),
-        ] = None,
-        sort_order: Optional[StrictStr] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        fleet_uid: Optional[StrictStr] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetProjectEventsByCursor200Response]:
-        """get_project_events_by_cursor
-
-        Get Events of a Project by cursor
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param limit:
-        :type limit: int
-        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-        :type cursor: str
-        :param sort_order:
-        :type sort_order: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param fleet_uid:
-        :type fleet_uid: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_project_events_by_cursor_serialize(
-            project_or_product_uid=project_or_product_uid,
-            limit=limit,
-            cursor=cursor,
-            sort_order=sort_order,
-            system_files_only=system_files_only,
-            files=files,
-            fleet_uid=fleet_uid,
-            device_uid=device_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEventsByCursor200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def get_project_events_by_cursor_without_preload_content(
-        self,
-        project_or_product_uid: StrictStr,
-        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
-            ),
-        ] = None,
-        sort_order: Optional[StrictStr] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        fleet_uid: Optional[StrictStr] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """get_project_events_by_cursor
-
-        Get Events of a Project by cursor
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param limit:
-        :type limit: int
-        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-        :type cursor: str
-        :param sort_order:
-        :type sort_order: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param fleet_uid:
-        :type fleet_uid: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_project_events_by_cursor_serialize(
-            project_or_product_uid=project_or_product_uid,
-            limit=limit,
-            cursor=cursor,
-            sort_order=sort_order,
-            system_files_only=system_files_only,
-            files=files,
-            fleet_uid=fleet_uid,
-            device_uid=device_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetProjectEventsByCursor200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _get_project_events_by_cursor_serialize(
-        self,
-        project_or_product_uid,
-        limit,
-        cursor,
-        sort_order,
-        system_files_only,
-        files,
-        fleet_uid,
-        device_uid,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-            "deviceUID": "multi",
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if project_or_product_uid is not None:
-            _path_params["projectOrProductUID"] = project_or_product_uid
-        # process the query parameters
-        if limit is not None:
-
-            _query_params.append(("limit", limit))
-
-        if cursor is not None:
-
-            _query_params.append(("cursor", cursor))
-
-        if sort_order is not None:
-
-            _query_params.append(("sortOrder", sort_order))
-
-        if system_files_only is not None:
-
-            _query_params.append(("systemFilesOnly", system_files_only))
-
-        if files is not None:
-
-            _query_params.append(("files", files))
-
-        if fleet_uid is not None:
-
-            _query_params.append(("fleetUID", fleet_uid))
-
-        if device_uid is not None:
-
-            _query_params.append(("deviceUID", device_uid))
-
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(
-            ["application/json"]
-        )
-
-        # authentication setting
-        _auth_settings: List[str] = ["personalAccessToken"]
-
-        return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/v1/projects/{projectOrProductUID}/events-cursor",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
