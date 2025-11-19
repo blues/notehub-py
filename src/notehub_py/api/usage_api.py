@@ -457,7 +457,11 @@ class UsageApi:
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[List[StrictStr]],
+            Field(description="Aggregation level for results"),
+        ] = None,
+        notefile: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
         ] = None,
         _request_timeout: Union[
             None,
@@ -488,7 +492,9 @@ class UsageApi:
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
-        :type aggregate: str
+        :type aggregate: List[str]
+        :param notefile: Filter to specific notefiles
+        :type notefile: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -519,6 +525,7 @@ class UsageApi:
             device_uid=device_uid,
             fleet_uid=fleet_uid,
             aggregate=aggregate,
+            notefile=notefile,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -561,7 +568,11 @@ class UsageApi:
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[List[StrictStr]],
+            Field(description="Aggregation level for results"),
+        ] = None,
+        notefile: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
         ] = None,
         _request_timeout: Union[
             None,
@@ -592,7 +603,9 @@ class UsageApi:
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
-        :type aggregate: str
+        :type aggregate: List[str]
+        :param notefile: Filter to specific notefiles
+        :type notefile: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -623,6 +636,7 @@ class UsageApi:
             device_uid=device_uid,
             fleet_uid=fleet_uid,
             aggregate=aggregate,
+            notefile=notefile,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -665,7 +679,11 @@ class UsageApi:
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[List[StrictStr]],
+            Field(description="Aggregation level for results"),
+        ] = None,
+        notefile: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
         ] = None,
         _request_timeout: Union[
             None,
@@ -696,7 +714,9 @@ class UsageApi:
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
-        :type aggregate: str
+        :type aggregate: List[str]
+        :param notefile: Filter to specific notefiles
+        :type notefile: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -727,6 +747,7 @@ class UsageApi:
             device_uid=device_uid,
             fleet_uid=fleet_uid,
             aggregate=aggregate,
+            notefile=notefile,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -750,6 +771,7 @@ class UsageApi:
         device_uid,
         fleet_uid,
         aggregate,
+        notefile,
         _request_auth,
         _content_type,
         _headers,
@@ -761,6 +783,8 @@ class UsageApi:
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
             "fleetUID": "multi",
+            "aggregate": "multi",
+            "notefile": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -797,6 +821,10 @@ class UsageApi:
         if aggregate is not None:
 
             _query_params.append(("aggregate", aggregate))
+
+        if notefile is not None:
+
+            _query_params.append(("notefile", notefile))
 
         # process the header parameters
         # process the form parameters
