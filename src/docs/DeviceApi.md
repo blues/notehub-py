@@ -5,8 +5,6 @@ All URIs are relative to *https://api.notefile.net*
 | Method                                                                                              | HTTP request                                                                                   | Description                                     |
 | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [**add_db_note**](DeviceApi.md#add_db_note)                                                         | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
-| [**add_device_environment_variables**](DeviceApi.md#add_device_environment_variables)               | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
-| [**add_device_environment_variables_by_pin**](DeviceApi.md#add_device_environment_variables_by_pin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
 | [**add_qi_note**](DeviceApi.md#add_qi_note)                                                         | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}             |
 | [**delete_db_note**](DeviceApi.md#delete_db_note)                                                   | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
 | [**delete_device**](DeviceApi.md#delete_device)                                                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
@@ -33,6 +31,8 @@ All URIs are relative to *https://api.notefile.net*
 | [**list_notefiles**](DeviceApi.md#list_notefiles)                                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes                   |
 | [**list_pending_notefiles**](DeviceApi.md#list_pending_notefiles)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending           |
 | [**provision_device**](DeviceApi.md#provision_device)                                               | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision                      |
+| [**set_device_environment_variables**](DeviceApi.md#set_device_environment_variables)               | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
+| [**set_device_environment_variables_by_pin**](DeviceApi.md#set_device_environment_variables_by_pin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
 | [**signal_device**](DeviceApi.md#signal_device)                                                     | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal                         |
 | [**update_db_note**](DeviceApi.md#update_db_note)                                                   | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
 
@@ -113,163 +113,6 @@ void (empty response body)
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | An empty object means success              | -                |
 | **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **add_device_environment_variables**
-
-> EnvironmentVariables add_device_environment_variables(project_or_product_uid, device_uid, environment_variables)
-
-Add environment variables of a device
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.environment_variables import EnvironmentVariables
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the device
-
-    try:
-        api_response = api_instance.add_device_environment_variables(project_or_product_uid, device_uid, environment_variables)
-        print("The response of DeviceApi->add_device_environment_variables:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceApi->add_device_environment_variables: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type                                                | Description                                     | Notes |
-| -------------------------- | --------------------------------------------------- | ----------------------------------------------- | ----- |
-| **project_or_product_uid** | **str**                                             |                                                 |
-| **device_uid**             | **str**                                             |                                                 |
-| **environment_variables**  | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
-
-### Return type
-
-[**EnvironmentVariables**](EnvironmentVariables.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **add_device_environment_variables_by_pin**
-
-> EnvironmentVariables add_device_environment_variables_by_pin(product_uid, device_uid, environment_variables)
-
-Add environment variables of a device with device pin authorization
-
-### Example
-
-- Api Key Authentication (pin):
-
-```python
-import notehub_py
-from notehub_py.models.environment_variables import EnvironmentVariables
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: pin
-configuration.api_key['pin'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['pin'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    product_uid = 'com.blues.bridge:sensors' # str |
-    device_uid = 'dev:000000000000000' # str |
-    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the device
-
-    try:
-        api_response = api_instance.add_device_environment_variables_by_pin(product_uid, device_uid, environment_variables)
-        print("The response of DeviceApi->add_device_environment_variables_by_pin:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceApi->add_device_environment_variables_by_pin: %s\n" % e)
-```
-
-### Parameters
-
-| Name                      | Type                                                | Description                                     | Notes |
-| ------------------------- | --------------------------------------------------- | ----------------------------------------------- | ----- |
-| **product_uid**           | **str**                                             |                                                 |
-| **device_uid**            | **str**                                             |                                                 |
-| **environment_variables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
-
-### Return type
-
-[**EnvironmentVariables**](EnvironmentVariables.md)
-
-### Authorization
-
-[pin](../README.md#pin)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2325,6 +2168,163 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | Successful operation                       | -                |
 | **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_device_environment_variables**
+
+> EnvironmentVariables set_device_environment_variables(project_or_product_uid, device_uid, environment_variables)
+
+Set environment variables of a device
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.environment_variables import EnvironmentVariables
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the device
+
+    try:
+        api_response = api_instance.set_device_environment_variables(project_or_product_uid, device_uid, environment_variables)
+        print("The response of DeviceApi->set_device_environment_variables:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->set_device_environment_variables: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type                                                | Description                                     | Notes |
+| -------------------------- | --------------------------------------------------- | ----------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**                                             |                                                 |
+| **device_uid**             | **str**                                             |                                                 |
+| **environment_variables**  | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                              | Response headers |
+| ----------- | -------------------------------------------------------- | ---------------- |
+| **200**     | The response body from an environment variables request. | -                |
+| **0**       | The response body in case of an API error.               | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_device_environment_variables_by_pin**
+
+> EnvironmentVariables set_device_environment_variables_by_pin(product_uid, device_uid, environment_variables)
+
+Set environment variables of a device with device pin authorization
+
+### Example
+
+- Api Key Authentication (pin):
+
+```python
+import notehub_py
+from notehub_py.models.environment_variables import EnvironmentVariables
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: pin
+configuration.api_key['pin'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['pin'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    product_uid = 'com.blues.bridge:sensors' # str |
+    device_uid = 'dev:000000000000000' # str |
+    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the device
+
+    try:
+        api_response = api_instance.set_device_environment_variables_by_pin(product_uid, device_uid, environment_variables)
+        print("The response of DeviceApi->set_device_environment_variables_by_pin:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->set_device_environment_variables_by_pin: %s\n" % e)
+```
+
+### Parameters
+
+| Name                      | Type                                                | Description                                     | Notes |
+| ------------------------- | --------------------------------------------------- | ----------------------------------------------- | ----- |
+| **product_uid**           | **str**                                             |                                                 |
+| **device_uid**            | **str**                                             |                                                 |
+| **environment_variables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[pin](../README.md#pin)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                              | Response headers |
+| ----------- | -------------------------------------------------------- | ---------------- |
+| **200**     | The response body from an environment variables request. | -                |
+| **0**       | The response body in case of an API error.               | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

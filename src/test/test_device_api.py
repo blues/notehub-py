@@ -31,14 +31,6 @@ class TestDeviceApi(unittest.TestCase):
         """Test case for add_db_note"""
         pass
 
-    def test_add_device_environment_variables(self) -> None:
-        """Test case for add_device_environment_variables"""
-        pass
-
-    def test_add_device_environment_variables_by_pin(self) -> None:
-        """Test case for add_device_environment_variables_by_pin"""
-        pass
-
     def test_add_qi_note(self) -> None:
         """Test case for add_qi_note"""
         pass
@@ -144,6 +136,14 @@ class TestDeviceApi(unittest.TestCase):
 
     def test_provision_device(self) -> None:
         """Test case for provision_device"""
+        pass
+
+    def test_set_device_environment_variables(self) -> None:
+        """Test case for set_device_environment_variables"""
+        pass
+
+    def test_set_device_environment_variables_by_pin(self) -> None:
+        """Test case for set_device_environment_variables_by_pin"""
         pass
 
     def test_signal_device(self) -> None:

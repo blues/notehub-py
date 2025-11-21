@@ -5,8 +5,6 @@ All URIs are relative to *https://api.notefile.net*
 | Method                                                                                       | HTTP request                                                                                | Description                                     |
 | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [**add_device_to_fleets**](ProjectApi.md#add_device_to_fleets)                               | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                       |
-| [**add_fleet_environment_variables**](ProjectApi.md#add_fleet_environment_variables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
-| [**add_project_environment_variables**](ProjectApi.md#add_project_environment_variables)     | **PUT** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**clone_project**](ProjectApi.md#clone_project)                                             | **POST** /v1/projects/{projectOrProductUID}/clone                                           |
 | [**create_fleet**](ProjectApi.md#create_fleet)                                               | **POST** /v1/projects/{projectOrProductUID}/fleets                                          |
 | [**create_product**](ProjectApi.md#create_product)                                           | **POST** /v1/projects/{projectOrProductUID}/products                                        |
@@ -38,7 +36,9 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_project_members**](ProjectApi.md#get_project_members)                                 | **GET** /v1/projects/{projectOrProductUID}/members                                          |
 | [**get_projects**](ProjectApi.md#get_projects)                                               | **GET** /v1/projects                                                                        |
 | [**perform_dfu_action**](ProjectApi.md#perform_dfu_action)                                   | **POST** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}                     |
+| [**set_fleet_environment_variables**](ProjectApi.md#set_fleet_environment_variables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
 | [**set_global_event_transformation**](ProjectApi.md#set_global_event_transformation)         | **POST** /v1/projects/{projectOrProductUID}/global-transformation                           |
+| [**set_project_environment_variables**](ProjectApi.md#set_project_environment_variables)     | **PUT** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**update_fleet**](ProjectApi.md#update_fleet)                                               | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                                |
 | [**upload_firmware**](ProjectApi.md#upload_firmware)                                         | **PUT** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
 
@@ -118,160 +118,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | The response body from a fleets endpoint.  | -                |
 | **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **add_fleet_environment_variables**
-
-> EnvironmentVariables add_fleet_environment_variables(project_or_product_uid, fleet_uid, environment_variables)
-
-Add environment variables of a fleet
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.environment_variables import EnvironmentVariables
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.ProjectApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    fleet_uid = 'fleet_uid_example' # str |
-    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the fleet
-
-    try:
-        api_response = api_instance.add_fleet_environment_variables(project_or_product_uid, fleet_uid, environment_variables)
-        print("The response of ProjectApi->add_fleet_environment_variables:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ProjectApi->add_fleet_environment_variables: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type                                                | Description                                    | Notes |
-| -------------------------- | --------------------------------------------------- | ---------------------------------------------- | ----- |
-| **project_or_product_uid** | **str**                                             |                                                |
-| **fleet_uid**              | **str**                                             |                                                |
-| **environment_variables**  | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the fleet |
-
-### Return type
-
-[**EnvironmentVariables**](EnvironmentVariables.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **add_project_environment_variables**
-
-> EnvironmentVariables add_project_environment_variables(project_or_product_uid, environment_variables=environment_variables)
-
-Add environment variables of a project
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.environment_variables import EnvironmentVariables
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.ProjectApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables |  (optional)
-
-    try:
-        api_response = api_instance.add_project_environment_variables(project_or_product_uid, environment_variables=environment_variables)
-        print("The response of ProjectApi->add_project_environment_variables:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ProjectApi->add_project_environment_variables: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type                                                | Description | Notes      |
-| -------------------------- | --------------------------------------------------- | ----------- | ---------- |
-| **project_or_product_uid** | **str**                                             |             |
-| **environment_variables**  | [**EnvironmentVariables**](EnvironmentVariables.md) |             | [optional] |
-
-### Return type
-
-[**EnvironmentVariables**](EnvironmentVariables.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2676,6 +2522,84 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **set_fleet_environment_variables**
+
+> EnvironmentVariables set_fleet_environment_variables(project_or_product_uid, fleet_uid, environment_variables)
+
+Set environment variables of a fleet
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.environment_variables import EnvironmentVariables
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    fleet_uid = 'fleet_uid_example' # str |
+    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the fleet
+
+    try:
+        api_response = api_instance.set_fleet_environment_variables(project_or_product_uid, fleet_uid, environment_variables)
+        print("The response of ProjectApi->set_fleet_environment_variables:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->set_fleet_environment_variables: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type                                                | Description                                    | Notes |
+| -------------------------- | --------------------------------------------------- | ---------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**                                             |                                                |
+| **fleet_uid**              | **str**                                             |                                                |
+| **environment_variables**  | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the fleet |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                              | Response headers |
+| ----------- | -------------------------------------------------------- | ---------------- |
+| **200**     | The response body from an environment variables request. | -                |
+| **0**       | The response body in case of an API error.               | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **set_global_event_transformation**
 
 > set_global_event_transformation(project_or_product_uid, body)
@@ -2746,6 +2670,82 @@ void (empty response body)
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | Successful operation                       | -                |
 | **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **set_project_environment_variables**
+
+> EnvironmentVariables set_project_environment_variables(project_or_product_uid, environment_variables=environment_variables)
+
+Set environment variables of a project
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.environment_variables import EnvironmentVariables
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables |  (optional)
+
+    try:
+        api_response = api_instance.set_project_environment_variables(project_or_product_uid, environment_variables=environment_variables)
+        print("The response of ProjectApi->set_project_environment_variables:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->set_project_environment_variables: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type                                                | Description | Notes      |
+| -------------------------- | --------------------------------------------------- | ----------- | ---------- |
+| **project_or_product_uid** | **str**                                             |             |
+| **environment_variables**  | [**EnvironmentVariables**](EnvironmentVariables.md) |             | [optional] |
+
+### Return type
+
+[**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                              | Response headers |
+| ----------- | -------------------------------------------------------- | ---------------- |
+| **200**     | The response body from an environment variables request. | -                |
+| **0**       | The response body in case of an API error.               | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

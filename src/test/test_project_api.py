@@ -31,14 +31,6 @@ class TestProjectApi(unittest.TestCase):
         """Test case for add_device_to_fleets"""
         pass
 
-    def test_add_fleet_environment_variables(self) -> None:
-        """Test case for add_fleet_environment_variables"""
-        pass
-
-    def test_add_project_environment_variables(self) -> None:
-        """Test case for add_project_environment_variables"""
-        pass
-
     def test_clone_project(self) -> None:
         """Test case for clone_project"""
         pass
@@ -172,8 +164,16 @@ class TestProjectApi(unittest.TestCase):
         """Test case for perform_dfu_action"""
         pass
 
+    def test_set_fleet_environment_variables(self) -> None:
+        """Test case for set_fleet_environment_variables"""
+        pass
+
     def test_set_global_event_transformation(self) -> None:
         """Test case for set_global_event_transformation"""
+        pass
+
+    def test_set_project_environment_variables(self) -> None:
+        """Test case for set_project_environment_variables"""
         pass
 
     def test_update_fleet(self) -> None:

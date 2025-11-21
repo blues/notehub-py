@@ -110,8 +110,6 @@ Class | Method | HTTP request | Description
 *AuthorizationApi* | [**o_auth2_client_credentials**](docs/AuthorizationApi.md#o_auth2_client_credentials) | **POST** /oauth2/token | Issue an OAuth 2.0 access token (Client Credentials)
 *BillingAccountApi* | [**get_billing_accounts**](docs/BillingAccountApi.md#get_billing_accounts) | **GET** /v1/billing-accounts | 
 *DeviceApi* | [**add_db_note**](docs/DeviceApi.md#add_db_note) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID} | 
-*DeviceApi* | [**add_device_environment_variables**](docs/DeviceApi.md#add_device_environment_variables) | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables | 
-*DeviceApi* | [**add_device_environment_variables_by_pin**](docs/DeviceApi.md#add_device_environment_variables_by_pin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin | 
 *DeviceApi* | [**add_qi_note**](docs/DeviceApi.md#add_qi_note) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID} | 
 *DeviceApi* | [**delete_db_note**](docs/DeviceApi.md#delete_db_note) | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID} | 
 *DeviceApi* | [**delete_device**](docs/DeviceApi.md#delete_device) | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID} | 
@@ -138,6 +136,8 @@ Class | Method | HTTP request | Description
 *DeviceApi* | [**list_notefiles**](docs/DeviceApi.md#list_notefiles) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes | 
 *DeviceApi* | [**list_pending_notefiles**](docs/DeviceApi.md#list_pending_notefiles) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending | 
 *DeviceApi* | [**provision_device**](docs/DeviceApi.md#provision_device) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision | 
+*DeviceApi* | [**set_device_environment_variables**](docs/DeviceApi.md#set_device_environment_variables) | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables | 
+*DeviceApi* | [**set_device_environment_variables_by_pin**](docs/DeviceApi.md#set_device_environment_variables_by_pin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin | 
 *DeviceApi* | [**signal_device**](docs/DeviceApi.md#signal_device) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal | 
 *DeviceApi* | [**update_db_note**](docs/DeviceApi.md#update_db_note) | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID} | 
 *EventApi* | [**get_events**](docs/EventApi.md#get_events) | **GET** /v1/projects/{projectOrProductUID}/events | 
@@ -154,8 +154,6 @@ Class | Method | HTTP request | Description
 *MonitorApi* | [**get_monitors**](docs/MonitorApi.md#get_monitors) | **GET** /v1/projects/{projectOrProductUID}/monitors | 
 *MonitorApi* | [**update_monitor**](docs/MonitorApi.md#update_monitor) | **PUT** /v1/projects/{projectOrProductUID}/monitors/{monitorUID} | 
 *ProjectApi* | [**add_device_to_fleets**](docs/ProjectApi.md#add_device_to_fleets) | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets | 
-*ProjectApi* | [**add_fleet_environment_variables**](docs/ProjectApi.md#add_fleet_environment_variables) | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables | 
-*ProjectApi* | [**add_project_environment_variables**](docs/ProjectApi.md#add_project_environment_variables) | **PUT** /v1/projects/{projectOrProductUID}/environment_variables | 
 *ProjectApi* | [**clone_project**](docs/ProjectApi.md#clone_project) | **POST** /v1/projects/{projectOrProductUID}/clone | 
 *ProjectApi* | [**create_fleet**](docs/ProjectApi.md#create_fleet) | **POST** /v1/projects/{projectOrProductUID}/fleets | 
 *ProjectApi* | [**create_product**](docs/ProjectApi.md#create_product) | **POST** /v1/projects/{projectOrProductUID}/products | 
@@ -187,7 +185,9 @@ Class | Method | HTTP request | Description
 *ProjectApi* | [**get_project_members**](docs/ProjectApi.md#get_project_members) | **GET** /v1/projects/{projectOrProductUID}/members | 
 *ProjectApi* | [**get_projects**](docs/ProjectApi.md#get_projects) | **GET** /v1/projects | 
 *ProjectApi* | [**perform_dfu_action**](docs/ProjectApi.md#perform_dfu_action) | **POST** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action} | 
+*ProjectApi* | [**set_fleet_environment_variables**](docs/ProjectApi.md#set_fleet_environment_variables) | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables | 
 *ProjectApi* | [**set_global_event_transformation**](docs/ProjectApi.md#set_global_event_transformation) | **POST** /v1/projects/{projectOrProductUID}/global-transformation | 
+*ProjectApi* | [**set_project_environment_variables**](docs/ProjectApi.md#set_project_environment_variables) | **PUT** /v1/projects/{projectOrProductUID}/environment_variables | 
 *ProjectApi* | [**update_fleet**](docs/ProjectApi.md#update_fleet) | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID} | 
 *ProjectApi* | [**upload_firmware**](docs/ProjectApi.md#upload_firmware) | **PUT** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename} | 
 *RouteApi* | [**create_route**](docs/RouteApi.md#create_route) | **POST** /v1/projects/{projectOrProductUID}/routes | 
