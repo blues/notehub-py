@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr, field_validator
+from pydantic import Field, StrictBool, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from notehub_py.models.get_data_usage200_response import GetDataUsage200Response
@@ -463,6 +463,12 @@ class UsageApi:
         notefile: Annotated[
             Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
         ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -495,6 +501,8 @@ class UsageApi:
         :type aggregate: List[str]
         :param notefile: Filter to specific notefiles
         :type notefile: List[str]
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -526,6 +534,7 @@ class UsageApi:
             fleet_uid=fleet_uid,
             aggregate=aggregate,
             notefile=notefile,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -574,6 +583,12 @@ class UsageApi:
         notefile: Annotated[
             Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
         ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -606,6 +621,8 @@ class UsageApi:
         :type aggregate: List[str]
         :param notefile: Filter to specific notefiles
         :type notefile: List[str]
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -637,6 +654,7 @@ class UsageApi:
             fleet_uid=fleet_uid,
             aggregate=aggregate,
             notefile=notefile,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -685,6 +703,12 @@ class UsageApi:
         notefile: Annotated[
             Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
         ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -717,6 +741,8 @@ class UsageApi:
         :type aggregate: List[str]
         :param notefile: Filter to specific notefiles
         :type notefile: List[str]
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -748,6 +774,7 @@ class UsageApi:
             fleet_uid=fleet_uid,
             aggregate=aggregate,
             notefile=notefile,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -772,6 +799,7 @@ class UsageApi:
         fleet_uid,
         aggregate,
         notefile,
+        skip_recent_data,
         _request_auth,
         _content_type,
         _headers,
@@ -826,6 +854,10 @@ class UsageApi:
 
             _query_params.append(("notefile", notefile))
 
+        if skip_recent_data is not None:
+
+            _query_params.append(("skipRecentData", skip_recent_data))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -879,6 +911,12 @@ class UsageApi:
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -909,6 +947,8 @@ class UsageApi:
         :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -939,6 +979,7 @@ class UsageApi:
             device_uid=device_uid,
             fleet_uid=fleet_uid,
             aggregate=aggregate,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -983,6 +1024,12 @@ class UsageApi:
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1013,6 +1060,8 @@ class UsageApi:
         :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1043,6 +1092,7 @@ class UsageApi:
             device_uid=device_uid,
             fleet_uid=fleet_uid,
             aggregate=aggregate,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1087,6 +1137,12 @@ class UsageApi:
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1117,6 +1173,8 @@ class UsageApi:
         :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1147,6 +1205,7 @@ class UsageApi:
             device_uid=device_uid,
             fleet_uid=fleet_uid,
             aggregate=aggregate,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1170,6 +1229,7 @@ class UsageApi:
         device_uid,
         fleet_uid,
         aggregate,
+        skip_recent_data,
         _request_auth,
         _content_type,
         _headers,
@@ -1217,6 +1277,10 @@ class UsageApi:
         if aggregate is not None:
 
             _query_params.append(("aggregate", aggregate))
+
+        if skip_recent_data is not None:
+
+            _query_params.append(("skipRecentData", skip_recent_data))
 
         # process the header parameters
         # process the form parameters
