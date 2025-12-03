@@ -41,6 +41,7 @@ class TestUsageEventsResponse(unittest.TestCase):
                     notehub_py.models.usage_events_data.UsageEventsData(
                         device = 'dev:123456789012345', 
                         fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
+                        notefiles = {"_log.qo":20,"customer1.qo":1,"session.qo":50}, 
                         period = '2025-07-23T00:00Z', 
                         platform_events = 15, 
                         total_events = 42, 
@@ -53,6 +54,7 @@ class TestUsageEventsResponse(unittest.TestCase):
                     notehub_py.models.usage_events_data.UsageEventsData(
                         device = 'dev:123456789012345', 
                         fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
+                        notefiles = {"_log.qo":20,"customer1.qo":1,"session.qo":50}, 
                         period = '2025-07-23T00:00Z', 
                         platform_events = 15, 
                         total_events = 42, 

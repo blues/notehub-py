@@ -20,11 +20,14 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictBytes, StrictStr, field_validator
 from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated
+from notehub_py.models.add_device_to_fleets_request import AddDeviceToFleetsRequest
 from notehub_py.models.clone_project_request import CloneProjectRequest
 from notehub_py.models.create_fleet_request import CreateFleetRequest
 from notehub_py.models.create_product_request import CreateProductRequest
 from notehub_py.models.create_project_request import CreateProjectRequest
-from notehub_py.models.delete_device_fleets_request import DeleteDeviceFleetsRequest
+from notehub_py.models.delete_device_from_fleets_request import (
+    DeleteDeviceFromFleetsRequest,
+)
 from notehub_py.models.device_dfu_history import DeviceDfuHistory
 from notehub_py.models.device_dfu_history_page import DeviceDfuHistoryPage
 from notehub_py.models.device_dfu_status import DeviceDfuStatus
@@ -43,7 +46,6 @@ from notehub_py.models.get_projects200_response import GetProjects200Response
 from notehub_py.models.notefile_schema import NotefileSchema
 from notehub_py.models.product import Product
 from notehub_py.models.project import Project
-from notehub_py.models.put_device_fleets_request import PutDeviceFleetsRequest
 from notehub_py.models.update_fleet_request import UpdateFleetRequest
 
 from notehub_py.api_client import ApiClient, RequestSerialized
@@ -62,6 +64,300 @@ class ProjectApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+    @validate_call
+    def add_device_to_fleets(
+        self,
+        project_or_product_uid: StrictStr,
+        device_uid: StrictStr,
+        add_device_to_fleets_request: Annotated[
+            AddDeviceToFleetsRequest,
+            Field(
+                description="The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
+            ),
+        ],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetDeviceFleets200Response:
+        """add_device_to_fleets
+
+        Add Device to Fleets
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param device_uid: (required)
+        :type device_uid: str
+        :param add_device_to_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :type add_device_to_fleets_request: AddDeviceToFleetsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._add_device_to_fleets_serialize(
+            project_or_product_uid=project_or_product_uid,
+            device_uid=device_uid,
+            add_device_to_fleets_request=add_device_to_fleets_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDeviceFleets200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def add_device_to_fleets_with_http_info(
+        self,
+        project_or_product_uid: StrictStr,
+        device_uid: StrictStr,
+        add_device_to_fleets_request: Annotated[
+            AddDeviceToFleetsRequest,
+            Field(
+                description="The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
+            ),
+        ],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetDeviceFleets200Response]:
+        """add_device_to_fleets
+
+        Add Device to Fleets
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param device_uid: (required)
+        :type device_uid: str
+        :param add_device_to_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :type add_device_to_fleets_request: AddDeviceToFleetsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._add_device_to_fleets_serialize(
+            project_or_product_uid=project_or_product_uid,
+            device_uid=device_uid,
+            add_device_to_fleets_request=add_device_to_fleets_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDeviceFleets200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def add_device_to_fleets_without_preload_content(
+        self,
+        project_or_product_uid: StrictStr,
+        device_uid: StrictStr,
+        add_device_to_fleets_request: Annotated[
+            AddDeviceToFleetsRequest,
+            Field(
+                description="The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
+            ),
+        ],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """add_device_to_fleets
+
+        Add Device to Fleets
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param device_uid: (required)
+        :type device_uid: str
+        :param add_device_to_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :type add_device_to_fleets_request: AddDeviceToFleetsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._add_device_to_fleets_serialize(
+            project_or_product_uid=project_or_product_uid,
+            device_uid=device_uid,
+            add_device_to_fleets_request=add_device_to_fleets_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDeviceFleets200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _add_device_to_fleets_serialize(
+        self,
+        project_or_product_uid,
+        device_uid,
+        add_device_to_fleets_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
+        if device_uid is not None:
+            _path_params["deviceUID"] = device_uid
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if add_device_to_fleets_request is not None:
+            _body_params = add_device_to_fleets_request
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["personalAccessToken"]
+
+        return self.api_client.param_serialize(
+            method="PUT",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
 
     @validate_call
     def clone_project(
@@ -1129,12 +1425,12 @@ class ProjectApi:
         )
 
     @validate_call
-    def delete_device_fleets(
+    def delete_device_from_fleets(
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        delete_device_fleets_request: Annotated[
-            DeleteDeviceFleetsRequest,
+        delete_device_from_fleets_request: Annotated[
+            DeleteDeviceFromFleetsRequest,
             Field(
                 description="The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
             ),
@@ -1151,7 +1447,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceFleets200Response:
-        """delete_device_fleets
+        """delete_device_from_fleets
 
         Remove Device from Fleets
 
@@ -1159,8 +1455,8 @@ class ProjectApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param delete_device_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
-        :type delete_device_fleets_request: DeleteDeviceFleetsRequest
+        :param delete_device_from_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :type delete_device_from_fleets_request: DeleteDeviceFromFleetsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1183,10 +1479,10 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._delete_device_fleets_serialize(
+        _param = self._delete_device_from_fleets_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            delete_device_fleets_request=delete_device_fleets_request,
+            delete_device_from_fleets_request=delete_device_from_fleets_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1206,12 +1502,12 @@ class ProjectApi:
         ).data
 
     @validate_call
-    def delete_device_fleets_with_http_info(
+    def delete_device_from_fleets_with_http_info(
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        delete_device_fleets_request: Annotated[
-            DeleteDeviceFleetsRequest,
+        delete_device_from_fleets_request: Annotated[
+            DeleteDeviceFromFleetsRequest,
             Field(
                 description="The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
             ),
@@ -1228,7 +1524,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceFleets200Response]:
-        """delete_device_fleets
+        """delete_device_from_fleets
 
         Remove Device from Fleets
 
@@ -1236,8 +1532,8 @@ class ProjectApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param delete_device_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
-        :type delete_device_fleets_request: DeleteDeviceFleetsRequest
+        :param delete_device_from_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :type delete_device_from_fleets_request: DeleteDeviceFromFleetsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1260,10 +1556,10 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._delete_device_fleets_serialize(
+        _param = self._delete_device_from_fleets_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            delete_device_fleets_request=delete_device_fleets_request,
+            delete_device_from_fleets_request=delete_device_from_fleets_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1283,12 +1579,12 @@ class ProjectApi:
         )
 
     @validate_call
-    def delete_device_fleets_without_preload_content(
+    def delete_device_from_fleets_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        delete_device_fleets_request: Annotated[
-            DeleteDeviceFleetsRequest,
+        delete_device_from_fleets_request: Annotated[
+            DeleteDeviceFromFleetsRequest,
             Field(
                 description="The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
             ),
@@ -1305,7 +1601,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_device_fleets
+        """delete_device_from_fleets
 
         Remove Device from Fleets
 
@@ -1313,8 +1609,8 @@ class ProjectApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param delete_device_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
-        :type delete_device_fleets_request: DeleteDeviceFleetsRequest
+        :param delete_device_from_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :type delete_device_from_fleets_request: DeleteDeviceFromFleetsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1337,10 +1633,10 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._delete_device_fleets_serialize(
+        _param = self._delete_device_from_fleets_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            delete_device_fleets_request=delete_device_fleets_request,
+            delete_device_from_fleets_request=delete_device_from_fleets_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1355,11 +1651,11 @@ class ProjectApi:
         )
         return response_data.response
 
-    def _delete_device_fleets_serialize(
+    def _delete_device_from_fleets_serialize(
         self,
         project_or_product_uid,
         device_uid,
-        delete_device_fleets_request,
+        delete_device_from_fleets_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1386,8 +1682,8 @@ class ProjectApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if delete_device_fleets_request is not None:
-            _body_params = delete_device_fleets_request
+        if delete_device_from_fleets_request is not None:
+            _body_params = delete_device_from_fleets_request
 
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.api_client.select_header_accept(
@@ -2705,514 +3001,7 @@ class ProjectApi:
         )
 
     @validate_call
-    def dfu_action(
-        self,
-        project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        action: StrictStr,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        tag: Annotated[
-            Optional[List[StrictStr]], Field(description="Tag filter")
-        ] = None,
-        serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Serial number filter")
-        ] = None,
-        fleet_uid: Optional[StrictStr] = None,
-        notecard_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Firmware version filter")
-        ] = None,
-        location: Annotated[
-            Optional[List[StrictStr]], Field(description="Location filter")
-        ] = None,
-        host_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Host firmware filter")
-        ] = None,
-        product_uid: Optional[List[StrictStr]] = None,
-        sku: Annotated[
-            Optional[List[StrictStr]], Field(description="SKU filter")
-        ] = None,
-        dfu_action_request: Annotated[
-            Optional[DfuActionRequest],
-            Field(description="Which firmware in the case of an update action"),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """dfu_action
-
-        Update/cancel host or notecard firmware updates
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param firmware_type: (required)
-        :type firmware_type: str
-        :param action: (required)
-        :type action: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param tag: Tag filter
-        :type tag: List[str]
-        :param serial_number: Serial number filter
-        :type serial_number: List[str]
-        :param fleet_uid:
-        :type fleet_uid: str
-        :param notecard_firmware: Firmware version filter
-        :type notecard_firmware: List[str]
-        :param location: Location filter
-        :type location: List[str]
-        :param host_firmware: Host firmware filter
-        :type host_firmware: List[str]
-        :param product_uid:
-        :type product_uid: List[str]
-        :param sku: SKU filter
-        :type sku: List[str]
-        :param dfu_action_request: Which firmware in the case of an update action
-        :type dfu_action_request: DfuActionRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._dfu_action_serialize(
-            project_or_product_uid=project_or_product_uid,
-            firmware_type=firmware_type,
-            action=action,
-            device_uid=device_uid,
-            tag=tag,
-            serial_number=serial_number,
-            fleet_uid=fleet_uid,
-            notecard_firmware=notecard_firmware,
-            location=location,
-            host_firmware=host_firmware,
-            product_uid=product_uid,
-            sku=sku,
-            dfu_action_request=dfu_action_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def dfu_action_with_http_info(
-        self,
-        project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        action: StrictStr,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        tag: Annotated[
-            Optional[List[StrictStr]], Field(description="Tag filter")
-        ] = None,
-        serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Serial number filter")
-        ] = None,
-        fleet_uid: Optional[StrictStr] = None,
-        notecard_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Firmware version filter")
-        ] = None,
-        location: Annotated[
-            Optional[List[StrictStr]], Field(description="Location filter")
-        ] = None,
-        host_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Host firmware filter")
-        ] = None,
-        product_uid: Optional[List[StrictStr]] = None,
-        sku: Annotated[
-            Optional[List[StrictStr]], Field(description="SKU filter")
-        ] = None,
-        dfu_action_request: Annotated[
-            Optional[DfuActionRequest],
-            Field(description="Which firmware in the case of an update action"),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """dfu_action
-
-        Update/cancel host or notecard firmware updates
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param firmware_type: (required)
-        :type firmware_type: str
-        :param action: (required)
-        :type action: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param tag: Tag filter
-        :type tag: List[str]
-        :param serial_number: Serial number filter
-        :type serial_number: List[str]
-        :param fleet_uid:
-        :type fleet_uid: str
-        :param notecard_firmware: Firmware version filter
-        :type notecard_firmware: List[str]
-        :param location: Location filter
-        :type location: List[str]
-        :param host_firmware: Host firmware filter
-        :type host_firmware: List[str]
-        :param product_uid:
-        :type product_uid: List[str]
-        :param sku: SKU filter
-        :type sku: List[str]
-        :param dfu_action_request: Which firmware in the case of an update action
-        :type dfu_action_request: DfuActionRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._dfu_action_serialize(
-            project_or_product_uid=project_or_product_uid,
-            firmware_type=firmware_type,
-            action=action,
-            device_uid=device_uid,
-            tag=tag,
-            serial_number=serial_number,
-            fleet_uid=fleet_uid,
-            notecard_firmware=notecard_firmware,
-            location=location,
-            host_firmware=host_firmware,
-            product_uid=product_uid,
-            sku=sku,
-            dfu_action_request=dfu_action_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def dfu_action_without_preload_content(
-        self,
-        project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        action: StrictStr,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        tag: Annotated[
-            Optional[List[StrictStr]], Field(description="Tag filter")
-        ] = None,
-        serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Serial number filter")
-        ] = None,
-        fleet_uid: Optional[StrictStr] = None,
-        notecard_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Firmware version filter")
-        ] = None,
-        location: Annotated[
-            Optional[List[StrictStr]], Field(description="Location filter")
-        ] = None,
-        host_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Host firmware filter")
-        ] = None,
-        product_uid: Optional[List[StrictStr]] = None,
-        sku: Annotated[
-            Optional[List[StrictStr]], Field(description="SKU filter")
-        ] = None,
-        dfu_action_request: Annotated[
-            Optional[DfuActionRequest],
-            Field(description="Which firmware in the case of an update action"),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """dfu_action
-
-        Update/cancel host or notecard firmware updates
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param firmware_type: (required)
-        :type firmware_type: str
-        :param action: (required)
-        :type action: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param tag: Tag filter
-        :type tag: List[str]
-        :param serial_number: Serial number filter
-        :type serial_number: List[str]
-        :param fleet_uid:
-        :type fleet_uid: str
-        :param notecard_firmware: Firmware version filter
-        :type notecard_firmware: List[str]
-        :param location: Location filter
-        :type location: List[str]
-        :param host_firmware: Host firmware filter
-        :type host_firmware: List[str]
-        :param product_uid:
-        :type product_uid: List[str]
-        :param sku: SKU filter
-        :type sku: List[str]
-        :param dfu_action_request: Which firmware in the case of an update action
-        :type dfu_action_request: DfuActionRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._dfu_action_serialize(
-            project_or_product_uid=project_or_product_uid,
-            firmware_type=firmware_type,
-            action=action,
-            device_uid=device_uid,
-            tag=tag,
-            serial_number=serial_number,
-            fleet_uid=fleet_uid,
-            notecard_firmware=notecard_firmware,
-            location=location,
-            host_firmware=host_firmware,
-            product_uid=product_uid,
-            sku=sku,
-            dfu_action_request=dfu_action_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _dfu_action_serialize(
-        self,
-        project_or_product_uid,
-        firmware_type,
-        action,
-        device_uid,
-        tag,
-        serial_number,
-        fleet_uid,
-        notecard_firmware,
-        location,
-        host_firmware,
-        product_uid,
-        sku,
-        dfu_action_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-            "deviceUID": "multi",
-            "tag": "multi",
-            "serialNumber": "multi",
-            "notecardFirmware": "multi",
-            "location": "multi",
-            "hostFirmware": "multi",
-            "productUID": "multi",
-            "sku": "multi",
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if project_or_product_uid is not None:
-            _path_params["projectOrProductUID"] = project_or_product_uid
-        if firmware_type is not None:
-            _path_params["firmwareType"] = firmware_type
-        if action is not None:
-            _path_params["action"] = action
-        # process the query parameters
-        if device_uid is not None:
-
-            _query_params.append(("deviceUID", device_uid))
-
-        if tag is not None:
-
-            _query_params.append(("tag", tag))
-
-        if serial_number is not None:
-
-            _query_params.append(("serialNumber", serial_number))
-
-        if fleet_uid is not None:
-
-            _query_params.append(("fleetUID", fleet_uid))
-
-        if notecard_firmware is not None:
-
-            _query_params.append(("notecardFirmware", notecard_firmware))
-
-        if location is not None:
-
-            _query_params.append(("location", location))
-
-        if host_firmware is not None:
-
-            _query_params.append(("hostFirmware", host_firmware))
-
-        if product_uid is not None:
-
-            _query_params.append(("productUID", product_uid))
-
-        if sku is not None:
-
-            _query_params.append(("sku", sku))
-
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if dfu_action_request is not None:
-            _body_params = dfu_action_request
-
-        # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(
-            ["application/json"]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params["Content-Type"] = _content_type
-        else:
-            _default_content_type = self.api_client.select_header_content_type(
-                ["application/json"]
-            )
-            if _default_content_type is not None:
-                _header_params["Content-Type"] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = ["personalAccessToken"]
-
-        return self.api_client.param_serialize(
-            method="POST",
-            resource_path="/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}",
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth,
-        )
-
-    @validate_call
-    def disable_global_transformation(
+    def disable_global_event_transformation(
         self,
         project_or_product_uid: StrictStr,
         _request_timeout: Union[
@@ -3227,7 +3016,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """disable_global_transformation
+        """disable_global_event_transformation
 
         Disable the project-level event JSONata transformation
 
@@ -3255,7 +3044,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._disable_global_transformation_serialize(
+        _param = self._disable_global_event_transformation_serialize(
             project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3276,7 +3065,7 @@ class ProjectApi:
         ).data
 
     @validate_call
-    def disable_global_transformation_with_http_info(
+    def disable_global_event_transformation_with_http_info(
         self,
         project_or_product_uid: StrictStr,
         _request_timeout: Union[
@@ -3291,7 +3080,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """disable_global_transformation
+        """disable_global_event_transformation
 
         Disable the project-level event JSONata transformation
 
@@ -3319,7 +3108,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._disable_global_transformation_serialize(
+        _param = self._disable_global_event_transformation_serialize(
             project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3340,7 +3129,7 @@ class ProjectApi:
         )
 
     @validate_call
-    def disable_global_transformation_without_preload_content(
+    def disable_global_event_transformation_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
         _request_timeout: Union[
@@ -3355,7 +3144,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """disable_global_transformation
+        """disable_global_event_transformation
 
         Disable the project-level event JSONata transformation
 
@@ -3383,7 +3172,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._disable_global_transformation_serialize(
+        _param = self._disable_global_event_transformation_serialize(
             project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3399,7 +3188,7 @@ class ProjectApi:
         )
         return response_data.response
 
-    def _disable_global_transformation_serialize(
+    def _disable_global_event_transformation_serialize(
         self,
         project_or_product_uid,
         _request_auth,
@@ -3451,7 +3240,7 @@ class ProjectApi:
         )
 
     @validate_call
-    def enable_global_transformation(
+    def enable_global_event_transformation(
         self,
         project_or_product_uid: StrictStr,
         _request_timeout: Union[
@@ -3466,7 +3255,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """enable_global_transformation
+        """enable_global_event_transformation
 
         Enable the project-level event JSONata transformation
 
@@ -3494,7 +3283,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._enable_global_transformation_serialize(
+        _param = self._enable_global_event_transformation_serialize(
             project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3515,7 +3304,7 @@ class ProjectApi:
         ).data
 
     @validate_call
-    def enable_global_transformation_with_http_info(
+    def enable_global_event_transformation_with_http_info(
         self,
         project_or_product_uid: StrictStr,
         _request_timeout: Union[
@@ -3530,7 +3319,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """enable_global_transformation
+        """enable_global_event_transformation
 
         Enable the project-level event JSONata transformation
 
@@ -3558,7 +3347,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._enable_global_transformation_serialize(
+        _param = self._enable_global_event_transformation_serialize(
             project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3579,7 +3368,7 @@ class ProjectApi:
         )
 
     @validate_call
-    def enable_global_transformation_without_preload_content(
+    def enable_global_event_transformation_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
         _request_timeout: Union[
@@ -3594,7 +3383,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """enable_global_transformation
+        """enable_global_event_transformation
 
         Enable the project-level event JSONata transformation
 
@@ -3622,7 +3411,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._enable_global_transformation_serialize(
+        _param = self._enable_global_event_transformation_serialize(
             project_or_product_uid=project_or_product_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3638,7 +3427,7 @@ class ProjectApi:
         )
         return response_data.response
 
-    def _enable_global_transformation_serialize(
+    def _enable_global_event_transformation_serialize(
         self,
         project_or_product_uid,
         _request_auth,
@@ -6657,6 +6446,245 @@ class ProjectApi:
         )
 
     @validate_call
+    def get_fleets(
+        self,
+        project_or_product_uid: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetDeviceFleets200Response:
+        """get_fleets
+
+        Get Project Fleets
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_fleets_serialize(
+            project_or_product_uid=project_or_product_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDeviceFleets200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_fleets_with_http_info(
+        self,
+        project_or_product_uid: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetDeviceFleets200Response]:
+        """get_fleets
+
+        Get Project Fleets
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_fleets_serialize(
+            project_or_product_uid=project_or_product_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDeviceFleets200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_fleets_without_preload_content(
+        self,
+        project_or_product_uid: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """get_fleets
+
+        Get Project Fleets
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_fleets_serialize(
+            project_or_product_uid=project_or_product_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDeviceFleets200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_fleets_serialize(
+        self,
+        project_or_product_uid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )
+
+        # authentication setting
+        _auth_settings: List[str] = ["personalAccessToken"]
+
+        return self.api_client.param_serialize(
+            method="GET",
+            resource_path="/v1/projects/{projectOrProductUID}/fleets",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     def get_notefile_schemas(
         self,
         project_or_product_uid: StrictStr,
@@ -8091,245 +8119,6 @@ class ProjectApi:
         )
 
     @validate_call
-    def get_project_fleets(
-        self,
-        project_or_product_uid: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetDeviceFleets200Response:
-        """get_project_fleets
-
-        Get Project Fleets
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_project_fleets_serialize(
-            project_or_product_uid=project_or_product_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceFleets200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def get_project_fleets_with_http_info(
-        self,
-        project_or_product_uid: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetDeviceFleets200Response]:
-        """get_project_fleets
-
-        Get Project Fleets
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_project_fleets_serialize(
-            project_or_product_uid=project_or_product_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceFleets200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def get_project_fleets_without_preload_content(
-        self,
-        project_or_product_uid: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """get_project_fleets
-
-        Get Project Fleets
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_project_fleets_serialize(
-            project_or_product_uid=project_or_product_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceFleets200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _get_project_fleets_serialize(
-        self,
-        project_or_product_uid,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {}
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if project_or_product_uid is not None:
-            _path_params["projectOrProductUID"] = project_or_product_uid
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(
-            ["application/json"]
-        )
-
-        # authentication setting
-        _auth_settings: List[str] = ["personalAccessToken"]
-
-        return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/v1/projects/{projectOrProductUID}/fleets",
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth,
-        )
-
-    @validate_call
     def get_project_members(
         self,
         project_or_product_uid: StrictStr,
@@ -8793,16 +8582,38 @@ class ProjectApi:
         )
 
     @validate_call
-    def put_device_fleets(
+    def perform_dfu_action(
         self,
         project_or_product_uid: StrictStr,
-        device_uid: StrictStr,
-        put_device_fleets_request: Annotated[
-            PutDeviceFleetsRequest,
-            Field(
-                description="The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
-            ),
-        ],
+        firmware_type: StrictStr,
+        action: StrictStr,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        tag: Annotated[
+            Optional[List[StrictStr]], Field(description="Tag filter")
+        ] = None,
+        serial_number: Annotated[
+            Optional[List[StrictStr]], Field(description="Serial number filter")
+        ] = None,
+        fleet_uid: Optional[StrictStr] = None,
+        notecard_firmware: Annotated[
+            Optional[List[StrictStr]], Field(description="Firmware version filter")
+        ] = None,
+        location: Annotated[
+            Optional[List[StrictStr]], Field(description="Location filter")
+        ] = None,
+        host_firmware: Annotated[
+            Optional[List[StrictStr]], Field(description="Host firmware filter")
+        ] = None,
+        product_uid: Optional[List[StrictStr]] = None,
+        sku: Annotated[
+            Optional[List[StrictStr]], Field(description="SKU filter")
+        ] = None,
+        dfu_action_request: Annotated[
+            Optional[DfuActionRequest],
+            Field(description="Which firmware in the case of an update action"),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8814,17 +8625,37 @@ class ProjectApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetDeviceFleets200Response:
-        """put_device_fleets
+    ) -> None:
+        """perform_dfu_action
 
-        Add Device to Fleets
+        Update/cancel host or notecard firmware updates
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param device_uid: (required)
-        :type device_uid: str
-        :param put_device_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
-        :type put_device_fleets_request: PutDeviceFleetsRequest
+        :param firmware_type: (required)
+        :type firmware_type: str
+        :param action: (required)
+        :type action: str
+        :param device_uid: A Device UID.
+        :type device_uid: List[str]
+        :param tag: Tag filter
+        :type tag: List[str]
+        :param serial_number: Serial number filter
+        :type serial_number: List[str]
+        :param fleet_uid:
+        :type fleet_uid: str
+        :param notecard_firmware: Firmware version filter
+        :type notecard_firmware: List[str]
+        :param location: Location filter
+        :type location: List[str]
+        :param host_firmware: Host firmware filter
+        :type host_firmware: List[str]
+        :param product_uid:
+        :type product_uid: List[str]
+        :param sku: SKU filter
+        :type sku: List[str]
+        :param dfu_action_request: Which firmware in the case of an update action
+        :type dfu_action_request: DfuActionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8847,10 +8678,20 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._put_device_fleets_serialize(
+        _param = self._perform_dfu_action_serialize(
             project_or_product_uid=project_or_product_uid,
+            firmware_type=firmware_type,
+            action=action,
             device_uid=device_uid,
-            put_device_fleets_request=put_device_fleets_request,
+            tag=tag,
+            serial_number=serial_number,
+            fleet_uid=fleet_uid,
+            notecard_firmware=notecard_firmware,
+            location=location,
+            host_firmware=host_firmware,
+            product_uid=product_uid,
+            sku=sku,
+            dfu_action_request=dfu_action_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8858,7 +8699,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceFleets200Response",
+            "200": None,
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -8870,16 +8711,38 @@ class ProjectApi:
         ).data
 
     @validate_call
-    def put_device_fleets_with_http_info(
+    def perform_dfu_action_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        device_uid: StrictStr,
-        put_device_fleets_request: Annotated[
-            PutDeviceFleetsRequest,
-            Field(
-                description="The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
-            ),
-        ],
+        firmware_type: StrictStr,
+        action: StrictStr,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        tag: Annotated[
+            Optional[List[StrictStr]], Field(description="Tag filter")
+        ] = None,
+        serial_number: Annotated[
+            Optional[List[StrictStr]], Field(description="Serial number filter")
+        ] = None,
+        fleet_uid: Optional[StrictStr] = None,
+        notecard_firmware: Annotated[
+            Optional[List[StrictStr]], Field(description="Firmware version filter")
+        ] = None,
+        location: Annotated[
+            Optional[List[StrictStr]], Field(description="Location filter")
+        ] = None,
+        host_firmware: Annotated[
+            Optional[List[StrictStr]], Field(description="Host firmware filter")
+        ] = None,
+        product_uid: Optional[List[StrictStr]] = None,
+        sku: Annotated[
+            Optional[List[StrictStr]], Field(description="SKU filter")
+        ] = None,
+        dfu_action_request: Annotated[
+            Optional[DfuActionRequest],
+            Field(description="Which firmware in the case of an update action"),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8891,17 +8754,37 @@ class ProjectApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetDeviceFleets200Response]:
-        """put_device_fleets
+    ) -> ApiResponse[None]:
+        """perform_dfu_action
 
-        Add Device to Fleets
+        Update/cancel host or notecard firmware updates
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param device_uid: (required)
-        :type device_uid: str
-        :param put_device_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
-        :type put_device_fleets_request: PutDeviceFleetsRequest
+        :param firmware_type: (required)
+        :type firmware_type: str
+        :param action: (required)
+        :type action: str
+        :param device_uid: A Device UID.
+        :type device_uid: List[str]
+        :param tag: Tag filter
+        :type tag: List[str]
+        :param serial_number: Serial number filter
+        :type serial_number: List[str]
+        :param fleet_uid:
+        :type fleet_uid: str
+        :param notecard_firmware: Firmware version filter
+        :type notecard_firmware: List[str]
+        :param location: Location filter
+        :type location: List[str]
+        :param host_firmware: Host firmware filter
+        :type host_firmware: List[str]
+        :param product_uid:
+        :type product_uid: List[str]
+        :param sku: SKU filter
+        :type sku: List[str]
+        :param dfu_action_request: Which firmware in the case of an update action
+        :type dfu_action_request: DfuActionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8924,10 +8807,20 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._put_device_fleets_serialize(
+        _param = self._perform_dfu_action_serialize(
             project_or_product_uid=project_or_product_uid,
+            firmware_type=firmware_type,
+            action=action,
             device_uid=device_uid,
-            put_device_fleets_request=put_device_fleets_request,
+            tag=tag,
+            serial_number=serial_number,
+            fleet_uid=fleet_uid,
+            notecard_firmware=notecard_firmware,
+            location=location,
+            host_firmware=host_firmware,
+            product_uid=product_uid,
+            sku=sku,
+            dfu_action_request=dfu_action_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8935,7 +8828,7 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceFleets200Response",
+            "200": None,
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -8947,16 +8840,38 @@ class ProjectApi:
         )
 
     @validate_call
-    def put_device_fleets_without_preload_content(
+    def perform_dfu_action_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        device_uid: StrictStr,
-        put_device_fleets_request: Annotated[
-            PutDeviceFleetsRequest,
-            Field(
-                description="The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
-            ),
-        ],
+        firmware_type: StrictStr,
+        action: StrictStr,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        tag: Annotated[
+            Optional[List[StrictStr]], Field(description="Tag filter")
+        ] = None,
+        serial_number: Annotated[
+            Optional[List[StrictStr]], Field(description="Serial number filter")
+        ] = None,
+        fleet_uid: Optional[StrictStr] = None,
+        notecard_firmware: Annotated[
+            Optional[List[StrictStr]], Field(description="Firmware version filter")
+        ] = None,
+        location: Annotated[
+            Optional[List[StrictStr]], Field(description="Location filter")
+        ] = None,
+        host_firmware: Annotated[
+            Optional[List[StrictStr]], Field(description="Host firmware filter")
+        ] = None,
+        product_uid: Optional[List[StrictStr]] = None,
+        sku: Annotated[
+            Optional[List[StrictStr]], Field(description="SKU filter")
+        ] = None,
+        dfu_action_request: Annotated[
+            Optional[DfuActionRequest],
+            Field(description="Which firmware in the case of an update action"),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8969,16 +8884,36 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """put_device_fleets
+        """perform_dfu_action
 
-        Add Device to Fleets
+        Update/cancel host or notecard firmware updates
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param device_uid: (required)
-        :type device_uid: str
-        :param put_device_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
-        :type put_device_fleets_request: PutDeviceFleetsRequest
+        :param firmware_type: (required)
+        :type firmware_type: str
+        :param action: (required)
+        :type action: str
+        :param device_uid: A Device UID.
+        :type device_uid: List[str]
+        :param tag: Tag filter
+        :type tag: List[str]
+        :param serial_number: Serial number filter
+        :type serial_number: List[str]
+        :param fleet_uid:
+        :type fleet_uid: str
+        :param notecard_firmware: Firmware version filter
+        :type notecard_firmware: List[str]
+        :param location: Location filter
+        :type location: List[str]
+        :param host_firmware: Host firmware filter
+        :type host_firmware: List[str]
+        :param product_uid:
+        :type product_uid: List[str]
+        :param sku: SKU filter
+        :type sku: List[str]
+        :param dfu_action_request: Which firmware in the case of an update action
+        :type dfu_action_request: DfuActionRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9001,10 +8936,20 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._put_device_fleets_serialize(
+        _param = self._perform_dfu_action_serialize(
             project_or_product_uid=project_or_product_uid,
+            firmware_type=firmware_type,
+            action=action,
             device_uid=device_uid,
-            put_device_fleets_request=put_device_fleets_request,
+            tag=tag,
+            serial_number=serial_number,
+            fleet_uid=fleet_uid,
+            notecard_firmware=notecard_firmware,
+            location=location,
+            host_firmware=host_firmware,
+            product_uid=product_uid,
+            sku=sku,
+            dfu_action_request=dfu_action_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9012,18 +8957,28 @@ class ProjectApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetDeviceFleets200Response",
+            "200": None,
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
         )
         return response_data.response
 
-    def _put_device_fleets_serialize(
+    def _perform_dfu_action_serialize(
         self,
         project_or_product_uid,
+        firmware_type,
+        action,
         device_uid,
-        put_device_fleets_request,
+        tag,
+        serial_number,
+        fleet_uid,
+        notecard_firmware,
+        location,
+        host_firmware,
+        product_uid,
+        sku,
+        dfu_action_request,
         _request_auth,
         _content_type,
         _headers,
@@ -9032,7 +8987,16 @@ class ProjectApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            "deviceUID": "multi",
+            "tag": "multi",
+            "serialNumber": "multi",
+            "notecardFirmware": "multi",
+            "location": "multi",
+            "hostFirmware": "multi",
+            "productUID": "multi",
+            "sku": "multi",
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -9044,14 +9008,52 @@ class ProjectApi:
         # process the path parameters
         if project_or_product_uid is not None:
             _path_params["projectOrProductUID"] = project_or_product_uid
-        if device_uid is not None:
-            _path_params["deviceUID"] = device_uid
+        if firmware_type is not None:
+            _path_params["firmwareType"] = firmware_type
+        if action is not None:
+            _path_params["action"] = action
         # process the query parameters
+        if device_uid is not None:
+
+            _query_params.append(("deviceUID", device_uid))
+
+        if tag is not None:
+
+            _query_params.append(("tag", tag))
+
+        if serial_number is not None:
+
+            _query_params.append(("serialNumber", serial_number))
+
+        if fleet_uid is not None:
+
+            _query_params.append(("fleetUID", fleet_uid))
+
+        if notecard_firmware is not None:
+
+            _query_params.append(("notecardFirmware", notecard_firmware))
+
+        if location is not None:
+
+            _query_params.append(("location", location))
+
+        if host_firmware is not None:
+
+            _query_params.append(("hostFirmware", host_firmware))
+
+        if product_uid is not None:
+
+            _query_params.append(("productUID", product_uid))
+
+        if sku is not None:
+
+            _query_params.append(("sku", sku))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if put_device_fleets_request is not None:
-            _body_params = put_device_fleets_request
+        if dfu_action_request is not None:
+            _body_params = dfu_action_request
 
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.api_client.select_header_accept(
@@ -9072,8 +9074,8 @@ class ProjectApi:
         _auth_settings: List[str] = ["personalAccessToken"]
 
         return self.api_client.param_serialize(
-            method="PUT",
-            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets",
+            method="POST",
+            resource_path="/v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9087,7 +9089,7 @@ class ProjectApi:
         )
 
     @validate_call
-    def put_fleet_environment_variables(
+    def set_fleet_environment_variables(
         self,
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
@@ -9107,9 +9109,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvironmentVariables:
-        """put_fleet_environment_variables
+        """set_fleet_environment_variables
 
-        Put environment variables of a fleet
+        Set environment variables of a fleet
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9139,7 +9141,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._put_fleet_environment_variables_serialize(
+        _param = self._set_fleet_environment_variables_serialize(
             project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             environment_variables=environment_variables,
@@ -9162,7 +9164,7 @@ class ProjectApi:
         ).data
 
     @validate_call
-    def put_fleet_environment_variables_with_http_info(
+    def set_fleet_environment_variables_with_http_info(
         self,
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
@@ -9182,9 +9184,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvironmentVariables]:
-        """put_fleet_environment_variables
+        """set_fleet_environment_variables
 
-        Put environment variables of a fleet
+        Set environment variables of a fleet
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9214,7 +9216,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._put_fleet_environment_variables_serialize(
+        _param = self._set_fleet_environment_variables_serialize(
             project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             environment_variables=environment_variables,
@@ -9237,7 +9239,7 @@ class ProjectApi:
         )
 
     @validate_call
-    def put_fleet_environment_variables_without_preload_content(
+    def set_fleet_environment_variables_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
@@ -9257,9 +9259,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """put_fleet_environment_variables
+        """set_fleet_environment_variables
 
-        Put environment variables of a fleet
+        Set environment variables of a fleet
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9289,7 +9291,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._put_fleet_environment_variables_serialize(
+        _param = self._set_fleet_environment_variables_serialize(
             project_or_product_uid=project_or_product_uid,
             fleet_uid=fleet_uid,
             environment_variables=environment_variables,
@@ -9307,7 +9309,7 @@ class ProjectApi:
         )
         return response_data.response
 
-    def _put_fleet_environment_variables_serialize(
+    def _set_fleet_environment_variables_serialize(
         self,
         project_or_product_uid,
         fleet_uid,
@@ -9375,271 +9377,7 @@ class ProjectApi:
         )
 
     @validate_call
-    def put_project_environment_variables(
-        self,
-        project_or_product_uid: StrictStr,
-        environment_variables: Optional[EnvironmentVariables] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> EnvironmentVariables:
-        """put_project_environment_variables
-
-        Put environment variables of a project
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param environment_variables:
-        :type environment_variables: EnvironmentVariables
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._put_project_environment_variables_serialize(
-            project_or_product_uid=project_or_product_uid,
-            environment_variables=environment_variables,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "EnvironmentVariables",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def put_project_environment_variables_with_http_info(
-        self,
-        project_or_product_uid: StrictStr,
-        environment_variables: Optional[EnvironmentVariables] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[EnvironmentVariables]:
-        """put_project_environment_variables
-
-        Put environment variables of a project
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param environment_variables:
-        :type environment_variables: EnvironmentVariables
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._put_project_environment_variables_serialize(
-            project_or_product_uid=project_or_product_uid,
-            environment_variables=environment_variables,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "EnvironmentVariables",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def put_project_environment_variables_without_preload_content(
-        self,
-        project_or_product_uid: StrictStr,
-        environment_variables: Optional[EnvironmentVariables] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """put_project_environment_variables
-
-        Put environment variables of a project
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param environment_variables:
-        :type environment_variables: EnvironmentVariables
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._put_project_environment_variables_serialize(
-            project_or_product_uid=project_or_product_uid,
-            environment_variables=environment_variables,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "EnvironmentVariables",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _put_project_environment_variables_serialize(
-        self,
-        project_or_product_uid,
-        environment_variables,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {}
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if project_or_product_uid is not None:
-            _path_params["projectOrProductUID"] = project_or_product_uid
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if environment_variables is not None:
-            _body_params = environment_variables
-
-        # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(
-            ["application/json"]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params["Content-Type"] = _content_type
-        else:
-            _default_content_type = self.api_client.select_header_content_type(
-                ["application/json"]
-            )
-            if _default_content_type is not None:
-                _header_params["Content-Type"] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = ["personalAccessToken"]
-
-        return self.api_client.param_serialize(
-            method="PUT",
-            resource_path="/v1/projects/{projectOrProductUID}/environment_variables",
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth,
-        )
-
-    @validate_call
-    def set_global_transformation(
+    def set_global_event_transformation(
         self,
         project_or_product_uid: StrictStr,
         body: Annotated[
@@ -9660,7 +9398,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """set_global_transformation
+        """set_global_event_transformation
 
         Set the project-level event JSONata transformation
 
@@ -9690,7 +9428,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._set_global_transformation_serialize(
+        _param = self._set_global_event_transformation_serialize(
             project_or_product_uid=project_or_product_uid,
             body=body,
             _request_auth=_request_auth,
@@ -9712,7 +9450,7 @@ class ProjectApi:
         ).data
 
     @validate_call
-    def set_global_transformation_with_http_info(
+    def set_global_event_transformation_with_http_info(
         self,
         project_or_product_uid: StrictStr,
         body: Annotated[
@@ -9733,7 +9471,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """set_global_transformation
+        """set_global_event_transformation
 
         Set the project-level event JSONata transformation
 
@@ -9763,7 +9501,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._set_global_transformation_serialize(
+        _param = self._set_global_event_transformation_serialize(
             project_or_product_uid=project_or_product_uid,
             body=body,
             _request_auth=_request_auth,
@@ -9785,7 +9523,7 @@ class ProjectApi:
         )
 
     @validate_call
-    def set_global_transformation_without_preload_content(
+    def set_global_event_transformation_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
         body: Annotated[
@@ -9806,7 +9544,7 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_global_transformation
+        """set_global_event_transformation
 
         Set the project-level event JSONata transformation
 
@@ -9836,7 +9574,7 @@ class ProjectApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._set_global_transformation_serialize(
+        _param = self._set_global_event_transformation_serialize(
             project_or_product_uid=project_or_product_uid,
             body=body,
             _request_auth=_request_auth,
@@ -9853,7 +9591,7 @@ class ProjectApi:
         )
         return response_data.response
 
-    def _set_global_transformation_serialize(
+    def _set_global_event_transformation_serialize(
         self,
         project_or_product_uid,
         body,
@@ -9905,6 +9643,270 @@ class ProjectApi:
         return self.api_client.param_serialize(
             method="POST",
             resource_path="/v1/projects/{projectOrProductUID}/global-transformation",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    def set_project_environment_variables(
+        self,
+        project_or_product_uid: StrictStr,
+        environment_variables: Optional[EnvironmentVariables] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> EnvironmentVariables:
+        """set_project_environment_variables
+
+        Set environment variables of a project
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param environment_variables:
+        :type environment_variables: EnvironmentVariables
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._set_project_environment_variables_serialize(
+            project_or_product_uid=project_or_product_uid,
+            environment_variables=environment_variables,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "EnvironmentVariables",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def set_project_environment_variables_with_http_info(
+        self,
+        project_or_product_uid: StrictStr,
+        environment_variables: Optional[EnvironmentVariables] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[EnvironmentVariables]:
+        """set_project_environment_variables
+
+        Set environment variables of a project
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param environment_variables:
+        :type environment_variables: EnvironmentVariables
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._set_project_environment_variables_serialize(
+            project_or_product_uid=project_or_product_uid,
+            environment_variables=environment_variables,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "EnvironmentVariables",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def set_project_environment_variables_without_preload_content(
+        self,
+        project_or_product_uid: StrictStr,
+        environment_variables: Optional[EnvironmentVariables] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """set_project_environment_variables
+
+        Set environment variables of a project
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param environment_variables:
+        :type environment_variables: EnvironmentVariables
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._set_project_environment_variables_serialize(
+            project_or_product_uid=project_or_product_uid,
+            environment_variables=environment_variables,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "EnvironmentVariables",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _set_project_environment_variables_serialize(
+        self,
+        project_or_product_uid,
+        environment_variables,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if environment_variables is not None:
+            _body_params = environment_variables
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["personalAccessToken"]
+
+        return self.api_client.param_serialize(
+            method="PUT",
+            resource_path="/v1/projects/{projectOrProductUID}/environment_variables",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -10,7 +10,7 @@ All URIs are relative to *https://api.notefile.net*
 
 # **get_data_usage**
 
-> GetDataUsage200Response get_data_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
+> GetDataUsage200Response get_data_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, aggregate=aggregate)
 
 Get data usage in bytes for a project with time range and period aggregation
 
@@ -49,10 +49,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
     end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
+    fleet_uid = ['fleet_uid_example'] # List[str] | Filter by Fleet UID (optional)
     aggregate = 'device' # str | Aggregation level for results (optional) (default to 'device')
 
     try:
-        api_response = api_instance.get_data_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
+        api_response = api_instance.get_data_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, aggregate=aggregate)
         print("The response of UsageApi->get_data_usage:\n")
         pprint(api_response)
     except Exception as e:
@@ -68,6 +69,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
 | **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
 | **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                   | [optional]                               |
+| **fleet_uid**              | [**List[str]**](str.md) | Filter by Fleet UID                                             | [optional]                               |
 | **aggregate**              | **str**                 | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
 
 ### Return type
@@ -94,7 +96,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_events_usage**
 
-> UsageEventsResponse get_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
+> UsageEventsResponse get_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, aggregate=aggregate, notefile=notefile, skip_recent_data=skip_recent_data, include_notefiles=include_notefiles)
 
 Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
@@ -133,10 +135,14 @@ with notehub_py.ApiClient(configuration) as api_client:
     start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
     end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
+    fleet_uid = ['fleet_uid_example'] # List[str] | Filter by Fleet UID (optional)
     aggregate = 'device' # str | Aggregation level for results (optional) (default to 'device')
+    notefile = ['notefile_example'] # List[str] | Filter to specific notefiles (optional)
+    skip_recent_data = False # bool | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (optional) (default to False)
+    include_notefiles = False # bool | Include per-notefile event counts in the response (optional) (default to False)
 
     try:
-        api_response = api_instance.get_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
+        api_response = api_instance.get_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, aggregate=aggregate, notefile=notefile, skip_recent_data=skip_recent_data, include_notefiles=include_notefiles)
         print("The response of UsageApi->get_events_usage:\n")
         pprint(api_response)
     except Exception as e:
@@ -145,14 +151,18 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                    | Description                                                     | Notes                                    |
-| -------------------------- | ----------------------- | --------------------------------------------------------------- | ---------------------------------------- |
-| **project_or_product_uid** | **str**                 |                                                                 |
-| **period**                 | **str**                 | Period type for aggregation                                     |
-| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
-| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
-| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                   | [optional]                               |
-| **aggregate**              | **str**                 | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
+| Name                       | Type                    | Description                                                                                                                                               | Notes                                    |
+| -------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **project_or_product_uid** | **str**                 |                                                                                                                                                           |
+| **period**                 | **str**                 | Period type for aggregation                                                                                                                               |
+| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp                                                                                           | [optional]                               |
+| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                               |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                             | [optional]                               |
+| **fleet_uid**              | [**List[str]**](str.md) | Filter by Fleet UID                                                                                                                                       | [optional]                               |
+| **aggregate**              | **str**                 | Aggregation level for results                                                                                                                             | [optional] [default to &#39;device&#39;] |
+| **notefile**               | [**List[str]**](str.md) | Filter to specific notefiles                                                                                                                              | [optional]                               |
+| **skip_recent_data**       | **bool**                | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to False]            |
+| **include_notefiles**      | **bool**                | Include per-notefile event counts in the response                                                                                                         | [optional] [default to False]            |
 
 ### Return type
 
@@ -178,7 +188,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_sessions_usage**
 
-> GetSessionsUsage200Response get_sessions_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
+> GetSessionsUsage200Response get_sessions_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, aggregate=aggregate, skip_recent_data=skip_recent_data)
 
 Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
@@ -217,10 +227,12 @@ with notehub_py.ApiClient(configuration) as api_client:
     start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
     end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
     device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
+    fleet_uid = ['fleet_uid_example'] # List[str] | Filter by Fleet UID (optional)
     aggregate = 'device' # str | Aggregation level for results (optional) (default to 'device')
+    skip_recent_data = False # bool | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (optional) (default to False)
 
     try:
-        api_response = api_instance.get_sessions_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, aggregate=aggregate)
+        api_response = api_instance.get_sessions_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, aggregate=aggregate, skip_recent_data=skip_recent_data)
         print("The response of UsageApi->get_sessions_usage:\n")
         pprint(api_response)
     except Exception as e:
@@ -229,14 +241,16 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                    | Description                                                     | Notes                                    |
-| -------------------------- | ----------------------- | --------------------------------------------------------------- | ---------------------------------------- |
-| **project_or_product_uid** | **str**                 |                                                                 |
-| **period**                 | **str**                 | Period type for aggregation                                     |
-| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional]                               |
-| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional]                               |
-| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                   | [optional]                               |
-| **aggregate**              | **str**                 | Aggregation level for results                                   | [optional] [default to &#39;device&#39;] |
+| Name                       | Type                    | Description                                                                                                                                               | Notes                                    |
+| -------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| **project_or_product_uid** | **str**                 |                                                                                                                                                           |
+| **period**                 | **str**                 | Period type for aggregation                                                                                                                               |
+| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp                                                                                           | [optional]                               |
+| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                               |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                             | [optional]                               |
+| **fleet_uid**              | [**List[str]**](str.md) | Filter by Fleet UID                                                                                                                                       | [optional]                               |
+| **aggregate**              | **str**                 | Aggregation level for results                                                                                                                             | [optional] [default to &#39;device&#39;] |
+| **skip_recent_data**       | **bool**                | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to False]            |
 
 ### Return type
 

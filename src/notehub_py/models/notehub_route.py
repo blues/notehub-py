@@ -34,6 +34,7 @@ from notehub_py.models.rad_route import RadRoute
 from notehub_py.models.s3_archive_route import S3ArchiveRoute
 from notehub_py.models.slack_route import SlackRoute
 from notehub_py.models.snowflake_route import SnowflakeRoute
+from notehub_py.models.snowpipe_streaming_route import SnowpipeStreamingRoute
 from notehub_py.models.thingworx_route import ThingworxRoute
 from notehub_py.models.twilio_route import TwilioRoute
 from typing import Optional, Set
@@ -61,6 +62,7 @@ class NotehubRoute(BaseModel):
     s3archive: Optional[S3ArchiveRoute] = None
     slack: Optional[SlackRoute] = None
     snowflake: Optional[SnowflakeRoute] = None
+    snowpipe_streaming: Optional[SnowpipeStreamingRoute] = None
     thingworx: Optional[ThingworxRoute] = None
     twilio: Optional[TwilioRoute] = None
     type: Optional[StrictStr] = Field(
@@ -84,6 +86,7 @@ class NotehubRoute(BaseModel):
         "s3archive",
         "slack",
         "snowflake",
+        "snowpipe_streaming",
         "thingworx",
         "twilio",
         "type",
@@ -173,6 +176,9 @@ class NotehubRoute(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of snowflake
         if self.snowflake:
             _dict["snowflake"] = self.snowflake.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of snowpipe_streaming
+        if self.snowpipe_streaming:
+            _dict["snowpipe_streaming"] = self.snowpipe_streaming.to_dict()
         # override the default output from pydantic by calling `to_dict()` of thingworx
         if self.thingworx:
             _dict["thingworx"] = self.thingworx.to_dict()
@@ -260,6 +266,11 @@ class NotehubRoute(BaseModel):
                 "snowflake": (
                     SnowflakeRoute.from_dict(obj["snowflake"])
                     if obj.get("snowflake") is not None
+                    else None
+                ),
+                "snowpipe_streaming": (
+                    SnowpipeStreamingRoute.from_dict(obj["snowpipe_streaming"])
+                    if obj.get("snowpipe_streaming") is not None
                     else None
                 ),
                 "thingworx": (

@@ -15,7 +15,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 
-__version__ = "2.3.0"
+__version__ = "3.0.0"
 
 # import apis into sdk package
 from notehub_py.api.alert_api import AlertApi
@@ -42,6 +42,7 @@ from notehub_py.exceptions import ApiAttributeError
 from notehub_py.exceptions import ApiException
 
 # import models into sdk package
+from notehub_py.models.add_device_to_fleets_request import AddDeviceToFleetsRequest
 from notehub_py.models.alert import Alert
 from notehub_py.models.alert_data_inner import AlertDataInner
 from notehub_py.models.alert_notifications_inner import AlertNotificationsInner
@@ -66,7 +67,10 @@ from notehub_py.models.data_field import DataField
 from notehub_py.models.data_set_field import DataSetField
 from notehub_py.models.data_usage import DataUsage
 from notehub_py.models.datacake_route import DatacakeRoute
-from notehub_py.models.delete_device_fleets_request import DeleteDeviceFleetsRequest
+from notehub_py.models.delete_device_from_fleets_request import (
+    DeleteDeviceFromFleetsRequest,
+)
+from notehub_py.models.delete_notefiles_request import DeleteNotefilesRequest
 from notehub_py.models.device import Device
 from notehub_py.models.device_dfu_history import DeviceDfuHistory
 from notehub_py.models.device_dfu_history_current import DeviceDfuHistoryCurrent
@@ -98,6 +102,7 @@ from notehub_py.models.get_data_usage200_response import GetDataUsage200Response
 from notehub_py.models.get_data_usage200_response_data_inner import (
     GetDataUsage200ResponseDataInner,
 )
+from notehub_py.models.get_db_note200_response import GetDbNote200Response
 from notehub_py.models.get_device_environment_variables_by_pin200_response import (
     GetDeviceEnvironmentVariablesByPin200Response,
 )
@@ -108,28 +113,29 @@ from notehub_py.models.get_device_health_log200_response import (
 from notehub_py.models.get_device_health_log200_response_health_log_inner import (
     GetDeviceHealthLog200ResponseHealthLogInner,
 )
-from notehub_py.models.get_device_latest200_response import GetDeviceLatest200Response
+from notehub_py.models.get_device_latest_events200_response import (
+    GetDeviceLatestEvents200Response,
+)
 from notehub_py.models.get_device_plans200_response import GetDevicePlans200Response
 from notehub_py.models.get_device_public_key200_response import (
     GetDevicePublicKey200Response,
 )
+from notehub_py.models.get_device_public_keys200_response import (
+    GetDevicePublicKeys200Response,
+)
+from notehub_py.models.get_device_public_keys200_response_device_public_keys_inner import (
+    GetDevicePublicKeys200ResponseDevicePublicKeysInner,
+)
 from notehub_py.models.get_device_sessions200_response import (
     GetDeviceSessions200Response,
 )
+from notehub_py.models.get_devices200_response import GetDevices200Response
+from notehub_py.models.get_events200_response import GetEvents200Response
+from notehub_py.models.get_events_by_cursor200_response import (
+    GetEventsByCursor200Response,
+)
+from notehub_py.models.get_notefile200_response import GetNotefile200Response
 from notehub_py.models.get_products200_response import GetProducts200Response
-from notehub_py.models.get_project_device_public_keys200_response import (
-    GetProjectDevicePublicKeys200Response,
-)
-from notehub_py.models.get_project_device_public_keys200_response_device_public_keys_inner import (
-    GetProjectDevicePublicKeys200ResponseDevicePublicKeysInner,
-)
-from notehub_py.models.get_project_devices200_response import (
-    GetProjectDevices200Response,
-)
-from notehub_py.models.get_project_events200_response import GetProjectEvents200Response
-from notehub_py.models.get_project_events_by_cursor200_response import (
-    GetProjectEventsByCursor200Response,
-)
 from notehub_py.models.get_project_members200_response import (
     GetProjectMembers200Response,
 )
@@ -137,19 +143,11 @@ from notehub_py.models.get_projects200_response import GetProjects200Response
 from notehub_py.models.get_sessions_usage200_response import GetSessionsUsage200Response
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.models.google_route import GoogleRoute
-from notehub_py.models.handle_note_changes200_response import (
-    HandleNoteChanges200Response,
-)
-from notehub_py.models.handle_note_get200_response import HandleNoteGet200Response
-from notehub_py.models.handle_note_signal200_response import HandleNoteSignal200Response
-from notehub_py.models.handle_notefile_changes200_response import (
-    HandleNotefileChanges200Response,
-)
-from notehub_py.models.handle_notefile_changes_pending200_response import (
-    HandleNotefileChangesPending200Response,
-)
-from notehub_py.models.handle_notefile_delete_request import HandleNotefileDeleteRequest
 from notehub_py.models.http_route import HttpRoute
+from notehub_py.models.list_notefiles200_response import ListNotefiles200Response
+from notehub_py.models.list_pending_notefiles200_response import (
+    ListPendingNotefiles200Response,
+)
 from notehub_py.models.location import Location
 from notehub_py.models.login200_response import Login200Response
 from notehub_py.models.login_request import LoginRequest
@@ -168,14 +166,11 @@ from notehub_py.models.personal_access_token_created_by import (
 )
 from notehub_py.models.personal_access_token_info import PersonalAccessTokenInfo
 from notehub_py.models.personal_access_token_secret import PersonalAccessTokenSecret
-from notehub_py.models.post_provision_project_device_request import (
-    PostProvisionProjectDeviceRequest,
-)
 from notehub_py.models.product import Product
 from notehub_py.models.project import Project
 from notehub_py.models.project_member import ProjectMember
+from notehub_py.models.provision_device_request import ProvisionDeviceRequest
 from notehub_py.models.proxy_route import ProxyRoute
-from notehub_py.models.put_device_fleets_request import PutDeviceFleetsRequest
 from notehub_py.models.qubitro_route import QubitroRoute
 from notehub_py.models.rad_route import RadRoute
 from notehub_py.models.repository import Repository
@@ -185,11 +180,13 @@ from notehub_py.models.route_transform_settings import RouteTransformSettings
 from notehub_py.models.s3_archive_route import S3ArchiveRoute
 from notehub_py.models.satellite_plan import SatellitePlan
 from notehub_py.models.schema_property import SchemaProperty
+from notehub_py.models.signal_device200_response import SignalDevice200Response
 from notehub_py.models.sim_usage import SimUsage
 from notehub_py.models.slack_bearer_notification import SlackBearerNotification
 from notehub_py.models.slack_route import SlackRoute
 from notehub_py.models.slack_web_hook_notification import SlackWebHookNotification
 from notehub_py.models.snowflake_route import SnowflakeRoute
+from notehub_py.models.snowpipe_streaming_route import SnowpipeStreamingRoute
 from notehub_py.models.thingworx_route import ThingworxRoute
 from notehub_py.models.tower_location import TowerLocation
 from notehub_py.models.twilio_route import TwilioRoute

@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr, field_validator
+from pydantic import Field, StrictBool, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from notehub_py.models.get_data_usage200_response import GetDataUsage200Response
@@ -61,6 +61,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -90,6 +93,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -120,6 +125,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -159,6 +165,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -188,6 +197,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -218,6 +229,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -257,6 +269,9 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -286,6 +301,8 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -316,6 +333,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -338,6 +356,7 @@ class UsageApi:
         start_date,
         end_date,
         device_uid,
+        fleet_uid,
         aggregate,
         _request_auth,
         _content_type,
@@ -349,6 +368,7 @@ class UsageApi:
 
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
+            "fleetUID": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -373,6 +393,10 @@ class UsageApi:
         if device_uid is not None:
 
             _query_params.append(("deviceUID", device_uid))
+
+        if fleet_uid is not None:
+
+            _query_params.append(("fleetUID", fleet_uid))
 
         if period is not None:
 
@@ -429,8 +453,24 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
+        notefile: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
+        ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
+        include_notefiles: Annotated[
+            Optional[StrictBool],
+            Field(description="Include per-notefile event counts in the response"),
         ] = None,
         _request_timeout: Union[
             None,
@@ -458,8 +498,16 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param notefile: Filter to specific notefiles
+        :type notefile: List[str]
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
+        :param include_notefiles: Include per-notefile event counts in the response
+        :type include_notefiles: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -488,7 +536,11 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
+            notefile=notefile,
+            skip_recent_data=skip_recent_data,
+            include_notefiles=include_notefiles,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -527,8 +579,24 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
+        notefile: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
+        ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
+        include_notefiles: Annotated[
+            Optional[StrictBool],
+            Field(description="Include per-notefile event counts in the response"),
         ] = None,
         _request_timeout: Union[
             None,
@@ -556,8 +624,16 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param notefile: Filter to specific notefiles
+        :type notefile: List[str]
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
+        :param include_notefiles: Include per-notefile event counts in the response
+        :type include_notefiles: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -586,7 +662,11 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
+            notefile=notefile,
+            skip_recent_data=skip_recent_data,
+            include_notefiles=include_notefiles,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -625,8 +705,24 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
+        notefile: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
+        ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
+        include_notefiles: Annotated[
+            Optional[StrictBool],
+            Field(description="Include per-notefile event counts in the response"),
         ] = None,
         _request_timeout: Union[
             None,
@@ -654,8 +750,16 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param notefile: Filter to specific notefiles
+        :type notefile: List[str]
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
+        :param include_notefiles: Include per-notefile event counts in the response
+        :type include_notefiles: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -684,7 +788,11 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
+            notefile=notefile,
+            skip_recent_data=skip_recent_data,
+            include_notefiles=include_notefiles,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -706,7 +814,11 @@ class UsageApi:
         start_date,
         end_date,
         device_uid,
+        fleet_uid,
         aggregate,
+        notefile,
+        skip_recent_data,
+        include_notefiles,
         _request_auth,
         _content_type,
         _headers,
@@ -717,6 +829,8 @@ class UsageApi:
 
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
+            "fleetUID": "multi",
+            "notefile": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -742,6 +856,10 @@ class UsageApi:
 
             _query_params.append(("deviceUID", device_uid))
 
+        if fleet_uid is not None:
+
+            _query_params.append(("fleetUID", fleet_uid))
+
         if period is not None:
 
             _query_params.append(("period", period))
@@ -749,6 +867,18 @@ class UsageApi:
         if aggregate is not None:
 
             _query_params.append(("aggregate", aggregate))
+
+        if notefile is not None:
+
+            _query_params.append(("notefile", notefile))
+
+        if skip_recent_data is not None:
+
+            _query_params.append(("skipRecentData", skip_recent_data))
+
+        if include_notefiles is not None:
+
+            _query_params.append(("includeNotefiles", include_notefiles))
 
         # process the header parameters
         # process the form parameters
@@ -797,8 +927,17 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -826,8 +965,12 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -856,7 +999,9 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -895,8 +1040,17 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -924,8 +1078,12 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -954,7 +1112,9 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -993,8 +1153,17 @@ class UsageApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        fleet_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
+        ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -1022,8 +1191,12 @@ class UsageApi:
         :type end_date: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param fleet_uid: Filter by Fleet UID
+        :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1052,7 +1225,9 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             device_uid=device_uid,
+            fleet_uid=fleet_uid,
             aggregate=aggregate,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1074,7 +1249,9 @@ class UsageApi:
         start_date,
         end_date,
         device_uid,
+        fleet_uid,
         aggregate,
+        skip_recent_data,
         _request_auth,
         _content_type,
         _headers,
@@ -1085,6 +1262,7 @@ class UsageApi:
 
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
+            "fleetUID": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -1110,6 +1288,10 @@ class UsageApi:
 
             _query_params.append(("deviceUID", device_uid))
 
+        if fleet_uid is not None:
+
+            _query_params.append(("fleetUID", fleet_uid))
+
         if period is not None:
 
             _query_params.append(("period", period))
@@ -1117,6 +1299,10 @@ class UsageApi:
         if aggregate is not None:
 
             _query_params.append(("aggregate", aggregate))
+
+        if skip_recent_data is not None:
+
+            _query_params.append(("skipRecentData", skip_recent_data))
 
         # process the header parameters
         # process the form parameters

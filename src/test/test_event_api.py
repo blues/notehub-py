@@ -27,20 +27,20 @@ class TestEventApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_get_events(self) -> None:
+        """Test case for get_events"""
+        pass
+
+    def test_get_events_by_cursor(self) -> None:
+        """Test case for get_events_by_cursor"""
+        pass
+
     def test_get_fleet_events(self) -> None:
         """Test case for get_fleet_events"""
         pass
 
     def test_get_fleet_events_by_cursor(self) -> None:
         """Test case for get_fleet_events_by_cursor"""
-        pass
-
-    def test_get_project_events(self) -> None:
-        """Test case for get_project_events"""
-        pass
-
-    def test_get_project_events_by_cursor(self) -> None:
-        """Test case for get_project_events_by_cursor"""
         pass
 
     def test_get_route_logs_by_event(self) -> None:

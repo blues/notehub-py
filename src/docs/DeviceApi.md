@@ -4,37 +4,347 @@ All URIs are relative to *https://api.notefile.net*
 
 | Method                                                                                              | HTTP request                                                                                   | Description                                     |
 | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| [**add_db_note**](DeviceApi.md#add_db_note)                                                         | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
+| [**add_qi_note**](DeviceApi.md#add_qi_note)                                                         | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}             |
+| [**delete_db_note**](DeviceApi.md#delete_db_note)                                                   | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
+| [**delete_device**](DeviceApi.md#delete_device)                                                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
 | [**delete_device_environment_variable**](DeviceApi.md#delete_device_environment_variable)           | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}  |
-| [**delete_project_device**](DeviceApi.md#delete_project_device)                                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
+| [**delete_notefiles**](DeviceApi.md#delete_notefiles)                                               | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                        |
 | [**disable_device**](DeviceApi.md#disable_device)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable                        |
 | [**disable_device_connectivity_assurance**](DeviceApi.md#disable_device_connectivity_assurance)     | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance |
 | [**enable_device**](DeviceApi.md#enable_device)                                                     | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable                         |
 | [**enable_device_connectivity_assurance**](DeviceApi.md#enable_device_connectivity_assurance)       | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/enable-connectivity-assurance  |
+| [**get_db_note**](DeviceApi.md#get_db_note)                                                         | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
 | [**get_device**](DeviceApi.md#get_device)                                                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                                 |
 | [**get_device_environment_hierarchy**](DeviceApi.md#get_device_environment_hierarchy)               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_hierarchy           | Get environment variable hierarchy for a device |
 | [**get_device_environment_variables**](DeviceApi.md#get_device_environment_variables)               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
 | [**get_device_environment_variables_by_pin**](DeviceApi.md#get_device_environment_variables_by_pin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
 | [**get_device_health_log**](DeviceApi.md#get_device_health_log)                                     | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log                      |
-| [**get_device_latest**](DeviceApi.md#get_device_latest)                                             | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest                          |
+| [**get_device_latest_events**](DeviceApi.md#get_device_latest_events)                               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest                          |
 | [**get_device_plans**](DeviceApi.md#get_device_plans)                                               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans                           |
 | [**get_device_public_key**](DeviceApi.md#get_device_public_key)                                     | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key                      |
+| [**get_device_public_keys**](DeviceApi.md#get_device_public_keys)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/public-keys                                 |
 | [**get_device_sessions**](DeviceApi.md#get_device_sessions)                                         | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions                        |
-| [**get_project_device_public_keys**](DeviceApi.md#get_project_device_public_keys)                   | **GET** /v1/projects/{projectOrProductUID}/devices/public-keys                                 |
-| [**get_project_devices**](DeviceApi.md#get_project_devices)                                         | **GET** /v1/projects/{projectOrProductUID}/devices                                             |
-| [**get_project_fleet_devices**](DeviceApi.md#get_project_fleet_devices)                             | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices                           |
-| [**handle_note_add**](DeviceApi.md#handle_note_add)                                                 | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}             |
-| [**handle_note_changes**](DeviceApi.md#handle_note_changes)                                         | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes      |
-| [**handle_note_create_add**](DeviceApi.md#handle_note_create_add)                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
-| [**handle_note_delete**](DeviceApi.md#handle_note_delete)                                           | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
-| [**handle_note_get**](DeviceApi.md#handle_note_get)                                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
-| [**handle_note_signal**](DeviceApi.md#handle_note_signal)                                           | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal                         |
-| [**handle_note_update**](DeviceApi.md#handle_note_update)                                           | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
-| [**handle_notefile_changes**](DeviceApi.md#handle_notefile_changes)                                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes                   |
-| [**handle_notefile_changes_pending**](DeviceApi.md#handle_notefile_changes_pending)                 | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending           |
-| [**handle_notefile_delete**](DeviceApi.md#handle_notefile_delete)                                   | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                        |
-| [**post_provision_project_device**](DeviceApi.md#post_provision_project_device)                     | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision                      |
-| [**put_device_environment_variables**](DeviceApi.md#put_device_environment_variables)               | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
-| [**put_device_environment_variables_by_pin**](DeviceApi.md#put_device_environment_variables_by_pin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
+| [**get_devices**](DeviceApi.md#get_devices)                                                         | **GET** /v1/projects/{projectOrProductUID}/devices                                             |
+| [**get_fleet_devices**](DeviceApi.md#get_fleet_devices)                                             | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices                           |
+| [**get_notefile**](DeviceApi.md#get_notefile)                                                       | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes      |
+| [**list_notefiles**](DeviceApi.md#list_notefiles)                                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes                   |
+| [**list_pending_notefiles**](DeviceApi.md#list_pending_notefiles)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending           |
+| [**provision_device**](DeviceApi.md#provision_device)                                               | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision                      |
+| [**set_device_environment_variables**](DeviceApi.md#set_device_environment_variables)               | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
+| [**set_device_environment_variables_by_pin**](DeviceApi.md#set_device_environment_variables_by_pin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
+| [**signal_device**](DeviceApi.md#signal_device)                                                     | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal                         |
+| [**update_db_note**](DeviceApi.md#update_db_note)                                                   | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}     |
+
+# **add_db_note**
+
+> add_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note)
+
+Add a Note to a .db notefile
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.note import Note
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+    notefile_id = 'notefile_id_example' # str |
+    note_id = 'note_id_example' # str |
+    note = notehub_py.Note() # Note | Body or payload of note to be added to the device
+
+    try:
+        api_instance.add_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note)
+    except Exception as e:
+        print("Exception when calling DeviceApi->add_db_note: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type                | Description                                       | Notes |
+| -------------------------- | ------------------- | ------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**             |                                                   |
+| **device_uid**             | **str**             |                                                   |
+| **notefile_id**            | **str**             |                                                   |
+| **note_id**                | **str**             |                                                   |
+| **note**                   | [**Note**](Note.md) | Body or payload of note to be added to the device |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | An empty object means success              | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **add_qi_note**
+
+> add_qi_note(project_or_product_uid, device_uid, notefile_id, note)
+
+Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.note import Note
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+    notefile_id = 'notefile_id_example' # str |
+    note = notehub_py.Note() # Note | Body or payload of note to be added to the device
+
+    try:
+        api_instance.add_qi_note(project_or_product_uid, device_uid, notefile_id, note)
+    except Exception as e:
+        print("Exception when calling DeviceApi->add_qi_note: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type                | Description                                       | Notes |
+| -------------------------- | ------------------- | ------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**             |                                                   |
+| **device_uid**             | **str**             |                                                   |
+| **notefile_id**            | **str**             |                                                   |
+| **note**                   | [**Note**](Note.md) | Body or payload of note to be added to the device |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | An empty object means success              | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_db_note**
+
+> delete_db_note(project_or_product_uid, device_uid, notefile_id, note_id)
+
+Delete a note from a .db notefile
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+    notefile_id = 'notefile_id_example' # str |
+    note_id = 'note_id_example' # str |
+
+    try:
+        api_instance.delete_db_note(project_or_product_uid, device_uid, notefile_id, note_id)
+    except Exception as e:
+        print("Exception when calling DeviceApi->delete_db_note: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **device_uid**             | **str** |             |
+| **notefile_id**            | **str** |             |
+| **note_id**                | **str** |             |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | An empty object means success              | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_device**
+
+> delete_device(project_or_product_uid, device_uid, purge)
+
+Delete Device
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+    purge = False # bool |  (default to False)
+
+    try:
+        api_instance.delete_device(project_or_product_uid, device_uid, purge)
+    except Exception as e:
+        print("Exception when calling DeviceApi->delete_device: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type     | Description | Notes              |
+| -------------------------- | -------- | ----------- | ------------------ |
+| **project_or_product_uid** | **str**  |             |
+| **device_uid**             | **str**  |             |
+| **purge**                  | **bool** |             | [default to False] |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **204**     | Successful operation                       | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_device_environment_variable**
 
@@ -114,11 +424,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_project_device**
+# **delete_notefiles**
 
-> delete_project_device(project_or_product_uid, device_uid, purge)
+> delete_notefiles(project_or_product_uid, device_uid, delete_notefiles_request)
 
-Delete Device
+Deletes Notefiles and the Notes they contain.
 
 ### Example
 
@@ -126,6 +436,7 @@ Delete Device
 
 ```python
 import notehub_py
+from notehub_py.models.delete_notefiles_request import DeleteNotefilesRequest
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -151,21 +462,21 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.DeviceApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
-    purge = False # bool |  (default to False)
+    delete_notefiles_request = notehub_py.DeleteNotefilesRequest() # DeleteNotefilesRequest |
 
     try:
-        api_instance.delete_project_device(project_or_product_uid, device_uid, purge)
+        api_instance.delete_notefiles(project_or_product_uid, device_uid, delete_notefiles_request)
     except Exception as e:
-        print("Exception when calling DeviceApi->delete_project_device: %s\n" % e)
+        print("Exception when calling DeviceApi->delete_notefiles: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                       | Type     | Description | Notes              |
-| -------------------------- | -------- | ----------- | ------------------ |
-| **project_or_product_uid** | **str**  |             |
-| **device_uid**             | **str**  |             |
-| **purge**                  | **bool** |             | [default to False] |
+| Name                         | Type                                                    | Description | Notes |
+| ---------------------------- | ------------------------------------------------------- | ----------- | ----- |
+| **project_or_product_uid**   | **str**                                                 |             |
+| **device_uid**               | **str**                                                 |             |
+| **delete_notefiles_request** | [**DeleteNotefilesRequest**](DeleteNotefilesRequest.md) |             |
 
 ### Return type
 
@@ -177,14 +488,14 @@ void (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **204**     | Successful operation                       | -                |
+| **200**     | An empty object means success              | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -477,6 +788,90 @@ void (empty response body)
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | Successful operation                       | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_db_note**
+
+> GetDbNote200Response get_db_note(project_or_product_uid, device_uid, notefile_id, note_id, delete=delete, deleted=deleted)
+
+Get a note from a .db notefile
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.get_db_note200_response import GetDbNote200Response
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+    notefile_id = 'notefile_id_example' # str |
+    note_id = 'note_id_example' # str |
+    delete = True # bool | Whether to delete the note from the DB notefile (optional)
+    deleted = True # bool | Whether to return deleted notes (optional)
+
+    try:
+        api_response = api_instance.get_db_note(project_or_product_uid, device_uid, notefile_id, note_id, delete=delete, deleted=deleted)
+        print("The response of DeviceApi->get_db_note:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_db_note: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type     | Description                                     | Notes      |
+| -------------------------- | -------- | ----------------------------------------------- | ---------- |
+| **project_or_product_uid** | **str**  |                                                 |
+| **device_uid**             | **str**  |                                                 |
+| **notefile_id**            | **str**  |                                                 |
+| **note_id**                | **str**  |                                                 |
+| **delete**                 | **bool** | Whether to delete the note from the DB notefile | [optional] |
+| **deleted**                | **bool** | Whether to return deleted notes                 | [optional] |
+
+### Return type
+
+[**GetDbNote200Response**](GetDbNote200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | The requested note                         | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -870,9 +1265,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_device_latest**
+# **get_device_latest_events**
 
-> GetDeviceLatest200Response get_device_latest(project_or_product_uid, device_uid)
+> GetDeviceLatestEvents200Response get_device_latest_events(project_or_product_uid, device_uid)
 
 Get Device Latest Events
 
@@ -882,7 +1277,7 @@ Get Device Latest Events
 
 ```python
 import notehub_py
-from notehub_py.models.get_device_latest200_response import GetDeviceLatest200Response
+from notehub_py.models.get_device_latest_events200_response import GetDeviceLatestEvents200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -910,11 +1305,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     device_uid = 'dev:000000000000000' # str |
 
     try:
-        api_response = api_instance.get_device_latest(project_or_product_uid, device_uid)
-        print("The response of DeviceApi->get_device_latest:\n")
+        api_response = api_instance.get_device_latest_events(project_or_product_uid, device_uid)
+        print("The response of DeviceApi->get_device_latest_events:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->get_device_latest: %s\n" % e)
+        print("Exception when calling DeviceApi->get_device_latest_events: %s\n" % e)
 ```
 
 ### Parameters
@@ -926,7 +1321,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**GetDeviceLatest200Response**](GetDeviceLatest200Response.md)
+[**GetDeviceLatestEvents200Response**](GetDeviceLatestEvents200Response.md)
 
 ### Authorization
 
@@ -1098,6 +1493,84 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_device_public_keys**
+
+> GetDevicePublicKeys200Response get_device_public_keys(project_or_product_uid, page_size=page_size, page_num=page_num)
+
+Get Device Public Keys of a Project
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.get_device_public_keys200_response import GetDevicePublicKeys200Response
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    page_size = 50 # int |  (optional) (default to 50)
+    page_num = 1 # int |  (optional) (default to 1)
+
+    try:
+        api_response = api_instance.get_device_public_keys(project_or_product_uid, page_size=page_size, page_num=page_num)
+        print("The response of DeviceApi->get_device_public_keys:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_device_public_keys: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes                      |
+| -------------------------- | ------- | ----------- | -------------------------- |
+| **project_or_product_uid** | **str** |             |
+| **page_size**              | **int** |             | [optional] [default to 50] |
+| **page_num**               | **int** |             | [optional] [default to 1]  |
+
+### Return type
+
+[**GetDevicePublicKeys200Response**](GetDevicePublicKeys200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Successful operation                       | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_device_sessions**
 
 > GetDeviceSessions200Response get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num, start_date=start_date, end_date=end_date)
@@ -1182,87 +1655,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_project_device_public_keys**
+# **get_devices**
 
-> GetProjectDevicePublicKeys200Response get_project_device_public_keys(project_or_product_uid, page_size=page_size, page_num=page_num)
-
-Get Device Public Keys of a Project
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.get_project_device_public_keys200_response import GetProjectDevicePublicKeys200Response
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    page_size = 50 # int |  (optional) (default to 50)
-    page_num = 1 # int |  (optional) (default to 1)
-
-    try:
-        api_response = api_instance.get_project_device_public_keys(project_or_product_uid, page_size=page_size, page_num=page_num)
-        print("The response of DeviceApi->get_project_device_public_keys:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceApi->get_project_device_public_keys: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type    | Description | Notes                      |
-| -------------------------- | ------- | ----------- | -------------------------- |
-| **project_or_product_uid** | **str** |             |
-| **page_size**              | **int** |             | [optional] [default to 50] |
-| **page_num**               | **int** |             | [optional] [default to 1]  |
-
-### Return type
-
-[**GetProjectDevicePublicKeys200Response**](GetProjectDevicePublicKeys200Response.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_project_devices**
-
-> GetProjectDevices200Response get_project_devices(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, fleet_uid=fleet_uid, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
+> GetDevices200Response get_devices(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, fleet_uid=fleet_uid, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
 
 Get Devices of a Project
 
@@ -1272,7 +1667,7 @@ Get Devices of a Project
 
 ```python
 import notehub_py
-from notehub_py.models.get_project_devices200_response import GetProjectDevices200Response
+from notehub_py.models.get_devices200_response import GetDevices200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -1310,11 +1705,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     sku = ['sku_example'] # List[str] | SKU filter (optional)
 
     try:
-        api_response = api_instance.get_project_devices(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, fleet_uid=fleet_uid, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
-        print("The response of DeviceApi->get_project_devices:\n")
+        api_response = api_instance.get_devices(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, fleet_uid=fleet_uid, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
+        print("The response of DeviceApi->get_devices:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->get_project_devices: %s\n" % e)
+        print("Exception when calling DeviceApi->get_devices: %s\n" % e)
 ```
 
 ### Parameters
@@ -1336,7 +1731,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**GetProjectDevices200Response**](GetProjectDevices200Response.md)
+[**GetDevices200Response**](GetDevices200Response.md)
 
 ### Authorization
 
@@ -1356,9 +1751,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_project_fleet_devices**
+# **get_fleet_devices**
 
-> GetProjectDevices200Response get_project_fleet_devices(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
+> GetDevices200Response get_fleet_devices(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
 
 Get Devices of a Fleet within a Project
 
@@ -1368,7 +1763,7 @@ Get Devices of a Fleet within a Project
 
 ```python
 import notehub_py
-from notehub_py.models.get_project_devices200_response import GetProjectDevices200Response
+from notehub_py.models.get_devices200_response import GetDevices200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -1406,11 +1801,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     sku = ['sku_example'] # List[str] | SKU filter (optional)
 
     try:
-        api_response = api_instance.get_project_fleet_devices(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
-        print("The response of DeviceApi->get_project_fleet_devices:\n")
+        api_response = api_instance.get_fleet_devices(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
+        print("The response of DeviceApi->get_fleet_devices:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->get_project_fleet_devices: %s\n" % e)
+        print("Exception when calling DeviceApi->get_fleet_devices: %s\n" % e)
 ```
 
 ### Parameters
@@ -1432,7 +1827,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**GetProjectDevices200Response**](GetProjectDevices200Response.md)
+[**GetDevices200Response**](GetDevices200Response.md)
 
 ### Authorization
 
@@ -1452,11 +1847,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **handle_note_add**
+# **get_notefile**
 
-> handle_note_add(project_or_product_uid, device_uid, notefile_id, note)
+> GetNotefile200Response get_notefile(project_or_product_uid, device_uid, notefile_id, tracker=tracker, max=max, start=start, stop=stop, deleted=deleted, delete=delete)
 
-Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+For .qi files, returns the queued up notes. For .db files, returns all notes in the notefile
 
 ### Example
 
@@ -1464,7 +1859,7 @@ Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
 ```python
 import notehub_py
-from notehub_py.models.note import Note
+from notehub_py.models.get_notefile200_response import GetNotefile200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -1491,94 +1886,19 @@ with notehub_py.ApiClient(configuration) as api_client:
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
     notefile_id = 'notefile_id_example' # str |
-    note = notehub_py.Note() # Note | Body or payload of note to be added to the device
-
-    try:
-        api_instance.handle_note_add(project_or_product_uid, device_uid, notefile_id, note)
-    except Exception as e:
-        print("Exception when calling DeviceApi->handle_note_add: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type                | Description                                       | Notes |
-| -------------------------- | ------------------- | ------------------------------------------------- | ----- |
-| **project_or_product_uid** | **str**             |                                                   |
-| **device_uid**             | **str**             |                                                   |
-| **notefile_id**            | **str**             |                                                   |
-| **note**                   | [**Note**](Note.md) | Body or payload of note to be added to the device |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **handle_note_changes**
-
-> HandleNoteChanges200Response handle_note_changes(project_or_product_uid, device_uid, notefile_id, max=max, deleted=deleted, delete=delete)
-
-Incrementally retrieve changes within a specific Notefile.
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.handle_note_changes200_response import HandleNoteChanges200Response
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
+    tracker = 'tracker_example' # str | The change tracker ID. (optional)
     max = 56 # int | The maximum number of Notes to return in the request. (optional)
+    start = True # bool | true to reset the tracker to the beginning. (optional)
+    stop = True # bool | true to delete the tracker. (optional)
     deleted = True # bool | true to return deleted notes. (optional)
     delete = True # bool | true to delete the notes returned by the request. (optional)
 
     try:
-        api_response = api_instance.handle_note_changes(project_or_product_uid, device_uid, notefile_id, max=max, deleted=deleted, delete=delete)
-        print("The response of DeviceApi->handle_note_changes:\n")
+        api_response = api_instance.get_notefile(project_or_product_uid, device_uid, notefile_id, tracker=tracker, max=max, start=start, stop=stop, deleted=deleted, delete=delete)
+        print("The response of DeviceApi->get_notefile:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->handle_note_changes: %s\n" % e)
+        print("Exception when calling DeviceApi->get_notefile: %s\n" % e)
 ```
 
 ### Parameters
@@ -1588,13 +1908,16 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **project_or_product_uid** | **str**  |                                                       |
 | **device_uid**             | **str**  |                                                       |
 | **notefile_id**            | **str**  |                                                       |
+| **tracker**                | **str**  | The change tracker ID.                                | [optional] |
 | **max**                    | **int**  | The maximum number of Notes to return in the request. | [optional] |
+| **start**                  | **bool** | true to reset the tracker to the beginning.           | [optional] |
+| **stop**                   | **bool** | true to delete the tracker.                           | [optional] |
 | **deleted**                | **bool** | true to return deleted notes.                         | [optional] |
 | **delete**                 | **bool** | true to delete the notes returned by the request.     | [optional] |
 
 ### Return type
 
-[**HandleNoteChanges200Response**](HandleNoteChanges200Response.md)
+[**GetNotefile200Response**](GetNotefile200Response.md)
 
 ### Authorization
 
@@ -1614,11 +1937,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **handle_note_create_add**
+# **list_notefiles**
 
-> handle_note_create_add(project_or_product_uid, device_uid, notefile_id, note_id, note)
+> ListNotefiles200Response list_notefiles(project_or_product_uid, device_uid, tracker=tracker, files=files)
 
-Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+Lists .qi and .db files for the device
 
 ### Example
 
@@ -1626,7 +1949,7 @@ Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
 ```python
 import notehub_py
-from notehub_py.models.note import Note
+from notehub_py.models.list_notefiles200_response import ListNotefiles200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -1652,414 +1975,15 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.DeviceApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
-    note_id = 'note_id_example' # str |
-    note = notehub_py.Note() # Note | Body or payload of note to be added to the device
-
-    try:
-        api_instance.handle_note_create_add(project_or_product_uid, device_uid, notefile_id, note_id, note)
-    except Exception as e:
-        print("Exception when calling DeviceApi->handle_note_create_add: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type                | Description                                       | Notes |
-| -------------------------- | ------------------- | ------------------------------------------------- | ----- |
-| **project_or_product_uid** | **str**             |                                                   |
-| **device_uid**             | **str**             |                                                   |
-| **notefile_id**            | **str**             |                                                   |
-| **note_id**                | **str**             |                                                   |
-| **note**                   | [**Note**](Note.md) | Body or payload of note to be added to the device |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **handle_note_delete**
-
-> handle_note_delete(project_or_product_uid, device_uid, notefile_id, note_id)
-
-Delete a note from a DB notefile
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
-    note_id = 'note_id_example' # str |
-
-    try:
-        api_instance.handle_note_delete(project_or_product_uid, device_uid, notefile_id, note_id)
-    except Exception as e:
-        print("Exception when calling DeviceApi->handle_note_delete: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type    | Description | Notes |
-| -------------------------- | ------- | ----------- | ----- |
-| **project_or_product_uid** | **str** |             |
-| **device_uid**             | **str** |             |
-| **notefile_id**            | **str** |             |
-| **note_id**                | **str** |             |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **handle_note_get**
-
-> HandleNoteGet200Response handle_note_get(project_or_product_uid, device_uid, notefile_id, note_id, delete=delete, deleted=deleted)
-
-Get a note from a DB notefile
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.handle_note_get200_response import HandleNoteGet200Response
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
-    note_id = 'note_id_example' # str |
-    delete = True # bool | Whether to delete the note from the DB notefile (optional)
-    deleted = True # bool | Whether to return deleted notes (optional)
-
-    try:
-        api_response = api_instance.handle_note_get(project_or_product_uid, device_uid, notefile_id, note_id, delete=delete, deleted=deleted)
-        print("The response of DeviceApi->handle_note_get:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceApi->handle_note_get: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type     | Description                                     | Notes      |
-| -------------------------- | -------- | ----------------------------------------------- | ---------- |
-| **project_or_product_uid** | **str**  |                                                 |
-| **device_uid**             | **str**  |                                                 |
-| **notefile_id**            | **str**  |                                                 |
-| **note_id**                | **str**  |                                                 |
-| **delete**                 | **bool** | Whether to delete the note from the DB notefile | [optional] |
-| **deleted**                | **bool** | Whether to return deleted notes                 | [optional] |
-
-### Return type
-
-[**HandleNoteGet200Response**](HandleNoteGet200Response.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The requested note                         | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **handle_note_signal**
-
-> HandleNoteSignal200Response handle_note_signal(project_or_product_uid, device_uid, body)
-
-Send a signal from Notehub to a Notecard.
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.body import Body
-from notehub_py.models.handle_note_signal200_response import HandleNoteSignal200Response
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    body = notehub_py.Body() # Body | Body or payload of singnal to be sent to the device
-
-    try:
-        api_response = api_instance.handle_note_signal(project_or_product_uid, device_uid, body)
-        print("The response of DeviceApi->handle_note_signal:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceApi->handle_note_signal: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type                | Description                                         | Notes |
-| -------------------------- | ------------------- | --------------------------------------------------- | ----- |
-| **project_or_product_uid** | **str**             |                                                     |
-| **device_uid**             | **str**             |                                                     |
-| **body**                   | [**Body**](Body.md) | Body or payload of singnal to be sent to the device |
-
-### Return type
-
-[**HandleNoteSignal200Response**](HandleNoteSignal200Response.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | A status response.                         | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **handle_note_update**
-
-> handle_note_update(project_or_product_uid, device_uid, notefile_id, note_id, note)
-
-Update a note in a DB notefile
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.note import Note
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
-    note_id = 'note_id_example' # str |
-    note = notehub_py.Note() # Note | Body or payload of note to be added to the device
-
-    try:
-        api_instance.handle_note_update(project_or_product_uid, device_uid, notefile_id, note_id, note)
-    except Exception as e:
-        print("Exception when calling DeviceApi->handle_note_update: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type                | Description                                       | Notes |
-| -------------------------- | ------------------- | ------------------------------------------------- | ----- |
-| **project_or_product_uid** | **str**             |                                                   |
-| **device_uid**             | **str**             |                                                   |
-| **notefile_id**            | **str**             |                                                   |
-| **note_id**                | **str**             |                                                   |
-| **note**                   | [**Note**](Note.md) | Body or payload of note to be added to the device |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **handle_notefile_changes**
-
-> HandleNotefileChanges200Response handle_notefile_changes(project_or_product_uid, device_uid, files=files)
-
-Used to perform queries on a single or multiple files to determine if new Notes are available to read
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.handle_notefile_changes200_response import HandleNotefileChanges200Response
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
+    tracker = 'tracker_example' # str | The change tracker ID. (optional)
     files = ['files_example'] # List[str] | One or more files to obtain change information from. (optional)
 
     try:
-        api_response = api_instance.handle_notefile_changes(project_or_product_uid, device_uid, files=files)
-        print("The response of DeviceApi->handle_notefile_changes:\n")
+        api_response = api_instance.list_notefiles(project_or_product_uid, device_uid, tracker=tracker, files=files)
+        print("The response of DeviceApi->list_notefiles:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->handle_notefile_changes: %s\n" % e)
+        print("Exception when calling DeviceApi->list_notefiles: %s\n" % e)
 ```
 
 ### Parameters
@@ -2068,11 +1992,12 @@ with notehub_py.ApiClient(configuration) as api_client:
 | -------------------------- | ----------------------- | ---------------------------------------------------- | ---------- |
 | **project_or_product_uid** | **str**                 |                                                      |
 | **device_uid**             | **str**                 |                                                      |
+| **tracker**                | **str**                 | The change tracker ID.                               | [optional] |
 | **files**                  | [**List[str]**](str.md) | One or more files to obtain change information from. | [optional] |
 
 ### Return type
 
-[**HandleNotefileChanges200Response**](HandleNotefileChanges200Response.md)
+[**ListNotefiles200Response**](ListNotefiles200Response.md)
 
 ### Authorization
 
@@ -2092,11 +2017,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **handle_notefile_changes_pending**
+# **list_pending_notefiles**
 
-> HandleNotefileChangesPending200Response handle_notefile_changes_pending(project_or_product_uid, device_uid)
+> ListPendingNotefiles200Response list_pending_notefiles(project_or_product_uid, device_uid)
 
-Returns info about file changes that are pending upload to Notehub or download to the Notecard.
+Lists .qi and .db files that are pending sync to the Notecard
 
 ### Example
 
@@ -2104,7 +2029,7 @@ Returns info about file changes that are pending upload to Notehub or download t
 
 ```python
 import notehub_py
-from notehub_py.models.handle_notefile_changes_pending200_response import HandleNotefileChangesPending200Response
+from notehub_py.models.list_pending_notefiles200_response import ListPendingNotefiles200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -2132,11 +2057,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     device_uid = 'dev:000000000000000' # str |
 
     try:
-        api_response = api_instance.handle_notefile_changes_pending(project_or_product_uid, device_uid)
-        print("The response of DeviceApi->handle_notefile_changes_pending:\n")
+        api_response = api_instance.list_pending_notefiles(project_or_product_uid, device_uid)
+        print("The response of DeviceApi->list_pending_notefiles:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->handle_notefile_changes_pending: %s\n" % e)
+        print("Exception when calling DeviceApi->list_pending_notefiles: %s\n" % e)
 ```
 
 ### Parameters
@@ -2148,7 +2073,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**HandleNotefileChangesPending200Response**](HandleNotefileChangesPending200Response.md)
+[**ListPendingNotefiles200Response**](ListPendingNotefiles200Response.md)
 
 ### Authorization
 
@@ -2168,85 +2093,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **handle_notefile_delete**
+# **provision_device**
 
-> handle_notefile_delete(project_or_product_uid, device_uid, handle_notefile_delete_request)
-
-Deletes Notefiles and the Notes they contain.
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.handle_notefile_delete_request import HandleNotefileDeleteRequest
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    handle_notefile_delete_request = notehub_py.HandleNotefileDeleteRequest() # HandleNotefileDeleteRequest |
-
-    try:
-        api_instance.handle_notefile_delete(project_or_product_uid, device_uid, handle_notefile_delete_request)
-    except Exception as e:
-        print("Exception when calling DeviceApi->handle_notefile_delete: %s\n" % e)
-```
-
-### Parameters
-
-| Name                               | Type                                                              | Description | Notes |
-| ---------------------------------- | ----------------------------------------------------------------- | ----------- | ----- |
-| **project_or_product_uid**         | **str**                                                           |             |
-| **device_uid**                     | **str**                                                           |             |
-| **handle_notefile_delete_request** | [**HandleNotefileDeleteRequest**](HandleNotefileDeleteRequest.md) |             |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **post_provision_project_device**
-
-> object post_provision_project_device(project_or_product_uid, device_uid, post_provision_project_device_request)
+> object provision_device(project_or_product_uid, device_uid, provision_device_request)
 
 Provision Device for a Project
 
@@ -2256,7 +2105,7 @@ Provision Device for a Project
 
 ```python
 import notehub_py
-from notehub_py.models.post_provision_project_device_request import PostProvisionProjectDeviceRequest
+from notehub_py.models.provision_device_request import ProvisionDeviceRequest
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -2282,23 +2131,23 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.DeviceApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
-    post_provision_project_device_request = notehub_py.PostProvisionProjectDeviceRequest() # PostProvisionProjectDeviceRequest | Provision a device to a specific ProductUID
+    provision_device_request = notehub_py.ProvisionDeviceRequest() # ProvisionDeviceRequest | Provision a device to a specific ProductUID
 
     try:
-        api_response = api_instance.post_provision_project_device(project_or_product_uid, device_uid, post_provision_project_device_request)
-        print("The response of DeviceApi->post_provision_project_device:\n")
+        api_response = api_instance.provision_device(project_or_product_uid, device_uid, provision_device_request)
+        print("The response of DeviceApi->provision_device:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->post_provision_project_device: %s\n" % e)
+        print("Exception when calling DeviceApi->provision_device: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                                      | Type                                                                          | Description                                 | Notes |
-| ----------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------- | ----- |
-| **project_or_product_uid**                | **str**                                                                       |                                             |
-| **device_uid**                            | **str**                                                                       |                                             |
-| **post_provision_project_device_request** | [**PostProvisionProjectDeviceRequest**](PostProvisionProjectDeviceRequest.md) | Provision a device to a specific ProductUID |
+| Name                         | Type                                                    | Description                                 | Notes |
+| ---------------------------- | ------------------------------------------------------- | ------------------------------------------- | ----- |
+| **project_or_product_uid**   | **str**                                                 |                                             |
+| **device_uid**               | **str**                                                 |                                             |
+| **provision_device_request** | [**ProvisionDeviceRequest**](ProvisionDeviceRequest.md) | Provision a device to a specific ProductUID |
 
 ### Return type
 
@@ -2322,11 +2171,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **put_device_environment_variables**
+# **set_device_environment_variables**
 
-> EnvironmentVariables put_device_environment_variables(project_or_product_uid, device_uid, environment_variables)
+> EnvironmentVariables set_device_environment_variables(project_or_product_uid, device_uid, environment_variables)
 
-Put environment variables of a device
+Set environment variables of a device
 
 ### Example
 
@@ -2363,11 +2212,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the device
 
     try:
-        api_response = api_instance.put_device_environment_variables(project_or_product_uid, device_uid, environment_variables)
-        print("The response of DeviceApi->put_device_environment_variables:\n")
+        api_response = api_instance.set_device_environment_variables(project_or_product_uid, device_uid, environment_variables)
+        print("The response of DeviceApi->set_device_environment_variables:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->put_device_environment_variables: %s\n" % e)
+        print("Exception when calling DeviceApi->set_device_environment_variables: %s\n" % e)
 ```
 
 ### Parameters
@@ -2400,11 +2249,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **put_device_environment_variables_by_pin**
+# **set_device_environment_variables_by_pin**
 
-> EnvironmentVariables put_device_environment_variables_by_pin(product_uid, device_uid, environment_variables)
+> EnvironmentVariables set_device_environment_variables_by_pin(product_uid, device_uid, environment_variables)
 
-Put environment variables of a device with device pin authorization
+Set environment variables of a device with device pin authorization
 
 ### Example
 
@@ -2442,11 +2291,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the device
 
     try:
-        api_response = api_instance.put_device_environment_variables_by_pin(product_uid, device_uid, environment_variables)
-        print("The response of DeviceApi->put_device_environment_variables_by_pin:\n")
+        api_response = api_instance.set_device_environment_variables_by_pin(product_uid, device_uid, environment_variables)
+        print("The response of DeviceApi->set_device_environment_variables_by_pin:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->put_device_environment_variables_by_pin: %s\n" % e)
+        print("Exception when calling DeviceApi->set_device_environment_variables_by_pin: %s\n" % e)
 ```
 
 ### Parameters
@@ -2476,5 +2325,164 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ----------- | -------------------------------------------------------- | ---------------- |
 | **200**     | The response body from an environment variables request. | -                |
 | **0**       | The response body in case of an API error.               | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **signal_device**
+
+> SignalDevice200Response signal_device(project_or_product_uid, device_uid, body)
+
+Send a signal from Notehub to a Notecard.
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.body import Body
+from notehub_py.models.signal_device200_response import SignalDevice200Response
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+    body = notehub_py.Body() # Body | Body or payload of signal to be sent to the device
+
+    try:
+        api_response = api_instance.signal_device(project_or_product_uid, device_uid, body)
+        print("The response of DeviceApi->signal_device:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->signal_device: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type                | Description                                        | Notes |
+| -------------------------- | ------------------- | -------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**             |                                                    |
+| **device_uid**             | **str**             |                                                    |
+| **body**                   | [**Body**](Body.md) | Body or payload of signal to be sent to the device |
+
+### Return type
+
+[**SignalDevice200Response**](SignalDevice200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | A status response.                         | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_db_note**
+
+> update_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note)
+
+Update a note in a .db notefile
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.note import Note
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+    notefile_id = 'notefile_id_example' # str |
+    note_id = 'note_id_example' # str |
+    note = notehub_py.Note() # Note | Body or payload of note to be added to the device
+
+    try:
+        api_instance.update_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note)
+    except Exception as e:
+        print("Exception when calling DeviceApi->update_db_note: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type                | Description                                       | Notes |
+| -------------------------- | ------------------- | ------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**             |                                                   |
+| **device_uid**             | **str**             |                                                   |
+| **notefile_id**            | **str**             |                                                   |
+| **note_id**                | **str**             |                                                   |
+| **note**                   | [**Note**](Note.md) | Body or payload of note to be added to the device |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | An empty object means success              | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

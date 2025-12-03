@@ -278,6 +278,27 @@ class TestNotehubRoute(unittest.TestCase):
                         jsonata = '$.body.data', 
                         jsonata_in = '$.body.data', ), 
                     user_name = '', ),
+                snowpipe_streaming = notehub_py.models.snowpipe_streaming_route.SnowpipeStreamingRoute(
+                    account_name = '', 
+                    database_name = '', 
+                    filter = notehub_py.models.filter.Filter(
+                        files = ["env.qo","motion.qo"], 
+                        system_notefiles = False, 
+                        type = 'inclusion', ), 
+                    fleets = [
+                        ''
+                        ], 
+                    organization_name = '', 
+                    pem = '', 
+                    pipe_name = '', 
+                    private_key_name = '', 
+                    schema_name = '', 
+                    timeout = 56, 
+                    transform = notehub_py.models.route_transform_settings.RouteTransformSettings(
+                        format = 'json', 
+                        jsonata = '$.body.data', 
+                        jsonata_in = '$.body.data', ), 
+                    user_name = '', ),
                 thingworx = notehub_py.models.thingworx_route.ThingworxRoute(
                     app_key = '', 
                     filter = notehub_py.models.filter.Filter(

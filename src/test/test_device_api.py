@@ -27,12 +27,28 @@ class TestDeviceApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_add_db_note(self) -> None:
+        """Test case for add_db_note"""
+        pass
+
+    def test_add_qi_note(self) -> None:
+        """Test case for add_qi_note"""
+        pass
+
+    def test_delete_db_note(self) -> None:
+        """Test case for delete_db_note"""
+        pass
+
+    def test_delete_device(self) -> None:
+        """Test case for delete_device"""
+        pass
+
     def test_delete_device_environment_variable(self) -> None:
         """Test case for delete_device_environment_variable"""
         pass
 
-    def test_delete_project_device(self) -> None:
-        """Test case for delete_project_device"""
+    def test_delete_notefiles(self) -> None:
+        """Test case for delete_notefiles"""
         pass
 
     def test_disable_device(self) -> None:
@@ -49,6 +65,10 @@ class TestDeviceApi(unittest.TestCase):
 
     def test_enable_device_connectivity_assurance(self) -> None:
         """Test case for enable_device_connectivity_assurance"""
+        pass
+
+    def test_get_db_note(self) -> None:
+        """Test case for get_db_note"""
         pass
 
     def test_get_device(self) -> None:
@@ -74,8 +94,8 @@ class TestDeviceApi(unittest.TestCase):
         """Test case for get_device_health_log"""
         pass
 
-    def test_get_device_latest(self) -> None:
-        """Test case for get_device_latest"""
+    def test_get_device_latest_events(self) -> None:
+        """Test case for get_device_latest_events"""
         pass
 
     def test_get_device_plans(self) -> None:
@@ -86,72 +106,52 @@ class TestDeviceApi(unittest.TestCase):
         """Test case for get_device_public_key"""
         pass
 
+    def test_get_device_public_keys(self) -> None:
+        """Test case for get_device_public_keys"""
+        pass
+
     def test_get_device_sessions(self) -> None:
         """Test case for get_device_sessions"""
         pass
 
-    def test_get_project_device_public_keys(self) -> None:
-        """Test case for get_project_device_public_keys"""
+    def test_get_devices(self) -> None:
+        """Test case for get_devices"""
         pass
 
-    def test_get_project_devices(self) -> None:
-        """Test case for get_project_devices"""
+    def test_get_fleet_devices(self) -> None:
+        """Test case for get_fleet_devices"""
         pass
 
-    def test_get_project_fleet_devices(self) -> None:
-        """Test case for get_project_fleet_devices"""
+    def test_get_notefile(self) -> None:
+        """Test case for get_notefile"""
         pass
 
-    def test_handle_note_add(self) -> None:
-        """Test case for handle_note_add"""
+    def test_list_notefiles(self) -> None:
+        """Test case for list_notefiles"""
         pass
 
-    def test_handle_note_changes(self) -> None:
-        """Test case for handle_note_changes"""
+    def test_list_pending_notefiles(self) -> None:
+        """Test case for list_pending_notefiles"""
         pass
 
-    def test_handle_note_create_add(self) -> None:
-        """Test case for handle_note_create_add"""
+    def test_provision_device(self) -> None:
+        """Test case for provision_device"""
         pass
 
-    def test_handle_note_delete(self) -> None:
-        """Test case for handle_note_delete"""
+    def test_set_device_environment_variables(self) -> None:
+        """Test case for set_device_environment_variables"""
         pass
 
-    def test_handle_note_get(self) -> None:
-        """Test case for handle_note_get"""
+    def test_set_device_environment_variables_by_pin(self) -> None:
+        """Test case for set_device_environment_variables_by_pin"""
         pass
 
-    def test_handle_note_signal(self) -> None:
-        """Test case for handle_note_signal"""
+    def test_signal_device(self) -> None:
+        """Test case for signal_device"""
         pass
 
-    def test_handle_note_update(self) -> None:
-        """Test case for handle_note_update"""
-        pass
-
-    def test_handle_notefile_changes(self) -> None:
-        """Test case for handle_notefile_changes"""
-        pass
-
-    def test_handle_notefile_changes_pending(self) -> None:
-        """Test case for handle_notefile_changes_pending"""
-        pass
-
-    def test_handle_notefile_delete(self) -> None:
-        """Test case for handle_notefile_delete"""
-        pass
-
-    def test_post_provision_project_device(self) -> None:
-        """Test case for post_provision_project_device"""
-        pass
-
-    def test_put_device_environment_variables(self) -> None:
-        """Test case for put_device_environment_variables"""
-        pass
-
-    def test_put_device_environment_variables_by_pin(self) -> None:
-        """Test case for put_device_environment_variables_by_pin"""
+    def test_update_db_note(self) -> None:
+        """Test case for update_db_note"""
         pass
 
 
