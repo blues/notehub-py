@@ -34,7 +34,7 @@ class UsageEventsData(BaseModel):
     fleet: Optional[StrictStr] = None
     notefiles: Optional[Dict[str, StrictInt]] = Field(
         default=None,
-        description="Count of events per notefile. Only present when aggregate=notefile is specified.",
+        description="Count of events per notefile. Only present when includeNotefiles=true is specified.",
     )
     period: datetime
     platform_events: StrictInt = Field(

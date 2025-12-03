@@ -457,8 +457,7 @@ class UsageApi:
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
         aggregate: Annotated[
-            Optional[List[StrictStr]],
-            Field(description="Aggregation level for results"),
+            Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
         notefile: Annotated[
             Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
@@ -468,6 +467,10 @@ class UsageApi:
             Field(
                 description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
             ),
+        ] = None,
+        include_notefiles: Annotated[
+            Optional[StrictBool],
+            Field(description="Include per-notefile event counts in the response"),
         ] = None,
         _request_timeout: Union[
             None,
@@ -498,11 +501,13 @@ class UsageApi:
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
-        :type aggregate: List[str]
+        :type aggregate: str
         :param notefile: Filter to specific notefiles
         :type notefile: List[str]
         :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
         :type skip_recent_data: bool
+        :param include_notefiles: Include per-notefile event counts in the response
+        :type include_notefiles: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -535,6 +540,7 @@ class UsageApi:
             aggregate=aggregate,
             notefile=notefile,
             skip_recent_data=skip_recent_data,
+            include_notefiles=include_notefiles,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -577,8 +583,7 @@ class UsageApi:
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
         aggregate: Annotated[
-            Optional[List[StrictStr]],
-            Field(description="Aggregation level for results"),
+            Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
         notefile: Annotated[
             Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
@@ -588,6 +593,10 @@ class UsageApi:
             Field(
                 description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
             ),
+        ] = None,
+        include_notefiles: Annotated[
+            Optional[StrictBool],
+            Field(description="Include per-notefile event counts in the response"),
         ] = None,
         _request_timeout: Union[
             None,
@@ -618,11 +627,13 @@ class UsageApi:
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
-        :type aggregate: List[str]
+        :type aggregate: str
         :param notefile: Filter to specific notefiles
         :type notefile: List[str]
         :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
         :type skip_recent_data: bool
+        :param include_notefiles: Include per-notefile event counts in the response
+        :type include_notefiles: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -655,6 +666,7 @@ class UsageApi:
             aggregate=aggregate,
             notefile=notefile,
             skip_recent_data=skip_recent_data,
+            include_notefiles=include_notefiles,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -697,8 +709,7 @@ class UsageApi:
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
         aggregate: Annotated[
-            Optional[List[StrictStr]],
-            Field(description="Aggregation level for results"),
+            Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
         notefile: Annotated[
             Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
@@ -708,6 +719,10 @@ class UsageApi:
             Field(
                 description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
             ),
+        ] = None,
+        include_notefiles: Annotated[
+            Optional[StrictBool],
+            Field(description="Include per-notefile event counts in the response"),
         ] = None,
         _request_timeout: Union[
             None,
@@ -738,11 +753,13 @@ class UsageApi:
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
         :param aggregate: Aggregation level for results
-        :type aggregate: List[str]
+        :type aggregate: str
         :param notefile: Filter to specific notefiles
         :type notefile: List[str]
         :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
         :type skip_recent_data: bool
+        :param include_notefiles: Include per-notefile event counts in the response
+        :type include_notefiles: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -775,6 +792,7 @@ class UsageApi:
             aggregate=aggregate,
             notefile=notefile,
             skip_recent_data=skip_recent_data,
+            include_notefiles=include_notefiles,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -800,6 +818,7 @@ class UsageApi:
         aggregate,
         notefile,
         skip_recent_data,
+        include_notefiles,
         _request_auth,
         _content_type,
         _headers,
@@ -811,7 +830,6 @@ class UsageApi:
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
             "fleetUID": "multi",
-            "aggregate": "multi",
             "notefile": "multi",
         }
 
@@ -857,6 +875,10 @@ class UsageApi:
         if skip_recent_data is not None:
 
             _query_params.append(("skipRecentData", skip_recent_data))
+
+        if include_notefiles is not None:
+
+            _query_params.append(("includeNotefiles", include_notefiles))
 
         # process the header parameters
         # process the form parameters
