@@ -37,6 +37,13 @@ class TestDevice(unittest.TestCase):
         model = Device()
         if include_optional:
             return Device(
+                best_location = notehub_py.models.location.Location(
+                    country = '', 
+                    latitude = 1.337, 
+                    longitude = 1.337, 
+                    name = '', 
+                    timezone = '', 
+                    when = '', ),
                 cellular_usage = [
                     notehub_py.models.sim_usage.SimUsage(
                         iccid = '', 

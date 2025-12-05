@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,8 +29,9 @@ class FleetConnectivityAssurance(BaseModel):
     FleetConnectivityAssurance
     """  # noqa: E501
 
-    enabled: StrictBool = Field(
-        description="Whether Connectivity Assurance is enabled for this fleet"
+    enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Whether Connectivity Assurance is enabled for this fleet",
     )
     __properties: ClassVar[List[str]] = ["enabled"]
 
@@ -71,6 +72,11 @@ class FleetConnectivityAssurance(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if enabled (nullable) is None
+        # and model_fields_set contains the field
+        if self.enabled is None and "enabled" in self.model_fields_set:
+            _dict["enabled"] = None
+
         return _dict
 
     @classmethod

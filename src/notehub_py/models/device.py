@@ -42,6 +42,7 @@ class Device(BaseModel):
     Device
     """  # noqa: E501
 
+    best_location: Optional[Location] = None
     cellular_usage: Optional[List[SimUsage]] = None
     contact: Optional[Contact] = None
     dfu: Optional[DFUEnv] = None
@@ -62,6 +63,7 @@ class Device(BaseModel):
     uid: StrictStr
     voltage: Union[StrictFloat, StrictInt]
     __properties: ClassVar[List[str]] = [
+        "best_location",
         "cellular_usage",
         "contact",
         "dfu",
@@ -120,6 +122,9 @@ class Device(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of best_location
+        if self.best_location:
+            _dict["best_location"] = self.best_location.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in cellular_usage (list)
         _items = []
         if self.cellular_usage:
@@ -145,6 +150,11 @@ class Device(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of triangulated_location
         if self.triangulated_location:
             _dict["triangulated_location"] = self.triangulated_location.to_dict()
+        # set to None if best_location (nullable) is None
+        # and model_fields_set contains the field
+        if self.best_location is None and "best_location" in self.model_fields_set:
+            _dict["best_location"] = None
+
         # set to None if contact (nullable) is None
         # and model_fields_set contains the field
         if self.contact is None and "contact" in self.model_fields_set:
@@ -196,6 +206,11 @@ class Device(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "best_location": (
+                    Location.from_dict(obj["best_location"])
+                    if obj.get("best_location") is not None
+                    else None
+                ),
                 "cellular_usage": (
                     [SimUsage.from_dict(_item) for _item in obj["cellular_usage"]]
                     if obj.get("cellular_usage") is not None
