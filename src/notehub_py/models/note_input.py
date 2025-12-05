@@ -18,31 +18,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBytes, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ListPendingNotefiles200Response(BaseModel):
+class NoteInput(BaseModel):
     """
-    ListPendingNotefiles200Response
+    NoteInput
     """  # noqa: E501
 
-    changes: Optional[StrictInt] = Field(
-        default=None, description="The number of pending changes in the Notefile."
+    body: Optional[Dict[str, Any]] = Field(
+        default=None, description="Arbitrary user-defined JSON for the note."
     )
-    info: Optional[Dict[str, Any]] = Field(
-        default=None,
-        description="An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file.",
+    payload: Optional[Union[StrictBytes, StrictStr]] = Field(
+        default=None, description="Optional base64-encoded payload."
     )
-    pending: Optional[StrictBool] = Field(
-        default=None, description="Whether there are pending changes."
-    )
-    total: Optional[StrictInt] = Field(
-        default=None, description="The total number of files."
-    )
-    __properties: ClassVar[List[str]] = ["changes", "info", "pending", "total"]
+    __properties: ClassVar[List[str]] = ["body", "payload"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -61,7 +54,7 @@ class ListPendingNotefiles200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListPendingNotefiles200Response from a JSON string"""
+        """Create an instance of NoteInput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -85,7 +78,7 @@ class ListPendingNotefiles200Response(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListPendingNotefiles200Response from a dict"""
+        """Create an instance of NoteInput from a dict"""
         if obj is None:
             return None
 
@@ -93,11 +86,6 @@ class ListPendingNotefiles200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "changes": obj.get("changes"),
-                "info": obj.get("info"),
-                "pending": obj.get("pending"),
-                "total": obj.get("total"),
-            }
+            {"body": obj.get("body"), "payload": obj.get("payload")}
         )
         return _obj

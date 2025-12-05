@@ -111,9 +111,9 @@ Class | Method | HTTP request | Description
 *BillingAccountApi* | [**get_billing_accounts**](docs/BillingAccountApi.md#get_billing_accounts) | **GET** /v1/billing-accounts | 
 *DeviceApi* | [**add_db_note**](docs/DeviceApi.md#add_db_note) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID} | 
 *DeviceApi* | [**add_qi_note**](docs/DeviceApi.md#add_qi_note) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID} | 
-*DeviceApi* | [**delete_db_note**](docs/DeviceApi.md#delete_db_note) | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID} | 
 *DeviceApi* | [**delete_device**](docs/DeviceApi.md#delete_device) | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID} | 
 *DeviceApi* | [**delete_device_environment_variable**](docs/DeviceApi.md#delete_device_environment_variable) | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key} | 
+*DeviceApi* | [**delete_note**](docs/DeviceApi.md#delete_note) | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID} | 
 *DeviceApi* | [**delete_notefiles**](docs/DeviceApi.md#delete_notefiles) | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files | 
 *DeviceApi* | [**disable_device**](docs/DeviceApi.md#disable_device) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable | 
 *DeviceApi* | [**disable_device_connectivity_assurance**](docs/DeviceApi.md#disable_device_connectivity_assurance) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance | 
@@ -132,9 +132,8 @@ Class | Method | HTTP request | Description
 *DeviceApi* | [**get_device_sessions**](docs/DeviceApi.md#get_device_sessions) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions | 
 *DeviceApi* | [**get_devices**](docs/DeviceApi.md#get_devices) | **GET** /v1/projects/{projectOrProductUID}/devices | 
 *DeviceApi* | [**get_fleet_devices**](docs/DeviceApi.md#get_fleet_devices) | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices | 
-*DeviceApi* | [**get_notefile**](docs/DeviceApi.md#get_notefile) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes | 
-*DeviceApi* | [**list_notefiles**](docs/DeviceApi.md#list_notefiles) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes | 
-*DeviceApi* | [**list_pending_notefiles**](docs/DeviceApi.md#list_pending_notefiles) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending | 
+*DeviceApi* | [**get_notefile**](docs/DeviceApi.md#get_notefile) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID} | 
+*DeviceApi* | [**list_notefiles**](docs/DeviceApi.md#list_notefiles) | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files | 
 *DeviceApi* | [**provision_device**](docs/DeviceApi.md#provision_device) | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision | 
 *DeviceApi* | [**set_device_environment_variables**](docs/DeviceApi.md#set_device_environment_variables) | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables | 
 *DeviceApi* | [**set_device_environment_variables_by_pin**](docs/DeviceApi.md#set_device_environment_variables_by_pin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin | 
@@ -284,8 +283,6 @@ Class | Method | HTTP request | Description
  - [GetWebhooks200Response](docs/GetWebhooks200Response.md)
  - [GoogleRoute](docs/GoogleRoute.md)
  - [HttpRoute](docs/HttpRoute.md)
- - [ListNotefiles200Response](docs/ListNotefiles200Response.md)
- - [ListPendingNotefiles200Response](docs/ListPendingNotefiles200Response.md)
  - [Location](docs/Location.md)
  - [Login200Response](docs/Login200Response.md)
  - [LoginRequest](docs/LoginRequest.md)
@@ -293,6 +290,8 @@ Class | Method | HTTP request | Description
  - [MonitorAlertRoutesInner](docs/MonitorAlertRoutesInner.md)
  - [MqttRoute](docs/MqttRoute.md)
  - [Note](docs/Note.md)
+ - [NoteInput](docs/NoteInput.md)
+ - [Notefile](docs/Notefile.md)
  - [NotefileSchema](docs/NotefileSchema.md)
  - [NotehubRoute](docs/NotehubRoute.md)
  - [NotehubRouteSummary](docs/NotehubRouteSummary.md)

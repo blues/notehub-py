@@ -86,8 +86,6 @@ docs/GetSessionsUsage200Response.md
 docs/GetWebhooks200Response.md
 docs/GoogleRoute.md
 docs/HttpRoute.md
-docs/ListNotefiles200Response.md
-docs/ListPendingNotefiles200Response.md
 docs/Location.md
 docs/Login200Response.md
 docs/LoginRequest.md
@@ -96,6 +94,8 @@ docs/MonitorAlertRoutesInner.md
 docs/MonitorApi.md
 docs/MqttRoute.md
 docs/Note.md
+docs/NoteInput.md
+docs/Notefile.md
 docs/NotefileSchema.md
 docs/NotehubRoute.md
 docs/NotehubRouteSummary.md
@@ -239,8 +239,6 @@ notehub_py/models/get_sessions_usage200_response.py
 notehub_py/models/get_webhooks200_response.py
 notehub_py/models/google_route.py
 notehub_py/models/http_route.py
-notehub_py/models/list_notefiles200_response.py
-notehub_py/models/list_pending_notefiles200_response.py
 notehub_py/models/location.py
 notehub_py/models/login200_response.py
 notehub_py/models/login_request.py
@@ -248,6 +246,8 @@ notehub_py/models/monitor.py
 notehub_py/models/monitor_alert_routes_inner.py
 notehub_py/models/mqtt_route.py
 notehub_py/models/note.py
+notehub_py/models/note_input.py
+notehub_py/models/notefile.py
 notehub_py/models/notefile_schema.py
 notehub_py/models/notehub_route.py
 notehub_py/models/notehub_route_summary.py
@@ -382,8 +382,6 @@ test/test_get_sessions_usage200_response.py
 test/test_get_webhooks200_response.py
 test/test_google_route.py
 test/test_http_route.py
-test/test_list_notefiles200_response.py
-test/test_list_pending_notefiles200_response.py
 test/test_location.py
 test/test_login200_response.py
 test/test_login_request.py
@@ -392,6 +390,8 @@ test/test_monitor_alert_routes_inner.py
 test/test_monitor_api.py
 test/test_mqtt_route.py
 test/test_note.py
+test/test_note_input.py
+test/test_notefile.py
 test/test_notefile_schema.py
 test/test_notehub_route.py
 test/test_notehub_route_summary.py

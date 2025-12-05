@@ -2,13 +2,14 @@
 
 ## Properties
 
-| Name            | Type         | Description | Notes      |
-| --------------- | ------------ | ----------- | ---------- |
-| **device**      | **str**      |             | [optional] |
-| **fleet**       | **str**      |             | [optional] |
-| **period**      | **datetime** |             |
-| **sessions**    | **int**      |             |
-| **total_bytes** | **int**      |             |
+| Name              | Type         | Description | Notes      |
+| ----------------- | ------------ | ----------- | ---------- |
+| **device**        | **str**      |             | [optional] |
+| **fleet**         | **str**      |             | [optional] |
+| **period**        | **datetime** |             |
+| **sessions**      | **int**      |             |
+| **total_bytes**   | **int**      |             |
+| **total_devices** | **int**      |             |
 
 ## Example
 

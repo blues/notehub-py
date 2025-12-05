@@ -35,12 +35,14 @@ class UsageSessionsData(BaseModel):
     period: datetime
     sessions: StrictInt
     total_bytes: StrictInt
+    total_devices: StrictInt
     __properties: ClassVar[List[str]] = [
         "device",
         "fleet",
         "period",
         "sessions",
         "total_bytes",
+        "total_devices",
     ]
 
     model_config = ConfigDict(
@@ -98,6 +100,7 @@ class UsageSessionsData(BaseModel):
                 "period": obj.get("period"),
                 "sessions": obj.get("sessions"),
                 "total_bytes": obj.get("total_bytes"),
+                "total_devices": obj.get("total_devices"),
             }
         )
         return _obj

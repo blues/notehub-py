@@ -44,6 +44,7 @@ class TestUsageEventsResponse(unittest.TestCase):
                         notefiles = {"_log.qo":20,"customer1.qo":1,"session.qo":50}, 
                         period = '2025-07-23T00:00Z', 
                         platform_events = 15, 
+                        total_devices = 56, 
                         total_events = 42, 
                         watchdog_events = 10, )
                     ]
@@ -57,6 +58,7 @@ class TestUsageEventsResponse(unittest.TestCase):
                         notefiles = {"_log.qo":20,"customer1.qo":1,"session.qo":50}, 
                         period = '2025-07-23T00:00Z', 
                         platform_events = 15, 
+                        total_devices = 56, 
                         total_events = 42, 
                         watchdog_events = 10, )
                     ],

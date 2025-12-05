@@ -18,8 +18,16 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictBytes,
+    StrictInt,
+    StrictStr,
+)
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,9 +37,34 @@ class Note(BaseModel):
     Note
     """  # noqa: E501
 
-    body: Optional[Dict[str, Any]] = None
-    payload: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["body", "payload"]
+    body: Dict[str, Any] = Field(
+        description="Arbitrary user-defined JSON for the note."
+    )
+    edge: Optional[StrictBool] = Field(
+        default=None, description="True if originated from an edge source."
+    )
+    id: StrictStr = Field(
+        description='Note name/identifier (e.g., "1:435", "my_note").'
+    )
+    payload: Optional[Union[StrictBytes, StrictStr]] = Field(
+        default=None, description="Optional base64-encoded payload."
+    )
+    pending: Optional[StrictBool] = Field(
+        default=None, description="True if the note is pending delivery or processing."
+    )
+    time: StrictInt = Field(description="Unix epoch seconds.")
+    where: Optional[StrictStr] = Field(
+        default=None, description="Optional location/metadata string."
+    )
+    __properties: ClassVar[List[str]] = [
+        "body",
+        "edge",
+        "id",
+        "payload",
+        "pending",
+        "time",
+        "where",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +115,14 @@ class Note(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"body": obj.get("body"), "payload": obj.get("payload")}
+            {
+                "body": obj.get("body"),
+                "edge": obj.get("edge"),
+                "id": obj.get("id"),
+                "payload": obj.get("payload"),
+                "pending": obj.get("pending"),
+                "time": obj.get("time"),
+                "where": obj.get("where"),
+            }
         )
         return _obj
