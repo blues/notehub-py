@@ -39,6 +39,13 @@ class TestGetDevices200Response(unittest.TestCase):
             return GetDevices200Response(
                 devices = [
                     notehub_py.models.device.Device(
+                        best_location = notehub_py.models.location.Location(
+                            country = '', 
+                            latitude = 1.337, 
+                            longitude = 1.337, 
+                            name = '', 
+                            timezone = '', 
+                            when = '', ), 
                         cellular_usage = [
                             notehub_py.models.sim_usage.SimUsage(
                                 iccid = '', 
@@ -105,13 +112,7 @@ class TestGetDevices200Response(unittest.TestCase):
                             lac = 56, 
                             mcc = 56, 
                             mnc = 56, ), 
-                        tower_location = notehub_py.models.location.Location(
-                            country = '', 
-                            latitude = 1.337, 
-                            longitude = 1.337, 
-                            name = '', 
-                            timezone = '', 
-                            when = '', ), 
+                        tower_location = , 
                         triangulated_location = , 
                         uid = '', 
                         voltage = 1.337, )
@@ -122,6 +123,13 @@ class TestGetDevices200Response(unittest.TestCase):
             return GetDevices200Response(
                 devices = [
                     notehub_py.models.device.Device(
+                        best_location = notehub_py.models.location.Location(
+                            country = '', 
+                            latitude = 1.337, 
+                            longitude = 1.337, 
+                            name = '', 
+                            timezone = '', 
+                            when = '', ), 
                         cellular_usage = [
                             notehub_py.models.sim_usage.SimUsage(
                                 iccid = '', 
@@ -188,13 +196,7 @@ class TestGetDevices200Response(unittest.TestCase):
                             lac = 56, 
                             mcc = 56, 
                             mnc = 56, ), 
-                        tower_location = notehub_py.models.location.Location(
-                            country = '', 
-                            latitude = 1.337, 
-                            longitude = 1.337, 
-                            name = '', 
-                            timezone = '', 
-                            when = '', ), 
+                        tower_location = , 
                         triangulated_location = , 
                         uid = '', 
                         voltage = 1.337, )

@@ -2,9 +2,9 @@
 
 ## Properties
 
-| Name        | Type     | Description                                              | Notes |
-| ----------- | -------- | -------------------------------------------------------- | ----- |
-| **enabled** | **bool** | Whether Connectivity Assurance is enabled for this fleet |
+| Name        | Type     | Description                                              | Notes      |
+| ----------- | -------- | -------------------------------------------------------- | ---------- |
+| **enabled** | **bool** | Whether Connectivity Assurance is enabled for this fleet | [optional] |
 
 ## Example
 

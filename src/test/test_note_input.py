@@ -15,11 +15,11 @@ Do not edit the class manually.
 
 import unittest
 
-from notehub_py.models.list_notefiles200_response import ListNotefiles200Response
+from notehub_py.models.note_input import NoteInput
 
 
-class TestListNotefiles200Response(unittest.TestCase):
-    """ListNotefiles200Response unit test stubs"""
+class TestNoteInput(unittest.TestCase):
+    """NoteInput unit test stubs"""
 
     def setUp(self):
         pass
@@ -27,27 +27,26 @@ class TestListNotefiles200Response(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> ListNotefiles200Response:
-        """Test ListNotefiles200Response
+    def make_instance(self, include_optional) -> NoteInput:
+        """Test NoteInput
         include_option is a boolean, when False only required
         params are included, when True both required and
         optional params are included"""
-        # uncomment below to create an instance of `ListNotefiles200Response`
+        # uncomment below to create an instance of `NoteInput`
         """
-        model = ListNotefiles200Response()
+        model = NoteInput()
         if include_optional:
-            return ListNotefiles200Response(
-                changes = 56,
-                info = None,
-                total = 56
+            return NoteInput(
+                body = { },
+                payload = 'YQ=='
             )
         else:
-            return ListNotefiles200Response(
+            return NoteInput(
         )
         """
 
-    def testListNotefiles200Response(self):
-        """Test ListNotefiles200Response"""
+    def testNoteInput(self):
+        """Test NoteInput"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

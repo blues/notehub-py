@@ -41,7 +41,6 @@ class TestFleetConnectivityAssurance(unittest.TestCase):
             )
         else:
             return FleetConnectivityAssurance(
-                enabled = True,
         )
         """
 
