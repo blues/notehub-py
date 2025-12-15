@@ -15,7 +15,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 
-__version__ = "3.0.0"
+__version__ = "4.0.0"
 
 # import apis into sdk package
 from notehub_py.api.alert_api import AlertApi
@@ -140,6 +140,9 @@ from notehub_py.models.get_project_members200_response import (
     GetProjectMembers200Response,
 )
 from notehub_py.models.get_projects200_response import GetProjects200Response
+from notehub_py.models.get_route_logs_usage200_response import (
+    GetRouteLogsUsage200Response,
+)
 from notehub_py.models.get_sessions_usage200_response import GetSessionsUsage200Response
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.models.google_route import GoogleRoute

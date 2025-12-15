@@ -18,33 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from notehub_py.models.fleet_connectivity_assurance import FleetConnectivityAssurance
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List
+from notehub_py.models.usage_route_logs_data import UsageRouteLogsData
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class CreateFleetRequest(BaseModel):
+class GetRouteLogsUsage200Response(BaseModel):
     """
-    CreateFleetRequest
+    GetRouteLogsUsage200Response
     """  # noqa: E501
 
-    connectivity_assurance: Optional[FleetConnectivityAssurance] = None
-    label: Optional[StrictStr] = Field(
-        default=None, description="The label, or name,  for the Fleet."
-    )
-    smart_rule: Optional[StrictStr] = Field(
-        default=None,
-        description="JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.",
-    )
-    smart_rule_enabled: Optional[StrictBool] = None
-    __properties: ClassVar[List[str]] = [
-        "connectivity_assurance",
-        "label",
-        "smart_rule",
-        "smart_rule_enabled",
-    ]
+    route_logs: List[UsageRouteLogsData]
+    __properties: ClassVar[List[str]] = ["route_logs"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -63,7 +50,7 @@ class CreateFleetRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateFleetRequest from a JSON string"""
+        """Create an instance of GetRouteLogsUsage200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -83,22 +70,18 @@ class CreateFleetRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of connectivity_assurance
-        if self.connectivity_assurance:
-            _dict["connectivity_assurance"] = self.connectivity_assurance.to_dict()
-        # set to None if connectivity_assurance (nullable) is None
-        # and model_fields_set contains the field
-        if (
-            self.connectivity_assurance is None
-            and "connectivity_assurance" in self.model_fields_set
-        ):
-            _dict["connectivity_assurance"] = None
-
+        # override the default output from pydantic by calling `to_dict()` of each item in route_logs (list)
+        _items = []
+        if self.route_logs:
+            for _item in self.route_logs:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["route_logs"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateFleetRequest from a dict"""
+        """Create an instance of GetRouteLogsUsage200Response from a dict"""
         if obj is None:
             return None
 
@@ -107,14 +90,11 @@ class CreateFleetRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "connectivity_assurance": (
-                    FleetConnectivityAssurance.from_dict(obj["connectivity_assurance"])
-                    if obj.get("connectivity_assurance") is not None
+                "route_logs": (
+                    [UsageRouteLogsData.from_dict(_item) for _item in obj["route_logs"]]
+                    if obj.get("route_logs") is not None
                     else None
-                ),
-                "label": obj.get("label"),
-                "smart_rule": obj.get("smart_rule"),
-                "smart_rule_enabled": obj.get("smart_rule_enabled"),
+                )
             }
         )
         return _obj
