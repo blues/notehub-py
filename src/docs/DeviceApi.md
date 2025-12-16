@@ -6,9 +6,9 @@ All URIs are relative to *https://api.notefile.net*
 | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [**add_db_note**](DeviceApi.md#add_db_note)                                                         | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
 | [**add_qi_note**](DeviceApi.md#add_qi_note)                                                         | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}             |
-| [**delete_db_note**](DeviceApi.md#delete_db_note)                                                   | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
 | [**delete_device**](DeviceApi.md#delete_device)                                                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                              |
 | [**delete_device_environment_variable**](DeviceApi.md#delete_device_environment_variable)           | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}  |
+| [**delete_note**](DeviceApi.md#delete_note)                                                         | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}  |
 | [**delete_notefiles**](DeviceApi.md#delete_notefiles)                                               | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                        |
 | [**disable_device**](DeviceApi.md#disable_device)                                                   | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable                        |
 | [**disable_device_connectivity_assurance**](DeviceApi.md#disable_device_connectivity_assurance)     | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/disable-connectivity-assurance |
@@ -27,9 +27,8 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_device_sessions**](DeviceApi.md#get_device_sessions)                                         | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/sessions                        |
 | [**get_devices**](DeviceApi.md#get_devices)                                                         | **GET** /v1/projects/{projectOrProductUID}/devices                                             |
 | [**get_fleet_devices**](DeviceApi.md#get_fleet_devices)                                             | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/devices                           |
-| [**get_notefile**](DeviceApi.md#get_notefile)                                                       | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes      |
-| [**list_notefiles**](DeviceApi.md#list_notefiles)                                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes                   |
-| [**list_pending_notefiles**](DeviceApi.md#list_pending_notefiles)                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending           |
+| [**get_notefile**](DeviceApi.md#get_notefile)                                                       | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}              |
+| [**list_notefiles**](DeviceApi.md#list_notefiles)                                                   | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/files                           |
 | [**provision_device**](DeviceApi.md#provision_device)                                               | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/provision                      |
 | [**set_device_environment_variables**](DeviceApi.md#set_device_environment_variables)               | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables           |
 | [**set_device_environment_variables_by_pin**](DeviceApi.md#set_device_environment_variables_by_pin) | **PUT** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin           |
@@ -38,9 +37,9 @@ All URIs are relative to *https://api.notefile.net*
 
 # **add_db_note**
 
-> add_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note)
+> add_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note_input)
 
-Add a Note to a .db notefile
+Add a Note to a .db notefile. if noteID is '-' then payload is ignored and empty notefile is created
 
 ### Example
 
@@ -48,7 +47,7 @@ Add a Note to a .db notefile
 
 ```python
 import notehub_py
-from notehub_py.models.note import Note
+from notehub_py.models.note_input import NoteInput
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -76,23 +75,23 @@ with notehub_py.ApiClient(configuration) as api_client:
     device_uid = 'dev:000000000000000' # str |
     notefile_id = 'notefile_id_example' # str |
     note_id = 'note_id_example' # str |
-    note = notehub_py.Note() # Note | Body or payload of note to be added to the device
+    note_input = notehub_py.NoteInput() # NoteInput | Body or payload of note to be added to the device
 
     try:
-        api_instance.add_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note)
+        api_instance.add_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note_input)
     except Exception as e:
         print("Exception when calling DeviceApi->add_db_note: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                       | Type                | Description                                       | Notes |
-| -------------------------- | ------------------- | ------------------------------------------------- | ----- |
-| **project_or_product_uid** | **str**             |                                                   |
-| **device_uid**             | **str**             |                                                   |
-| **notefile_id**            | **str**             |                                                   |
-| **note_id**                | **str**             |                                                   |
-| **note**                   | [**Note**](Note.md) | Body or payload of note to be added to the device |
+| Name                       | Type                          | Description                                       | Notes |
+| -------------------------- | ----------------------------- | ------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**                       |                                                   |
+| **device_uid**             | **str**                       |                                                   |
+| **notefile_id**            | **str**                       |                                                   |
+| **note_id**                | **str**                       |                                                   |
+| **note_input**             | [**NoteInput**](NoteInput.md) | Body or payload of note to be added to the device |
 
 ### Return type
 
@@ -118,7 +117,7 @@ void (empty response body)
 
 # **add_qi_note**
 
-> add_qi_note(project_or_product_uid, device_uid, notefile_id, note)
+> add_qi_note(project_or_product_uid, device_uid, notefile_id, note_input)
 
 Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
@@ -128,7 +127,7 @@ Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
 ```python
 import notehub_py
-from notehub_py.models.note import Note
+from notehub_py.models.note_input import NoteInput
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -155,22 +154,22 @@ with notehub_py.ApiClient(configuration) as api_client:
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
     notefile_id = 'notefile_id_example' # str |
-    note = notehub_py.Note() # Note | Body or payload of note to be added to the device
+    note_input = notehub_py.NoteInput() # NoteInput | Body or payload of note to be added to the device
 
     try:
-        api_instance.add_qi_note(project_or_product_uid, device_uid, notefile_id, note)
+        api_instance.add_qi_note(project_or_product_uid, device_uid, notefile_id, note_input)
     except Exception as e:
         print("Exception when calling DeviceApi->add_qi_note: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                       | Type                | Description                                       | Notes |
-| -------------------------- | ------------------- | ------------------------------------------------- | ----- |
-| **project_or_product_uid** | **str**             |                                                   |
-| **device_uid**             | **str**             |                                                   |
-| **notefile_id**            | **str**             |                                                   |
-| **note**                   | [**Note**](Note.md) | Body or payload of note to be added to the device |
+| Name                       | Type                          | Description                                       | Notes |
+| -------------------------- | ----------------------------- | ------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**                       |                                                   |
+| **device_uid**             | **str**                       |                                                   |
+| **notefile_id**            | **str**                       |                                                   |
+| **note_input**             | [**NoteInput**](NoteInput.md) | Body or payload of note to be added to the device |
 
 ### Return type
 
@@ -183,83 +182,6 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_db_note**
-
-> delete_db_note(project_or_product_uid, device_uid, notefile_id, note_id)
-
-Delete a note from a .db notefile
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
-    note_id = 'note_id_example' # str |
-
-    try:
-        api_instance.delete_db_note(project_or_product_uid, device_uid, notefile_id, note_id)
-    except Exception as e:
-        print("Exception when calling DeviceApi->delete_db_note: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type    | Description | Notes |
-| -------------------------- | ------- | ----------- | ----- |
-| **project_or_product_uid** | **str** |             |
-| **device_uid**             | **str** |             |
-| **notefile_id**            | **str** |             |
-| **note_id**                | **str** |             |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 
 ### HTTP response details
@@ -421,6 +343,83 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ----------- | -------------------------------------------------------- | ---------------- |
 | **200**     | The response body from an environment variables request. | -                |
 | **0**       | The response body in case of an API error.               | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_note**
+
+> delete_note(project_or_product_uid, device_uid, notefile_id, note_id)
+
+Delete a note from a .db or .qi notefile
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+    notefile_id = 'notefile_id_example' # str |
+    note_id = 'note_id_example' # str |
+
+    try:
+        api_instance.delete_note(project_or_product_uid, device_uid, notefile_id, note_id)
+    except Exception as e:
+        print("Exception when calling DeviceApi->delete_note: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **device_uid**             | **str** |             |
+| **notefile_id**            | **str** |             |
+| **note_id**                | **str** |             |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | An empty object means success              | -                |
+| **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -796,7 +795,7 @@ void (empty response body)
 
 > GetDbNote200Response get_db_note(project_or_product_uid, device_uid, notefile_id, note_id, delete=delete, deleted=deleted)
 
-Get a note from a .db notefile
+Get a note from a .db or .qi notefile
 
 ### Example
 
@@ -1849,7 +1848,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_notefile**
 
-> GetNotefile200Response get_notefile(project_or_product_uid, device_uid, notefile_id, tracker=tracker, max=max, start=start, stop=stop, deleted=deleted, delete=delete)
+> GetNotefile200Response get_notefile(project_or_product_uid, device_uid, notefile_id, max=max, deleted=deleted, delete=delete)
 
 For .qi files, returns the queued up notes. For .db files, returns all notes in the notefile
 
@@ -1886,15 +1885,12 @@ with notehub_py.ApiClient(configuration) as api_client:
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
     notefile_id = 'notefile_id_example' # str |
-    tracker = 'tracker_example' # str | The change tracker ID. (optional)
     max = 56 # int | The maximum number of Notes to return in the request. (optional)
-    start = True # bool | true to reset the tracker to the beginning. (optional)
-    stop = True # bool | true to delete the tracker. (optional)
     deleted = True # bool | true to return deleted notes. (optional)
     delete = True # bool | true to delete the notes returned by the request. (optional)
 
     try:
-        api_response = api_instance.get_notefile(project_or_product_uid, device_uid, notefile_id, tracker=tracker, max=max, start=start, stop=stop, deleted=deleted, delete=delete)
+        api_response = api_instance.get_notefile(project_or_product_uid, device_uid, notefile_id, max=max, deleted=deleted, delete=delete)
         print("The response of DeviceApi->get_notefile:\n")
         pprint(api_response)
     except Exception as e:
@@ -1908,10 +1904,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **project_or_product_uid** | **str**  |                                                       |
 | **device_uid**             | **str**  |                                                       |
 | **notefile_id**            | **str**  |                                                       |
-| **tracker**                | **str**  | The change tracker ID.                                | [optional] |
 | **max**                    | **int**  | The maximum number of Notes to return in the request. | [optional] |
-| **start**                  | **bool** | true to reset the tracker to the beginning.           | [optional] |
-| **stop**                   | **bool** | true to delete the tracker.                           | [optional] |
 | **deleted**                | **bool** | true to return deleted notes.                         | [optional] |
 | **delete**                 | **bool** | true to delete the notes returned by the request.     | [optional] |
 
@@ -1939,7 +1932,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **list_notefiles**
 
-> ListNotefiles200Response list_notefiles(project_or_product_uid, device_uid, tracker=tracker, files=files)
+> List[Notefile] list_notefiles(project_or_product_uid, device_uid, files=files, pending=pending)
 
 Lists .qi and .db files for the device
 
@@ -1949,7 +1942,7 @@ Lists .qi and .db files for the device
 
 ```python
 import notehub_py
-from notehub_py.models.list_notefiles200_response import ListNotefiles200Response
+from notehub_py.models.notefile import Notefile
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -1975,11 +1968,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.DeviceApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
-    tracker = 'tracker_example' # str | The change tracker ID. (optional)
     files = ['files_example'] # List[str] | One or more files to obtain change information from. (optional)
+    pending = True # bool | show only files that are pending sync to the Notecard (optional)
 
     try:
-        api_response = api_instance.list_notefiles(project_or_product_uid, device_uid, tracker=tracker, files=files)
+        api_response = api_instance.list_notefiles(project_or_product_uid, device_uid, files=files, pending=pending)
         print("The response of DeviceApi->list_notefiles:\n")
         pprint(api_response)
     except Exception as e:
@@ -1988,16 +1981,16 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                    | Description                                          | Notes      |
-| -------------------------- | ----------------------- | ---------------------------------------------------- | ---------- |
-| **project_or_product_uid** | **str**                 |                                                      |
-| **device_uid**             | **str**                 |                                                      |
-| **tracker**                | **str**                 | The change tracker ID.                               | [optional] |
-| **files**                  | [**List[str]**](str.md) | One or more files to obtain change information from. | [optional] |
+| Name                       | Type                    | Description                                           | Notes      |
+| -------------------------- | ----------------------- | ----------------------------------------------------- | ---------- |
+| **project_or_product_uid** | **str**                 |                                                       |
+| **device_uid**             | **str**                 |                                                       |
+| **files**                  | [**List[str]**](str.md) | One or more files to obtain change information from.  | [optional] |
+| **pending**                | **bool**                | show only files that are pending sync to the Notecard | [optional] |
 
 ### Return type
 
-[**ListNotefiles200Response**](ListNotefiles200Response.md)
+[**List[Notefile]**](Notefile.md)
 
 ### Authorization
 
@@ -2012,83 +2005,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The notefile changes object                | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **list_pending_notefiles**
-
-> ListPendingNotefiles200Response list_pending_notefiles(project_or_product_uid, device_uid)
-
-Lists .qi and .db files that are pending sync to the Notecard
-
-### Example
-
-- Bearer Authentication (personalAccessToken):
-
-```python
-import notehub_py
-from notehub_py.models.list_pending_notefiles200_response import ListPendingNotefiles200Response
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-
-    try:
-        api_response = api_instance.list_pending_notefiles(project_or_product_uid, device_uid)
-        print("The response of DeviceApi->list_pending_notefiles:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DeviceApi->list_pending_notefiles: %s\n" % e)
-```
-
-### Parameters
-
-| Name                       | Type    | Description | Notes |
-| -------------------------- | ------- | ----------- | ----- |
-| **project_or_product_uid** | **str** |             |
-| **device_uid**             | **str** |             |
-
-### Return type
-
-[**ListPendingNotefiles200Response**](ListPendingNotefiles200Response.md)
-
-### Authorization
-
-[personalAccessToken](../README.md#personalAccessToken)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The notefile pending changes object        | -                |
+| **200**     | All notefiles and their notes              | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2409,9 +2326,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **update_db_note**
 
-> update_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note)
+> update_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note_input)
 
-Update a note in a .db notefile
+Update a note in a .db or .qi notefile
 
 ### Example
 
@@ -2419,7 +2336,7 @@ Update a note in a .db notefile
 
 ```python
 import notehub_py
-from notehub_py.models.note import Note
+from notehub_py.models.note_input import NoteInput
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -2447,23 +2364,23 @@ with notehub_py.ApiClient(configuration) as api_client:
     device_uid = 'dev:000000000000000' # str |
     notefile_id = 'notefile_id_example' # str |
     note_id = 'note_id_example' # str |
-    note = notehub_py.Note() # Note | Body or payload of note to be added to the device
+    note_input = notehub_py.NoteInput() # NoteInput | Body or payload of note to be added to the device
 
     try:
-        api_instance.update_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note)
+        api_instance.update_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note_input)
     except Exception as e:
         print("Exception when calling DeviceApi->update_db_note: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                       | Type                | Description                                       | Notes |
-| -------------------------- | ------------------- | ------------------------------------------------- | ----- |
-| **project_or_product_uid** | **str**             |                                                   |
-| **device_uid**             | **str**             |                                                   |
-| **notefile_id**            | **str**             |                                                   |
-| **note_id**                | **str**             |                                                   |
-| **note**                   | [**Note**](Note.md) | Body or payload of note to be added to the device |
+| Name                       | Type                          | Description                                       | Notes |
+| -------------------------- | ----------------------------- | ------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**                       |                                                   |
+| **device_uid**             | **str**                       |                                                   |
+| **notefile_id**            | **str**                       |                                                   |
+| **note_id**                | **str**                       |                                                   |
+| **note_input**             | [**NoteInput**](NoteInput.md) | Body or payload of note to be added to the device |
 
 ### Return type
 

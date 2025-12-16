@@ -35,16 +35,16 @@ class TestDeviceApi(unittest.TestCase):
         """Test case for add_qi_note"""
         pass
 
-    def test_delete_db_note(self) -> None:
-        """Test case for delete_db_note"""
-        pass
-
     def test_delete_device(self) -> None:
         """Test case for delete_device"""
         pass
 
     def test_delete_device_environment_variable(self) -> None:
         """Test case for delete_device_environment_variable"""
+        pass
+
+    def test_delete_note(self) -> None:
+        """Test case for delete_note"""
         pass
 
     def test_delete_notefiles(self) -> None:
@@ -128,10 +128,6 @@ class TestDeviceApi(unittest.TestCase):
 
     def test_list_notefiles(self) -> None:
         """Test case for list_notefiles"""
-        pass
-
-    def test_list_pending_notefiles(self) -> None:
-        """Test case for list_pending_notefiles"""
         pass
 
     def test_provision_device(self) -> None:

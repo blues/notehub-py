@@ -18,28 +18,23 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
+from notehub_py.models.note import Note
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ListNotefiles200Response(BaseModel):
+class Notefile(BaseModel):
     """
-    ListNotefiles200Response
+    Notefile
     """  # noqa: E501
 
-    changes: Optional[StrictInt] = Field(
-        default=None, description="The number of pending changes in the Notefile."
-    )
-    info: Optional[Dict[str, Any]] = Field(
-        default=None,
-        description="An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file.",
-    )
-    total: Optional[StrictInt] = Field(
-        default=None, description="The total number of files."
-    )
-    __properties: ClassVar[List[str]] = ["changes", "info", "total"]
+    id: StrictStr = Field(description='Notefile id (e.g., "test.qi", "config.db").')
+    notes: Annotated[List[Note], Field(min_length=0)]
+    template: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "notes", "template"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -58,7 +53,7 @@ class ListNotefiles200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListNotefiles200Response from a JSON string"""
+        """Create an instance of Notefile from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -78,11 +73,18 @@ class ListNotefiles200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in notes (list)
+        _items = []
+        if self.notes:
+            for _item in self.notes:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["notes"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListNotefiles200Response from a dict"""
+        """Create an instance of Notefile from a dict"""
         if obj is None:
             return None
 
@@ -91,9 +93,13 @@ class ListNotefiles200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "changes": obj.get("changes"),
-                "info": obj.get("info"),
-                "total": obj.get("total"),
+                "id": obj.get("id"),
+                "notes": (
+                    [Note.from_dict(_item) for _item in obj["notes"]]
+                    if obj.get("notes") is not None
+                    else None
+                ),
+                "template": obj.get("template"),
             }
         )
         return _obj

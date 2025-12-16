@@ -18,32 +18,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBytes, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class UsageSessionsData(BaseModel):
+class NoteInput(BaseModel):
     """
-    UsageSessionsData
+    NoteInput
     """  # noqa: E501
 
-    device: Optional[StrictStr] = None
-    fleet: Optional[StrictStr] = None
-    period: datetime
-    sessions: StrictInt
-    total_bytes: StrictInt
-    total_devices: StrictInt
-    __properties: ClassVar[List[str]] = [
-        "device",
-        "fleet",
-        "period",
-        "sessions",
-        "total_bytes",
-        "total_devices",
-    ]
+    body: Optional[Dict[str, Any]] = Field(
+        default=None, description="Arbitrary user-defined JSON for the note."
+    )
+    payload: Optional[Union[StrictBytes, StrictStr]] = Field(
+        default=None, description="Optional base64-encoded payload."
+    )
+    __properties: ClassVar[List[str]] = ["body", "payload"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -62,7 +54,7 @@ class UsageSessionsData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UsageSessionsData from a JSON string"""
+        """Create an instance of NoteInput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -86,7 +78,7 @@ class UsageSessionsData(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UsageSessionsData from a dict"""
+        """Create an instance of NoteInput from a dict"""
         if obj is None:
             return None
 
@@ -94,13 +86,6 @@ class UsageSessionsData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "device": obj.get("device"),
-                "fleet": obj.get("fleet"),
-                "period": obj.get("period"),
-                "sessions": obj.get("sessions"),
-                "total_bytes": obj.get("total_bytes"),
-                "total_devices": obj.get("total_devices"),
-            }
+            {"body": obj.get("body"), "payload": obj.get("payload")}
         )
         return _obj

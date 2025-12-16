@@ -18,31 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List
+from notehub_py.models.usage_route_logs_data import UsageRouteLogsData
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ListPendingNotefiles200Response(BaseModel):
+class GetRouteLogsUsage200Response(BaseModel):
     """
-    ListPendingNotefiles200Response
+    GetRouteLogsUsage200Response
     """  # noqa: E501
 
-    changes: Optional[StrictInt] = Field(
-        default=None, description="The number of pending changes in the Notefile."
-    )
-    info: Optional[Dict[str, Any]] = Field(
-        default=None,
-        description="An object with a key for each Notefile that matched the request parameters, and value object with the changes and total for each file.",
-    )
-    pending: Optional[StrictBool] = Field(
-        default=None, description="Whether there are pending changes."
-    )
-    total: Optional[StrictInt] = Field(
-        default=None, description="The total number of files."
-    )
-    __properties: ClassVar[List[str]] = ["changes", "info", "pending", "total"]
+    route_logs: List[UsageRouteLogsData]
+    __properties: ClassVar[List[str]] = ["route_logs"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -61,7 +50,7 @@ class ListPendingNotefiles200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListPendingNotefiles200Response from a JSON string"""
+        """Create an instance of GetRouteLogsUsage200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -81,11 +70,18 @@ class ListPendingNotefiles200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in route_logs (list)
+        _items = []
+        if self.route_logs:
+            for _item in self.route_logs:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["route_logs"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListPendingNotefiles200Response from a dict"""
+        """Create an instance of GetRouteLogsUsage200Response from a dict"""
         if obj is None:
             return None
 
@@ -94,10 +90,11 @@ class ListPendingNotefiles200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "changes": obj.get("changes"),
-                "info": obj.get("info"),
-                "pending": obj.get("pending"),
-                "total": obj.get("total"),
+                "route_logs": (
+                    [UsageRouteLogsData.from_dict(_item) for _item in obj["route_logs"]]
+                    if obj.get("route_logs") is not None
+                    else None
+                )
             }
         )
         return _obj

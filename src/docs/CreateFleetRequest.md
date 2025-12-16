@@ -7,6 +7,7 @@
 | **connectivity_assurance** | [**FleetConnectivityAssurance**](FleetConnectivityAssurance.md) |                                                                                                                                                                                                                                                                    | [optional] |
 | **label**                  | **str**                                                         | The label, or name, for the Fleet.                                                                                                                                                                                                                                 | [optional] |
 | **smart_rule**             | **str**                                                         | JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged. | [optional] |
+| **smart_rule_enabled**     | **bool**                                                        |                                                                                                                                                                                                                                                                    | [optional] |
 
 ## Example
 

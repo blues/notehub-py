@@ -15,7 +15,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 
-__version__ = "3.0.0"
+__version__ = "4.0.0"
 
 # import apis into sdk package
 from notehub_py.api.alert_api import AlertApi
@@ -140,14 +140,13 @@ from notehub_py.models.get_project_members200_response import (
     GetProjectMembers200Response,
 )
 from notehub_py.models.get_projects200_response import GetProjects200Response
+from notehub_py.models.get_route_logs_usage200_response import (
+    GetRouteLogsUsage200Response,
+)
 from notehub_py.models.get_sessions_usage200_response import GetSessionsUsage200Response
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.models.google_route import GoogleRoute
 from notehub_py.models.http_route import HttpRoute
-from notehub_py.models.list_notefiles200_response import ListNotefiles200Response
-from notehub_py.models.list_pending_notefiles200_response import (
-    ListPendingNotefiles200Response,
-)
 from notehub_py.models.location import Location
 from notehub_py.models.login200_response import Login200Response
 from notehub_py.models.login_request import LoginRequest
@@ -155,6 +154,8 @@ from notehub_py.models.monitor import Monitor
 from notehub_py.models.monitor_alert_routes_inner import MonitorAlertRoutesInner
 from notehub_py.models.mqtt_route import MqttRoute
 from notehub_py.models.note import Note
+from notehub_py.models.note_input import NoteInput
+from notehub_py.models.notefile import Notefile
 from notehub_py.models.notefile_schema import NotefileSchema
 from notehub_py.models.notehub_route import NotehubRoute
 from notehub_py.models.notehub_route_summary import NotehubRouteSummary

@@ -47,11 +47,8 @@ from notehub_py.models.get_device_sessions200_response import (
 )
 from notehub_py.models.get_devices200_response import GetDevices200Response
 from notehub_py.models.get_notefile200_response import GetNotefile200Response
-from notehub_py.models.list_notefiles200_response import ListNotefiles200Response
-from notehub_py.models.list_pending_notefiles200_response import (
-    ListPendingNotefiles200Response,
-)
-from notehub_py.models.note import Note
+from notehub_py.models.note_input import NoteInput
+from notehub_py.models.notefile import Notefile
 from notehub_py.models.provision_device_request import ProvisionDeviceRequest
 from notehub_py.models.signal_device200_response import SignalDevice200Response
 
@@ -79,8 +76,9 @@ class DeviceApi:
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
-        note: Annotated[
-            Note, Field(description="Body or payload of note to be added to the device")
+        note_input: Annotated[
+            NoteInput,
+            Field(description="Body or payload of note to be added to the device"),
         ],
         _request_timeout: Union[
             None,
@@ -96,7 +94,7 @@ class DeviceApi:
     ) -> None:
         """add_db_note
 
-        Add a Note to a .db notefile
+        Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -106,8 +104,8 @@ class DeviceApi:
         :type notefile_id: str
         :param note_id: (required)
         :type note_id: str
-        :param note: Body or payload of note to be added to the device (required)
-        :type note: Note
+        :param note_input: Body or payload of note to be added to the device (required)
+        :type note_input: NoteInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -135,7 +133,7 @@ class DeviceApi:
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
-            note=note,
+            note_input=note_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -161,8 +159,9 @@ class DeviceApi:
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
-        note: Annotated[
-            Note, Field(description="Body or payload of note to be added to the device")
+        note_input: Annotated[
+            NoteInput,
+            Field(description="Body or payload of note to be added to the device"),
         ],
         _request_timeout: Union[
             None,
@@ -178,7 +177,7 @@ class DeviceApi:
     ) -> ApiResponse[None]:
         """add_db_note
 
-        Add a Note to a .db notefile
+        Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -188,8 +187,8 @@ class DeviceApi:
         :type notefile_id: str
         :param note_id: (required)
         :type note_id: str
-        :param note: Body or payload of note to be added to the device (required)
-        :type note: Note
+        :param note_input: Body or payload of note to be added to the device (required)
+        :type note_input: NoteInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -217,7 +216,7 @@ class DeviceApi:
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
-            note=note,
+            note_input=note_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -243,8 +242,9 @@ class DeviceApi:
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
-        note: Annotated[
-            Note, Field(description="Body or payload of note to be added to the device")
+        note_input: Annotated[
+            NoteInput,
+            Field(description="Body or payload of note to be added to the device"),
         ],
         _request_timeout: Union[
             None,
@@ -260,7 +260,7 @@ class DeviceApi:
     ) -> RESTResponseType:
         """add_db_note
 
-        Add a Note to a .db notefile
+        Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -270,8 +270,8 @@ class DeviceApi:
         :type notefile_id: str
         :param note_id: (required)
         :type note_id: str
-        :param note: Body or payload of note to be added to the device (required)
-        :type note: Note
+        :param note_input: Body or payload of note to be added to the device (required)
+        :type note_input: NoteInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -299,7 +299,7 @@ class DeviceApi:
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
-            note=note,
+            note_input=note_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -320,7 +320,7 @@ class DeviceApi:
         device_uid,
         notefile_id,
         note_id,
-        note,
+        note_input,
         _request_auth,
         _content_type,
         _headers,
@@ -351,8 +351,8 @@ class DeviceApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if note is not None:
-            _body_params = note
+        if note_input is not None:
+            _body_params = note_input
 
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.api_client.select_header_accept(
@@ -393,8 +393,9 @@ class DeviceApi:
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
-        note: Annotated[
-            Note, Field(description="Body or payload of note to be added to the device")
+        note_input: Annotated[
+            NoteInput,
+            Field(description="Body or payload of note to be added to the device"),
         ],
         _request_timeout: Union[
             None,
@@ -418,8 +419,8 @@ class DeviceApi:
         :type device_uid: str
         :param notefile_id: (required)
         :type notefile_id: str
-        :param note: Body or payload of note to be added to the device (required)
-        :type note: Note
+        :param note_input: Body or payload of note to be added to the device (required)
+        :type note_input: NoteInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -446,7 +447,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
-            note=note,
+            note_input=note_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -471,8 +472,9 @@ class DeviceApi:
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
-        note: Annotated[
-            Note, Field(description="Body or payload of note to be added to the device")
+        note_input: Annotated[
+            NoteInput,
+            Field(description="Body or payload of note to be added to the device"),
         ],
         _request_timeout: Union[
             None,
@@ -496,8 +498,8 @@ class DeviceApi:
         :type device_uid: str
         :param notefile_id: (required)
         :type notefile_id: str
-        :param note: Body or payload of note to be added to the device (required)
-        :type note: Note
+        :param note_input: Body or payload of note to be added to the device (required)
+        :type note_input: NoteInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -524,7 +526,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
-            note=note,
+            note_input=note_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -549,8 +551,9 @@ class DeviceApi:
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
-        note: Annotated[
-            Note, Field(description="Body or payload of note to be added to the device")
+        note_input: Annotated[
+            NoteInput,
+            Field(description="Body or payload of note to be added to the device"),
         ],
         _request_timeout: Union[
             None,
@@ -574,8 +577,8 @@ class DeviceApi:
         :type device_uid: str
         :param notefile_id: (required)
         :type notefile_id: str
-        :param note: Body or payload of note to be added to the device (required)
-        :type note: Note
+        :param note_input: Body or payload of note to be added to the device (required)
+        :type note_input: NoteInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -602,7 +605,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
-            note=note,
+            note_input=note_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -622,7 +625,7 @@ class DeviceApi:
         project_or_product_uid,
         device_uid,
         notefile_id,
-        note,
+        note_input,
         _request_auth,
         _content_type,
         _headers,
@@ -651,8 +654,8 @@ class DeviceApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if note is not None:
-            _body_params = note
+        if note_input is not None:
+            _body_params = note_input
 
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.api_client.select_header_accept(
@@ -675,290 +678,6 @@ class DeviceApi:
         return self.api_client.param_serialize(
             method="POST",
             resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}",
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth,
-        )
-
-    @validate_call
-    def delete_db_note(
-        self,
-        project_or_product_uid: StrictStr,
-        device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """delete_db_note
-
-        Delete a note from a .db notefile
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param device_uid: (required)
-        :type device_uid: str
-        :param notefile_id: (required)
-        :type notefile_id: str
-        :param note_id: (required)
-        :type note_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._delete_db_note_serialize(
-            project_or_product_uid=project_or_product_uid,
-            device_uid=device_uid,
-            notefile_id=notefile_id,
-            note_id=note_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def delete_db_note_with_http_info(
-        self,
-        project_or_product_uid: StrictStr,
-        device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """delete_db_note
-
-        Delete a note from a .db notefile
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param device_uid: (required)
-        :type device_uid: str
-        :param notefile_id: (required)
-        :type notefile_id: str
-        :param note_id: (required)
-        :type note_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._delete_db_note_serialize(
-            project_or_product_uid=project_or_product_uid,
-            device_uid=device_uid,
-            notefile_id=notefile_id,
-            note_id=note_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def delete_db_note_without_preload_content(
-        self,
-        project_or_product_uid: StrictStr,
-        device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """delete_db_note
-
-        Delete a note from a .db notefile
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param device_uid: (required)
-        :type device_uid: str
-        :param notefile_id: (required)
-        :type notefile_id: str
-        :param note_id: (required)
-        :type note_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._delete_db_note_serialize(
-            project_or_product_uid=project_or_product_uid,
-            device_uid=device_uid,
-            notefile_id=notefile_id,
-            note_id=note_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _delete_db_note_serialize(
-        self,
-        project_or_product_uid,
-        device_uid,
-        notefile_id,
-        note_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {}
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if project_or_product_uid is not None:
-            _path_params["projectOrProductUID"] = project_or_product_uid
-        if device_uid is not None:
-            _path_params["deviceUID"] = device_uid
-        if notefile_id is not None:
-            _path_params["notefileID"] = notefile_id
-        if note_id is not None:
-            _path_params["noteID"] = note_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(
-            ["application/json"]
-        )
-
-        # authentication setting
-        _auth_settings: List[str] = ["personalAccessToken"]
-
-        return self.api_client.param_serialize(
-            method="DELETE",
-            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1505,6 +1224,290 @@ class DeviceApi:
         return self.api_client.param_serialize(
             method="DELETE",
             resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    def delete_note(
+        self,
+        project_or_product_uid: StrictStr,
+        device_uid: StrictStr,
+        notefile_id: StrictStr,
+        note_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """delete_note
+
+        Delete a note from a .db or .qi notefile
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param device_uid: (required)
+        :type device_uid: str
+        :param notefile_id: (required)
+        :type notefile_id: str
+        :param note_id: (required)
+        :type note_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_note_serialize(
+            project_or_product_uid=project_or_product_uid,
+            device_uid=device_uid,
+            notefile_id=notefile_id,
+            note_id=note_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": None,
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def delete_note_with_http_info(
+        self,
+        project_or_product_uid: StrictStr,
+        device_uid: StrictStr,
+        notefile_id: StrictStr,
+        note_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """delete_note
+
+        Delete a note from a .db or .qi notefile
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param device_uid: (required)
+        :type device_uid: str
+        :param notefile_id: (required)
+        :type notefile_id: str
+        :param note_id: (required)
+        :type note_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_note_serialize(
+            project_or_product_uid=project_or_product_uid,
+            device_uid=device_uid,
+            notefile_id=notefile_id,
+            note_id=note_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": None,
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def delete_note_without_preload_content(
+        self,
+        project_or_product_uid: StrictStr,
+        device_uid: StrictStr,
+        notefile_id: StrictStr,
+        note_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """delete_note
+
+        Delete a note from a .db or .qi notefile
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param device_uid: (required)
+        :type device_uid: str
+        :param notefile_id: (required)
+        :type notefile_id: str
+        :param note_id: (required)
+        :type note_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_note_serialize(
+            project_or_product_uid=project_or_product_uid,
+            device_uid=device_uid,
+            notefile_id=notefile_id,
+            note_id=note_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": None,
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _delete_note_serialize(
+        self,
+        project_or_product_uid,
+        device_uid,
+        notefile_id,
+        note_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
+        if device_uid is not None:
+            _path_params["deviceUID"] = device_uid
+        if notefile_id is not None:
+            _path_params["notefileID"] = notefile_id
+        if note_id is not None:
+            _path_params["noteID"] = note_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )
+
+        # authentication setting
+        _auth_settings: List[str] = ["personalAccessToken"]
+
+        return self.api_client.param_serialize(
+            method="DELETE",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2840,7 +2843,7 @@ class DeviceApi:
     ) -> GetDbNote200Response:
         """get_db_note
 
-        Get a note from a .db notefile
+        Get a note from a .db or .qi notefile
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2929,7 +2932,7 @@ class DeviceApi:
     ) -> ApiResponse[GetDbNote200Response]:
         """get_db_note
 
-        Get a note from a .db notefile
+        Get a note from a .db or .qi notefile
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3018,7 +3021,7 @@ class DeviceApi:
     ) -> RESTResponseType:
         """get_db_note
 
-        Get a note from a .db notefile
+        Get a note from a .db or .qi notefile
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -6856,19 +6859,9 @@ class DeviceApi:
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         max: Annotated[
             Optional[StrictInt],
             Field(description="The maximum number of Notes to return in the request."),
-        ] = None,
-        start: Annotated[
-            Optional[StrictBool],
-            Field(description="true to reset the tracker to the beginning."),
-        ] = None,
-        stop: Annotated[
-            Optional[StrictBool], Field(description="true to delete the tracker.")
         ] = None,
         deleted: Annotated[
             Optional[StrictBool], Field(description="true to return deleted notes.")
@@ -6899,14 +6892,8 @@ class DeviceApi:
         :type device_uid: str
         :param notefile_id: (required)
         :type notefile_id: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param max: The maximum number of Notes to return in the request.
         :type max: int
-        :param start: true to reset the tracker to the beginning.
-        :type start: bool
-        :param stop: true to delete the tracker.
-        :type stop: bool
         :param deleted: true to return deleted notes.
         :type deleted: bool
         :param delete: true to delete the notes returned by the request.
@@ -6937,10 +6924,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
-            tracker=tracker,
             max=max,
-            start=start,
-            stop=stop,
             deleted=deleted,
             delete=delete,
             _request_auth=_request_auth,
@@ -6967,19 +6951,9 @@ class DeviceApi:
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         max: Annotated[
             Optional[StrictInt],
             Field(description="The maximum number of Notes to return in the request."),
-        ] = None,
-        start: Annotated[
-            Optional[StrictBool],
-            Field(description="true to reset the tracker to the beginning."),
-        ] = None,
-        stop: Annotated[
-            Optional[StrictBool], Field(description="true to delete the tracker.")
         ] = None,
         deleted: Annotated[
             Optional[StrictBool], Field(description="true to return deleted notes.")
@@ -7010,14 +6984,8 @@ class DeviceApi:
         :type device_uid: str
         :param notefile_id: (required)
         :type notefile_id: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param max: The maximum number of Notes to return in the request.
         :type max: int
-        :param start: true to reset the tracker to the beginning.
-        :type start: bool
-        :param stop: true to delete the tracker.
-        :type stop: bool
         :param deleted: true to return deleted notes.
         :type deleted: bool
         :param delete: true to delete the notes returned by the request.
@@ -7048,10 +7016,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
-            tracker=tracker,
             max=max,
-            start=start,
-            stop=stop,
             deleted=deleted,
             delete=delete,
             _request_auth=_request_auth,
@@ -7078,19 +7043,9 @@ class DeviceApi:
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         notefile_id: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         max: Annotated[
             Optional[StrictInt],
             Field(description="The maximum number of Notes to return in the request."),
-        ] = None,
-        start: Annotated[
-            Optional[StrictBool],
-            Field(description="true to reset the tracker to the beginning."),
-        ] = None,
-        stop: Annotated[
-            Optional[StrictBool], Field(description="true to delete the tracker.")
         ] = None,
         deleted: Annotated[
             Optional[StrictBool], Field(description="true to return deleted notes.")
@@ -7121,14 +7076,8 @@ class DeviceApi:
         :type device_uid: str
         :param notefile_id: (required)
         :type notefile_id: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param max: The maximum number of Notes to return in the request.
         :type max: int
-        :param start: true to reset the tracker to the beginning.
-        :type start: bool
-        :param stop: true to delete the tracker.
-        :type stop: bool
         :param deleted: true to return deleted notes.
         :type deleted: bool
         :param delete: true to delete the notes returned by the request.
@@ -7159,10 +7108,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
             notefile_id=notefile_id,
-            tracker=tracker,
             max=max,
-            start=start,
-            stop=stop,
             deleted=deleted,
             delete=delete,
             _request_auth=_request_auth,
@@ -7184,10 +7130,7 @@ class DeviceApi:
         project_or_product_uid,
         device_uid,
         notefile_id,
-        tracker,
         max,
-        start,
-        stop,
         deleted,
         delete,
         _request_auth,
@@ -7215,21 +7158,9 @@ class DeviceApi:
         if notefile_id is not None:
             _path_params["notefileID"] = notefile_id
         # process the query parameters
-        if tracker is not None:
-
-            _query_params.append(("tracker", tracker))
-
         if max is not None:
 
             _query_params.append(("max", max))
-
-        if start is not None:
-
-            _query_params.append(("start", start))
-
-        if stop is not None:
-
-            _query_params.append(("stop", stop))
 
         if deleted is not None:
 
@@ -7253,7 +7184,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/changes",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7271,12 +7202,13 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         files: Annotated[
             Optional[List[StrictStr]],
             Field(description="One or more files to obtain change information from."),
+        ] = None,
+        pending: Annotated[
+            Optional[StrictBool],
+            Field(description="show only files that are pending sync to the Notecard"),
         ] = None,
         _request_timeout: Union[
             None,
@@ -7289,7 +7221,7 @@ class DeviceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ListNotefiles200Response:
+    ) -> List[Notefile]:
         """list_notefiles
 
         Lists .qi and .db files for the device
@@ -7298,10 +7230,10 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param files: One or more files to obtain change information from.
         :type files: List[str]
+        :param pending: show only files that are pending sync to the Notecard
+        :type pending: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7327,8 +7259,8 @@ class DeviceApi:
         _param = self._list_notefiles_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            tracker=tracker,
             files=files,
+            pending=pending,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7336,7 +7268,7 @@ class DeviceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ListNotefiles200Response",
+            "200": "List[Notefile]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -7352,12 +7284,13 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         files: Annotated[
             Optional[List[StrictStr]],
             Field(description="One or more files to obtain change information from."),
+        ] = None,
+        pending: Annotated[
+            Optional[StrictBool],
+            Field(description="show only files that are pending sync to the Notecard"),
         ] = None,
         _request_timeout: Union[
             None,
@@ -7370,7 +7303,7 @@ class DeviceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ListNotefiles200Response]:
+    ) -> ApiResponse[List[Notefile]]:
         """list_notefiles
 
         Lists .qi and .db files for the device
@@ -7379,10 +7312,10 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param files: One or more files to obtain change information from.
         :type files: List[str]
+        :param pending: show only files that are pending sync to the Notecard
+        :type pending: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7408,8 +7341,8 @@ class DeviceApi:
         _param = self._list_notefiles_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            tracker=tracker,
             files=files,
+            pending=pending,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7417,7 +7350,7 @@ class DeviceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ListNotefiles200Response",
+            "200": "List[Notefile]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -7433,12 +7366,13 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        tracker: Annotated[
-            Optional[StrictStr], Field(description="The change tracker ID.")
-        ] = None,
         files: Annotated[
             Optional[List[StrictStr]],
             Field(description="One or more files to obtain change information from."),
+        ] = None,
+        pending: Annotated[
+            Optional[StrictBool],
+            Field(description="show only files that are pending sync to the Notecard"),
         ] = None,
         _request_timeout: Union[
             None,
@@ -7460,10 +7394,10 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param tracker: The change tracker ID.
-        :type tracker: str
         :param files: One or more files to obtain change information from.
         :type files: List[str]
+        :param pending: show only files that are pending sync to the Notecard
+        :type pending: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -7489,8 +7423,8 @@ class DeviceApi:
         _param = self._list_notefiles_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            tracker=tracker,
             files=files,
+            pending=pending,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7498,7 +7432,7 @@ class DeviceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ListNotefiles200Response",
+            "200": "List[Notefile]",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -7509,8 +7443,8 @@ class DeviceApi:
         self,
         project_or_product_uid,
         device_uid,
-        tracker,
         files,
+        pending,
         _request_auth,
         _content_type,
         _headers,
@@ -7536,14 +7470,14 @@ class DeviceApi:
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
-        if tracker is not None:
-
-            _query_params.append(("tracker", tracker))
-
         if files is not None:
 
             _query_params.append(("files", files))
 
+        if pending is not None:
+
+            _query_params.append(("pending", pending))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -7558,261 +7492,7 @@ class DeviceApi:
 
         return self.api_client.param_serialize(
             method="GET",
-            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes",
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth,
-        )
-
-    @validate_call
-    def list_pending_notefiles(
-        self,
-        project_or_product_uid: StrictStr,
-        device_uid: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ListPendingNotefiles200Response:
-        """list_pending_notefiles
-
-        Lists .qi and .db files that are pending sync to the Notecard
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param device_uid: (required)
-        :type device_uid: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._list_pending_notefiles_serialize(
-            project_or_product_uid=project_or_product_uid,
-            device_uid=device_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ListPendingNotefiles200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def list_pending_notefiles_with_http_info(
-        self,
-        project_or_product_uid: StrictStr,
-        device_uid: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ListPendingNotefiles200Response]:
-        """list_pending_notefiles
-
-        Lists .qi and .db files that are pending sync to the Notecard
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param device_uid: (required)
-        :type device_uid: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._list_pending_notefiles_serialize(
-            project_or_product_uid=project_or_product_uid,
-            device_uid=device_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ListPendingNotefiles200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def list_pending_notefiles_without_preload_content(
-        self,
-        project_or_product_uid: StrictStr,
-        device_uid: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """list_pending_notefiles
-
-        Lists .qi and .db files that are pending sync to the Notecard
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param device_uid: (required)
-        :type device_uid: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._list_pending_notefiles_serialize(
-            project_or_product_uid=project_or_product_uid,
-            device_uid=device_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ListPendingNotefiles200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _list_pending_notefiles_serialize(
-        self,
-        project_or_product_uid,
-        device_uid,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {}
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if project_or_product_uid is not None:
-            _path_params["projectOrProductUID"] = project_or_product_uid
-        if device_uid is not None:
-            _path_params["deviceUID"] = device_uid
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(
-            ["application/json"]
-        )
-
-        # authentication setting
-        _auth_settings: List[str] = ["personalAccessToken"]
-
-        return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files/changes/pending",
+            resource_path="/v1/projects/{projectOrProductUID}/devices/{deviceUID}/files",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8984,8 +8664,9 @@ class DeviceApi:
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
-        note: Annotated[
-            Note, Field(description="Body or payload of note to be added to the device")
+        note_input: Annotated[
+            NoteInput,
+            Field(description="Body or payload of note to be added to the device"),
         ],
         _request_timeout: Union[
             None,
@@ -9001,7 +8682,7 @@ class DeviceApi:
     ) -> None:
         """update_db_note
 
-        Update a note in a .db notefile
+        Update a note in a .db or .qi notefile
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9011,8 +8692,8 @@ class DeviceApi:
         :type notefile_id: str
         :param note_id: (required)
         :type note_id: str
-        :param note: Body or payload of note to be added to the device (required)
-        :type note: Note
+        :param note_input: Body or payload of note to be added to the device (required)
+        :type note_input: NoteInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9040,7 +8721,7 @@ class DeviceApi:
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
-            note=note,
+            note_input=note_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9066,8 +8747,9 @@ class DeviceApi:
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
-        note: Annotated[
-            Note, Field(description="Body or payload of note to be added to the device")
+        note_input: Annotated[
+            NoteInput,
+            Field(description="Body or payload of note to be added to the device"),
         ],
         _request_timeout: Union[
             None,
@@ -9083,7 +8765,7 @@ class DeviceApi:
     ) -> ApiResponse[None]:
         """update_db_note
 
-        Update a note in a .db notefile
+        Update a note in a .db or .qi notefile
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9093,8 +8775,8 @@ class DeviceApi:
         :type notefile_id: str
         :param note_id: (required)
         :type note_id: str
-        :param note: Body or payload of note to be added to the device (required)
-        :type note: Note
+        :param note_input: Body or payload of note to be added to the device (required)
+        :type note_input: NoteInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9122,7 +8804,7 @@ class DeviceApi:
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
-            note=note,
+            note_input=note_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9148,8 +8830,9 @@ class DeviceApi:
         device_uid: StrictStr,
         notefile_id: StrictStr,
         note_id: StrictStr,
-        note: Annotated[
-            Note, Field(description="Body or payload of note to be added to the device")
+        note_input: Annotated[
+            NoteInput,
+            Field(description="Body or payload of note to be added to the device"),
         ],
         _request_timeout: Union[
             None,
@@ -9165,7 +8848,7 @@ class DeviceApi:
     ) -> RESTResponseType:
         """update_db_note
 
-        Update a note in a .db notefile
+        Update a note in a .db or .qi notefile
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9175,8 +8858,8 @@ class DeviceApi:
         :type notefile_id: str
         :param note_id: (required)
         :type note_id: str
-        :param note: Body or payload of note to be added to the device (required)
-        :type note: Note
+        :param note_input: Body or payload of note to be added to the device (required)
+        :type note_input: NoteInput
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9204,7 +8887,7 @@ class DeviceApi:
             device_uid=device_uid,
             notefile_id=notefile_id,
             note_id=note_id,
-            note=note,
+            note_input=note_input,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9225,7 +8908,7 @@ class DeviceApi:
         device_uid,
         notefile_id,
         note_id,
-        note,
+        note_input,
         _request_auth,
         _content_type,
         _headers,
@@ -9256,8 +8939,8 @@ class DeviceApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if note is not None:
-            _body_params = note
+        if note_input is not None:
+            _body_params = note_input
 
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.api_client.select_header_accept(

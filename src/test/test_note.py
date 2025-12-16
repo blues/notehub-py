@@ -37,11 +37,19 @@ class TestNote(unittest.TestCase):
         model = Note()
         if include_optional:
             return Note(
-                body = None,
-                payload = ''
+                body = { },
+                edge = True,
+                id = '',
+                payload = 'YQ==',
+                pending = True,
+                time = 56,
+                where = ''
             )
         else:
             return Note(
+                body = { },
+                id = '',
+                time = 56,
         )
         """
 

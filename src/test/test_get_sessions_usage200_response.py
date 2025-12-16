@@ -43,7 +43,8 @@ class TestGetSessionsUsage200Response(unittest.TestCase):
                         fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
                         period = '2025-07-23T00:00Z', 
                         sessions = 12, 
-                        total_bytes = 1048576, )
+                        total_bytes = 1048576, 
+                        total_devices = 1, )
                     ]
             )
         else:
@@ -54,7 +55,8 @@ class TestGetSessionsUsage200Response(unittest.TestCase):
                         fleet = 'fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d', 
                         period = '2025-07-23T00:00Z', 
                         sessions = 12, 
-                        total_bytes = 1048576, )
+                        total_bytes = 1048576, 
+                        total_devices = 1, )
                     ],
         )
         """

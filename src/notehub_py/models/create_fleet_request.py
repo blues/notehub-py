@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.fleet_connectivity_assurance import FleetConnectivityAssurance
 from typing import Optional, Set
@@ -38,10 +38,12 @@ class CreateFleetRequest(BaseModel):
         default=None,
         description="JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.",
     )
+    smart_rule_enabled: Optional[StrictBool] = None
     __properties: ClassVar[List[str]] = [
         "connectivity_assurance",
         "label",
         "smart_rule",
+        "smart_rule_enabled",
     ]
 
     model_config = ConfigDict(
@@ -112,6 +114,7 @@ class CreateFleetRequest(BaseModel):
                 ),
                 "label": obj.get("label"),
                 "smart_rule": obj.get("smart_rule"),
+                "smart_rule_enabled": obj.get("smart_rule_enabled"),
             }
         )
         return _obj

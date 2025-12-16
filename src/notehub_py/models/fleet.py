@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.fleet_connectivity_assurance import FleetConnectivityAssurance
 from typing import Optional, Set
@@ -42,6 +42,7 @@ class Fleet(BaseModel):
         default=None,
         description="JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.",
     )
+    smart_rule_enabled: Optional[StrictBool] = None
     uid: StrictStr = Field(description="Fleet UID")
     watchdog_mins: Optional[StrictInt] = Field(
         default=None,
@@ -53,6 +54,7 @@ class Fleet(BaseModel):
         "environment_variables",
         "label",
         "smart_rule",
+        "smart_rule_enabled",
         "uid",
         "watchdog_mins",
     ]
@@ -127,6 +129,7 @@ class Fleet(BaseModel):
                 "environment_variables": obj.get("environment_variables"),
                 "label": obj.get("label"),
                 "smart_rule": obj.get("smart_rule"),
+                "smart_rule_enabled": obj.get("smart_rule_enabled"),
                 "uid": obj.get("uid"),
                 "watchdog_mins": obj.get("watchdog_mins"),
             }
