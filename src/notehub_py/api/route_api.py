@@ -846,6 +846,8 @@ class RouteApi:
         system_files_only: Optional[StrictBool] = None,
         most_recent_only: Optional[StrictBool] = None,
         files: Optional[StrictStr] = None,
+        routing_status: Optional[List[StrictStr]] = None,
+        response_status: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -886,6 +888,10 @@ class RouteApi:
         :type most_recent_only: bool
         :param files:
         :type files: str
+        :param routing_status:
+        :type routing_status: List[str]
+        :param response_status:
+        :type response_status: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -921,6 +927,8 @@ class RouteApi:
             system_files_only=system_files_only,
             most_recent_only=most_recent_only,
             files=files,
+            routing_status=routing_status,
+            response_status=response_status,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -966,6 +974,8 @@ class RouteApi:
         system_files_only: Optional[StrictBool] = None,
         most_recent_only: Optional[StrictBool] = None,
         files: Optional[StrictStr] = None,
+        routing_status: Optional[List[StrictStr]] = None,
+        response_status: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1006,6 +1016,10 @@ class RouteApi:
         :type most_recent_only: bool
         :param files:
         :type files: str
+        :param routing_status:
+        :type routing_status: List[str]
+        :param response_status:
+        :type response_status: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1041,6 +1055,8 @@ class RouteApi:
             system_files_only=system_files_only,
             most_recent_only=most_recent_only,
             files=files,
+            routing_status=routing_status,
+            response_status=response_status,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1086,6 +1102,8 @@ class RouteApi:
         system_files_only: Optional[StrictBool] = None,
         most_recent_only: Optional[StrictBool] = None,
         files: Optional[StrictStr] = None,
+        routing_status: Optional[List[StrictStr]] = None,
+        response_status: Optional[List[StrictStr]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1126,6 +1144,10 @@ class RouteApi:
         :type most_recent_only: bool
         :param files:
         :type files: str
+        :param routing_status:
+        :type routing_status: List[str]
+        :param response_status:
+        :type response_status: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1161,6 +1183,8 @@ class RouteApi:
             system_files_only=system_files_only,
             most_recent_only=most_recent_only,
             files=files,
+            routing_status=routing_status,
+            response_status=response_status,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1189,6 +1213,8 @@ class RouteApi:
         system_files_only,
         most_recent_only,
         files,
+        routing_status,
+        response_status,
         _request_auth,
         _content_type,
         _headers,
@@ -1199,6 +1225,8 @@ class RouteApi:
 
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
+            "routingStatus": "multi",
+            "responseStatus": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -1253,6 +1281,14 @@ class RouteApi:
         if files is not None:
 
             _query_params.append(("files", files))
+
+        if routing_status is not None:
+
+            _query_params.append(("routingStatus", routing_status))
+
+        if response_status is not None:
+
+            _query_params.append(("responseStatus", response_status))
 
         # process the header parameters
         # process the form parameters

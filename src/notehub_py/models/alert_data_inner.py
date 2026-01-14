@@ -80,8 +80,8 @@ class AlertDataInner(BaseModel):
         if value is None:
             return value
 
-        if value not in set(["event"]):
-            raise ValueError("must be one of enum values ('event')")
+        if value not in set(["event", "device"]):
+            raise ValueError("must be one of enum values ('event', 'device')")
         return value
 
     model_config = ConfigDict(

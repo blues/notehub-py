@@ -119,6 +119,7 @@ docs/RouteApi.md
 docs/RouteLog.md
 docs/RouteTransformSettings.md
 docs/S3ArchiveRoute.md
+docs/SatelliteDataUsage.md
 docs/SatellitePlan.md
 docs/SchemaProperty.md
 docs/SignalDevice200Response.md
@@ -270,6 +271,7 @@ notehub_py/models/role.py
 notehub_py/models/route_log.py
 notehub_py/models/route_transform_settings.py
 notehub_py/models/s3_archive_route.py
+notehub_py/models/satellite_data_usage.py
 notehub_py/models/satellite_plan.py
 notehub_py/models/schema_property.py
 notehub_py/models/signal_device200_response.py
@@ -301,4 +303,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_satellite_data_usage.py
 tox.ini

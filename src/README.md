@@ -315,6 +315,7 @@ Class | Method | HTTP request | Description
  - [RouteLog](docs/RouteLog.md)
  - [RouteTransformSettings](docs/RouteTransformSettings.md)
  - [S3ArchiveRoute](docs/S3ArchiveRoute.md)
+ - [SatelliteDataUsage](docs/SatelliteDataUsage.md)
  - [SatellitePlan](docs/SatellitePlan.md)
  - [SchemaProperty](docs/SchemaProperty.md)
  - [SignalDevice200Response](docs/SignalDevice200Response.md)
@@ -349,13 +350,6 @@ Authentication schemes defined for the API:
 ### personalAccessToken
 
 - **Type**: Bearer authentication
-
-<a id="pin"></a>
-### pin
-
-- **Type**: API key
-- **API key parameter name**: X-Auth-Token
-- **Location**: HTTP header
 
 
 ## Author

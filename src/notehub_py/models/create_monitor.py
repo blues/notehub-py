@@ -64,7 +64,7 @@ class CreateMonitor(BaseModel):
         default=None, description="The last time the monitor was evaluated and routed."
     )
     name: StrictStr
-    notefile_filter: List[StrictStr]
+    notefile_filter: Optional[List[StrictStr]] = None
     per_device: Optional[StrictBool] = Field(
         default=None,
         description="Only relevant when using an aggregate_function. If true, the monitor will be evaluated per device, | rather than across the set of selected devices. If true then if a single device matches the specified criteria, | and alert will be created, otherwise the aggregate function will be applied across all devices.",
@@ -81,13 +81,11 @@ class CreateMonitor(BaseModel):
         default=None,
         description="A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.",
     )
-    source_type: Optional[StrictStr] = Field(
-        default=None,
-        description='The type of source to monitor. Currently only "event" is supported.',
+    source_type: StrictStr = Field(
+        description='The type of source to monitor. Supported values are "event" and "heartbeat".'
     )
-    threshold: Optional[StrictInt] = Field(
-        default=None,
-        description="The type of condition to apply to the value selected by the source_selector",
+    threshold: StrictInt = Field(
+        description="The type of condition to apply to the value selected by the source_selector"
     )
     uid: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
@@ -167,11 +165,8 @@ class CreateMonitor(BaseModel):
     @field_validator("source_type")
     def source_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(["event"]):
-            raise ValueError("must be one of enum values ('event')")
+        if value not in set(["event", "heartbeat"]):
+            raise ValueError("must be one of enum values ('event', 'heartbeat')")
         return value
 
     model_config = ConfigDict(

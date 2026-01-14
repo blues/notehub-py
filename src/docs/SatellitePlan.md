@@ -2,13 +2,14 @@
 
 ## Properties
 
-| Name               | Type                          | Description                                                 | Notes      |
-| ------------------ | ----------------------------- | ----------------------------------------------------------- | ---------- |
-| **activated**      | **int**                       | Activation date of the satellite plan as Unix timestamp     |
-| **billable_bytes** | [**DataUsage**](DataUsage.md) |                                                             | [optional] |
-| **last_updated**   | **int**                       | Time this plan information was last updated                 | [optional] |
-| **ntn_provider**   | **str**                       | Non-Terrestrial Network provider name                       |
-| **psid**           | **str**                       | Provider-specific identifier for the satellite subscription |
+| Name                       | Type                                            | Description                                                 | Notes      |
+| -------------------------- | ----------------------------------------------- | ----------------------------------------------------------- | ---------- |
+| **activated**              | **int**                                         | Activation date of the satellite plan as Unix timestamp     |
+| **last_session_at**        | **int**                                         | When this Starnote last had a session                       | [optional] |
+| **minimum_billable_bytes** | **int**                                         | Minimum billable bytes                                      | [optional] |
+| **ntn_provider**           | **str**                                         | Non-Terrestrial Network provider name                       |
+| **psid**                   | **str**                                         | Provider-specific identifier for the satellite subscription |
+| **satellite_data_usage**   | [**SatelliteDataUsage**](SatelliteDataUsage.md) |                                                             | [optional] |
 
 ## Example
 

@@ -83,7 +83,7 @@ class Monitor(BaseModel):
     )
     source_type: Optional[StrictStr] = Field(
         default=None,
-        description='The type of source to monitor. Currently only "event" is supported.',
+        description='The type of source to monitor. Supported values are "event" and "heartbeat".',
     )
     threshold: Optional[StrictInt] = Field(
         default=None,
@@ -170,8 +170,8 @@ class Monitor(BaseModel):
         if value is None:
             return value
 
-        if value not in set(["event"]):
-            raise ValueError("must be one of enum values ('event')")
+        if value not in set(["event", "heartbeat"]):
+            raise ValueError("must be one of enum values ('event', 'heartbeat')")
         return value
 
     model_config = ConfigDict(

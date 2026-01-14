@@ -2,14 +2,15 @@
 
 ## Properties
 
-| Name       | Type                                | Description                                                                                 | Notes      |
-| ---------- | ----------------------------------- | ------------------------------------------------------------------------------------------- | ---------- |
-| **data**   | [**List[UsageData]**](UsageData.md) |                                                                                             |
-| **device** | **str**                             | The device UID this usage data belongs to (only present when aggregate is &#39;device&#39;) | [optional] |
-| **fleet**  | **str**                             | The fleet UID this usage data belongs to (only present when aggregate is &#39;fleet&#39;)   | [optional] |
-| **iccid**  | **str**                             | The ICCID of the cellular SIM card (only present when type is &#39;cellular&#39;)           | [optional] |
-| **imsi**   | **str**                             | The IMSI of the satellite device (only present when type is &#39;satellite&#39;)            | [optional] |
-| **type**   | **str**                             | The type of connectivity                                                                    |
+| Name             | Type                                | Description                                                                                 | Notes      |
+| ---------------- | ----------------------------------- | ------------------------------------------------------------------------------------------- | ---------- |
+| **data**         | [**List[UsageData]**](UsageData.md) |                                                                                             |
+| **device**       | **str**                             | The device UID this usage data belongs to (only present when aggregate is &#39;device&#39;) | [optional] |
+| **device_count** | **int**                             | the number of devices represented by this data point                                        | [optional] |
+| **fleet**        | **str**                             | The fleet UID this usage data belongs to (only present when aggregate is &#39;fleet&#39;)   | [optional] |
+| **iccid**        | **str**                             | The ICCID of the cellular SIM card (only present when type is &#39;cellular&#39;)           | [optional] |
+| **psid**         | **str**                             | The PSID (Packet Service ID) of the satellite (or other packet-based device)                | [optional] |
+| **type**         | **str**                             | The type of connectivity                                                                    |
 
 ## Example
 

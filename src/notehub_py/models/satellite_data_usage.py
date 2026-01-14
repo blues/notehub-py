@@ -18,50 +18,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class UsageData(BaseModel):
+class SatelliteDataUsage(BaseModel):
     """
-    UsageData
+    SatelliteDataUsage
     """  # noqa: E501
 
-    billable_bytes_received: Optional[StrictInt] = Field(
-        default=None,
-        description="Billable bytes received (only for packet-based protocols)",
-    )
-    billable_bytes_sent: Optional[StrictInt] = Field(
-        default=None,
-        description="Billable bytes sent (only for packet-based protocols)",
-    )
-    billable_bytes_total: Optional[StrictInt] = Field(
-        default=None,
-        description="Total billable bytes (only for packet-based protocols)",
-    )
-    bytes_received: Optional[StrictInt] = None
-    bytes_sent: Optional[StrictInt] = None
-    packets_received: Optional[StrictInt] = Field(
-        default=None, description="Packets received (only for packet-based protocols)"
-    )
-    packets_sent: Optional[StrictInt] = Field(
-        default=None, description="Packets sent (only for packet-based protocols)"
-    )
-    period: datetime
-    total_bytes: StrictInt
+    bytes_remaining: StrictInt = Field(description="Bytes remaining in the plan")
+    bytes_total: StrictInt = Field(description="Total bytes included in the plan")
+    bytes_used: StrictInt = Field(description="Bytes used to date")
+    bytes_used_billable: StrictInt = Field(description="Billable bytes used to date")
     __properties: ClassVar[List[str]] = [
-        "billable_bytes_received",
-        "billable_bytes_sent",
-        "billable_bytes_total",
-        "bytes_received",
-        "bytes_sent",
-        "packets_received",
-        "packets_sent",
-        "period",
-        "total_bytes",
+        "bytes_remaining",
+        "bytes_total",
+        "bytes_used",
+        "bytes_used_billable",
     ]
 
     model_config = ConfigDict(
@@ -81,7 +57,7 @@ class UsageData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of UsageData from a JSON string"""
+        """Create an instance of SatelliteDataUsage from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -105,7 +81,7 @@ class UsageData(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of UsageData from a dict"""
+        """Create an instance of SatelliteDataUsage from a dict"""
         if obj is None:
             return None
 
@@ -114,15 +90,10 @@ class UsageData(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "billable_bytes_received": obj.get("billable_bytes_received"),
-                "billable_bytes_sent": obj.get("billable_bytes_sent"),
-                "billable_bytes_total": obj.get("billable_bytes_total"),
-                "bytes_received": obj.get("bytes_received"),
-                "bytes_sent": obj.get("bytes_sent"),
-                "packets_received": obj.get("packets_received"),
-                "packets_sent": obj.get("packets_sent"),
-                "period": obj.get("period"),
-                "total_bytes": obj.get("total_bytes"),
+                "bytes_remaining": obj.get("bytes_remaining"),
+                "bytes_total": obj.get("bytes_total"),
+                "bytes_used": obj.get("bytes_used"),
+                "bytes_used_billable": obj.get("bytes_used_billable"),
             }
         )
         return _obj

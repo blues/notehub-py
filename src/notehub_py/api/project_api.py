@@ -5333,6 +5333,13 @@ class ProjectApi:
         filename: Optional[StrictStr] = None,
         md5: Optional[StrictStr] = None,
         unpublished: Optional[StrictBool] = None,
+        sort_by: Annotated[
+            Optional[StrictStr], Field(description="Field to sort by")
+        ] = None,
+        sort_order: Annotated[
+            Optional[StrictStr],
+            Field(description="Sort order (asc for ascending, desc for descending)"),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5365,6 +5372,10 @@ class ProjectApi:
         :type md5: str
         :param unpublished:
         :type unpublished: bool
+        :param sort_by: Field to sort by
+        :type sort_by: str
+        :param sort_order: Sort order (asc for ascending, desc for descending)
+        :type sort_order: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5396,6 +5407,8 @@ class ProjectApi:
             filename=filename,
             md5=md5,
             unpublished=unpublished,
+            sort_by=sort_by,
+            sort_order=sort_order,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5425,6 +5438,13 @@ class ProjectApi:
         filename: Optional[StrictStr] = None,
         md5: Optional[StrictStr] = None,
         unpublished: Optional[StrictBool] = None,
+        sort_by: Annotated[
+            Optional[StrictStr], Field(description="Field to sort by")
+        ] = None,
+        sort_order: Annotated[
+            Optional[StrictStr],
+            Field(description="Sort order (asc for ascending, desc for descending)"),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5457,6 +5477,10 @@ class ProjectApi:
         :type md5: str
         :param unpublished:
         :type unpublished: bool
+        :param sort_by: Field to sort by
+        :type sort_by: str
+        :param sort_order: Sort order (asc for ascending, desc for descending)
+        :type sort_order: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5488,6 +5512,8 @@ class ProjectApi:
             filename=filename,
             md5=md5,
             unpublished=unpublished,
+            sort_by=sort_by,
+            sort_order=sort_order,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5517,6 +5543,13 @@ class ProjectApi:
         filename: Optional[StrictStr] = None,
         md5: Optional[StrictStr] = None,
         unpublished: Optional[StrictBool] = None,
+        sort_by: Annotated[
+            Optional[StrictStr], Field(description="Field to sort by")
+        ] = None,
+        sort_order: Annotated[
+            Optional[StrictStr],
+            Field(description="Sort order (asc for ascending, desc for descending)"),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5549,6 +5582,10 @@ class ProjectApi:
         :type md5: str
         :param unpublished:
         :type unpublished: bool
+        :param sort_by: Field to sort by
+        :type sort_by: str
+        :param sort_order: Sort order (asc for ascending, desc for descending)
+        :type sort_order: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5580,6 +5617,8 @@ class ProjectApi:
             filename=filename,
             md5=md5,
             unpublished=unpublished,
+            sort_by=sort_by,
+            sort_order=sort_order,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5604,6 +5643,8 @@ class ProjectApi:
         filename,
         md5,
         unpublished,
+        sort_by,
+        sort_order,
         _request_auth,
         _content_type,
         _headers,
@@ -5652,6 +5693,14 @@ class ProjectApi:
         if unpublished is not None:
 
             _query_params.append(("unpublished", unpublished))
+
+        if sort_by is not None:
+
+            _query_params.append(("sortBy", sort_by))
+
+        if sort_order is not None:
+
+            _query_params.append(("sortOrder", sort_order))
 
         # process the header parameters
         # process the form parameters
