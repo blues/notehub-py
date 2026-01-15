@@ -238,7 +238,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_route_logs_by_route**
 
-> List[RouteLog] get_route_logs_by_route(project_or_product_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, most_recent_only=most_recent_only, files=files)
+> List[RouteLog] get_route_logs_by_route(project_or_product_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, most_recent_only=most_recent_only, files=files, routing_status=routing_status, response_status=response_status)
 
 Get Route Logs by Route UID
 
@@ -284,9 +284,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     system_files_only = True # bool |  (optional)
     most_recent_only = True # bool |  (optional)
     files = '_health.qo, data.qo' # str |  (optional)
+    routing_status = ['failure'] # List[str] |  (optional)
+    response_status = ['500'] # List[str] |  (optional)
 
     try:
-        api_response = api_instance.get_route_logs_by_route(project_or_product_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, most_recent_only=most_recent_only, files=files)
+        api_response = api_instance.get_route_logs_by_route(project_or_product_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, most_recent_only=most_recent_only, files=files, routing_status=routing_status, response_status=response_status)
         print("The response of RouteApi->get_route_logs_by_route:\n")
         pprint(api_response)
     except Exception as e:
@@ -309,6 +311,8 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **system_files_only**      | **bool**                |                                                                 | [optional]                             |
 | **most_recent_only**       | **bool**                |                                                                 | [optional]                             |
 | **files**                  | **str**                 |                                                                 | [optional]                             |
+| **routing_status**         | [**List[str]**](str.md) |                                                                 | [optional]                             |
+| **response_status**        | [**List[str]**](str.md) |                                                                 | [optional]                             |
 
 ### Return type
 

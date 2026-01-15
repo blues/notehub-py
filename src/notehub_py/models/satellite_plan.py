@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from notehub_py.models.data_usage import DataUsage
+from notehub_py.models.satellite_data_usage import SatelliteDataUsage
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,20 +33,24 @@ class SatellitePlan(BaseModel):
     activated: StrictInt = Field(
         description="Activation date of the satellite plan as Unix timestamp"
     )
-    billable_bytes: Optional[DataUsage] = None
-    last_updated: Optional[StrictInt] = Field(
-        default=None, description="Time this plan information was last updated"
+    last_session_at: Optional[StrictInt] = Field(
+        default=None, description="When this Starnote last had a session"
+    )
+    minimum_billable_bytes: Optional[StrictInt] = Field(
+        default=None, description="Minimum billable bytes"
     )
     ntn_provider: StrictStr = Field(description="Non-Terrestrial Network provider name")
     psid: StrictStr = Field(
         description="Provider-specific identifier for the satellite subscription"
     )
+    satellite_data_usage: Optional[SatelliteDataUsage] = None
     __properties: ClassVar[List[str]] = [
         "activated",
-        "billable_bytes",
-        "last_updated",
+        "last_session_at",
+        "minimum_billable_bytes",
         "ntn_provider",
         "psid",
+        "satellite_data_usage",
     ]
 
     model_config = ConfigDict(
@@ -86,9 +90,9 @@ class SatellitePlan(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of billable_bytes
-        if self.billable_bytes:
-            _dict["billable_bytes"] = self.billable_bytes.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of satellite_data_usage
+        if self.satellite_data_usage:
+            _dict["satellite_data_usage"] = self.satellite_data_usage.to_dict()
         return _dict
 
     @classmethod
@@ -103,14 +107,15 @@ class SatellitePlan(BaseModel):
         _obj = cls.model_validate(
             {
                 "activated": obj.get("activated"),
-                "billable_bytes": (
-                    DataUsage.from_dict(obj["billable_bytes"])
-                    if obj.get("billable_bytes") is not None
-                    else None
-                ),
-                "last_updated": obj.get("last_updated"),
+                "last_session_at": obj.get("last_session_at"),
+                "minimum_billable_bytes": obj.get("minimum_billable_bytes"),
                 "ntn_provider": obj.get("ntn_provider"),
                 "psid": obj.get("psid"),
+                "satellite_data_usage": (
+                    SatelliteDataUsage.from_dict(obj["satellite_data_usage"])
+                    if obj.get("satellite_data_usage") is not None
+                    else None
+                ),
             }
         )
         return _obj

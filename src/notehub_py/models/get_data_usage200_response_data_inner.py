@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.usage_data import UsageData
 from typing import Optional, Set
@@ -35,6 +35,9 @@ class GetDataUsage200ResponseDataInner(BaseModel):
         default=None,
         description="The device UID this usage data belongs to (only present when aggregate is 'device')",
     )
+    device_count: Optional[StrictInt] = Field(
+        default=None, description="the number of devices represented by this data point"
+    )
     fleet: Optional[StrictStr] = Field(
         default=None,
         description="The fleet UID this usage data belongs to (only present when aggregate is 'fleet')",
@@ -43,17 +46,18 @@ class GetDataUsage200ResponseDataInner(BaseModel):
         default=None,
         description="The ICCID of the cellular SIM card (only present when type is 'cellular')",
     )
-    imsi: Optional[StrictStr] = Field(
+    psid: Optional[StrictStr] = Field(
         default=None,
-        description="The IMSI of the satellite device (only present when type is 'satellite')",
+        description="The PSID (Packet Service ID) of the satellite (or other packet-based device)",
     )
     type: StrictStr = Field(description="The type of connectivity")
     __properties: ClassVar[List[str]] = [
         "data",
         "device",
+        "device_count",
         "fleet",
         "iccid",
-        "imsi",
+        "psid",
         "type",
     ]
 
@@ -127,9 +131,10 @@ class GetDataUsage200ResponseDataInner(BaseModel):
                     else None
                 ),
                 "device": obj.get("device"),
+                "device_count": obj.get("device_count"),
                 "fleet": obj.get("fleet"),
                 "iccid": obj.get("iccid"),
-                "imsi": obj.get("imsi"),
+                "psid": obj.get("psid"),
                 "type": obj.get("type"),
             }
         )

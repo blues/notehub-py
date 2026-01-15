@@ -695,7 +695,6 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        purge: StrictBool,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -716,8 +715,6 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param purge: (required)
-        :type purge: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -743,7 +740,6 @@ class DeviceApi:
         _param = self._delete_device_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            purge=purge,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -767,7 +763,6 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        purge: StrictBool,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -788,8 +783,6 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param purge: (required)
-        :type purge: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -815,7 +808,6 @@ class DeviceApi:
         _param = self._delete_device_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            purge=purge,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -839,7 +831,6 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        purge: StrictBool,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -860,8 +851,6 @@ class DeviceApi:
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param purge: (required)
-        :type purge: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -887,7 +876,6 @@ class DeviceApi:
         _param = self._delete_device_serialize(
             project_or_product_uid=project_or_product_uid,
             device_uid=device_uid,
-            purge=purge,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -906,7 +894,6 @@ class DeviceApi:
         self,
         project_or_product_uid,
         device_uid,
-        purge,
         _request_auth,
         _content_type,
         _headers,
@@ -930,10 +917,6 @@ class DeviceApi:
         if device_uid is not None:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
-        if purge is not None:
-
-            _query_params.append(("purge", purge))
-
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -3918,6 +3901,9 @@ class DeviceApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
+        x_auth_token: Annotated[
+            StrictStr, Field(description="For accessing endpoints by Device pin.")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3938,6 +3924,8 @@ class DeviceApi:
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
+        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :type x_auth_token: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3963,6 +3951,7 @@ class DeviceApi:
         _param = self._get_device_environment_variables_by_pin_serialize(
             product_uid=product_uid,
             device_uid=device_uid,
+            x_auth_token=x_auth_token,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3986,6 +3975,9 @@ class DeviceApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
+        x_auth_token: Annotated[
+            StrictStr, Field(description="For accessing endpoints by Device pin.")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4006,6 +3998,8 @@ class DeviceApi:
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
+        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :type x_auth_token: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4031,6 +4025,7 @@ class DeviceApi:
         _param = self._get_device_environment_variables_by_pin_serialize(
             product_uid=product_uid,
             device_uid=device_uid,
+            x_auth_token=x_auth_token,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4054,6 +4049,9 @@ class DeviceApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
+        x_auth_token: Annotated[
+            StrictStr, Field(description="For accessing endpoints by Device pin.")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4074,6 +4072,8 @@ class DeviceApi:
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
+        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :type x_auth_token: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4099,6 +4099,7 @@ class DeviceApi:
         _param = self._get_device_environment_variables_by_pin_serialize(
             product_uid=product_uid,
             device_uid=device_uid,
+            x_auth_token=x_auth_token,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4117,6 +4118,7 @@ class DeviceApi:
         self,
         product_uid,
         device_uid,
+        x_auth_token,
         _request_auth,
         _content_type,
         _headers,
@@ -4141,6 +4143,8 @@ class DeviceApi:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
         # process the header parameters
+        if x_auth_token is not None:
+            _header_params["X-Auth-Token"] = x_auth_token
         # process the form parameters
         # process the body parameter
 
@@ -4150,7 +4154,7 @@ class DeviceApi:
         )
 
         # authentication setting
-        _auth_settings: List[str] = ["pin"]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
             method="GET",
@@ -8086,6 +8090,9 @@ class DeviceApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
+        x_auth_token: Annotated[
+            StrictStr, Field(description="For accessing endpoints by Device pin.")
+        ],
         environment_variables: Annotated[
             EnvironmentVariables,
             Field(description="Environment variables to be added to the device"),
@@ -8110,6 +8117,8 @@ class DeviceApi:
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
+        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :type x_auth_token: str
         :param environment_variables: Environment variables to be added to the device (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
@@ -8137,6 +8146,7 @@ class DeviceApi:
         _param = self._set_device_environment_variables_by_pin_serialize(
             product_uid=product_uid,
             device_uid=device_uid,
+            x_auth_token=x_auth_token,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8161,6 +8171,9 @@ class DeviceApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
+        x_auth_token: Annotated[
+            StrictStr, Field(description="For accessing endpoints by Device pin.")
+        ],
         environment_variables: Annotated[
             EnvironmentVariables,
             Field(description="Environment variables to be added to the device"),
@@ -8185,6 +8198,8 @@ class DeviceApi:
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
+        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :type x_auth_token: str
         :param environment_variables: Environment variables to be added to the device (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
@@ -8212,6 +8227,7 @@ class DeviceApi:
         _param = self._set_device_environment_variables_by_pin_serialize(
             product_uid=product_uid,
             device_uid=device_uid,
+            x_auth_token=x_auth_token,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8236,6 +8252,9 @@ class DeviceApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
+        x_auth_token: Annotated[
+            StrictStr, Field(description="For accessing endpoints by Device pin.")
+        ],
         environment_variables: Annotated[
             EnvironmentVariables,
             Field(description="Environment variables to be added to the device"),
@@ -8260,6 +8279,8 @@ class DeviceApi:
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
+        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :type x_auth_token: str
         :param environment_variables: Environment variables to be added to the device (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
@@ -8287,6 +8308,7 @@ class DeviceApi:
         _param = self._set_device_environment_variables_by_pin_serialize(
             product_uid=product_uid,
             device_uid=device_uid,
+            x_auth_token=x_auth_token,
             environment_variables=environment_variables,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8306,6 +8328,7 @@ class DeviceApi:
         self,
         product_uid,
         device_uid,
+        x_auth_token,
         environment_variables,
         _request_auth,
         _content_type,
@@ -8331,6 +8354,8 @@ class DeviceApi:
             _path_params["deviceUID"] = device_uid
         # process the query parameters
         # process the header parameters
+        if x_auth_token is not None:
+            _header_params["X-Auth-Token"] = x_auth_token
         # process the form parameters
         # process the body parameter
         if environment_variables is not None:
@@ -8352,7 +8377,7 @@ class DeviceApi:
                 _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = ["pin"]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
             method="PUT",

@@ -1457,7 +1457,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_firmware_info**
 
-> List[FirmwareInfo] get_firmware_info(project_or_product_uid, product=product, firmware_type=firmware_type, version=version, target=target, filename=filename, md5=md5, unpublished=unpublished)
+> List[FirmwareInfo] get_firmware_info(project_or_product_uid, product=product, firmware_type=firmware_type, version=version, target=target, filename=filename, md5=md5, unpublished=unpublished, sort_by=sort_by, sort_order=sort_order)
 
 Get Available Firmware Information
 
@@ -1499,9 +1499,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     filename = 'notecard-7.2.2.16518$20240410043100.bin' # str |  (optional)
     md5 = 'md5_example' # str |  (optional)
     unpublished = True # bool |  (optional)
+    sort_by = 'created' # str | Field to sort by (optional) (default to 'created')
+    sort_order = 'desc' # str | Sort order (asc for ascending, desc for descending) (optional) (default to 'desc')
 
     try:
-        api_response = api_instance.get_firmware_info(project_or_product_uid, product=product, firmware_type=firmware_type, version=version, target=target, filename=filename, md5=md5, unpublished=unpublished)
+        api_response = api_instance.get_firmware_info(project_or_product_uid, product=product, firmware_type=firmware_type, version=version, target=target, filename=filename, md5=md5, unpublished=unpublished, sort_by=sort_by, sort_order=sort_order)
         print("The response of ProjectApi->get_firmware_info:\n")
         pprint(api_response)
     except Exception as e:
@@ -1510,16 +1512,18 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type     | Description | Notes      |
-| -------------------------- | -------- | ----------- | ---------- |
-| **project_or_product_uid** | **str**  |             |
-| **product**                | **str**  |             | [optional] |
-| **firmware_type**          | **str**  |             | [optional] |
-| **version**                | **str**  |             | [optional] |
-| **target**                 | **str**  |             | [optional] |
-| **filename**               | **str**  |             | [optional] |
-| **md5**                    | **str**  |             | [optional] |
-| **unpublished**            | **bool** |             | [optional] |
+| Name                       | Type     | Description                                         | Notes                                     |
+| -------------------------- | -------- | --------------------------------------------------- | ----------------------------------------- |
+| **project_or_product_uid** | **str**  |                                                     |
+| **product**                | **str**  |                                                     | [optional]                                |
+| **firmware_type**          | **str**  |                                                     | [optional]                                |
+| **version**                | **str**  |                                                     | [optional]                                |
+| **target**                 | **str**  |                                                     | [optional]                                |
+| **filename**               | **str**  |                                                     | [optional]                                |
+| **md5**                    | **str**  |                                                     | [optional]                                |
+| **unpublished**            | **bool** |                                                     | [optional]                                |
+| **sort_by**                | **str**  | Field to sort by                                    | [optional] [default to &#39;created&#39;] |
+| **sort_order**             | **str**  | Sort order (asc for ascending, desc for descending) | [optional] [default to &#39;desc&#39;]    |
 
 ### Return type
 

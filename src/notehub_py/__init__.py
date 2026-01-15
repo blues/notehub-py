@@ -179,6 +179,7 @@ from notehub_py.models.role import Role
 from notehub_py.models.route_log import RouteLog
 from notehub_py.models.route_transform_settings import RouteTransformSettings
 from notehub_py.models.s3_archive_route import S3ArchiveRoute
+from notehub_py.models.satellite_data_usage import SatelliteDataUsage
 from notehub_py.models.satellite_plan import SatellitePlan
 from notehub_py.models.schema_property import SchemaProperty
 from notehub_py.models.signal_device200_response import SignalDevice200Response

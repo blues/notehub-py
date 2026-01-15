@@ -2,12 +2,17 @@
 
 ## Properties
 
-| Name               | Type         | Description | Notes      |
-| ------------------ | ------------ | ----------- | ---------- |
-| **bytes_received** | **int**      |             | [optional] |
-| **bytes_sent**     | **int**      |             | [optional] |
-| **period**         | **datetime** |             |
-| **total_bytes**    | **int**      |             |
+| Name                        | Type         | Description                                               | Notes      |
+| --------------------------- | ------------ | --------------------------------------------------------- | ---------- |
+| **billable_bytes_received** | **int**      | Billable bytes received (only for packet-based protocols) | [optional] |
+| **billable_bytes_sent**     | **int**      | Billable bytes sent (only for packet-based protocols)     | [optional] |
+| **billable_bytes_total**    | **int**      | Total billable bytes (only for packet-based protocols)    | [optional] |
+| **bytes_received**          | **int**      |                                                           | [optional] |
+| **bytes_sent**              | **int**      |                                                           | [optional] |
+| **packets_received**        | **int**      | Packets received (only for packet-based protocols)        | [optional] |
+| **packets_sent**            | **int**      | Packets sent (only for packet-based protocols)            | [optional] |
+| **period**                  | **datetime** |                                                           |
+| **total_bytes**             | **int**      |                                                           |
 
 ## Example
 

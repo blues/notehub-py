@@ -933,6 +933,12 @@ class UsageApi:
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -961,6 +967,8 @@ class UsageApi:
         :type route_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -990,6 +998,7 @@ class UsageApi:
             end_date=end_date,
             route_uid=route_uid,
             aggregate=aggregate,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1031,6 +1040,12 @@ class UsageApi:
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1059,6 +1074,8 @@ class UsageApi:
         :type route_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1088,6 +1105,7 @@ class UsageApi:
             end_date=end_date,
             route_uid=route_uid,
             aggregate=aggregate,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1129,6 +1147,12 @@ class UsageApi:
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
+        skip_recent_data: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1157,6 +1181,8 @@ class UsageApi:
         :type route_uid: List[str]
         :param aggregate: Aggregation level for results
         :type aggregate: str
+        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1186,6 +1212,7 @@ class UsageApi:
             end_date=end_date,
             route_uid=route_uid,
             aggregate=aggregate,
+            skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1208,6 +1235,7 @@ class UsageApi:
         end_date,
         route_uid,
         aggregate,
+        skip_recent_data,
         _request_auth,
         _content_type,
         _headers,
@@ -1250,6 +1278,10 @@ class UsageApi:
         if aggregate is not None:
 
             _query_params.append(("aggregate", aggregate))
+
+        if skip_recent_data is not None:
+
+            _query_params.append(("skipRecentData", skip_recent_data))
 
         # process the header parameters
         # process the form parameters

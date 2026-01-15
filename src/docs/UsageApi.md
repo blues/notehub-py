@@ -189,7 +189,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_route_logs_usage**
 
-> GetRouteLogsUsage200Response get_route_logs_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, route_uid=route_uid, aggregate=aggregate)
+> GetRouteLogsUsage200Response get_route_logs_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, route_uid=route_uid, aggregate=aggregate, skip_recent_data=skip_recent_data)
 
 Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
@@ -229,9 +229,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
     route_uid = ['route_uid_example'] # List[str] | A Route UID. (optional)
     aggregate = 'route' # str | Aggregation level for results (optional) (default to 'route')
+    skip_recent_data = False # bool | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (optional) (default to False)
 
     try:
-        api_response = api_instance.get_route_logs_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, route_uid=route_uid, aggregate=aggregate)
+        api_response = api_instance.get_route_logs_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, route_uid=route_uid, aggregate=aggregate, skip_recent_data=skip_recent_data)
         print("The response of UsageApi->get_route_logs_usage:\n")
         pprint(api_response)
     except Exception as e:
@@ -240,14 +241,15 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                    | Description                                                     | Notes                                   |
-| -------------------------- | ----------------------- | --------------------------------------------------------------- | --------------------------------------- |
-| **project_or_product_uid** | **str**                 |                                                                 |
-| **period**                 | **str**                 | Period type for aggregation                                     |
-| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp | [optional]                              |
-| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp   | [optional]                              |
-| **route_uid**              | [**List[str]**](str.md) | A Route UID.                                                    | [optional]                              |
-| **aggregate**              | **str**                 | Aggregation level for results                                   | [optional] [default to &#39;route&#39;] |
+| Name                       | Type                    | Description                                                                                                                                               | Notes                                   |
+| -------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| **project_or_product_uid** | **str**                 |                                                                                                                                                           |
+| **period**                 | **str**                 | Period type for aggregation                                                                                                                               |
+| **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp                                                                                           | [optional]                              |
+| **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp                                                                                             | [optional]                              |
+| **route_uid**              | [**List[str]**](str.md) | A Route UID.                                                                                                                                              | [optional]                              |
+| **aggregate**              | **str**                 | Aggregation level for results                                                                                                                             | [optional] [default to &#39;route&#39;] |
+| **skip_recent_data**       | **bool**                | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. | [optional] [default to False]           |
 
 ### Return type
 

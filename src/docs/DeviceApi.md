@@ -195,7 +195,7 @@ void (empty response body)
 
 # **delete_device**
 
-> delete_device(project_or_product_uid, device_uid, purge)
+> delete_device(project_or_product_uid, device_uid)
 
 Delete Device
 
@@ -230,21 +230,19 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.DeviceApi(api_client)
     project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
     device_uid = 'dev:000000000000000' # str |
-    purge = False # bool |  (default to False)
 
     try:
-        api_instance.delete_device(project_or_product_uid, device_uid, purge)
+        api_instance.delete_device(project_or_product_uid, device_uid)
     except Exception as e:
         print("Exception when calling DeviceApi->delete_device: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                       | Type     | Description | Notes              |
-| -------------------------- | -------- | ----------- | ------------------ |
-| **project_or_product_uid** | **str**  |             |
-| **device_uid**             | **str**  |             |
-| **purge**                  | **bool** |             | [default to False] |
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **device_uid**             | **str** |             |
 
 ### Return type
 
@@ -1107,13 +1105,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_device_environment_variables_by_pin**
 
-> GetDeviceEnvironmentVariablesByPin200Response get_device_environment_variables_by_pin(product_uid, device_uid)
+> GetDeviceEnvironmentVariablesByPin200Response get_device_environment_variables_by_pin(product_uid, device_uid, x_auth_token)
 
 Get environment variables of a device with device pin authorization
 
 ### Example
-
-- Api Key Authentication (pin):
 
 ```python
 import notehub_py
@@ -1127,16 +1123,6 @@ configuration = notehub_py.Configuration(
     host = "https://api.notefile.net"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: pin
-configuration.api_key['pin'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['pin'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -1144,9 +1130,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.DeviceApi(api_client)
     product_uid = 'com.blues.bridge:sensors' # str |
     device_uid = 'dev:000000000000000' # str |
+    x_auth_token = 'x_auth_token_example' # str | For accessing endpoints by Device pin.
 
     try:
-        api_response = api_instance.get_device_environment_variables_by_pin(product_uid, device_uid)
+        api_response = api_instance.get_device_environment_variables_by_pin(product_uid, device_uid, x_auth_token)
         print("The response of DeviceApi->get_device_environment_variables_by_pin:\n")
         pprint(api_response)
     except Exception as e:
@@ -1155,10 +1142,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name            | Type    | Description | Notes |
-| --------------- | ------- | ----------- | ----- |
-| **product_uid** | **str** |             |
-| **device_uid**  | **str** |             |
+| Name             | Type    | Description                            | Notes |
+| ---------------- | ------- | -------------------------------------- | ----- |
+| **product_uid**  | **str** |                                        |
+| **device_uid**   | **str** |                                        |
+| **x_auth_token** | **str** | For accessing endpoints by Device pin. |
 
 ### Return type
 
@@ -1166,7 +1154,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-[pin](../README.md#pin)
+No authorization required
 
 ### HTTP request headers
 
@@ -2168,13 +2156,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **set_device_environment_variables_by_pin**
 
-> EnvironmentVariables set_device_environment_variables_by_pin(product_uid, device_uid, environment_variables)
+> EnvironmentVariables set_device_environment_variables_by_pin(product_uid, device_uid, x_auth_token, environment_variables)
 
 Set environment variables of a device with device pin authorization
 
 ### Example
-
-- Api Key Authentication (pin):
 
 ```python
 import notehub_py
@@ -2188,16 +2174,6 @@ configuration = notehub_py.Configuration(
     host = "https://api.notefile.net"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: pin
-configuration.api_key['pin'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['pin'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -2205,10 +2181,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.DeviceApi(api_client)
     product_uid = 'com.blues.bridge:sensors' # str |
     device_uid = 'dev:000000000000000' # str |
+    x_auth_token = 'x_auth_token_example' # str | For accessing endpoints by Device pin.
     environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the device
 
     try:
-        api_response = api_instance.set_device_environment_variables_by_pin(product_uid, device_uid, environment_variables)
+        api_response = api_instance.set_device_environment_variables_by_pin(product_uid, device_uid, x_auth_token, environment_variables)
         print("The response of DeviceApi->set_device_environment_variables_by_pin:\n")
         pprint(api_response)
     except Exception as e:
@@ -2221,6 +2198,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ------------------------- | --------------------------------------------------- | ----------------------------------------------- | ----- |
 | **product_uid**           | **str**                                             |                                                 |
 | **device_uid**            | **str**                                             |                                                 |
+| **x_auth_token**          | **str**                                             | For accessing endpoints by Device pin.          |
 | **environment_variables** | [**EnvironmentVariables**](EnvironmentVariables.md) | Environment variables to be added to the device |
 
 ### Return type
@@ -2229,7 +2207,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-[pin](../README.md#pin)
+No authorization required
 
 ### HTTP request headers
 
