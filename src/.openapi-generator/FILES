@@ -303,5 +303,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_satellite_data_usage.py
 tox.ini
