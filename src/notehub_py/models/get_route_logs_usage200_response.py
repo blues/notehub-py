@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.usage_route_logs_data import UsageRouteLogsData
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +31,11 @@ class GetRouteLogsUsage200Response(BaseModel):
     """  # noqa: E501
 
     route_logs: List[UsageRouteLogsData]
-    __properties: ClassVar[List[str]] = ["route_logs"]
+    truncated: Optional[StrictBool] = Field(
+        default=None,
+        description="If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure",
+    )
+    __properties: ClassVar[List[str]] = ["route_logs", "truncated"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +98,8 @@ class GetRouteLogsUsage200Response(BaseModel):
                     [UsageRouteLogsData.from_dict(_item) for _item in obj["route_logs"]]
                     if obj.get("route_logs") is not None
                     else None
-                )
+                ),
+                "truncated": obj.get("truncated"),
             }
         )
         return _obj

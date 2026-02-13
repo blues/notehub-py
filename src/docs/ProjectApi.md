@@ -16,6 +16,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**delete_project**](ProjectApi.md#delete_project)                                           | **DELETE** /v1/projects/{projectOrProductUID}                                               |
 | [**delete_project_environment_variable**](ProjectApi.md#delete_project_environment_variable) | **DELETE** /v1/projects/{projectOrProductUID}/environment_variables/{key}                   |
 | [**disable_global_event_transformation**](ProjectApi.md#disable_global_event_transformation) | **POST** /v1/projects/{projectOrProductUID}/global-transformation/disable                   |
+| [**download_firmware**](ProjectApi.md#download_firmware)                                     | **GET** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
 | [**enable_global_event_transformation**](ProjectApi.md#enable_global_event_transformation)   | **POST** /v1/projects/{projectOrProductUID}/global-transformation/enable                    |
 | [**get_device_dfu_history**](ProjectApi.md#get_device_dfu_history)                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/history   |
 | [**get_device_dfu_status**](ProjectApi.md#get_device_dfu_status)                             | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status    |
@@ -944,6 +945,83 @@ void (empty response body)
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | Successful operation                       | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **download_firmware**
+
+> bytearray download_firmware(project_or_product_uid, firmware_type, filename)
+
+Download firmware binary
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    firmware_type = 'firmware_type_example' # str |
+    filename = 'filename_example' # str |
+
+    try:
+        api_response = api_instance.download_firmware(project_or_product_uid, firmware_type, filename)
+        print("The response of ProjectApi->download_firmware:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->download_firmware: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **firmware_type**          | **str** |             |
+| **filename**               | **str** |             |
+
+### Return type
+
+**bytearray**
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/octet-stream, application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | Firmware binary                            | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
