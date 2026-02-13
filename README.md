@@ -201,6 +201,12 @@ Follow the installation instructions for Python and pip, and see the note about 
 npm install @openapitools/openapi-generator-cli -g
 ```
 
+You'll also need to install Python development dependencies required by the `scripts.py` file:
+
+```bash
+pip3 install -r requirements-dev.txt
+```
+
 Now you should be ready to work with the package locally or make changes and modifications.
 
 ### Modifying the Project
