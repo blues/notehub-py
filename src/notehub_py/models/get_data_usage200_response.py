@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.get_data_usage200_response_data_inner import (
     GetDataUsage200ResponseDataInner,
@@ -33,7 +33,11 @@ class GetDataUsage200Response(BaseModel):
     """  # noqa: E501
 
     data: Optional[List[GetDataUsage200ResponseDataInner]] = None
-    __properties: ClassVar[List[str]] = ["data"]
+    truncated: Optional[StrictBool] = Field(
+        default=None,
+        description="If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure",
+    )
+    __properties: ClassVar[List[str]] = ["data", "truncated"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -99,7 +103,8 @@ class GetDataUsage200Response(BaseModel):
                     ]
                     if obj.get("data") is not None
                     else None
-                )
+                ),
+                "truncated": obj.get("truncated"),
             }
         )
         return _obj

@@ -30,38 +30,38 @@ class UsageData(BaseModel):
     UsageData
     """  # noqa: E501
 
-    billable_bytes_received: Optional[StrictInt] = Field(
-        default=None,
-        description="Billable bytes received (only for packet-based protocols)",
-    )
-    billable_bytes_sent: Optional[StrictInt] = Field(
-        default=None,
-        description="Billable bytes sent (only for packet-based protocols)",
-    )
     billable_bytes_total: Optional[StrictInt] = Field(
         default=None,
         description="Total billable bytes (only for packet-based protocols)",
     )
-    bytes_received: Optional[StrictInt] = None
-    bytes_sent: Optional[StrictInt] = None
-    packets_received: Optional[StrictInt] = Field(
-        default=None, description="Packets received (only for packet-based protocols)"
+    downlink_bytes: Optional[StrictInt] = None
+    downlink_bytes_billable: Optional[StrictInt] = Field(
+        default=None,
+        description="Billable downlink bytes (only for packet-based protocols)",
     )
-    packets_sent: Optional[StrictInt] = Field(
-        default=None, description="Packets sent (only for packet-based protocols)"
+    downlink_packets: Optional[StrictInt] = Field(
+        default=None, description="Downlink packets (only for packet-based protocols)"
     )
     period: datetime
     total_bytes: StrictInt
+    uplink_bytes: Optional[StrictInt] = None
+    uplink_bytes_billable: Optional[StrictInt] = Field(
+        default=None,
+        description="Billable uplink bytes (only for packet-based protocols)",
+    )
+    uplink_packets: Optional[StrictInt] = Field(
+        default=None, description="Uplink packets (only for packet-based protocols)"
+    )
     __properties: ClassVar[List[str]] = [
-        "billable_bytes_received",
-        "billable_bytes_sent",
         "billable_bytes_total",
-        "bytes_received",
-        "bytes_sent",
-        "packets_received",
-        "packets_sent",
+        "downlink_bytes",
+        "downlink_bytes_billable",
+        "downlink_packets",
         "period",
         "total_bytes",
+        "uplink_bytes",
+        "uplink_bytes_billable",
+        "uplink_packets",
     ]
 
     model_config = ConfigDict(
@@ -114,15 +114,15 @@ class UsageData(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "billable_bytes_received": obj.get("billable_bytes_received"),
-                "billable_bytes_sent": obj.get("billable_bytes_sent"),
                 "billable_bytes_total": obj.get("billable_bytes_total"),
-                "bytes_received": obj.get("bytes_received"),
-                "bytes_sent": obj.get("bytes_sent"),
-                "packets_received": obj.get("packets_received"),
-                "packets_sent": obj.get("packets_sent"),
+                "downlink_bytes": obj.get("downlink_bytes"),
+                "downlink_bytes_billable": obj.get("downlink_bytes_billable"),
+                "downlink_packets": obj.get("downlink_packets"),
                 "period": obj.get("period"),
                 "total_bytes": obj.get("total_bytes"),
+                "uplink_bytes": obj.get("uplink_bytes"),
+                "uplink_bytes_billable": obj.get("uplink_bytes_billable"),
+                "uplink_packets": obj.get("uplink_packets"),
             }
         )
         return _obj

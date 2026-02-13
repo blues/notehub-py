@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.usage_events_data import UsageEventsData
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +31,11 @@ class UsageEventsResponse(BaseModel):
     """  # noqa: E501
 
     data: List[UsageEventsData]
-    __properties: ClassVar[List[str]] = ["data"]
+    truncated: Optional[StrictBool] = Field(
+        default=None,
+        description="If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure",
+    )
+    __properties: ClassVar[List[str]] = ["data", "truncated"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +98,8 @@ class UsageEventsResponse(BaseModel):
                     [UsageEventsData.from_dict(_item) for _item in obj["data"]]
                     if obj.get("data") is not None
                     else None
-                )
+                ),
+                "truncated": obj.get("truncated"),
             }
         )
         return _obj

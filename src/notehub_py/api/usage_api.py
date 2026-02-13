@@ -67,6 +67,10 @@ class UsageApi:
         fleet_uid: Annotated[
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -98,6 +102,8 @@ class UsageApi:
         :type device_uid: List[str]
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -129,6 +135,7 @@ class UsageApi:
             end_date=end_date,
             device_uid=device_uid,
             fleet_uid=fleet_uid,
+            limit=limit,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -171,6 +178,10 @@ class UsageApi:
         fleet_uid: Annotated[
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -202,6 +213,8 @@ class UsageApi:
         :type device_uid: List[str]
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -233,6 +246,7 @@ class UsageApi:
             end_date=end_date,
             device_uid=device_uid,
             fleet_uid=fleet_uid,
+            limit=limit,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -275,6 +289,10 @@ class UsageApi:
         fleet_uid: Annotated[
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -306,6 +324,8 @@ class UsageApi:
         :type device_uid: List[str]
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
@@ -337,6 +357,7 @@ class UsageApi:
             end_date=end_date,
             device_uid=device_uid,
             fleet_uid=fleet_uid,
+            limit=limit,
             aggregate=aggregate,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -360,6 +381,7 @@ class UsageApi:
         end_date,
         device_uid,
         fleet_uid,
+        limit,
         aggregate,
         _request_auth,
         _content_type,
@@ -400,6 +422,10 @@ class UsageApi:
         if fleet_uid is not None:
 
             _query_params.append(("fleetUID", fleet_uid))
+
+        if limit is not None:
+
+            _query_params.append(("limit", limit))
 
         if period is not None:
 
@@ -459,6 +485,10 @@ class UsageApi:
         fleet_uid: Annotated[
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -503,6 +533,8 @@ class UsageApi:
         :type device_uid: List[str]
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param notefile: Filter to specific notefiles
@@ -540,6 +572,7 @@ class UsageApi:
             end_date=end_date,
             device_uid=device_uid,
             fleet_uid=fleet_uid,
+            limit=limit,
             aggregate=aggregate,
             notefile=notefile,
             skip_recent_data=skip_recent_data,
@@ -585,6 +618,10 @@ class UsageApi:
         fleet_uid: Annotated[
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -629,6 +666,8 @@ class UsageApi:
         :type device_uid: List[str]
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param notefile: Filter to specific notefiles
@@ -666,6 +705,7 @@ class UsageApi:
             end_date=end_date,
             device_uid=device_uid,
             fleet_uid=fleet_uid,
+            limit=limit,
             aggregate=aggregate,
             notefile=notefile,
             skip_recent_data=skip_recent_data,
@@ -711,6 +751,10 @@ class UsageApi:
         fleet_uid: Annotated[
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -755,6 +799,8 @@ class UsageApi:
         :type device_uid: List[str]
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param notefile: Filter to specific notefiles
@@ -792,6 +838,7 @@ class UsageApi:
             end_date=end_date,
             device_uid=device_uid,
             fleet_uid=fleet_uid,
+            limit=limit,
             aggregate=aggregate,
             notefile=notefile,
             skip_recent_data=skip_recent_data,
@@ -818,6 +865,7 @@ class UsageApi:
         end_date,
         device_uid,
         fleet_uid,
+        limit,
         aggregate,
         notefile,
         skip_recent_data,
@@ -862,6 +910,10 @@ class UsageApi:
         if fleet_uid is not None:
 
             _query_params.append(("fleetUID", fleet_uid))
+
+        if limit is not None:
+
+            _query_params.append(("limit", limit))
 
         if period is not None:
 
@@ -930,6 +982,10 @@ class UsageApi:
         route_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Route UID.")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -965,6 +1021,8 @@ class UsageApi:
         :type end_date: int
         :param route_uid: A Route UID.
         :type route_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
@@ -997,6 +1055,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             route_uid=route_uid,
+            limit=limit,
             aggregate=aggregate,
             skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
@@ -1037,6 +1096,10 @@ class UsageApi:
         route_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Route UID.")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -1072,6 +1135,8 @@ class UsageApi:
         :type end_date: int
         :param route_uid: A Route UID.
         :type route_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
@@ -1104,6 +1169,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             route_uid=route_uid,
+            limit=limit,
             aggregate=aggregate,
             skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
@@ -1144,6 +1210,10 @@ class UsageApi:
         route_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Route UID.")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -1179,6 +1249,8 @@ class UsageApi:
         :type end_date: int
         :param route_uid: A Route UID.
         :type route_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
@@ -1211,6 +1283,7 @@ class UsageApi:
             start_date=start_date,
             end_date=end_date,
             route_uid=route_uid,
+            limit=limit,
             aggregate=aggregate,
             skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
@@ -1234,6 +1307,7 @@ class UsageApi:
         start_date,
         end_date,
         route_uid,
+        limit,
         aggregate,
         skip_recent_data,
         _request_auth,
@@ -1270,6 +1344,10 @@ class UsageApi:
         if route_uid is not None:
 
             _query_params.append(("routeUID", route_uid))
+
+        if limit is not None:
+
+            _query_params.append(("limit", limit))
 
         if period is not None:
 
@@ -1333,6 +1411,10 @@ class UsageApi:
         fleet_uid: Annotated[
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -1370,6 +1452,8 @@ class UsageApi:
         :type device_uid: List[str]
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
@@ -1403,6 +1487,7 @@ class UsageApi:
             end_date=end_date,
             device_uid=device_uid,
             fleet_uid=fleet_uid,
+            limit=limit,
             aggregate=aggregate,
             skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
@@ -1446,6 +1531,10 @@ class UsageApi:
         fleet_uid: Annotated[
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -1483,6 +1572,8 @@ class UsageApi:
         :type device_uid: List[str]
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
@@ -1516,6 +1607,7 @@ class UsageApi:
             end_date=end_date,
             device_uid=device_uid,
             fleet_uid=fleet_uid,
+            limit=limit,
             aggregate=aggregate,
             skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
@@ -1559,6 +1651,10 @@ class UsageApi:
         fleet_uid: Annotated[
             Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
         ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
+            Field(description="Limit the number of data points returned"),
+        ] = None,
         aggregate: Annotated[
             Optional[StrictStr], Field(description="Aggregation level for results")
         ] = None,
@@ -1596,6 +1692,8 @@ class UsageApi:
         :type device_uid: List[str]
         :param fleet_uid: Filter by Fleet UID
         :type fleet_uid: List[str]
+        :param limit: Limit the number of data points returned
+        :type limit: int
         :param aggregate: Aggregation level for results
         :type aggregate: str
         :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
@@ -1629,6 +1727,7 @@ class UsageApi:
             end_date=end_date,
             device_uid=device_uid,
             fleet_uid=fleet_uid,
+            limit=limit,
             aggregate=aggregate,
             skip_recent_data=skip_recent_data,
             _request_auth=_request_auth,
@@ -1653,6 +1752,7 @@ class UsageApi:
         end_date,
         device_uid,
         fleet_uid,
+        limit,
         aggregate,
         skip_recent_data,
         _request_auth,
@@ -1694,6 +1794,10 @@ class UsageApi:
         if fleet_uid is not None:
 
             _query_params.append(("fleetUID", fleet_uid))
+
+        if limit is not None:
+
+            _query_params.append(("limit", limit))
 
         if period is not None:
 

@@ -4,15 +4,15 @@
 
 | Name                        | Type         | Description                                               | Notes      |
 | --------------------------- | ------------ | --------------------------------------------------------- | ---------- |
-| **billable_bytes_received** | **int**      | Billable bytes received (only for packet-based protocols) | [optional] |
-| **billable_bytes_sent**     | **int**      | Billable bytes sent (only for packet-based protocols)     | [optional] |
 | **billable_bytes_total**    | **int**      | Total billable bytes (only for packet-based protocols)    | [optional] |
-| **bytes_received**          | **int**      |                                                           | [optional] |
-| **bytes_sent**              | **int**      |                                                           | [optional] |
-| **packets_received**        | **int**      | Packets received (only for packet-based protocols)        | [optional] |
-| **packets_sent**            | **int**      | Packets sent (only for packet-based protocols)            | [optional] |
+| **downlink_bytes**          | **int**      |                                                           | [optional] |
+| **downlink_bytes_billable** | **int**      | Billable downlink bytes (only for packet-based protocols) | [optional] |
+| **downlink_packets**        | **int**      | Downlink packets (only for packet-based protocols)        | [optional] |
 | **period**                  | **datetime** |                                                           |
 | **total_bytes**             | **int**      |                                                           |
+| **uplink_bytes**            | **int**      |                                                           | [optional] |
+| **uplink_bytes_billable**   | **int**      | Billable uplink bytes (only for packet-based protocols)   | [optional] |
+| **uplink_packets**          | **int**      | Uplink packets (only for packet-based protocols)          | [optional] |
 
 ## Example
 

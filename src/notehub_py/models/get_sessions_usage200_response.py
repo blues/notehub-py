@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List
 from notehub_py.models.usage_sessions_data import UsageSessionsData
 from typing import Optional, Set
@@ -31,7 +31,10 @@ class GetSessionsUsage200Response(BaseModel):
     """  # noqa: E501
 
     sessions: List[UsageSessionsData]
-    __properties: ClassVar[List[str]] = ["sessions"]
+    truncated: StrictBool = Field(
+        description="If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure"
+    )
+    __properties: ClassVar[List[str]] = ["sessions", "truncated"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +97,8 @@ class GetSessionsUsage200Response(BaseModel):
                     [UsageSessionsData.from_dict(_item) for _item in obj["sessions"]]
                     if obj.get("sessions") is not None
                     else None
-                )
+                ),
+                "truncated": obj.get("truncated"),
             }
         )
         return _obj
