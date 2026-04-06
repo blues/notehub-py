@@ -2,22 +2,23 @@
 
 ## Properties
 
-| Name                         | Type                                                    | Description | Notes      |
-| ---------------------------- | ------------------------------------------------------- | ----------- | ---------- |
-| **access_key_id**            | **str**                                                 |             | [optional] |
-| **access_key_secret**        | **str**                                                 |             | [optional] |
-| **channel**                  | **str**                                                 |             | [optional] |
-| **disable_http_headers**     | **bool**                                                |             | [optional] |
-| **filter**                   | [**Filter**](Filter.md)                                 |             | [optional] |
-| **fleets**                   | **List[str]**                                           |             | [optional] |
-| **http_headers**             | **Dict[str, str]**                                      |             | [optional] |
-| **message_deduplication_id** | **str**                                                 |             | [optional] |
-| **message_group_id**         | **str**                                                 |             | [optional] |
-| **region**                   | **str**                                                 |             | [optional] |
-| **throttle_ms**              | **int**                                                 |             | [optional] |
-| **timeout**                  | **int**                                                 |             | [optional] |
-| **transform**                | [**RouteTransformSettings**](RouteTransformSettings.md) |             | [optional] |
-| **url**                      | **str**                                                 |             | [optional] |
+| Name                         | Type                                                    | Description                                                   | Notes      |
+| ---------------------------- | ------------------------------------------------------- | ------------------------------------------------------------- | ---------- |
+| **access_key_id**            | **str**                                                 |                                                               | [optional] |
+| **access_key_secret**        | **str**                                                 |                                                               | [optional] |
+| **channel**                  | **str**                                                 |                                                               | [optional] |
+| **disable_http_headers**     | **bool**                                                |                                                               | [optional] |
+| **filter**                   | [**Filter**](Filter.md)                                 |                                                               | [optional] |
+| **fleets**                   | **List[str]**                                           |                                                               | [optional] |
+| **http_headers**             | **Dict[str, str]**                                      |                                                               | [optional] |
+| **message_deduplication_id** | **str**                                                 |                                                               | [optional] |
+| **message_group_id**         | **str**                                                 |                                                               | [optional] |
+| **region**                   | **str**                                                 |                                                               | [optional] |
+| **role_arn**                 | **str**                                                 | IAM Role ARN for role-based authentication via STS AssumeRole | [optional] |
+| **throttle_ms**              | **int**                                                 |                                                               | [optional] |
+| **timeout**                  | **int**                                                 |                                                               | [optional] |
+| **transform**                | [**RouteTransformSettings**](RouteTransformSettings.md) |                                                               | [optional] |
+| **url**                      | **str**                                                 |                                                               | [optional] |
 
 ## Example
 

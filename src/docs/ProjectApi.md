@@ -2,8 +2,8 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                                       | HTTP request                                                                                | Description                                     |
-| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| Method                                                                                       | HTTP request                                                                                | Description                                              |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | [**add_device_to_fleets**](ProjectApi.md#add_device_to_fleets)                               | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                       |
 | [**clone_project**](ProjectApi.md#clone_project)                                             | **POST** /v1/projects/{projectOrProductUID}/clone                                           |
 | [**create_fleet**](ProjectApi.md#create_fleet)                                               | **POST** /v1/projects/{projectOrProductUID}/fleets                                          |
@@ -18,6 +18,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**disable_global_event_transformation**](ProjectApi.md#disable_global_event_transformation) | **POST** /v1/projects/{projectOrProductUID}/global-transformation/disable                   |
 | [**download_firmware**](ProjectApi.md#download_firmware)                                     | **GET** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
 | [**enable_global_event_transformation**](ProjectApi.md#enable_global_event_transformation)   | **POST** /v1/projects/{projectOrProductUID}/global-transformation/enable                    |
+| [**get_aws_role_config**](ProjectApi.md#get_aws_role_config)                                 | **GET** /v1/projects/{projectOrProductUID}/aws-role-config                                  | Get AWS role configuration for role-based authentication |
 | [**get_device_dfu_history**](ProjectApi.md#get_device_dfu_history)                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/history   |
 | [**get_device_dfu_status**](ProjectApi.md#get_device_dfu_status)                             | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/dfu/{firmwareType}/status    |
 | [**get_device_fleets**](ProjectApi.md#get_device_fleets)                                     | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                       |
@@ -25,14 +26,14 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_devices_dfu_status**](ProjectApi.md#get_devices_dfu_status)                           | **GET** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/status                        |
 | [**get_firmware_info**](ProjectApi.md#get_firmware_info)                                     | **GET** /v1/projects/{projectOrProductUID}/firmware                                         |
 | [**get_fleet**](ProjectApi.md#get_fleet)                                                     | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                                |
-| [**get_fleet_environment_hierarchy**](ProjectApi.md#get_fleet_environment_hierarchy)         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy          | Get environment variable hierarchy for a device |
+| [**get_fleet_environment_hierarchy**](ProjectApi.md#get_fleet_environment_hierarchy)         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_hierarchy          | Get environment variable hierarchy for a device          |
 | [**get_fleet_environment_variables**](ProjectApi.md#get_fleet_environment_variables)         | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
 | [**get_fleets**](ProjectApi.md#get_fleets)                                                   | **GET** /v1/projects/{projectOrProductUID}/fleets                                           |
-| [**get_notefile_schemas**](ProjectApi.md#get_notefile_schemas)                               | **GET** /v1/projects/{projectOrProductUID}/schemas                                          | Get variable format for a notefile              |
+| [**get_notefile_schemas**](ProjectApi.md#get_notefile_schemas)                               | **GET** /v1/projects/{projectOrProductUID}/schemas                                          | Get variable format for a notefile                       |
 | [**get_products**](ProjectApi.md#get_products)                                               | **GET** /v1/projects/{projectOrProductUID}/products                                         |
 | [**get_project**](ProjectApi.md#get_project)                                                 | **GET** /v1/projects/{projectOrProductUID}                                                  |
 | [**get_project_by_product**](ProjectApi.md#get_project_by_product)                           | **GET** /v1/products/{productUID}/project                                                   |
-| [**get_project_environment_hierarchy**](ProjectApi.md#get_project_environment_hierarchy)     | **GET** /v1/projects/{projectOrProductUID}/environment_hierarchy                            | Get environment variable hierarchy for a device |
+| [**get_project_environment_hierarchy**](ProjectApi.md#get_project_environment_hierarchy)     | **GET** /v1/projects/{projectOrProductUID}/environment_hierarchy                            | Get environment variable hierarchy for a device          |
 | [**get_project_environment_variables**](ProjectApi.md#get_project_environment_variables)     | **GET** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**get_project_members**](ProjectApi.md#get_project_members)                                 | **GET** /v1/projects/{projectOrProductUID}/members                                          |
 | [**get_projects**](ProjectApi.md#get_projects)                                               | **GET** /v1/projects                                                                        |
@@ -1093,6 +1094,83 @@ void (empty response body)
 | Status code | Description                                | Response headers |
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | Successful operation                       | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_aws_role_config**
+
+> AWSRoleConfig get_aws_role_config(project_or_product_uid)
+
+Get AWS role configuration for role-based authentication
+
+Returns the AWS Account ID and External ID needed to configure an IAM role trust policy for role-based authentication on AWS routes.
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.models.aws_role_config import AWSRoleConfig
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+
+    try:
+        # Get AWS role configuration for role-based authentication
+        api_response = api_instance.get_aws_role_config(project_or_product_uid)
+        print("The response of ProjectApi->get_aws_role_config:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->get_aws_role_config: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+
+### Return type
+
+[**AWSRoleConfig**](AWSRoleConfig.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | AWS role configuration                     | -                |
 | **0**       | The response body in case of an API error. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

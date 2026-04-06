@@ -6,6 +6,7 @@ All URIs are relative to *https://api.notefile.net*
 | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | [**add_db_note**](DeviceApi.md#add_db_note)                                                         | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}   |
 | [**add_qi_note**](DeviceApi.md#add_qi_note)                                                         | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}            |
+| [**create_notefile**](DeviceApi.md#create_notefile)                                                 | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notefiles/{notefileID}        |
 | [**delete_device**](DeviceApi.md#delete_device)                                                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}                             |
 | [**delete_device_environment_variable**](DeviceApi.md#delete_device_environment_variable)           | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables/{key} |
 | [**delete_note**](DeviceApi.md#delete_note)                                                         | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID} |
@@ -180,6 +181,81 @@ void (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description                                | Response headers |
+| ----------- | ------------------------------------------ | ---------------- |
+| **200**     | An empty object means success              | -                |
+| **0**       | The response body in case of an API error. | -                |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_notefile**
+
+> create_notefile(project_or_product_uid, device_uid, notefile_id)
+
+Creates an empty Notefile on the device.
+
+### Example
+
+- Bearer Authentication (personalAccessToken):
+
+```python
+import notehub_py
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.notefile.net
+# See configuration.py for a list of all supported configuration parameters.
+configuration = notehub_py.Configuration(
+    host = "https://api.notefile.net"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: personalAccessToken
+configuration = notehub_py.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    device_uid = 'dev:000000000000000' # str |
+    notefile_id = 'notefile_id_example' # str |
+
+    try:
+        api_instance.create_notefile(project_or_product_uid, device_uid, notefile_id)
+    except Exception as e:
+        print("Exception when calling DeviceApi->create_notefile: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **device_uid**             | **str** |             |
+| **notefile_id**            | **str** |             |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 ### HTTP response details
@@ -1412,7 +1488,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 # **get_device_sessions**
 
-> GetDeviceSessions200Response get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num, start_date=start_date, end_date=end_date)
+> GetDeviceSessions200Response get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num, start_date=start_date, end_date=end_date, first_sync=first_sync)
 
 Get Device Sessions
 
@@ -1452,9 +1528,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     page_num = 1 # int |  (optional) (default to 1)
     start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
     end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
+    first_sync = False # bool | When true, filters results to only show first sync sessions (optional) (default to False)
 
     try:
-        api_response = api_instance.get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num, start_date=start_date, end_date=end_date)
+        api_response = api_instance.get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num, start_date=start_date, end_date=end_date, first_sync=first_sync)
         print("The response of DeviceApi->get_device_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -1463,14 +1540,15 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description                                                     | Notes                      |
-| -------------------------- | ------- | --------------------------------------------------------------- | -------------------------- |
-| **project_or_product_uid** | **str** |                                                                 |
-| **device_uid**             | **str** |                                                                 |
-| **page_size**              | **int** |                                                                 | [optional] [default to 50] |
-| **page_num**               | **int** |                                                                 | [optional] [default to 1]  |
-| **start_date**             | **int** | Start date for filtering results, specified as a Unix timestamp | [optional]                 |
-| **end_date**               | **int** | End date for filtering results, specified as a Unix timestamp   | [optional]                 |
+| Name                       | Type     | Description                                                     | Notes                         |
+| -------------------------- | -------- | --------------------------------------------------------------- | ----------------------------- |
+| **project_or_product_uid** | **str**  |                                                                 |
+| **device_uid**             | **str**  |                                                                 |
+| **page_size**              | **int**  |                                                                 | [optional] [default to 50]    |
+| **page_num**               | **int**  |                                                                 | [optional] [default to 1]     |
+| **start_date**             | **int**  | Start date for filtering results, specified as a Unix timestamp | [optional]                    |
+| **end_date**               | **int**  | End date for filtering results, specified as a Unix timestamp   | [optional]                    |
+| **first_sync**             | **bool** | When true, filters results to only show first sync sessions     | [optional] [default to False] |
 
 ### Return type
 
