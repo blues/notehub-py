@@ -2,13 +2,14 @@
 
 ## Properties
 
-| Name                  | Type         | Description                                                    | Notes      |
-| --------------------- | ------------ | -------------------------------------------------------------- | ---------- |
-| **failed_routes**     | **int**      |                                                                |
-| **period**            | **datetime** |                                                                |
-| **route**             | **str**      | The route UID (only present when aggregate is &#39;route&#39;) | [optional] |
-| **successful_routes** | **int**      |                                                                |
-| **total_routes**      | **int**      |                                                                |
+| Name                  | Type         | Description                                                                   | Notes      |
+| --------------------- | ------------ | ----------------------------------------------------------------------------- | ---------- |
+| **avg_latency_ms**    | **float**    | Average routing latency in milliseconds for route logs with recorded duration | [optional] |
+| **failed_routes**     | **int**      |                                                                               |
+| **period**            | **datetime** |                                                                               |
+| **route**             | **str**      | The route UID (only present when aggregate is &#39;route&#39;)                | [optional] |
+| **successful_routes** | **int**      |                                                                               |
+| **total_routes**      | **int**      |                                                                               |
 
 ## Example
 

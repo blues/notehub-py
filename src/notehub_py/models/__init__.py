@@ -15,6 +15,7 @@ Do not edit the class manually.
 
 
 # import models into model package
+from notehub_py.models.aws_role_config import AWSRoleConfig
 from notehub_py.models.add_device_to_fleets_request import AddDeviceToFleetsRequest
 from notehub_py.models.alert import Alert
 from notehub_py.models.alert_data_inner import AlertDataInner
@@ -25,10 +26,12 @@ from notehub_py.models.billing_account import BillingAccount
 from notehub_py.models.billing_account_role import BillingAccountRole
 from notehub_py.models.blynk_route import BlynkRoute
 from notehub_py.models.body import Body
+from notehub_py.models.cancel_job_run200_response import CancelJobRun200Response
 from notehub_py.models.cellular_plan import CellularPlan
 from notehub_py.models.clone_project_request import CloneProjectRequest
 from notehub_py.models.contact import Contact
 from notehub_py.models.create_fleet_request import CreateFleetRequest
+from notehub_py.models.create_job201_response import CreateJob201Response
 from notehub_py.models.create_monitor import CreateMonitor
 from notehub_py.models.create_product_request import CreateProductRequest
 from notehub_py.models.create_project_request import CreateProjectRequest
@@ -43,6 +46,7 @@ from notehub_py.models.datacake_route import DatacakeRoute
 from notehub_py.models.delete_device_from_fleets_request import (
     DeleteDeviceFromFleetsRequest,
 )
+from notehub_py.models.delete_job200_response import DeleteJob200Response
 from notehub_py.models.delete_notefiles_request import DeleteNotefilesRequest
 from notehub_py.models.device import Device
 from notehub_py.models.device_dfu_history import DeviceDfuHistory
@@ -68,6 +72,18 @@ from notehub_py.models.firmware_info import FirmwareInfo
 from notehub_py.models.fleet import Fleet
 from notehub_py.models.fleet_connectivity_assurance import FleetConnectivityAssurance
 from notehub_py.models.get_alerts200_response import GetAlerts200Response
+from notehub_py.models.get_billing_account200_response import (
+    GetBillingAccount200Response,
+)
+from notehub_py.models.get_billing_account200_response_plan import (
+    GetBillingAccount200ResponsePlan,
+)
+from notehub_py.models.get_billing_account_balance_history200_response import (
+    GetBillingAccountBalanceHistory200Response,
+)
+from notehub_py.models.get_billing_account_balance_history200_response_data_inner import (
+    GetBillingAccountBalanceHistory200ResponseDataInner,
+)
 from notehub_py.models.get_billing_accounts200_response import (
     GetBillingAccounts200Response,
 )
@@ -107,6 +123,8 @@ from notehub_py.models.get_events200_response import GetEvents200Response
 from notehub_py.models.get_events_by_cursor200_response import (
     GetEventsByCursor200Response,
 )
+from notehub_py.models.get_job_runs200_response import GetJobRuns200Response
+from notehub_py.models.get_jobs200_response import GetJobs200Response
 from notehub_py.models.get_notefile200_response import GetNotefile200Response
 from notehub_py.models.get_products200_response import GetProducts200Response
 from notehub_py.models.get_project_members200_response import (
@@ -120,6 +138,8 @@ from notehub_py.models.get_sessions_usage200_response import GetSessionsUsage200
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.models.google_route import GoogleRoute
 from notehub_py.models.http_route import HttpRoute
+from notehub_py.models.job import Job
+from notehub_py.models.job_run import JobRun
 from notehub_py.models.location import Location
 from notehub_py.models.login200_response import Login200Response
 from notehub_py.models.login_request import LoginRequest
@@ -151,6 +171,7 @@ from notehub_py.models.repository import Repository
 from notehub_py.models.role import Role
 from notehub_py.models.route_log import RouteLog
 from notehub_py.models.route_transform_settings import RouteTransformSettings
+from notehub_py.models.run_job200_response import RunJob200Response
 from notehub_py.models.s3_archive_route import S3ArchiveRoute
 from notehub_py.models.satellite_data_usage import SatelliteDataUsage
 from notehub_py.models.satellite_plan import SatellitePlan

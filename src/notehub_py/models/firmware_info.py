@@ -41,9 +41,13 @@ class FirmwareInfo(BaseModel):
     filename: Optional[StrictStr] = Field(
         default=None, description="The name of the firmware file."
     )
+    info: Optional[Dict[str, Any]] = Field(
+        default=None, description="User-defined metadata"
+    )
     md5: Optional[StrictStr] = Field(
         default=None, description="The MD5 hash of the firmware file."
     )
+    notes: Optional[StrictStr] = Field(default=None, description="User-defined notes")
     organization: Optional[StrictStr] = Field(
         default=None, description="The organization that owns the firmware."
     )
@@ -68,7 +72,9 @@ class FirmwareInfo(BaseModel):
         "created",
         "description",
         "filename",
+        "info",
         "md5",
+        "notes",
         "organization",
         "product",
         "published",
@@ -132,7 +138,9 @@ class FirmwareInfo(BaseModel):
                 "created": obj.get("created"),
                 "description": obj.get("description"),
                 "filename": obj.get("filename"),
+                "info": obj.get("info"),
                 "md5": obj.get("md5"),
+                "notes": obj.get("notes"),
                 "organization": obj.get("organization"),
                 "product": obj.get("product"),
                 "published": obj.get("published"),

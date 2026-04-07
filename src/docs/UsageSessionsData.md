@@ -2,14 +2,17 @@
 
 ## Properties
 
-| Name              | Type         | Description | Notes      |
-| ----------------- | ------------ | ----------- | ---------- |
-| **device**        | **str**      |             | [optional] |
-| **fleet**         | **str**      |             | [optional] |
-| **period**        | **datetime** |             |
-| **sessions**      | **int**      |             |
-| **total_bytes**   | **int**      |             |
-| **total_devices** | **int**      |             |
+| Name                      | Type               | Description                                                                        | Notes      |
+| ------------------------- | ------------------ | ---------------------------------------------------------------------------------- | ---------- |
+| **device**                | **str**            |                                                                                    | [optional] |
+| **first_sync_sessions**   | **int**            | Number of first sync sessions in this period                                       |
+| **fleet**                 | **str**            |                                                                                    | [optional] |
+| **period**                | **datetime**       |                                                                                    |
+| **sessions**              | **int**            |                                                                                    |
+| **sessions_by_transport** | **Dict[str, int]** | Count of sessions grouped by transport type prefix (e.g. cell, wifi, ntn, lorawan) | [optional] |
+| **tls_sessions**          | **int**            | Number of TLS sessions in this period                                              | [optional] |
+| **total_bytes**           | **int**            |                                                                                    |
+| **total_devices**         | **int**            |                                                                                    |
 
 ## Example
 

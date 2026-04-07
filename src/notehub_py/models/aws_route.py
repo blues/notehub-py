@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.filter import Filter
 from notehub_py.models.route_transform_settings import RouteTransformSettings
@@ -41,6 +41,10 @@ class AwsRoute(BaseModel):
     message_deduplication_id: Optional[StrictStr] = None
     message_group_id: Optional[StrictStr] = None
     region: Optional[StrictStr] = None
+    role_arn: Optional[StrictStr] = Field(
+        default=None,
+        description="IAM Role ARN for role-based authentication via STS AssumeRole",
+    )
     throttle_ms: Optional[StrictInt] = None
     timeout: Optional[StrictInt] = None
     transform: Optional[RouteTransformSettings] = None
@@ -56,6 +60,7 @@ class AwsRoute(BaseModel):
         "message_deduplication_id",
         "message_group_id",
         "region",
+        "role_arn",
         "throttle_ms",
         "timeout",
         "transform",
@@ -132,6 +137,7 @@ class AwsRoute(BaseModel):
                 "message_deduplication_id": obj.get("message_deduplication_id"),
                 "message_group_id": obj.get("message_group_id"),
                 "region": obj.get("region"),
+                "role_arn": obj.get("role_arn"),
                 "throttle_ms": obj.get("throttle_ms"),
                 "timeout": obj.get("timeout"),
                 "transform": (

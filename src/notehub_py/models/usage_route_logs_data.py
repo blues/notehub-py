@@ -19,8 +19,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,6 +30,10 @@ class UsageRouteLogsData(BaseModel):
     UsageRouteLogsData
     """  # noqa: E501
 
+    avg_latency_ms: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Average routing latency in milliseconds for route logs with recorded duration",
+    )
     failed_routes: StrictInt
     period: datetime
     route: Optional[StrictStr] = Field(
@@ -39,6 +43,7 @@ class UsageRouteLogsData(BaseModel):
     successful_routes: StrictInt
     total_routes: StrictInt
     __properties: ClassVar[List[str]] = [
+        "avg_latency_ms",
         "failed_routes",
         "period",
         "route",
@@ -83,6 +88,11 @@ class UsageRouteLogsData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if avg_latency_ms (nullable) is None
+        # and model_fields_set contains the field
+        if self.avg_latency_ms is None and "avg_latency_ms" in self.model_fields_set:
+            _dict["avg_latency_ms"] = None
+
         return _dict
 
     @classmethod
@@ -96,6 +106,7 @@ class UsageRouteLogsData(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "avg_latency_ms": obj.get("avg_latency_ms"),
                 "failed_routes": obj.get("failed_routes"),
                 "period": obj.get("period"),
                 "route": obj.get("route"),

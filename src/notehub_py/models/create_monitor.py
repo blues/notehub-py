@@ -145,10 +145,11 @@ class CreateMonitor(BaseModel):
                 "less_than_or_equal_to",
                 "equal_to",
                 "not_equal_to",
+                "count",
             ]
         ):
             raise ValueError(
-                "must be one of enum values ('greater_than', 'greater_than_or_equal_to', 'less_than', 'less_than_or_equal_to', 'equal_to', 'not_equal_to')"
+                "must be one of enum values ('greater_than', 'greater_than_or_equal_to', 'less_than', 'less_than_or_equal_to', 'equal_to', 'not_equal_to', 'count')"
             )
         return value
 

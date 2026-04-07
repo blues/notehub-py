@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,16 +31,29 @@ class UsageSessionsData(BaseModel):
     """  # noqa: E501
 
     device: Optional[StrictStr] = None
+    first_sync_sessions: StrictInt = Field(
+        description="Number of first sync sessions in this period"
+    )
     fleet: Optional[StrictStr] = None
     period: datetime
     sessions: StrictInt
+    sessions_by_transport: Optional[Dict[str, StrictInt]] = Field(
+        default=None,
+        description="Count of sessions grouped by transport type prefix (e.g. cell, wifi, ntn, lorawan)",
+    )
+    tls_sessions: Optional[StrictInt] = Field(
+        default=None, description="Number of TLS sessions in this period"
+    )
     total_bytes: StrictInt
     total_devices: StrictInt
     __properties: ClassVar[List[str]] = [
         "device",
+        "first_sync_sessions",
         "fleet",
         "period",
         "sessions",
+        "sessions_by_transport",
+        "tls_sessions",
         "total_bytes",
         "total_devices",
     ]
@@ -82,6 +95,11 @@ class UsageSessionsData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if tls_sessions (nullable) is None
+        # and model_fields_set contains the field
+        if self.tls_sessions is None and "tls_sessions" in self.model_fields_set:
+            _dict["tls_sessions"] = None
+
         return _dict
 
     @classmethod
@@ -96,9 +114,12 @@ class UsageSessionsData(BaseModel):
         _obj = cls.model_validate(
             {
                 "device": obj.get("device"),
+                "first_sync_sessions": obj.get("first_sync_sessions"),
                 "fleet": obj.get("fleet"),
                 "period": obj.get("period"),
                 "sessions": obj.get("sessions"),
+                "sessions_by_transport": obj.get("sessions_by_transport"),
+                "tls_sessions": obj.get("tls_sessions"),
                 "total_bytes": obj.get("total_bytes"),
                 "total_devices": obj.get("total_devices"),
             }
