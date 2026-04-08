@@ -16,8 +16,6 @@ Creates an event using specified webhook
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.event import Event
@@ -72,8 +70,6 @@ Closes the session for the specified device if open
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.device_session import DeviceSession
@@ -127,8 +123,6 @@ void (empty response body)
 Create a Session for the specified device. | If a session is currently open it will be closed and a new one opened.
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py

@@ -42,8 +42,6 @@ Add a Note to a .db notefile. if noteID is '-' then payload is ignored and empty
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.note_input import NoteInput
@@ -103,8 +101,6 @@ Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.note_input import NoteInput
@@ -162,8 +158,6 @@ Creates an empty Notefile on the device.
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -214,8 +208,6 @@ Delete Device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -263,8 +255,6 @@ void (empty response body)
 Delete environment variable of a device
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -324,8 +314,6 @@ Delete a note from a .db or .qi notefile
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -379,8 +367,6 @@ void (empty response body)
 Deletes Notefiles and the Notes they contain.
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -437,8 +423,6 @@ Disable Device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -487,8 +471,6 @@ Enable Device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -536,8 +518,6 @@ void (empty response body)
 Get a note from a .db or .qi notefile
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -605,8 +585,6 @@ Get Device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.device import Device
@@ -657,8 +635,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get environment variable hierarchy for a device
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -716,8 +692,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get environment variables of a device
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -838,8 +812,6 @@ Get Device Health Log
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_device_health_log200_response import (
@@ -907,8 +879,6 @@ Get Device Latest Events
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_device_latest_events200_response import (
@@ -964,8 +934,6 @@ Get Data Plans associated with the device, this include the primary sim, any ext
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_device_plans200_response import GetDevicePlans200Response
@@ -1016,8 +984,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get Device Public Key
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -1073,8 +1039,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get Device Public Keys of a Project
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -1132,8 +1096,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get Device Sessions
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -1205,8 +1167,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get Devices of a Project
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -1298,8 +1258,6 @@ Get Devices of a Fleet within a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_devices200_response import GetDevices200Response
@@ -1390,8 +1348,6 @@ For .qi files, returns the queued up notes. For .db files, returns all notes in 
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_notefile200_response import GetNotefile200Response
@@ -1458,8 +1414,6 @@ Lists .qi and .db files for the device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.notefile import Notefile
@@ -1521,8 +1475,6 @@ Provision Device for a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.provision_device_request import ProvisionDeviceRequest
@@ -1579,8 +1531,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Set environment variables of a device
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -1705,8 +1655,6 @@ Send a signal from Notehub to a Notecard.
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.body import Body
@@ -1764,8 +1712,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Update a note in a .db or .qi notefile
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py

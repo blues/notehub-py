@@ -21,8 +21,6 @@ Cancel a running job execution
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.cancel_job_run200_response import CancelJobRun200Response
@@ -73,8 +71,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Create a new batch job with an optional name
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -129,8 +125,6 @@ Delete a batch job
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.delete_job200_response import DeleteJob200Response
@@ -181,8 +175,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get a specific batch job definition
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -235,8 +227,6 @@ Get the result of a job execution
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.job_run import JobRun
@@ -287,8 +277,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 List all runs for a specific job
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -347,8 +335,6 @@ List all batch jobs for a project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_jobs200_response import GetJobs200Response
@@ -397,8 +383,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Execute a batch job
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py

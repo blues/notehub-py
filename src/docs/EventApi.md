@@ -18,8 +18,6 @@ Get Events of a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_events200_response import GetEvents200Response
@@ -125,8 +123,6 @@ Get Events of a Project by cursor
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_events_by_cursor200_response import (
@@ -200,8 +196,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get Events of a Fleet
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -308,8 +302,6 @@ Get Events of a Fleet by cursor
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_events_by_cursor200_response import (
@@ -389,8 +381,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get Route Logs by Event UID
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py

@@ -16,8 +16,6 @@ Get Billing Account Information
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_billing_account200_response import (
@@ -68,8 +66,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get Billing Account Balance history, only enterprise supported
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -132,8 +128,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get Billing Accounts accessible by the api_key
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py

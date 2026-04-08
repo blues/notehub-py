@@ -14,8 +14,6 @@ Get list of defined Alerts
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_alerts200_response import GetAlerts200Response

@@ -52,8 +52,6 @@ Add Device to Fleets
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.add_device_to_fleets_request import AddDeviceToFleetsRequest
@@ -112,8 +110,6 @@ Clone a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.clone_project_request import CloneProjectRequest
@@ -169,8 +165,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Create Fleet
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -228,8 +222,6 @@ Create Product within a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.create_product_request import CreateProductRequest
@@ -286,8 +278,6 @@ Create a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.create_project_request import CreateProjectRequest
@@ -339,8 +329,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Remove Device from Fleets
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -402,8 +390,6 @@ Delete Fleet
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -451,8 +437,6 @@ void (empty response body)
 Delete environment variables of a fleet
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -512,8 +496,6 @@ Delete a product
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -562,8 +544,6 @@ Delete a Project by ProjectUID
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -609,8 +589,6 @@ void (empty response body)
 Delete an environment variable of a project by key
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -668,8 +646,6 @@ Disable the project-level event JSONata transformation
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -718,8 +694,6 @@ void (empty response body)
 Download firmware binary
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -775,8 +749,6 @@ Enable the project-level event JSONata transformation
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -828,8 +800,6 @@ Returns the AWS Account ID and External ID needed to configure an IAM role trust
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.aws_role_config import AWSRoleConfig
@@ -879,8 +849,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get device DFU history for host or Notecard firmware
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -937,8 +905,6 @@ Get device DFU history for host or Notecard firmware
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.device_dfu_status import DeviceDfuStatus
@@ -994,8 +960,6 @@ Get Device Fleets
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
@@ -1048,8 +1012,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get host or Notecard DFU history for all devices that match the filter criteria
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -1150,8 +1112,6 @@ Get host or Notecard DFU history for all devices that match the filter criteria
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.device_dfu_status_page import DeviceDfuStatusPage
@@ -1251,8 +1211,6 @@ Get Available Firmware Information
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.firmware_info import FirmwareInfo
@@ -1331,8 +1289,6 @@ Get Fleet
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.fleet import Fleet
@@ -1383,8 +1339,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get environment variable hierarchy for a device
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -1443,8 +1397,6 @@ Get environment variables of a fleet
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.environment_variables import EnvironmentVariables
@@ -1500,8 +1452,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get Project Fleets
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -1601,8 +1551,6 @@ Get Products within a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_products200_response import GetProducts200Response
@@ -1651,8 +1599,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get a Project by ProjectUID
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -1703,8 +1649,6 @@ Get a Project by ProductUID
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.project import Project
@@ -1753,8 +1697,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get environment variable hierarchy for a device
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -1811,8 +1753,6 @@ Get environment variables of a project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.environment_variables import EnvironmentVariables
@@ -1867,8 +1807,6 @@ Get Project Members
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_project_members200_response import (
@@ -1920,8 +1858,6 @@ Get Projects accessible by the api_key
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_projects200_response import GetProjects200Response
@@ -1967,8 +1903,6 @@ This endpoint does not need any parameter.
 Update/cancel host or notecard firmware updates
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -2063,8 +1997,6 @@ Set environment variables of a fleet
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.environment_variables import EnvironmentVariables
@@ -2125,8 +2057,6 @@ Set the project-level event JSONata transformation
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -2177,8 +2107,6 @@ void (empty response body)
 Set environment variables of a project
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -2238,8 +2166,6 @@ Update Fleet
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.fleet import Fleet
@@ -2297,8 +2223,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Upload firmware binary
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
