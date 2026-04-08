@@ -22,12 +22,6 @@ from notehub_py.models.login_request import LoginRequest
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -77,12 +71,6 @@ import notehub_py
 from notehub_py.models.o_auth2_token_response import OAuth2TokenResponse
 from notehub_py.rest import ApiException
 from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
 
 
 # Enter a context with an instance of the API client
