@@ -13,7 +13,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_jobs**](JobsApi.md#get_jobs)             | **GET** /v1/projects/{projectOrProductUID}/jobs                          |
 | [**run_job**](JobsApi.md#run_job)               | **POST** /v1/projects/{projectOrProductUID}/jobs/{jobUID}/run            |
 
-# **cancel_job_run**
+## **cancel_job_run**
 
 > CancelJobRun200Response cancel_job_run(project_or_product_uid, report_uid)
 
@@ -88,9 +88,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **404**     | Run not found                              | -                |
 | **0**       | The response body in case of an API error. | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_job**
+## **create_job**
 
 > CreateJob201Response create_job(project_or_product_uid, name, body)
 
@@ -167,9 +165,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **400**     | Missing required name parameter or invalid job definition | -                |
 | **0**       | The response body in case of an API error.                | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_job**
+## **delete_job**
 
 > DeleteJob200Response delete_job(project_or_product_uid, job_uid)
 
@@ -244,9 +240,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **404**     | Job not found                              | -                |
 | **0**       | The response body in case of an API error. | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_job**
+## **get_job**
 
 > Job get_job(project_or_product_uid, job_uid)
 
@@ -321,9 +315,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **404**     | Job not found                              | -                |
 | **0**       | The response body in case of an API error. | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_job_run**
+## **get_job_run**
 
 > JobRun get_job_run(project_or_product_uid, report_uid)
 
@@ -398,9 +390,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **404**     | Run not found                              | -                |
 | **0**       | The response body in case of an API error. | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_job_runs**
+## **get_job_runs**
 
 > GetJobRuns200Response get_job_runs(project_or_product_uid, job_uid, status=status, dry_run=dry_run)
 
@@ -479,9 +469,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **404**     | Job not found                              | -                |
 | **0**       | The response body in case of an API error. | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_jobs**
+## **get_jobs**
 
 > GetJobs200Response get_jobs(project_or_product_uid)
 
@@ -553,9 +541,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **200**     | List of batch jobs                         | -                |
 | **0**       | The response body in case of an API error. | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **run_job**
+## **run_job**
 
 > RunJob200Response run_job(project_or_product_uid, job_uid, dry_run=dry_run)
 
@@ -631,5 +617,3 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **200**     | Job execution started                      | -                |
 | **404**     | Job not found                              | -                |
 | **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

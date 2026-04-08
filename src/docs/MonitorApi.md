@@ -10,7 +10,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_monitors**](MonitorApi.md#get_monitors)     | **GET** /v1/projects/{projectOrProductUID}/monitors                 |
 | [**update_monitor**](MonitorApi.md#update_monitor) | **PUT** /v1/projects/{projectOrProductUID}/monitors/{monitorUID}    |
 
-# **create_monitor**
+## **create_monitor**
 
 > Monitor create_monitor(project_or_product_uid, body)
 
@@ -85,9 +85,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **201**     | Successful operation                       | -                |
 | **0**       | The response body in case of an API error. | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_monitor**
+## **delete_monitor**
 
 > Monitor delete_monitor(project_or_product_uid, monitor_uid)
 
@@ -161,9 +159,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **200**     | Successful operation                       | -                |
 | **0**       | The response body in case of an API error. | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_monitor**
+## **get_monitor**
 
 > Monitor get_monitor(project_or_product_uid, monitor_uid)
 
@@ -237,9 +233,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **200**     | Successful operation                       | -                |
 | **0**       | The response body in case of an API error. | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_monitors**
+## **get_monitors**
 
 > List[Monitor] get_monitors(project_or_product_uid)
 
@@ -311,9 +305,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **200**     | The response body from GET /monitors       | -                |
 | **0**       | The response body in case of an API error. | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_monitor**
+## **update_monitor**
 
 > Monitor update_monitor(project_or_product_uid, monitor_uid, monitor)
 
@@ -388,5 +380,3 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | Successful operation                       | -                |
 | **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
