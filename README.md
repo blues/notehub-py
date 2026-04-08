@@ -79,8 +79,6 @@ Personal Access Tokens have the same permissions as your Notehub user account an
 
 Once you have your PAT, supply it to the library by replacing `PERSONAL_ACCESS_TOKEN` with your token in the code.
 
-> **NOTE:** Be aware that all Notehub API calls made using the Notehub Py library utilize your account's [Consumption Credits](https://dev.blues.io/reference/glossary#consumption-credit) (CCs). For more information, please consult our [pricing page](https://blues.com/pricing/).
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
