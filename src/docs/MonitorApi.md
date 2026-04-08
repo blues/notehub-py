@@ -10,7 +10,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_monitors**](MonitorApi.md#get_monitors)     | **GET** /v1/projects/{projectOrProductUID}/monitors                 |
 | [**update_monitor**](MonitorApi.md#update_monitor) | **PUT** /v1/projects/{projectOrProductUID}/monitors/{monitorUID}    |
 
-## **create_monitor**
+## create_monitor
 
 > Monitor create_monitor(project_or_product_uid, body)
 
@@ -78,14 +78,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **201**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **delete_monitor**
+## delete_monitor
 
 > Monitor delete_monitor(project_or_product_uid, monitor_uid)
 
@@ -152,14 +145,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_monitor**
+## get_monitor
 
 > Monitor get_monitor(project_or_product_uid, monitor_uid)
 
@@ -226,14 +212,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_monitors**
+## get_monitors
 
 > List[Monitor] get_monitors(project_or_product_uid)
 
@@ -298,14 +277,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The response body from GET /monitors       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **update_monitor**
+## update_monitor
 
 > Monitor update_monitor(project_or_product_uid, monitor_uid, monitor)
 
@@ -373,10 +345,3 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |

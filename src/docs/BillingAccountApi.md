@@ -8,7 +8,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_billing_account_balance_history**](BillingAccountApi.md#get_billing_account_balance_history) | **GET** /v1/billing-accounts/{billingAccountUID}/balance-history |
 | [**get_billing_accounts**](BillingAccountApi.md#get_billing_accounts)                               | **GET** /v1/billing-accounts                                     |
 
-## **get_billing_account**
+## get_billing_account
 
 > GetBillingAccount200Response get_billing_account(billing_account_uid)
 
@@ -73,14 +73,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_billing_account_balance_history**
+## get_billing_account_balance_history
 
 > GetBillingAccountBalanceHistory200Response get_billing_account_balance_history(billing_account_uid, start_date=start_date, end_date=end_date)
 
@@ -149,14 +142,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_billing_accounts**
+## get_billing_accounts
 
 > GetBillingAccounts200Response get_billing_accounts()
 
@@ -217,10 +203,3 @@ This endpoint does not need any parameter.
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |

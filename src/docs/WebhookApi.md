@@ -10,7 +10,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_webhooks**](WebhookApi.md#get_webhooks)     | **GET** /v1/projects/{projectOrProductUID}/webhooks                 |
 | [**update_webhook**](WebhookApi.md#update_webhook) | **PUT** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}    |
 
-## **create_webhook**
+## create_webhook
 
 > create_webhook(project_or_product_uid, webhook_uid, webhook_settings)
 
@@ -77,14 +77,7 @@ void (empty response body)
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Webhook created successfully               | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **delete_webhook**
+## delete_webhook
 
 > delete_webhook(project_or_product_uid, webhook_uid)
 
@@ -148,14 +141,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Webhook deleted successfully               | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_webhook**
+## get_webhook
 
 > WebhookSettings get_webhook(project_or_product_uid, webhook_uid)
 
@@ -222,14 +208,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Webhook settings retrieved successfully    | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_webhooks**
+## get_webhooks
 
 > GetWebhooks200Response get_webhooks(project_or_product_uid)
 
@@ -294,14 +273,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Webhooks retrieved successfully            | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **update_webhook**
+## update_webhook
 
 > update_webhook(project_or_product_uid, webhook_uid, webhook_settings)
 
@@ -367,10 +339,3 @@ void (empty response body)
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Webhook updated successfully               | -                |
-| **0**       | The response body in case of an API error. | -                |

@@ -7,7 +7,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**login**](AuthorizationApi.md#login)                                           | **POST** /auth/login   |
 | [**o_auth2_client_credentials**](AuthorizationApi.md#o_auth2_client_credentials) | **POST** /oauth2/token | Issue an OAuth 2.0 access token (Client Credentials) |
 
-## **login**
+## login
 
 > Login200Response login(login_request)
 
@@ -62,15 +62,7 @@ No authorization required
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description           | Response headers |
-| ----------- | --------------------- | ---------------- |
-| **200**     | Successful operation  | -                |
-| **400**     | Bad Request           | -                |
-| **500**     | Internal Server Error | -                |
-
-## **o_auth2_client_credentials**
+## o_auth2_client_credentials
 
 > OAuth2TokenResponse o_auth2_client_credentials(client_id, client_secret, grant_type, scope=scope)
 
@@ -132,12 +124,3 @@ No authorization required
 
 - **Content-Type**: application/x-www-form-urlencoded
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                       | Response headers |
-| ----------- | ------------------------------------------------- | ---------------- |
-| **200**     | Successful token response                         | -                |
-| **400**     | Invalid request (missing or malformed parameters) | -                |
-| **401**     | Invalid client authentication                     | -                |
-| **403**     | Unauthorized scope                                | -                |
