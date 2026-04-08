@@ -26,20 +26,26 @@ from notehub_py.models.webhook_settings import WebhookSettings
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
-    webhook_settings = {"settings":{"disabled":false,"id":"Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8","transform":"{\"device\":body.end_device_ids.dev_eui,\"sn\":body.end_device_ids.device_id,\"body\":body.uplink_message.decoded_payload,\"details\":body}"}} # WebhookSettings |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
+    webhook_settings = {
+        "settings": {
+            "disabled": false,
+            "id": "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8",
+            "transform": '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}',
+        }
+    }  # WebhookSettings |
 
     try:
-        api_instance.create_webhook(project_or_product_uid, webhook_uid, webhook_settings)
+        api_instance.create_webhook(
+            project_or_product_uid, webhook_uid, webhook_settings
+        )
     except Exception as e:
         print("Exception when calling WebhookApi->create_webhook: %s\n" % e)
 ```
@@ -80,16 +86,14 @@ import notehub_py
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
 
     try:
         api_instance.delete_webhook(project_or_product_uid, webhook_uid)
@@ -133,16 +137,14 @@ from notehub_py.models.webhook_settings import WebhookSettings
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
 
     try:
         api_response = api_instance.get_webhook(project_or_product_uid, webhook_uid)
@@ -188,15 +190,13 @@ from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
 
     try:
         api_response = api_instance.get_webhooks(project_or_product_uid)
@@ -241,20 +241,23 @@ from notehub_py.models.webhook_settings import WebhookSettings
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
-    webhook_settings = {"disabled":false,"transform":"{\"device\":body.end_device_ids.dev_eui,\"sn\":body.end_device_ids.device_id,\"body\":body.uplink_message.decoded_payload,\"details\":body}"} # WebhookSettings |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
+    webhook_settings = {
+        "disabled": false,
+        "transform": '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}',
+    }  # WebhookSettings |
 
     try:
-        api_instance.update_webhook(project_or_product_uid, webhook_uid, webhook_settings)
+        api_instance.update_webhook(
+            project_or_product_uid, webhook_uid, webhook_settings
+        )
     except Exception as e:
         print("Exception when calling WebhookApi->update_webhook: %s\n" % e)
 ```

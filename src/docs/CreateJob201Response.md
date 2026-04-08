@@ -21,7 +21,9 @@ print(CreateJob201Response.to_json())
 # convert the object into a dict
 create_job201_response_dict = create_job201_response_instance.to_dict()
 # create an instance of CreateJob201Response from a dict
-create_job201_response_from_dict = CreateJob201Response.from_dict(create_job201_response_dict)
+create_job201_response_from_dict = CreateJob201Response.from_dict(
+    create_job201_response_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

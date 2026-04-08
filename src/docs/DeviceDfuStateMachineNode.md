@@ -26,7 +26,9 @@ print(DeviceDfuStateMachineNode.to_json())
 # convert the object into a dict
 device_dfu_state_machine_node_dict = device_dfu_state_machine_node_instance.to_dict()
 # create an instance of DeviceDfuStateMachineNode from a dict
-device_dfu_state_machine_node_from_dict = DeviceDfuStateMachineNode.from_dict(device_dfu_state_machine_node_dict)
+device_dfu_state_machine_node_from_dict = DeviceDfuStateMachineNode.from_dict(
+    device_dfu_state_machine_node_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

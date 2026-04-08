@@ -189,13 +189,46 @@ def run_black_on_python():
     except Exception as e:
         print(f"Exception when running Black on Python files: {e}")
     
+def run_blacken_docs():
+    """
+    Run blacken-docs on the generated markdown documentation files in the src/docs/ directory.
+    This normalizes Python code blocks in markdown to use double quotes (Black style).
+    """
+    try:
+        docs_dir = "src/docs"
+
+        if not os.path.exists(docs_dir):
+            print(f"Documentation directory {docs_dir} not found. Skipping blacken-docs.")
+            return
+
+        print(f"Running blacken-docs on markdown documentation in {docs_dir}...")
+
+        subprocess.run([
+            "python3", "-m", "pip", "install", "blacken-docs"
+        ])
+
+        md_files = [
+            os.path.join(docs_dir, f)
+            for f in os.listdir(docs_dir)
+            if f.endswith(".md")
+        ]
+
+        if md_files:
+            subprocess.run(["python3", "-m", "blacken_docs"] + md_files)
+
+        print("blacken-docs formatting completed successfully.")
+    except Exception as e:
+        print(f"Exception when running blacken-docs: {e}")
+
+
 def format_code():
     """
     Format both Python and Markdown files in the repository.
     """
     run_black_on_python()
+    run_blacken_docs()
     run_prettier_on_docs()
-    print("All code formatting completed.")        
+    print("All code formatting completed.")
 
 def generate_and_format():
     """
@@ -210,10 +243,10 @@ def generate_and_format():
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print(
-            "Usage: python3 scripts.py [download_python_template | " 
+            "Usage: python3 scripts.py [download_python_template | "
             "generate_package | build_distro_package | "
             "remove_deprecated_parameters | run_prettier_on_docs | "
-            "run_black_on_python | format_code | generate_and_format]"
+            "run_black_on_python | run_blacken_docs | format_code | generate_and_format]"
         )
         sys.exit(1)
     
@@ -230,6 +263,8 @@ if __name__ == "__main__":
         run_prettier_on_docs()
     elif script_to_run == "run_black_on_python":
         run_black_on_python()
+    elif script_to_run == "run_blacken_docs":
+        run_blacken_docs()
     elif script_to_run == "format_code":
         format_code()    
     elif script_to_run == "generate_and_format":

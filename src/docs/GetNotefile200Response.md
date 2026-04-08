@@ -23,7 +23,9 @@ print(GetNotefile200Response.to_json())
 # convert the object into a dict
 get_notefile200_response_dict = get_notefile200_response_instance.to_dict()
 # create an instance of GetNotefile200Response from a dict
-get_notefile200_response_from_dict = GetNotefile200Response.from_dict(get_notefile200_response_dict)
+get_notefile200_response_from_dict = GetNotefile200Response.from_dict(
+    get_notefile200_response_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

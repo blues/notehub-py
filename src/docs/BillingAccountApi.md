@@ -20,19 +20,19 @@ Get Billing Account Information
 
 ```python
 import notehub_py
-from notehub_py.models.get_billing_account200_response import GetBillingAccount200Response
+from notehub_py.models.get_billing_account200_response import (
+    GetBillingAccount200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.BillingAccountApi(api_client)
-    billing_account_uid = '00000000-0000-0000-000000000001' # str |
+    billing_account_uid = "00000000-0000-0000-000000000001"  # str |
 
     try:
         api_response = api_instance.get_billing_account(billing_account_uid)
@@ -73,28 +73,35 @@ Get Billing Account Balance history, only enterprise supported
 
 ```python
 import notehub_py
-from notehub_py.models.get_billing_account_balance_history200_response import GetBillingAccountBalanceHistory200Response
+from notehub_py.models.get_billing_account_balance_history200_response import (
+    GetBillingAccountBalanceHistory200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.BillingAccountApi(api_client)
-    billing_account_uid = '00000000-0000-0000-000000000001' # str |
-    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
-    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
+    billing_account_uid = "00000000-0000-0000-000000000001"  # str |
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
 
     try:
-        api_response = api_instance.get_billing_account_balance_history(billing_account_uid, start_date=start_date, end_date=end_date)
-        print("The response of BillingAccountApi->get_billing_account_balance_history:\n")
+        api_response = api_instance.get_billing_account_balance_history(
+            billing_account_uid, start_date=start_date, end_date=end_date
+        )
+        print(
+            "The response of BillingAccountApi->get_billing_account_balance_history:\n"
+        )
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BillingAccountApi->get_billing_account_balance_history: %s\n" % e)
+        print(
+            "Exception when calling BillingAccountApi->get_billing_account_balance_history: %s\n"
+            % e
+        )
 ```
 
 ### Parameters
@@ -130,13 +137,13 @@ Get Billing Accounts accessible by the api_key
 
 ```python
 import notehub_py
-from notehub_py.models.get_billing_accounts200_response import GetBillingAccounts200Response
+from notehub_py.models.get_billing_accounts200_response import (
+    GetBillingAccounts200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -148,7 +155,9 @@ with notehub_py.ApiClient(configuration) as api_client:
         print("The response of BillingAccountApi->get_billing_accounts:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BillingAccountApi->get_billing_accounts: %s\n" % e)
+        print(
+            "Exception when calling BillingAccountApi->get_billing_accounts: %s\n" % e
+        )
 ```
 
 ### Parameters

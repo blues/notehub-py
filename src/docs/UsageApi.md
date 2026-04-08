@@ -25,25 +25,34 @@ from notehub_py.models.get_data_usage200_response import GetDataUsage200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.UsageApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    period = 'period_example' # str | Period type for aggregation
-    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
-    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
-    device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
-    fleet_uid = ['fleet_uid_example'] # List[str] | Filter by Fleet UID (optional)
-    limit = 200000 # int | Limit the number of data points returned (optional) (default to 200000)
-    aggregate = 'device' # str | Aggregation level for results (optional) (default to 'device')
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    period = "period_example"  # str | Period type for aggregation
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
+    device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    fleet_uid = ["fleet_uid_example"]  # List[str] | Filter by Fleet UID (optional)
+    limit = 200000  # int | Limit the number of data points returned (optional) (default to 200000)
+    aggregate = (
+        "device"  # str | Aggregation level for results (optional) (default to 'device')
+    )
 
     try:
-        api_response = api_instance.get_data_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, limit=limit, aggregate=aggregate)
+        api_response = api_instance.get_data_usage(
+            project_or_product_uid,
+            period,
+            start_date=start_date,
+            end_date=end_date,
+            device_uid=device_uid,
+            fleet_uid=fleet_uid,
+            limit=limit,
+            aggregate=aggregate,
+        )
         print("The response of UsageApi->get_data_usage:\n")
         pprint(api_response)
     except Exception as e:
@@ -92,28 +101,42 @@ from notehub_py.models.usage_events_response import UsageEventsResponse
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.UsageApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    period = 'period_example' # str | Period type for aggregation
-    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
-    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
-    device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
-    fleet_uid = ['fleet_uid_example'] # List[str] | Filter by Fleet UID (optional)
-    limit = 200000 # int | Limit the number of data points returned (optional) (default to 200000)
-    aggregate = 'device' # str | Aggregation level for results (optional) (default to 'device')
-    notefile = ['notefile_example'] # List[str] | Filter to specific notefiles (optional)
-    skip_recent_data = False # bool | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (optional) (default to False)
-    include_notefiles = False # bool | Include per-notefile event counts in the response (optional) (default to False)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    period = "period_example"  # str | Period type for aggregation
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
+    device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    fleet_uid = ["fleet_uid_example"]  # List[str] | Filter by Fleet UID (optional)
+    limit = 200000  # int | Limit the number of data points returned (optional) (default to 200000)
+    aggregate = (
+        "device"  # str | Aggregation level for results (optional) (default to 'device')
+    )
+    notefile = [
+        "notefile_example"
+    ]  # List[str] | Filter to specific notefiles (optional)
+    skip_recent_data = False  # bool | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (optional) (default to False)
+    include_notefiles = False  # bool | Include per-notefile event counts in the response (optional) (default to False)
 
     try:
-        api_response = api_instance.get_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, limit=limit, aggregate=aggregate, notefile=notefile, skip_recent_data=skip_recent_data, include_notefiles=include_notefiles)
+        api_response = api_instance.get_events_usage(
+            project_or_product_uid,
+            period,
+            start_date=start_date,
+            end_date=end_date,
+            device_uid=device_uid,
+            fleet_uid=fleet_uid,
+            limit=limit,
+            aggregate=aggregate,
+            notefile=notefile,
+            skip_recent_data=skip_recent_data,
+            include_notefiles=include_notefiles,
+        )
         print("The response of UsageApi->get_events_usage:\n")
         pprint(api_response)
     except Exception as e:
@@ -161,29 +184,40 @@ Get route logs usage for a project with time range and period aggregation, when 
 
 ```python
 import notehub_py
-from notehub_py.models.get_route_logs_usage200_response import GetRouteLogsUsage200Response
+from notehub_py.models.get_route_logs_usage200_response import (
+    GetRouteLogsUsage200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.UsageApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    period = 'period_example' # str | Period type for aggregation
-    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
-    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
-    route_uid = ['route_uid_example'] # List[str] | A Route UID. (optional)
-    limit = 200000 # int | Limit the number of data points returned (optional) (default to 200000)
-    aggregate = 'route' # str | Aggregation level for results (optional) (default to 'route')
-    skip_recent_data = False # bool | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (optional) (default to False)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    period = "period_example"  # str | Period type for aggregation
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
+    route_uid = ["route_uid_example"]  # List[str] | A Route UID. (optional)
+    limit = 200000  # int | Limit the number of data points returned (optional) (default to 200000)
+    aggregate = (
+        "route"  # str | Aggregation level for results (optional) (default to 'route')
+    )
+    skip_recent_data = False  # bool | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (optional) (default to False)
 
     try:
-        api_response = api_instance.get_route_logs_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, route_uid=route_uid, limit=limit, aggregate=aggregate, skip_recent_data=skip_recent_data)
+        api_response = api_instance.get_route_logs_usage(
+            project_or_product_uid,
+            period,
+            start_date=start_date,
+            end_date=end_date,
+            route_uid=route_uid,
+            limit=limit,
+            aggregate=aggregate,
+            skip_recent_data=skip_recent_data,
+        )
         print("The response of UsageApi->get_route_logs_usage:\n")
         pprint(api_response)
     except Exception as e:
@@ -232,26 +266,36 @@ from notehub_py.models.get_sessions_usage200_response import GetSessionsUsage200
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.UsageApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    period = 'period_example' # str | Period type for aggregation
-    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
-    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
-    device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
-    fleet_uid = ['fleet_uid_example'] # List[str] | Filter by Fleet UID (optional)
-    limit = 200000 # int | Limit the number of data points returned (optional) (default to 200000)
-    aggregate = 'device' # str | Aggregation level for results (optional) (default to 'device')
-    skip_recent_data = False # bool | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (optional) (default to False)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    period = "period_example"  # str | Period type for aggregation
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
+    device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    fleet_uid = ["fleet_uid_example"]  # List[str] | Filter by Fleet UID (optional)
+    limit = 200000  # int | Limit the number of data points returned (optional) (default to 200000)
+    aggregate = (
+        "device"  # str | Aggregation level for results (optional) (default to 'device')
+    )
+    skip_recent_data = False  # bool | When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects. (optional) (default to False)
 
     try:
-        api_response = api_instance.get_sessions_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, limit=limit, aggregate=aggregate, skip_recent_data=skip_recent_data)
+        api_response = api_instance.get_sessions_usage(
+            project_or_product_uid,
+            period,
+            start_date=start_date,
+            end_date=end_date,
+            device_uid=device_uid,
+            fleet_uid=fleet_uid,
+            limit=limit,
+            aggregate=aggregate,
+            skip_recent_data=skip_recent_data,
+        )
         print("The response of UsageApi->get_sessions_usage:\n")
         pprint(api_response)
     except Exception as e:

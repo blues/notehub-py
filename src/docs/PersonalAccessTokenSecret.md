@@ -22,7 +22,9 @@ print(PersonalAccessTokenSecret.to_json())
 # convert the object into a dict
 personal_access_token_secret_dict = personal_access_token_secret_instance.to_dict()
 # create an instance of PersonalAccessTokenSecret from a dict
-personal_access_token_secret_from_dict = PersonalAccessTokenSecret.from_dict(personal_access_token_secret_dict)
+personal_access_token_secret_from_dict = PersonalAccessTokenSecret.from_dict(
+    personal_access_token_secret_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -26,7 +26,9 @@ print(UsageRouteLogsData.to_json())
 # convert the object into a dict
 usage_route_logs_data_dict = usage_route_logs_data_instance.to_dict()
 # create an instance of UsageRouteLogsData from a dict
-usage_route_logs_data_from_dict = UsageRouteLogsData.from_dict(usage_route_logs_data_dict)
+usage_route_logs_data_from_dict = UsageRouteLogsData.from_dict(
+    usage_route_logs_data_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -22,7 +22,9 @@ print(CreateProjectRequest.to_json())
 # convert the object into a dict
 create_project_request_dict = create_project_request_instance.to_dict()
 # create an instance of CreateProjectRequest from a dict
-create_project_request_from_dict = CreateProjectRequest.from_dict(create_project_request_dict)
+create_project_request_from_dict = CreateProjectRequest.from_dict(
+    create_project_request_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

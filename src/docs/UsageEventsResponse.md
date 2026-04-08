@@ -22,7 +22,9 @@ print(UsageEventsResponse.to_json())
 # convert the object into a dict
 usage_events_response_dict = usage_events_response_instance.to_dict()
 # create an instance of UsageEventsResponse from a dict
-usage_events_response_from_dict = UsageEventsResponse.from_dict(usage_events_response_dict)
+usage_events_response_from_dict = UsageEventsResponse.from_dict(
+    usage_events_response_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

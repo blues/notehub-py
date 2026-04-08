@@ -29,16 +29,14 @@ from notehub_py.models.cancel_job_run200_response import CancelJobRun200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    report_uid = 'my-reconciliation-job-1707654321000' # str | Unique identifier for a job run report
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    report_uid = "my-reconciliation-job-1707654321000"  # str | Unique identifier for a job run report
 
     try:
         api_response = api_instance.cancel_job_run(project_or_product_uid, report_uid)
@@ -84,17 +82,15 @@ from notehub_py.models.create_job201_response import CreateJob201Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    name = 'name_example' # str | Name for the job
-    body = None # object | The job definition as raw JSON
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    name = "name_example"  # str | Name for the job
+    body = None  # object | The job definition as raw JSON
 
     try:
         api_response = api_instance.create_job(project_or_product_uid, name, body)
@@ -141,16 +137,14 @@ from notehub_py.models.delete_job200_response import DeleteJob200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    job_uid = 'my-reconciliation-job' # str | Unique identifier for a batch job
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    job_uid = "my-reconciliation-job"  # str | Unique identifier for a batch job
 
     try:
         api_response = api_instance.delete_job(project_or_product_uid, job_uid)
@@ -196,16 +190,14 @@ from notehub_py.models.job import Job
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    job_uid = 'my-reconciliation-job' # str | Unique identifier for a batch job
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    job_uid = "my-reconciliation-job"  # str | Unique identifier for a batch job
 
     try:
         api_response = api_instance.get_job(project_or_product_uid, job_uid)
@@ -251,16 +243,14 @@ from notehub_py.models.job_run import JobRun
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    report_uid = 'my-reconciliation-job-1707654321000' # str | Unique identifier for a job run report
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    report_uid = "my-reconciliation-job-1707654321000"  # str | Unique identifier for a job run report
 
     try:
         api_response = api_instance.get_job_run(project_or_product_uid, report_uid)
@@ -306,21 +296,21 @@ from notehub_py.models.get_job_runs200_response import GetJobRuns200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    job_uid = 'my-reconciliation-job' # str | Unique identifier for a batch job
-    status = 'status_example' # str | Filter runs by status (optional)
-    dry_run = True # bool | Filter runs by dry run flag (optional)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    job_uid = "my-reconciliation-job"  # str | Unique identifier for a batch job
+    status = "status_example"  # str | Filter runs by status (optional)
+    dry_run = True  # bool | Filter runs by dry run flag (optional)
 
     try:
-        api_response = api_instance.get_job_runs(project_or_product_uid, job_uid, status=status, dry_run=dry_run)
+        api_response = api_instance.get_job_runs(
+            project_or_product_uid, job_uid, status=status, dry_run=dry_run
+        )
         print("The response of JobsApi->get_job_runs:\n")
         pprint(api_response)
     except Exception as e:
@@ -365,15 +355,13 @@ from notehub_py.models.get_jobs200_response import GetJobs200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
 
     try:
         api_response = api_instance.get_jobs(project_or_product_uid)
@@ -418,20 +406,20 @@ from notehub_py.models.run_job200_response import RunJob200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    job_uid = 'my-reconciliation-job' # str | Unique identifier for a batch job
-    dry_run = False # bool | Run job in dry-run mode without making actual changes (optional) (default to False)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    job_uid = "my-reconciliation-job"  # str | Unique identifier for a batch job
+    dry_run = False  # bool | Run job in dry-run mode without making actual changes (optional) (default to False)
 
     try:
-        api_response = api_instance.run_job(project_or_product_uid, job_uid, dry_run=dry_run)
+        api_response = api_instance.run_job(
+            project_or_product_uid, job_uid, dry_run=dry_run
+        )
         print("The response of JobsApi->run_job:\n")
         pprint(api_response)
     except Exception as e:
