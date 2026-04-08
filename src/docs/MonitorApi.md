@@ -18,8 +18,6 @@ Create a new Monitor
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.create_monitor import CreateMonitor
@@ -72,8 +70,6 @@ Delete Monitor
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.monitor import Monitor
@@ -124,8 +120,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get Monitor
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -178,8 +172,6 @@ Get list of defined Monitors
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.monitor import Monitor
@@ -228,8 +220,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Update Monitor
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py

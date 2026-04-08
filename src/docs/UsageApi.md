@@ -17,8 +17,6 @@ Get data usage in bytes for a project with time range and period aggregation
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_data_usage200_response import GetDataUsage200Response
@@ -92,8 +90,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -180,8 +176,6 @@ Get route logs usage for a project with time range and period aggregation, when 
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_route_logs_usage200_response import (
@@ -257,8 +251,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py

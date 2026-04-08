@@ -19,8 +19,6 @@ Create Route within a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.notehub_route import NotehubRoute
@@ -74,8 +72,6 @@ Delete single route within a project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -125,8 +121,6 @@ void (empty response body)
 Get single route within a project
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -180,8 +174,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Get Route Logs by Route UID
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -260,8 +252,6 @@ Get all Routes within a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.notehub_route_summary import NotehubRouteSummary
@@ -312,8 +302,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Update route by UID
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py

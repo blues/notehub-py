@@ -18,8 +18,6 @@ Creates a webhook for the specified product with the given name. The name | must
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.webhook_settings import WebhookSettings
@@ -79,8 +77,6 @@ Deletes the specified webhook
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
@@ -128,8 +124,6 @@ void (empty response body)
 Retrieves the configuration settings for the specified webhook
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -182,8 +176,6 @@ Retrieves all webhooks for the specified project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
@@ -232,8 +224,6 @@ with notehub_py.ApiClient(configuration) as api_client:
 Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
