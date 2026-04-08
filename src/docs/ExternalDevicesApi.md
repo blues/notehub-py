@@ -24,22 +24,23 @@ from notehub_py.models.event import Event
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.ExternalDevicesApi(api_client)
-    product_uid = 'com.blues.bridge:sensors' # str |
-    device_uid = 'dev:000000000000000' # str |
-    event = notehub_py.Event() # Event | Event Object
+    product_uid = "com.blues.bridge:sensors"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    event = notehub_py.Event()  # Event | Event Object
 
     try:
         api_instance.create_event_ext_device(product_uid, device_uid, event)
     except Exception as e:
-        print("Exception when calling ExternalDevicesApi->create_event_ext_device: %s\n" % e)
+        print(
+            "Exception when calling ExternalDevicesApi->create_event_ext_device: %s\n"
+            % e
+        )
 ```
 
 ### Parameters
@@ -79,22 +80,23 @@ from notehub_py.models.device_session import DeviceSession
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.ExternalDevicesApi(api_client)
-    product_uid = 'com.blues.bridge:sensors' # str |
-    device_uid = 'dev:000000000000000' # str |
-    device_session = notehub_py.DeviceSession() # DeviceSession | Session Object
+    product_uid = "com.blues.bridge:sensors"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    device_session = notehub_py.DeviceSession()  # DeviceSession | Session Object
 
     try:
         api_instance.ext_device_session_close(product_uid, device_uid, device_session)
     except Exception as e:
-        print("Exception when calling ExternalDevicesApi->ext_device_session_close: %s\n" % e)
+        print(
+            "Exception when calling ExternalDevicesApi->ext_device_session_close: %s\n"
+            % e
+        )
 ```
 
 ### Parameters
@@ -134,22 +136,23 @@ from notehub_py.models.device_session import DeviceSession
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.ExternalDevicesApi(api_client)
-    product_uid = 'com.blues.bridge:sensors' # str |
-    device_uid = 'dev:000000000000000' # str |
-    device_session = notehub_py.DeviceSession() # DeviceSession | Session Object
+    product_uid = "com.blues.bridge:sensors"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    device_session = notehub_py.DeviceSession()  # DeviceSession | Session Object
 
     try:
         api_instance.ext_device_session_open(product_uid, device_uid, device_session)
     except Exception as e:
-        print("Exception when calling ExternalDevicesApi->ext_device_session_open: %s\n" % e)
+        print(
+            "Exception when calling ExternalDevicesApi->ext_device_session_open: %s\n"
+            % e
+        )
 ```
 
 ### Parameters

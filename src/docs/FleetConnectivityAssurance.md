@@ -21,7 +21,9 @@ print(FleetConnectivityAssurance.to_json())
 # convert the object into a dict
 fleet_connectivity_assurance_dict = fleet_connectivity_assurance_instance.to_dict()
 # create an instance of FleetConnectivityAssurance from a dict
-fleet_connectivity_assurance_from_dict = FleetConnectivityAssurance.from_dict(fleet_connectivity_assurance_dict)
+fleet_connectivity_assurance_from_dict = FleetConnectivityAssurance.from_dict(
+    fleet_connectivity_assurance_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -27,16 +27,14 @@ from notehub_py.models.monitor import Monitor
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.MonitorApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    body = notehub_py.Monitor() # Monitor | Body or payload of monitor to be created
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    body = notehub_py.Monitor()  # Monitor | Body or payload of monitor to be created
 
     try:
         api_response = api_instance.create_monitor(project_or_product_uid, body)
@@ -82,16 +80,14 @@ from notehub_py.models.monitor import Monitor
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.MonitorApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    monitor_uid = 'monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    monitor_uid = "monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"  # str |
 
     try:
         api_response = api_instance.delete_monitor(project_or_product_uid, monitor_uid)
@@ -137,16 +133,14 @@ from notehub_py.models.monitor import Monitor
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.MonitorApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    monitor_uid = 'monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    monitor_uid = "monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"  # str |
 
     try:
         api_response = api_instance.get_monitor(project_or_product_uid, monitor_uid)
@@ -192,15 +186,13 @@ from notehub_py.models.monitor import Monitor
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.MonitorApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
 
     try:
         api_response = api_instance.get_monitors(project_or_product_uid)
@@ -245,20 +237,20 @@ from notehub_py.models.monitor import Monitor
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.MonitorApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    monitor_uid = 'monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad' # str |
-    monitor = notehub_py.Monitor() # Monitor | Body or payload of monitor to be created
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    monitor_uid = "monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"  # str |
+    monitor = notehub_py.Monitor()  # Monitor | Body or payload of monitor to be created
 
     try:
-        api_response = api_instance.update_monitor(project_or_product_uid, monitor_uid, monitor)
+        api_response = api_instance.update_monitor(
+            project_or_product_uid, monitor_uid, monitor
+        )
         print("The response of MonitorApi->update_monitor:\n")
         pprint(api_response)
     except Exception as e:

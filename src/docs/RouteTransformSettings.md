@@ -25,7 +25,9 @@ print(RouteTransformSettings.to_json())
 # convert the object into a dict
 route_transform_settings_dict = route_transform_settings_instance.to_dict()
 # create an instance of RouteTransformSettings from a dict
-route_transform_settings_from_dict = RouteTransformSettings.from_dict(route_transform_settings_dict)
+route_transform_settings_from_dict = RouteTransformSettings.from_dict(
+    route_transform_settings_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

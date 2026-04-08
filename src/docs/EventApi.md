@@ -26,34 +26,56 @@ from notehub_py.models.get_events200_response import GetEvents200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.EventApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    page_size = 50 # int |  (optional) (default to 50)
-    page_num = 1 # int |  (optional) (default to 1)
-    device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
-    sort_by = 'captured' # str |  (optional) (default to 'captured')
-    sort_order = 'asc' # str |  (optional) (default to 'asc')
-    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
-    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
-    date_type = 'captured' # str | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (optional) (default to 'captured')
-    system_files_only = True # bool |  (optional)
-    files = '_health.qo, data.qo' # str |  (optional)
-    format = 'json' # str | Response format (JSON or CSV) (optional) (default to 'json')
-    serial_number = ['serial_number_example'] # List[str] | Filter by Serial Number (optional)
-    fleet_uid = ['fleet_uid_example'] # List[str] | Filter by Fleet UID (optional)
-    session_uid = ['session_uid_example'] # List[str] | Filter by Session UID (optional)
-    event_uid = ['event_uid_example'] # List[str] | Filter by Event UID (optional)
-    select_fields = 'select_fields_example' # str | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output. (optional)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    page_size = 50  # int |  (optional) (default to 50)
+    page_num = 1  # int |  (optional) (default to 1)
+    device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    sort_by = "captured"  # str |  (optional) (default to 'captured')
+    sort_order = "asc"  # str |  (optional) (default to 'asc')
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
+    date_type = "captured"  # str | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (optional) (default to 'captured')
+    system_files_only = True  # bool |  (optional)
+    files = "_health.qo, data.qo"  # str |  (optional)
+    format = (
+        "json"  # str | Response format (JSON or CSV) (optional) (default to 'json')
+    )
+    serial_number = [
+        "serial_number_example"
+    ]  # List[str] | Filter by Serial Number (optional)
+    fleet_uid = ["fleet_uid_example"]  # List[str] | Filter by Fleet UID (optional)
+    session_uid = [
+        "session_uid_example"
+    ]  # List[str] | Filter by Session UID (optional)
+    event_uid = ["event_uid_example"]  # List[str] | Filter by Event UID (optional)
+    select_fields = "select_fields_example"  # str | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output. (optional)
 
     try:
-        api_response = api_instance.get_events(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, fleet_uid=fleet_uid, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
+        api_response = api_instance.get_events(
+            project_or_product_uid,
+            page_size=page_size,
+            page_num=page_num,
+            device_uid=device_uid,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            start_date=start_date,
+            end_date=end_date,
+            date_type=date_type,
+            system_files_only=system_files_only,
+            files=files,
+            format=format,
+            serial_number=serial_number,
+            fleet_uid=fleet_uid,
+            session_uid=session_uid,
+            event_uid=event_uid,
+            select_fields=select_fields,
+        )
         print("The response of EventApi->get_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -107,29 +129,38 @@ Get Events of a Project by cursor
 
 ```python
 import notehub_py
-from notehub_py.models.get_events_by_cursor200_response import GetEventsByCursor200Response
+from notehub_py.models.get_events_by_cursor200_response import (
+    GetEventsByCursor200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.EventApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    limit = 50 # int |  (optional) (default to 50)
-    cursor = 'cursor_example' # str | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.  (optional)
-    sort_order = 'asc' # str |  (optional) (default to 'asc')
-    system_files_only = True # bool |  (optional)
-    files = '_health.qo, data.qo' # str |  (optional)
-    fleet_uid = 'fleet_uid_example' # str |  (optional)
-    device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    limit = 50  # int |  (optional) (default to 50)
+    cursor = "cursor_example"  # str | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.  (optional)
+    sort_order = "asc"  # str |  (optional) (default to 'asc')
+    system_files_only = True  # bool |  (optional)
+    files = "_health.qo, data.qo"  # str |  (optional)
+    fleet_uid = "fleet_uid_example"  # str |  (optional)
+    device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
 
     try:
-        api_response = api_instance.get_events_by_cursor(project_or_product_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, fleet_uid=fleet_uid, device_uid=device_uid)
+        api_response = api_instance.get_events_by_cursor(
+            project_or_product_uid,
+            limit=limit,
+            cursor=cursor,
+            sort_order=sort_order,
+            system_files_only=system_files_only,
+            files=files,
+            fleet_uid=fleet_uid,
+            device_uid=device_uid,
+        )
         print("The response of EventApi->get_events_by_cursor:\n")
         pprint(api_response)
     except Exception as e:
@@ -178,34 +209,56 @@ from notehub_py.models.get_events200_response import GetEvents200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.EventApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    fleet_uid = 'fleet_uid_example' # str |
-    page_size = 50 # int |  (optional) (default to 50)
-    page_num = 1 # int |  (optional) (default to 1)
-    device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
-    sort_by = 'captured' # str |  (optional) (default to 'captured')
-    sort_order = 'asc' # str |  (optional) (default to 'asc')
-    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
-    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
-    date_type = 'captured' # str | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (optional) (default to 'captured')
-    system_files_only = True # bool |  (optional)
-    files = '_health.qo, data.qo' # str |  (optional)
-    format = 'json' # str | Response format (JSON or CSV) (optional) (default to 'json')
-    serial_number = ['serial_number_example'] # List[str] | Filter by Serial Number (optional)
-    session_uid = ['session_uid_example'] # List[str] | Filter by Session UID (optional)
-    event_uid = ['event_uid_example'] # List[str] | Filter by Event UID (optional)
-    select_fields = 'select_fields_example' # str | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output. (optional)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    fleet_uid = "fleet_uid_example"  # str |
+    page_size = 50  # int |  (optional) (default to 50)
+    page_num = 1  # int |  (optional) (default to 1)
+    device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    sort_by = "captured"  # str |  (optional) (default to 'captured')
+    sort_order = "asc"  # str |  (optional) (default to 'asc')
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
+    date_type = "captured"  # str | Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters (optional) (default to 'captured')
+    system_files_only = True  # bool |  (optional)
+    files = "_health.qo, data.qo"  # str |  (optional)
+    format = (
+        "json"  # str | Response format (JSON or CSV) (optional) (default to 'json')
+    )
+    serial_number = [
+        "serial_number_example"
+    ]  # List[str] | Filter by Serial Number (optional)
+    session_uid = [
+        "session_uid_example"
+    ]  # List[str] | Filter by Session UID (optional)
+    event_uid = ["event_uid_example"]  # List[str] | Filter by Event UID (optional)
+    select_fields = "select_fields_example"  # str | Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output. (optional)
 
     try:
-        api_response = api_instance.get_fleet_events(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
+        api_response = api_instance.get_fleet_events(
+            project_or_product_uid,
+            fleet_uid,
+            page_size=page_size,
+            page_num=page_num,
+            device_uid=device_uid,
+            sort_by=sort_by,
+            sort_order=sort_order,
+            start_date=start_date,
+            end_date=end_date,
+            date_type=date_type,
+            system_files_only=system_files_only,
+            files=files,
+            format=format,
+            serial_number=serial_number,
+            session_uid=session_uid,
+            event_uid=event_uid,
+            select_fields=select_fields,
+        )
         print("The response of EventApi->get_fleet_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -259,31 +312,42 @@ Get Events of a Fleet by cursor
 
 ```python
 import notehub_py
-from notehub_py.models.get_events_by_cursor200_response import GetEventsByCursor200Response
+from notehub_py.models.get_events_by_cursor200_response import (
+    GetEventsByCursor200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.EventApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    fleet_uid = 'fleet_uid_example' # str |
-    limit = 50 # int |  (optional) (default to 50)
-    cursor = 'cursor_example' # str | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.  (optional)
-    sort_order = 'asc' # str |  (optional) (default to 'asc')
-    system_files_only = True # bool |  (optional)
-    files = '_health.qo, data.qo' # str |  (optional)
-    device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
-    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
-    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    fleet_uid = "fleet_uid_example"  # str |
+    limit = 50  # int |  (optional) (default to 50)
+    cursor = "cursor_example"  # str | A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.  (optional)
+    sort_order = "asc"  # str |  (optional) (default to 'asc')
+    system_files_only = True  # bool |  (optional)
+    files = "_health.qo, data.qo"  # str |  (optional)
+    device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
 
     try:
-        api_response = api_instance.get_fleet_events_by_cursor(project_or_product_uid, fleet_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, device_uid=device_uid, start_date=start_date, end_date=end_date)
+        api_response = api_instance.get_fleet_events_by_cursor(
+            project_or_product_uid,
+            fleet_uid,
+            limit=limit,
+            cursor=cursor,
+            sort_order=sort_order,
+            system_files_only=system_files_only,
+            files=files,
+            device_uid=device_uid,
+            start_date=start_date,
+            end_date=end_date,
+        )
         print("The response of EventApi->get_fleet_events_by_cursor:\n")
         pprint(api_response)
     except Exception as e:
@@ -334,19 +398,19 @@ from notehub_py.models.route_log import RouteLog
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-configuration = notehub_py.Configuration(
-    access_token = "PERSONAL_ACCESS_TOKEN"
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.EventApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    event_uid = '4506f411-dea6-44a0-9743-1130f57d7747' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    event_uid = "4506f411-dea6-44a0-9743-1130f57d7747"  # str |
 
     try:
-        api_response = api_instance.get_route_logs_by_event(project_or_product_uid, event_uid)
+        api_response = api_instance.get_route_logs_by_event(
+            project_or_product_uid, event_uid
+        )
         print("The response of EventApi->get_route_logs_by_event:\n")
         pprint(api_response)
     except Exception as e:

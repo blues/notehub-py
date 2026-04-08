@@ -15,19 +15,29 @@
 ## Example
 
 ```python
-from notehub_py.models.get_data_usage200_response_data_inner import GetDataUsage200ResponseDataInner
+from notehub_py.models.get_data_usage200_response_data_inner import (
+    GetDataUsage200ResponseDataInner,
+)
 
 # TODO update the JSON string below
 json = "{}"
 # create an instance of GetDataUsage200ResponseDataInner from a JSON string
-get_data_usage200_response_data_inner_instance = GetDataUsage200ResponseDataInner.from_json(json)
+get_data_usage200_response_data_inner_instance = (
+    GetDataUsage200ResponseDataInner.from_json(json)
+)
 # print the JSON string representation of the object
 print(GetDataUsage200ResponseDataInner.to_json())
 
 # convert the object into a dict
-get_data_usage200_response_data_inner_dict = get_data_usage200_response_data_inner_instance.to_dict()
+get_data_usage200_response_data_inner_dict = (
+    get_data_usage200_response_data_inner_instance.to_dict()
+)
 # create an instance of GetDataUsage200ResponseDataInner from a dict
-get_data_usage200_response_data_inner_from_dict = GetDataUsage200ResponseDataInner.from_dict(get_data_usage200_response_data_inner_dict)
+get_data_usage200_response_data_inner_from_dict = (
+    GetDataUsage200ResponseDataInner.from_dict(
+        get_data_usage200_response_data_inner_dict
+    )
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -27,7 +27,10 @@ from pprint import pprint
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.AuthorizationApi(api_client)
-    login_request = {"password":"test-password","username":"name@example.com"} # LoginRequest |
+    login_request = {
+        "password": "test-password",
+        "username": "name@example.com",
+    }  # LoginRequest |
 
     try:
         api_response = api_instance.login(login_request)
@@ -77,18 +80,23 @@ from pprint import pprint
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.AuthorizationApi(api_client)
-    client_id = 'client_id_example' # str |
-    client_secret = 'client_secret_example' # str |
-    grant_type = 'grant_type_example' # str |
-    scope = 'scope_example' # str | Space-delimited scopes. (optional)
+    client_id = "client_id_example"  # str |
+    client_secret = "client_secret_example"  # str |
+    grant_type = "grant_type_example"  # str |
+    scope = "scope_example"  # str | Space-delimited scopes. (optional)
 
     try:
         # Issue an OAuth 2.0 access token (Client Credentials)
-        api_response = api_instance.o_auth2_client_credentials(client_id, client_secret, grant_type, scope=scope)
+        api_response = api_instance.o_auth2_client_credentials(
+            client_id, client_secret, grant_type, scope=scope
+        )
         print("The response of AuthorizationApi->o_auth2_client_credentials:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AuthorizationApi->o_auth2_client_credentials: %s\n" % e)
+        print(
+            "Exception when calling AuthorizationApi->o_auth2_client_credentials: %s\n"
+            % e
+        )
 ```
 
 ### Parameters
