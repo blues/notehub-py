@@ -6,7 +6,7 @@ All URIs are relative to *https://api.notefile.net*
 | ---------------------------------------- | ------------------------------------------------- | ----------- |
 | [**get_alerts**](AlertApi.md#get_alerts) | **GET** /v1/projects/{projectOrProductUID}/alerts |
 
-# **get_alerts**
+## **get_alerts**
 
 > GetAlerts200Response get_alerts(project_or_product_uid, page_size=page_size, page_num=page_num, monitor_uid=monitor_uid)
 
@@ -83,5 +83,3 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | The response body from GET /alerts         | -                |
 | **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

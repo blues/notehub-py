@@ -10,7 +10,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_fleet_events_by_cursor**](EventApi.md#get_fleet_events_by_cursor) | **GET** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor |
 | [**get_route_logs_by_event**](EventApi.md#get_route_logs_by_event)       | **GET** /v1/projects/{projectOrProductUID}/events/{eventUID}/route-logs    |
 
-# **get_events**
+## **get_events**
 
 > GetEvents200Response get_events(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, fleet_uid=fleet_uid, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
 
@@ -114,9 +114,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **200**     | The response body from a GET events request. | \* X-Has-More - True if there are more events <br> |
 | **0**       | The response body in case of an API error.   | -                                                  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_events_by_cursor**
+## **get_events_by_cursor**
 
 > GetEventsByCursor200Response get_events_by_cursor(project_or_product_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, fleet_uid=fleet_uid, device_uid=device_uid)
 
@@ -202,9 +200,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **200**     | The response body from a GET events by cursor request. | -                |
 | **0**       | The response body in case of an API error.             | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_fleet_events**
+## **get_fleet_events**
 
 > GetEvents200Response get_fleet_events(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
 
@@ -308,9 +304,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **200**     | The response body from a GET events request. | \* X-Has-More - True if there are more events <br> |
 | **0**       | The response body in case of an API error.   | -                                                  |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_fleet_events_by_cursor**
+## **get_fleet_events_by_cursor**
 
 > GetEventsByCursor200Response get_fleet_events_by_cursor(project_or_product_uid, fleet_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, device_uid=device_uid, start_date=start_date, end_date=end_date)
 
@@ -400,9 +394,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **200**     | The response body from a GET events by cursor request. | -                |
 | **0**       | The response body in case of an API error.             | -                |
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_route_logs_by_event**
+## **get_route_logs_by_event**
 
 > List[RouteLog] get_route_logs_by_event(project_or_product_uid, event_uid)
 
@@ -475,5 +467,3 @@ with notehub_py.ApiClient(configuration) as api_client:
 | ----------- | ------------------------------------------ | ---------------- |
 | **200**     | Successful operation                       | -                |
 | **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
