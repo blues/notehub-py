@@ -9,7 +9,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_route_logs_usage**](UsageApi.md#get_route_logs_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/route-logs |
 | [**get_sessions_usage**](UsageApi.md#get_sessions_usage)     | **GET** /v1/projects/{projectOrProductUID}/usage/sessions   |
 
-## **get_data_usage**
+## get_data_usage
 
 > GetDataUsage200Response get_data_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, limit=limit, aggregate=aggregate)
 
@@ -88,14 +88,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Response body for Data Usage               | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_events_usage**
+## get_events_usage
 
 > UsageEventsResponse get_events_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, limit=limit, aggregate=aggregate, notefile=notefile, skip_recent_data=skip_recent_data, include_notefiles=include_notefiles)
 
@@ -180,14 +173,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_route_logs_usage**
+## get_route_logs_usage
 
 > GetRouteLogsUsage200Response get_route_logs_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, route_uid=route_uid, limit=limit, aggregate=aggregate, skip_recent_data=skip_recent_data)
 
@@ -266,14 +252,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Response body for Route Log Usage          | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_sessions_usage**
+## get_sessions_usage
 
 > GetSessionsUsage200Response get_sessions_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, device_uid=device_uid, fleet_uid=fleet_uid, limit=limit, aggregate=aggregate, skip_recent_data=skip_recent_data)
 
@@ -353,10 +332,3 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Response body for Session Usage            | -                |
-| **0**       | The response body in case of an API error. | -                |

@@ -34,7 +34,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**signal_device**](DeviceApi.md#signal_device)                                                     | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal                        |
 | [**update_db_note**](DeviceApi.md#update_db_note)                                                   | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
 
-## **add_db_note**
+## add_db_note
 
 > add_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note_input)
 
@@ -105,14 +105,7 @@ void (empty response body)
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **add_qi_note**
+## add_qi_note
 
 > add_qi_note(project_or_product_uid, device_uid, notefile_id, note_input)
 
@@ -181,14 +174,7 @@ void (empty response body)
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **create_notefile**
+## create_notefile
 
 > create_notefile(project_or_product_uid, device_uid, notefile_id)
 
@@ -254,14 +240,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **delete_device**
+## delete_device
 
 > delete_device(project_or_product_uid, device_uid)
 
@@ -325,14 +304,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **204**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **delete_device_environment_variable**
+## delete_device_environment_variable
 
 > EnvironmentVariables delete_device_environment_variable(project_or_product_uid, device_uid, key)
 
@@ -401,14 +373,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
-
-## **delete_note**
+## delete_note
 
 > delete_note(project_or_product_uid, device_uid, notefile_id, note_id)
 
@@ -476,14 +441,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **delete_notefiles**
+## delete_notefiles
 
 > delete_notefiles(project_or_product_uid, device_uid, delete_notefiles_request)
 
@@ -550,14 +508,7 @@ void (empty response body)
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **disable_device**
+## disable_device
 
 > disable_device(project_or_product_uid, device_uid)
 
@@ -621,14 +572,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **enable_device**
+## enable_device
 
 > enable_device(project_or_product_uid, device_uid)
 
@@ -692,14 +636,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_db_note**
+## get_db_note
 
 > GetDbNote200Response get_db_note(project_or_product_uid, device_uid, notefile_id, note_id, delete=delete, deleted=deleted)
 
@@ -774,14 +711,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The requested note                         | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_device**
+## get_device
 
 > Device get_device(project_or_product_uid, device_uid)
 
@@ -848,14 +778,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_device_environment_hierarchy**
+## get_device_environment_hierarchy
 
 > EnvTreeJsonNode get_device_environment_hierarchy(project_or_product_uid, device_uid)
 
@@ -923,15 +846,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                         | Response headers |
-| ----------- | --------------------------------------------------- | ---------------- |
-| **200**     | Successfully retrieved device environment hierarchy | -                |
-| **404**     | Project or device not found                         | -                |
-| **500**     | Server error                                        | -                |
-
-## **get_device_environment_variables**
+## get_device_environment_variables
 
 > GetDeviceEnvironmentVariablesByPin200Response get_device_environment_variables(project_or_product_uid, device_uid)
 
@@ -998,14 +913,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                                        | Response headers |
-| ----------- | ------------------------------------------------------------------ | ---------------- |
-| **200**     | The response body from a get device environment variables request. | -                |
-| **0**       | The response body in case of an API error.                         | -                |
-
-## **get_device_environment_variables_by_pin**
+## get_device_environment_variables_by_pin
 
 > GetDeviceEnvironmentVariablesByPin200Response get_device_environment_variables_by_pin(product_uid, device_uid, x_auth_token)
 
@@ -1063,14 +971,7 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                                        | Response headers |
-| ----------- | ------------------------------------------------------------------ | ---------------- |
-| **200**     | The response body from a get device environment variables request. | -                |
-| **0**       | The response body in case of an API error.                         | -                |
-
-## **get_device_health_log**
+## get_device_health_log
 
 > GetDeviceHealthLog200Response get_device_health_log(project_or_product_uid, device_uid, start_date=start_date, end_date=end_date, log_type=log_type)
 
@@ -1143,14 +1044,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_device_latest_events**
+## get_device_latest_events
 
 > GetDeviceLatestEvents200Response get_device_latest_events(project_or_product_uid, device_uid)
 
@@ -1217,14 +1111,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                    | Response headers |
-| ----------- | ---------------------------------------------- | ---------------- |
-| **200**     | The response body for a Latest Events request. | -                |
-| **0**       | The response body in case of an API error.     | -                |
-
-## **get_device_plans**
+## get_device_plans
 
 > GetDevicePlans200Response get_device_plans(project_or_product_uid, device_uid)
 
@@ -1291,14 +1178,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Response body for /plans                   | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_device_public_key**
+## get_device_public_key
 
 > GetDevicePublicKey200Response get_device_public_key(project_or_product_uid, device_uid)
 
@@ -1365,14 +1245,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_device_public_keys**
+## get_device_public_keys
 
 > GetDevicePublicKeys200Response get_device_public_keys(project_or_product_uid, page_size=page_size, page_num=page_num)
 
@@ -1441,14 +1314,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_device_sessions**
+## get_device_sessions
 
 > GetDeviceSessions200Response get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num, start_date=start_date, end_date=end_date, first_sync=first_sync)
 
@@ -1525,14 +1391,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The response body for a session request.   | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_devices**
+## get_devices
 
 > GetDevices200Response get_devices(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, fleet_uid=fleet_uid, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
 
@@ -1619,14 +1478,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | List of Devices                            | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_fleet_devices**
+## get_fleet_devices
 
 > GetDevices200Response get_fleet_devices(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
 
@@ -1713,14 +1565,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | List of Devices                            | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_notefile**
+## get_notefile
 
 > GetNotefile200Response get_notefile(project_or_product_uid, device_uid, notefile_id, max=max, deleted=deleted, delete=delete)
 
@@ -1795,14 +1640,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The note changes object                    | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **list_notefiles**
+## list_notefiles
 
 > List[Notefile] list_notefiles(project_or_product_uid, device_uid, files=files, pending=pending)
 
@@ -1873,14 +1711,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | All notefiles and their notes              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **provision_device**
+## provision_device
 
 > object provision_device(project_or_product_uid, device_uid, provision_device_request)
 
@@ -1949,14 +1780,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **set_device_environment_variables**
+## set_device_environment_variables
 
 > EnvironmentVariables set_device_environment_variables(project_or_product_uid, device_uid, environment_variables)
 
@@ -2025,14 +1849,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
-
-## **set_device_environment_variables_by_pin**
+## set_device_environment_variables_by_pin
 
 > EnvironmentVariables set_device_environment_variables_by_pin(product_uid, device_uid, x_auth_token, environment_variables)
 
@@ -2092,14 +1909,7 @@ No authorization required
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
-
-## **signal_device**
+## signal_device
 
 > SignalDevice200Response signal_device(project_or_product_uid, device_uid, body)
 
@@ -2169,14 +1979,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | A status response.                         | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **update_db_note**
+## update_db_note
 
 > update_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note_input)
 
@@ -2246,10 +2049,3 @@ void (empty response body)
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |

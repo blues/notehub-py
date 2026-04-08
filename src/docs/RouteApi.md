@@ -11,7 +11,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_routes**](RouteApi.md#get_routes)                           | **GET** /v1/projects/{projectOrProductUID}/routes                       |
 | [**update_route**](RouteApi.md#update_route)                       | **PUT** /v1/projects/{projectOrProductUID}/routes/{routeUID}            |
 
-## **create_route**
+## create_route
 
 > NotehubRoute create_route(project_or_product_uid, notehub_route)
 
@@ -78,14 +78,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **201**     | Created                                    | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **delete_route**
+## delete_route
 
 > delete_route(project_or_product_uid, route_uid)
 
@@ -149,14 +142,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **204**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_route**
+## get_route
 
 > NotehubRoute get_route(project_or_product_uid, route_uid)
 
@@ -223,14 +209,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_route_logs_by_route**
+## get_route_logs_by_route
 
 > List[RouteLog] get_route_logs_by_route(project_or_product_uid, route_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, system_files_only=system_files_only, most_recent_only=most_recent_only, files=files, routing_status=routing_status, response_status=response_status)
 
@@ -321,14 +300,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_routes**
+## get_routes
 
 > List[NotehubRouteSummary] get_routes(project_or_product_uid)
 
@@ -393,14 +365,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **update_route**
+## update_route
 
 > NotehubRoute update_route(project_or_product_uid, route_uid, notehub_route)
 
@@ -479,10 +444,3 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |

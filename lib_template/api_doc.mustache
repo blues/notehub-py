@@ -10,7 +10,9 @@ Method | HTTP request | Description
 
 {{#operations}}
 {{#operation}}
-## **{{{operationId}}}**
+
+## {{{operationId}}}
+
 > {{#returnType}}{{{.}}} {{/returnType}}{{{operationId}}}({{#allParams}}{{#required}}{{{paramName}}}{{/required}}{{^required}}{{{paramName}}}={{{paramName}}}{{/required}}{{^-last}}, {{/-last}}{{/allParams}})
 
 {{{summary}}}{{#notes}}
@@ -59,16 +61,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: {{#consumes}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/consumes}}{{^consumes}}Not defined{{/consumes}}
  - **Accept**: {{#produces}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/produces}}{{^produces}}Not defined{{/produces}}
-
-{{#responses.0}}
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-{{#responses}}
-**{{code}}** | {{message}} | {{#headers}} * {{baseName}} - {{description}} <br> {{/headers}}{{^headers.0}} - {{/headers.0}} |
-{{/responses}}
-{{/responses.0}}
 
 {{/operation}}
 {{/operations}}

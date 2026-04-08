@@ -13,7 +13,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_jobs**](JobsApi.md#get_jobs)             | **GET** /v1/projects/{projectOrProductUID}/jobs                          |
 | [**run_job**](JobsApi.md#run_job)               | **POST** /v1/projects/{projectOrProductUID}/jobs/{jobUID}/run            |
 
-## **cancel_job_run**
+## cancel_job_run
 
 > CancelJobRun200Response cancel_job_run(project_or_product_uid, report_uid)
 
@@ -80,15 +80,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Cancel operation completed                 | -                |
-| **404**     | Run not found                              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **create_job**
+## create_job
 
 > CreateJob201Response create_job(project_or_product_uid, name, body)
 
@@ -157,15 +149,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                               | Response headers |
-| ----------- | --------------------------------------------------------- | ---------------- |
-| **201**     | Job created successfully                                  | -                |
-| **400**     | Missing required name parameter or invalid job definition | -                |
-| **0**       | The response body in case of an API error.                | -                |
-
-## **delete_job**
+## delete_job
 
 > DeleteJob200Response delete_job(project_or_product_uid, job_uid)
 
@@ -232,15 +216,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Job deleted successfully                   | -                |
-| **404**     | Job not found                              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_job**
+## get_job
 
 > Job get_job(project_or_product_uid, job_uid)
 
@@ -307,15 +283,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Batch job details                          | -                |
-| **404**     | Job not found                              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_job_run**
+## get_job_run
 
 > JobRun get_job_run(project_or_product_uid, report_uid)
 
@@ -382,15 +350,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Job run details                            | -                |
-| **404**     | Run not found                              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_job_runs**
+## get_job_runs
 
 > GetJobRuns200Response get_job_runs(project_or_product_uid, job_uid, status=status, dry_run=dry_run)
 
@@ -461,15 +421,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | List of job runs                           | -                |
-| **404**     | Job not found                              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **get_jobs**
+## get_jobs
 
 > GetJobs200Response get_jobs(project_or_product_uid)
 
@@ -534,14 +486,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | List of batch jobs                         | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **run_job**
+## run_job
 
 > RunJob200Response run_job(project_or_product_uid, job_uid, dry_run=dry_run)
 
@@ -609,11 +554,3 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Job execution started                      | -                |
-| **404**     | Job not found                              | -                |
-| **0**       | The response body in case of an API error. | -                |

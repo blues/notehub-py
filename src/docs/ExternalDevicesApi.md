@@ -8,7 +8,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**ext_device_session_close**](ExternalDevicesApi.md#ext_device_session_close) | **POST** /v1/products/{productUID}/ext-devices/{deviceUID}/session/close |
 | [**ext_device_session_open**](ExternalDevicesApi.md#ext_device_session_open)   | **POST** /v1/products/{productUID}/ext-devices/{deviceUID}/session/open  |
 
-## **create_event_ext_device**
+## create_event_ext_device
 
 > create_event_ext_device(product_uid, device_uid, event)
 
@@ -75,14 +75,7 @@ void (empty response body)
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Event Created Successfully                 | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **ext_device_session_close**
+## ext_device_session_close
 
 > ext_device_session_close(product_uid, device_uid, device_session)
 
@@ -149,14 +142,7 @@ void (empty response body)
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Session closed                             | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-## **ext_device_session_open**
+## ext_device_session_open
 
 > ext_device_session_open(product_uid, device_uid, device_session)
 
@@ -222,10 +208,3 @@ void (empty response body)
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Session Created Successfully               | -                |
-| **0**       | The response body in case of an API error. | -                |
