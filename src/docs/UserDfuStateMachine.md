@@ -24,7 +24,9 @@ print(UserDfuStateMachine.to_json())
 # convert the object into a dict
 user_dfu_state_machine_dict = user_dfu_state_machine_instance.to_dict()
 # create an instance of UserDfuStateMachine from a dict
-user_dfu_state_machine_from_dict = UserDfuStateMachine.from_dict(user_dfu_state_machine_dict)
+user_dfu_state_machine_from_dict = UserDfuStateMachine.from_dict(
+    user_dfu_state_machine_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

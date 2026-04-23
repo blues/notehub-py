@@ -7,7 +7,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**login**](AuthorizationApi.md#login)                                           | **POST** /auth/login   |
 | [**o_auth2_client_credentials**](AuthorizationApi.md#o_auth2_client_credentials) | **POST** /oauth2/token | Issue an OAuth 2.0 access token (Client Credentials) |
 
-# **login**
+## login
 
 > Login200Response login(login_request)
 
@@ -22,18 +22,15 @@ from notehub_py.models.login_request import LoginRequest
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.AuthorizationApi(api_client)
-    login_request = {"password":"test-password","username":"name@example.com"} # LoginRequest |
+    login_request = {
+        "password": "test-password",
+        "username": "name@example.com",
+    }  # LoginRequest |
 
     try:
         api_response = api_instance.login(login_request)
@@ -62,17 +59,7 @@ No authorization required
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description           | Response headers |
-| ----------- | --------------------- | ---------------- |
-| **200**     | Successful operation  | -                |
-| **400**     | Bad Request           | -                |
-| **500**     | Internal Server Error | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **o_auth2_client_credentials**
+## o_auth2_client_credentials
 
 > OAuth2TokenResponse o_auth2_client_credentials(client_id, client_secret, grant_type, scope=scope)
 
@@ -88,29 +75,28 @@ from notehub_py.models.o_auth2_token_response import OAuth2TokenResponse
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.AuthorizationApi(api_client)
-    client_id = 'client_id_example' # str |
-    client_secret = 'client_secret_example' # str |
-    grant_type = 'grant_type_example' # str |
-    scope = 'scope_example' # str | Space-delimited scopes. (optional)
+    client_id = "client_id_example"  # str |
+    client_secret = "client_secret_example"  # str |
+    grant_type = "grant_type_example"  # str |
+    scope = "scope_example"  # str | Space-delimited scopes. (optional)
 
     try:
         # Issue an OAuth 2.0 access token (Client Credentials)
-        api_response = api_instance.o_auth2_client_credentials(client_id, client_secret, grant_type, scope=scope)
+        api_response = api_instance.o_auth2_client_credentials(
+            client_id, client_secret, grant_type, scope=scope
+        )
         print("The response of AuthorizationApi->o_auth2_client_credentials:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling AuthorizationApi->o_auth2_client_credentials: %s\n" % e)
+        print(
+            "Exception when calling AuthorizationApi->o_auth2_client_credentials: %s\n"
+            % e
+        )
 ```
 
 ### Parameters
@@ -134,14 +120,3 @@ No authorization required
 
 - **Content-Type**: application/x-www-form-urlencoded
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                       | Response headers |
-| ----------- | ------------------------------------------------- | ---------------- |
-| **200**     | Successful token response                         | -                |
-| **400**     | Invalid request (missing or malformed parameters) | -                |
-| **401**     | Invalid client authentication                     | -                |
-| **403**     | Unauthorized scope                                | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -24,7 +24,9 @@ print(OAuth2TokenResponse.to_json())
 # convert the object into a dict
 o_auth2_token_response_dict = o_auth2_token_response_instance.to_dict()
 # create an instance of OAuth2TokenResponse from a dict
-o_auth2_token_response_from_dict = OAuth2TokenResponse.from_dict(o_auth2_token_response_dict)
+o_auth2_token_response_from_dict = OAuth2TokenResponse.from_dict(
+    o_auth2_token_response_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -26,7 +26,9 @@ print(MonitorAlertRoutesInner.to_json())
 # convert the object into a dict
 monitor_alert_routes_inner_dict = monitor_alert_routes_inner_instance.to_dict()
 # create an instance of MonitorAlertRoutesInner from a dict
-monitor_alert_routes_inner_from_dict = MonitorAlertRoutesInner.from_dict(monitor_alert_routes_inner_dict)
+monitor_alert_routes_inner_from_dict = MonitorAlertRoutesInner.from_dict(
+    monitor_alert_routes_inner_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

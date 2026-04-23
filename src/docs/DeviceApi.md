@@ -34,7 +34,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**signal_device**](DeviceApi.md#signal_device)                                                     | **POST** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/signal                        |
 | [**update_db_note**](DeviceApi.md#update_db_note)                                                   | **PUT** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/notes/{notefileID}/{noteID}    |
 
-# **add_db_note**
+## add_db_note
 
 > add_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note_input)
 
@@ -42,42 +42,30 @@ Add a Note to a .db notefile. if noteID is '-' then payload is ignored and empty
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.note_input import NoteInput
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
-    note_id = 'note_id_example' # str |
-    note_input = notehub_py.NoteInput() # NoteInput | Body or payload of note to be added to the device
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    notefile_id = "notefile_id_example"  # str |
+    note_id = "note_id_example"  # str |
+    note_input = (
+        notehub_py.NoteInput()
+    )  # NoteInput | Body or payload of note to be added to the device
 
     try:
-        api_instance.add_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note_input)
+        api_instance.add_db_note(
+            project_or_product_uid, device_uid, notefile_id, note_id, note_input
+        )
     except Exception as e:
         print("Exception when calling DeviceApi->add_db_note: %s\n" % e)
 ```
@@ -105,16 +93,7 @@ void (empty response body)
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **add_qi_note**
+## add_qi_note
 
 > add_qi_note(project_or_product_uid, device_uid, notefile_id, note_input)
 
@@ -122,41 +101,29 @@ Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.note_input import NoteInput
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
-    note_input = notehub_py.NoteInput() # NoteInput | Body or payload of note to be added to the device
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    notefile_id = "notefile_id_example"  # str |
+    note_input = (
+        notehub_py.NoteInput()
+    )  # NoteInput | Body or payload of note to be added to the device
 
     try:
-        api_instance.add_qi_note(project_or_product_uid, device_uid, notefile_id, note_input)
+        api_instance.add_qi_note(
+            project_or_product_uid, device_uid, notefile_id, note_input
+        )
     except Exception as e:
         print("Exception when calling DeviceApi->add_qi_note: %s\n" % e)
 ```
@@ -183,16 +150,7 @@ void (empty response body)
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **create_notefile**
+## create_notefile
 
 > create_notefile(project_or_product_uid, device_uid, notefile_id)
 
@@ -200,36 +158,20 @@ Creates an empty Notefile on the device.
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    notefile_id = "notefile_id_example"  # str |
 
     try:
         api_instance.create_notefile(project_or_product_uid, device_uid, notefile_id)
@@ -258,16 +200,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_device**
+## delete_device
 
 > delete_device(project_or_product_uid, device_uid)
 
@@ -275,35 +208,19 @@ Delete Device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
 
     try:
         api_instance.delete_device(project_or_product_uid, device_uid)
@@ -331,16 +248,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **204**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_device_environment_variable**
+## delete_device_environment_variable
 
 > EnvironmentVariables delete_device_environment_variable(project_or_product_uid, device_uid, key)
 
@@ -348,44 +256,33 @@ Delete environment variable of a device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.environment_variables import EnvironmentVariables
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    key = 'key_example' # str | The environment variable key to delete.
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    key = "key_example"  # str | The environment variable key to delete.
 
     try:
-        api_response = api_instance.delete_device_environment_variable(project_or_product_uid, device_uid, key)
+        api_response = api_instance.delete_device_environment_variable(
+            project_or_product_uid, device_uid, key
+        )
         print("The response of DeviceApi->delete_device_environment_variable:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->delete_device_environment_variable: %s\n" % e)
+        print(
+            "Exception when calling DeviceApi->delete_device_environment_variable: %s\n"
+            % e
+        )
 ```
 
 ### Parameters
@@ -409,16 +306,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_note**
+## delete_note
 
 > delete_note(project_or_product_uid, device_uid, notefile_id, note_id)
 
@@ -426,40 +314,26 @@ Delete a note from a .db or .qi notefile
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
-    note_id = 'note_id_example' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    notefile_id = "notefile_id_example"  # str |
+    note_id = "note_id_example"  # str |
 
     try:
-        api_instance.delete_note(project_or_product_uid, device_uid, notefile_id, note_id)
+        api_instance.delete_note(
+            project_or_product_uid, device_uid, notefile_id, note_id
+        )
     except Exception as e:
         print("Exception when calling DeviceApi->delete_note: %s\n" % e)
 ```
@@ -486,16 +360,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_notefiles**
+## delete_notefiles
 
 > delete_notefiles(project_or_product_uid, device_uid, delete_notefiles_request)
 
@@ -503,40 +368,28 @@ Deletes Notefiles and the Notes they contain.
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.delete_notefiles_request import DeleteNotefilesRequest
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    delete_notefiles_request = notehub_py.DeleteNotefilesRequest() # DeleteNotefilesRequest |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    delete_notefiles_request = (
+        notehub_py.DeleteNotefilesRequest()
+    )  # DeleteNotefilesRequest |
 
     try:
-        api_instance.delete_notefiles(project_or_product_uid, device_uid, delete_notefiles_request)
+        api_instance.delete_notefiles(
+            project_or_product_uid, device_uid, delete_notefiles_request
+        )
     except Exception as e:
         print("Exception when calling DeviceApi->delete_notefiles: %s\n" % e)
 ```
@@ -562,16 +415,7 @@ void (empty response body)
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **disable_device**
+## disable_device
 
 > disable_device(project_or_product_uid, device_uid)
 
@@ -579,35 +423,19 @@ Disable Device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
 
     try:
         api_instance.disable_device(project_or_product_uid, device_uid)
@@ -635,16 +463,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **enable_device**
+## enable_device
 
 > enable_device(project_or_product_uid, device_uid)
 
@@ -652,35 +471,19 @@ Enable Device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
 
     try:
         api_instance.enable_device(project_or_product_uid, device_uid)
@@ -708,16 +511,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_db_note**
+## get_db_note
 
 > GetDbNote200Response get_db_note(project_or_product_uid, device_uid, notefile_id, note_id, delete=delete, deleted=deleted)
 
@@ -725,43 +519,34 @@ Get a note from a .db or .qi notefile
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_db_note200_response import GetDbNote200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
-    note_id = 'note_id_example' # str |
-    delete = True # bool | Whether to delete the note from the DB notefile (optional)
-    deleted = True # bool | Whether to return deleted notes (optional)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    notefile_id = "notefile_id_example"  # str |
+    note_id = "note_id_example"  # str |
+    delete = True  # bool | Whether to delete the note from the DB notefile (optional)
+    deleted = True  # bool | Whether to return deleted notes (optional)
 
     try:
-        api_response = api_instance.get_db_note(project_or_product_uid, device_uid, notefile_id, note_id, delete=delete, deleted=deleted)
+        api_response = api_instance.get_db_note(
+            project_or_product_uid,
+            device_uid,
+            notefile_id,
+            note_id,
+            delete=delete,
+            deleted=deleted,
+        )
         print("The response of DeviceApi->get_db_note:\n")
         pprint(api_response)
     except Exception as e:
@@ -792,16 +577,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The requested note                         | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_device**
+## get_device
 
 > Device get_device(project_or_product_uid, device_uid)
 
@@ -809,36 +585,20 @@ Get Device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.device import Device
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
 
     try:
         api_response = api_instance.get_device(project_or_product_uid, device_uid)
@@ -868,16 +628,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_device_environment_hierarchy**
+## get_device_environment_hierarchy
 
 > EnvTreeJsonNode get_device_environment_hierarchy(project_or_product_uid, device_uid)
 
@@ -885,44 +636,33 @@ Get environment variable hierarchy for a device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.env_tree_json_node import EnvTreeJsonNode
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
 
     try:
         # Get environment variable hierarchy for a device
-        api_response = api_instance.get_device_environment_hierarchy(project_or_product_uid, device_uid)
+        api_response = api_instance.get_device_environment_hierarchy(
+            project_or_product_uid, device_uid
+        )
         print("The response of DeviceApi->get_device_environment_hierarchy:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->get_device_environment_hierarchy: %s\n" % e)
+        print(
+            "Exception when calling DeviceApi->get_device_environment_hierarchy: %s\n"
+            % e
+        )
 ```
 
 ### Parameters
@@ -945,17 +685,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                         | Response headers |
-| ----------- | --------------------------------------------------- | ---------------- |
-| **200**     | Successfully retrieved device environment hierarchy | -                |
-| **404**     | Project or device not found                         | -                |
-| **500**     | Server error                                        | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_device_environment_variables**
+## get_device_environment_variables
 
 > GetDeviceEnvironmentVariablesByPin200Response get_device_environment_variables(project_or_product_uid, device_uid)
 
@@ -963,43 +693,34 @@ Get environment variables of a device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
-from notehub_py.models.get_device_environment_variables_by_pin200_response import GetDeviceEnvironmentVariablesByPin200Response
+from notehub_py.models.get_device_environment_variables_by_pin200_response import (
+    GetDeviceEnvironmentVariablesByPin200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
 
     try:
-        api_response = api_instance.get_device_environment_variables(project_or_product_uid, device_uid)
+        api_response = api_instance.get_device_environment_variables(
+            project_or_product_uid, device_uid
+        )
         print("The response of DeviceApi->get_device_environment_variables:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->get_device_environment_variables: %s\n" % e)
+        print(
+            "Exception when calling DeviceApi->get_device_environment_variables: %s\n"
+            % e
+        )
 ```
 
 ### Parameters
@@ -1022,16 +743,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                                        | Response headers |
-| ----------- | ------------------------------------------------------------------ | ---------------- |
-| **200**     | The response body from a get device environment variables request. | -                |
-| **0**       | The response body in case of an API error.                         | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_device_environment_variables_by_pin**
+## get_device_environment_variables_by_pin
 
 > GetDeviceEnvironmentVariablesByPin200Response get_device_environment_variables_by_pin(product_uid, device_uid, x_auth_token)
 
@@ -1041,31 +753,34 @@ Get environment variables of a device with device pin authorization
 
 ```python
 import notehub_py
-from notehub_py.models.get_device_environment_variables_by_pin200_response import GetDeviceEnvironmentVariablesByPin200Response
+from notehub_py.models.get_device_environment_variables_by_pin200_response import (
+    GetDeviceEnvironmentVariablesByPin200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
 
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    product_uid = 'com.blues.bridge:sensors' # str |
-    device_uid = 'dev:000000000000000' # str |
-    x_auth_token = 'x_auth_token_example' # str | For accessing endpoints by Device pin.
+    product_uid = "com.blues.bridge:sensors"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    x_auth_token = (
+        "x_auth_token_example"  # str | For accessing endpoints by Device pin.
+    )
 
     try:
-        api_response = api_instance.get_device_environment_variables_by_pin(product_uid, device_uid, x_auth_token)
+        api_response = api_instance.get_device_environment_variables_by_pin(
+            product_uid, device_uid, x_auth_token
+        )
         print("The response of DeviceApi->get_device_environment_variables_by_pin:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->get_device_environment_variables_by_pin: %s\n" % e)
+        print(
+            "Exception when calling DeviceApi->get_device_environment_variables_by_pin: %s\n"
+            % e
+        )
 ```
 
 ### Parameters
@@ -1089,16 +804,7 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                                        | Response headers |
-| ----------- | ------------------------------------------------------------------ | ---------------- |
-| **200**     | The response body from a get device environment variables request. | -                |
-| **0**       | The response body in case of an API error.                         | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_device_health_log**
+## get_device_health_log
 
 > GetDeviceHealthLog200Response get_device_health_log(project_or_product_uid, device_uid, start_date=start_date, end_date=end_date, log_type=log_type)
 
@@ -1106,42 +812,36 @@ Get Device Health Log
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
-from notehub_py.models.get_device_health_log200_response import GetDeviceHealthLog200Response
+from notehub_py.models.get_device_health_log200_response import (
+    GetDeviceHealthLog200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
-    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
-    log_type = ['log_type_example'] # List[str] | Return only specified log types (optional)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
+    log_type = [
+        "log_type_example"
+    ]  # List[str] | Return only specified log types (optional)
 
     try:
-        api_response = api_instance.get_device_health_log(project_or_product_uid, device_uid, start_date=start_date, end_date=end_date, log_type=log_type)
+        api_response = api_instance.get_device_health_log(
+            project_or_product_uid,
+            device_uid,
+            start_date=start_date,
+            end_date=end_date,
+            log_type=log_type,
+        )
         print("The response of DeviceApi->get_device_health_log:\n")
         pprint(api_response)
     except Exception as e:
@@ -1171,16 +871,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_device_latest_events**
+## get_device_latest_events
 
 > GetDeviceLatestEvents200Response get_device_latest_events(project_or_product_uid, device_uid)
 
@@ -1188,39 +879,27 @@ Get Device Latest Events
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
-from notehub_py.models.get_device_latest_events200_response import GetDeviceLatestEvents200Response
+from notehub_py.models.get_device_latest_events200_response import (
+    GetDeviceLatestEvents200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
 
     try:
-        api_response = api_instance.get_device_latest_events(project_or_product_uid, device_uid)
+        api_response = api_instance.get_device_latest_events(
+            project_or_product_uid, device_uid
+        )
         print("The response of DeviceApi->get_device_latest_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -1247,16 +926,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                    | Response headers |
-| ----------- | ---------------------------------------------- | ---------------- |
-| **200**     | The response body for a Latest Events request. | -                |
-| **0**       | The response body in case of an API error.     | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_device_plans**
+## get_device_plans
 
 > GetDevicePlans200Response get_device_plans(project_or_product_uid, device_uid)
 
@@ -1264,36 +934,20 @@ Get Data Plans associated with the device, this include the primary sim, any ext
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_device_plans200_response import GetDevicePlans200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
 
     try:
         api_response = api_instance.get_device_plans(project_or_product_uid, device_uid)
@@ -1323,16 +977,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Response body for /plans                   | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_device_public_key**
+## get_device_public_key
 
 > GetDevicePublicKey200Response get_device_public_key(project_or_product_uid, device_uid)
 
@@ -1340,39 +985,27 @@ Get Device Public Key
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
-from notehub_py.models.get_device_public_key200_response import GetDevicePublicKey200Response
+from notehub_py.models.get_device_public_key200_response import (
+    GetDevicePublicKey200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
 
     try:
-        api_response = api_instance.get_device_public_key(project_or_product_uid, device_uid)
+        api_response = api_instance.get_device_public_key(
+            project_or_product_uid, device_uid
+        )
         print("The response of DeviceApi->get_device_public_key:\n")
         pprint(api_response)
     except Exception as e:
@@ -1399,16 +1032,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_device_public_keys**
+## get_device_public_keys
 
 > GetDevicePublicKeys200Response get_device_public_keys(project_or_product_uid, page_size=page_size, page_num=page_num)
 
@@ -1416,40 +1040,28 @@ Get Device Public Keys of a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
-from notehub_py.models.get_device_public_keys200_response import GetDevicePublicKeys200Response
+from notehub_py.models.get_device_public_keys200_response import (
+    GetDevicePublicKeys200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    page_size = 50 # int |  (optional) (default to 50)
-    page_num = 1 # int |  (optional) (default to 1)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    page_size = 50  # int |  (optional) (default to 50)
+    page_num = 1  # int |  (optional) (default to 1)
 
     try:
-        api_response = api_instance.get_device_public_keys(project_or_product_uid, page_size=page_size, page_num=page_num)
+        api_response = api_instance.get_device_public_keys(
+            project_or_product_uid, page_size=page_size, page_num=page_num
+        )
         print("The response of DeviceApi->get_device_public_keys:\n")
         pprint(api_response)
     except Exception as e:
@@ -1477,16 +1089,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_device_sessions**
+## get_device_sessions
 
 > GetDeviceSessions200Response get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num, start_date=start_date, end_date=end_date, first_sync=first_sync)
 
@@ -1494,44 +1097,38 @@ Get Device Sessions
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
-from notehub_py.models.get_device_sessions200_response import GetDeviceSessions200Response
+from notehub_py.models.get_device_sessions200_response import (
+    GetDeviceSessions200Response,
+)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    page_size = 50 # int |  (optional) (default to 50)
-    page_num = 1 # int |  (optional) (default to 1)
-    start_date = 1628631763 # int | Start date for filtering results, specified as a Unix timestamp (optional)
-    end_date = 1657894210 # int | End date for filtering results, specified as a Unix timestamp (optional)
-    first_sync = False # bool | When true, filters results to only show first sync sessions (optional) (default to False)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    page_size = 50  # int |  (optional) (default to 50)
+    page_num = 1  # int |  (optional) (default to 1)
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
+    first_sync = False  # bool | When true, filters results to only show first sync sessions (optional) (default to False)
 
     try:
-        api_response = api_instance.get_device_sessions(project_or_product_uid, device_uid, page_size=page_size, page_num=page_num, start_date=start_date, end_date=end_date, first_sync=first_sync)
+        api_response = api_instance.get_device_sessions(
+            project_or_product_uid,
+            device_uid,
+            page_size=page_size,
+            page_num=page_num,
+            start_date=start_date,
+            end_date=end_date,
+            first_sync=first_sync,
+        )
         print("The response of DeviceApi->get_device_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -1563,16 +1160,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The response body for a session request.   | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_devices**
+## get_devices
 
 > GetDevices200Response get_devices(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, fleet_uid=fleet_uid, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
 
@@ -1580,49 +1168,52 @@ Get Devices of a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_devices200_response import GetDevices200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    page_size = 50 # int |  (optional) (default to 50)
-    page_num = 1 # int |  (optional) (default to 1)
-    device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
-    tag = ['tag_example'] # List[str] | Tag filter (optional)
-    serial_number = ['serial_number_example'] # List[str] | Serial number filter (optional)
-    fleet_uid = ['fleet_uid_example'] # List[str] |  (optional)
-    notecard_firmware = ['notecard_firmware_example'] # List[str] | Firmware version filter (optional)
-    location = ['location_example'] # List[str] | Location filter (optional)
-    host_firmware = ['host_firmware_example'] # List[str] | Host firmware filter (optional)
-    product_uid = ['product_uid_example'] # List[str] |  (optional)
-    sku = ['sku_example'] # List[str] | SKU filter (optional)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    page_size = 50  # int |  (optional) (default to 50)
+    page_num = 1  # int |  (optional) (default to 1)
+    device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    tag = ["tag_example"]  # List[str] | Tag filter (optional)
+    serial_number = [
+        "serial_number_example"
+    ]  # List[str] | Serial number filter (optional)
+    fleet_uid = ["fleet_uid_example"]  # List[str] |  (optional)
+    notecard_firmware = [
+        "notecard_firmware_example"
+    ]  # List[str] | Firmware version filter (optional)
+    location = ["location_example"]  # List[str] | Location filter (optional)
+    host_firmware = [
+        "host_firmware_example"
+    ]  # List[str] | Host firmware filter (optional)
+    product_uid = ["product_uid_example"]  # List[str] |  (optional)
+    sku = ["sku_example"]  # List[str] | SKU filter (optional)
 
     try:
-        api_response = api_instance.get_devices(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, fleet_uid=fleet_uid, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
+        api_response = api_instance.get_devices(
+            project_or_product_uid,
+            page_size=page_size,
+            page_num=page_num,
+            device_uid=device_uid,
+            tag=tag,
+            serial_number=serial_number,
+            fleet_uid=fleet_uid,
+            notecard_firmware=notecard_firmware,
+            location=location,
+            host_firmware=host_firmware,
+            product_uid=product_uid,
+            sku=sku,
+        )
         print("The response of DeviceApi->get_devices:\n")
         pprint(api_response)
     except Exception as e:
@@ -1659,16 +1250,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | List of Devices                            | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_fleet_devices**
+## get_fleet_devices
 
 > GetDevices200Response get_fleet_devices(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
 
@@ -1676,49 +1258,52 @@ Get Devices of a Fleet within a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_devices200_response import GetDevices200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    fleet_uid = 'fleet_uid_example' # str |
-    page_size = 50 # int |  (optional) (default to 50)
-    page_num = 1 # int |  (optional) (default to 1)
-    device_uid = ['device_uid_example'] # List[str] | A Device UID. (optional)
-    tag = ['tag_example'] # List[str] | Tag filter (optional)
-    serial_number = ['serial_number_example'] # List[str] | Serial number filter (optional)
-    notecard_firmware = ['notecard_firmware_example'] # List[str] | Firmware version filter (optional)
-    location = ['location_example'] # List[str] | Location filter (optional)
-    host_firmware = ['host_firmware_example'] # List[str] | Host firmware filter (optional)
-    product_uid = ['product_uid_example'] # List[str] |  (optional)
-    sku = ['sku_example'] # List[str] | SKU filter (optional)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    fleet_uid = "fleet_uid_example"  # str |
+    page_size = 50  # int |  (optional) (default to 50)
+    page_num = 1  # int |  (optional) (default to 1)
+    device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    tag = ["tag_example"]  # List[str] | Tag filter (optional)
+    serial_number = [
+        "serial_number_example"
+    ]  # List[str] | Serial number filter (optional)
+    notecard_firmware = [
+        "notecard_firmware_example"
+    ]  # List[str] | Firmware version filter (optional)
+    location = ["location_example"]  # List[str] | Location filter (optional)
+    host_firmware = [
+        "host_firmware_example"
+    ]  # List[str] | Host firmware filter (optional)
+    product_uid = ["product_uid_example"]  # List[str] |  (optional)
+    sku = ["sku_example"]  # List[str] | SKU filter (optional)
 
     try:
-        api_response = api_instance.get_fleet_devices(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, tag=tag, serial_number=serial_number, notecard_firmware=notecard_firmware, location=location, host_firmware=host_firmware, product_uid=product_uid, sku=sku)
+        api_response = api_instance.get_fleet_devices(
+            project_or_product_uid,
+            fleet_uid,
+            page_size=page_size,
+            page_num=page_num,
+            device_uid=device_uid,
+            tag=tag,
+            serial_number=serial_number,
+            notecard_firmware=notecard_firmware,
+            location=location,
+            host_firmware=host_firmware,
+            product_uid=product_uid,
+            sku=sku,
+        )
         print("The response of DeviceApi->get_fleet_devices:\n")
         pprint(api_response)
     except Exception as e:
@@ -1755,16 +1340,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | List of Devices                            | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_notefile**
+## get_notefile
 
 > GetNotefile200Response get_notefile(project_or_product_uid, device_uid, notefile_id, max=max, deleted=deleted, delete=delete)
 
@@ -1772,43 +1348,34 @@ For .qi files, returns the queued up notes. For .db files, returns all notes in 
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_notefile200_response import GetNotefile200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
-    max = 56 # int | The maximum number of Notes to return in the request. (optional)
-    deleted = True # bool | true to return deleted notes. (optional)
-    delete = True # bool | true to delete the notes returned by the request. (optional)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    notefile_id = "notefile_id_example"  # str |
+    max = 56  # int | The maximum number of Notes to return in the request. (optional)
+    deleted = True  # bool | true to return deleted notes. (optional)
+    delete = True  # bool | true to delete the notes returned by the request. (optional)
 
     try:
-        api_response = api_instance.get_notefile(project_or_product_uid, device_uid, notefile_id, max=max, deleted=deleted, delete=delete)
+        api_response = api_instance.get_notefile(
+            project_or_product_uid,
+            device_uid,
+            notefile_id,
+            max=max,
+            deleted=deleted,
+            delete=delete,
+        )
         print("The response of DeviceApi->get_notefile:\n")
         pprint(api_response)
     except Exception as e:
@@ -1839,16 +1406,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | The note changes object                    | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **list_notefiles**
+## list_notefiles
 
 > List[Notefile] list_notefiles(project_or_product_uid, device_uid, files=files, pending=pending)
 
@@ -1856,41 +1414,31 @@ Lists .qi and .db files for the device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.notefile import Notefile
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    files = ['files_example'] # List[str] | One or more files to obtain change information from. (optional)
-    pending = True # bool | show only files that are pending sync to the Notecard (optional)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    files = [
+        "files_example"
+    ]  # List[str] | One or more files to obtain change information from. (optional)
+    pending = (
+        True  # bool | show only files that are pending sync to the Notecard (optional)
+    )
 
     try:
-        api_response = api_instance.list_notefiles(project_or_product_uid, device_uid, files=files, pending=pending)
+        api_response = api_instance.list_notefiles(
+            project_or_product_uid, device_uid, files=files, pending=pending
+        )
         print("The response of DeviceApi->list_notefiles:\n")
         pprint(api_response)
     except Exception as e:
@@ -1919,16 +1467,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | All notefiles and their notes              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **provision_device**
+## provision_device
 
 > object provision_device(project_or_product_uid, device_uid, provision_device_request)
 
@@ -1936,40 +1475,28 @@ Provision Device for a Project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.provision_device_request import ProvisionDeviceRequest
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    provision_device_request = notehub_py.ProvisionDeviceRequest() # ProvisionDeviceRequest | Provision a device to a specific ProductUID
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    provision_device_request = (
+        notehub_py.ProvisionDeviceRequest()
+    )  # ProvisionDeviceRequest | Provision a device to a specific ProductUID
 
     try:
-        api_response = api_instance.provision_device(project_or_product_uid, device_uid, provision_device_request)
+        api_response = api_instance.provision_device(
+            project_or_product_uid, device_uid, provision_device_request
+        )
         print("The response of DeviceApi->provision_device:\n")
         pprint(api_response)
     except Exception as e:
@@ -1997,16 +1524,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Successful operation                       | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **set_device_environment_variables**
+## set_device_environment_variables
 
 > EnvironmentVariables set_device_environment_variables(project_or_product_uid, device_uid, environment_variables)
 
@@ -2014,44 +1532,35 @@ Set environment variables of a device
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.environment_variables import EnvironmentVariables
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the device
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    environment_variables = (
+        notehub_py.EnvironmentVariables()
+    )  # EnvironmentVariables | Environment variables to be added to the device
 
     try:
-        api_response = api_instance.set_device_environment_variables(project_or_product_uid, device_uid, environment_variables)
+        api_response = api_instance.set_device_environment_variables(
+            project_or_product_uid, device_uid, environment_variables
+        )
         print("The response of DeviceApi->set_device_environment_variables:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->set_device_environment_variables: %s\n" % e)
+        print(
+            "Exception when calling DeviceApi->set_device_environment_variables: %s\n"
+            % e
+        )
 ```
 
 ### Parameters
@@ -2075,16 +1584,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **set_device_environment_variables_by_pin**
+## set_device_environment_variables_by_pin
 
 > EnvironmentVariables set_device_environment_variables_by_pin(product_uid, device_uid, x_auth_token, environment_variables)
 
@@ -2098,28 +1598,31 @@ from notehub_py.models.environment_variables import EnvironmentVariables
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    product_uid = 'com.blues.bridge:sensors' # str |
-    device_uid = 'dev:000000000000000' # str |
-    x_auth_token = 'x_auth_token_example' # str | For accessing endpoints by Device pin.
-    environment_variables = notehub_py.EnvironmentVariables() # EnvironmentVariables | Environment variables to be added to the device
+    product_uid = "com.blues.bridge:sensors"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    x_auth_token = (
+        "x_auth_token_example"  # str | For accessing endpoints by Device pin.
+    )
+    environment_variables = (
+        notehub_py.EnvironmentVariables()
+    )  # EnvironmentVariables | Environment variables to be added to the device
 
     try:
-        api_response = api_instance.set_device_environment_variables_by_pin(product_uid, device_uid, x_auth_token, environment_variables)
+        api_response = api_instance.set_device_environment_variables_by_pin(
+            product_uid, device_uid, x_auth_token, environment_variables
+        )
         print("The response of DeviceApi->set_device_environment_variables_by_pin:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DeviceApi->set_device_environment_variables_by_pin: %s\n" % e)
+        print(
+            "Exception when calling DeviceApi->set_device_environment_variables_by_pin: %s\n"
+            % e
+        )
 ```
 
 ### Parameters
@@ -2144,24 +1647,13 @@ No authorization required
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                              | Response headers |
-| ----------- | -------------------------------------------------------- | ---------------- |
-| **200**     | The response body from an environment variables request. | -                |
-| **0**       | The response body in case of an API error.               | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **signal_device**
+## signal_device
 
 > SignalDevice200Response signal_device(project_or_product_uid, device_uid, body)
 
 Send a signal from Notehub to a Notecard.
 
 ### Example
-
-- Bearer Authentication (personalAccessToken):
 
 ```python
 import notehub_py
@@ -2170,32 +1662,22 @@ from notehub_py.models.signal_device200_response import SignalDevice200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    body = notehub_py.Body() # Body | Body or payload of signal to be sent to the device
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    body = (
+        notehub_py.Body()
+    )  # Body | Body or payload of signal to be sent to the device
 
     try:
-        api_response = api_instance.signal_device(project_or_product_uid, device_uid, body)
+        api_response = api_instance.signal_device(
+            project_or_product_uid, device_uid, body
+        )
         print("The response of DeviceApi->signal_device:\n")
         pprint(api_response)
     except Exception as e:
@@ -2223,16 +1705,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | A status response.                         | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_db_note**
+## update_db_note
 
 > update_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note_input)
 
@@ -2240,42 +1713,30 @@ Update a note in a .db or .qi notefile
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.note_input import NoteInput
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.DeviceApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    device_uid = 'dev:000000000000000' # str |
-    notefile_id = 'notefile_id_example' # str |
-    note_id = 'note_id_example' # str |
-    note_input = notehub_py.NoteInput() # NoteInput | Body or payload of note to be added to the device
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    notefile_id = "notefile_id_example"  # str |
+    note_id = "note_id_example"  # str |
+    note_input = (
+        notehub_py.NoteInput()
+    )  # NoteInput | Body or payload of note to be added to the device
 
     try:
-        api_instance.update_db_note(project_or_product_uid, device_uid, notefile_id, note_id, note_input)
+        api_instance.update_db_note(
+            project_or_product_uid, device_uid, notefile_id, note_id, note_input
+        )
     except Exception as e:
         print("Exception when calling DeviceApi->update_db_note: %s\n" % e)
 ```
@@ -2302,12 +1763,3 @@ void (empty response body)
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | An empty object means success              | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

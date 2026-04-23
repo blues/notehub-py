@@ -21,7 +21,9 @@ print(EnvironmentVariables.to_json())
 # convert the object into a dict
 environment_variables_dict = environment_variables_instance.to_dict()
 # create an instance of EnvironmentVariables from a dict
-environment_variables_from_dict = EnvironmentVariables.from_dict(environment_variables_dict)
+environment_variables_from_dict = EnvironmentVariables.from_dict(
+    environment_variables_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

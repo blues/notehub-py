@@ -24,7 +24,9 @@ print(PersonalAccessTokenInfo.to_json())
 # convert the object into a dict
 personal_access_token_info_dict = personal_access_token_info_instance.to_dict()
 # create an instance of PersonalAccessTokenInfo from a dict
-personal_access_token_info_from_dict = PersonalAccessTokenInfo.from_dict(personal_access_token_info_dict)
+personal_access_token_info_from_dict = PersonalAccessTokenInfo.from_dict(
+    personal_access_token_info_dict
+)
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

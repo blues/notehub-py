@@ -10,7 +10,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_webhooks**](WebhookApi.md#get_webhooks)     | **GET** /v1/projects/{projectOrProductUID}/webhooks                 |
 | [**update_webhook**](WebhookApi.md#update_webhook) | **PUT** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}    |
 
-# **create_webhook**
+## create_webhook
 
 > create_webhook(project_or_product_uid, webhook_uid, webhook_settings)
 
@@ -18,40 +18,32 @@ Creates a webhook for the specified product with the given name. The name | must
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.webhook_settings import WebhookSettings
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
-    webhook_settings = {"settings":{"disabled":false,"id":"Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8","transform":"{\"device\":body.end_device_ids.dev_eui,\"sn\":body.end_device_ids.device_id,\"body\":body.uplink_message.decoded_payload,\"details\":body}"}} # WebhookSettings |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
+    webhook_settings = {
+        "settings": {
+            "disabled": false,
+            "id": "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8",
+            "transform": '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}',
+        }
+    }  # WebhookSettings |
 
     try:
-        api_instance.create_webhook(project_or_product_uid, webhook_uid, webhook_settings)
+        api_instance.create_webhook(
+            project_or_product_uid, webhook_uid, webhook_settings
+        )
     except Exception as e:
         print("Exception when calling WebhookApi->create_webhook: %s\n" % e)
 ```
@@ -77,16 +69,7 @@ void (empty response body)
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Webhook created successfully               | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **delete_webhook**
+## delete_webhook
 
 > delete_webhook(project_or_product_uid, webhook_uid)
 
@@ -94,35 +77,19 @@ Deletes the specified webhook
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
 
     try:
         api_instance.delete_webhook(project_or_product_uid, webhook_uid)
@@ -150,16 +117,7 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Webhook deleted successfully               | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_webhook**
+## get_webhook
 
 > WebhookSettings get_webhook(project_or_product_uid, webhook_uid)
 
@@ -167,36 +125,20 @@ Retrieves the configuration settings for the specified webhook
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.webhook_settings import WebhookSettings
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
 
     try:
         api_response = api_instance.get_webhook(project_or_product_uid, webhook_uid)
@@ -226,16 +168,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Webhook settings retrieved successfully    | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_webhooks**
+## get_webhooks
 
 > GetWebhooks200Response get_webhooks(project_or_product_uid)
 
@@ -243,35 +176,19 @@ Retrieves all webhooks for the specified project
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
 
     try:
         api_response = api_instance.get_webhooks(project_or_product_uid)
@@ -300,16 +217,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Webhooks retrieved successfully            | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_webhook**
+## update_webhook
 
 > update_webhook(project_or_product_uid, webhook_uid, webhook_settings)
 
@@ -317,40 +225,29 @@ Updates the configuration settings for the specified webhook. | Webhook will be 
 
 ### Example
 
-- Bearer Authentication (personalAccessToken):
-
 ```python
 import notehub_py
 from notehub_py.models.webhook_settings import WebhookSettings
 from notehub_py.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.notefile.net
-# See configuration.py for a list of all supported configuration parameters.
-configuration = notehub_py.Configuration(
-    host = "https://api.notefile.net"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure Bearer authorization: personalAccessToken
-configuration = notehub_py.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
-    project_or_product_uid = 'app:2606f411-dea6-44a0-9743-1130f57d77d8' # str |
-    webhook_uid = 'Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8' # str | Webhook UID
-    webhook_settings = {"disabled":false,"transform":"{\"device\":body.end_device_ids.dev_eui,\"sn\":body.end_device_ids.device_id,\"body\":body.uplink_message.decoded_payload,\"details\":body}"} # WebhookSettings |
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
+    webhook_settings = {
+        "disabled": false,
+        "transform": '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}',
+    }  # WebhookSettings |
 
     try:
-        api_instance.update_webhook(project_or_product_uid, webhook_uid, webhook_settings)
+        api_instance.update_webhook(
+            project_or_product_uid, webhook_uid, webhook_settings
+        )
     except Exception as e:
         print("Exception when calling WebhookApi->update_webhook: %s\n" % e)
 ```
@@ -375,12 +272,3 @@ void (empty response body)
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description                                | Response headers |
-| ----------- | ------------------------------------------ | ---------------- |
-| **200**     | Webhook updated successfully               | -                |
-| **0**       | The response body in case of an API error. | -                |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

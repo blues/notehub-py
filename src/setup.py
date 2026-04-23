@@ -26,7 +26,7 @@ with open("README.md", "r") as fh:
 # http://pypi.python.org/pypi/setuptools
 NAME = "notehub-py"
 VERSION = "6.1.0"
-PYTHON_REQUIRES = ">=3.7"
+PYTHON_REQUIRES = ">=3.10"
 REQUIRES = [
     "urllib3 >= 2.5.0",
     "python-dateutil",
@@ -50,10 +50,11 @@ setup(
     package_data={"notehub_py": ["py.typed"]},
     classifiers=[
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Intended Audience :: Developers",
