@@ -15,7 +15,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 
-__version__ = "6.1.0"
+__version__ = "6.2.0"
 
 # import apis into sdk package
 from notehub_py.api.alert_api import AlertApi
@@ -215,6 +215,7 @@ from notehub_py.models.thingworx_route import ThingworxRoute
 from notehub_py.models.tower_location import TowerLocation
 from notehub_py.models.twilio_route import TwilioRoute
 from notehub_py.models.update_fleet_request import UpdateFleetRequest
+from notehub_py.models.update_host_firmware_request import UpdateHostFirmwareRequest
 from notehub_py.models.upload_metadata import UploadMetadata
 from notehub_py.models.usage_data import UsageData
 from notehub_py.models.usage_events_data import UsageEventsData

@@ -316,7 +316,7 @@ class BillingAccountApi:
     ) -> GetBillingAccountBalanceHistory200Response:
         """get_billing_account_balance_history
 
-        Get Billing Account Balance history, only enterprise supported
+        Get Billing Account Balance history
 
         :param billing_account_uid: (required)
         :type billing_account_uid: str
@@ -398,7 +398,7 @@ class BillingAccountApi:
     ) -> ApiResponse[GetBillingAccountBalanceHistory200Response]:
         """get_billing_account_balance_history
 
-        Get Billing Account Balance history, only enterprise supported
+        Get Billing Account Balance history
 
         :param billing_account_uid: (required)
         :type billing_account_uid: str
@@ -480,7 +480,7 @@ class BillingAccountApi:
     ) -> RESTResponseType:
         """get_billing_account_balance_history
 
-        Get Billing Account Balance history, only enterprise supported
+        Get Billing Account Balance history
 
         :param billing_account_uid: (required)
         :type billing_account_uid: str

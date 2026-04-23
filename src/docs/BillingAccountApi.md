@@ -63,7 +63,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > GetBillingAccountBalanceHistory200Response get_billing_account_balance_history(billing_account_uid, start_date=start_date, end_date=end_date)
 
-Get Billing Account Balance history, only enterprise supported
+Get Billing Account Balance history
 
 ### Example
 
