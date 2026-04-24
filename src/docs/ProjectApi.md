@@ -10,6 +10,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**create_product**](ProjectApi.md#create_product)                                           | **POST** /v1/projects/{projectOrProductUID}/products                                        |
 | [**create_project**](ProjectApi.md#create_project)                                           | **POST** /v1/projects                                                                       |
 | [**delete_device_from_fleets**](ProjectApi.md#delete_device_from_fleets)                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                    |
+| [**delete_firmware**](ProjectApi.md#delete_firmware)                                         | **DELETE** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}            |
 | [**delete_fleet**](ProjectApi.md#delete_fleet)                                               | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                             |
 | [**delete_fleet_environment_variable**](ProjectApi.md#delete_fleet_environment_variable)     | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables/{key} |
 | [**delete_product**](ProjectApi.md#delete_product)                                           | **DELETE** /v1/projects/{projectOrProductUID}/products/{productUID}                         |
@@ -41,6 +42,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**set_fleet_environment_variables**](ProjectApi.md#set_fleet_environment_variables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
 | [**set_global_event_transformation**](ProjectApi.md#set_global_event_transformation)         | **POST** /v1/projects/{projectOrProductUID}/global-transformation                           |
 | [**set_project_environment_variables**](ProjectApi.md#set_project_environment_variables)     | **PUT** /v1/projects/{projectOrProductUID}/environment_variables                            |
+| [**update_firmware**](ProjectApi.md#update_firmware)                                         | **POST** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}              |
 | [**update_fleet**](ProjectApi.md#update_fleet)                                               | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                                |
 | [**upload_firmware**](ProjectApi.md#upload_firmware)                                         | **PUT** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
 
@@ -380,6 +382,56 @@ with notehub_py.ApiClient(configuration) as api_client:
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+## delete_firmware
+
+> delete_firmware(project_or_product_uid, firmware_type, filename)
+
+Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    firmware_type = "firmware_type_example"  # str |
+    filename = "filename_example"  # str |
+
+    try:
+        api_instance.delete_firmware(project_or_product_uid, firmware_type, filename)
+    except Exception as e:
+        print("Exception when calling ProjectApi->delete_firmware: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+| **firmware_type**          | **str** |             |
+| **filename**               | **str** |             |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 ## delete_fleet
@@ -2148,6 +2200,69 @@ with notehub_py.ApiClient(configuration) as api_client:
 ### Return type
 
 [**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## update_firmware
+
+> FirmwareInfo update_firmware(project_or_product_uid, firmware_type, filename, update_host_firmware_request)
+
+Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.firmware_info import FirmwareInfo
+from notehub_py.models.update_host_firmware_request import UpdateHostFirmwareRequest
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    firmware_type = "firmware_type_example"  # str |
+    filename = "filename_example"  # str |
+    update_host_firmware_request = (
+        notehub_py.UpdateHostFirmwareRequest()
+    )  # UpdateHostFirmwareRequest | Firmware metadata fields to update. All fields are optional; only provided fields will be updated.
+
+    try:
+        api_response = api_instance.update_firmware(
+            project_or_product_uid,
+            firmware_type,
+            filename,
+            update_host_firmware_request,
+        )
+        print("The response of ProjectApi->update_firmware:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->update_firmware: %s\n" % e)
+```
+
+### Parameters
+
+| Name                             | Type                                                          | Description                                                                                        | Notes |
+| -------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ----- |
+| **project_or_product_uid**       | **str**                                                       |                                                                                                    |
+| **firmware_type**                | **str**                                                       |                                                                                                    |
+| **filename**                     | **str**                                                       |                                                                                                    |
+| **update_host_firmware_request** | [**UpdateHostFirmwareRequest**](UpdateHostFirmwareRequest.md) | Firmware metadata fields to update. All fields are optional; only provided fields will be updated. |
+
+### Return type
+
+[**FirmwareInfo**](FirmwareInfo.md)
 
 ### Authorization
 

@@ -147,6 +147,7 @@ docs/ThingworxRoute.md
 docs/TowerLocation.md
 docs/TwilioRoute.md
 docs/UpdateFleetRequest.md
+docs/UpdateHostFirmwareRequest.md
 docs/UploadMetadata.md
 docs/UsageApi.md
 docs/UsageData.md
@@ -313,6 +314,7 @@ notehub_py/models/thingworx_route.py
 notehub_py/models/tower_location.py
 notehub_py/models/twilio_route.py
 notehub_py/models/update_fleet_request.py
+notehub_py/models/update_host_firmware_request.py
 notehub_py/models/upload_metadata.py
 notehub_py/models/usage_data.py
 notehub_py/models/usage_events_data.py
@@ -331,4 +333,5 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_update_host_firmware_request.py
 tox.ini
