@@ -31,16 +31,27 @@ class Job(BaseModel):
 
     created: StrictInt = Field(description="Unix timestamp when job was created")
     created_by: StrictStr = Field(description="User who created the job")
-    definition: Optional[Dict[str, Any]] = Field(
-        default=None, description="Full job definition (only in detail view)"
-    )
     job_uid: StrictStr = Field(description="Unique identifier for the job")
+    last_run_completed: Optional[StrictInt] = Field(
+        default=None,
+        description="Unix timestamp when the most recent run completed (0 if still in progress)",
+    )
+    last_run_status: Optional[StrictStr] = Field(
+        default=None,
+        description='Status of the most recent job run. Terminal values are: "submitted", "completed successfully", "dry run completed successfully", "completed with errors", "cancelled". While a job is running, intermediate per-device progress updates may appear (e.g. "dev:000000000000000 completed", "dev:000000000000000 updated: ...").',
+    )
+    last_run_submitted: Optional[StrictInt] = Field(
+        default=None,
+        description="Unix timestamp when the most recent run was submitted",
+    )
     name: StrictStr = Field(description="Human-readable job name")
     __properties: ClassVar[List[str]] = [
         "created",
         "created_by",
-        "definition",
         "job_uid",
+        "last_run_completed",
+        "last_run_status",
+        "last_run_submitted",
         "name",
     ]
 
@@ -96,8 +107,10 @@ class Job(BaseModel):
             {
                 "created": obj.get("created"),
                 "created_by": obj.get("created_by"),
-                "definition": obj.get("definition"),
                 "job_uid": obj.get("job_uid"),
+                "last_run_completed": obj.get("last_run_completed"),
+                "last_run_status": obj.get("last_run_status"),
+                "last_run_submitted": obj.get("last_run_submitted"),
                 "name": obj.get("name"),
             }
         )

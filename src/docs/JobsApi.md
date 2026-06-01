@@ -7,6 +7,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**cancel_job_run**](JobsApi.md#cancel_job_run) | **POST** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}/cancel |
 | [**create_job**](JobsApi.md#create_job)         | **POST** /v1/projects/{projectOrProductUID}/jobs                         |
 | [**delete_job**](JobsApi.md#delete_job)         | **DELETE** /v1/projects/{projectOrProductUID}/jobs/{jobUID}              |
+| [**delete_job_run**](JobsApi.md#delete_job_run) | **DELETE** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}      |
 | [**get_job**](JobsApi.md#get_job)               | **GET** /v1/projects/{projectOrProductUID}/jobs/{jobUID}                 |
 | [**get_job_run**](JobsApi.md#get_job_run)       | **GET** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}         |
 | [**get_job_runs**](JobsApi.md#get_job_runs)     | **GET** /v1/projects/{projectOrProductUID}/jobs/{jobUID}/runs            |
@@ -66,7 +67,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ## create_job
 
-> CreateJob201Response create_job(project_or_product_uid, name, body)
+> CreateJob201Response create_job(project_or_product_uid, name, job_definition)
 
 Create a new batch job with an optional name
 
@@ -75,6 +76,7 @@ Create a new batch job with an optional name
 ```python
 import notehub_py
 from notehub_py.models.create_job201_response import CreateJob201Response
+from notehub_py.models.job_definition import JobDefinition
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -86,10 +88,14 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.JobsApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
     name = "name_example"  # str | Name for the job
-    body = None  # object | The job definition as raw JSON
+    job_definition = (
+        notehub_py.JobDefinition()
+    )  # JobDefinition | The batch job definition
 
     try:
-        api_response = api_instance.create_job(project_or_product_uid, name, body)
+        api_response = api_instance.create_job(
+            project_or_product_uid, name, job_definition
+        )
         print("The response of JobsApi->create_job:\n")
         pprint(api_response)
     except Exception as e:
@@ -98,11 +104,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type       | Description                    | Notes |
-| -------------------------- | ---------- | ------------------------------ | ----- |
-| **project_or_product_uid** | **str**    |                                |
-| **name**                   | **str**    | Name for the job               |
-| **body**                   | **object** | The job definition as raw JSON |
+| Name                       | Type                                  | Description              | Notes |
+| -------------------------- | ------------------------------------- | ------------------------ | ----- |
+| **project_or_product_uid** | **str**                               |                          |
+| **name**                   | **str**                               | Name for the job         |
+| **job_definition**         | [**JobDefinition**](JobDefinition.md) | The batch job definition |
 
 ### Return type
 
@@ -168,9 +174,57 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+## delete_job_run
+
+> delete_job_run(project_or_product_uid, report_uid)
+
+Delete the results of a job run
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.JobsApi(api_client)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    report_uid = "my-reconciliation-job-1707654321000"  # str | Unique identifier for a job run report
+
+    try:
+        api_instance.delete_job_run(project_or_product_uid, report_uid)
+    except Exception as e:
+        print("Exception when calling JobsApi->delete_job_run: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description                            | Notes |
+| -------------------------- | ------- | -------------------------------------- | ----- |
+| **project_or_product_uid** | **str** |                                        |
+| **report_uid**             | **str** | Unique identifier for a job run report |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 ## get_job
 
-> Job get_job(project_or_product_uid, job_uid)
+> JobDetail get_job(project_or_product_uid, job_uid)
 
 Get a specific batch job definition
 
@@ -178,7 +232,7 @@ Get a specific batch job definition
 
 ```python
 import notehub_py
-from notehub_py.models.job import Job
+from notehub_py.models.job_detail import JobDetail
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -208,7 +262,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Return type
 
-[**Job**](Job.md)
+[**JobDetail**](JobDetail.md)
 
 ### Authorization
 
@@ -221,7 +275,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ## get_job_run
 
-> JobRun get_job_run(project_or_product_uid, report_uid)
+> JobRun get_job_run(project_or_product_uid, report_uid, view=view)
 
 Get the result of a job execution
 
@@ -241,9 +295,12 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.JobsApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
     report_uid = "my-reconciliation-job-1707654321000"  # str | Unique identifier for a job run report
+    view = "summary"  # str | Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload (optional) (default to 'summary')
 
     try:
-        api_response = api_instance.get_job_run(project_or_product_uid, report_uid)
+        api_response = api_instance.get_job_run(
+            project_or_product_uid, report_uid, view=view
+        )
         print("The response of JobsApi->get_job_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -252,10 +309,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description                            | Notes |
-| -------------------------- | ------- | -------------------------------------- | ----- |
-| **project_or_product_uid** | **str** |                                        |
-| **report_uid**             | **str** | Unique identifier for a job run report |
+| Name                       | Type    | Description                                                                                                                      | Notes                                     |
+| -------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| **project_or_product_uid** | **str** |                                                                                                                                  |
+| **report_uid**             | **str** | Unique identifier for a job run report                                                                                           |
+| **view**                   | **str** | Controls the level of detail returned: &#39;summary&#39; returns metadata only, &#39;detail&#39; returns the full result payload | [optional] [default to &#39;summary&#39;] |
 
 ### Return type
 

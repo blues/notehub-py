@@ -17,15 +17,16 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictStr
-from typing import Any, Dict, Optional
+from pydantic import Field, StrictBool, StrictStr, field_validator
+from typing import Optional
 from typing_extensions import Annotated
 from notehub_py.models.cancel_job_run200_response import CancelJobRun200Response
 from notehub_py.models.create_job201_response import CreateJob201Response
 from notehub_py.models.delete_job200_response import DeleteJob200Response
 from notehub_py.models.get_job_runs200_response import GetJobRuns200Response
 from notehub_py.models.get_jobs200_response import GetJobs200Response
-from notehub_py.models.job import Job
+from notehub_py.models.job_definition import JobDefinition
+from notehub_py.models.job_detail import JobDetail
 from notehub_py.models.job_run import JobRun
 from notehub_py.models.run_job200_response import RunJob200Response
 
@@ -314,8 +315,8 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         name: Annotated[StrictStr, Field(description="Name for the job")],
-        body: Annotated[
-            Dict[str, Any], Field(description="The job definition as raw JSON")
+        job_definition: Annotated[
+            JobDefinition, Field(description="The batch job definition")
         ],
         _request_timeout: Union[
             None,
@@ -337,8 +338,8 @@ class JobsApi:
         :type project_or_product_uid: str
         :param name: Name for the job (required)
         :type name: str
-        :param body: The job definition as raw JSON (required)
-        :type body: object
+        :param job_definition: The batch job definition (required)
+        :type job_definition: JobDefinition
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -364,7 +365,7 @@ class JobsApi:
         _param = self._create_job_serialize(
             project_or_product_uid=project_or_product_uid,
             name=name,
-            body=body,
+            job_definition=job_definition,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -389,8 +390,8 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         name: Annotated[StrictStr, Field(description="Name for the job")],
-        body: Annotated[
-            Dict[str, Any], Field(description="The job definition as raw JSON")
+        job_definition: Annotated[
+            JobDefinition, Field(description="The batch job definition")
         ],
         _request_timeout: Union[
             None,
@@ -412,8 +413,8 @@ class JobsApi:
         :type project_or_product_uid: str
         :param name: Name for the job (required)
         :type name: str
-        :param body: The job definition as raw JSON (required)
-        :type body: object
+        :param job_definition: The batch job definition (required)
+        :type job_definition: JobDefinition
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -439,7 +440,7 @@ class JobsApi:
         _param = self._create_job_serialize(
             project_or_product_uid=project_or_product_uid,
             name=name,
-            body=body,
+            job_definition=job_definition,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -464,8 +465,8 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         name: Annotated[StrictStr, Field(description="Name for the job")],
-        body: Annotated[
-            Dict[str, Any], Field(description="The job definition as raw JSON")
+        job_definition: Annotated[
+            JobDefinition, Field(description="The batch job definition")
         ],
         _request_timeout: Union[
             None,
@@ -487,8 +488,8 @@ class JobsApi:
         :type project_or_product_uid: str
         :param name: Name for the job (required)
         :type name: str
-        :param body: The job definition as raw JSON (required)
-        :type body: object
+        :param job_definition: The batch job definition (required)
+        :type job_definition: JobDefinition
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -514,7 +515,7 @@ class JobsApi:
         _param = self._create_job_serialize(
             project_or_product_uid=project_or_product_uid,
             name=name,
-            body=body,
+            job_definition=job_definition,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -534,7 +535,7 @@ class JobsApi:
         self,
         project_or_product_uid,
         name,
-        body,
+        job_definition,
         _request_auth,
         _content_type,
         _headers,
@@ -563,8 +564,8 @@ class JobsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if body is not None:
-            _body_params = body
+        if job_definition is not None:
+            _body_params = job_definition
 
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.api_client.select_header_accept(
@@ -863,6 +864,269 @@ class JobsApi:
         )
 
     @validate_call
+    def delete_job_run(
+        self,
+        project_or_product_uid: StrictStr,
+        report_uid: Annotated[
+            StrictStr, Field(description="Unique identifier for a job run report")
+        ],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """delete_job_run
+
+        Delete the results of a job run
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param report_uid: Unique identifier for a job run report (required)
+        :type report_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_job_run_serialize(
+            project_or_product_uid=project_or_product_uid,
+            report_uid=report_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": None,
+            "404": None,
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def delete_job_run_with_http_info(
+        self,
+        project_or_product_uid: StrictStr,
+        report_uid: Annotated[
+            StrictStr, Field(description="Unique identifier for a job run report")
+        ],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """delete_job_run
+
+        Delete the results of a job run
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param report_uid: Unique identifier for a job run report (required)
+        :type report_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_job_run_serialize(
+            project_or_product_uid=project_or_product_uid,
+            report_uid=report_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": None,
+            "404": None,
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def delete_job_run_without_preload_content(
+        self,
+        project_or_product_uid: StrictStr,
+        report_uid: Annotated[
+            StrictStr, Field(description="Unique identifier for a job run report")
+        ],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """delete_job_run
+
+        Delete the results of a job run
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param report_uid: Unique identifier for a job run report (required)
+        :type report_uid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._delete_job_run_serialize(
+            project_or_product_uid=project_or_product_uid,
+            report_uid=report_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": None,
+            "404": None,
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _delete_job_run_serialize(
+        self,
+        project_or_product_uid,
+        report_uid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
+        if report_uid is not None:
+            _path_params["reportUID"] = report_uid
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )
+
+        # authentication setting
+        _auth_settings: List[str] = ["personalAccessToken"]
+
+        return self.api_client.param_serialize(
+            method="DELETE",
+            resource_path="/v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     def get_job(
         self,
         project_or_product_uid: StrictStr,
@@ -880,7 +1144,7 @@ class JobsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Job:
+    ) -> JobDetail:
         """get_job
 
         Get a specific batch job definition
@@ -921,7 +1185,7 @@ class JobsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Job",
+            "200": "JobDetail",
             "404": None,
         }
         response_data = self.api_client.call_api(
@@ -951,7 +1215,7 @@ class JobsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Job]:
+    ) -> ApiResponse[JobDetail]:
         """get_job
 
         Get a specific batch job definition
@@ -992,7 +1256,7 @@ class JobsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Job",
+            "200": "JobDetail",
             "404": None,
         }
         response_data = self.api_client.call_api(
@@ -1063,7 +1327,7 @@ class JobsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Job",
+            "200": "JobDetail",
             "404": None,
         }
         response_data = self.api_client.call_api(
@@ -1132,6 +1396,12 @@ class JobsApi:
         report_uid: Annotated[
             StrictStr, Field(description="Unique identifier for a job run report")
         ],
+        view: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload"
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1152,6 +1422,8 @@ class JobsApi:
         :type project_or_product_uid: str
         :param report_uid: Unique identifier for a job run report (required)
         :type report_uid: str
+        :param view: Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload
+        :type view: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1177,6 +1449,7 @@ class JobsApi:
         _param = self._get_job_run_serialize(
             project_or_product_uid=project_or_product_uid,
             report_uid=report_uid,
+            view=view,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1203,6 +1476,12 @@ class JobsApi:
         report_uid: Annotated[
             StrictStr, Field(description="Unique identifier for a job run report")
         ],
+        view: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload"
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1223,6 +1502,8 @@ class JobsApi:
         :type project_or_product_uid: str
         :param report_uid: Unique identifier for a job run report (required)
         :type report_uid: str
+        :param view: Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload
+        :type view: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1248,6 +1529,7 @@ class JobsApi:
         _param = self._get_job_run_serialize(
             project_or_product_uid=project_or_product_uid,
             report_uid=report_uid,
+            view=view,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1274,6 +1556,12 @@ class JobsApi:
         report_uid: Annotated[
             StrictStr, Field(description="Unique identifier for a job run report")
         ],
+        view: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload"
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1294,6 +1582,8 @@ class JobsApi:
         :type project_or_product_uid: str
         :param report_uid: Unique identifier for a job run report (required)
         :type report_uid: str
+        :param view: Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload
+        :type view: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1319,6 +1609,7 @@ class JobsApi:
         _param = self._get_job_run_serialize(
             project_or_product_uid=project_or_product_uid,
             report_uid=report_uid,
+            view=view,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1338,6 +1629,7 @@ class JobsApi:
         self,
         project_or_product_uid,
         report_uid,
+        view,
         _request_auth,
         _content_type,
         _headers,
@@ -1361,6 +1653,10 @@ class JobsApi:
         if report_uid is not None:
             _path_params["reportUID"] = report_uid
         # process the query parameters
+        if view is not None:
+
+            _query_params.append(("view", view))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter

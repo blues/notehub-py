@@ -15,7 +15,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 
-__version__ = "6.2.0"
+__version__ = "6.3.0"
 
 # import apis into sdk package
 from notehub_py.api.alert_api import AlertApi
@@ -50,6 +50,7 @@ from notehub_py.models.alert_data_inner import AlertDataInner
 from notehub_py.models.alert_notifications_inner import AlertNotificationsInner
 from notehub_py.models.aws_route import AwsRoute
 from notehub_py.models.azure_route import AzureRoute
+from notehub_py.models.batch_job_requests import BatchJobRequests
 from notehub_py.models.billing_account import BillingAccount
 from notehub_py.models.billing_account_role import BillingAccountRole
 from notehub_py.models.blynk_route import BlynkRoute
@@ -60,9 +61,13 @@ from notehub_py.models.clone_project_request import CloneProjectRequest
 from notehub_py.models.contact import Contact
 from notehub_py.models.create_fleet_request import CreateFleetRequest
 from notehub_py.models.create_job201_response import CreateJob201Response
+from notehub_py.models.create_legacy_webhook_event_request import (
+    CreateLegacyWebhookEventRequest,
+)
 from notehub_py.models.create_monitor import CreateMonitor
 from notehub_py.models.create_product_request import CreateProductRequest
 from notehub_py.models.create_project_request import CreateProjectRequest
+from notehub_py.models.create_project_secret_request import CreateProjectSecretRequest
 from notehub_py.models.create_update_repository import CreateUpdateRepository
 from notehub_py.models.current_firmware import CurrentFirmware
 from notehub_py.models.dfu_env import DFUEnv
@@ -130,6 +135,16 @@ from notehub_py.models.get_device_health_log200_response import (
 from notehub_py.models.get_device_health_log200_response_health_log_inner import (
     GetDeviceHealthLog200ResponseHealthLogInner,
 )
+from notehub_py.models.get_device_journey200_response import GetDeviceJourney200Response
+from notehub_py.models.get_device_journey200_response_journey import (
+    GetDeviceJourney200ResponseJourney,
+)
+from notehub_py.models.get_device_journeys200_response import (
+    GetDeviceJourneys200Response,
+)
+from notehub_py.models.get_device_journeys200_response_journeys_inner import (
+    GetDeviceJourneys200ResponseJourneysInner,
+)
 from notehub_py.models.get_device_latest_events200_response import (
     GetDeviceLatestEvents200Response,
 )
@@ -158,6 +173,7 @@ from notehub_py.models.get_products200_response import GetProducts200Response
 from notehub_py.models.get_project_members200_response import (
     GetProjectMembers200Response,
 )
+from notehub_py.models.get_project_secrets_response import GetProjectSecretsResponse
 from notehub_py.models.get_projects200_response import GetProjects200Response
 from notehub_py.models.get_route_logs_usage200_response import (
     GetRouteLogsUsage200Response,
@@ -167,6 +183,10 @@ from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.models.google_route import GoogleRoute
 from notehub_py.models.http_route import HttpRoute
 from notehub_py.models.job import Job
+from notehub_py.models.job_definition import JobDefinition
+from notehub_py.models.job_definition_report_options import JobDefinitionReportOptions
+from notehub_py.models.job_definition_select import JobDefinitionSelect
+from notehub_py.models.job_detail import JobDetail
 from notehub_py.models.job_run import JobRun
 from notehub_py.models.location import Location
 from notehub_py.models.login200_response import Login200Response
@@ -191,11 +211,15 @@ from notehub_py.models.personal_access_token_secret import PersonalAccessTokenSe
 from notehub_py.models.product import Product
 from notehub_py.models.project import Project
 from notehub_py.models.project_member import ProjectMember
+from notehub_py.models.project_secret import ProjectSecret
 from notehub_py.models.provision_device_request import ProvisionDeviceRequest
 from notehub_py.models.proxy_route import ProxyRoute
 from notehub_py.models.qubitro_route import QubitroRoute
 from notehub_py.models.rad_route import RadRoute
 from notehub_py.models.repository import Repository
+from notehub_py.models.repository_list_response import RepositoryListResponse
+from notehub_py.models.repository_token_request import RepositoryTokenRequest
+from notehub_py.models.repository_token_response import RepositoryTokenResponse
 from notehub_py.models.role import Role
 from notehub_py.models.route_log import RouteLog
 from notehub_py.models.route_transform_settings import RouteTransformSettings
@@ -216,6 +240,7 @@ from notehub_py.models.tower_location import TowerLocation
 from notehub_py.models.twilio_route import TwilioRoute
 from notehub_py.models.update_fleet_request import UpdateFleetRequest
 from notehub_py.models.update_host_firmware_request import UpdateHostFirmwareRequest
+from notehub_py.models.update_project_secret_request import UpdateProjectSecretRequest
 from notehub_py.models.upload_metadata import UploadMetadata
 from notehub_py.models.usage_data import UsageData
 from notehub_py.models.usage_events_data import UsageEventsData

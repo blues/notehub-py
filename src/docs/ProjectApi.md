@@ -9,6 +9,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**create_fleet**](ProjectApi.md#create_fleet)                                               | **POST** /v1/projects/{projectOrProductUID}/fleets                                          |
 | [**create_product**](ProjectApi.md#create_product)                                           | **POST** /v1/projects/{projectOrProductUID}/products                                        |
 | [**create_project**](ProjectApi.md#create_project)                                           | **POST** /v1/projects                                                                       |
+| [**create_project_secret**](ProjectApi.md#create_project_secret)                             | **POST** /v1/projects/{projectOrProductUID}/secrets                                         |
 | [**delete_device_from_fleets**](ProjectApi.md#delete_device_from_fleets)                     | **DELETE** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/fleets                    |
 | [**delete_firmware**](ProjectApi.md#delete_firmware)                                         | **DELETE** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}            |
 | [**delete_fleet**](ProjectApi.md#delete_fleet)                                               | **DELETE** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                             |
@@ -16,6 +17,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**delete_product**](ProjectApi.md#delete_product)                                           | **DELETE** /v1/projects/{projectOrProductUID}/products/{productUID}                         |
 | [**delete_project**](ProjectApi.md#delete_project)                                           | **DELETE** /v1/projects/{projectOrProductUID}                                               |
 | [**delete_project_environment_variable**](ProjectApi.md#delete_project_environment_variable) | **DELETE** /v1/projects/{projectOrProductUID}/environment_variables/{key}                   |
+| [**delete_project_secret**](ProjectApi.md#delete_project_secret)                             | **DELETE** /v1/projects/{projectOrProductUID}/secrets/{secretName}                          |
 | [**disable_global_event_transformation**](ProjectApi.md#disable_global_event_transformation) | **POST** /v1/projects/{projectOrProductUID}/global-transformation/disable                   |
 | [**download_firmware**](ProjectApi.md#download_firmware)                                     | **GET** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
 | [**enable_global_event_transformation**](ProjectApi.md#enable_global_event_transformation)   | **POST** /v1/projects/{projectOrProductUID}/global-transformation/enable                    |
@@ -37,6 +39,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_project_environment_hierarchy**](ProjectApi.md#get_project_environment_hierarchy)     | **GET** /v1/projects/{projectOrProductUID}/environment_hierarchy                            | Get environment variable hierarchy for a device          |
 | [**get_project_environment_variables**](ProjectApi.md#get_project_environment_variables)     | **GET** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**get_project_members**](ProjectApi.md#get_project_members)                                 | **GET** /v1/projects/{projectOrProductUID}/members                                          |
+| [**get_project_secrets**](ProjectApi.md#get_project_secrets)                                 | **GET** /v1/projects/{projectOrProductUID}/secrets                                          |
 | [**get_projects**](ProjectApi.md#get_projects)                                               | **GET** /v1/projects                                                                        |
 | [**perform_dfu_action**](ProjectApi.md#perform_dfu_action)                                   | **POST** /v1/projects/{projectOrProductUID}/dfu/{firmwareType}/{action}                     |
 | [**set_fleet_environment_variables**](ProjectApi.md#set_fleet_environment_variables)         | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}/environment_variables          |
@@ -44,6 +47,7 @@ All URIs are relative to *https://api.notefile.net*
 | [**set_project_environment_variables**](ProjectApi.md#set_project_environment_variables)     | **PUT** /v1/projects/{projectOrProductUID}/environment_variables                            |
 | [**update_firmware**](ProjectApi.md#update_firmware)                                         | **POST** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}              |
 | [**update_fleet**](ProjectApi.md#update_fleet)                                               | **PUT** /v1/projects/{projectOrProductUID}/fleets/{fleetUID}                                |
+| [**update_project_secret**](ProjectApi.md#update_project_secret)                             | **PUT** /v1/projects/{projectOrProductUID}/secrets/{secretName}                             |
 | [**upload_firmware**](ProjectApi.md#upload_firmware)                                         | **PUT** /v1/projects/{projectOrProductUID}/firmware/{firmwareType}/{filename}               |
 
 ## add_device_to_fleets
@@ -314,6 +318,62 @@ with notehub_py.ApiClient(configuration) as api_client:
 ### Return type
 
 [**Project**](Project.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## create_project_secret
+
+> ProjectSecret create_project_secret(project_or_product_uid, create_project_secret_request)
+
+Create a new project secret
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.create_project_secret_request import CreateProjectSecretRequest
+from notehub_py.models.project_secret import ProjectSecret
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    create_project_secret_request = (
+        notehub_py.CreateProjectSecretRequest()
+    )  # CreateProjectSecretRequest |
+
+    try:
+        api_response = api_instance.create_project_secret(
+            project_or_product_uid, create_project_secret_request
+        )
+        print("The response of ProjectApi->create_project_secret:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->create_project_secret: %s\n" % e)
+```
+
+### Parameters
+
+| Name                              | Type                                                            | Description | Notes |
+| --------------------------------- | --------------------------------------------------------------- | ----------- | ----- |
+| **project_or_product_uid**        | **str**                                                         |             |
+| **create_project_secret_request** | [**CreateProjectSecretRequest**](CreateProjectSecretRequest.md) |             |
+
+### Return type
+
+[**ProjectSecret**](ProjectSecret.md)
 
 ### Authorization
 
@@ -680,6 +740,54 @@ with notehub_py.ApiClient(configuration) as api_client:
 ### Return type
 
 [**EnvironmentVariables**](EnvironmentVariables.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## delete_project_secret
+
+> delete_project_secret(project_or_product_uid, secret_name)
+
+Delete a project secret by name
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    secret_name = "secret_name_example"  # str | The name of the secret.
+
+    try:
+        api_instance.delete_project_secret(project_or_product_uid, secret_name)
+    except Exception as e:
+        print("Exception when calling ProjectApi->delete_project_secret: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description             | Notes |
+| -------------------------- | ------- | ----------------------- | ----- |
+| **project_or_product_uid** | **str** |                         |
+| **secret_name**            | **str** | The name of the secret. |
+
+### Return type
+
+void (empty response body)
 
 ### Authorization
 
@@ -1560,6 +1668,7 @@ from notehub_py.models.notefile_schema import NotefileSchema
 from notehub_py.rest import ApiException
 from pprint import pprint
 
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -1588,7 +1697,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-No authorization required
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -1902,6 +2011,55 @@ with notehub_py.ApiClient(configuration) as api_client:
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+## get_project_secrets
+
+> GetProjectSecretsResponse get_project_secrets(project_or_product_uid)
+
+Get all secrets for a project (metadata only, values are never returned)
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.get_project_secrets_response import GetProjectSecretsResponse
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+
+    try:
+        api_response = api_instance.get_project_secrets(project_or_product_uid)
+        print("The response of ProjectApi->get_project_secrets:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->get_project_secrets: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description | Notes |
+| -------------------------- | ------- | ----------- | ----- |
+| **project_or_product_uid** | **str** |             |
+
+### Return type
+
+[**GetProjectSecretsResponse**](GetProjectSecretsResponse.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 ## get_projects
 
 > GetProjects200Response get_projects()
@@ -2121,7 +2279,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.ProjectApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    body = None  # object | JSONata expression which will be applied to each event before it is persisted and routed
+    body = "body_example"  # str | JSONata expression which will be applied to each event before it is persisted and routed
 
     try:
         api_instance.set_global_event_transformation(project_or_product_uid, body)
@@ -2134,10 +2292,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type       | Description                                                                              | Notes |
-| -------------------------- | ---------- | ---------------------------------------------------------------------------------------- | ----- |
-| **project_or_product_uid** | **str**    |                                                                                          |
-| **body**                   | **object** | JSONata expression which will be applied to each event before it is persisted and routed |
+| Name                       | Type    | Description                                                                              | Notes |
+| -------------------------- | ------- | ---------------------------------------------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str** |                                                                                          |
+| **body**                   | **str** | JSONata expression which will be applied to each event before it is persisted and routed |
 
 ### Return type
 
@@ -2149,7 +2307,7 @@ void (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: text/plain
 - **Accept**: application/json
 
 ## set_project_environment_variables
@@ -2321,6 +2479,64 @@ with notehub_py.ApiClient(configuration) as api_client:
 ### Return type
 
 [**Fleet**](Fleet.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+## update_project_secret
+
+> ProjectSecret update_project_secret(project_or_product_uid, secret_name, update_project_secret_request)
+
+Update the value of an existing project secret
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.project_secret import ProjectSecret
+from notehub_py.models.update_project_secret_request import UpdateProjectSecretRequest
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.ProjectApi(api_client)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    secret_name = "secret_name_example"  # str | The name of the secret.
+    update_project_secret_request = (
+        notehub_py.UpdateProjectSecretRequest()
+    )  # UpdateProjectSecretRequest |
+
+    try:
+        api_response = api_instance.update_project_secret(
+            project_or_product_uid, secret_name, update_project_secret_request
+        )
+        print("The response of ProjectApi->update_project_secret:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ProjectApi->update_project_secret: %s\n" % e)
+```
+
+### Parameters
+
+| Name                              | Type                                                            | Description             | Notes |
+| --------------------------------- | --------------------------------------------------------------- | ----------------------- | ----- |
+| **project_or_product_uid**        | **str**                                                         |                         |
+| **secret_name**                   | **str**                                                         | The name of the secret. |
+| **update_project_secret_request** | [**UpdateProjectSecretRequest**](UpdateProjectSecretRequest.md) |                         |
+
+### Return type
+
+[**ProjectSecret**](ProjectSecret.md)
 
 ### Authorization
 

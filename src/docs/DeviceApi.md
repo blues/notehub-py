@@ -19,6 +19,8 @@ All URIs are relative to *https://api.notefile.net*
 | [**get_device_environment_variables**](DeviceApi.md#get_device_environment_variables)               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/environment_variables          |
 | [**get_device_environment_variables_by_pin**](DeviceApi.md#get_device_environment_variables_by_pin) | **GET** /v1/products/{productUID}/devices/{deviceUID}/environment_variables_with_pin          |
 | [**get_device_health_log**](DeviceApi.md#get_device_health_log)                                     | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/health-log                     |
+| [**get_device_journey**](DeviceApi.md#get_device_journey)                                           | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys/{journeyID}           |
+| [**get_device_journeys**](DeviceApi.md#get_device_journeys)                                         | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/journeys                       |
 | [**get_device_latest_events**](DeviceApi.md#get_device_latest_events)                               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/latest                         |
 | [**get_device_plans**](DeviceApi.md#get_device_plans)                                               | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/plans                          |
 | [**get_device_public_key**](DeviceApi.md#get_device_public_key)                                     | **GET** /v1/projects/{projectOrProductUID}/devices/{deviceUID}/public-key                     |
@@ -759,6 +761,7 @@ from notehub_py.models.get_device_environment_variables_by_pin200_response impor
 from notehub_py.rest import ApiException
 from pprint import pprint
 
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -797,7 +800,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-No authorization required
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 
@@ -861,6 +864,128 @@ with notehub_py.ApiClient(configuration) as api_client:
 ### Return type
 
 [**GetDeviceHealthLog200Response**](GetDeviceHealthLog200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## get_device_journey
+
+> GetDeviceJourney200Response get_device_journey(project_or_product_uid, device_uid, journey_id, page_size=page_size, page_num=page_num)
+
+Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.get_device_journey200_response import GetDeviceJourney200Response
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    journey_id = 56  # int | Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+    page_size = 50  # int |  (optional) (default to 50)
+    page_num = 1  # int |  (optional) (default to 1)
+
+    try:
+        api_response = api_instance.get_device_journey(
+            project_or_product_uid,
+            device_uid,
+            journey_id,
+            page_size=page_size,
+            page_num=page_num,
+        )
+        print("The response of DeviceApi->get_device_journey:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_device_journey: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description                                                                                                                                               | Notes                      |
+| -------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **project_or_product_uid** | **str** |                                                                                                                                                           |
+| **device_uid**             | **str** |                                                                                                                                                           |
+| **journey_id**             | **int** | Identifier of the journey, taken from the &#x60;journey&#x60; field on &#x60;\_track.qo&#x60; events (a Unix timestamp marking the start of the journey). |
+| **page_size**              | **int** |                                                                                                                                                           | [optional] [default to 50] |
+| **page_num**               | **int** |                                                                                                                                                           | [optional] [default to 1]  |
+
+### Return type
+
+[**GetDeviceJourney200Response**](GetDeviceJourney200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+## get_device_journeys
+
+> GetDeviceJourneys200Response get_device_journeys(project_or_product_uid, device_uid, start_date=start_date, end_date=end_date)
+
+Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.get_device_journeys200_response import (
+    GetDeviceJourneys200Response,
+)
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.DeviceApi(api_client)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    device_uid = "dev:000000000000000"  # str |
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
+
+    try:
+        api_response = api_instance.get_device_journeys(
+            project_or_product_uid, device_uid, start_date=start_date, end_date=end_date
+        )
+        print("The response of DeviceApi->get_device_journeys:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DeviceApi->get_device_journeys: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description                                                     | Notes      |
+| -------------------------- | ------- | --------------------------------------------------------------- | ---------- |
+| **project_or_product_uid** | **str** |                                                                 |
+| **device_uid**             | **str** |                                                                 |
+| **start_date**             | **int** | Start date for filtering results, specified as a Unix timestamp | [optional] |
+| **end_date**               | **int** | End date for filtering results, specified as a Unix timestamp   | [optional] |
+
+### Return type
+
+[**GetDeviceJourneys200Response**](GetDeviceJourneys200Response.md)
 
 ### Authorization
 
@@ -1598,6 +1723,7 @@ from notehub_py.models.environment_variables import EnvironmentVariables
 from notehub_py.rest import ApiException
 from pprint import pprint
 
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
 
 # Enter a context with an instance of the API client
 with notehub_py.ApiClient(configuration) as api_client:
@@ -1640,7 +1766,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Authorization
 
-No authorization required
+[personalAccessToken](../README.md#personalAccessToken)
 
 ### HTTP request headers
 

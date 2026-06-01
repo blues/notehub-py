@@ -30,6 +30,7 @@ class BillingAccountRole(str, Enum):
     BILLING_ADMIN = "billing_admin"
     BILLING_MANAGER = "billing_manager"
     PROJECT_CREATOR = "project_creator"
+    BILLING_MEMBER = "billing_member"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
