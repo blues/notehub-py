@@ -88,6 +88,18 @@ class CreateMonitor(BaseModel):
         description="The type of condition to apply to the value selected by the source_selector"
     )
     uid: Optional[StrictStr] = None
+    usage_scope: Optional[StrictStr] = Field(
+        default=None,
+        description='For usage monitors: the scope of aggregation. Supported values are "device" and "fleet".',
+    )
+    usage_type: Optional[StrictStr] = Field(
+        default=None,
+        description='For usage monitors: the type of data usage to monitor. Supported values are "cellular" and "satellite".',
+    )
+    usage_window: Optional[StrictInt] = Field(
+        default=None,
+        description="For usage monitors: the rolling time window in days to sum usage over (e.g. 30 for 30 days).",
+    )
     __properties: ClassVar[List[str]] = [
         "aggregate_function",
         "aggregate_window",
@@ -107,6 +119,9 @@ class CreateMonitor(BaseModel):
         "source_type",
         "threshold",
         "uid",
+        "usage_scope",
+        "usage_type",
+        "usage_window",
     ]
 
     @field_validator("aggregate_function")
@@ -252,6 +267,9 @@ class CreateMonitor(BaseModel):
                 "source_type": obj.get("source_type"),
                 "threshold": obj.get("threshold"),
                 "uid": obj.get("uid"),
+                "usage_scope": obj.get("usage_scope"),
+                "usage_type": obj.get("usage_type"),
+                "usage_window": obj.get("usage_window"),
             }
         )
         return _obj
