@@ -18,7 +18,7 @@ All URIs are relative to *https://api.notefile.net*
 
 ## create_legacy_webhook_event
 
-> create_legacy_webhook_event(product_uid, device_uid, create_legacy_webhook_event_request)
+> create_legacy_webhook_event(product_uid, device_uid, request_body)
 
 Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
 
@@ -26,9 +26,6 @@ Legacy endpoint for sending an event from a webhook, associated with the given d
 
 ```python
 import notehub_py
-from notehub_py.models.create_legacy_webhook_event_request import (
-    CreateLegacyWebhookEventRequest,
-)
 from notehub_py.rest import ApiException
 from pprint import pprint
 
@@ -40,16 +37,14 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.WebhookApi(api_client)
     product_uid = "com.blues.bridge:sensors"  # str |
     device_uid = "dev:000000000000000"  # str |
-    create_legacy_webhook_event_request = {
+    request_body = {
         "body": {"key": "value"},
         "file": "data.qo",
         "payload": "SGVsbG8sIFdvcmxkIQ==",
-    }  # CreateLegacyWebhookEventRequest | A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload.
+    }  # Dict[str, object] | A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.
 
     try:
-        api_instance.create_legacy_webhook_event(
-            product_uid, device_uid, create_legacy_webhook_event_request
-        )
+        api_instance.create_legacy_webhook_event(product_uid, device_uid, request_body)
     except Exception as e:
         print(
             "Exception when calling WebhookApi->create_legacy_webhook_event: %s\n" % e
@@ -58,11 +53,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                                    | Type                                                                      | Description                                                                             | Notes |
-| --------------------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----- |
-| **product_uid**                         | **str**                                                                   |                                                                                         |
-| **device_uid**                          | **str**                                                                   |                                                                                         |
-| **create_legacy_webhook_event_request** | [**CreateLegacyWebhookEventRequest**](CreateLegacyWebhookEventRequest.md) | A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload. |
+| Name             | Type                               | Description                                                                                                                                                                                                           | Notes |
+| ---------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **product_uid**  | **str**                            |                                                                                                                                                                                                                       |
+| **device_uid**   | **str**                            |                                                                                                                                                                                                                       |
+| **request_body** | [**Dict[str, object]**](object.md) | A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored. |
 
 ### Return type
 

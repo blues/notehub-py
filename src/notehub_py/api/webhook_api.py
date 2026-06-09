@@ -20,9 +20,6 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import Any, Dict, Optional
 from typing_extensions import Annotated
-from notehub_py.models.create_legacy_webhook_event_request import (
-    CreateLegacyWebhookEventRequest,
-)
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.models.webhook_settings import WebhookSettings
 
@@ -48,10 +45,10 @@ class WebhookApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        create_legacy_webhook_event_request: Annotated[
-            CreateLegacyWebhookEventRequest,
+        request_body: Annotated[
+            Dict[str, Any],
             Field(
-                description="A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload."
+                description="A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored."
             ),
         ],
         _request_timeout: Union[
@@ -74,8 +71,8 @@ class WebhookApi:
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param create_legacy_webhook_event_request: A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload. (required)
-        :type create_legacy_webhook_event_request: CreateLegacyWebhookEventRequest
+        :param request_body: A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored. (required)
+        :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -101,7 +98,7 @@ class WebhookApi:
         _param = self._create_legacy_webhook_event_serialize(
             product_uid=product_uid,
             device_uid=device_uid,
-            create_legacy_webhook_event_request=create_legacy_webhook_event_request,
+            request_body=request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -125,10 +122,10 @@ class WebhookApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        create_legacy_webhook_event_request: Annotated[
-            CreateLegacyWebhookEventRequest,
+        request_body: Annotated[
+            Dict[str, Any],
             Field(
-                description="A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload."
+                description="A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored."
             ),
         ],
         _request_timeout: Union[
@@ -151,8 +148,8 @@ class WebhookApi:
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param create_legacy_webhook_event_request: A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload. (required)
-        :type create_legacy_webhook_event_request: CreateLegacyWebhookEventRequest
+        :param request_body: A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored. (required)
+        :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -178,7 +175,7 @@ class WebhookApi:
         _param = self._create_legacy_webhook_event_serialize(
             product_uid=product_uid,
             device_uid=device_uid,
-            create_legacy_webhook_event_request=create_legacy_webhook_event_request,
+            request_body=request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -202,10 +199,10 @@ class WebhookApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        create_legacy_webhook_event_request: Annotated[
-            CreateLegacyWebhookEventRequest,
+        request_body: Annotated[
+            Dict[str, Any],
             Field(
-                description="A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload."
+                description="A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored."
             ),
         ],
         _request_timeout: Union[
@@ -228,8 +225,8 @@ class WebhookApi:
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param create_legacy_webhook_event_request: A Note-shaped event with notefile name, JSON body, and optional base64-encoded payload. (required)
-        :type create_legacy_webhook_event_request: CreateLegacyWebhookEventRequest
+        :param request_body: A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored. (required)
+        :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -255,7 +252,7 @@ class WebhookApi:
         _param = self._create_legacy_webhook_event_serialize(
             product_uid=product_uid,
             device_uid=device_uid,
-            create_legacy_webhook_event_request=create_legacy_webhook_event_request,
+            request_body=request_body,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -274,7 +271,7 @@ class WebhookApi:
         self,
         product_uid,
         device_uid,
-        create_legacy_webhook_event_request,
+        request_body,
         _request_auth,
         _content_type,
         _headers,
@@ -301,8 +298,8 @@ class WebhookApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_legacy_webhook_event_request is not None:
-            _body_params = create_legacy_webhook_event_request
+        if request_body is not None:
+            _body_params = request_body
 
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.api_client.select_header_accept(

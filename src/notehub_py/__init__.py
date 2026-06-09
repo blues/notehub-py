@@ -15,7 +15,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 
-__version__ = "6.3.0"
+__version__ = "6.4.0"
 
 # import apis into sdk package
 from notehub_py.api.alert_api import AlertApi
@@ -26,6 +26,7 @@ from notehub_py.api.event_api import EventApi
 from notehub_py.api.external_devices_api import ExternalDevicesApi
 from notehub_py.api.jobs_api import JobsApi
 from notehub_py.api.monitor_api import MonitorApi
+from notehub_py.api.organization_api import OrganizationApi
 from notehub_py.api.project_api import ProjectApi
 from notehub_py.api.route_api import RouteApi
 from notehub_py.api.usage_api import UsageApi
@@ -61,14 +62,12 @@ from notehub_py.models.clone_project_request import CloneProjectRequest
 from notehub_py.models.contact import Contact
 from notehub_py.models.create_fleet_request import CreateFleetRequest
 from notehub_py.models.create_job201_response import CreateJob201Response
-from notehub_py.models.create_legacy_webhook_event_request import (
-    CreateLegacyWebhookEventRequest,
-)
 from notehub_py.models.create_monitor import CreateMonitor
 from notehub_py.models.create_product_request import CreateProductRequest
 from notehub_py.models.create_project_request import CreateProjectRequest
 from notehub_py.models.create_project_secret_request import CreateProjectSecretRequest
 from notehub_py.models.create_update_repository import CreateUpdateRepository
+from notehub_py.models.created_repository import CreatedRepository
 from notehub_py.models.current_firmware import CurrentFirmware
 from notehub_py.models.dfu_env import DFUEnv
 from notehub_py.models.dfu_state import DFUState
@@ -169,6 +168,7 @@ from notehub_py.models.get_events_by_cursor200_response import (
 from notehub_py.models.get_job_runs200_response import GetJobRuns200Response
 from notehub_py.models.get_jobs200_response import GetJobs200Response
 from notehub_py.models.get_notefile200_response import GetNotefile200Response
+from notehub_py.models.get_organizations200_response import GetOrganizations200Response
 from notehub_py.models.get_products200_response import GetProducts200Response
 from notehub_py.models.get_project_members200_response import (
     GetProjectMembers200Response,
@@ -202,6 +202,8 @@ from notehub_py.models.notehub_route import NotehubRoute
 from notehub_py.models.notehub_route_summary import NotehubRouteSummary
 from notehub_py.models.o_auth2_error import OAuth2Error
 from notehub_py.models.o_auth2_token_response import OAuth2TokenResponse
+from notehub_py.models.organization import Organization
+from notehub_py.models.organization_role import OrganizationRole
 from notehub_py.models.personal_access_token import PersonalAccessToken
 from notehub_py.models.personal_access_token_created_by import (
     PersonalAccessTokenCreatedBy,

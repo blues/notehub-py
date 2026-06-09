@@ -2,13 +2,15 @@
 
 ## Properties
 
-| Name          | Type                                                                        | Description | Notes      |
-| ------------- | --------------------------------------------------------------------------- | ----------- | ---------- |
-| **name**      | **str**                                                                     |             | [optional] |
-| **owner**     | **str**                                                                     |             | [optional] |
-| **plan**      | [**GetBillingAccount200ResponsePlan**](GetBillingAccount200ResponsePlan.md) |             | [optional] |
-| **suspended** | **bool**                                                                    |             | [optional] |
-| **uid**       | **str**                                                                     |             | [optional] |
+| Name            | Type                                                                        | Description | Notes      |
+| --------------- | --------------------------------------------------------------------------- | ----------- | ---------- |
+| **contact_uid** | **str**                                                                     |             | [optional] |
+| **email**       | **str**                                                                     |             | [optional] |
+| **name**        | **str**                                                                     |             | [optional] |
+| **owner**       | **str**                                                                     |             | [optional] |
+| **plan**        | [**GetBillingAccount200ResponsePlan**](GetBillingAccount200ResponsePlan.md) |             | [optional] |
+| **suspended**   | **bool**                                                                    |             | [optional] |
+| **uid**         | **str**                                                                     |             | [optional] |
 
 ## Example
 

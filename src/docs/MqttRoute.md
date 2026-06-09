@@ -7,6 +7,7 @@
 | **broker**           | **str**                                                 |             | [optional] |
 | **certificate**      | **str**                                                 |             | [optional] |
 | **certificate_name** | **str**                                                 |             | [optional] |
+| **client_id**        | **str**                                                 |             | [optional] |
 | **filter**           | [**Filter**](Filter.md)                                 |             | [optional] |
 | **fleets**           | **List[str]**                                           |             | [optional] |
 | **key**              | **str**                                                 |             | [optional] |

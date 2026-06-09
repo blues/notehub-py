@@ -18,35 +18,37 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from notehub_py.models.get_billing_account200_response_plan import (
-    GetBillingAccount200ResponsePlan,
-)
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class GetBillingAccount200Response(BaseModel):
+class CreatedRepository(BaseModel):
     """
-    GetBillingAccount200Response
+    CreatedRepository
     """  # noqa: E501
 
-    contact_uid: Optional[StrictStr] = None
-    email: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    owner: Optional[StrictStr] = None
-    plan: Optional[GetBillingAccount200ResponsePlan] = None
-    suspended: Optional[StrictBool] = None
-    uid: Optional[StrictStr] = None
+    fleet_uids: Optional[List[StrictStr]] = None
+    name: Optional[StrictStr] = Field(default=None, description="repository name")
+    password: Optional[StrictStr] = Field(
+        default=None,
+        description="read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created",
+    )
+    project_uids: Optional[List[StrictStr]] = None
+    uid: Optional[StrictStr] = Field(
+        default=None, description="The unique identifier for the data repository"
+    )
+    user: Optional[StrictStr] = Field(
+        default=None, description="read-only user for database"
+    )
     __properties: ClassVar[List[str]] = [
-        "contact_uid",
-        "email",
+        "fleet_uids",
         "name",
-        "owner",
-        "plan",
-        "suspended",
+        "password",
+        "project_uids",
         "uid",
+        "user",
     ]
 
     model_config = ConfigDict(
@@ -66,7 +68,7 @@ class GetBillingAccount200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetBillingAccount200Response from a JSON string"""
+        """Create an instance of CreatedRepository from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -86,14 +88,11 @@ class GetBillingAccount200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of plan
-        if self.plan:
-            _dict["plan"] = self.plan.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetBillingAccount200Response from a dict"""
+        """Create an instance of CreatedRepository from a dict"""
         if obj is None:
             return None
 
@@ -102,17 +101,12 @@ class GetBillingAccount200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "contact_uid": obj.get("contact_uid"),
-                "email": obj.get("email"),
+                "fleet_uids": obj.get("fleet_uids"),
                 "name": obj.get("name"),
-                "owner": obj.get("owner"),
-                "plan": (
-                    GetBillingAccount200ResponsePlan.from_dict(obj["plan"])
-                    if obj.get("plan") is not None
-                    else None
-                ),
-                "suspended": obj.get("suspended"),
+                "password": obj.get("password"),
+                "project_uids": obj.get("project_uids"),
                 "uid": obj.get("uid"),
+                "user": obj.get("user"),
             }
         )
         return _obj

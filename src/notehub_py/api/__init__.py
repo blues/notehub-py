@@ -9,6 +9,7 @@ from notehub_py.api.event_api import EventApi
 from notehub_py.api.external_devices_api import ExternalDevicesApi
 from notehub_py.api.jobs_api import JobsApi
 from notehub_py.api.monitor_api import MonitorApi
+from notehub_py.api.organization_api import OrganizationApi
 from notehub_py.api.project_api import ProjectApi
 from notehub_py.api.route_api import RouteApi
 from notehub_py.api.usage_api import UsageApi
