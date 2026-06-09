@@ -34,6 +34,7 @@ class MqttRoute(BaseModel):
     broker: Optional[StrictStr] = None
     certificate: Optional[StrictStr] = None
     certificate_name: Optional[StrictStr] = None
+    client_id: Optional[StrictStr] = None
     filter: Optional[Filter] = None
     fleets: Optional[List[StrictStr]] = None
     key: Optional[StrictStr] = None
@@ -49,6 +50,7 @@ class MqttRoute(BaseModel):
         "broker",
         "certificate",
         "certificate_name",
+        "client_id",
         "filter",
         "fleets",
         "key",
@@ -121,6 +123,7 @@ class MqttRoute(BaseModel):
                 "broker": obj.get("broker"),
                 "certificate": obj.get("certificate"),
                 "certificate_name": obj.get("certificate_name"),
+                "client_id": obj.get("client_id"),
                 "filter": (
                     Filter.from_dict(obj["filter"])
                     if obj.get("filter") is not None

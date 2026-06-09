@@ -18,36 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from notehub_py.models.get_billing_account200_response_plan import (
-    GetBillingAccount200ResponsePlan,
-)
+from notehub_py.models.organization import Organization
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class GetBillingAccount200Response(BaseModel):
+class GetOrganizations200Response(BaseModel):
     """
-    GetBillingAccount200Response
+    GetOrganizations200Response
     """  # noqa: E501
 
-    contact_uid: Optional[StrictStr] = None
-    email: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    owner: Optional[StrictStr] = None
-    plan: Optional[GetBillingAccount200ResponsePlan] = None
-    suspended: Optional[StrictBool] = None
-    uid: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = [
-        "contact_uid",
-        "email",
-        "name",
-        "owner",
-        "plan",
-        "suspended",
-        "uid",
-    ]
+    organizations: Optional[List[Organization]] = None
+    __properties: ClassVar[List[str]] = ["organizations"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -66,7 +50,7 @@ class GetBillingAccount200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetBillingAccount200Response from a JSON string"""
+        """Create an instance of GetOrganizations200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -86,14 +70,18 @@ class GetBillingAccount200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of plan
-        if self.plan:
-            _dict["plan"] = self.plan.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in organizations (list)
+        _items = []
+        if self.organizations:
+            for _item in self.organizations:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["organizations"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetBillingAccount200Response from a dict"""
+        """Create an instance of GetOrganizations200Response from a dict"""
         if obj is None:
             return None
 
@@ -102,17 +90,11 @@ class GetBillingAccount200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "contact_uid": obj.get("contact_uid"),
-                "email": obj.get("email"),
-                "name": obj.get("name"),
-                "owner": obj.get("owner"),
-                "plan": (
-                    GetBillingAccount200ResponsePlan.from_dict(obj["plan"])
-                    if obj.get("plan") is not None
+                "organizations": (
+                    [Organization.from_dict(_item) for _item in obj["organizations"]]
+                    if obj.get("organizations") is not None
                     else None
-                ),
-                "suspended": obj.get("suspended"),
-                "uid": obj.get("uid"),
+                )
             }
         )
         return _obj

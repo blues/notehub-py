@@ -18,36 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from notehub_py.models.get_billing_account200_response_plan import (
-    GetBillingAccount200ResponsePlan,
-)
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List
+from notehub_py.models.organization_role import OrganizationRole
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class GetBillingAccount200Response(BaseModel):
+class Organization(BaseModel):
     """
-    GetBillingAccount200Response
+    Organization
     """  # noqa: E501
 
-    contact_uid: Optional[StrictStr] = None
-    email: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    owner: Optional[StrictStr] = None
-    plan: Optional[GetBillingAccount200ResponsePlan] = None
-    suspended: Optional[StrictBool] = None
-    uid: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = [
-        "contact_uid",
-        "email",
-        "name",
-        "owner",
-        "plan",
-        "suspended",
-        "uid",
-    ]
+    name: StrictStr
+    role: OrganizationRole
+    uid: StrictStr
+    __properties: ClassVar[List[str]] = ["name", "role", "uid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -66,7 +52,7 @@ class GetBillingAccount200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetBillingAccount200Response from a JSON string"""
+        """Create an instance of Organization from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -86,14 +72,11 @@ class GetBillingAccount200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of plan
-        if self.plan:
-            _dict["plan"] = self.plan.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetBillingAccount200Response from a dict"""
+        """Create an instance of Organization from a dict"""
         if obj is None:
             return None
 
@@ -101,18 +84,6 @@ class GetBillingAccount200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "contact_uid": obj.get("contact_uid"),
-                "email": obj.get("email"),
-                "name": obj.get("name"),
-                "owner": obj.get("owner"),
-                "plan": (
-                    GetBillingAccount200ResponsePlan.from_dict(obj["plan"])
-                    if obj.get("plan") is not None
-                    else None
-                ),
-                "suspended": obj.get("suspended"),
-                "uid": obj.get("uid"),
-            }
+            {"name": obj.get("name"), "role": obj.get("role"), "uid": obj.get("uid")}
         )
         return _obj

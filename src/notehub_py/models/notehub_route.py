@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from notehub_py.models.aws_route import AwsRoute
 from notehub_py.models.azure_route import AzureRoute
 from notehub_py.models.blynk_route import BlynkRoute
@@ -56,6 +57,9 @@ class NotehubRoute(BaseModel):
     label: Optional[StrictStr] = None
     modified: Optional[datetime] = None
     mqtt: Optional[MqttRoute] = None
+    notes: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="Optional free-form text for annotating the route."
+    )
     proxy: Optional[ProxyRoute] = None
     qubitro: Optional[QubitroRoute] = None
     radnote: Optional[RadRoute] = None
@@ -80,6 +84,7 @@ class NotehubRoute(BaseModel):
         "label",
         "modified",
         "mqtt",
+        "notes",
         "proxy",
         "qubitro",
         "radnote",
@@ -238,6 +243,7 @@ class NotehubRoute(BaseModel):
                     if obj.get("mqtt") is not None
                     else None
                 ),
+                "notes": obj.get("notes"),
                 "proxy": (
                     ProxyRoute.from_dict(obj["proxy"])
                     if obj.get("proxy") is not None
