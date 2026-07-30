@@ -12,7 +12,7 @@ All URIs are relative to *https://api.notefile.net*
 
 ## create_monitor
 
-> Monitor create_monitor(project_or_product_uid, body)
+> Monitor create_monitor(project_or_product_uid, create_monitor)
 
 Create a new Monitor
 
@@ -32,10 +32,14 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.MonitorApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    body = notehub_py.Monitor()  # Monitor | Body or payload of monitor to be created
+    create_monitor = (
+        notehub_py.CreateMonitor()
+    )  # CreateMonitor | Body or payload of monitor to be created
 
     try:
-        api_response = api_instance.create_monitor(project_or_product_uid, body)
+        api_response = api_instance.create_monitor(
+            project_or_product_uid, create_monitor
+        )
         print("The response of MonitorApi->create_monitor:\n")
         pprint(api_response)
     except Exception as e:
@@ -44,10 +48,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type        | Description                              | Notes |
-| -------------------------- | ----------- | ---------------------------------------- | ----- |
-| **project_or_product_uid** | **str**     |                                          |
-| **body**                   | **Monitor** | Body or payload of monitor to be created |
+| Name                       | Type                                  | Description                              | Notes |
+| -------------------------- | ------------------------------------- | ---------------------------------------- | ----- |
+| **project_or_product_uid** | **str**                               |                                          |
+| **create_monitor**         | [**CreateMonitor**](CreateMonitor.md) | Body or payload of monitor to be created |
 
 ### Return type
 

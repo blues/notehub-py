@@ -18,30 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
+from notehub_py.models.description_record import DescriptionRecord
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class GetDeviceJourneys200ResponseJourneysInner(BaseModel):
+class DescriptionRecordList(BaseModel):
     """
-    GetDeviceJourneys200ResponseJourneysInner
+    DescriptionRecordList
     """  # noqa: E501
 
-    end_date: datetime = Field(description="Latest event time within the journey.")
-    journey_id: StrictInt = Field(
-        description="Identifier of the journey, taken from the numeric `journey` field in the event body. This value is itself a Unix timestamp marking the start of the journey. "
-    )
-    start_date: datetime = Field(description="Earliest event time within the journey.")
-    total_events: StrictInt = Field(description="The number of events in the journey.")
-    __properties: ClassVar[List[str]] = [
-        "end_date",
-        "journey_id",
-        "start_date",
-        "total_events",
-    ]
+    descriptions: List[DescriptionRecord]
+    __properties: ClassVar[List[str]] = ["descriptions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -60,7 +50,7 @@ class GetDeviceJourneys200ResponseJourneysInner(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetDeviceJourneys200ResponseJourneysInner from a JSON string"""
+        """Create an instance of DescriptionRecordList from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,11 +70,18 @@ class GetDeviceJourneys200ResponseJourneysInner(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in descriptions (list)
+        _items = []
+        if self.descriptions:
+            for _item in self.descriptions:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["descriptions"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetDeviceJourneys200ResponseJourneysInner from a dict"""
+        """Create an instance of DescriptionRecordList from a dict"""
         if obj is None:
             return None
 
@@ -93,10 +90,14 @@ class GetDeviceJourneys200ResponseJourneysInner(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "end_date": obj.get("end_date"),
-                "journey_id": obj.get("journey_id"),
-                "start_date": obj.get("start_date"),
-                "total_events": obj.get("total_events"),
+                "descriptions": (
+                    [
+                        DescriptionRecord.from_dict(_item)
+                        for _item in obj["descriptions"]
+                    ]
+                    if obj.get("descriptions") is not None
+                    else None
+                )
             }
         )
         return _obj

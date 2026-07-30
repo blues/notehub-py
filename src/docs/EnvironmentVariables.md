@@ -2,9 +2,10 @@
 
 ## Properties
 
-| Name                      | Type               | Description | Notes |
-| ------------------------- | ------------------ | ----------- | ----- |
-| **environment_variables** | **Dict[str, str]** |             |
+| Name                           | Type               | Description                                                                                                                                                                                                                                                          | Notes      |
+| ------------------------------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **environment_variable_notes** | **Dict[str, str]** | Optional per-variable annotations, keyed by variable name. Setting a key to an empty string removes its note. A 400 error is returned for any key that does not already exist as a stored variable and is not included in environment_variables in the same request. | [optional] |
+| **environment_variables**      | **Dict[str, str]** |                                                                                                                                                                                                                                                                      |
 
 ## Example
 

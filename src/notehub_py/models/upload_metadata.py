@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from notehub_py.models.firmware import Firmware
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,11 +32,11 @@ class UploadMetadata(BaseModel):
     """  # noqa: E501
 
     contains: Optional[StrictStr] = None
-    crc32: Optional[StrictInt] = None
+    crc32: Optional[Annotated[int, Field(le=4294967295, strict=True, ge=0)]] = None
     created: Optional[StrictInt] = None
     firmware: Optional[Firmware] = None
     found: Optional[StrictStr] = None
-    length: Optional[StrictInt] = None
+    length: Optional[Annotated[int, Field(strict=True, ge=0)]] = None
     md5: Optional[StrictStr] = None
     modified: Optional[StrictInt] = None
     name: Optional[StrictStr] = None

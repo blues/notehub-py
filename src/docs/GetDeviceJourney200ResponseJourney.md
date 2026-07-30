@@ -1,6 +1,6 @@
 # GetDeviceJourney200ResponseJourney
 
-Paginated `_track.qo` events for the journey.
+Paginated events for the journey.
 
 ## Properties
 

@@ -18,28 +18,55 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class EnvironmentVariables(BaseModel):
+class DescriptionRecord(BaseModel):
     """
-    EnvironmentVariables
+    Metadata for a stored description record. The content itself is returned by GET on the record.
     """  # noqa: E501
 
-    environment_variable_notes: Optional[
-        Dict[str, Annotated[str, Field(strict=True, max_length=1024)]]
-    ] = Field(
-        default=None,
-        description="Optional per-variable annotations, keyed by variable name. Setting a key to an empty string removes its note. A 400 error is returned for any key that does not already exist as a stored variable and is not included in environment_variables in the same request.",
+    content_type: StrictStr = Field(
+        description='The stored content type, either "application/json" or "text/plain; charset=utf-8".'
     )
-    environment_variables: Dict[str, StrictStr]
+    created_at: StrictInt = Field(
+        description="When the record was first created (Unix seconds)."
+    )
+    created_by: Optional[StrictStr] = Field(
+        default=None, description="The actor who created the record."
+    )
+    length: StrictInt = Field(description="The content length in bytes.")
+    md5: StrictStr = Field(description="The hex-encoded MD5 of the content.")
+    modified_at: StrictInt = Field(
+        description="When the record was last updated (Unix seconds)."
+    )
+    modified_by: Optional[StrictStr] = Field(
+        default=None, description="The actor who last updated the record."
+    )
+    name: StrictStr = Field(
+        description="The record name (letters, digits, '.', '_' or '-')."
+    )
+    owner_uid: Optional[StrictStr] = Field(
+        default=None,
+        description="The owning project (app) UID for project-scoped records; empty for global.",
+    )
+    scope: StrictStr = Field(
+        description='The ownership scope of the record ("global" or "project").'
+    )
     __properties: ClassVar[List[str]] = [
-        "environment_variable_notes",
-        "environment_variables",
+        "content_type",
+        "created_at",
+        "created_by",
+        "length",
+        "md5",
+        "modified_at",
+        "modified_by",
+        "name",
+        "owner_uid",
+        "scope",
     ]
 
     model_config = ConfigDict(
@@ -59,7 +86,7 @@ class EnvironmentVariables(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of EnvironmentVariables from a JSON string"""
+        """Create an instance of DescriptionRecord from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -83,7 +110,7 @@ class EnvironmentVariables(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of EnvironmentVariables from a dict"""
+        """Create an instance of DescriptionRecord from a dict"""
         if obj is None:
             return None
 
@@ -92,8 +119,16 @@ class EnvironmentVariables(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "environment_variable_notes": obj.get("environment_variable_notes"),
-                "environment_variables": obj.get("environment_variables"),
+                "content_type": obj.get("content_type"),
+                "created_at": obj.get("created_at"),
+                "created_by": obj.get("created_by"),
+                "length": obj.get("length"),
+                "md5": obj.get("md5"),
+                "modified_at": obj.get("modified_at"),
+                "modified_by": obj.get("modified_by"),
+                "name": obj.get("name"),
+                "owner_uid": obj.get("owner_uid"),
+                "scope": obj.get("scope"),
             }
         )
         return _obj

@@ -4290,7 +4290,7 @@ class DeviceApi:
         journey_id: Annotated[
             StrictInt,
             Field(
-                description="Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey). "
+                description="Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey). "
             ),
         ],
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
@@ -4309,13 +4309,13 @@ class DeviceApi:
     ) -> GetDeviceJourney200Response:
         """get_device_journey
 
-        Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+        Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param journey_id: Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).  (required)
+        :param journey_id: Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).  (required)
         :type journey_id: int
         :param page_size:
         :type page_size: int
@@ -4375,7 +4375,7 @@ class DeviceApi:
         journey_id: Annotated[
             StrictInt,
             Field(
-                description="Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey). "
+                description="Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey). "
             ),
         ],
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
@@ -4394,13 +4394,13 @@ class DeviceApi:
     ) -> ApiResponse[GetDeviceJourney200Response]:
         """get_device_journey
 
-        Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+        Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param journey_id: Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).  (required)
+        :param journey_id: Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).  (required)
         :type journey_id: int
         :param page_size:
         :type page_size: int
@@ -4460,7 +4460,7 @@ class DeviceApi:
         journey_id: Annotated[
             StrictInt,
             Field(
-                description="Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey). "
+                description="Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey). "
             ),
         ],
         page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
@@ -4479,13 +4479,13 @@ class DeviceApi:
     ) -> RESTResponseType:
         """get_device_journey
 
-        Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+        Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param journey_id: Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).  (required)
+        :param journey_id: Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).  (required)
         :type journey_id: int
         :param page_size:
         :type page_size: int
@@ -4631,7 +4631,7 @@ class DeviceApi:
     ) -> GetDeviceJourneys200Response:
         """get_device_journeys
 
-        Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+        Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4717,7 +4717,7 @@ class DeviceApi:
     ) -> ApiResponse[GetDeviceJourneys200Response]:
         """get_device_journeys
 
-        Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+        Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4803,7 +4803,7 @@ class DeviceApi:
     ) -> RESTResponseType:
         """get_device_journeys
 
-        Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+        Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str

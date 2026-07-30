@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,6 +30,12 @@ class GetDeviceEnvironmentVariablesByPin200Response(BaseModel):
     GetDeviceEnvironmentVariablesByPin200Response
     """  # noqa: E501
 
+    environment_variable_notes: Optional[
+        Dict[str, Annotated[str, Field(strict=True, max_length=1024)]]
+    ] = Field(
+        default=None,
+        description="Optional per-variable annotations for device-level environment variables, keyed by variable name.",
+    )
     environment_variables: Dict[str, StrictStr] = Field(
         description="The environment variables for this device that have been set using host firmware or the Notehub API or UI."
     )
@@ -40,6 +47,7 @@ class GetDeviceEnvironmentVariablesByPin200Response(BaseModel):
         description="The environment variables that have been set using the env.default request through the Notecard API."
     )
     __properties: ClassVar[List[str]] = [
+        "environment_variable_notes",
         "environment_variables",
         "environment_variables_effective",
         "environment_variables_env_default",
@@ -95,6 +103,7 @@ class GetDeviceEnvironmentVariablesByPin200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "environment_variable_notes": obj.get("environment_variable_notes"),
                 "environment_variables": obj.get("environment_variables"),
                 "environment_variables_effective": obj.get(
                     "environment_variables_effective"

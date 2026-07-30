@@ -18,16 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import (
-    BaseModel,
-    ConfigDict,
-    Field,
-    StrictFloat,
-    StrictInt,
-    StrictStr,
-    field_validator,
-)
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -37,18 +30,18 @@ class DFUState(BaseModel):
     DFUState
     """  # noqa: E501
 
-    began: Optional[Union[StrictFloat, StrictInt]] = Field(
+    began: Optional[StrictInt] = Field(
         default=None, description="The time when the DFU began"
     )
-    crc32: Optional[Union[StrictFloat, StrictInt]] = Field(
+    crc32: Optional[Annotated[int, Field(le=4294967295, strict=True, ge=0)]] = Field(
         default=None, description="Used for image verification"
     )
-    errors: Optional[Union[StrictFloat, StrictInt]] = Field(
+    errors: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(
         default=None,
         description="The number of consecutive errors the DFU process has encountered",
     )
     file: Optional[StrictStr] = Field(default=None, description="Firmware filename")
-    length: Optional[Union[StrictFloat, StrictInt]] = Field(
+    length: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(
         default=None, description="Length of firmware file"
     )
     md5: Optional[StrictStr] = Field(
@@ -58,17 +51,17 @@ class DFUState(BaseModel):
         default=None,
         description='* "idle"          - nothing downloading or downloaded * "error"         - halted and in the error state * "downloading"   - transferring data from cloud to module * "sideloading"   - transferring data via request to module * "ready"         - DFU data is ready/verified and waiting on external storage * "ready-retry"   - DFU data is ready/verified and retrying * "updating"      - currently updating * "completed"     - DFU is done successfully ',
     )
-    read: Optional[Union[StrictFloat, StrictInt]] = Field(
+    read: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(
         default=None,
         description="The amount the notecard has read of the image from notehub",
     )
-    retry: Optional[Union[StrictFloat, StrictInt]] = Field(
+    retry: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(
         default=None,
         description="Value of _fw_retry environment var at time of DFU initialization",
     )
     status: Optional[StrictStr] = Field(default=None, description="Status message")
     type: Optional[StrictStr] = None
-    updated: Optional[Union[StrictFloat, StrictInt]] = Field(
+    updated: Optional[StrictInt] = Field(
         default=None, description="Last updated timestamp"
     )
     version: Optional[StrictStr] = Field(

@@ -4,6 +4,7 @@
 
 | Name                                  | Type               | Description                                                                                                                  | Notes      |
 | ------------------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **environment_variable_notes**        | **Dict[str, str]** | Optional per-variable annotations for device-level environment variables, keyed by variable name.                            | [optional] |
 | **environment_variables**             | **Dict[str, str]** | The environment variables for this device that have been set using host firmware or the Notehub API or UI.                   |
 | **environment_variables_effective**   | **Dict[str, str]** | The environment variables as they will be seen by the device, fully resolved with project/fleet/device prioritization rules. | [optional] |
 | **environment_variables_env_default** | **Dict[str, str]** | The environment variables that have been set using the env.default request through the Notecard API.                         |

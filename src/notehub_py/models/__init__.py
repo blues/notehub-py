@@ -43,6 +43,7 @@ from notehub_py.models.current_firmware import CurrentFirmware
 from notehub_py.models.dfu_env import DFUEnv
 from notehub_py.models.dfu_state import DFUState
 from notehub_py.models.data_field import DataField
+from notehub_py.models.data_set import DataSet
 from notehub_py.models.data_set_field import DataSetField
 from notehub_py.models.data_usage import DataUsage
 from notehub_py.models.datacake_route import DatacakeRoute
@@ -51,6 +52,8 @@ from notehub_py.models.delete_device_from_fleets_request import (
 )
 from notehub_py.models.delete_job200_response import DeleteJob200Response
 from notehub_py.models.delete_notefiles_request import DeleteNotefilesRequest
+from notehub_py.models.description_record import DescriptionRecord
+from notehub_py.models.description_record_list import DescriptionRecordList
 from notehub_py.models.device import Device
 from notehub_py.models.device_dfu_history import DeviceDfuHistory
 from notehub_py.models.device_dfu_history_current import DeviceDfuHistoryCurrent
