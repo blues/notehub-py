@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,10 +31,14 @@ class EnvVar(BaseModel):
     """  # noqa: E501
 
     key: Optional[StrictStr] = None
+    note: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None,
+        description="Optional free-form text for annotating the environment variable.",
+    )
     precedence: Optional[StrictInt] = None
     used: Optional[StrictBool] = None
     value: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["key", "precedence", "used", "value"]
+    __properties: ClassVar[List[str]] = ["key", "note", "precedence", "used", "value"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +91,7 @@ class EnvVar(BaseModel):
         _obj = cls.model_validate(
             {
                 "key": obj.get("key"),
+                "note": obj.get("note"),
                 "precedence": obj.get("precedence"),
                 "used": obj.get("used"),
                 "value": obj.get("value"),

@@ -28,6 +28,7 @@ from pydantic import (
     StrictStr,
 )
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -40,7 +41,7 @@ class Event(BaseModel):
     app: Optional[StrictStr] = Field(
         default=None, description="App UID (globally unique)"
     )
-    bars: Optional[Union[StrictFloat, StrictInt]] = Field(
+    bars: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(
         default=None, description="Bars. Only available on _session.qo events."
     )
     best_country: Optional[StrictStr] = Field(default=None, description="Country")
@@ -55,7 +56,7 @@ class Event(BaseModel):
     best_location_type: Optional[StrictStr] = Field(
         default=None, description='One of "gps", "triangulated", or "tower"'
     )
-    best_location_when: Optional[Union[StrictFloat, StrictInt]] = Field(
+    best_location_when: Optional[StrictInt] = Field(
         default=None, description="Unix timestamp"
     )
     best_lon: Optional[Union[StrictFloat, StrictInt]] = Field(
@@ -81,7 +82,7 @@ class Event(BaseModel):
     file: Optional[StrictStr] = Field(
         default=None, description="The notefile associated with this event"
     )
-    moved: Optional[Union[StrictFloat, StrictInt]] = Field(
+    moved: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(
         default=None,
         description="The number of times the device was sensed to have moved between the last session and this session. Only available on _session.qo events.",
     )
@@ -108,20 +109,24 @@ class Event(BaseModel):
         default=None, description="The unix timestamp when the event was received"
     )
     req: Optional[StrictStr] = Field(default=None, description="The notecard request")
-    rsrp: Optional[Union[StrictFloat, StrictInt]] = Field(
+    rsrp: Optional[StrictInt] = Field(
         default=None, description="RSRP. Only available on _session.qo events."
     )
-    rsrq: Optional[Union[StrictFloat, StrictInt]] = Field(
+    rsrq: Optional[StrictInt] = Field(
         default=None, description="RSRQ. Only available on _session.qo events."
     )
-    rssi: Optional[Union[StrictFloat, StrictInt]] = Field(
+    rssi: Optional[StrictInt] = Field(
         default=None,
         description="Received Signal Strength Indicator (RSSI) is an estimated measurement of how well a device can receive signals. Only available on _session.qo events.",
+    )
+    sensor: Optional[StrictStr] = Field(
+        default=None,
+        description="Sensor UID, for events originating from a sensor attached to the device",
     )
     session: Optional[StrictStr] = Field(
         default=None, description="Session UID (globally unique)"
     )
-    sinr: Optional[Union[StrictFloat, StrictInt]] = Field(
+    sinr: Optional[StrictInt] = Field(
         default=None, description="SINR. Only available on _session.qo events."
     )
     sku: Optional[StrictStr] = Field(
@@ -151,9 +156,7 @@ class Event(BaseModel):
         default=None, description="Longitude"
     )
     tower_timezone: Optional[StrictStr] = Field(default=None, description="Timezone")
-    tower_when: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Unix timestamp"
-    )
+    tower_when: Optional[StrictInt] = Field(default=None, description="Unix timestamp")
     transport: Optional[StrictStr] = Field(
         default=None,
         description='The transport used for this event, e.g., "cellular", "wifi", ", etc.',
@@ -166,20 +169,22 @@ class Event(BaseModel):
     tri_lon: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="Longitude"
     )
-    tri_points: Optional[Union[StrictFloat, StrictInt]] = Field(
+    tri_points: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(
         default=None, description="Triangulation points"
     )
     tri_timezone: Optional[StrictStr] = Field(default=None, description="Timezone")
-    tri_when: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Unix timestamp"
-    )
-    updates: Optional[Union[StrictFloat, StrictInt]] = None
+    tri_when: Optional[StrictInt] = Field(default=None, description="Unix timestamp")
+    updates: Optional[Annotated[int, Field(strict=True, ge=0)]] = None
     voltage: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None,
         description="Device voltage. Only available on _session.qo events.",
     )
-    when: Optional[Union[StrictFloat, StrictInt]] = Field(
+    when: Optional[StrictInt] = Field(
         default=None, description="When the event was captured on the device"
+    )
+    when_ms: Optional[StrictInt] = Field(
+        default=None,
+        description="Millisecond-accurate Unix epoch timestamp for when the event was captured on the device",
     )
     where_country: Optional[StrictStr] = Field(default=None, description="Country")
     where_lat: Optional[Union[StrictFloat, StrictInt]] = Field(
@@ -193,9 +198,7 @@ class Event(BaseModel):
         default=None, description="Open Location Code"
     )
     where_timezone: Optional[StrictStr] = Field(default=None, description="Timezone")
-    where_when: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Unix timestamp"
-    )
+    where_when: Optional[StrictInt] = Field(default=None, description="Unix timestamp")
     __properties: ClassVar[List[str]] = [
         "app",
         "bars",
@@ -225,6 +228,7 @@ class Event(BaseModel):
         "rsrp",
         "rsrq",
         "rssi",
+        "sensor",
         "session",
         "sinr",
         "sku",
@@ -250,6 +254,7 @@ class Event(BaseModel):
         "updates",
         "voltage",
         "when",
+        "when_ms",
         "where_country",
         "where_lat",
         "where_location",
@@ -337,6 +342,7 @@ class Event(BaseModel):
                 "rsrp": obj.get("rsrp"),
                 "rsrq": obj.get("rsrq"),
                 "rssi": obj.get("rssi"),
+                "sensor": obj.get("sensor"),
                 "session": obj.get("session"),
                 "sinr": obj.get("sinr"),
                 "sku": obj.get("sku"),
@@ -362,6 +368,7 @@ class Event(BaseModel):
                 "updates": obj.get("updates"),
                 "voltage": obj.get("voltage"),
                 "when": obj.get("when"),
+                "when_ms": obj.get("when_ms"),
                 "where_country": obj.get("where_country"),
                 "where_lat": obj.get("where_lat"),
                 "where_location": obj.get("where_location"),

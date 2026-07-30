@@ -25,7 +25,7 @@ with open("README.md", "r") as fh:
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "notehub-py"
-VERSION = "6.4.0"
+VERSION = "6.5.0"
 PYTHON_REQUIRES = ">=3.10"
 REQUIRES = [
     "urllib3 >= 2.5.0",

@@ -2,12 +2,13 @@
 
 ## Properties
 
-| Name           | Type     | Description | Notes      |
-| -------------- | -------- | ----------- | ---------- |
-| **key**        | **str**  |             | [optional] |
-| **precedence** | **int**  |             | [optional] |
-| **used**       | **bool** |             | [optional] |
-| **value**      | **str**  |             | [optional] |
+| Name           | Type     | Description                                                      | Notes      |
+| -------------- | -------- | ---------------------------------------------------------------- | ---------- |
+| **key**        | **str**  |                                                                  | [optional] |
+| **note**       | **str**  | Optional free-form text for annotating the environment variable. | [optional] |
+| **precedence** | **int**  |                                                                  | [optional] |
+| **used**       | **bool** |                                                                  | [optional] |
+| **value**      | **str**  |                                                                  | [optional] |
 
 ## Example
 

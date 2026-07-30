@@ -44,8 +44,8 @@ class DataSetField(BaseModel):
         if value is None:
             return value
 
-        if value not in set([0, 1, 2]):
-            raise ValueError("must be one of enum values (0, 1, 2)")
+        if value not in set([0, 1, 2, 5, 6, 7, 8]):
+            raise ValueError("must be one of enum values (0, 1, 2, 5, 6, 7, 8)")
         return value
 
     model_config = ConfigDict(

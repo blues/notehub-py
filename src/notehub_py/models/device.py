@@ -22,6 +22,7 @@ from datetime import datetime
 from pydantic import (
     BaseModel,
     ConfigDict,
+    Field,
     StrictBool,
     StrictFloat,
     StrictInt,
@@ -42,6 +43,10 @@ class Device(BaseModel):
     Device
     """  # noqa: E501
 
+    best_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The best ID for the device, preference for the serial number over device UID",
+    )
     best_location: Optional[Location] = None
     cellular_usage: Optional[List[SimUsage]] = None
     contact: Optional[Contact] = None
@@ -63,6 +68,7 @@ class Device(BaseModel):
     uid: StrictStr
     voltage: Union[StrictFloat, StrictInt]
     __properties: ClassVar[List[str]] = [
+        "best_id",
         "best_location",
         "cellular_usage",
         "contact",
@@ -206,6 +212,7 @@ class Device(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "best_id": obj.get("best_id"),
                 "best_location": (
                     Location.from_dict(obj["best_location"])
                     if obj.get("best_location") is not None

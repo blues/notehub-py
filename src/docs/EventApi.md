@@ -12,7 +12,7 @@ All URIs are relative to *https://api.notefile.net*
 
 ## get_events
 
-> GetEvents200Response get_events(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, fleet_uid=fleet_uid, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
+> GetEvents200Response get_events(project_or_product_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sensor_uid=sensor_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, fleet_uid=fleet_uid, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
 
 Get Events of a Project
 
@@ -34,6 +34,9 @@ with notehub_py.ApiClient(configuration) as api_client:
     page_size = 50  # int |  (optional) (default to 50)
     page_num = 1  # int |  (optional) (default to 1)
     device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    sensor_uid = [
+        "sensor_uid_example"
+    ]  # List[str] | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix. (optional)
     sort_by = "captured"  # str |  (optional) (default to 'captured')
     sort_order = "asc"  # str |  (optional) (default to 'asc')
     start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
@@ -60,6 +63,7 @@ with notehub_py.ApiClient(configuration) as api_client:
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             sort_by=sort_by,
             sort_order=sort_order,
             start_date=start_date,
@@ -88,6 +92,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **page_size**              | **int**                 |                                                                                                                                                                  | [optional] [default to 50]                 |
 | **page_num**               | **int**                 |                                                                                                                                                                  | [optional] [default to 1]                  |
 | **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
+| **sensor_uid**             | [**List[str]**](str.md) | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.                                                | [optional]                                 |
 | **sort_by**                | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
 | **sort_order**             | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
 | **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp                                                                                                  | [optional]                                 |
@@ -117,7 +122,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ## get_events_by_cursor
 
-> GetEventsByCursor200Response get_events_by_cursor(project_or_product_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, fleet_uid=fleet_uid, device_uid=device_uid)
+> GetEventsByCursor200Response get_events_by_cursor(project_or_product_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, fleet_uid=fleet_uid, device_uid=device_uid, sensor_uid=sensor_uid)
 
 Get Events of a Project by cursor
 
@@ -145,6 +150,9 @@ with notehub_py.ApiClient(configuration) as api_client:
     files = "_health.qo, data.qo"  # str |  (optional)
     fleet_uid = "fleet_uid_example"  # str |  (optional)
     device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    sensor_uid = [
+        "sensor_uid_example"
+    ]  # List[str] | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix. (optional)
 
     try:
         api_response = api_instance.get_events_by_cursor(
@@ -156,6 +164,7 @@ with notehub_py.ApiClient(configuration) as api_client:
             files=files,
             fleet_uid=fleet_uid,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
         )
         print("The response of EventApi->get_events_by_cursor:\n")
         pprint(api_response)
@@ -175,6 +184,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **files**                  | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **fleet_uid**              | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
+| **sensor_uid**             | [**List[str]**](str.md) | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.                                                                                                                                                                                                                                                          | [optional]                            |
 
 ### Return type
 
@@ -191,7 +201,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ## get_fleet_events
 
-> GetEvents200Response get_fleet_events(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
+> GetEvents200Response get_fleet_events(project_or_product_uid, fleet_uid, page_size=page_size, page_num=page_num, device_uid=device_uid, sensor_uid=sensor_uid, sort_by=sort_by, sort_order=sort_order, start_date=start_date, end_date=end_date, date_type=date_type, system_files_only=system_files_only, files=files, format=format, serial_number=serial_number, session_uid=session_uid, event_uid=event_uid, select_fields=select_fields)
 
 Get Events of a Fleet
 
@@ -214,6 +224,9 @@ with notehub_py.ApiClient(configuration) as api_client:
     page_size = 50  # int |  (optional) (default to 50)
     page_num = 1  # int |  (optional) (default to 1)
     device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    sensor_uid = [
+        "sensor_uid_example"
+    ]  # List[str] | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix. (optional)
     sort_by = "captured"  # str |  (optional) (default to 'captured')
     sort_order = "asc"  # str |  (optional) (default to 'asc')
     start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
@@ -240,6 +253,7 @@ with notehub_py.ApiClient(configuration) as api_client:
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             sort_by=sort_by,
             sort_order=sort_order,
             start_date=start_date,
@@ -268,6 +282,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **page_size**              | **int**                 |                                                                                                                                                                  | [optional] [default to 50]                 |
 | **page_num**               | **int**                 |                                                                                                                                                                  | [optional] [default to 1]                  |
 | **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                    | [optional]                                 |
+| **sensor_uid**             | [**List[str]**](str.md) | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.                                                | [optional]                                 |
 | **sort_by**                | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;captured&#39;] |
 | **sort_order**             | **str**                 |                                                                                                                                                                  | [optional] [default to &#39;asc&#39;]      |
 | **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp                                                                                                  | [optional]                                 |
@@ -296,7 +311,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ## get_fleet_events_by_cursor
 
-> GetEventsByCursor200Response get_fleet_events_by_cursor(project_or_product_uid, fleet_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, device_uid=device_uid, start_date=start_date, end_date=end_date)
+> GetEventsByCursor200Response get_fleet_events_by_cursor(project_or_product_uid, fleet_uid, limit=limit, cursor=cursor, sort_order=sort_order, system_files_only=system_files_only, files=files, device_uid=device_uid, sensor_uid=sensor_uid, start_date=start_date, end_date=end_date)
 
 Get Events of a Fleet by cursor
 
@@ -324,6 +339,9 @@ with notehub_py.ApiClient(configuration) as api_client:
     system_files_only = True  # bool |  (optional)
     files = "_health.qo, data.qo"  # str |  (optional)
     device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
+    sensor_uid = [
+        "sensor_uid_example"
+    ]  # List[str] | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix. (optional)
     start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
     end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
 
@@ -337,6 +355,7 @@ with notehub_py.ApiClient(configuration) as api_client:
             system_files_only=system_files_only,
             files=files,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             start_date=start_date,
             end_date=end_date,
         )
@@ -358,6 +377,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | **system_files_only**      | **bool**                |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **files**                  | **str**                 |                                                                                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                                                                                                                                                                                                                              | [optional]                            |
+| **sensor_uid**             | [**List[str]**](str.md) | A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.                                                                                                                                                                                                                                                          | [optional]                            |
 | **start_date**             | **int**                 | Start date for filtering results, specified as a Unix timestamp                                                                                                                                                                                                                                                                                                            | [optional]                            |
 | **end_date**               | **int**                 | End date for filtering results, specified as a Unix timestamp                                                                                                                                                                                                                                                                                                              | [optional]                            |
 

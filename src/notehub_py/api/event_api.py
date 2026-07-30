@@ -52,6 +52,12 @@ class EventApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
+        ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
         start_date: Annotated[
@@ -119,6 +125,8 @@ class EventApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
         :param sort_order:
@@ -172,6 +180,7 @@ class EventApi:
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             sort_by=sort_by,
             sort_order=sort_order,
             start_date=start_date,
@@ -211,6 +220,12 @@ class EventApi:
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
         ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
@@ -279,6 +294,8 @@ class EventApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
         :param sort_order:
@@ -332,6 +349,7 @@ class EventApi:
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             sort_by=sort_by,
             sort_order=sort_order,
             start_date=start_date,
@@ -371,6 +389,12 @@ class EventApi:
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
         ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
@@ -439,6 +463,8 @@ class EventApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
         :param sort_order:
@@ -492,6 +518,7 @@ class EventApi:
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             sort_by=sort_by,
             sort_order=sort_order,
             start_date=start_date,
@@ -525,6 +552,7 @@ class EventApi:
         page_size,
         page_num,
         device_uid,
+        sensor_uid,
         sort_by,
         sort_order,
         start_date,
@@ -548,6 +576,7 @@ class EventApi:
 
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
+            "sensorUID": "multi",
             "serialNumber": "multi",
             "fleetUID": "multi",
             "sessionUID": "multi",
@@ -576,6 +605,10 @@ class EventApi:
         if device_uid is not None:
 
             _query_params.append(("deviceUID", device_uid))
+
+        if sensor_uid is not None:
+
+            _query_params.append(("sensorUID", sensor_uid))
 
         if sort_by is not None:
 
@@ -674,6 +707,12 @@ class EventApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -706,6 +745,8 @@ class EventApi:
         :type fleet_uid: str
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -737,6 +778,7 @@ class EventApi:
             files=files,
             fleet_uid=fleet_uid,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -773,6 +815,12 @@ class EventApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -805,6 +853,8 @@ class EventApi:
         :type fleet_uid: str
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -836,6 +886,7 @@ class EventApi:
             files=files,
             fleet_uid=fleet_uid,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -872,6 +923,12 @@ class EventApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -904,6 +961,8 @@ class EventApi:
         :type fleet_uid: str
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -935,6 +994,7 @@ class EventApi:
             files=files,
             fleet_uid=fleet_uid,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -959,6 +1019,7 @@ class EventApi:
         files,
         fleet_uid,
         device_uid,
+        sensor_uid,
         _request_auth,
         _content_type,
         _headers,
@@ -969,6 +1030,7 @@ class EventApi:
 
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
+            "sensorUID": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -1010,6 +1072,10 @@ class EventApi:
 
             _query_params.append(("deviceUID", device_uid))
 
+        if sensor_uid is not None:
+
+            _query_params.append(("sensorUID", sensor_uid))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -1046,6 +1112,12 @@ class EventApi:
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
         ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
@@ -1113,6 +1185,8 @@ class EventApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
         :param sort_order:
@@ -1165,6 +1239,7 @@ class EventApi:
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             sort_by=sort_by,
             sort_order=sort_order,
             start_date=start_date,
@@ -1204,6 +1279,12 @@ class EventApi:
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
         ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
@@ -1271,6 +1352,8 @@ class EventApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
         :param sort_order:
@@ -1323,6 +1406,7 @@ class EventApi:
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             sort_by=sort_by,
             sort_order=sort_order,
             start_date=start_date,
@@ -1362,6 +1446,12 @@ class EventApi:
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
         ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
@@ -1429,6 +1519,8 @@ class EventApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
         :param sort_order:
@@ -1481,6 +1573,7 @@ class EventApi:
             page_size=page_size,
             page_num=page_num,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             sort_by=sort_by,
             sort_order=sort_order,
             start_date=start_date,
@@ -1514,6 +1607,7 @@ class EventApi:
         page_size,
         page_num,
         device_uid,
+        sensor_uid,
         sort_by,
         sort_order,
         start_date,
@@ -1536,6 +1630,7 @@ class EventApi:
 
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
+            "sensorUID": "multi",
             "serialNumber": "multi",
             "sessionUID": "multi",
             "eventUID": "multi",
@@ -1565,6 +1660,10 @@ class EventApi:
         if device_uid is not None:
 
             _query_params.append(("deviceUID", device_uid))
+
+        if sensor_uid is not None:
+
+            _query_params.append(("sensorUID", sensor_uid))
 
         if sort_by is not None:
 
@@ -1659,6 +1758,12 @@ class EventApi:
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
+        ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -1703,6 +1808,8 @@ class EventApi:
         :type files: str
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
@@ -1738,6 +1845,7 @@ class EventApi:
             system_files_only=system_files_only,
             files=files,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             start_date=start_date,
             end_date=end_date,
             _request_auth=_request_auth,
@@ -1775,6 +1883,12 @@ class EventApi:
         files: Optional[StrictStr] = None,
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
         ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
@@ -1820,6 +1934,8 @@ class EventApi:
         :type files: str
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
@@ -1855,6 +1971,7 @@ class EventApi:
             system_files_only=system_files_only,
             files=files,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             start_date=start_date,
             end_date=end_date,
             _request_auth=_request_auth,
@@ -1892,6 +2009,12 @@ class EventApi:
         files: Optional[StrictStr] = None,
         device_uid: Annotated[
             Optional[List[StrictStr]], Field(description="A Device UID.")
+        ] = None,
+        sensor_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+            ),
         ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
@@ -1937,6 +2060,8 @@ class EventApi:
         :type files: str
         :param device_uid: A Device UID.
         :type device_uid: List[str]
+        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :type sensor_uid: List[str]
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
@@ -1972,6 +2097,7 @@ class EventApi:
             system_files_only=system_files_only,
             files=files,
             device_uid=device_uid,
+            sensor_uid=sensor_uid,
             start_date=start_date,
             end_date=end_date,
             _request_auth=_request_auth,
@@ -1998,6 +2124,7 @@ class EventApi:
         system_files_only,
         files,
         device_uid,
+        sensor_uid,
         start_date,
         end_date,
         _request_auth,
@@ -2010,6 +2137,7 @@ class EventApi:
 
         _collection_formats: Dict[str, str] = {
             "deviceUID": "multi",
+            "sensorUID": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -2048,6 +2176,10 @@ class EventApi:
         if device_uid is not None:
 
             _query_params.append(("deviceUID", device_uid))
+
+        if sensor_uid is not None:
+
+            _query_params.append(("sensorUID", sensor_uid))
 
         if start_date is not None:
 

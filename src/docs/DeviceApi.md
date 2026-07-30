@@ -878,7 +878,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > GetDeviceJourney200Response get_device_journey(project_or_product_uid, device_uid, journey_id, page_size=page_size, page_num=page_num)
 
-Get a single journey for a device along with its `_track.qo` events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
 
 ### Example
 
@@ -896,7 +896,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.DeviceApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
     device_uid = "dev:000000000000000"  # str |
-    journey_id = 56  # int | Identifier of the journey, taken from the `journey` field on `_track.qo` events (a Unix timestamp marking the start of the journey).
+    journey_id = 56  # int | Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey).
     page_size = 50  # int |  (optional) (default to 50)
     page_num = 1  # int |  (optional) (default to 1)
 
@@ -916,13 +916,13 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description                                                                                                                                               | Notes                      |
-| -------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| **project_or_product_uid** | **str** |                                                                                                                                                           |
-| **device_uid**             | **str** |                                                                                                                                                           |
-| **journey_id**             | **int** | Identifier of the journey, taken from the &#x60;journey&#x60; field on &#x60;\_track.qo&#x60; events (a Unix timestamp marking the start of the journey). |
-| **page_size**              | **int** |                                                                                                                                                           | [optional] [default to 50] |
-| **page_num**               | **int** |                                                                                                                                                           | [optional] [default to 1]  |
+| Name                       | Type    | Description                                                                                                                                        | Notes                      |
+| -------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **project_or_product_uid** | **str** |                                                                                                                                                    |
+| **device_uid**             | **str** |                                                                                                                                                    |
+| **journey_id**             | **int** | Identifier of the journey, taken from the numeric &#x60;journey&#x60; field in the event body (a Unix timestamp marking the start of the journey). |
+| **page_size**              | **int** |                                                                                                                                                    | [optional] [default to 50] |
+| **page_num**               | **int** |                                                                                                                                                    | [optional] [default to 1]  |
 
 ### Return type
 
@@ -941,7 +941,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > GetDeviceJourneys200Response get_device_journeys(project_or_product_uid, device_uid, start_date=start_date, end_date=end_date)
 
-Get the list of journeys for a device, derived from `_track.qo` events. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
 
 ### Example
 

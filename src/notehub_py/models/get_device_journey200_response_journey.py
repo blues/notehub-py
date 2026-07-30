@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class GetDeviceJourney200ResponseJourney(BaseModel):
     """
-    Paginated `_track.qo` events for the journey.
+    Paginated events for the journey.
     """  # noqa: E501
 
     events: List[Event]
