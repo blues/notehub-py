@@ -5,18 +5,44 @@ on:
   push:
     branches-ignore:
       - "main"
+      - "dependabot/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
-  create_pr_repo_sync:
+  create_pr:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v3
-      - name: Create pull request
-        id: open-pr
-        uses: repo-sync/pull-request@v2
+      - uses: actions/checkout@v7
         with:
-          destination_branch: "main"
-          pr_title: "feat: PLACEHOLDER TITLE"
-          pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
-          pr_reviewer: "tjvantoll"
-          pr_draft: true
+          sparse-checkout: .github/PULL_REQUEST_TEMPLATE.md
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - name: Create pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ "$(gh api "repos/{owner}/{repo}/compare/main...$BRANCH" --jq '.files | length')" -eq 0 ]; then
+            echo "No file changes between main and $BRANCH; skipping."
+            exit 0
+          fi
+          existing="$(gh pr list --head "$BRANCH" --base main --state open --json url --jq '.[0].url // empty')"
+          if [ -n "$existing" ]; then
+            echo "Pull request already exists: $existing"
+            exit 0
+          fi
+          gh pr create --base main --head "$BRANCH" \
+            --title "feat: PLACEHOLDER TITLE" \
+            --body-file .github/PULL_REQUEST_TEMPLATE.md \
+            --reviewer tjvantoll \
+            --draft
