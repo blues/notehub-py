@@ -32,7 +32,7 @@ jobs:
           BRANCH: ${{ github.ref_name }}
         run: |
           set -euo pipefail
-          if [ "$(gh api "repos/{owner}/{repo}/compare/main...$BRANCH" --jq '.files | length')" -eq 0 ]; then
+          if [ "$(gh api "repos/{owner}/{repo}/compare/main...$GITHUB_SHA" --jq '.files | length')" -eq 0 ]; then
             echo "No file changes between main and $BRANCH; skipping."
             exit 0
           fi
