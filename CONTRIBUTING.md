@@ -48,7 +48,7 @@ Here are some ways _you_ can contribute:
 4. Add, commit, and push your changes. Please try to use [conventional commits][conventional commits] when pushing changes - this will ensure better changelog documentation when the next release is cut.
 5. [Submit a pull request][pr] with a conventional commit title.
 
-> **NOTE:** Examples of many of the conventional commit types accepted are visible in the [`publish-npm.yml`](/.github/workflows/publish-npm.yml) file under the `Generate release changelog` step.
+> **NOTE:** Common conventional commit types in this repo include `feat`, `fix`, `docs`, `chore`, and `ci`. See the [conventional commits specification][conventional commits] for the full format.
 
 ## Coding Guidelines
 

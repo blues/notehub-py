@@ -2,32 +2,31 @@ name: Upload Python Package
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: 
+    timeout-minutes: 10
+    environment:
       name: pypi
       url: https://pypi.org/p/notehub-py
     permissions:
+      contents: read
       id-token: write # IMPORTANT: this permission is mandatory for trusted publishing
     defaults:
       run:
         working-directory: ./src
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-        
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.x"
-
-      - name: Install dependencies
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install build
 
       - name: Build package
         run: |
