@@ -6347,24 +6347,47 @@ class DeviceApi:
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
         tag: Annotated[
-            Optional[List[StrictStr]], Field(description="Tag filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`."
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Serial number filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         fleet_uid: Optional[List[StrictStr]] = None,
         notecard_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Firmware version filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         location: Annotated[
-            Optional[List[StrictStr]], Field(description="Location filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         host_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Host firmware filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
-        product_uid: Optional[List[StrictStr]] = None,
+        product_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
+        ] = None,
         sku: Annotated[
-            Optional[List[StrictStr]], Field(description="SKU filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -6390,21 +6413,21 @@ class DeviceApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
-        :param tag: Tag filter
+        :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
-        :param serial_number: Serial number filter
+        :param serial_number: Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type serial_number: List[str]
         :param fleet_uid:
         :type fleet_uid: List[str]
-        :param notecard_firmware: Firmware version filter
+        :param notecard_firmware: Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type notecard_firmware: List[str]
-        :param location: Location filter
+        :param location: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type location: List[str]
-        :param host_firmware: Host firmware filter
+        :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid:
+        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
-        :param sku: SKU filter
+        :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6469,24 +6492,47 @@ class DeviceApi:
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
         tag: Annotated[
-            Optional[List[StrictStr]], Field(description="Tag filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`."
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Serial number filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         fleet_uid: Optional[List[StrictStr]] = None,
         notecard_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Firmware version filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         location: Annotated[
-            Optional[List[StrictStr]], Field(description="Location filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         host_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Host firmware filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
-        product_uid: Optional[List[StrictStr]] = None,
+        product_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
+        ] = None,
         sku: Annotated[
-            Optional[List[StrictStr]], Field(description="SKU filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -6512,21 +6558,21 @@ class DeviceApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
-        :param tag: Tag filter
+        :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
-        :param serial_number: Serial number filter
+        :param serial_number: Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type serial_number: List[str]
         :param fleet_uid:
         :type fleet_uid: List[str]
-        :param notecard_firmware: Firmware version filter
+        :param notecard_firmware: Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type notecard_firmware: List[str]
-        :param location: Location filter
+        :param location: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type location: List[str]
-        :param host_firmware: Host firmware filter
+        :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid:
+        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
-        :param sku: SKU filter
+        :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6591,24 +6637,47 @@ class DeviceApi:
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
         tag: Annotated[
-            Optional[List[StrictStr]], Field(description="Tag filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`."
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Serial number filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         fleet_uid: Optional[List[StrictStr]] = None,
         notecard_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Firmware version filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         location: Annotated[
-            Optional[List[StrictStr]], Field(description="Location filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         host_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Host firmware filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
-        product_uid: Optional[List[StrictStr]] = None,
+        product_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
+        ] = None,
         sku: Annotated[
-            Optional[List[StrictStr]], Field(description="SKU filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -6634,21 +6703,21 @@ class DeviceApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
-        :param tag: Tag filter
+        :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
-        :param serial_number: Serial number filter
+        :param serial_number: Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type serial_number: List[str]
         :param fleet_uid:
         :type fleet_uid: List[str]
-        :param notecard_firmware: Firmware version filter
+        :param notecard_firmware: Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type notecard_firmware: List[str]
-        :param location: Location filter
+        :param location: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type location: List[str]
-        :param host_firmware: Host firmware filter
+        :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid:
+        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
-        :param sku: SKU filter
+        :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6826,23 +6895,46 @@ class DeviceApi:
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
         tag: Annotated[
-            Optional[List[StrictStr]], Field(description="Tag filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`."
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Serial number filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         notecard_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Firmware version filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         location: Annotated[
-            Optional[List[StrictStr]], Field(description="Location filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         host_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Host firmware filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
-        product_uid: Optional[List[StrictStr]] = None,
+        product_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
+        ] = None,
         sku: Annotated[
-            Optional[List[StrictStr]], Field(description="SKU filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -6870,19 +6962,19 @@ class DeviceApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
-        :param tag: Tag filter
+        :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
-        :param serial_number: Serial number filter
+        :param serial_number: Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type serial_number: List[str]
-        :param notecard_firmware: Firmware version filter
+        :param notecard_firmware: Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type notecard_firmware: List[str]
-        :param location: Location filter
+        :param location: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type location: List[str]
-        :param host_firmware: Host firmware filter
+        :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid:
+        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
-        :param sku: SKU filter
+        :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6948,23 +7040,46 @@ class DeviceApi:
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
         tag: Annotated[
-            Optional[List[StrictStr]], Field(description="Tag filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`."
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Serial number filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         notecard_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Firmware version filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         location: Annotated[
-            Optional[List[StrictStr]], Field(description="Location filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         host_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Host firmware filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
-        product_uid: Optional[List[StrictStr]] = None,
+        product_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
+        ] = None,
         sku: Annotated[
-            Optional[List[StrictStr]], Field(description="SKU filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -6992,19 +7107,19 @@ class DeviceApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
-        :param tag: Tag filter
+        :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
-        :param serial_number: Serial number filter
+        :param serial_number: Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type serial_number: List[str]
-        :param notecard_firmware: Firmware version filter
+        :param notecard_firmware: Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type notecard_firmware: List[str]
-        :param location: Location filter
+        :param location: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type location: List[str]
-        :param host_firmware: Host firmware filter
+        :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid:
+        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
-        :param sku: SKU filter
+        :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7070,23 +7185,46 @@ class DeviceApi:
             Optional[List[StrictStr]], Field(description="A Device UID.")
         ] = None,
         tag: Annotated[
-            Optional[List[StrictStr]], Field(description="Tag filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`."
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Serial number filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         notecard_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Firmware version filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         location: Annotated[
-            Optional[List[StrictStr]], Field(description="Location filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         host_firmware: Annotated[
-            Optional[List[StrictStr]], Field(description="Host firmware filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
-        product_uid: Optional[List[StrictStr]] = None,
+        product_uid: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
+        ] = None,
         sku: Annotated[
-            Optional[List[StrictStr]], Field(description="SKU filter")
+            Optional[List[StrictStr]],
+            Field(
+                description="SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -7114,19 +7252,19 @@ class DeviceApi:
         :type page_num: int
         :param device_uid: A Device UID.
         :type device_uid: List[str]
-        :param tag: Tag filter
+        :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
-        :param serial_number: Serial number filter
+        :param serial_number: Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type serial_number: List[str]
-        :param notecard_firmware: Firmware version filter
+        :param notecard_firmware: Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type notecard_firmware: List[str]
-        :param location: Location filter
+        :param location: Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type location: List[str]
-        :param host_firmware: Host firmware filter
+        :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid:
+        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
-        :param sku: SKU filter
+        :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

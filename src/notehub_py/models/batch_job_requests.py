@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.batch_job_note_request import BatchJobNoteRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -50,6 +51,10 @@ class BatchJobRequests(BaseModel):
     fleets_to_leave: Optional[List[StrictStr]] = Field(
         default=None, description="Fleet UIDs to remove the device from"
     )
+    note_reqs: Optional[List[BatchJobNoteRequest]] = Field(
+        default=None,
+        description="note.add/note.update/note.delete requests to perform against the device's own notefiles. When both default_requests and a device's device_requests specify note_reqs, they merge by identity (req, file, note): a device-specific entry with the same identity as a default entry replaces it; entries unique to either side (no collision) all still apply.",
+    )
     provision_product: Optional[StrictStr] = Field(
         default=None,
         description="Product UID to provision the device with if not already provisioned",
@@ -76,6 +81,7 @@ class BatchJobRequests(BaseModel):
         "fleets_to_default",
         "fleets_to_join",
         "fleets_to_leave",
+        "note_reqs",
         "provision_product",
         "sn_to_default",
         "sn_to_set",
@@ -120,6 +126,13 @@ class BatchJobRequests(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in note_reqs (list)
+        _items = []
+        if self.note_reqs:
+            for _item in self.note_reqs:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["note_reqs"] = _items
         return _dict
 
     @classmethod
@@ -145,6 +158,11 @@ class BatchJobRequests(BaseModel):
                 "fleets_to_default": obj.get("fleets_to_default"),
                 "fleets_to_join": obj.get("fleets_to_join"),
                 "fleets_to_leave": obj.get("fleets_to_leave"),
+                "note_reqs": (
+                    [BatchJobNoteRequest.from_dict(_item) for _item in obj["note_reqs"]]
+                    if obj.get("note_reqs") is not None
+                    else None
+                ),
                 "provision_product": obj.get("provision_product"),
                 "sn_to_default": obj.get("sn_to_default"),
                 "sn_to_set": obj.get("sn_to_set"),

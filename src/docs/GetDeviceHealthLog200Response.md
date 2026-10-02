@@ -2,9 +2,9 @@
 
 ## Properties
 
-| Name           | Type                                                                                                    | Description | Notes |
-| -------------- | ------------------------------------------------------------------------------------------------------- | ----------- | ----- |
-| **health_log** | [**List[GetDeviceHealthLog200ResponseHealthLogInner]**](GetDeviceHealthLog200ResponseHealthLogInner.md) |             |
+| Name           | Type                                | Description | Notes |
+| -------------- | ----------------------------------- | ----------- | ----- |
+| **health_log** | [**List[HealthLog]**](HealthLog.md) |             |
 
 ## Example
 

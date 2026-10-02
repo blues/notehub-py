@@ -18,20 +18,41 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
-from notehub_py.models.health_log import HealthLog
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class GetDeviceHealthLog200Response(BaseModel):
+class ArchiveStats(BaseModel):
     """
-    GetDeviceHealthLog200Response
+    Statistics about a repository's data archive.
     """  # noqa: E501
 
-    health_log: List[HealthLog]
-    __properties: ClassVar[List[str]] = ["health_log"]
+    begin: Optional[datetime] = Field(
+        default=None, description="Timestamp of the earliest archived record."
+    )
+    end: Optional[datetime] = Field(
+        default=None, description="Timestamp of the latest archived record."
+    )
+    file_count: Optional[StrictInt] = Field(
+        default=None, description="Number of archive files."
+    )
+    record_count: Optional[StrictInt] = Field(
+        default=None,
+        description="Total number of records across all archive files. Null when the count cannot be determined because one or more archive files predate the record-count filename format.",
+    )
+    total_size_bytes: Optional[StrictInt] = Field(
+        default=None, description="Total size of all archive files, in bytes."
+    )
+    __properties: ClassVar[List[str]] = [
+        "begin",
+        "end",
+        "file_count",
+        "record_count",
+        "total_size_bytes",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +71,7 @@ class GetDeviceHealthLog200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetDeviceHealthLog200Response from a JSON string"""
+        """Create an instance of ArchiveStats from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,18 +91,16 @@ class GetDeviceHealthLog200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in health_log (list)
-        _items = []
-        if self.health_log:
-            for _item in self.health_log:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["health_log"] = _items
+        # set to None if record_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.record_count is None and "record_count" in self.model_fields_set:
+            _dict["record_count"] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetDeviceHealthLog200Response from a dict"""
+        """Create an instance of ArchiveStats from a dict"""
         if obj is None:
             return None
 
@@ -90,11 +109,11 @@ class GetDeviceHealthLog200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "health_log": (
-                    [HealthLog.from_dict(_item) for _item in obj["health_log"]]
-                    if obj.get("health_log") is not None
-                    else None
-                )
+                "begin": obj.get("begin"),
+                "end": obj.get("end"),
+                "file_count": obj.get("file_count"),
+                "record_count": obj.get("record_count"),
+                "total_size_bytes": obj.get("total_size_bytes"),
             }
         )
         return _obj

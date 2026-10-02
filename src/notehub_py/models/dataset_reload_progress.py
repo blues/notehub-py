@@ -18,20 +18,37 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
-from notehub_py.models.health_log import HealthLog
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class GetDeviceHealthLog200Response(BaseModel):
+class DatasetReloadProgress(BaseModel):
     """
-    GetDeviceHealthLog200Response
+    Live progress of an in-flight reload of this dataset; absent when not reloading.
     """  # noqa: E501
 
-    health_log: List[HealthLog]
-    __properties: ClassVar[List[str]] = ["health_log"]
+    archive_records_read: Optional[StrictInt] = Field(
+        default=None, description="Archived records read so far."
+    )
+    archive_records_total: Optional[StrictInt] = Field(
+        default=None,
+        description="Approximate total archived records to read. Null when it cannot be determined because some archive files predate the record-count filename format.",
+    )
+    started: Optional[datetime] = Field(
+        default=None, description="When this reload started."
+    )
+    tail_records_read: Optional[StrictInt] = Field(
+        default=None, description="Unarchived (Kafka tail) records read so far."
+    )
+    __properties: ClassVar[List[str]] = [
+        "archive_records_read",
+        "archive_records_total",
+        "started",
+        "tail_records_read",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +67,7 @@ class GetDeviceHealthLog200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetDeviceHealthLog200Response from a JSON string"""
+        """Create an instance of DatasetReloadProgress from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,18 +87,19 @@ class GetDeviceHealthLog200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in health_log (list)
-        _items = []
-        if self.health_log:
-            for _item in self.health_log:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["health_log"] = _items
+        # set to None if archive_records_total (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.archive_records_total is None
+            and "archive_records_total" in self.model_fields_set
+        ):
+            _dict["archive_records_total"] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetDeviceHealthLog200Response from a dict"""
+        """Create an instance of DatasetReloadProgress from a dict"""
         if obj is None:
             return None
 
@@ -90,11 +108,10 @@ class GetDeviceHealthLog200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "health_log": (
-                    [HealthLog.from_dict(_item) for _item in obj["health_log"]]
-                    if obj.get("health_log") is not None
-                    else None
-                )
+                "archive_records_read": obj.get("archive_records_read"),
+                "archive_records_total": obj.get("archive_records_total"),
+                "started": obj.get("started"),
+                "tail_records_read": obj.get("tail_records_read"),
             }
         )
         return _obj

@@ -41,7 +41,7 @@ class Monitor(BaseModel):
 
     aggregate_function: Optional[StrictStr] = Field(
         default=None,
-        description="Aggregate function to apply to the selected values before applying the condition. [none, sum, average, max, min]",
+        description="Aggregate function to apply to the selected values before applying the condition. [none, avg, max, min, sum, count]",
     )
     aggregate_window: Optional[Annotated[str, Field(strict=True)]] = Field(
         default=None,
@@ -53,9 +53,9 @@ class Monitor(BaseModel):
     alert_routes: Optional[List[MonitorAlertRoutesInner]] = None
     condition_type: Optional[StrictStr] = Field(
         default=None,
-        description="A comparison operation to apply to the value selected by the source_selector [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]",
+        description="A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]",
     )
-    description: Optional[StrictStr] = None
+    description: Optional[StrictStr] = ""
     disabled: Optional[StrictBool] = Field(
         default=None, description="If true, the monitor will not be evaluated."
     )
@@ -79,15 +79,15 @@ class Monitor(BaseModel):
     )
     source_selector: Optional[StrictStr] = Field(
         default=None,
-        description="A valid JSONata expression that selects the value to monitor from the source. | It should return a single, numeric value.",
+        description="A dot-delimited path to a single numeric value within the event body.",
     )
     source_type: Optional[StrictStr] = Field(
-        default=None,
-        description='The type of source to monitor. Supported values are "event" and "heartbeat".',
+        default="event",
+        description='The type of source to monitor. Defaults to "event".',
     )
     threshold: Optional[StrictInt] = Field(
         default=None,
-        description="The type of condition to apply to the value selected by the source_selector",
+        description="The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes.",
     )
     uid: Optional[StrictStr] = None
     usage_scope: Optional[StrictStr] = Field(
@@ -132,9 +132,9 @@ class Monitor(BaseModel):
         if value is None:
             return value
 
-        if value not in set(["none", "sum", "average", "max", "min"]):
+        if value not in set(["none", "avg", "max", "min", "sum", "count"]):
             raise ValueError(
-                "must be one of enum values ('none', 'sum', 'average', 'max', 'min')"
+                "must be one of enum values ('none', 'avg', 'max', 'min', 'sum', 'count')"
             )
         return value
 
@@ -162,11 +162,10 @@ class Monitor(BaseModel):
                 "less_than_or_equal_to",
                 "equal_to",
                 "not_equal_to",
-                "count",
             ]
         ):
             raise ValueError(
-                "must be one of enum values ('greater_than', 'greater_than_or_equal_to', 'less_than', 'less_than_or_equal_to', 'equal_to', 'not_equal_to', 'count')"
+                "must be one of enum values ('greater_than', 'greater_than_or_equal_to', 'less_than', 'less_than_or_equal_to', 'equal_to', 'not_equal_to')"
             )
         return value
 
@@ -186,8 +185,10 @@ class Monitor(BaseModel):
         if value is None:
             return value
 
-        if value not in set(["event", "heartbeat"]):
-            raise ValueError("must be one of enum values ('event', 'heartbeat')")
+        if value not in set(["event", "heartbeat", "usage"]):
+            raise ValueError(
+                "must be one of enum values ('event', 'heartbeat', 'usage')"
+            )
         return value
 
     model_config = ConfigDict(
@@ -259,7 +260,9 @@ class Monitor(BaseModel):
                     else None
                 ),
                 "condition_type": obj.get("condition_type"),
-                "description": obj.get("description"),
+                "description": (
+                    obj.get("description") if obj.get("description") is not None else ""
+                ),
                 "disabled": obj.get("disabled"),
                 "fleet_filter": obj.get("fleet_filter"),
                 "last_routed_at": obj.get("last_routed_at"),
@@ -269,7 +272,11 @@ class Monitor(BaseModel):
                 "routing_cooldown_period": obj.get("routing_cooldown_period"),
                 "silenced": obj.get("silenced"),
                 "source_selector": obj.get("source_selector"),
-                "source_type": obj.get("source_type"),
+                "source_type": (
+                    obj.get("source_type")
+                    if obj.get("source_type") is not None
+                    else "event"
+                ),
                 "threshold": obj.get("threshold"),
                 "uid": obj.get("uid"),
                 "usage_scope": obj.get("usage_scope"),

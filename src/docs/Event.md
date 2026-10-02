@@ -25,6 +25,7 @@
 | **ordering_code**      | **str**    | Ordering code. Only available on \_session.qo events.                                                                                                  | [optional] |
 | **orientation**        | **str**    | The orientation of the device. Only available on \_session.qo events.                                                                                  | [optional] |
 | **payload**            | **str**    | A base64-encoded binary payload                                                                                                                        | [optional] |
+| **platform**           | **bool**   | Whether this is a platform event (administrative, e.g. \_health.qo, \_session.qo) rather than user data                                                | [optional] |
 | **product**            | **str**    | Product UID (globally unique)                                                                                                                          | [optional] |
 | **rat**                | **str**    | Rat. Only available on \_session.qo events.                                                                                                            | [optional] |
 | **received**           | **float**  | The unix timestamp when the event was received                                                                                                         | [optional] |

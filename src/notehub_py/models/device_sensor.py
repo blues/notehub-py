@@ -18,20 +18,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
-from notehub_py.models.health_log import HealthLog
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class GetDeviceHealthLog200Response(BaseModel):
+class DeviceSensor(BaseModel):
     """
-    GetDeviceHealthLog200Response
+    A sensor attached to a device
     """  # noqa: E501
 
-    health_log: List[HealthLog]
-    __properties: ClassVar[List[str]] = ["health_log"]
+    last_activity_date: Optional[datetime] = Field(
+        default=None,
+        description="UTC midnight of the most recent day on which this sensor was active",
+    )
+    sensor_uid: StrictStr = Field(description="Unique identifier of the sensor")
+    __properties: ClassVar[List[str]] = ["last_activity_date", "sensor_uid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +54,7 @@ class GetDeviceHealthLog200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetDeviceHealthLog200Response from a JSON string"""
+        """Create an instance of DeviceSensor from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,18 +74,11 @@ class GetDeviceHealthLog200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in health_log (list)
-        _items = []
-        if self.health_log:
-            for _item in self.health_log:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["health_log"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetDeviceHealthLog200Response from a dict"""
+        """Create an instance of DeviceSensor from a dict"""
         if obj is None:
             return None
 
@@ -90,11 +87,8 @@ class GetDeviceHealthLog200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "health_log": (
-                    [HealthLog.from_dict(_item) for _item in obj["health_log"]]
-                    if obj.get("health_log") is not None
-                    else None
-                )
+                "last_activity_date": obj.get("last_activity_date"),
+                "sensor_uid": obj.get("sensor_uid"),
             }
         )
         return _obj

@@ -15,7 +15,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 
-__version__ = "6.5.0"
+__version__ = "6.6.0"
 
 # import apis into sdk package
 from notehub_py.api.alert_api import AlertApi
@@ -50,8 +50,10 @@ from notehub_py.models.add_device_to_fleets_request import AddDeviceToFleetsRequ
 from notehub_py.models.alert import Alert
 from notehub_py.models.alert_data_inner import AlertDataInner
 from notehub_py.models.alert_notifications_inner import AlertNotificationsInner
+from notehub_py.models.archive_stats import ArchiveStats
 from notehub_py.models.aws_route import AwsRoute
 from notehub_py.models.azure_route import AzureRoute
+from notehub_py.models.batch_job_note_request import BatchJobNoteRequest
 from notehub_py.models.batch_job_requests import BatchJobRequests
 from notehub_py.models.billing_account import BillingAccount
 from notehub_py.models.billing_account_role import BillingAccountRole
@@ -77,6 +79,7 @@ from notehub_py.models.data_set import DataSet
 from notehub_py.models.data_set_field import DataSetField
 from notehub_py.models.data_usage import DataUsage
 from notehub_py.models.datacake_route import DatacakeRoute
+from notehub_py.models.dataset_reload_progress import DatasetReloadProgress
 from notehub_py.models.delete_device_from_fleets_request import (
     DeleteDeviceFromFleetsRequest,
 )
@@ -92,6 +95,7 @@ from notehub_py.models.device_dfu_state_machine import DeviceDfuStateMachine
 from notehub_py.models.device_dfu_state_machine_node import DeviceDfuStateMachineNode
 from notehub_py.models.device_dfu_status import DeviceDfuStatus
 from notehub_py.models.device_dfu_status_page import DeviceDfuStatusPage
+from notehub_py.models.device_sensor import DeviceSensor
 from notehub_py.models.device_session import DeviceSession
 from notehub_py.models.device_tower_info import DeviceTowerInfo
 from notehub_py.models.device_usage import DeviceUsage
@@ -134,9 +138,6 @@ from notehub_py.models.get_device_environment_variables_by_pin200_response impor
 from notehub_py.models.get_device_fleets200_response import GetDeviceFleets200Response
 from notehub_py.models.get_device_health_log200_response import (
     GetDeviceHealthLog200Response,
-)
-from notehub_py.models.get_device_health_log200_response_health_log_inner import (
-    GetDeviceHealthLog200ResponseHealthLogInner,
 )
 from notehub_py.models.get_device_journey200_response import GetDeviceJourney200Response
 from notehub_py.models.get_device_journey200_response_journey import (
@@ -185,6 +186,7 @@ from notehub_py.models.get_route_logs_usage200_response import (
 from notehub_py.models.get_sessions_usage200_response import GetSessionsUsage200Response
 from notehub_py.models.get_webhooks200_response import GetWebhooks200Response
 from notehub_py.models.google_route import GoogleRoute
+from notehub_py.models.health_log import HealthLog
 from notehub_py.models.http_route import HttpRoute
 from notehub_py.models.job import Job
 from notehub_py.models.job_definition import JobDefinition
