@@ -1309,20 +1309,28 @@ with notehub_py.ApiClient(configuration) as api_client:
     page_size = 50  # int |  (optional) (default to 50)
     page_num = 1  # int |  (optional) (default to 1)
     device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
-    tag = ["tag_example"]  # List[str] | Tag filter (optional)
+    tag = [
+        "tag_example"
+    ]  # List[str] | Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`. (optional)
     serial_number = [
         "serial_number_example"
-    ]  # List[str] | Serial number filter (optional)
+    ]  # List[str] | Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
     fleet_uid = ["fleet_uid_example"]  # List[str] |  (optional)
     notecard_firmware = [
         "notecard_firmware_example"
-    ]  # List[str] | Firmware version filter (optional)
-    location = ["location_example"]  # List[str] | Location filter (optional)
+    ]  # List[str] | Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
+    location = [
+        "location_example"
+    ]  # List[str] | Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
     host_firmware = [
         "host_firmware_example"
-    ]  # List[str] | Host firmware filter (optional)
-    product_uid = ["product_uid_example"]  # List[str] |  (optional)
-    sku = ["sku_example"]  # List[str] | SKU filter (optional)
+    ]  # List[str] | Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
+    product_uid = [
+        "product_uid_example"
+    ]  # List[str] | Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
+    sku = [
+        "sku_example"
+    ]  # List[str] | SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
 
     try:
         api_response = api_instance.get_devices(
@@ -1347,20 +1355,20 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                    | Description             | Notes                      |
-| -------------------------- | ----------------------- | ----------------------- | -------------------------- |
-| **project_or_product_uid** | **str**                 |                         |
-| **page_size**              | **int**                 |                         | [optional] [default to 50] |
-| **page_num**               | **int**                 |                         | [optional] [default to 1]  |
-| **device_uid**             | [**List[str]**](str.md) | A Device UID.           | [optional]                 |
-| **tag**                    | [**List[str]**](str.md) | Tag filter              | [optional]                 |
-| **serial_number**          | [**List[str]**](str.md) | Serial number filter    | [optional]                 |
-| **fleet_uid**              | [**List[str]**](str.md) |                         | [optional]                 |
-| **notecard_firmware**      | [**List[str]**](str.md) | Firmware version filter | [optional]                 |
-| **location**               | [**List[str]**](str.md) | Location filter         | [optional]                 |
-| **host_firmware**          | [**List[str]**](str.md) | Host firmware filter    | [optional]                 |
-| **product_uid**            | [**List[str]**](str.md) |                         | [optional]                 |
-| **sku**                    | [**List[str]**](str.md) | SKU filter              | [optional]                 |
+| Name                       | Type                    | Description                                                                                                                                                                                                                                                                                           | Notes                      |
+| -------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **project_or_product_uid** | **str**                 |                                                                                                                                                                                                                                                                                                       |
+| **page_size**              | **int**                 |                                                                                                                                                                                                                                                                                                       | [optional] [default to 50] |
+| **page_num**               | **int**                 |                                                                                                                                                                                                                                                                                                       | [optional] [default to 1]  |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                                                                                                                                                         | [optional]                 |
+| **tag**                    | [**List[str]**](str.md) | Tag filter. Matches the whole tag, case-insensitive. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;_&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally. For example, &#x60;51_&#x60; matches tags starting with &#x60;51&#x60;. | [optional]                 |
+| **serial_number**          | [**List[str]**](str.md) | Serial number filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                         | [optional]                 |
+| **fleet_uid**              | [**List[str]**](str.md) |                                                                                                                                                                                                                                                                                                       | [optional]                 |
+| **notecard_firmware**      | [**List[str]**](str.md) | Firmware version filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                      | [optional]                 |
+| **location**               | [**List[str]**](str.md) | Location filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                              | [optional]                 |
+| **host_firmware**          | [**List[str]**](str.md) | Host firmware filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                         | [optional]                 |
+| **product_uid**            | [**List[str]**](str.md) | Product UID filter. Matches any value containing the filter text, case-insensitive. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                         | [optional]                 |
+| **sku**                    | [**List[str]**](str.md) | SKU filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                                   | [optional]                 |
 
 ### Return type
 
@@ -1400,19 +1408,27 @@ with notehub_py.ApiClient(configuration) as api_client:
     page_size = 50  # int |  (optional) (default to 50)
     page_num = 1  # int |  (optional) (default to 1)
     device_uid = ["device_uid_example"]  # List[str] | A Device UID. (optional)
-    tag = ["tag_example"]  # List[str] | Tag filter (optional)
+    tag = [
+        "tag_example"
+    ]  # List[str] | Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`. (optional)
     serial_number = [
         "serial_number_example"
-    ]  # List[str] | Serial number filter (optional)
+    ]  # List[str] | Serial number filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
     notecard_firmware = [
         "notecard_firmware_example"
-    ]  # List[str] | Firmware version filter (optional)
-    location = ["location_example"]  # List[str] | Location filter (optional)
+    ]  # List[str] | Firmware version filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
+    location = [
+        "location_example"
+    ]  # List[str] | Location filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
     host_firmware = [
         "host_firmware_example"
-    ]  # List[str] | Host firmware filter (optional)
-    product_uid = ["product_uid_example"]  # List[str] |  (optional)
-    sku = ["sku_example"]  # List[str] | SKU filter (optional)
+    ]  # List[str] | Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
+    product_uid = [
+        "product_uid_example"
+    ]  # List[str] | Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
+    sku = [
+        "sku_example"
+    ]  # List[str] | SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. (optional)
 
     try:
         api_response = api_instance.get_fleet_devices(
@@ -1437,20 +1453,20 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                    | Description             | Notes                      |
-| -------------------------- | ----------------------- | ----------------------- | -------------------------- |
-| **project_or_product_uid** | **str**                 |                         |
-| **fleet_uid**              | **str**                 |                         |
-| **page_size**              | **int**                 |                         | [optional] [default to 50] |
-| **page_num**               | **int**                 |                         | [optional] [default to 1]  |
-| **device_uid**             | [**List[str]**](str.md) | A Device UID.           | [optional]                 |
-| **tag**                    | [**List[str]**](str.md) | Tag filter              | [optional]                 |
-| **serial_number**          | [**List[str]**](str.md) | Serial number filter    | [optional]                 |
-| **notecard_firmware**      | [**List[str]**](str.md) | Firmware version filter | [optional]                 |
-| **location**               | [**List[str]**](str.md) | Location filter         | [optional]                 |
-| **host_firmware**          | [**List[str]**](str.md) | Host firmware filter    | [optional]                 |
-| **product_uid**            | [**List[str]**](str.md) |                         | [optional]                 |
-| **sku**                    | [**List[str]**](str.md) | SKU filter              | [optional]                 |
+| Name                       | Type                    | Description                                                                                                                                                                                                                                                                                           | Notes                      |
+| -------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **project_or_product_uid** | **str**                 |                                                                                                                                                                                                                                                                                                       |
+| **fleet_uid**              | **str**                 |                                                                                                                                                                                                                                                                                                       |
+| **page_size**              | **int**                 |                                                                                                                                                                                                                                                                                                       | [optional] [default to 50] |
+| **page_num**               | **int**                 |                                                                                                                                                                                                                                                                                                       | [optional] [default to 1]  |
+| **device_uid**             | [**List[str]**](str.md) | A Device UID.                                                                                                                                                                                                                                                                                         | [optional]                 |
+| **tag**                    | [**List[str]**](str.md) | Tag filter. Matches the whole tag, case-insensitive. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;_&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally. For example, &#x60;51_&#x60; matches tags starting with &#x60;51&#x60;. | [optional]                 |
+| **serial_number**          | [**List[str]**](str.md) | Serial number filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                         | [optional]                 |
+| **notecard_firmware**      | [**List[str]**](str.md) | Firmware version filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                      | [optional]                 |
+| **location**               | [**List[str]**](str.md) | Location filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                              | [optional]                 |
+| **host_firmware**          | [**List[str]**](str.md) | Host firmware filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                         | [optional]                 |
+| **product_uid**            | [**List[str]**](str.md) | Product UID filter. Matches any value containing the filter text, case-insensitive. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                         | [optional]                 |
+| **sku**                    | [**List[str]**](str.md) | SKU filter. Matches any value containing the filter text. Use &#x60;_&#x60; as a wildcard and &#x60;\\_&#x60; to match a literal &#x60;\*&#x60;; all other characters, including &#x60;%&#x60; and &#x60;\_&#x60;, match literally.                                                                   | [optional]                 |
 
 ### Return type
 

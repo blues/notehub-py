@@ -33,7 +33,8 @@ class DataSetField(BaseModel):
         default=None, description="The datatype of the field"
     )
     jsonata: Optional[StrictStr] = Field(
-        default=None, description="the JSONata expression used to populate this field"
+        default=None,
+        description="The JSONata expression that populates this field from the event. Required for a dataset with no rows expression. Must be omitted when the dataset has one: the column is then taken from the row object key matching this field's name, and supplying an expression here is rejected rather than silently ignored.",
     )
     name: Optional[StrictStr] = Field(default=None, description="The name of the field")
     __properties: ClassVar[List[str]] = ["datatype", "jsonata", "name"]
@@ -44,8 +45,8 @@ class DataSetField(BaseModel):
         if value is None:
             return value
 
-        if value not in set([0, 1, 2, 5, 6, 7, 8]):
-            raise ValueError("must be one of enum values (0, 1, 2, 5, 6, 7, 8)")
+        if value not in set([0, 1, 2, 3, 5, 6, 7, 8]):
+            raise ValueError("must be one of enum values (0, 1, 2, 3, 5, 6, 7, 8)")
         return value
 
     model_config = ConfigDict(

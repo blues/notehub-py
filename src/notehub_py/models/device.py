@@ -30,8 +30,10 @@ from pydantic import (
 )
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from notehub_py.models.contact import Contact
+from notehub_py.models.device_sensor import DeviceSensor
 from notehub_py.models.device_tower_info import DeviceTowerInfo
 from notehub_py.models.dfu_env import DFUEnv
+from notehub_py.models.health_log import HealthLog
 from notehub_py.models.location import Location
 from notehub_py.models.sim_usage import SimUsage
 from typing import Optional, Set
@@ -56,11 +58,18 @@ class Device(BaseModel):
     firmware_notecard: Optional[StrictStr] = None
     fleet_uids: List[StrictStr]
     gps_location: Optional[Location] = None
+    health_log: Optional[List[HealthLog]] = None
     last_activity: Optional[datetime] = None
     product_uid: StrictStr
     provisioned: datetime
+    recent_event_count: Optional[List[StrictInt]] = None
+    recent_session_count: Optional[List[StrictInt]] = None
+    recent_session_seconds: Optional[List[StrictInt]] = None
+    recent_when: Optional[datetime] = None
+    sensors: Optional[List[DeviceSensor]] = None
     serial_number: Optional[StrictStr] = None
     sku: Optional[StrictStr] = None
+    tags: Optional[StrictStr] = None
     temperature: Union[StrictFloat, StrictInt]
     tower_info: Optional[DeviceTowerInfo] = None
     tower_location: Optional[Location] = None
@@ -78,11 +87,18 @@ class Device(BaseModel):
         "firmware_notecard",
         "fleet_uids",
         "gps_location",
+        "health_log",
         "last_activity",
         "product_uid",
         "provisioned",
+        "recent_event_count",
+        "recent_session_count",
+        "recent_session_seconds",
+        "recent_when",
+        "sensors",
         "serial_number",
         "sku",
+        "tags",
         "temperature",
         "tower_info",
         "tower_location",
@@ -147,6 +163,20 @@ class Device(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of gps_location
         if self.gps_location:
             _dict["gps_location"] = self.gps_location.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in health_log (list)
+        _items = []
+        if self.health_log:
+            for _item in self.health_log:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["health_log"] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in sensors (list)
+        _items = []
+        if self.sensors:
+            for _item in self.sensors:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["sensors"] = _items
         # override the default output from pydantic by calling `to_dict()` of tower_info
         if self.tower_info:
             _dict["tower_info"] = self.tower_info.to_dict()
@@ -180,6 +210,11 @@ class Device(BaseModel):
         # and model_fields_set contains the field
         if self.last_activity is None and "last_activity" in self.model_fields_set:
             _dict["last_activity"] = None
+
+        # set to None if recent_when (nullable) is None
+        # and model_fields_set contains the field
+        if self.recent_when is None and "recent_when" in self.model_fields_set:
+            _dict["recent_when"] = None
 
         # set to None if tower_info (nullable) is None
         # and model_fields_set contains the field
@@ -240,11 +275,26 @@ class Device(BaseModel):
                     if obj.get("gps_location") is not None
                     else None
                 ),
+                "health_log": (
+                    [HealthLog.from_dict(_item) for _item in obj["health_log"]]
+                    if obj.get("health_log") is not None
+                    else None
+                ),
                 "last_activity": obj.get("last_activity"),
                 "product_uid": obj.get("product_uid"),
                 "provisioned": obj.get("provisioned"),
+                "recent_event_count": obj.get("recent_event_count"),
+                "recent_session_count": obj.get("recent_session_count"),
+                "recent_session_seconds": obj.get("recent_session_seconds"),
+                "recent_when": obj.get("recent_when"),
+                "sensors": (
+                    [DeviceSensor.from_dict(_item) for _item in obj["sensors"]]
+                    if obj.get("sensors") is not None
+                    else None
+                ),
                 "serial_number": obj.get("serial_number"),
                 "sku": obj.get("sku"),
+                "tags": obj.get("tags"),
                 "temperature": obj.get("temperature"),
                 "tower_info": (
                     DeviceTowerInfo.from_dict(obj["tower_info"])

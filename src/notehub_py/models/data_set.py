@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.data_set_field import DataSetField
+from notehub_py.models.dataset_reload_progress import DatasetReloadProgress
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -52,9 +53,14 @@ class DataSet(BaseModel):
         default=None,
         description="If non-empty, only events from these notefiles populate the dataset. Empty or omitted means all notefiles.",
     )
+    reload: Optional[DatasetReloadProgress] = None
+    rows: Optional[StrictStr] = Field(
+        default=None,
+        description="Optional JSONata expression that expands one event into several rows. It evaluates to one row object per row, whose keys are the dataset's columns: an array of objects, or a single object for one row. Both are accepted because JSONata collapses a one-element sequence to the element, so the same expression yields an array for an event carrying several readings and a bare object for one carrying a single reading. A result that is undefined or empty contributes no rows and is not an error; anything that is not an object, or an array containing one, is rejected. When set it is the only expression that reads the event: each field below takes the row object key matching its name, and time/lat/lon name a key too. Omit it and the dataset produces one row per event, with each field's own jsonata expression reading the event directly. event.uploaded and event.captured always resolve against the event either way.",
+    )
     time: Optional[StrictStr] = Field(
         default=None,
-        description="JSONata expression resulting in the relevant time field",
+        description="JSONata expression resulting in the row's time. Required for a dataset with no rows expression. With one it defaults to the row object's \"time\" key, and only needs setting to name a different key, or to reach past the row as event.uploaded and event.captured do. lat and lon work the same way and are what declare that the dataset has a location column at all.",
     )
     __properties: ClassVar[List[str]] = [
         "fields",
@@ -64,6 +70,8 @@ class DataSet(BaseModel):
         "lon",
         "name",
         "notefiles",
+        "reload",
+        "rows",
         "time",
     ]
 
@@ -118,6 +126,14 @@ class DataSet(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict["fields"] = _items
+        # override the default output from pydantic by calling `to_dict()` of reload
+        if self.reload:
+            _dict["reload"] = self.reload.to_dict()
+        # set to None if reload (nullable) is None
+        # and model_fields_set contains the field
+        if self.reload is None and "reload" in self.model_fields_set:
+            _dict["reload"] = None
+
         return _dict
 
     @classmethod
@@ -142,6 +158,12 @@ class DataSet(BaseModel):
                 "lon": obj.get("lon"),
                 "name": obj.get("name"),
                 "notefiles": obj.get("notefiles"),
+                "reload": (
+                    DatasetReloadProgress.from_dict(obj["reload"])
+                    if obj.get("reload") is not None
+                    else None
+                ),
+                "rows": obj.get("rows"),
                 "time": obj.get("time"),
             }
         )

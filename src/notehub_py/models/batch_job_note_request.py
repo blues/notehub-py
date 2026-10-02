@@ -18,20 +18,39 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
-from notehub_py.models.health_log import HealthLog
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class GetDeviceHealthLog200Response(BaseModel):
+class BatchJobNoteRequest(BaseModel):
     """
-    GetDeviceHealthLog200Response
+    A single note.add/note.update/note.delete request against a device's own notefile
     """  # noqa: E501
 
-    health_log: List[HealthLog]
-    __properties: ClassVar[List[str]] = ["health_log"]
+    body: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="The note's JSON body (used by note.add and note.update)",
+    )
+    file: StrictStr = Field(
+        description="The notefile to operate on (e.g. data.qi, config.dbs)"
+    )
+    note: Optional[StrictStr] = Field(
+        default=None,
+        description="The note ID. Required for note.update and note.delete, and for note.add against a database (.dbs/.db) notefile. Must be omitted for note.add against a queue (.qi/.qo) notefile.",
+    )
+    req: StrictStr = Field(description="The note operation to perform")
+    __properties: ClassVar[List[str]] = ["body", "file", "note", "req"]
+
+    @field_validator("req")
+    def req_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(["note.add", "note.update", "note.delete"]):
+            raise ValueError(
+                "must be one of enum values ('note.add', 'note.update', 'note.delete')"
+            )
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +69,7 @@ class GetDeviceHealthLog200Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GetDeviceHealthLog200Response from a JSON string"""
+        """Create an instance of BatchJobNoteRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,18 +89,11 @@ class GetDeviceHealthLog200Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in health_log (list)
-        _items = []
-        if self.health_log:
-            for _item in self.health_log:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["health_log"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GetDeviceHealthLog200Response from a dict"""
+        """Create an instance of BatchJobNoteRequest from a dict"""
         if obj is None:
             return None
 
@@ -90,11 +102,10 @@ class GetDeviceHealthLog200Response(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "health_log": (
-                    [HealthLog.from_dict(_item) for _item in obj["health_log"]]
-                    if obj.get("health_log") is not None
-                    else None
-                )
+                "body": obj.get("body"),
+                "file": obj.get("file"),
+                "note": obj.get("note"),
+                "req": obj.get("req"),
             }
         )
         return _obj

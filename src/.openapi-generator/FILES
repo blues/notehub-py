@@ -9,9 +9,11 @@ docs/Alert.md
 docs/AlertApi.md
 docs/AlertDataInner.md
 docs/AlertNotificationsInner.md
+docs/ArchiveStats.md
 docs/AuthorizationApi.md
 docs/AwsRoute.md
 docs/AzureRoute.md
+docs/BatchJobNoteRequest.md
 docs/BatchJobRequests.md
 docs/BillingAccount.md
 docs/BillingAccountApi.md
@@ -38,6 +40,7 @@ docs/DataSet.md
 docs/DataSetField.md
 docs/DataUsage.md
 docs/DatacakeRoute.md
+docs/DatasetReloadProgress.md
 docs/DeleteDeviceFromFleetsRequest.md
 docs/DeleteJob200Response.md
 docs/DeleteNotefilesRequest.md
@@ -53,6 +56,7 @@ docs/DeviceDfuStateMachine.md
 docs/DeviceDfuStateMachineNode.md
 docs/DeviceDfuStatus.md
 docs/DeviceDfuStatusPage.md
+docs/DeviceSensor.md
 docs/DeviceSession.md
 docs/DeviceTowerInfo.md
 docs/DeviceUsage.md
@@ -82,7 +86,6 @@ docs/GetDbNote200Response.md
 docs/GetDeviceEnvironmentVariablesByPin200Response.md
 docs/GetDeviceFleets200Response.md
 docs/GetDeviceHealthLog200Response.md
-docs/GetDeviceHealthLog200ResponseHealthLogInner.md
 docs/GetDeviceJourney200Response.md
 docs/GetDeviceJourney200ResponseJourney.md
 docs/GetDeviceJourneys200Response.md
@@ -108,6 +111,7 @@ docs/GetRouteLogsUsage200Response.md
 docs/GetSessionsUsage200Response.md
 docs/GetWebhooks200Response.md
 docs/GoogleRoute.md
+docs/HealthLog.md
 docs/HttpRoute.md
 docs/Job.md
 docs/JobDefinition.md
@@ -211,9 +215,11 @@ notehub_py/models/add_device_to_fleets_request.py
 notehub_py/models/alert.py
 notehub_py/models/alert_data_inner.py
 notehub_py/models/alert_notifications_inner.py
+notehub_py/models/archive_stats.py
 notehub_py/models/aws_role_config.py
 notehub_py/models/aws_route.py
 notehub_py/models/azure_route.py
+notehub_py/models/batch_job_note_request.py
 notehub_py/models/batch_job_requests.py
 notehub_py/models/billing_account.py
 notehub_py/models/billing_account_role.py
@@ -237,6 +243,7 @@ notehub_py/models/data_set.py
 notehub_py/models/data_set_field.py
 notehub_py/models/data_usage.py
 notehub_py/models/datacake_route.py
+notehub_py/models/dataset_reload_progress.py
 notehub_py/models/delete_device_from_fleets_request.py
 notehub_py/models/delete_job200_response.py
 notehub_py/models/delete_notefiles_request.py
@@ -250,6 +257,7 @@ notehub_py/models/device_dfu_state_machine.py
 notehub_py/models/device_dfu_state_machine_node.py
 notehub_py/models/device_dfu_status.py
 notehub_py/models/device_dfu_status_page.py
+notehub_py/models/device_sensor.py
 notehub_py/models/device_session.py
 notehub_py/models/device_tower_info.py
 notehub_py/models/device_usage.py
@@ -279,7 +287,6 @@ notehub_py/models/get_db_note200_response.py
 notehub_py/models/get_device_environment_variables_by_pin200_response.py
 notehub_py/models/get_device_fleets200_response.py
 notehub_py/models/get_device_health_log200_response.py
-notehub_py/models/get_device_health_log200_response_health_log_inner.py
 notehub_py/models/get_device_journey200_response.py
 notehub_py/models/get_device_journey200_response_journey.py
 notehub_py/models/get_device_journeys200_response.py
@@ -305,6 +312,7 @@ notehub_py/models/get_route_logs_usage200_response.py
 notehub_py/models/get_sessions_usage200_response.py
 notehub_py/models/get_webhooks200_response.py
 notehub_py/models/google_route.py
+notehub_py/models/health_log.py
 notehub_py/models/http_route.py
 notehub_py/models/job.py
 notehub_py/models/job_definition.py
@@ -383,8 +391,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_data_set.py
-test/test_description_api.py
-test/test_description_record.py
-test/test_description_record_list.py
+test/test_archive_stats.py
+test/test_batch_job_note_request.py
+test/test_dataset_reload_progress.py
+test/test_device_sensor.py
+test/test_health_log.py
 tox.ini

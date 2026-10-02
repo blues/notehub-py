@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.archive_stats import ArchiveStats
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,13 +30,20 @@ class Repository(BaseModel):
     Repository
     """  # noqa: E501
 
+    archive: Optional[ArchiveStats] = None
     fleet_uids: Optional[List[StrictStr]] = None
     name: Optional[StrictStr] = Field(default=None, description="repository name")
     project_uids: Optional[List[StrictStr]] = None
     uid: Optional[StrictStr] = Field(
         default=None, description="The unique identifier for the data repository"
     )
-    __properties: ClassVar[List[str]] = ["fleet_uids", "name", "project_uids", "uid"]
+    __properties: ClassVar[List[str]] = [
+        "archive",
+        "fleet_uids",
+        "name",
+        "project_uids",
+        "uid",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,6 +82,14 @@ class Repository(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of archive
+        if self.archive:
+            _dict["archive"] = self.archive.to_dict()
+        # set to None if archive (nullable) is None
+        # and model_fields_set contains the field
+        if self.archive is None and "archive" in self.model_fields_set:
+            _dict["archive"] = None
+
         return _dict
 
     @classmethod
@@ -87,6 +103,11 @@ class Repository(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "archive": (
+                    ArchiveStats.from_dict(obj["archive"])
+                    if obj.get("archive") is not None
+                    else None
+                ),
                 "fleet_uids": obj.get("fleet_uids"),
                 "name": obj.get("name"),
                 "project_uids": obj.get("project_uids"),

@@ -2,29 +2,36 @@
 
 ## Properties
 
-| Name                      | Type                                      | Description                                                                  | Notes      |
-| ------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------- | ---------- |
-| **best_id**               | **str**                                   | The best ID for the device, preference for the serial number over device UID | [optional] |
-| **best_location**         | [**Location**](Location.md)               |                                                                              | [optional] |
-| **cellular_usage**        | [**List[SimUsage]**](SimUsage.md)         |                                                                              | [optional] |
-| **contact**               | [**Contact**](Contact.md)                 |                                                                              | [optional] |
-| **dfu**                   | [**DFUEnv**](DFUEnv.md)                   |                                                                              | [optional] |
-| **disabled**              | **bool**                                  |                                                                              | [optional] |
-| **firmware_host**         | **str**                                   |                                                                              | [optional] |
-| **firmware_notecard**     | **str**                                   |                                                                              | [optional] |
-| **fleet_uids**            | **List[str]**                             |                                                                              |
-| **gps_location**          | [**Location**](Location.md)               |                                                                              | [optional] |
-| **last_activity**         | **datetime**                              |                                                                              | [optional] |
-| **product_uid**           | **str**                                   |                                                                              |
-| **provisioned**           | **datetime**                              |                                                                              |
-| **serial_number**         | **str**                                   |                                                                              | [optional] |
-| **sku**                   | **str**                                   |                                                                              | [optional] |
-| **temperature**           | **float**                                 |                                                                              |
-| **tower_info**            | [**DeviceTowerInfo**](DeviceTowerInfo.md) |                                                                              | [optional] |
-| **tower_location**        | [**Location**](Location.md)               |                                                                              | [optional] |
-| **triangulated_location** | [**Location**](Location.md)               |                                                                              | [optional] |
-| **uid**                   | **str**                                   |                                                                              |
-| **voltage**               | **float**                                 |                                                                              |
+| Name                       | Type                                      | Description                                                                  | Notes      |
+| -------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------- | ---------- |
+| **best_id**                | **str**                                   | The best ID for the device, preference for the serial number over device UID | [optional] |
+| **best_location**          | [**Location**](Location.md)               |                                                                              | [optional] |
+| **cellular_usage**         | [**List[SimUsage]**](SimUsage.md)         |                                                                              | [optional] |
+| **contact**                | [**Contact**](Contact.md)                 |                                                                              | [optional] |
+| **dfu**                    | [**DFUEnv**](DFUEnv.md)                   |                                                                              | [optional] |
+| **disabled**               | **bool**                                  |                                                                              | [optional] |
+| **firmware_host**          | **str**                                   |                                                                              | [optional] |
+| **firmware_notecard**      | **str**                                   |                                                                              | [optional] |
+| **fleet_uids**             | **List[str]**                             |                                                                              |
+| **gps_location**           | [**Location**](Location.md)               |                                                                              | [optional] |
+| **health_log**             | [**List[HealthLog]**](HealthLog.md)       |                                                                              | [optional] |
+| **last_activity**          | **datetime**                              |                                                                              | [optional] |
+| **product_uid**            | **str**                                   |                                                                              |
+| **provisioned**            | **datetime**                              |                                                                              |
+| **recent_event_count**     | **List[int]**                             |                                                                              | [optional] |
+| **recent_session_count**   | **List[int]**                             |                                                                              | [optional] |
+| **recent_session_seconds** | **List[int]**                             |                                                                              | [optional] |
+| **recent_when**            | **datetime**                              |                                                                              | [optional] |
+| **sensors**                | [**List[DeviceSensor]**](DeviceSensor.md) |                                                                              | [optional] |
+| **serial_number**          | **str**                                   |                                                                              | [optional] |
+| **sku**                    | **str**                                   |                                                                              | [optional] |
+| **tags**                   | **str**                                   |                                                                              | [optional] |
+| **temperature**            | **float**                                 |                                                                              |
+| **tower_info**             | [**DeviceTowerInfo**](DeviceTowerInfo.md) |                                                                              | [optional] |
+| **tower_location**         | [**Location**](Location.md)               |                                                                              | [optional] |
+| **triangulated_location**  | [**Location**](Location.md)               |                                                                              | [optional] |
+| **uid**                    | **str**                                   |                                                                              |
+| **voltage**                | **float**                                 |                                                                              |
 
 ## Example
 

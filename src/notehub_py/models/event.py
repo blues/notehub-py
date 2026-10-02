@@ -99,6 +99,10 @@ class Event(BaseModel):
     payload: Optional[StrictStr] = Field(
         default=None, description="A base64-encoded binary payload"
     )
+    platform: Optional[StrictBool] = Field(
+        default=None,
+        description="Whether this is a platform event (administrative, e.g. _health.qo, _session.qo) rather than user data",
+    )
     product: Optional[StrictStr] = Field(
         default=None, description="Product UID (globally unique)"
     )
@@ -221,6 +225,7 @@ class Event(BaseModel):
         "ordering_code",
         "orientation",
         "payload",
+        "platform",
         "product",
         "rat",
         "received",
@@ -335,6 +340,7 @@ class Event(BaseModel):
                 "ordering_code": obj.get("ordering_code"),
                 "orientation": obj.get("orientation"),
                 "payload": obj.get("payload"),
+                "platform": obj.get("platform"),
                 "product": obj.get("product"),
                 "rat": obj.get("rat"),
                 "received": obj.get("received"),
