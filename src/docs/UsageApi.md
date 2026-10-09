@@ -4,10 +4,74 @@ All URIs are relative to *https://api.notefile.net*
 
 | Method                                                       | HTTP request                                                | Description |
 | ------------------------------------------------------------ | ----------------------------------------------------------- | ----------- |
+| [**get_api_usage**](UsageApi.md#get_api_usage)               | **GET** /v1/projects/{projectOrProductUID}/usage/api        |
 | [**get_data_usage**](UsageApi.md#get_data_usage)             | **GET** /v1/projects/{projectOrProductUID}/usage/data       |
 | [**get_events_usage**](UsageApi.md#get_events_usage)         | **GET** /v1/projects/{projectOrProductUID}/usage/events     |
 | [**get_route_logs_usage**](UsageApi.md#get_route_logs_usage) | **GET** /v1/projects/{projectOrProductUID}/usage/route-logs |
 | [**get_sessions_usage**](UsageApi.md#get_sessions_usage)     | **GET** /v1/projects/{projectOrProductUID}/usage/sessions   |
+
+## get_api_usage
+
+> GetApiUsage200Response get_api_usage(project_or_product_uid, period, start_date=start_date, end_date=end_date, limit=limit)
+
+Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project's plan are counted
+
+### Example
+
+```python
+import notehub_py
+from notehub_py.models.get_api_usage200_response import GetApiUsage200Response
+from notehub_py.rest import ApiException
+from pprint import pprint
+
+configuration = notehub_py.Configuration(access_token="PERSONAL_ACCESS_TOKEN")
+
+# Enter a context with an instance of the API client
+with notehub_py.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = notehub_py.UsageApi(api_client)
+    project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
+    period = "period_example"  # str | Period type for aggregation
+    start_date = 1628631763  # int | Start date for filtering results, specified as a Unix timestamp (optional)
+    end_date = 1657894210  # int | End date for filtering results, specified as a Unix timestamp (optional)
+    limit = 200000  # int | Limit the number of data points returned (optional) (default to 200000)
+
+    try:
+        api_response = api_instance.get_api_usage(
+            project_or_product_uid,
+            period,
+            start_date=start_date,
+            end_date=end_date,
+            limit=limit,
+        )
+        print("The response of UsageApi->get_api_usage:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsageApi->get_api_usage: %s\n" % e)
+```
+
+### Parameters
+
+| Name                       | Type    | Description                                                     | Notes                          |
+| -------------------------- | ------- | --------------------------------------------------------------- | ------------------------------ |
+| **project_or_product_uid** | **str** |                                                                 |
+| **period**                 | **str** | Period type for aggregation                                     |
+| **start_date**             | **int** | Start date for filtering results, specified as a Unix timestamp | [optional]                     |
+| **end_date**               | **int** | End date for filtering results, specified as a Unix timestamp   | [optional]                     |
+| **limit**                  | **int** | Limit the number of data points returned                        | [optional] [default to 200000] |
+
+### Return type
+
+[**GetApiUsage200Response**](GetApiUsage200Response.md)
+
+### Authorization
+
+[personalAccessToken](../README.md#personalAccessToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 ## get_data_usage
 

@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from notehub_py.models.data_set_field import DataSetField
 from notehub_py.models.dataset_reload_progress import DatasetReloadProgress
 from typing import Optional, Set
@@ -40,8 +41,20 @@ class DataSet(BaseModel):
         default=None,
         description="True once the dataset has been fully loaded from the repository's archive after backfill completed. Server-populated; ignored on input.",
     )
+    lambda_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the Lambda function deployed for a Python dataset. Derived from the repository and dataset name; set when the function is deployed.",
+    )
+    lambda_version: Optional[StrictStr] = Field(
+        default=None,
+        description="Published Lambda version this dataset is pinned to. A reload invokes this version rather than the latest, so republishing a projection never changes how a replay projects.",
+    )
     lat: Optional[StrictStr] = Field(
         default=None, description="JSONata expression resulting in the latitude field"
+    )
+    location: Optional[StrictBool] = Field(
+        default=None,
+        description='Whether the dataset has a location column, taken from each row\'s "lat" and "lon" keys. For Python datasets only; a JSONata dataset declares a location column by setting both lat and lon.',
     )
     lon: Optional[StrictStr] = Field(
         default=None, description="JSONata expression resulting in the Longitude field"
@@ -52,6 +65,10 @@ class DataSet(BaseModel):
     notefiles: Optional[List[StrictStr]] = Field(
         default=None,
         description="If non-empty, only events from these notefiles populate the dataset. Empty or omitted means all notefiles.",
+    )
+    python: Optional[Annotated[str, Field(strict=True, max_length=65536)]] = Field(
+        default=None,
+        description="Optional Python source projecting each event, as an alternative to JSONata. It defines one function, with type annotations required: \"def rows(record: dict[str, Any]) -> list[dict[str, Any]]\". It returns zero or more row objects per event, whose keys are the dataset's columns -- the same convention the rows expression uses. Returning an empty list contributes no rows and is not an error; anything else, None included, is an error for that event. Mutually exclusive with rows, time, lat, lon and every field's own jsonata expression, since a Python projection produces whole row objects and leaves nothing for them to do. Use it for payloads JSONata cannot decode, such as packed binary, base64-wrapped blobs, protobuf or CBOR. At most 64 KiB. Rows must come back in the same order every time rows() runs over the same event: a row's position in the list identifies it, so an order that varies (such as iterating over a set) makes a replay insert duplicates. Sort the list if the order is not already fixed.",
     )
     reload: Optional[DatasetReloadProgress] = None
     rows: Optional[StrictStr] = Field(
@@ -66,10 +83,14 @@ class DataSet(BaseModel):
         "fields",
         "is_optimized",
         "is_ready",
+        "lambda_name",
+        "lambda_version",
         "lat",
+        "location",
         "lon",
         "name",
         "notefiles",
+        "python",
         "reload",
         "rows",
         "time",
@@ -106,11 +127,15 @@ class DataSet(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "is_optimized",
                 "is_ready",
+                "lambda_name",
+                "lambda_version",
             ]
         )
 
@@ -154,10 +179,14 @@ class DataSet(BaseModel):
                 ),
                 "is_optimized": obj.get("is_optimized"),
                 "is_ready": obj.get("is_ready"),
+                "lambda_name": obj.get("lambda_name"),
+                "lambda_version": obj.get("lambda_version"),
                 "lat": obj.get("lat"),
+                "location": obj.get("location"),
                 "lon": obj.get("lon"),
                 "name": obj.get("name"),
                 "notefiles": obj.get("notefiles"),
+                "python": obj.get("python"),
                 "reload": (
                     DatasetReloadProgress.from_dict(obj["reload"])
                     if obj.get("reload") is not None

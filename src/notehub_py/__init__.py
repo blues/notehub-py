@@ -15,7 +15,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 
-__version__ = "6.6.0"
+__version__ = "6.7.0"
 
 # import apis into sdk package
 from notehub_py.api.alert_api import AlertApi
@@ -112,6 +112,7 @@ from notehub_py.models.firmware_info import FirmwareInfo
 from notehub_py.models.fleet import Fleet
 from notehub_py.models.fleet_connectivity_assurance import FleetConnectivityAssurance
 from notehub_py.models.get_alerts200_response import GetAlerts200Response
+from notehub_py.models.get_api_usage200_response import GetApiUsage200Response
 from notehub_py.models.get_billing_account200_response import (
     GetBillingAccount200Response,
 )
@@ -210,12 +211,6 @@ from notehub_py.models.o_auth2_error import OAuth2Error
 from notehub_py.models.o_auth2_token_response import OAuth2TokenResponse
 from notehub_py.models.organization import Organization
 from notehub_py.models.organization_role import OrganizationRole
-from notehub_py.models.personal_access_token import PersonalAccessToken
-from notehub_py.models.personal_access_token_created_by import (
-    PersonalAccessTokenCreatedBy,
-)
-from notehub_py.models.personal_access_token_info import PersonalAccessTokenInfo
-from notehub_py.models.personal_access_token_secret import PersonalAccessTokenSecret
 from notehub_py.models.product import Product
 from notehub_py.models.project import Project
 from notehub_py.models.project_member import ProjectMember
@@ -250,6 +245,7 @@ from notehub_py.models.update_fleet_request import UpdateFleetRequest
 from notehub_py.models.update_host_firmware_request import UpdateHostFirmwareRequest
 from notehub_py.models.update_project_secret_request import UpdateProjectSecretRequest
 from notehub_py.models.upload_metadata import UploadMetadata
+from notehub_py.models.usage_api_data import UsageApiData
 from notehub_py.models.usage_data import UsageData
 from notehub_py.models.usage_events_data import UsageEventsData
 from notehub_py.models.usage_events_response import UsageEventsResponse

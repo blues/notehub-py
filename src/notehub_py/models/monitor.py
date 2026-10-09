@@ -23,11 +23,12 @@ from pydantic import (
     ConfigDict,
     Field,
     StrictBool,
+    StrictFloat,
     StrictInt,
     StrictStr,
     field_validator,
 )
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from notehub_py.models.monitor_alert_routes_inner import MonitorAlertRoutesInner
 from typing import Optional, Set
@@ -85,7 +86,7 @@ class Monitor(BaseModel):
         default="event",
         description='The type of source to monitor. Defaults to "event".',
     )
-    threshold: Optional[StrictInt] = Field(
+    threshold: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None,
         description="The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes.",
     )
@@ -144,8 +145,10 @@ class Monitor(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^[0-9]+[smh]$", value):
-            raise ValueError(r"must validate the regular expression /^[0-9]+[smh]$/")
+        if not re.match(r"^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$", value):
+            raise ValueError(
+                r"must validate the regular expression /^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$/"
+            )
         return value
 
     @field_validator("condition_type")
@@ -175,8 +178,10 @@ class Monitor(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^[0-9]+[smh]$", value):
-            raise ValueError(r"must validate the regular expression /^[0-9]+[smh]$/")
+        if not re.match(r"^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$", value):
+            raise ValueError(
+                r"must validate the regular expression /^(([0-9]+[.]?[0-9]*|[.][0-9]+)(ns|us|µs|ms|s|m|h))+$/"
+            )
         return value
 
     @field_validator("source_type")

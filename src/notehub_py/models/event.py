@@ -203,6 +203,10 @@ class Event(BaseModel):
     )
     where_timezone: Optional[StrictStr] = Field(default=None, description="Timezone")
     where_when: Optional[StrictInt] = Field(default=None, description="Unix timestamp")
+    wire_length: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(
+        default=None,
+        description="Approximate number of bytes that the note's body and payload occupied on the wire when transmitted from the device to Notehub",
+    )
     __properties: ClassVar[List[str]] = [
         "app",
         "bars",
@@ -267,6 +271,7 @@ class Event(BaseModel):
         "where_olc",
         "where_timezone",
         "where_when",
+        "wire_length",
     ]
 
     model_config = ConfigDict(
@@ -382,6 +387,7 @@ class Event(BaseModel):
                 "where_olc": obj.get("where_olc"),
                 "where_timezone": obj.get("where_timezone"),
                 "where_when": obj.get("where_when"),
+                "wire_length": obj.get("wire_length"),
             }
         )
         return _obj
