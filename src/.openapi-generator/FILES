@@ -75,6 +75,7 @@ docs/FirmwareInfo.md
 docs/Fleet.md
 docs/FleetConnectivityAssurance.md
 docs/GetAlerts200Response.md
+docs/GetApiUsage200Response.md
 docs/GetBillingAccount200Response.md
 docs/GetBillingAccount200ResponsePlan.md
 docs/GetBillingAccountBalanceHistory200Response.md
@@ -138,10 +139,6 @@ docs/OAuth2TokenResponse.md
 docs/Organization.md
 docs/OrganizationApi.md
 docs/OrganizationRole.md
-docs/PersonalAccessToken.md
-docs/PersonalAccessTokenCreatedBy.md
-docs/PersonalAccessTokenInfo.md
-docs/PersonalAccessTokenSecret.md
 docs/Product.md
 docs/Project.md
 docs/ProjectApi.md
@@ -179,6 +176,7 @@ docs/UpdateHostFirmwareRequest.md
 docs/UpdateProjectSecretRequest.md
 docs/UploadMetadata.md
 docs/UsageApi.md
+docs/UsageApiData.md
 docs/UsageData.md
 docs/UsageEventsData.md
 docs/UsageEventsResponse.md
@@ -276,6 +274,7 @@ notehub_py/models/firmware_info.py
 notehub_py/models/fleet.py
 notehub_py/models/fleet_connectivity_assurance.py
 notehub_py/models/get_alerts200_response.py
+notehub_py/models/get_api_usage200_response.py
 notehub_py/models/get_billing_account200_response.py
 notehub_py/models/get_billing_account200_response_plan.py
 notehub_py/models/get_billing_account_balance_history200_response.py
@@ -336,10 +335,6 @@ notehub_py/models/o_auth2_error.py
 notehub_py/models/o_auth2_token_response.py
 notehub_py/models/organization.py
 notehub_py/models/organization_role.py
-notehub_py/models/personal_access_token.py
-notehub_py/models/personal_access_token_created_by.py
-notehub_py/models/personal_access_token_info.py
-notehub_py/models/personal_access_token_secret.py
 notehub_py/models/product.py
 notehub_py/models/project.py
 notehub_py/models/project_member.py
@@ -374,6 +369,7 @@ notehub_py/models/update_fleet_request.py
 notehub_py/models/update_host_firmware_request.py
 notehub_py/models/update_project_secret_request.py
 notehub_py/models/upload_metadata.py
+notehub_py/models/usage_api_data.py
 notehub_py/models/usage_data.py
 notehub_py/models/usage_events_data.py
 notehub_py/models/usage_events_response.py
@@ -391,9 +387,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_archive_stats.py
-test/test_batch_job_note_request.py
-test/test_dataset_reload_progress.py
-test/test_device_sensor.py
-test/test_health_log.py
+test/test_get_api_usage200_response.py
+test/test_usage_api_data.py
 tox.ini

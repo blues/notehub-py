@@ -36,7 +36,7 @@ class RepositoryTokenRequest(BaseModel):
     )
     ttl_seconds: Optional[Annotated[int, Field(le=3600, strict=True, ge=60)]] = Field(
         default=900,
-        description="Requested credential lifetime in seconds. Clamped server-side to [60, 3600]. Defaults to 900 (15 minutes) if omitted. ",
+        description="Requested credential lifetime in seconds. Clamped server-side to [60, 3600], or to [60, 900] for a scoped token. Defaults to 900 (15 minutes) if omitted. ",
     )
     __properties: ClassVar[List[str]] = ["intent", "ttl_seconds"]
 

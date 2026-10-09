@@ -2,14 +2,14 @@
 
 ## Properties
 
-| Name             | Type          | Description                                                                                                                                                         | Notes      |
-| ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **fleet_uids**   | **List[str]** |                                                                                                                                                                     | [optional] |
-| **name**         | **str**       | repository name                                                                                                                                                     | [optional] |
-| **password**     | **str**       | read-only password for the database, also used as X-Repository-Token header for subsequent API calls. This value is only served once when the repository is created | [optional] |
-| **project_uids** | **List[str]** |                                                                                                                                                                     | [optional] |
-| **uid**          | **str**       | The unique identifier for the data repository                                                                                                                       | [optional] |
-| **user**         | **str**       | read-only user for database                                                                                                                                         | [optional] |
+| Name             | Type          | Description                                                                                                                                                                                                                                                   | Notes      |
+| ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **fleet_uids**   | **List[str]** |                                                                                                                                                                                                                                                               | [optional] |
+| **name**         | **str**       | repository name                                                                                                                                                                                                                                               | [optional] |
+| **password**     | **str**       | read-only password for the database, also used as X-Repository-Token header for subsequent API calls. This value is only served once when the repository is created, and never to a scoped token, which queries through the repository token endpoint instead | [optional] |
+| **project_uids** | **List[str]** |                                                                                                                                                                                                                                                               | [optional] |
+| **uid**          | **str**       | The unique identifier for the data repository                                                                                                                                                                                                                 | [optional] |
+| **user**         | **str**       | read-only user for database                                                                                                                                                                                                                                   | [optional] |
 
 ## Example
 

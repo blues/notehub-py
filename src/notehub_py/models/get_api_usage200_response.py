@@ -18,38 +18,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
+from notehub_py.models.usage_api_data import UsageApiData
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class CreatedRepository(BaseModel):
+class GetApiUsage200Response(BaseModel):
     """
-    CreatedRepository
+    GetApiUsage200Response
     """  # noqa: E501
 
-    fleet_uids: Optional[List[StrictStr]] = None
-    name: Optional[StrictStr] = Field(default=None, description="repository name")
-    password: Optional[StrictStr] = Field(
+    data: List[UsageApiData]
+    truncated: Optional[StrictBool] = Field(
         default=None,
-        description="read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created, and never to a scoped token, which queries through the repository token endpoint instead",
+        description="If the data is truncated that means that the parameters selected resulted in a response of over | the requested limit of data points, in order to ensure",
     )
-    project_uids: Optional[List[StrictStr]] = None
-    uid: Optional[StrictStr] = Field(
-        default=None, description="The unique identifier for the data repository"
-    )
-    user: Optional[StrictStr] = Field(
-        default=None, description="read-only user for database"
-    )
-    __properties: ClassVar[List[str]] = [
-        "fleet_uids",
-        "name",
-        "password",
-        "project_uids",
-        "uid",
-        "user",
-    ]
+    __properties: ClassVar[List[str]] = ["data", "truncated"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -68,7 +54,7 @@ class CreatedRepository(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreatedRepository from a JSON string"""
+        """Create an instance of GetApiUsage200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -88,11 +74,18 @@ class CreatedRepository(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
+        _items = []
+        if self.data:
+            for _item in self.data:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["data"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreatedRepository from a dict"""
+        """Create an instance of GetApiUsage200Response from a dict"""
         if obj is None:
             return None
 
@@ -101,12 +94,12 @@ class CreatedRepository(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "fleet_uids": obj.get("fleet_uids"),
-                "name": obj.get("name"),
-                "password": obj.get("password"),
-                "project_uids": obj.get("project_uids"),
-                "uid": obj.get("uid"),
-                "user": obj.get("user"),
+                "data": (
+                    [UsageApiData.from_dict(_item) for _item in obj["data"]]
+                    if obj.get("data") is not None
+                    else None
+                ),
+                "truncated": obj.get("truncated"),
             }
         )
         return _obj

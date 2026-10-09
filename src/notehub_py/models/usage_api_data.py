@@ -18,38 +18,31 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class CreatedRepository(BaseModel):
+class UsageApiData(BaseModel):
     """
-    CreatedRepository
+    UsageApiData
     """  # noqa: E501
 
-    fleet_uids: Optional[List[StrictStr]] = None
-    name: Optional[StrictStr] = Field(default=None, description="repository name")
-    password: Optional[StrictStr] = Field(
+    endpoint: Optional[StrictStr] = Field(
         default=None,
-        description="read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created, and never to a scoped token, which queries through the repository token endpoint instead",
+        description="The templated path of the endpoint the requests were made against, with path parameters left unsubstituted. Empty if the endpoint could not be resolved for these requests.",
     )
-    project_uids: Optional[List[StrictStr]] = None
-    uid: Optional[StrictStr] = Field(
-        default=None, description="The unique identifier for the data repository"
+    method: Optional[StrictStr] = Field(
+        default=None,
+        description="The HTTP method of the requests counted in this data point. Empty if the endpoint could not be resolved for these requests.",
     )
-    user: Optional[StrictStr] = Field(
-        default=None, description="read-only user for database"
+    period: datetime
+    requests: StrictInt = Field(
+        description="Number of billable API requests in this period."
     )
-    __properties: ClassVar[List[str]] = [
-        "fleet_uids",
-        "name",
-        "password",
-        "project_uids",
-        "uid",
-        "user",
-    ]
+    __properties: ClassVar[List[str]] = ["endpoint", "method", "period", "requests"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -68,7 +61,7 @@ class CreatedRepository(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreatedRepository from a JSON string"""
+        """Create an instance of UsageApiData from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -92,7 +85,7 @@ class CreatedRepository(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreatedRepository from a dict"""
+        """Create an instance of UsageApiData from a dict"""
         if obj is None:
             return None
 
@@ -101,12 +94,10 @@ class CreatedRepository(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "fleet_uids": obj.get("fleet_uids"),
-                "name": obj.get("name"),
-                "password": obj.get("password"),
-                "project_uids": obj.get("project_uids"),
-                "uid": obj.get("uid"),
-                "user": obj.get("user"),
+                "endpoint": obj.get("endpoint"),
+                "method": obj.get("method"),
+                "period": obj.get("period"),
+                "requests": obj.get("requests"),
             }
         )
         return _obj
