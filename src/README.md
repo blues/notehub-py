@@ -24,12 +24,6 @@ python3 -m pip install notehub-py
 ```
 (you may need to run `pip` with root permission: `sudo python3 -m pip install notehub-py`)
 
-or
-
-```sh
-python3 -m pip3 install notehub-py
-```
-
 Then import the package:
 
 ```python

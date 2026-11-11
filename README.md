@@ -43,12 +43,6 @@ With `pip` via PyPy:
 python3 -m pip install notehub-py
 ```
 
-or
-
-```bash
-python3 -m pip3 install notehub-py
-```
-
 ## Usage
 
 Once the package is installed, you can import it into a Python file using `import`.
