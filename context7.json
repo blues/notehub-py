@@ -1,0 +1,32 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "url": "https://context7.com/blues/notehub-py",
+  "public_key": "pk_nVFOrz6sC1j4Aqx8A32xw",
+  "projectTitle": "notehub-py: Python client for the Blues Notehub API",
+  "description": "notehub-py, published on PyPI as notehub-py and imported as notehub_py, is the Python client library for the Blues Notehub REST API at https://api.notefile.net, generated from the Notehub OpenAPI specification. It provides synchronous API classes and pydantic models for Notehub projects, devices, fleets, events, routes, environment variables, firmware updates, monitors, jobs, and usage data.",
+  "folders": [
+    "src"
+  ],
+  "excludeFiles": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "CHANGELOG.md",
+    "changelog.md",
+    "CHANGELOG.mdx",
+    "changelog.mdx",
+    "LICENSE.md",
+    "license.md",
+    "CODE_OF_CONDUCT.md",
+    "code_of_conduct.md",
+    "NEWS.md"
+  ],
+  "rules": [
+    "Install with pip install notehub-py and import the package as notehub_py, with an underscore.",
+    "Authorize Notehub API requests to https://api.notefile.net with an Authorization: Bearer header carrying a Notehub personal access token or an OAuth bearer token. In notehub-py, pass it as notehub_py.Configuration(access_token=token).",
+    "Open a client with `with notehub_py.ApiClient(configuration) as api_client:` and pass it to an API class such as notehub_py.DeviceApi(api_client), notehub_py.ProjectApi(api_client), or notehub_py.EventApi(api_client).",
+    "notehub-py methods are synchronous and snake_case. Pass required path parameters positionally and optional ones as keyword arguments, e.g. get_devices(project_or_product_uid, page_size=50, page_num=1). HTTP errors raise notehub_py.ApiException.",
+    "Devices, Notes, Notefiles, and device environment variables are in DeviceApi; fleets, products, firmware, DFU, and project environment variables are in ProjectApi; events are in EventApi; routes are in RouteApi.",
+    "Paged methods such as get_devices take page_size and page_num and return has_more. To read many events, call EventApi.get_events_by_cursor and pass each response's next_cursor as the cursor argument of the next call.",
+    "Copy Api class, method, parameter, and model names exactly from this SDK's src/docs files or the Notehub API reference (https://dev.blues.io/api-reference/notehub-api/); do not invent methods, parameters, or response fields."
+  ]
+}
