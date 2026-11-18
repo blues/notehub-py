@@ -30,7 +30,7 @@ class UpdateProjectSecretRequest(BaseModel):
     """  # noqa: E501
 
     value: StrictStr = Field(
-        description="The new secret value (encrypted at rest, never returned)."
+        description="The new secret value. Encrypted at rest and never returned."
     )
     __properties: ClassVar[List[str]] = ["value"]
 

@@ -30,13 +30,15 @@ class SlackWebHookNotification(BaseModel):
     """  # noqa: E501
 
     message_type: Optional[StrictStr] = Field(
-        default=None, description="text or blocks"
+        default=None,
+        description="How `text` is read. - `text`: plain message text - `blocks`: a Slack Block Kit JSON definition ",
     )
     text: Optional[StrictStr] = Field(
-        default=None, description="The text of the message, or the blocks definition"
+        default=None,
+        description="The message, or Block Kit JSON. Event placeholders such as `[.body.temp]` aren't allowed.",
     )
-    url: Optional[StrictStr] = Field(
-        default=None, description="The URL of the Slack webhook."
+    url: StrictStr = Field(
+        description="The URL of the Slack webhook. Returned as `(omitted)`. Sending it back keeps the stored URL if the monitor has only one Slack webhook route."
     )
     __properties: ClassVar[List[str]] = ["message_type", "text", "url"]
 

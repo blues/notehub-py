@@ -42,45 +42,95 @@ from typing_extensions import Self
 
 class Device(BaseModel):
     """
-    Device
+    A device in a project. `best_location` is the best of `gps_location`, `triangulated_location` and `tower_location`; each is null when unknown.
     """  # noqa: E501
 
     best_id: Optional[StrictStr] = Field(
         default=None,
-        description="The best ID for the device, preference for the serial number over device UID",
+        description="The serial number if set, otherwise the DeviceUID. Use it as a display name.",
     )
     best_location: Optional[Location] = None
     cellular_usage: Optional[List[SimUsage]] = None
     contact: Optional[Contact] = None
+    deleted: Optional[StrictBool] = Field(
+        default=None,
+        description="True if this device has been deleted. Only present when reading with a `cursor`. ",
+    )
     dfu: Optional[DFUEnv] = None
-    disabled: Optional[StrictBool] = None
-    firmware_host: Optional[StrictStr] = None
-    firmware_notecard: Optional[StrictStr] = None
-    fleet_uids: List[StrictStr]
+    disabled: Optional[StrictBool] = Field(
+        default=None,
+        description="True if the device was disabled with `DisableDevice` and can't connect.",
+    )
+    firmware_host: Optional[StrictStr] = Field(
+        default=None,
+        description="Host firmware version, as reported by the device. Usually a JSON string.",
+    )
+    firmware_notecard: Optional[StrictStr] = Field(
+        default=None,
+        description="Notecard firmware version, as reported by the device.",
+    )
+    fleet_uids: List[StrictStr] = Field(
+        description="FleetUIDs of the fleets the device is in."
+    )
     gps_location: Optional[Location] = None
-    health_log: Optional[List[HealthLog]] = None
-    last_activity: Optional[datetime] = None
-    product_uid: StrictStr
-    provisioned: datetime
-    recent_event_count: Optional[List[StrictInt]] = None
-    recent_session_count: Optional[List[StrictInt]] = None
-    recent_session_seconds: Optional[List[StrictInt]] = None
-    recent_when: Optional[datetime] = None
+    health_log: Optional[List[HealthLog]] = Field(
+        default=None,
+        description="Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`; use `GetDeviceHealthLog`.",
+    )
+    last_activity: Optional[datetime] = Field(
+        default=None,
+        description="When the device was last active in a session. Null if it has never connected.",
+    )
+    product_uid: StrictStr = Field(
+        description="ProductUID the device uses, e.g. `com.blues.bridge:sensors`."
+    )
+    provisioned: datetime = Field(
+        description="When the device was added to the project."
+    )
+    recent_event_count: Optional[List[StrictInt]] = Field(
+        default=None,
+        description="Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.",
+    )
+    recent_session_count: Optional[List[StrictInt]] = Field(
+        default=None,
+        description="Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.",
+    )
+    recent_session_seconds: Optional[List[StrictInt]] = Field(
+        default=None,
+        description="Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.",
+    )
+    recent_when: Optional[datetime] = Field(
+        default=None,
+        description="Not returned by `GetDevice`, `GetDevices` or `GetFleetDevices`.",
+    )
     sensors: Optional[List[DeviceSensor]] = None
-    serial_number: Optional[StrictStr] = None
-    sku: Optional[StrictStr] = None
-    tags: Optional[StrictStr] = None
-    temperature: Union[StrictFloat, StrictInt]
+    serial_number: Optional[StrictStr] = Field(
+        default=None,
+        description="Serial number, from the `_sn` environment variable if set. Empty if none.",
+    )
+    sku: Optional[StrictStr] = Field(
+        default=None, description="Notecard SKU, e.g. `NOTE-WBNAW`."
+    )
+    tags: Optional[StrictStr] = Field(
+        default=None,
+        description="Comma-separated tags, from the `_tags` environment variable. Empty if none.",
+    )
+    temperature: Union[StrictFloat, StrictInt] = Field(
+        description="Last reported Notecard temperature, in degrees Celsius."
+    )
     tower_info: Optional[DeviceTowerInfo] = None
     tower_location: Optional[Location] = None
     triangulated_location: Optional[Location] = None
-    uid: StrictStr
-    voltage: Union[StrictFloat, StrictInt]
+    uid: StrictStr = Field(description="DeviceUID, e.g. `dev:864475040509284`.")
+    voltage: Union[StrictFloat, StrictInt] = Field(
+        description="Last reported supply voltage, in volts."
+    )
     __properties: ClassVar[List[str]] = [
         "best_id",
         "best_location",
         "cellular_usage",
         "contact",
+        "deleted",
         "dfu",
         "disabled",
         "firmware_host",
@@ -263,6 +313,7 @@ class Device(BaseModel):
                     if obj.get("contact") is not None
                     else None
                 ),
+                "deleted": obj.get("deleted"),
                 "dfu": (
                     DFUEnv.from_dict(obj["dfu"]) if obj.get("dfu") is not None else None
                 ),

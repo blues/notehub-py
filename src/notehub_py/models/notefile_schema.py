@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from notehub_py.models.schema_property import SchemaProperty
 from typing import Optional, Set
@@ -30,8 +30,10 @@ class NotefileSchema(BaseModel):
     NotefileSchema
     """  # noqa: E501
 
-    notefile: StrictStr
-    properties: List[SchemaProperty]
+    notefile: StrictStr = Field(description="Notefile name, e.g. `sensors.qo`.")
+    properties: List[SchemaProperty] = Field(
+        description="Fields seen in this Notefile's event `body`. Event envelope fields such as `when` and `device` are not included."
+    )
     __properties: ClassVar[List[str]] = ["notefile", "properties"]
 
     model_config = ConfigDict(

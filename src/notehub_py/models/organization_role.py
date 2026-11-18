@@ -21,7 +21,7 @@ from typing_extensions import Self
 
 class OrganizationRole(str, Enum):
     """
-    OrganizationRole
+    Your role in the organization.
     """
 
     """

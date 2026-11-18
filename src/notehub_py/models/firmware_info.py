@@ -33,13 +33,14 @@ class FirmwareInfo(BaseModel):
         default=None, description="The date the firmware was built."
     )
     created: Optional[StrictStr] = Field(
-        default=None, description="The date the firmware was created."
+        default=None, description="Upload time, as Unix epoch seconds in a string."
     )
     description: Optional[StrictStr] = Field(
-        default=None, description="A description of the firmware."
+        default=None, description="Not currently filled in."
     )
     filename: Optional[StrictStr] = Field(
-        default=None, description="The name of the firmware file."
+        default=None,
+        description="Stored filename, with the `$` timestamp suffix Notehub adds on upload. Use it in other firmware and DFU operations.",
     )
     info: Optional[Dict[str, Any]] = Field(
         default=None, description="User-defined metadata"
@@ -55,7 +56,8 @@ class FirmwareInfo(BaseModel):
         default=None, description="The product that the firmware is for."
     )
     published: Optional[StrictBool] = Field(
-        default=None, description="True if the firmware is published."
+        default=None,
+        description="`true` for all host firmware, and for Notecard firmware that Blues has published.",
     )
     tags: Optional[StrictStr] = Field(
         default=None, description="A list of tags associated with the firmware."
@@ -63,7 +65,7 @@ class FirmwareInfo(BaseModel):
     target: Optional[StrictStr] = Field(
         default=None, description="The target device for the firmware."
     )
-    type: Optional[StrictStr] = Field(default=None, description="The type of firmware.")
+    type: Optional[StrictStr] = Field(default=None, description="`host` or `notecard`.")
     version: Optional[StrictStr] = Field(
         default=None, description="The version of the firmware."
     )

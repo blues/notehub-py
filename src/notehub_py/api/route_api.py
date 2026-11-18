@@ -60,9 +60,9 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NotehubRoute:
-        """create_route
+        """Create a route
 
-        Create Route within a Project
+        Create a route that sends a project's events to a destination such as a URL, an MQTT broker or a cloud service. Set `type` and fill in the object it names. Omit `fleets` to send every fleet's events. Unknown FleetUIDs are ignored, so `fleets: []` or a list of only unknown UIDs gives a route that sends nothing.  Requires the Owner or Developer role. Returns 400 for invalid settings.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -130,9 +130,9 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[NotehubRoute]:
-        """create_route
+        """Create a route
 
-        Create Route within a Project
+        Create a route that sends a project's events to a destination such as a URL, an MQTT broker or a cloud service. Set `type` and fill in the object it names. Omit `fleets` to send every fleet's events. Unknown FleetUIDs are ignored, so `fleets: []` or a list of only unknown UIDs gives a route that sends nothing.  Requires the Owner or Developer role. Returns 400 for invalid settings.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -200,9 +200,9 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_route
+        """Create a route
 
-        Create Route within a Project
+        Create a route that sends a project's events to a destination such as a URL, an MQTT broker or a cloud service. Set `type` and fill in the object it names. Omit `fleets` to send every fleet's events. Unknown FleetUIDs are ignored, so `fleets: []` or a list of only unknown UIDs gives a route that sends nothing.  Requires the Owner or Developer role. Returns 400 for invalid settings.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -315,7 +315,12 @@ class RouteApi:
     def delete_route(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -328,13 +333,13 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_route
+        """Delete a route
 
-        Delete single route within a project
+        Delete a route so it stops sending events. To pause it instead, set `disabled` with `UpdateRoute`.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -383,7 +388,12 @@ class RouteApi:
     def delete_route_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -396,13 +406,13 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_route
+        """Delete a route
 
-        Delete single route within a project
+        Delete a route so it stops sending events. To pause it instead, set `disabled` with `UpdateRoute`.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -451,7 +461,12 @@ class RouteApi:
     def delete_route_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -464,13 +479,13 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_route
+        """Delete a route
 
-        Delete single route within a project
+        Delete a route so it stops sending events. To pause it instead, set `disabled` with `UpdateRoute`.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -569,7 +584,12 @@ class RouteApi:
     def get_route(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -582,13 +602,13 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NotehubRoute:
-        """get_route
+        """Get a route
 
-        Get single route within a project
+        Get one route's full settings: destination, filter, transform and fleets. Secrets such as passwords and keys come back as `(omitted)`.  Requires the Owner or Developer role. Viewers can use `GetRoutes`. Returns 404 if the route doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -637,7 +657,12 @@ class RouteApi:
     def get_route_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -650,13 +675,13 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[NotehubRoute]:
-        """get_route
+        """Get a route
 
-        Get single route within a project
+        Get one route's full settings: destination, filter, transform and fleets. Secrets such as passwords and keys come back as `(omitted)`.  Requires the Owner or Developer role. Viewers can use `GetRoutes`. Returns 404 if the route doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -705,7 +730,12 @@ class RouteApi:
     def get_route_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -718,13 +748,13 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_route
+        """Get a route
 
-        Get single route within a project
+        Get one route's full settings: destination, filter, transform and fleets. Secrets such as passwords and keys come back as `(omitted)`.  Requires the Owner or Developer role. Viewers can use `GetRoutes`. Returns 404 if the route doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -823,14 +853,35 @@ class RouteApi:
     def get_route_logs_by_route(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
         ] = None,
-        sort_by: Optional[StrictStr] = None,
-        sort_order: Optional[StrictStr] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
+        ] = None,
+        sort_by: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Field to sort by. - `date`: when the attempt was made - `event`: the order the events arrived in, then the attempt time "
+            ),
+        ] = None,
+        sort_order: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Sort direction. - `asc`: oldest first - `desc`: newest first "
+            ),
+        ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -843,11 +894,34 @@ class RouteApi:
                 description="End date for filtering results, specified as a Unix timestamp"
             ),
         ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        most_recent_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        routing_status: Optional[List[StrictStr]] = None,
-        response_status: Optional[List[StrictStr]] = None,
+        system_files_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`."
+            ),
+        ] = None,
+        most_recent_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only the latest attempt for each event."
+            ),
+        ] = None,
+        files: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`."
+            ),
+        ] = None,
+        routing_status: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="Return only attempts with this outcome. - `success`: the destination accepted the event - `failure`: the attempt failed "
+            ),
+        ] = None,
+        response_status: Annotated[
+            Optional[List[StrictStr]],
+            Field(description="Response status codes to include, e.g. `500`."),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -860,37 +934,39 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[RouteLog]:
-        """get_route_logs_by_route
+        """List a route's logs
 
-        Get Route Logs by Route UID
+        List a route's attempts to send events, newest first, with each one's event, response status, body and duration. Filter by device, notefile, date, success or HTTP status. For one event, use `GetRouteLogsByEvent`.  Paginated. Returns 404 if the route doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param sort_by:
+        :param sort_by: Field to sort by. - `date`: when the attempt was made - `event`: the order the events arrived in, then the attempt time
         :type sort_by: str
-        :param sort_order:
+        :param sort_order: Sort direction. - `asc`: oldest first - `desc`: newest first
         :type sort_order: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param system_files_only:
+        :param system_files_only: If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
         :type system_files_only: bool
-        :param most_recent_only:
+        :param most_recent_only: If true, return only the latest attempt for each event.
         :type most_recent_only: bool
-        :param files:
+        :param files: Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
         :type files: str
-        :param routing_status:
+        :param routing_status: Return only attempts with this outcome. - `success`: the destination accepted the event - `failure`: the attempt failed
         :type routing_status: List[str]
-        :param response_status:
+        :param response_status: Response status codes to include, e.g. `500`.
         :type response_status: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -919,6 +995,7 @@ class RouteApi:
             route_uid=route_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             sort_by=sort_by,
             sort_order=sort_order,
@@ -951,14 +1028,35 @@ class RouteApi:
     def get_route_logs_by_route_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
         ] = None,
-        sort_by: Optional[StrictStr] = None,
-        sort_order: Optional[StrictStr] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
+        ] = None,
+        sort_by: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Field to sort by. - `date`: when the attempt was made - `event`: the order the events arrived in, then the attempt time "
+            ),
+        ] = None,
+        sort_order: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Sort direction. - `asc`: oldest first - `desc`: newest first "
+            ),
+        ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -971,11 +1069,34 @@ class RouteApi:
                 description="End date for filtering results, specified as a Unix timestamp"
             ),
         ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        most_recent_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        routing_status: Optional[List[StrictStr]] = None,
-        response_status: Optional[List[StrictStr]] = None,
+        system_files_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`."
+            ),
+        ] = None,
+        most_recent_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only the latest attempt for each event."
+            ),
+        ] = None,
+        files: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`."
+            ),
+        ] = None,
+        routing_status: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="Return only attempts with this outcome. - `success`: the destination accepted the event - `failure`: the attempt failed "
+            ),
+        ] = None,
+        response_status: Annotated[
+            Optional[List[StrictStr]],
+            Field(description="Response status codes to include, e.g. `500`."),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -988,37 +1109,39 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[RouteLog]]:
-        """get_route_logs_by_route
+        """List a route's logs
 
-        Get Route Logs by Route UID
+        List a route's attempts to send events, newest first, with each one's event, response status, body and duration. Filter by device, notefile, date, success or HTTP status. For one event, use `GetRouteLogsByEvent`.  Paginated. Returns 404 if the route doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param sort_by:
+        :param sort_by: Field to sort by. - `date`: when the attempt was made - `event`: the order the events arrived in, then the attempt time
         :type sort_by: str
-        :param sort_order:
+        :param sort_order: Sort direction. - `asc`: oldest first - `desc`: newest first
         :type sort_order: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param system_files_only:
+        :param system_files_only: If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
         :type system_files_only: bool
-        :param most_recent_only:
+        :param most_recent_only: If true, return only the latest attempt for each event.
         :type most_recent_only: bool
-        :param files:
+        :param files: Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
         :type files: str
-        :param routing_status:
+        :param routing_status: Return only attempts with this outcome. - `success`: the destination accepted the event - `failure`: the attempt failed
         :type routing_status: List[str]
-        :param response_status:
+        :param response_status: Response status codes to include, e.g. `500`.
         :type response_status: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1047,6 +1170,7 @@ class RouteApi:
             route_uid=route_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             sort_by=sort_by,
             sort_order=sort_order,
@@ -1079,14 +1203,35 @@ class RouteApi:
     def get_route_logs_by_route_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
         ] = None,
-        sort_by: Optional[StrictStr] = None,
-        sort_order: Optional[StrictStr] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
+        ] = None,
+        sort_by: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Field to sort by. - `date`: when the attempt was made - `event`: the order the events arrived in, then the attempt time "
+            ),
+        ] = None,
+        sort_order: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Sort direction. - `asc`: oldest first - `desc`: newest first "
+            ),
+        ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -1099,11 +1244,34 @@ class RouteApi:
                 description="End date for filtering results, specified as a Unix timestamp"
             ),
         ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        most_recent_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        routing_status: Optional[List[StrictStr]] = None,
-        response_status: Optional[List[StrictStr]] = None,
+        system_files_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`."
+            ),
+        ] = None,
+        most_recent_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only the latest attempt for each event."
+            ),
+        ] = None,
+        files: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`."
+            ),
+        ] = None,
+        routing_status: Annotated[
+            Optional[List[StrictStr]],
+            Field(
+                description="Return only attempts with this outcome. - `success`: the destination accepted the event - `failure`: the attempt failed "
+            ),
+        ] = None,
+        response_status: Annotated[
+            Optional[List[StrictStr]],
+            Field(description="Response status codes to include, e.g. `500`."),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1116,37 +1284,39 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_route_logs_by_route
+        """List a route's logs
 
-        Get Route Logs by Route UID
+        List a route's attempts to send events, newest first, with each one's event, response status, body and duration. Filter by device, notefile, date, success or HTTP status. For one event, use `GetRouteLogsByEvent`.  Paginated. Returns 404 if the route doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param page_size:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param sort_by:
+        :param sort_by: Field to sort by. - `date`: when the attempt was made - `event`: the order the events arrived in, then the attempt time
         :type sort_by: str
-        :param sort_order:
+        :param sort_order: Sort direction. - `asc`: oldest first - `desc`: newest first
         :type sort_order: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param system_files_only:
+        :param system_files_only: If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
         :type system_files_only: bool
-        :param most_recent_only:
+        :param most_recent_only: If true, return only the latest attempt for each event.
         :type most_recent_only: bool
-        :param files:
+        :param files: Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
         :type files: str
-        :param routing_status:
+        :param routing_status: Return only attempts with this outcome. - `success`: the destination accepted the event - `failure`: the attempt failed
         :type routing_status: List[str]
-        :param response_status:
+        :param response_status: Response status codes to include, e.g. `500`.
         :type response_status: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1175,6 +1345,7 @@ class RouteApi:
             route_uid=route_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             sort_by=sort_by,
             sort_order=sort_order,
@@ -1205,6 +1376,7 @@ class RouteApi:
         route_uid,
         page_size,
         page_num,
+        cursor,
         device_uid,
         sort_by,
         sort_order,
@@ -1249,6 +1421,10 @@ class RouteApi:
         if page_num is not None:
 
             _query_params.append(("pageNum", page_num))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
 
         if device_uid is not None:
 
@@ -1333,9 +1509,9 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[NotehubRouteSummary]:
-        """get_routes
+        """List routes
 
-        Get all Routes within a Project
+        List a project's routes with their type and label and whether they're disabled, without their settings. For a route's settings, use `GetRoute`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1397,9 +1573,9 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[NotehubRouteSummary]]:
-        """get_routes
+        """List routes
 
-        Get all Routes within a Project
+        List a project's routes with their type and label and whether they're disabled, without their settings. For a route's settings, use `GetRoute`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1461,9 +1637,9 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_routes
+        """List routes
 
-        Get all Routes within a Project
+        List a project's routes with their type and label and whether they're disabled, without their settings. For a route's settings, use `GetRoute`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1560,7 +1736,12 @@ class RouteApi:
     def update_route(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
         notehub_route: Annotated[
             NotehubRoute, Field(description="Route settings to be updated")
         ],
@@ -1576,13 +1757,13 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NotehubRoute:
-        """update_route
+        """Update a route
 
-        Update route by UID
+        Change a route's settings. Fields you leave out keep their values, and a secret sent back as `(omitted)` is kept, but leaving out `notes` clears it.  Requires the Owner or Developer role. Returns 404 if the route doesn't exist, and 400 for invalid settings.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param notehub_route: Route settings to be updated (required)
         :type notehub_route: NotehubRoute
@@ -1634,7 +1815,12 @@ class RouteApi:
     def update_route_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
         notehub_route: Annotated[
             NotehubRoute, Field(description="Route settings to be updated")
         ],
@@ -1650,13 +1836,13 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[NotehubRoute]:
-        """update_route
+        """Update a route
 
-        Update route by UID
+        Change a route's settings. Fields you leave out keep their values, and a secret sent back as `(omitted)` is kept, but leaving out `notes` clears it.  Requires the Owner or Developer role. Returns 404 if the route doesn't exist, and 400 for invalid settings.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param notehub_route: Route settings to be updated (required)
         :type notehub_route: NotehubRoute
@@ -1708,7 +1894,12 @@ class RouteApi:
     def update_route_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        route_uid: StrictStr,
+        route_uid: Annotated[
+            StrictStr,
+            Field(
+                description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`."
+            ),
+        ],
         notehub_route: Annotated[
             NotehubRoute, Field(description="Route settings to be updated")
         ],
@@ -1724,13 +1915,13 @@ class RouteApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_route
+        """Update a route
 
-        Update route by UID
+        Change a route's settings. Fields you leave out keep their values, and a secret sent back as `(omitted)` is kept, but leaving out `notes` clears it.  Requires the Owner or Developer role. Returns 404 if the route doesn't exist, and 400 for invalid settings.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param route_uid: (required)
+        :param route_uid: RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`. List with `GetRoutes`. (required)
         :type route_uid: str
         :param notehub_route: Route settings to be updated (required)
         :type notehub_route: NotehubRoute

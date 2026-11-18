@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,13 +26,13 @@ from typing_extensions import Self
 
 class DeviceTowerInfo(BaseModel):
     """
-    DeviceTowerInfo
+    The cell tower the device last used. Null if unknown.
     """  # noqa: E501
 
-    cell_id: Optional[StrictInt] = None
-    lac: Optional[StrictInt] = None
-    mcc: Optional[StrictInt] = None
-    mnc: Optional[StrictInt] = None
+    cell_id: Optional[StrictInt] = Field(default=None, description="Cell ID.")
+    lac: Optional[StrictInt] = Field(default=None, description="Location area code.")
+    mcc: Optional[StrictInt] = Field(default=None, description="Mobile country code.")
+    mnc: Optional[StrictInt] = Field(default=None, description="Mobile network code.")
     __properties: ClassVar[List[str]] = ["cell_id", "lac", "mcc", "mnc"]
 
     model_config = ConfigDict(

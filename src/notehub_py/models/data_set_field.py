@@ -34,7 +34,7 @@ class DataSetField(BaseModel):
     )
     jsonata: Optional[StrictStr] = Field(
         default=None,
-        description="The JSONata expression that populates this field from the event. Required for a dataset with no rows expression. Must be omitted when the dataset has one: the column is then taken from the row object key matching this field's name, and supplying an expression here is rejected rather than silently ignored.",
+        description="JSONata expression for this column. Required without the dataset's `rows` expression; must be omitted with it.",
     )
     name: Optional[StrictStr] = Field(default=None, description="The name of the field")
     __properties: ClassVar[List[str]] = ["datatype", "jsonata", "name"]

@@ -30,7 +30,7 @@ class DeleteDeviceFromFleetsRequest(BaseModel):
     """  # noqa: E501
 
     fleet_uids: List[StrictStr] = Field(
-        description="The fleetUIDs to remove from the device."
+        description="FleetUIDs to remove the device from."
     )
     __properties: ClassVar[List[str]] = ["fleet_uids"]
 

@@ -2,14 +2,14 @@
 
 ## Properties
 
-| Name          | Type      | Description | Notes |
-| ------------- | --------- | ----------- | ----- |
-| **country**   | **str**   |             |
-| **latitude**  | **float** |             |
-| **longitude** | **float** |             |
-| **name**      | **str**   |             |
-| **timezone**  | **str**   |             |
-| **when**      | **str**   |             |
+| Name          | Type      | Description                                                           | Notes |
+| ------------- | --------- | --------------------------------------------------------------------- | ----- |
+| **country**   | **str**   | Two-letter country code, e.g. &#x60;US&#x60;.                         |
+| **latitude**  | **float** | Latitude in degrees.                                                  |
+| **longitude** | **float** | Longitude in degrees.                                                 |
+| **name**      | **str**   | Place name, e.g. &#x60;Waverly MI&#x60;.                              |
+| **timezone**  | **str**   | IANA time zone, e.g. &#x60;America/Detroit&#x60;.                     |
+| **when**      | **str**   | When the location was recorded, in RFC 3339 format. Empty if unknown. |
 
 ## Example
 

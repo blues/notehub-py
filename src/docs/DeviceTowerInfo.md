@@ -1,13 +1,15 @@
 # DeviceTowerInfo
 
+The cell tower the device last used. Null if unknown.
+
 ## Properties
 
-| Name        | Type    | Description | Notes      |
-| ----------- | ------- | ----------- | ---------- |
-| **cell_id** | **int** |             | [optional] |
-| **lac**     | **int** |             | [optional] |
-| **mcc**     | **int** |             | [optional] |
-| **mnc**     | **int** |             | [optional] |
+| Name        | Type    | Description          | Notes      |
+| ----------- | ------- | -------------------- | ---------- |
+| **cell_id** | **int** | Cell ID.             | [optional] |
+| **lac**     | **int** | Location area code.  | [optional] |
+| **mcc**     | **int** | Mobile country code. | [optional] |
+| **mnc**     | **int** | Mobile network code. | [optional] |
 
 ## Example
 

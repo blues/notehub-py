@@ -31,9 +31,9 @@ class ProjectMember(BaseModel):
     """  # noqa: E501
 
     email: StrictStr = Field(
-        description="The email address of the project member. This property will only be populated if the viewer is an owner of the project. "
+        description="The member's email address. Empty unless the caller is an Owner of the project."
     )
-    name: StrictStr
+    name: StrictStr = Field(description="The member's display name.")
     role: Optional[Role]
     __properties: ClassVar[List[str]] = ["email", "name", "role"]
 

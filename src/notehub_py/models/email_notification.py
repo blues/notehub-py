@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +29,9 @@ class EmailNotification(BaseModel):
     EmailNotification
     """  # noqa: E501
 
-    email: Optional[StrictStr] = Field(default=None, description="Email Address")
+    email: StrictStr = Field(
+        description="Email address, or several separated by commas."
+    )
     __properties: ClassVar[List[str]] = ["email"]
 
     model_config = ConfigDict(

@@ -2,10 +2,11 @@
 
 ## Properties
 
-| Name         | Type                                        | Description | Notes |
-| ------------ | ------------------------------------------- | ----------- | ----- |
-| **has_more** | **bool**                                    |             |
-| **sessions** | [**List[DeviceSession]**](DeviceSession.md) |             |
+| Name            | Type                                        | Description                                                                                                                                                                                                                       | Notes      |
+| --------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **has_more**    | **bool**                                    |                                                                                                                                                                                                                                   |
+| **next_cursor** | **str**                                     | Pass this value (epoch microseconds, optionally &#x60;.N&#x60;) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes. | [optional] |
+| **sessions**    | [**List[DeviceSession]**](DeviceSession.md) |                                                                                                                                                                                                                                   |
 
 ## Example
 

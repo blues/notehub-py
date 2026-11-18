@@ -2,9 +2,9 @@
 
 ## Properties
 
-| Name     | Type       | Description | Notes      |
-| -------- | ---------- | ----------- | ---------- |
-| **body** | **object** |             | [optional] |
+| Name     | Type       | Description                                                                                                   | Notes      |
+| -------- | ---------- | ------------------------------------------------------------------------------------------------------------- | ---------- |
+| **body** | **object** | The JSON object to send to the Notecard. Must not have a &#x60;type&#x60; field, which the Notecard reserves. | [optional] |
 
 ## Example
 

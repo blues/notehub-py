@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.alert import Alert
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,7 +32,11 @@ class GetAlerts200Response(BaseModel):
 
     alerts: List[Alert] = Field(description="The list of alerts")
     has_more: StrictBool = Field(description="True if there are more alerts")
-    __properties: ClassVar[List[str]] = ["alerts", "has_more"]
+    next_cursor: Optional[StrictStr] = Field(
+        default=None,
+        description="Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes. ",
+    )
+    __properties: ClassVar[List[str]] = ["alerts", "has_more", "next_cursor"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,6 +101,7 @@ class GetAlerts200Response(BaseModel):
                     else None
                 ),
                 "has_more": obj.get("has_more"),
+                "next_cursor": obj.get("next_cursor"),
             }
         )
         return _obj

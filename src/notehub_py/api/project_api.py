@@ -78,9 +78,7 @@ class ProjectApi:
         device_uid: StrictStr,
         add_device_to_fleets_request: Annotated[
             AddDeviceToFleetsRequest,
-            Field(
-                description="The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
-            ),
+            Field(description="The fleets to add the device to."),
         ],
         _request_timeout: Union[
             None,
@@ -94,15 +92,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceFleets200Response:
-        """add_device_to_fleets
+        """Add a device to fleets
 
-        Add Device to Fleets
+        Add a device to one or more fleets, keeping the fleets it's already in, and return all its fleets. Fleets it's already in are skipped, so a retry is safe.  Requires the Owner or Developer role. Returns 400 if a fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param add_device_to_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :param add_device_to_fleets_request: The fleets to add the device to. (required)
         :type add_device_to_fleets_request: AddDeviceToFleetsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -155,9 +153,7 @@ class ProjectApi:
         device_uid: StrictStr,
         add_device_to_fleets_request: Annotated[
             AddDeviceToFleetsRequest,
-            Field(
-                description="The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
-            ),
+            Field(description="The fleets to add the device to."),
         ],
         _request_timeout: Union[
             None,
@@ -171,15 +167,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceFleets200Response]:
-        """add_device_to_fleets
+        """Add a device to fleets
 
-        Add Device to Fleets
+        Add a device to one or more fleets, keeping the fleets it's already in, and return all its fleets. Fleets it's already in are skipped, so a retry is safe.  Requires the Owner or Developer role. Returns 400 if a fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param add_device_to_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :param add_device_to_fleets_request: The fleets to add the device to. (required)
         :type add_device_to_fleets_request: AddDeviceToFleetsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -232,9 +228,7 @@ class ProjectApi:
         device_uid: StrictStr,
         add_device_to_fleets_request: Annotated[
             AddDeviceToFleetsRequest,
-            Field(
-                description="The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
-            ),
+            Field(description="The fleets to add the device to."),
         ],
         _request_timeout: Union[
             None,
@@ -248,15 +242,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """add_device_to_fleets
+        """Add a device to fleets
 
-        Add Device to Fleets
+        Add a device to one or more fleets, keeping the fleets it's already in, and return all its fleets. Fleets it's already in are skipped, so a retry is safe.  Requires the Owner or Developer role. Returns 400 if a fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param add_device_to_fleets_request: The fleets to add to the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :param add_device_to_fleets_request: The fleets to add the device to. (required)
         :type add_device_to_fleets_request: AddDeviceToFleetsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -370,7 +364,10 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         clone_project_request: Annotated[
-            CloneProjectRequest, Field(description="Project to be cloned")
+            CloneProjectRequest,
+            Field(
+                description="The new project's name and organization, and what to leave out of the copy."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -384,13 +381,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Project:
-        """clone_project
+        """Clone a project
 
-        Clone a Project
+        Create a new project as a copy of this one. Settings, environment variables, transformation, fleets, routes and host firmware are copied; devices, products and members aren't. Copied fleets get new FleetUIDs.  Requires the Owner role (400 otherwise), a verified email address (401 otherwise), and permission to create projects in the target organization (403 otherwise).
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param clone_project_request: Project to be cloned (required)
+        :param clone_project_request: The new project's name and organization, and what to leave out of the copy. (required)
         :type clone_project_request: CloneProjectRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -440,7 +437,10 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         clone_project_request: Annotated[
-            CloneProjectRequest, Field(description="Project to be cloned")
+            CloneProjectRequest,
+            Field(
+                description="The new project's name and organization, and what to leave out of the copy."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -454,13 +454,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Project]:
-        """clone_project
+        """Clone a project
 
-        Clone a Project
+        Create a new project as a copy of this one. Settings, environment variables, transformation, fleets, routes and host firmware are copied; devices, products and members aren't. Copied fleets get new FleetUIDs.  Requires the Owner role (400 otherwise), a verified email address (401 otherwise), and permission to create projects in the target organization (403 otherwise).
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param clone_project_request: Project to be cloned (required)
+        :param clone_project_request: The new project's name and organization, and what to leave out of the copy. (required)
         :type clone_project_request: CloneProjectRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -510,7 +510,10 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         clone_project_request: Annotated[
-            CloneProjectRequest, Field(description="Project to be cloned")
+            CloneProjectRequest,
+            Field(
+                description="The new project's name and organization, and what to leave out of the copy."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -524,13 +527,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """clone_project
+        """Clone a project
 
-        Clone a Project
+        Create a new project as a copy of this one. Settings, environment variables, transformation, fleets, routes and host firmware are copied; devices, products and members aren't. Copied fleets get new FleetUIDs.  Requires the Owner role (400 otherwise), a verified email address (401 otherwise), and permission to create projects in the target organization (403 otherwise).
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param clone_project_request: Project to be cloned (required)
+        :param clone_project_request: The new project's name and organization, and what to leave out of the copy. (required)
         :type clone_project_request: CloneProjectRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -640,7 +643,7 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         create_fleet_request: Annotated[
-            CreateFleetRequest, Field(description="Fleet to be added")
+            CreateFleetRequest, Field(description="The new fleet's name and settings.")
         ],
         _request_timeout: Union[
             None,
@@ -654,13 +657,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Fleet:
-        """create_fleet
+        """Create a fleet
 
-        Create Fleet
+        Create a fleet in the project. Connectivity assurance is on unless `connectivity_assurance.enabled` is `false`. A second call creates another fleet.  Requires the Owner or Developer role. Returns 400 if `label` is missing or empty.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param create_fleet_request: Fleet to be added (required)
+        :param create_fleet_request: The new fleet's name and settings. (required)
         :type create_fleet_request: CreateFleetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -710,7 +713,7 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         create_fleet_request: Annotated[
-            CreateFleetRequest, Field(description="Fleet to be added")
+            CreateFleetRequest, Field(description="The new fleet's name and settings.")
         ],
         _request_timeout: Union[
             None,
@@ -724,13 +727,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Fleet]:
-        """create_fleet
+        """Create a fleet
 
-        Create Fleet
+        Create a fleet in the project. Connectivity assurance is on unless `connectivity_assurance.enabled` is `false`. A second call creates another fleet.  Requires the Owner or Developer role. Returns 400 if `label` is missing or empty.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param create_fleet_request: Fleet to be added (required)
+        :param create_fleet_request: The new fleet's name and settings. (required)
         :type create_fleet_request: CreateFleetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -780,7 +783,7 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         create_fleet_request: Annotated[
-            CreateFleetRequest, Field(description="Fleet to be added")
+            CreateFleetRequest, Field(description="The new fleet's name and settings.")
         ],
         _request_timeout: Union[
             None,
@@ -794,13 +797,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_fleet
+        """Create a fleet
 
-        Create Fleet
+        Create a fleet in the project. Connectivity assurance is on unless `connectivity_assurance.enabled` is `false`. A second call creates another fleet.  Requires the Owner or Developer role. Returns 400 if `label` is missing or empty.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param create_fleet_request: Fleet to be added (required)
+        :param create_fleet_request: The new fleet's name and settings. (required)
         :type create_fleet_request: CreateFleetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -910,7 +913,10 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         create_product_request: Annotated[
-            CreateProductRequest, Field(description="Product to be created")
+            CreateProductRequest,
+            Field(
+                description="The new product's UID suffix, name and provisioning settings."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -924,13 +930,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Product:
-        """create_product
+        """Create a product
 
-        Create Product within a Project
+        Add a ProductUID to the project, formed from the caller's reversed email and `product_uid`. For `jane@acme.com` and `sensors` it is `com.acme.jane:sensors`.  Requires the Owner or Developer role and a verified email address (400 otherwise). Returns 404 if an `auto_provision_fleets` entry isn't a fleet in this project, and 500 if `product_uid` is invalid or already taken.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param create_product_request: Product to be created (required)
+        :param create_product_request: The new product's UID suffix, name and provisioning settings. (required)
         :type create_product_request: CreateProductRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -980,7 +986,10 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         create_product_request: Annotated[
-            CreateProductRequest, Field(description="Product to be created")
+            CreateProductRequest,
+            Field(
+                description="The new product's UID suffix, name and provisioning settings."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -994,13 +1003,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Product]:
-        """create_product
+        """Create a product
 
-        Create Product within a Project
+        Add a ProductUID to the project, formed from the caller's reversed email and `product_uid`. For `jane@acme.com` and `sensors` it is `com.acme.jane:sensors`.  Requires the Owner or Developer role and a verified email address (400 otherwise). Returns 404 if an `auto_provision_fleets` entry isn't a fleet in this project, and 500 if `product_uid` is invalid or already taken.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param create_product_request: Product to be created (required)
+        :param create_product_request: The new product's UID suffix, name and provisioning settings. (required)
         :type create_product_request: CreateProductRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1050,7 +1059,10 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         create_product_request: Annotated[
-            CreateProductRequest, Field(description="Product to be created")
+            CreateProductRequest,
+            Field(
+                description="The new product's UID suffix, name and provisioning settings."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -1064,13 +1076,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_product
+        """Create a product
 
-        Create Product within a Project
+        Add a ProductUID to the project, formed from the caller's reversed email and `product_uid`. For `jane@acme.com` and `sensors` it is `com.acme.jane:sensors`.  Requires the Owner or Developer role and a verified email address (400 otherwise). Returns 404 if an `auto_provision_fleets` entry isn't a fleet in this project, and 500 if `product_uid` is invalid or already taken.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param create_product_request: Product to be created (required)
+        :param create_product_request: The new product's UID suffix, name and provisioning settings. (required)
         :type create_product_request: CreateProductRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1179,7 +1191,8 @@ class ProjectApi:
     def create_project(
         self,
         create_project_request: Annotated[
-            CreateProjectRequest, Field(description="Project to be created")
+            CreateProjectRequest,
+            Field(description="The new project's name and organization."),
         ],
         _request_timeout: Union[
             None,
@@ -1193,11 +1206,11 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Project:
-        """create_project
+        """Create a project
 
-        Create a Project
+        Create a project in an organization, with one default fleet, no products, and the caller as its Owner. A second call creates another project.  Requires a verified email address (401 otherwise) and permission to create projects in the organization (403 otherwise).
 
-        :param create_project_request: Project to be created (required)
+        :param create_project_request: The new project's name and organization. (required)
         :type create_project_request: CreateProjectRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1245,7 +1258,8 @@ class ProjectApi:
     def create_project_with_http_info(
         self,
         create_project_request: Annotated[
-            CreateProjectRequest, Field(description="Project to be created")
+            CreateProjectRequest,
+            Field(description="The new project's name and organization."),
         ],
         _request_timeout: Union[
             None,
@@ -1259,11 +1273,11 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Project]:
-        """create_project
+        """Create a project
 
-        Create a Project
+        Create a project in an organization, with one default fleet, no products, and the caller as its Owner. A second call creates another project.  Requires a verified email address (401 otherwise) and permission to create projects in the organization (403 otherwise).
 
-        :param create_project_request: Project to be created (required)
+        :param create_project_request: The new project's name and organization. (required)
         :type create_project_request: CreateProjectRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1311,7 +1325,8 @@ class ProjectApi:
     def create_project_without_preload_content(
         self,
         create_project_request: Annotated[
-            CreateProjectRequest, Field(description="Project to be created")
+            CreateProjectRequest,
+            Field(description="The new project's name and organization."),
         ],
         _request_timeout: Union[
             None,
@@ -1325,11 +1340,11 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_project
+        """Create a project
 
-        Create a Project
+        Create a project in an organization, with one default fleet, no products, and the caller as its Owner. A second call creates another project.  Requires a verified email address (401 otherwise) and permission to create projects in the organization (403 otherwise).
 
-        :param create_project_request: Project to be created (required)
+        :param create_project_request: The new project's name and organization. (required)
         :type create_project_request: CreateProjectRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1447,9 +1462,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ProjectSecret:
-        """create_project_secret
+        """Create a project secret
 
-        Create a new project secret
+        Store a secret value that routes and alerts can reference as `[$$name]` without exposing it. The value can't be read back.  Requires the Owner or Developer role. Returns 409 if the name is taken, and 400 if it's invalid.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1517,9 +1532,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ProjectSecret]:
-        """create_project_secret
+        """Create a project secret
 
-        Create a new project secret
+        Store a secret value that routes and alerts can reference as `[$$name]` without exposing it. The value can't be read back.  Requires the Owner or Developer role. Returns 409 if the name is taken, and 400 if it's invalid.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1587,9 +1602,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_project_secret
+        """Create a project secret
 
-        Create a new project secret
+        Store a secret value that routes and alerts can reference as `[$$name]` without exposing it. The value can't be read back.  Requires the Owner or Developer role. Returns 409 if the name is taken, and 400 if it's invalid.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1707,9 +1722,7 @@ class ProjectApi:
         device_uid: StrictStr,
         delete_device_from_fleets_request: Annotated[
             DeleteDeviceFromFleetsRequest,
-            Field(
-                description="The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
-            ),
+            Field(description="The fleets to remove the device from."),
         ],
         _request_timeout: Union[
             None,
@@ -1723,15 +1736,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceFleets200Response:
-        """delete_device_from_fleets
+        """Remove a device from fleets
 
-        Remove Device from Fleets
+        Remove a device from one or more fleets and return the fleets it's still in. Fleets it isn't in are ignored, so a retry is safe.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param delete_device_from_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :param delete_device_from_fleets_request: The fleets to remove the device from. (required)
         :type delete_device_from_fleets_request: DeleteDeviceFromFleetsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1784,9 +1797,7 @@ class ProjectApi:
         device_uid: StrictStr,
         delete_device_from_fleets_request: Annotated[
             DeleteDeviceFromFleetsRequest,
-            Field(
-                description="The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
-            ),
+            Field(description="The fleets to remove the device from."),
         ],
         _request_timeout: Union[
             None,
@@ -1800,15 +1811,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceFleets200Response]:
-        """delete_device_from_fleets
+        """Remove a device from fleets
 
-        Remove Device from Fleets
+        Remove a device from one or more fleets and return the fleets it's still in. Fleets it isn't in are ignored, so a retry is safe.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param delete_device_from_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :param delete_device_from_fleets_request: The fleets to remove the device from. (required)
         :type delete_device_from_fleets_request: DeleteDeviceFromFleetsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1861,9 +1872,7 @@ class ProjectApi:
         device_uid: StrictStr,
         delete_device_from_fleets_request: Annotated[
             DeleteDeviceFromFleetsRequest,
-            Field(
-                description="The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error. "
-            ),
+            Field(description="The fleets to remove the device from."),
         ],
         _request_timeout: Union[
             None,
@@ -1877,15 +1886,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_device_from_fleets
+        """Remove a device from fleets
 
-        Remove Device from Fleets
+        Remove a device from one or more fleets and return the fleets it's still in. Fleets it isn't in are ignored, so a retry is safe.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param delete_device_from_fleets_request: The fleets to remove from the device. Note that the endpoint takes an array of fleetUIDs, to facilitate multi-fleet devices. Multi-fleet is not yet enabled on all SaaS plans - unless it is supported by the SaaS plan of the project, passing more than a single fleetUID in the array is an error.  (required)
+        :param delete_device_from_fleets_request: The fleets to remove the device from. (required)
         :type delete_device_from_fleets_request: DeleteDeviceFromFleetsRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2012,9 +2021,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_firmware
+        """Delete host firmware
 
-        Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+        Delete a host firmware file by its stored filename, including its `$` timestamp suffix. Notecard firmware can't be deleted.  Requires the Owner or Developer role. Returns 404 if the file doesn't exist, and 400 for a sub-project, whose parent manages host firmware.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2084,9 +2093,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_firmware
+        """Delete host firmware
 
-        Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+        Delete a host firmware file by its stored filename, including its `$` timestamp suffix. Notecard firmware can't be deleted.  Requires the Owner or Developer role. Returns 404 if the file doesn't exist, and 400 for a sub-project, whose parent manages host firmware.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2156,9 +2165,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_firmware
+        """Delete host firmware
 
-        Delete a host firmware binary. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+        Delete a host firmware file by its stored filename, including its `$` timestamp suffix. Notecard firmware can't be deleted.  Requires the Owner or Developer role. Returns 404 if the file doesn't exist, and 400 for a sub-project, whose parent manages host firmware.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2280,9 +2289,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_fleet
+        """Delete a fleet
 
-        Delete Fleet
+        Delete a fleet and remove it from all its devices. The devices stay in the project; the fleet's environment variables are deleted. To remove one device from a fleet, use `DeleteDeviceFromFleets`.  Requires the Owner or Developer role. Returns 400 if the fleet does not exist, including on a retry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2348,9 +2357,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_fleet
+        """Delete a fleet
 
-        Delete Fleet
+        Delete a fleet and remove it from all its devices. The devices stay in the project; the fleet's environment variables are deleted. To remove one device from a fleet, use `DeleteDeviceFromFleets`.  Requires the Owner or Developer role. Returns 400 if the fleet does not exist, including on a retry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2416,9 +2425,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_fleet
+        """Delete a fleet
 
-        Delete Fleet
+        Delete a fleet and remove it from all its devices. The devices stay in the project; the fleet's environment variables are deleted. To remove one device from a fleet, use `DeleteDeviceFromFleets`.  Requires the Owner or Developer role. Returns 400 if the fleet does not exist, including on a retry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2523,7 +2532,7 @@ class ProjectApi:
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         key: Annotated[
-            StrictStr, Field(description="The environment variable key to delete.")
+            StrictStr, Field(description="Name of the environment variable to delete.")
         ],
         _request_timeout: Union[
             None,
@@ -2537,15 +2546,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvironmentVariables:
-        """delete_fleet_environment_variable
+        """Delete a fleet environment variable
 
-        Delete environment variables of a fleet
+        Delete one fleet environment variable and return the ones left.  Requires the Owner or Developer role. Returns 404 if the fleet or the variable doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
-        :param key: The environment variable key to delete. (required)
+        :param key: Name of the environment variable to delete. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2597,7 +2606,7 @@ class ProjectApi:
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         key: Annotated[
-            StrictStr, Field(description="The environment variable key to delete.")
+            StrictStr, Field(description="Name of the environment variable to delete.")
         ],
         _request_timeout: Union[
             None,
@@ -2611,15 +2620,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvironmentVariables]:
-        """delete_fleet_environment_variable
+        """Delete a fleet environment variable
 
-        Delete environment variables of a fleet
+        Delete one fleet environment variable and return the ones left.  Requires the Owner or Developer role. Returns 404 if the fleet or the variable doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
-        :param key: The environment variable key to delete. (required)
+        :param key: Name of the environment variable to delete. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2671,7 +2680,7 @@ class ProjectApi:
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         key: Annotated[
-            StrictStr, Field(description="The environment variable key to delete.")
+            StrictStr, Field(description="Name of the environment variable to delete.")
         ],
         _request_timeout: Union[
             None,
@@ -2685,15 +2694,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_fleet_environment_variable
+        """Delete a fleet environment variable
 
-        Delete environment variables of a fleet
+        Delete one fleet environment variable and return the ones left.  Requires the Owner or Developer role. Returns 404 if the fleet or the variable doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
-        :param key: The environment variable key to delete. (required)
+        :param key: Name of the environment variable to delete. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2809,9 +2818,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_product
+        """Delete a product
 
-        Delete a product
+        Remove a ProductUID from the project. Accepts the UID with or without the `product:` prefix.  Requires the Owner or Developer role. Returns 404 if the project has no such ProductUID.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2877,9 +2886,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_product
+        """Delete a product
 
-        Delete a product
+        Remove a ProductUID from the project. Accepts the UID with or without the `product:` prefix.  Requires the Owner or Developer role. Returns 404 if the project has no such ProductUID.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2945,9 +2954,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_product
+        """Delete a product
 
-        Delete a product
+        Remove a ProductUID from the project. Accepts the UID with or without the `product:` prefix.  Requires the Owner or Developer role. Returns 404 if the project has no such ProductUID.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3062,9 +3071,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_project
+        """Delete a project
 
-        Delete a Project by ProjectUID
+        Delete a project, its ProductUIDs, and every member's access to it. Can't be undone through the API.  Requires the Owner or Developer role. Returns 200 with no body.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3126,9 +3135,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_project
+        """Delete a project
 
-        Delete a Project by ProjectUID
+        Delete a project, its ProductUIDs, and every member's access to it. Can't be undone through the API.  Requires the Owner or Developer role. Returns 200 with no body.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3190,9 +3199,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_project
+        """Delete a project
 
-        Delete a Project by ProjectUID
+        Delete a project, its ProductUIDs, and every member's access to it. Can't be undone through the API.  Requires the Owner or Developer role. Returns 200 with no body.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3290,7 +3299,7 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         key: Annotated[
-            StrictStr, Field(description="The environment variable key to delete.")
+            StrictStr, Field(description="Name of the environment variable to delete.")
         ],
         _request_timeout: Union[
             None,
@@ -3304,13 +3313,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvironmentVariables:
-        """delete_project_environment_variable
+        """Delete a project environment variable
 
-        Delete an environment variable of a project by key
+        Delete one project environment variable and return the ones left. Deleting a variable that doesn't exist still succeeds.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param key: The environment variable key to delete. (required)
+        :param key: Name of the environment variable to delete. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3360,7 +3369,7 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         key: Annotated[
-            StrictStr, Field(description="The environment variable key to delete.")
+            StrictStr, Field(description="Name of the environment variable to delete.")
         ],
         _request_timeout: Union[
             None,
@@ -3374,13 +3383,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvironmentVariables]:
-        """delete_project_environment_variable
+        """Delete a project environment variable
 
-        Delete an environment variable of a project by key
+        Delete one project environment variable and return the ones left. Deleting a variable that doesn't exist still succeeds.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param key: The environment variable key to delete. (required)
+        :param key: Name of the environment variable to delete. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3430,7 +3439,7 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         key: Annotated[
-            StrictStr, Field(description="The environment variable key to delete.")
+            StrictStr, Field(description="Name of the environment variable to delete.")
         ],
         _request_timeout: Union[
             None,
@@ -3444,13 +3453,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_project_environment_variable
+        """Delete a project environment variable
 
-        Delete an environment variable of a project by key
+        Delete one project environment variable and return the ones left. Deleting a variable that doesn't exist still succeeds.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param key: The environment variable key to delete. (required)
+        :param key: Name of the environment variable to delete. (required)
         :type key: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3549,7 +3558,10 @@ class ProjectApi:
     def delete_project_secret(
         self,
         project_or_product_uid: StrictStr,
-        secret_name: Annotated[StrictStr, Field(description="The name of the secret.")],
+        secret_name: Annotated[
+            StrictStr,
+            Field(description="Name of the secret, as listed by `GetProjectSecrets`."),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3562,13 +3574,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_project_secret
+        """Delete a project secret
 
-        Delete a project secret by name
+        Delete a project secret. Routes and alerts that still reference it can no longer resolve it.  Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param secret_name: The name of the secret. (required)
+        :param secret_name: Name of the secret, as listed by `GetProjectSecrets`. (required)
         :type secret_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3618,7 +3630,10 @@ class ProjectApi:
     def delete_project_secret_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        secret_name: Annotated[StrictStr, Field(description="The name of the secret.")],
+        secret_name: Annotated[
+            StrictStr,
+            Field(description="Name of the secret, as listed by `GetProjectSecrets`."),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3631,13 +3646,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_project_secret
+        """Delete a project secret
 
-        Delete a project secret by name
+        Delete a project secret. Routes and alerts that still reference it can no longer resolve it.  Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param secret_name: The name of the secret. (required)
+        :param secret_name: Name of the secret, as listed by `GetProjectSecrets`. (required)
         :type secret_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3687,7 +3702,10 @@ class ProjectApi:
     def delete_project_secret_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        secret_name: Annotated[StrictStr, Field(description="The name of the secret.")],
+        secret_name: Annotated[
+            StrictStr,
+            Field(description="Name of the secret, as listed by `GetProjectSecrets`."),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3700,13 +3718,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_project_secret
+        """Delete a project secret
 
-        Delete a project secret by name
+        Delete a project secret. Routes and alerts that still reference it can no longer resolve it.  Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param secret_name: The name of the secret. (required)
+        :param secret_name: Name of the secret, as listed by `GetProjectSecrets`. (required)
         :type secret_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3818,9 +3836,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """disable_global_event_transformation
+        """Disable the global event transformation
 
-        Disable the project-level event JSONata transformation
+        Stop applying the project's global event transformation to new events. The expression is kept, so `EnableGlobalEventTransformation` can turn it back on.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's transformation applies.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3882,9 +3900,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """disable_global_event_transformation
+        """Disable the global event transformation
 
-        Disable the project-level event JSONata transformation
+        Stop applying the project's global event transformation to new events. The expression is kept, so `EnableGlobalEventTransformation` can turn it back on.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's transformation applies.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3946,9 +3964,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """disable_global_event_transformation
+        """Disable the global event transformation
 
-        Disable the project-level event JSONata transformation
+        Stop applying the project's global event transformation to new events. The expression is kept, so `EnableGlobalEventTransformation` can turn it back on.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's transformation applies.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4045,7 +4063,12 @@ class ProjectApi:
     def download_firmware(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
         filename: StrictStr,
         _request_timeout: Union[
             None,
@@ -4059,13 +4082,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> bytearray:
-        """download_firmware
+        """Download host firmware
 
-        Download firmware binary
+        Download a host firmware binary by its stored filename, including its `$` timestamp suffix. Notecard firmware can't be downloaded (400).  Requires the Owner or Developer role. Returns 404 if the file doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param filename: (required)
         :type filename: str
@@ -4117,7 +4140,12 @@ class ProjectApi:
     def download_firmware_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
         filename: StrictStr,
         _request_timeout: Union[
             None,
@@ -4131,13 +4159,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[bytearray]:
-        """download_firmware
+        """Download host firmware
 
-        Download firmware binary
+        Download a host firmware binary by its stored filename, including its `$` timestamp suffix. Notecard firmware can't be downloaded (400).  Requires the Owner or Developer role. Returns 404 if the file doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param filename: (required)
         :type filename: str
@@ -4189,7 +4217,12 @@ class ProjectApi:
     def download_firmware_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
         filename: StrictStr,
         _request_timeout: Union[
             None,
@@ -4203,13 +4236,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """download_firmware
+        """Download host firmware
 
-        Download firmware binary
+        Download a host firmware binary by its stored filename, including its `$` timestamp suffix. Notecard firmware can't be downloaded (400).  Requires the Owner or Developer role. Returns 404 if the file doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param filename: (required)
         :type filename: str
@@ -4326,9 +4359,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """enable_global_event_transformation
+        """Enable the global event transformation
 
-        Enable the project-level event JSONata transformation
+        Resume applying the project's global event transformation to new events, without changing the expression. Undoes `DisableGlobalEventTransformation`.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's transformation applies.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4390,9 +4423,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """enable_global_event_transformation
+        """Enable the global event transformation
 
-        Enable the project-level event JSONata transformation
+        Resume applying the project's global event transformation to new events, without changing the expression. Undoes `DisableGlobalEventTransformation`.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's transformation applies.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4454,9 +4487,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """enable_global_event_transformation
+        """Enable the global event transformation
 
-        Enable the project-level event JSONata transformation
+        Resume applying the project's global event transformation to new events, without changing the expression. Undoes `DisableGlobalEventTransformation`.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent's transformation applies.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4567,7 +4600,7 @@ class ProjectApi:
     ) -> AWSRoleConfig:
         """Get AWS role configuration for role-based authentication
 
-        Returns the AWS Account ID and External ID needed to configure an IAM role trust policy for role-based authentication on AWS routes.
+        Get the AWS account ID and External ID for the IAM role trust policy used by AWS routes with role-based authentication. The External ID is created on the first call and stays the same after that.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4631,7 +4664,7 @@ class ProjectApi:
     ) -> ApiResponse[AWSRoleConfig]:
         """Get AWS role configuration for role-based authentication
 
-        Returns the AWS Account ID and External ID needed to configure an IAM role trust policy for role-based authentication on AWS routes.
+        Get the AWS account ID and External ID for the IAM role trust policy used by AWS routes with role-based authentication. The External ID is created on the first call and stays the same after that.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4695,7 +4728,7 @@ class ProjectApi:
     ) -> RESTResponseType:
         """Get AWS role configuration for role-based authentication
 
-        Returns the AWS Account ID and External ID needed to configure an IAM role trust policy for role-based authentication on AWS routes.
+        Get the AWS account ID and External ID for the IAM role trust policy used by AWS routes with role-based authentication. The External ID is created on the first call and stays the same after that.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4793,7 +4826,12 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        firmware_type: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4806,15 +4844,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DeviceDfuHistory:
-        """get_device_dfu_history
+        """Get a device's firmware update history
 
-        Get device DFU history for host or Notecard firmware
+        Get a device's current host or Notecard firmware version and every firmware update requested for it, newest first. For just the latest update, use `GetDeviceDfuStatus`.  Returns 400 if the device isn't in the project.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4865,7 +4903,12 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        firmware_type: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4878,15 +4921,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DeviceDfuHistory]:
-        """get_device_dfu_history
+        """Get a device's firmware update history
 
-        Get device DFU history for host or Notecard firmware
+        Get a device's current host or Notecard firmware version and every firmware update requested for it, newest first. For just the latest update, use `GetDeviceDfuStatus`.  Returns 400 if the device isn't in the project.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4937,7 +4980,12 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        firmware_type: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4950,15 +4998,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_dfu_history
+        """Get a device's firmware update history
 
-        Get device DFU history for host or Notecard firmware
+        Get a device's current host or Notecard firmware version and every firmware update requested for it, newest first. For just the latest update, use `GetDeviceDfuStatus`.  Returns 400 if the device isn't in the project.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5062,7 +5110,12 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        firmware_type: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5075,15 +5128,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DeviceDfuStatus:
-        """get_device_dfu_status
+        """Get a device's firmware update status
 
-        Get device DFU history for host or Notecard firmware
+        Get a device's current host or Notecard firmware version and its latest firmware update. Includes whether an update is in progress. For every past update, use `GetDeviceDfuHistory`.  Returns 400 if the device isn't in the project.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5134,7 +5187,12 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        firmware_type: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5147,15 +5205,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DeviceDfuStatus]:
-        """get_device_dfu_status
+        """Get a device's firmware update status
 
-        Get device DFU history for host or Notecard firmware
+        Get a device's current host or Notecard firmware version and its latest firmware update. Includes whether an update is in progress. For every past update, use `GetDeviceDfuHistory`.  Returns 400 if the device isn't in the project.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5206,7 +5264,12 @@ class ProjectApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        firmware_type: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5219,15 +5282,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_dfu_status
+        """Get a device's firmware update status
 
-        Get device DFU history for host or Notecard firmware
+        Get a device's current host or Notecard firmware version and its latest firmware update. Includes whether an update is in progress. For every past update, use `GetDeviceDfuHistory`.  Returns 400 if the device isn't in the project.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -5343,9 +5406,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceFleets200Response:
-        """get_device_fleets
+        """List a device's fleets
 
-        Get Device Fleets
+        List the fleets a device belongs to, with only each fleet's UID, label and creation time. For a fleet's full details use `GetFleet`.  Returns 404 if the device isn't in the project.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5411,9 +5474,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceFleets200Response]:
-        """get_device_fleets
+        """List a device's fleets
 
-        Get Device Fleets
+        List the fleets a device belongs to, with only each fleet's UID, label and creation time. For a fleet's full details use `GetFleet`.  Returns 404 if the device isn't in the project.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5479,9 +5542,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_fleets
+        """List a device's fleets
 
-        Get Device Fleets
+        List the fleets a device belongs to, with only each fleet's UID, label and creation time. For a fleet's full details use `GetFleet`.  Returns 404 if the device isn't in the project.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5584,13 +5647,24 @@ class ProjectApi:
     def get_devices_dfu_history(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -5626,7 +5700,7 @@ class ProjectApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -5647,23 +5721,25 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DeviceDfuHistoryPage:
-        """get_devices_dfu_history
+        """List devices' firmware update history
 
-        Get host or Notecard DFU history for all devices that match the filter criteria
+        List every host or Notecard firmware update requested for each matching device, newest first. Includes each device's current firmware version. For just the latest update, use `GetDevicesDfuStatus`.  Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project firmware settings don't appear until the device itself is next updated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param page_size:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param sort_by:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -5677,7 +5753,7 @@ class ProjectApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -5708,6 +5784,7 @@ class ProjectApi:
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             sort_by=sort_by,
             sort_order=sort_order,
             device_uid=device_uid,
@@ -5741,13 +5818,24 @@ class ProjectApi:
     def get_devices_dfu_history_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -5783,7 +5871,7 @@ class ProjectApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -5804,23 +5892,25 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DeviceDfuHistoryPage]:
-        """get_devices_dfu_history
+        """List devices' firmware update history
 
-        Get host or Notecard DFU history for all devices that match the filter criteria
+        List every host or Notecard firmware update requested for each matching device, newest first. Includes each device's current firmware version. For just the latest update, use `GetDevicesDfuStatus`.  Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project firmware settings don't appear until the device itself is next updated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param page_size:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param sort_by:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -5834,7 +5924,7 @@ class ProjectApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -5865,6 +5955,7 @@ class ProjectApi:
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             sort_by=sort_by,
             sort_order=sort_order,
             device_uid=device_uid,
@@ -5898,13 +5989,24 @@ class ProjectApi:
     def get_devices_dfu_history_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -5940,7 +6042,7 @@ class ProjectApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -5961,23 +6063,25 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_devices_dfu_history
+        """List devices' firmware update history
 
-        Get host or Notecard DFU history for all devices that match the filter criteria
+        List every host or Notecard firmware update requested for each matching device, newest first. Includes each device's current firmware version. For just the latest update, use `GetDevicesDfuStatus`.  Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project firmware settings don't appear until the device itself is next updated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param page_size:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param sort_by:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -5991,7 +6095,7 @@ class ProjectApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -6022,6 +6126,7 @@ class ProjectApi:
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             sort_by=sort_by,
             sort_order=sort_order,
             device_uid=device_uid,
@@ -6053,6 +6158,7 @@ class ProjectApi:
         firmware_type,
         page_size,
         page_num,
+        cursor,
         sort_by,
         sort_order,
         device_uid,
@@ -6103,6 +6209,10 @@ class ProjectApi:
         if page_num is not None:
 
             _query_params.append(("pageNum", page_num))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
 
         if sort_by is not None:
 
@@ -6179,13 +6289,24 @@ class ProjectApi:
     def get_devices_dfu_status(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -6221,7 +6342,7 @@ class ProjectApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -6242,23 +6363,25 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DeviceDfuStatusPage:
-        """get_devices_dfu_status
+        """List devices' firmware status
 
-        Get host or Notecard DFU history for all devices that match the filter criteria
+        List the host or Notecard firmware version each matching device runs now, with its latest firmware update. Use this to find which firmware devices run.  Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project firmware settings don't appear until the device itself is next updated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param page_size:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param sort_by:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -6272,7 +6395,7 @@ class ProjectApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -6303,6 +6426,7 @@ class ProjectApi:
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             sort_by=sort_by,
             sort_order=sort_order,
             device_uid=device_uid,
@@ -6336,13 +6460,24 @@ class ProjectApi:
     def get_devices_dfu_status_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -6378,7 +6513,7 @@ class ProjectApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -6399,23 +6534,25 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DeviceDfuStatusPage]:
-        """get_devices_dfu_status
+        """List devices' firmware status
 
-        Get host or Notecard DFU history for all devices that match the filter criteria
+        List the host or Notecard firmware version each matching device runs now, with its latest firmware update. Use this to find which firmware devices run.  Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project firmware settings don't appear until the device itself is next updated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param page_size:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param sort_by:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -6429,7 +6566,7 @@ class ProjectApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -6460,6 +6597,7 @@ class ProjectApi:
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             sort_by=sort_by,
             sort_order=sort_order,
             device_uid=device_uid,
@@ -6493,13 +6631,24 @@ class ProjectApi:
     def get_devices_dfu_status_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         sort_by: Optional[StrictStr] = None,
         sort_order: Optional[StrictStr] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -6535,7 +6684,7 @@ class ProjectApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -6556,23 +6705,25 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_devices_dfu_status
+        """List devices' firmware status
 
-        Get host or Notecard DFU history for all devices that match the filter criteria
+        List the host or Notecard firmware version each matching device runs now, with its latest firmware update. Use this to find which firmware devices run.  Paginated, by page or `cursor`. With a `cursor`, changes made through fleet or project firmware settings don't appear until the device itself is next updated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
         :param page_size:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param sort_by:
         :type sort_by: str
         :param sort_order:
         :type sort_order: str
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -6586,7 +6737,7 @@ class ProjectApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -6617,6 +6768,7 @@ class ProjectApi:
             firmware_type=firmware_type,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             sort_by=sort_by,
             sort_order=sort_order,
             device_uid=device_uid,
@@ -6648,6 +6800,7 @@ class ProjectApi:
         firmware_type,
         page_size,
         page_num,
+        cursor,
         sort_by,
         sort_order,
         device_uid,
@@ -6698,6 +6851,10 @@ class ProjectApi:
         if page_num is not None:
 
             _query_params.append(("pageNum", page_num))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
 
         if sort_by is not None:
 
@@ -6774,13 +6931,38 @@ class ProjectApi:
     def get_firmware_info(
         self,
         project_or_product_uid: StrictStr,
-        product: Optional[StrictStr] = None,
-        firmware_type: Optional[StrictStr] = None,
-        version: Optional[StrictStr] = None,
-        target: Optional[StrictStr] = None,
-        filename: Optional[StrictStr] = None,
-        md5: Optional[StrictStr] = None,
-        unpublished: Optional[StrictBool] = None,
+        product: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose product contains this text."),
+        ] = None,
+        firmware_type: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Only list `host` or `notecard` firmware. Omit for both."
+            ),
+        ] = None,
+        version: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose version contains this text."),
+        ] = None,
+        target: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose target contains this text."),
+        ] = None,
+        filename: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Only firmware whose stored filename contains this text."
+            ),
+        ] = None,
+        md5: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose MD5 hash contains this text."),
+        ] = None,
+        unpublished: Annotated[
+            Optional[StrictBool],
+            Field(description="If `true`, also list unpublished Notecard firmware."),
+        ] = None,
         sort_by: Annotated[
             Optional[StrictStr], Field(description="Field to sort by")
         ] = None,
@@ -6800,25 +6982,25 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[FirmwareInfo]:
-        """get_firmware_info
+        """List firmware
 
-        Get Available Firmware Information
+        List the host firmware uploaded to the project and the Notecard firmware available to it. Text filters match substrings, and unpublished Notecard builds are left out unless `unpublished` is `true`. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param product:
+        :param product: Only firmware whose product contains this text.
         :type product: str
-        :param firmware_type:
+        :param firmware_type: Only list `host` or `notecard` firmware. Omit for both.
         :type firmware_type: str
-        :param version:
+        :param version: Only firmware whose version contains this text.
         :type version: str
-        :param target:
+        :param target: Only firmware whose target contains this text.
         :type target: str
-        :param filename:
+        :param filename: Only firmware whose stored filename contains this text.
         :type filename: str
-        :param md5:
+        :param md5: Only firmware whose MD5 hash contains this text.
         :type md5: str
-        :param unpublished:
+        :param unpublished: If `true`, also list unpublished Notecard firmware.
         :type unpublished: bool
         :param sort_by: Field to sort by
         :type sort_by: str
@@ -6879,13 +7061,38 @@ class ProjectApi:
     def get_firmware_info_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        product: Optional[StrictStr] = None,
-        firmware_type: Optional[StrictStr] = None,
-        version: Optional[StrictStr] = None,
-        target: Optional[StrictStr] = None,
-        filename: Optional[StrictStr] = None,
-        md5: Optional[StrictStr] = None,
-        unpublished: Optional[StrictBool] = None,
+        product: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose product contains this text."),
+        ] = None,
+        firmware_type: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Only list `host` or `notecard` firmware. Omit for both."
+            ),
+        ] = None,
+        version: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose version contains this text."),
+        ] = None,
+        target: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose target contains this text."),
+        ] = None,
+        filename: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Only firmware whose stored filename contains this text."
+            ),
+        ] = None,
+        md5: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose MD5 hash contains this text."),
+        ] = None,
+        unpublished: Annotated[
+            Optional[StrictBool],
+            Field(description="If `true`, also list unpublished Notecard firmware."),
+        ] = None,
         sort_by: Annotated[
             Optional[StrictStr], Field(description="Field to sort by")
         ] = None,
@@ -6905,25 +7112,25 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[FirmwareInfo]]:
-        """get_firmware_info
+        """List firmware
 
-        Get Available Firmware Information
+        List the host firmware uploaded to the project and the Notecard firmware available to it. Text filters match substrings, and unpublished Notecard builds are left out unless `unpublished` is `true`. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param product:
+        :param product: Only firmware whose product contains this text.
         :type product: str
-        :param firmware_type:
+        :param firmware_type: Only list `host` or `notecard` firmware. Omit for both.
         :type firmware_type: str
-        :param version:
+        :param version: Only firmware whose version contains this text.
         :type version: str
-        :param target:
+        :param target: Only firmware whose target contains this text.
         :type target: str
-        :param filename:
+        :param filename: Only firmware whose stored filename contains this text.
         :type filename: str
-        :param md5:
+        :param md5: Only firmware whose MD5 hash contains this text.
         :type md5: str
-        :param unpublished:
+        :param unpublished: If `true`, also list unpublished Notecard firmware.
         :type unpublished: bool
         :param sort_by: Field to sort by
         :type sort_by: str
@@ -6984,13 +7191,38 @@ class ProjectApi:
     def get_firmware_info_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        product: Optional[StrictStr] = None,
-        firmware_type: Optional[StrictStr] = None,
-        version: Optional[StrictStr] = None,
-        target: Optional[StrictStr] = None,
-        filename: Optional[StrictStr] = None,
-        md5: Optional[StrictStr] = None,
-        unpublished: Optional[StrictBool] = None,
+        product: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose product contains this text."),
+        ] = None,
+        firmware_type: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Only list `host` or `notecard` firmware. Omit for both."
+            ),
+        ] = None,
+        version: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose version contains this text."),
+        ] = None,
+        target: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose target contains this text."),
+        ] = None,
+        filename: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Only firmware whose stored filename contains this text."
+            ),
+        ] = None,
+        md5: Annotated[
+            Optional[StrictStr],
+            Field(description="Only firmware whose MD5 hash contains this text."),
+        ] = None,
+        unpublished: Annotated[
+            Optional[StrictBool],
+            Field(description="If `true`, also list unpublished Notecard firmware."),
+        ] = None,
         sort_by: Annotated[
             Optional[StrictStr], Field(description="Field to sort by")
         ] = None,
@@ -7010,25 +7242,25 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_firmware_info
+        """List firmware
 
-        Get Available Firmware Information
+        List the host firmware uploaded to the project and the Notecard firmware available to it. Text filters match substrings, and unpublished Notecard builds are left out unless `unpublished` is `true`. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param product:
+        :param product: Only firmware whose product contains this text.
         :type product: str
-        :param firmware_type:
+        :param firmware_type: Only list `host` or `notecard` firmware. Omit for both.
         :type firmware_type: str
-        :param version:
+        :param version: Only firmware whose version contains this text.
         :type version: str
-        :param target:
+        :param target: Only firmware whose target contains this text.
         :type target: str
-        :param filename:
+        :param filename: Only firmware whose stored filename contains this text.
         :type filename: str
-        :param md5:
+        :param md5: Only firmware whose MD5 hash contains this text.
         :type md5: str
-        :param unpublished:
+        :param unpublished: If `true`, also list unpublished Notecard firmware.
         :type unpublished: bool
         :param sort_by: Field to sort by
         :type sort_by: str
@@ -7194,9 +7426,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Fleet:
-        """get_fleet
+        """Get a fleet
 
-        Get Fleet
+        Get one fleet's label, smart rule, watchdog and environment variables. Doesn't include `smart_rule_enabled`.  Returns 404 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -7262,9 +7494,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Fleet]:
-        """get_fleet
+        """Get a fleet
 
-        Get Fleet
+        Get one fleet's label, smart rule, watchdog and environment variables. Doesn't include `smart_rule_enabled`.  Returns 404 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -7330,9 +7562,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_fleet
+        """Get a fleet
 
-        Get Fleet
+        Get one fleet's label, smart rule, watchdog and environment variables. Doesn't include `smart_rule_enabled`.  Returns 404 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -7448,8 +7680,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvTreeJsonNode:
-        """Get environment variable hierarchy for a device
+        """Get a fleet's environment hierarchy
 
+        Get a fleet's environment variables and the project variables it inherits, as a tree. Each variable has its precedence and whether it is used or overridden.  Returns 500 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -7517,8 +7750,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvTreeJsonNode]:
-        """Get environment variable hierarchy for a device
+        """Get a fleet's environment hierarchy
 
+        Get a fleet's environment variables and the project variables it inherits, as a tree. Each variable has its precedence and whether it is used or overridden.  Returns 500 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -7586,8 +7820,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get environment variable hierarchy for a device
+        """Get a fleet's environment hierarchy
 
+        Get a fleet's environment variables and the project variables it inherits, as a tree. Each variable has its precedence and whether it is used or overridden.  Returns 500 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -7705,9 +7940,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvironmentVariables:
-        """get_fleet_environment_variables
+        """Get fleet environment variables
 
-        Get environment variables of a fleet
+        Get the environment variables set on a fleet, with their notes. They override project variables, and device variables override them.  Returns 404 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -7773,9 +8008,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvironmentVariables]:
-        """get_fleet_environment_variables
+        """Get fleet environment variables
 
-        Get environment variables of a fleet
+        Get the environment variables set on a fleet, with their notes. They override project variables, and device variables override them.  Returns 404 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -7841,9 +8076,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_fleet_environment_variables
+        """Get fleet environment variables
 
-        Get environment variables of a fleet
+        Get the environment variables set on a fleet, with their notes. They override project variables, and device variables override them.  Returns 404 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -7958,9 +8193,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceFleets200Response:
-        """get_fleets
+        """List fleets
 
-        Get Project Fleets
+        List the project's fleets with each one's label, smart rule, watchdog and environment variables. Doesn't include `smart_rule_enabled`. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8022,9 +8257,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceFleets200Response]:
-        """get_fleets
+        """List fleets
 
-        Get Project Fleets
+        List the project's fleets with each one's label, smart rule, watchdog and environment variables. Doesn't include `smart_rule_enabled`. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8086,9 +8321,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_fleets
+        """List fleets
 
-        Get Project Fleets
+        List the project's fleets with each one's label, smart rule, watchdog and environment variables. Doesn't include `smart_rule_enabled`. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8197,8 +8432,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[NotefileSchema]:
-        """Get variable format for a notefile
+        """List Notefile schemas
 
+        List the project's Notefiles, each with the event `body` fields Notehub has seen in it and their JSON types. Inferred from received events.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8260,8 +8496,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[NotefileSchema]]:
-        """Get variable format for a notefile
+        """List Notefile schemas
 
+        List the project's Notefiles, each with the event `body` fields Notehub has seen in it and their JSON types. Inferred from received events.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8323,8 +8560,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get variable format for a notefile
+        """List Notefile schemas
 
+        List the project's Notefiles, each with the event `body` fields Notehub has seen in it and their JSON types. Inferred from received events.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8433,9 +8671,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetProducts200Response:
-        """get_products
+        """List a project's products
 
-        Get Products within a Project
+        List the project's ProductUIDs, each with its label, auto-provision fleets, and whether new devices start disabled. UIDs here include the `product:` prefix; `CreateProduct` returns them without it. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8497,9 +8735,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetProducts200Response]:
-        """get_products
+        """List a project's products
 
-        Get Products within a Project
+        List the project's ProductUIDs, each with its label, auto-provision fleets, and whether new devices start disabled. UIDs here include the `product:` prefix; `CreateProduct` returns them without it. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8561,9 +8799,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_products
+        """List a project's products
 
-        Get Products within a Project
+        List the project's ProductUIDs, each with its label, auto-provision fleets, and whether new devices start disabled. UIDs here include the `product:` prefix; `CreateProduct` returns them without it. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8672,9 +8910,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Project:
-        """get_project
+        """Get a project
 
-        Get a Project by ProjectUID
+        Get a project's label, creation time, contacts, and the caller's `role` in it. Accepts a ProductUID in place of the ProjectUID.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8736,9 +8974,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Project]:
-        """get_project
+        """Get a project
 
-        Get a Project by ProjectUID
+        Get a project's label, creation time, contacts, and the caller's `role` in it. Accepts a ProductUID in place of the ProjectUID.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8800,9 +9038,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_project
+        """Get a project
 
-        Get a Project by ProjectUID
+        Get a project's label, creation time, contacts, and the caller's `role` in it. Accepts a ProductUID in place of the ProjectUID.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -8898,7 +9136,12 @@ class ProjectApi:
     @validate_call
     def get_project_by_product(
         self,
-        product_uid: StrictStr,
+        product_uid: Annotated[
+            StrictStr,
+            Field(
+                description="ProductUID, e.g. `com.blues.airnote`, with or without the `product:` prefix."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8911,11 +9154,11 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Project:
-        """get_project_by_product
+        """Get the project for a ProductUID
 
-        Get a Project by ProductUID
+        Get the project that a ProductUID belongs to. Returns the same object as `GetProject`, which also accepts a ProductUID in place of a ProjectUID.
 
-        :param product_uid: (required)
+        :param product_uid: ProductUID, e.g. `com.blues.airnote`, with or without the `product:` prefix. (required)
         :type product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8962,7 +9205,12 @@ class ProjectApi:
     @validate_call
     def get_project_by_product_with_http_info(
         self,
-        product_uid: StrictStr,
+        product_uid: Annotated[
+            StrictStr,
+            Field(
+                description="ProductUID, e.g. `com.blues.airnote`, with or without the `product:` prefix."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8975,11 +9223,11 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Project]:
-        """get_project_by_product
+        """Get the project for a ProductUID
 
-        Get a Project by ProductUID
+        Get the project that a ProductUID belongs to. Returns the same object as `GetProject`, which also accepts a ProductUID in place of a ProjectUID.
 
-        :param product_uid: (required)
+        :param product_uid: ProductUID, e.g. `com.blues.airnote`, with or without the `product:` prefix. (required)
         :type product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9026,7 +9274,12 @@ class ProjectApi:
     @validate_call
     def get_project_by_product_without_preload_content(
         self,
-        product_uid: StrictStr,
+        product_uid: Annotated[
+            StrictStr,
+            Field(
+                description="ProductUID, e.g. `com.blues.airnote`, with or without the `product:` prefix."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9039,11 +9292,11 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_project_by_product
+        """Get the project for a ProductUID
 
-        Get a Project by ProductUID
+        Get the project that a ProductUID belongs to. Returns the same object as `GetProject`, which also accepts a ProductUID in place of a ProjectUID.
 
-        :param product_uid: (required)
+        :param product_uid: ProductUID, e.g. `com.blues.airnote`, with or without the `product:` prefix. (required)
         :type product_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9150,8 +9403,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvTreeJsonNode:
-        """Get environment variable hierarchy for a device
+        """Get the project environment hierarchy
 
+        Get the project's environment variables as a one-node environment hierarchy tree. The fleet and device hierarchy operations use the same format; for plain key/value pairs, use `GetProjectEnvironmentVariables`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9215,8 +9469,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvTreeJsonNode]:
-        """Get environment variable hierarchy for a device
+        """Get the project environment hierarchy
 
+        Get the project's environment variables as a one-node environment hierarchy tree. The fleet and device hierarchy operations use the same format; for plain key/value pairs, use `GetProjectEnvironmentVariables`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9280,8 +9535,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get environment variable hierarchy for a device
+        """Get the project environment hierarchy
 
+        Get the project's environment variables as a one-node environment hierarchy tree. The fleet and device hierarchy operations use the same format; for plain key/value pairs, use `GetProjectEnvironmentVariables`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9392,9 +9648,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvironmentVariables:
-        """get_project_environment_variables
+        """Get project environment variables
 
-        Get environment variables of a project
+        Get the environment variables set on the project, with their notes. Fleet and device variables override these; for what a device actually sees, use `GetDeviceEnvironmentVariables`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9456,9 +9712,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvironmentVariables]:
-        """get_project_environment_variables
+        """Get project environment variables
 
-        Get environment variables of a project
+        Get the environment variables set on the project, with their notes. Fleet and device variables override these; for what a device actually sees, use `GetDeviceEnvironmentVariables`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9520,9 +9776,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_project_environment_variables
+        """Get project environment variables
 
-        Get environment variables of a project
+        Get the environment variables set on the project, with their notes. Fleet and device variables override these; for what a device actually sees, use `GetDeviceEnvironmentVariables`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9631,9 +9887,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetProjectMembers200Response:
-        """get_project_members
+        """List project members
 
-        Get Project Members
+        List the project's members with each one's name and role. Emails are filled in only when the caller is an Owner. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9695,9 +9951,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetProjectMembers200Response]:
-        """get_project_members
+        """List project members
 
-        Get Project Members
+        List the project's members with each one's name and role. Emails are filled in only when the caller is an Owner. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9759,9 +10015,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_project_members
+        """List project members
 
-        Get Project Members
+        List the project's members with each one's name and role. Emails are filled in only when the caller is an Owner. Not paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9870,9 +10126,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetProjectSecretsResponse:
-        """get_project_secrets
+        """List project secrets
 
-        Get all secrets for a project (metadata only, values are never returned)
+        List the project's secrets by name, with who created and last changed each one and when. Values are never returned.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9934,9 +10190,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetProjectSecretsResponse]:
-        """get_project_secrets
+        """List project secrets
 
-        Get all secrets for a project (metadata only, values are never returned)
+        List the project's secrets by name, with who created and last changed each one and when. Values are never returned.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -9998,9 +10254,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_project_secrets
+        """List project secrets
 
-        Get all secrets for a project (metadata only, values are never returned)
+        List the project's secrets by name, with who created and last changed each one and when. Values are never returned.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -10108,9 +10364,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetProjects200Response:
-        """get_projects
+        """List projects
 
-        Get Projects accessible by the api_key
+        List every project the caller is a member of, with the caller's `role` in each. Not paginated.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10168,9 +10424,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetProjects200Response]:
-        """get_projects
+        """List projects
 
-        Get Projects accessible by the api_key
+        List every project the caller is a member of, with the caller's `role` in each. Not paginated.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10228,9 +10484,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_projects
+        """List projects
 
-        Get Projects accessible by the api_key
+        List every project the caller is a member of, with the caller's `role` in each. Not paginated.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10321,10 +10577,20 @@ class ProjectApi:
     def perform_dfu_action(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        action: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        action: Annotated[
+            StrictStr,
+            Field(
+                description="- `update`: start updating to the firmware in `filename` - `cancel`: cancel any update in progress "
+            ),
+        ],
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -10360,7 +10626,7 @@ class ProjectApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -10385,17 +10651,17 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """perform_dfu_action
+        """Start or cancel firmware updates
 
-        Update/cancel host or notecard firmware updates
+        Start or cancel a host or Notecard firmware update on every device matching the filters. With no filters, that is every device in the project. `update` sets each device's `_fw` or `_fwc` variable to `filename`.  Requires the Owner or Developer role. `update` returns 404 if the file isn't found, and can return 400 if a matching device already has an update in progress.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
-        :param action: (required)
+        :param action: - `update`: start updating to the firmware in `filename` - `cancel`: cancel any update in progress  (required)
         :type action: str
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -10409,7 +10675,7 @@ class ProjectApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -10473,10 +10739,20 @@ class ProjectApi:
     def perform_dfu_action_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        action: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        action: Annotated[
+            StrictStr,
+            Field(
+                description="- `update`: start updating to the firmware in `filename` - `cancel`: cancel any update in progress "
+            ),
+        ],
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -10512,7 +10788,7 @@ class ProjectApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -10537,17 +10813,17 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """perform_dfu_action
+        """Start or cancel firmware updates
 
-        Update/cancel host or notecard firmware updates
+        Start or cancel a host or Notecard firmware update on every device matching the filters. With no filters, that is every device in the project. `update` sets each device's `_fw` or `_fwc` variable to `filename`.  Requires the Owner or Developer role. `update` returns 404 if the file isn't found, and can return 400 if a matching device already has an update in progress.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
-        :param action: (required)
+        :param action: - `update`: start updating to the firmware in `filename` - `cancel`: cancel any update in progress  (required)
         :type action: str
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -10561,7 +10837,7 @@ class ProjectApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -10625,10 +10901,20 @@ class ProjectApi:
     def perform_dfu_action_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        action: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        action: Annotated[
+            StrictStr,
+            Field(
+                description="- `update`: start updating to the firmware in `filename` - `cancel`: cancel any update in progress "
+            ),
+        ],
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -10664,7 +10950,7 @@ class ProjectApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -10689,17 +10975,17 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """perform_dfu_action
+        """Start or cancel firmware updates
 
-        Update/cancel host or notecard firmware updates
+        Start or cancel a host or Notecard firmware update on every device matching the filters. With no filters, that is every device in the project. `update` sets each device's `_fw` or `_fwc` variable to `filename`.  Requires the Owner or Developer role. `update` returns 404 if the file isn't found, and can return 400 if a matching device already has an update in progress.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
-        :param action: (required)
+        :param action: - `update`: start updating to the firmware in `filename` - `cancel`: cancel any update in progress  (required)
         :type action: str
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -10713,7 +10999,7 @@ class ProjectApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -10900,7 +11186,7 @@ class ProjectApi:
         fleet_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
-            Field(description="Environment variables to be added to the fleet"),
+            Field(description="The variables to add or change, and optional notes."),
         ],
         _request_timeout: Union[
             None,
@@ -10914,15 +11200,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvironmentVariables:
-        """set_fleet_environment_variables
+        """Set fleet environment variables
 
-        Set environment variables of a fleet
+        Add or change a fleet's environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 404 if the fleet doesn't exist, and 400 if a note's key isn't a variable.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
-        :param environment_variables: Environment variables to be added to the fleet (required)
+        :param environment_variables: The variables to add or change, and optional notes. (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -10975,7 +11261,7 @@ class ProjectApi:
         fleet_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
-            Field(description="Environment variables to be added to the fleet"),
+            Field(description="The variables to add or change, and optional notes."),
         ],
         _request_timeout: Union[
             None,
@@ -10989,15 +11275,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvironmentVariables]:
-        """set_fleet_environment_variables
+        """Set fleet environment variables
 
-        Set environment variables of a fleet
+        Add or change a fleet's environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 404 if the fleet doesn't exist, and 400 if a note's key isn't a variable.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
-        :param environment_variables: Environment variables to be added to the fleet (required)
+        :param environment_variables: The variables to add or change, and optional notes. (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11050,7 +11336,7 @@ class ProjectApi:
         fleet_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
-            Field(description="Environment variables to be added to the fleet"),
+            Field(description="The variables to add or change, and optional notes."),
         ],
         _request_timeout: Union[
             None,
@@ -11064,15 +11350,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_fleet_environment_variables
+        """Set fleet environment variables
 
-        Set environment variables of a fleet
+        Add or change a fleet's environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 404 if the fleet doesn't exist, and 400 if a note's key isn't a variable.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
-        :param environment_variables: Environment variables to be added to the fleet (required)
+        :param environment_variables: The variables to add or change, and optional notes. (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11188,7 +11474,7 @@ class ProjectApi:
         body: Annotated[
             StrictStr,
             Field(
-                description="JSONata expression which will be applied to each event before it is persisted and routed"
+                description="JSONata expression as plain text. An empty body clears the transformation."
             ),
         ],
         _request_timeout: Union[
@@ -11203,13 +11489,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """set_global_event_transformation
+        """Set the global event transformation
 
-        Set the project-level event JSONata transformation
+        Set the project's JSONata expression that rewrites each new event before it's stored and routed. It can change `body`, `payload`, `details`, `file` and `note`, or drop the event with `$doNotRoute()`; an event it fails on is kept with `error` set. Doesn't enable or disable it.  Requires the Owner or Developer role. Returns 400 if it doesn't compile, or for a sub-project, which uses its parent's.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param body: JSONata expression which will be applied to each event before it is persisted and routed (required)
+        :param body: JSONata expression as plain text. An empty body clears the transformation. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11261,7 +11547,7 @@ class ProjectApi:
         body: Annotated[
             StrictStr,
             Field(
-                description="JSONata expression which will be applied to each event before it is persisted and routed"
+                description="JSONata expression as plain text. An empty body clears the transformation."
             ),
         ],
         _request_timeout: Union[
@@ -11276,13 +11562,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """set_global_event_transformation
+        """Set the global event transformation
 
-        Set the project-level event JSONata transformation
+        Set the project's JSONata expression that rewrites each new event before it's stored and routed. It can change `body`, `payload`, `details`, `file` and `note`, or drop the event with `$doNotRoute()`; an event it fails on is kept with `error` set. Doesn't enable or disable it.  Requires the Owner or Developer role. Returns 400 if it doesn't compile, or for a sub-project, which uses its parent's.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param body: JSONata expression which will be applied to each event before it is persisted and routed (required)
+        :param body: JSONata expression as plain text. An empty body clears the transformation. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11334,7 +11620,7 @@ class ProjectApi:
         body: Annotated[
             StrictStr,
             Field(
-                description="JSONata expression which will be applied to each event before it is persisted and routed"
+                description="JSONata expression as plain text. An empty body clears the transformation."
             ),
         ],
         _request_timeout: Union[
@@ -11349,13 +11635,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_global_event_transformation
+        """Set the global event transformation
 
-        Set the project-level event JSONata transformation
+        Set the project's JSONata expression that rewrites each new event before it's stored and routed. It can change `body`, `payload`, `details`, `file` and `note`, or drop the event with `$doNotRoute()`; an event it fails on is kept with `error` set. Doesn't enable or disable it.  Requires the Owner or Developer role. Returns 400 if it doesn't compile, or for a sub-project, which uses its parent's.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param body: JSONata expression which will be applied to each event before it is persisted and routed (required)
+        :param body: JSONata expression as plain text. An empty body clears the transformation. (required)
         :type body: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -11477,9 +11763,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvironmentVariables:
-        """set_project_environment_variables
+        """Set project environment variables
 
-        Set environment variables of a project
+        Add or change project environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -11545,9 +11831,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvironmentVariables]:
-        """set_project_environment_variables
+        """Set project environment variables
 
-        Set environment variables of a project
+        Add or change project environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -11613,9 +11899,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_project_environment_variables
+        """Set project environment variables
 
-        Set environment variables of a project
+        Add or change project environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -11748,9 +12034,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FirmwareInfo:
-        """update_firmware
+        """Update host firmware metadata
 
-        Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+        Change a host firmware file's `version`, `notes` or `info`; fields you leave out or send empty keep their values. Use the stored filename, including its `$` timestamp suffix.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent manages host firmware, and 404 if the file doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -11829,9 +12115,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FirmwareInfo]:
-        """update_firmware
+        """Update host firmware metadata
 
-        Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+        Change a host firmware file's `version`, `notes` or `info`; fields you leave out or send empty keep their values. Use the stored filename, including its `$` timestamp suffix.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent manages host firmware, and 404 if the file doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -11910,9 +12196,9 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_firmware
+        """Update host firmware metadata
 
-        Update the metadata of an existing host firmware entry. The filename must be the full stored filename including the timestamp suffix (e.g. test$20260324190911.bin) as returned by the firmware upload or list endpoints.
+        Change a host firmware file's `version`, `notes` or `info`; fields you leave out or send empty keep their values. Use the stored filename, including its `$` timestamp suffix.  Requires the Owner or Developer role. Returns 400 for a sub-project, whose parent manages host firmware, and 404 if the file doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -12039,7 +12325,10 @@ class ProjectApi:
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         update_fleet_request: Annotated[
-            UpdateFleetRequest, Field(description="Fleet details to update")
+            UpdateFleetRequest,
+            Field(
+                description="The fields to change. Fields left out keep their values, except `smart_rule_enabled`."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -12053,15 +12342,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Fleet:
-        """update_fleet
+        """Update a fleet
 
-        Update Fleet
+        Change a fleet's label, smart rule, watchdog or connectivity assurance, or add and remove devices. Always send `smart_rule_enabled`; leaving it out turns the smart rule off. Empty `label` or `smart_rule` keeps the current value; `-` clears `smart_rule`.  Requires the Owner or Developer role. Returns 400 for an unknown fleet or `label` of `-`, and for a bad DeviceUID after saving the other changes.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
-        :param update_fleet_request: Fleet details to update (required)
+        :param update_fleet_request: The fields to change. Fields left out keep their values, except `smart_rule_enabled`. (required)
         :type update_fleet_request: UpdateFleetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -12113,7 +12402,10 @@ class ProjectApi:
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         update_fleet_request: Annotated[
-            UpdateFleetRequest, Field(description="Fleet details to update")
+            UpdateFleetRequest,
+            Field(
+                description="The fields to change. Fields left out keep their values, except `smart_rule_enabled`."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -12127,15 +12419,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Fleet]:
-        """update_fleet
+        """Update a fleet
 
-        Update Fleet
+        Change a fleet's label, smart rule, watchdog or connectivity assurance, or add and remove devices. Always send `smart_rule_enabled`; leaving it out turns the smart rule off. Empty `label` or `smart_rule` keeps the current value; `-` clears `smart_rule`.  Requires the Owner or Developer role. Returns 400 for an unknown fleet or `label` of `-`, and for a bad DeviceUID after saving the other changes.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
-        :param update_fleet_request: Fleet details to update (required)
+        :param update_fleet_request: The fields to change. Fields left out keep their values, except `smart_rule_enabled`. (required)
         :type update_fleet_request: UpdateFleetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -12187,7 +12479,10 @@ class ProjectApi:
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
         update_fleet_request: Annotated[
-            UpdateFleetRequest, Field(description="Fleet details to update")
+            UpdateFleetRequest,
+            Field(
+                description="The fields to change. Fields left out keep their values, except `smart_rule_enabled`."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -12201,15 +12496,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_fleet
+        """Update a fleet
 
-        Update Fleet
+        Change a fleet's label, smart rule, watchdog or connectivity assurance, or add and remove devices. Always send `smart_rule_enabled`; leaving it out turns the smart rule off. Empty `label` or `smart_rule` keeps the current value; `-` clears `smart_rule`.  Requires the Owner or Developer role. Returns 400 for an unknown fleet or `label` of `-`, and for a bad DeviceUID after saving the other changes.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param fleet_uid: (required)
         :type fleet_uid: str
-        :param update_fleet_request: Fleet details to update (required)
+        :param update_fleet_request: The fields to change. Fields left out keep their values, except `smart_rule_enabled`. (required)
         :type update_fleet_request: UpdateFleetRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -12322,7 +12617,10 @@ class ProjectApi:
     def update_project_secret(
         self,
         project_or_product_uid: StrictStr,
-        secret_name: Annotated[StrictStr, Field(description="The name of the secret.")],
+        secret_name: Annotated[
+            StrictStr,
+            Field(description="Name of the secret, as listed by `GetProjectSecrets`."),
+        ],
         update_project_secret_request: UpdateProjectSecretRequest,
         _request_timeout: Union[
             None,
@@ -12336,13 +12634,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ProjectSecret:
-        """update_project_secret
+        """Update a project secret
 
-        Update the value of an existing project secret
+        Replace the value of an existing project secret. Routes and alerts that reference it use the new value from then on.  Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param secret_name: The name of the secret. (required)
+        :param secret_name: Name of the secret, as listed by `GetProjectSecrets`. (required)
         :type secret_name: str
         :param update_project_secret_request: (required)
         :type update_project_secret_request: UpdateProjectSecretRequest
@@ -12395,7 +12693,10 @@ class ProjectApi:
     def update_project_secret_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        secret_name: Annotated[StrictStr, Field(description="The name of the secret.")],
+        secret_name: Annotated[
+            StrictStr,
+            Field(description="Name of the secret, as listed by `GetProjectSecrets`."),
+        ],
         update_project_secret_request: UpdateProjectSecretRequest,
         _request_timeout: Union[
             None,
@@ -12409,13 +12710,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ProjectSecret]:
-        """update_project_secret
+        """Update a project secret
 
-        Update the value of an existing project secret
+        Replace the value of an existing project secret. Routes and alerts that reference it use the new value from then on.  Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param secret_name: The name of the secret. (required)
+        :param secret_name: Name of the secret, as listed by `GetProjectSecrets`. (required)
         :type secret_name: str
         :param update_project_secret_request: (required)
         :type update_project_secret_request: UpdateProjectSecretRequest
@@ -12468,7 +12769,10 @@ class ProjectApi:
     def update_project_secret_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        secret_name: Annotated[StrictStr, Field(description="The name of the secret.")],
+        secret_name: Annotated[
+            StrictStr,
+            Field(description="Name of the secret, as listed by `GetProjectSecrets`."),
+        ],
         update_project_secret_request: UpdateProjectSecretRequest,
         _request_timeout: Union[
             None,
@@ -12482,13 +12786,13 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_project_secret
+        """Update a project secret
 
-        Update the value of an existing project secret
+        Replace the value of an existing project secret. Routes and alerts that reference it use the new value from then on.  Requires the Owner or Developer role. Returns 404 if the secret doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param secret_name: The name of the secret. (required)
+        :param secret_name: Name of the secret, as listed by `GetProjectSecrets`. (required)
         :type secret_name: str
         :param update_project_secret_request: (required)
         :type update_project_secret_request: UpdateProjectSecretRequest
@@ -12604,8 +12908,18 @@ class ProjectApi:
     def upload_firmware(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        filename: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        filename: Annotated[
+            StrictStr,
+            Field(
+                description="Name to store the file under. Notehub adds `$` and a timestamp before the extension, except for a Notecard firmware name that already contains `$`."
+            ),
+        ],
         body: Annotated[
             Union[StrictBytes, StrictStr],
             Field(description="contents of the firmware binary"),
@@ -12634,15 +12948,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> FirmwareInfo:
-        """upload_firmware
+        """Upload firmware
 
-        Upload firmware binary
+        Upload a host or Notecard firmware binary. Notehub usually adds a timestamp to `filename`; use the returned `filename` from then on.  Requires the Owner or Developer role. Returns 400 for host firmware on a sub-project, whose parent manages it, and 500 for a wrong file type or a file over the limit: 1.5 MB for host firmware, 2 MB for `notecard-s3-*` and 1 MB for other Notecard firmware.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
-        :param filename: (required)
+        :param filename: Name to store the file under. Notehub adds `$` and a timestamp before the extension, except for a Notecard firmware name that already contains `$`. (required)
         :type filename: str
         :param body: contents of the firmware binary (required)
         :type body: bytearray
@@ -12701,8 +13015,18 @@ class ProjectApi:
     def upload_firmware_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        filename: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        filename: Annotated[
+            StrictStr,
+            Field(
+                description="Name to store the file under. Notehub adds `$` and a timestamp before the extension, except for a Notecard firmware name that already contains `$`."
+            ),
+        ],
         body: Annotated[
             Union[StrictBytes, StrictStr],
             Field(description="contents of the firmware binary"),
@@ -12731,15 +13055,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[FirmwareInfo]:
-        """upload_firmware
+        """Upload firmware
 
-        Upload firmware binary
+        Upload a host or Notecard firmware binary. Notehub usually adds a timestamp to `filename`; use the returned `filename` from then on.  Requires the Owner or Developer role. Returns 400 for host firmware on a sub-project, whose parent manages it, and 500 for a wrong file type or a file over the limit: 1.5 MB for host firmware, 2 MB for `notecard-s3-*` and 1 MB for other Notecard firmware.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
-        :param filename: (required)
+        :param filename: Name to store the file under. Notehub adds `$` and a timestamp before the extension, except for a Notecard firmware name that already contains `$`. (required)
         :type filename: str
         :param body: contents of the firmware binary (required)
         :type body: bytearray
@@ -12798,8 +13122,18 @@ class ProjectApi:
     def upload_firmware_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        firmware_type: StrictStr,
-        filename: StrictStr,
+        firmware_type: Annotated[
+            StrictStr,
+            Field(
+                description="Which firmware: `host` (the host microcontroller's) or `notecard`."
+            ),
+        ],
+        filename: Annotated[
+            StrictStr,
+            Field(
+                description="Name to store the file under. Notehub adds `$` and a timestamp before the extension, except for a Notecard firmware name that already contains `$`."
+            ),
+        ],
         body: Annotated[
             Union[StrictBytes, StrictStr],
             Field(description="contents of the firmware binary"),
@@ -12828,15 +13162,15 @@ class ProjectApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """upload_firmware
+        """Upload firmware
 
-        Upload firmware binary
+        Upload a host or Notecard firmware binary. Notehub usually adds a timestamp to `filename`; use the returned `filename` from then on.  Requires the Owner or Developer role. Returns 400 for host firmware on a sub-project, whose parent manages it, and 500 for a wrong file type or a file over the limit: 1.5 MB for host firmware, 2 MB for `notecard-s3-*` and 1 MB for other Notecard firmware.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param firmware_type: (required)
+        :param firmware_type: Which firmware: `host` (the host microcontroller's) or `notecard`. (required)
         :type firmware_type: str
-        :param filename: (required)
+        :param filename: Name to store the file under. Notehub adds `$` and a timestamp before the extension, except for a Notecard firmware name that already contains `$`. (required)
         :type filename: str
         :param body: contents of the firmware binary (required)
         :type body: bytearray

@@ -2,23 +2,25 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                          | HTTP request                                                             | Description |
-| ----------------------------------------------- | ------------------------------------------------------------------------ | ----------- |
-| [**cancel_job_run**](JobsApi.md#cancel_job_run) | **POST** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}/cancel |
-| [**create_job**](JobsApi.md#create_job)         | **POST** /v1/projects/{projectOrProductUID}/jobs                         |
-| [**delete_job**](JobsApi.md#delete_job)         | **DELETE** /v1/projects/{projectOrProductUID}/jobs/{jobUID}              |
-| [**delete_job_run**](JobsApi.md#delete_job_run) | **DELETE** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}      |
-| [**get_job**](JobsApi.md#get_job)               | **GET** /v1/projects/{projectOrProductUID}/jobs/{jobUID}                 |
-| [**get_job_run**](JobsApi.md#get_job_run)       | **GET** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}         |
-| [**get_job_runs**](JobsApi.md#get_job_runs)     | **GET** /v1/projects/{projectOrProductUID}/jobs/{jobUID}/runs            |
-| [**get_jobs**](JobsApi.md#get_jobs)             | **GET** /v1/projects/{projectOrProductUID}/jobs                          |
-| [**run_job**](JobsApi.md#run_job)               | **POST** /v1/projects/{projectOrProductUID}/jobs/{jobUID}/run            |
+| Method                                          | HTTP request                                                             | Description           |
+| ----------------------------------------------- | ------------------------------------------------------------------------ | --------------------- |
+| [**cancel_job_run**](JobsApi.md#cancel_job_run) | **POST** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}/cancel | Cancel a job run      |
+| [**create_job**](JobsApi.md#create_job)         | **POST** /v1/projects/{projectOrProductUID}/jobs                         | Create a batch job    |
+| [**delete_job**](JobsApi.md#delete_job)         | **DELETE** /v1/projects/{projectOrProductUID}/jobs/{jobUID}              | Delete a batch job    |
+| [**delete_job_run**](JobsApi.md#delete_job_run) | **DELETE** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}      | Delete a job run      |
+| [**get_job**](JobsApi.md#get_job)               | **GET** /v1/projects/{projectOrProductUID}/jobs/{jobUID}                 | Get a batch job       |
+| [**get_job_run**](JobsApi.md#get_job_run)       | **GET** /v1/projects/{projectOrProductUID}/jobs/runs/{reportUID}         | Get a job run         |
+| [**get_job_runs**](JobsApi.md#get_job_runs)     | **GET** /v1/projects/{projectOrProductUID}/jobs/{jobUID}/runs            | List a job&#39;s runs |
+| [**get_jobs**](JobsApi.md#get_jobs)             | **GET** /v1/projects/{projectOrProductUID}/jobs                          | List batch jobs       |
+| [**run_job**](JobsApi.md#run_job)               | **POST** /v1/projects/{projectOrProductUID}/jobs/{jobUID}/run            | Run a batch job       |
 
 ## cancel_job_run
 
 > CancelJobRun200Response cancel_job_run(project_or_product_uid, report_uid)
 
-Cancel a running job execution
+Cancel a job run
+
+Ask a running job to stop. `successful` is false if the run couldn't be cancelled. Requires the Owner or Developer role. Returns 404 if the run doesn't exist.
 
 ### Example
 
@@ -35,9 +37,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    report_uid = "my-reconciliation-job-1707654321000"  # str | Unique identifier for a job run report
+    report_uid = "my-reconciliation-job-1707654321000"  # str | Job run UID, as returned by `RunJob`.
 
     try:
+        # Cancel a job run
         api_response = api_instance.cancel_job_run(project_or_product_uid, report_uid)
         print("The response of JobsApi->cancel_job_run:\n")
         pprint(api_response)
@@ -47,10 +50,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description                            | Notes |
-| -------------------------- | ------- | -------------------------------------- | ----- |
-| **project_or_product_uid** | **str** |                                        |
-| **report_uid**             | **str** | Unique identifier for a job run report |
+| Name                       | Type    | Description                                     | Notes |
+| -------------------------- | ------- | ----------------------------------------------- | ----- |
+| **project_or_product_uid** | **str** |                                                 |
+| **report_uid**             | **str** | Job run UID, as returned by &#x60;RunJob&#x60;. |
 
 ### Return type
 
@@ -69,7 +72,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > CreateJob201Response create_job(project_or_product_uid, name, job_definition)
 
-Create a new batch job with an optional name
+Create a batch job
+
+Create a batch job from a definition that selects devices and the changes to make to them. It doesn't run until `RunJob`. Each call creates a new job with its own UID; names needn't be unique. Requires the Owner or Developer role. Returns 400 without a `name`; an invalid definition returns 500.
 
 ### Example
 
@@ -87,12 +92,15 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    name = "name_example"  # str | Name for the job
+    name = (
+        "name_example"  # str | Job name, shown in lists. It doesn't have to be unique.
+    )
     job_definition = (
         notehub_py.JobDefinition()
     )  # JobDefinition | The batch job definition
 
     try:
+        # Create a batch job
         api_response = api_instance.create_job(
             project_or_product_uid, name, job_definition
         )
@@ -104,11 +112,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                                  | Description              | Notes |
-| -------------------------- | ------------------------------------- | ------------------------ | ----- |
-| **project_or_product_uid** | **str**                               |                          |
-| **name**                   | **str**                               | Name for the job         |
-| **job_definition**         | [**JobDefinition**](JobDefinition.md) | The batch job definition |
+| Name                       | Type                                  | Description                                                 | Notes |
+| -------------------------- | ------------------------------------- | ----------------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**                               |                                                             |
+| **name**                   | **str**                               | Job name, shown in lists. It doesn&#39;t have to be unique. |
+| **job_definition**         | [**JobDefinition**](JobDefinition.md) | The batch job definition                                    |
 
 ### Return type
 
@@ -129,6 +137,8 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 Delete a batch job
 
+Delete a batch job. Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
+
 ### Example
 
 ```python
@@ -144,9 +154,12 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    job_uid = "my-reconciliation-job"  # str | Unique identifier for a batch job
+    job_uid = (
+        "my-reconciliation-job"  # str | Batch job UID, as returned by `CreateJob`.
+    )
 
     try:
+        # Delete a batch job
         api_response = api_instance.delete_job(project_or_product_uid, job_uid)
         print("The response of JobsApi->delete_job:\n")
         pprint(api_response)
@@ -156,10 +169,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description                       | Notes |
-| -------------------------- | ------- | --------------------------------- | ----- |
-| **project_or_product_uid** | **str** |                                   |
-| **job_uid**                | **str** | Unique identifier for a batch job |
+| Name                       | Type    | Description                                          | Notes |
+| -------------------------- | ------- | ---------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str** |                                                      |
+| **job_uid**                | **str** | Batch job UID, as returned by &#x60;CreateJob&#x60;. |
 
 ### Return type
 
@@ -178,7 +191,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > delete_job_run(project_or_product_uid, report_uid)
 
-Delete the results of a job run
+Delete a job run
+
+Delete a job run and its results. Deleting a run that doesn't exist also succeeds. Requires the Owner or Developer role.
 
 ### Example
 
@@ -194,9 +209,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    report_uid = "my-reconciliation-job-1707654321000"  # str | Unique identifier for a job run report
+    report_uid = "my-reconciliation-job-1707654321000"  # str | Job run UID, as returned by `RunJob`.
 
     try:
+        # Delete a job run
         api_instance.delete_job_run(project_or_product_uid, report_uid)
     except Exception as e:
         print("Exception when calling JobsApi->delete_job_run: %s\n" % e)
@@ -204,10 +220,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description                            | Notes |
-| -------------------------- | ------- | -------------------------------------- | ----- |
-| **project_or_product_uid** | **str** |                                        |
-| **report_uid**             | **str** | Unique identifier for a job run report |
+| Name                       | Type    | Description                                     | Notes |
+| -------------------------- | ------- | ----------------------------------------------- | ----- |
+| **project_or_product_uid** | **str** |                                                 |
+| **report_uid**             | **str** | Job run UID, as returned by &#x60;RunJob&#x60;. |
 
 ### Return type
 
@@ -226,7 +242,9 @@ void (empty response body)
 
 > JobDetail get_job(project_or_product_uid, job_uid)
 
-Get a specific batch job definition
+Get a batch job
+
+Get one batch job's definition and its latest run's status. Returns 404 if the job doesn't exist.
 
 ### Example
 
@@ -243,9 +261,12 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    job_uid = "my-reconciliation-job"  # str | Unique identifier for a batch job
+    job_uid = (
+        "my-reconciliation-job"  # str | Batch job UID, as returned by `CreateJob`.
+    )
 
     try:
+        # Get a batch job
         api_response = api_instance.get_job(project_or_product_uid, job_uid)
         print("The response of JobsApi->get_job:\n")
         pprint(api_response)
@@ -255,10 +276,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description                       | Notes |
-| -------------------------- | ------- | --------------------------------- | ----- |
-| **project_or_product_uid** | **str** |                                   |
-| **job_uid**                | **str** | Unique identifier for a batch job |
+| Name                       | Type    | Description                                          | Notes |
+| -------------------------- | ------- | ---------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str** |                                                      |
+| **job_uid**                | **str** | Batch job UID, as returned by &#x60;CreateJob&#x60;. |
 
 ### Return type
 
@@ -277,7 +298,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > JobRun get_job_run(project_or_product_uid, report_uid, view=view)
 
-Get the result of a job execution
+Get a job run
+
+Get a job run's status and, with `view=detail`, its full results. Returns 404 if the run doesn't exist.
 
 ### Example
 
@@ -294,10 +317,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    report_uid = "my-reconciliation-job-1707654321000"  # str | Unique identifier for a job run report
+    report_uid = "my-reconciliation-job-1707654321000"  # str | Job run UID, as returned by `RunJob`.
     view = "summary"  # str | Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload (optional) (default to 'summary')
 
     try:
+        # Get a job run
         api_response = api_instance.get_job_run(
             project_or_product_uid, report_uid, view=view
         )
@@ -312,7 +336,7 @@ with notehub_py.ApiClient(configuration) as api_client:
 | Name                       | Type    | Description                                                                                                                      | Notes                                     |
 | -------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
 | **project_or_product_uid** | **str** |                                                                                                                                  |
-| **report_uid**             | **str** | Unique identifier for a job run report                                                                                           |
+| **report_uid**             | **str** | Job run UID, as returned by &#x60;RunJob&#x60;.                                                                                  |
 | **view**                   | **str** | Controls the level of detail returned: &#39;summary&#39; returns metadata only, &#39;detail&#39; returns the full result payload | [optional] [default to &#39;summary&#39;] |
 
 ### Return type
@@ -332,7 +356,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > GetJobRuns200Response get_job_runs(project_or_product_uid, job_uid, status=status, dry_run=dry_run)
 
-List all runs for a specific job
+List a job's runs
+
+List a batch job's runs, optionally filtered by status or dry-run flag. Returns 404 if the job doesn't exist.
 
 ### Example
 
@@ -349,11 +375,14 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    job_uid = "my-reconciliation-job"  # str | Unique identifier for a batch job
-    status = "status_example"  # str | Filter runs by status (optional)
-    dry_run = True  # bool | Filter runs by dry run flag (optional)
+    job_uid = (
+        "my-reconciliation-job"  # str | Batch job UID, as returned by `CreateJob`.
+    )
+    status = "status_example"  # str | Return only runs with this status. (optional)
+    dry_run = True  # bool | If set, return only dry runs (`true`) or only real runs (`false`). (optional)
 
     try:
+        # List a job's runs
         api_response = api_instance.get_job_runs(
             project_or_product_uid, job_uid, status=status, dry_run=dry_run
         )
@@ -365,12 +394,12 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type     | Description                       | Notes      |
-| -------------------------- | -------- | --------------------------------- | ---------- |
-| **project_or_product_uid** | **str**  |                                   |
-| **job_uid**                | **str**  | Unique identifier for a batch job |
-| **status**                 | **str**  | Filter runs by status             | [optional] |
-| **dry_run**                | **bool** | Filter runs by dry run flag       | [optional] |
+| Name                       | Type     | Description                                                                            | Notes      |
+| -------------------------- | -------- | -------------------------------------------------------------------------------------- | ---------- |
+| **project_or_product_uid** | **str**  |                                                                                        |
+| **job_uid**                | **str**  | Batch job UID, as returned by &#x60;CreateJob&#x60;.                                   |
+| **status**                 | **str**  | Return only runs with this status.                                                     | [optional] |
+| **dry_run**                | **bool** | If set, return only dry runs (&#x60;true&#x60;) or only real runs (&#x60;false&#x60;). | [optional] |
 
 ### Return type
 
@@ -389,7 +418,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > GetJobs200Response get_jobs(project_or_product_uid)
 
-List all batch jobs for a project
+List batch jobs
+
+List a project's batch jobs with their latest run's status. A batch job applies changes, such as environment variables, to a selected set of devices.
 
 ### Example
 
@@ -408,6 +439,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
 
     try:
+        # List batch jobs
         api_response = api_instance.get_jobs(project_or_product_uid)
         print("The response of JobsApi->get_jobs:\n")
         pprint(api_response)
@@ -438,7 +470,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > RunJob200Response run_job(project_or_product_uid, job_uid, dry_run=dry_run)
 
-Execute a batch job
+Run a batch job
+
+Start a run of a batch job and return its run UID. The run continues in the background, and `GetJobRun` shows its progress. With `dry_run=true`, it reports what would change without changing anything. Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
 
 ### Example
 
@@ -455,10 +489,13 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.JobsApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    job_uid = "my-reconciliation-job"  # str | Unique identifier for a batch job
-    dry_run = False  # bool | Run job in dry-run mode without making actual changes (optional) (default to False)
+    job_uid = (
+        "my-reconciliation-job"  # str | Batch job UID, as returned by `CreateJob`.
+    )
+    dry_run = False  # bool | If true, report what the job would change without changing anything. (optional) (default to False)
 
     try:
+        # Run a batch job
         api_response = api_instance.run_job(
             project_or_product_uid, job_uid, dry_run=dry_run
         )
@@ -470,11 +507,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type     | Description                                           | Notes                         |
-| -------------------------- | -------- | ----------------------------------------------------- | ----------------------------- |
-| **project_or_product_uid** | **str**  |                                                       |
-| **job_uid**                | **str**  | Unique identifier for a batch job                     |
-| **dry_run**                | **bool** | Run job in dry-run mode without making actual changes | [optional] [default to False] |
+| Name                       | Type     | Description                                                          | Notes                         |
+| -------------------------- | -------- | -------------------------------------------------------------------- | ----------------------------- |
+| **project_or_product_uid** | **str**  |                                                                      |
+| **job_uid**                | **str**  | Batch job UID, as returned by &#x60;CreateJob&#x60;.                 |
+| **dry_run**                | **bool** | If true, report what the job would change without changing anything. | [optional] [default to False] |
 
 ### Return type
 

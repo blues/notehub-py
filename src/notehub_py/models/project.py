@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.contact import Contact
 from notehub_py.models.role import Role
@@ -33,11 +33,13 @@ class Project(BaseModel):
     """  # noqa: E501
 
     administrative_contact: Optional[Contact] = None
-    created: datetime
-    label: StrictStr
+    created: datetime = Field(description="When the project was created.")
+    label: StrictStr = Field(description="Project name shown in Notehub.")
     role: Optional[Role] = None
     technical_contact: Optional[Contact] = None
-    uid: StrictStr
+    uid: StrictStr = Field(
+        description="ProjectUID, e.g. `app:2606f411-dea6-44a0-9743-1130f57d77d8`."
+    )
     __properties: ClassVar[List[str]] = [
         "administrative_contact",
         "created",

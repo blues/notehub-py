@@ -30,13 +30,15 @@ class ProvisionDeviceRequest(BaseModel):
     """  # noqa: E501
 
     device_sn: Optional[StrictStr] = Field(
-        default=None, description="The serial number to assign to the device."
+        default=None,
+        description="Serial number to give the device. Ignored if the device already has one.",
     )
     fleet_uids: Optional[List[StrictStr]] = Field(
-        default=None, description="The fleetUIDs to provision the device to."
+        default=None,
+        description="FleetUIDs to put a new device in. If omitted or empty, the product's auto-provision fleets are used. Ignored if the device already exists. ",
     )
     product_uid: StrictStr = Field(
-        description="The ProductUID that the device should use."
+        description="ProductUID to provision the device under, e.g. `com.blues.bridge:sensors`. Must belong to this project. "
     )
     __properties: ClassVar[List[str]] = ["device_sn", "fleet_uids", "product_uid"]
 

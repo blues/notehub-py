@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.device_dfu_history_current import DeviceDfuHistoryCurrent
 from notehub_py.models.device_dfu_state_machine import DeviceDfuStateMachine
@@ -32,9 +32,16 @@ class DeviceDfuHistory(BaseModel):
     """  # noqa: E501
 
     current: Optional[DeviceDfuHistoryCurrent] = None
-    device_uid: Optional[StrictStr] = Field(default=None, description="Device UID")
-    history: Optional[List[DeviceDfuStateMachine]] = None
-    __properties: ClassVar[List[str]] = ["current", "device_uid", "history"]
+    deleted: Optional[StrictBool] = Field(
+        default=None,
+        description="True if this device has been deleted. Only present when reading with a `cursor`. ",
+    )
+    device_uid: Optional[StrictStr] = Field(default=None, description="DeviceUID")
+    history: Optional[List[DeviceDfuStateMachine]] = Field(
+        default=None,
+        description="Every firmware update requested for this device, newest first.",
+    )
+    __properties: ClassVar[List[str]] = ["current", "deleted", "device_uid", "history"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +108,7 @@ class DeviceDfuHistory(BaseModel):
                     if obj.get("current") is not None
                     else None
                 ),
+                "deleted": obj.get("deleted"),
                 "device_uid": obj.get("device_uid"),
                 "history": (
                     [DeviceDfuStateMachine.from_dict(_item) for _item in obj["history"]]

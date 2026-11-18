@@ -1,5 +1,7 @@
 # OrganizationRole
 
+Your role in the organization.
+
 ## Properties
 
 | Name | Type | Description | Notes |

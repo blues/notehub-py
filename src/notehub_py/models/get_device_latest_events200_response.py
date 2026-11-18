@@ -32,7 +32,7 @@ class GetDeviceLatestEvents200Response(BaseModel):
 
     latest_events: Optional[List[Event]] = Field(
         default=None,
-        description='The set of latest events.  Will always include the current "session.begin" event.',
+        description="The most recent event from each notefile, sorted by notefile name.",
     )
     __properties: ClassVar[List[str]] = ["latest_events"]
 

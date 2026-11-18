@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from notehub_py.models.organization_role import OrganizationRole
 from typing import Optional, Set
@@ -30,9 +30,9 @@ class Organization(BaseModel):
     Organization
     """  # noqa: E501
 
-    name: StrictStr
+    name: StrictStr = Field(description="Organization name.")
     role: OrganizationRole
-    uid: StrictStr
+    uid: StrictStr = Field(description="Organization UID.")
     __properties: ClassVar[List[str]] = ["name", "role", "uid"]
 
     model_config = ConfigDict(

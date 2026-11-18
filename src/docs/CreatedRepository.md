@@ -2,14 +2,14 @@
 
 ## Properties
 
-| Name             | Type          | Description                                                                                                                                                                                                                                                   | Notes      |
-| ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **fleet_uids**   | **List[str]** |                                                                                                                                                                                                                                                               | [optional] |
-| **name**         | **str**       | repository name                                                                                                                                                                                                                                               | [optional] |
-| **password**     | **str**       | read-only password for the database, also used as X-Repository-Token header for subsequent API calls. This value is only served once when the repository is created, and never to a scoped token, which queries through the repository token endpoint instead | [optional] |
-| **project_uids** | **List[str]** |                                                                                                                                                                                                                                                               | [optional] |
-| **uid**          | **str**       | The unique identifier for the data repository                                                                                                                                                                                                                 | [optional] |
-| **user**         | **str**       | read-only user for database                                                                                                                                                                                                                                   | [optional] |
+| Name             | Type          | Description                                                                                                                     | Notes      |
+| ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **fleet_uids**   | **List[str]** |                                                                                                                                 | [optional] |
+| **name**         | **str**       | Repository name.                                                                                                                | [optional] |
+| **password**     | **str**       | The repository key, for &#x60;X-Repository-Key&#x60; and as the database password. Returned only here, never to a scoped token. | [optional] |
+| **project_uids** | **List[str]** |                                                                                                                                 | [optional] |
+| **uid**          | **str**       | Repository UID, e.g. &#x60;repo:2606f411-dea6-44a0-9743-1130f57d77d8&#x60;.                                                     | [optional] |
+| **user**         | **str**       | Read-only database user that goes with &#x60;password&#x60;.                                                                    | [optional] |
 
 ## Example
 

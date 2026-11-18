@@ -2,11 +2,12 @@
 
 ## Properties
 
-| Name         | Type                        | Description                        | Notes      |
-| ------------ | --------------------------- | ---------------------------------- | ---------- |
-| **events**   | [**List[Event]**](Event.md) |                                    |
-| **has_more** | **bool**                    | True if there are more events      |
-| **through**  | **str**                     | The UID of the last event returned | [optional] |
+| Name            | Type                        | Description                                                                                                                                                                         | Notes      |
+| --------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **events**      | [**List[Event]**](Event.md) |                                                                                                                                                                                     |
+| **has_more**    | **bool**                    | True if there are more events                                                                                                                                                       |
+| **next_cursor** | **str**                     | Pass this value as the cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes. | [optional] |
+| **through**     | **str**                     | The UID of the last event returned                                                                                                                                                  | [optional] |
 
 ## Example
 

@@ -10,10 +10,10 @@
 | **bssid**              | **str**                               |                                                                                     | [optional] |
 | **cell**               | **str**                               | Cell ID where the session originated and quality (\&quot;mcc,mnc,lac,cellid\&quot;) | [optional] |
 | **continuous**         | **bool**                              | Was this a continuous connection?                                                   | [optional] |
-| **device**             | **str**                               | Device UID                                                                          | [optional] |
+| **device**             | **str**                               | DeviceUID                                                                           | [optional] |
 | **events**             | **int**                               | Number of events routed                                                             | [optional] |
 | **failed_connects**    | **int**                               | Number of failed connection attempts in the prior session                           | [optional] |
-| **fleets**             | **List[str]**                         | Array of Fleet UIDs                                                                 | [optional] |
+| **fleets**             | **List[str]**                         | Array of FleetUIDs                                                                  | [optional] |
 | **hp_cycles_data**     | **int**                               |                                                                                     | [optional] |
 | **hp_cycles_gps**      | **int**                               |                                                                                     | [optional] |
 | **hp_cycles_total**    | **int**                               |                                                                                     | [optional] |
@@ -30,13 +30,13 @@
 | **power_mah**          | **float**                             |                                                                                     | [optional] |
 | **power_primary**      | **bool**                              |                                                                                     | [optional] |
 | **power_usb**          | **bool**                              |                                                                                     | [optional] |
-| **product**            | **str**                               | Product UID                                                                         | [optional] |
+| **product**            | **str**                               | ProductUID                                                                          | [optional] |
 | **rat**                | **str**                               |                                                                                     | [optional] |
 | **rsrp**               | **int**                               |                                                                                     | [optional] |
 | **rsrq**               | **int**                               |                                                                                     | [optional] |
 | **rssi**               | **int**                               |                                                                                     | [optional] |
 | **scan**               | **bytearray**                         |                                                                                     | [optional] |
-| **session**            | **str**                               | Session UID                                                                         | [optional] |
+| **session**            | **str**                               | SessionUID                                                                          | [optional] |
 | **session_began**      | **int**                               | UNIX timestamp of session start                                                     | [optional] |
 | **session_ended**      | **int**                               | UNIX timestamp of session end                                                       | [optional] |
 | **sinr**               | **int**                               |                                                                                     | [optional] |

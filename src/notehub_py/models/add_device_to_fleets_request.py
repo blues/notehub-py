@@ -29,9 +29,7 @@ class AddDeviceToFleetsRequest(BaseModel):
     AddDeviceToFleetsRequest
     """  # noqa: E501
 
-    fleet_uids: List[StrictStr] = Field(
-        description="The fleetUIDs to add to the device."
-    )
+    fleet_uids: List[StrictStr] = Field(description="FleetUIDs to add the device to.")
     __properties: ClassVar[List[str]] = ["fleet_uids"]
 
     model_config = ConfigDict(

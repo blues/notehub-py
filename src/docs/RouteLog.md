@@ -2,16 +2,16 @@
 
 ## Properties
 
-| Name          | Type     | Description                                 | Notes      |
-| ------------- | -------- | ------------------------------------------- | ---------- |
-| **attn**      | **bool** | If true, an error was returned when routing | [optional] |
-| **var_date**  | **str**  | The date of the logs.                       | [optional] |
-| **duration**  | **int**  | The duration of the route in milliseconds   | [optional] |
-| **event_uid** | **str**  | The event UID.                              | [optional] |
-| **route_uid** | **str**  | The route UID.                              | [optional] |
-| **status**    | **str**  | The status of the event.                    | [optional] |
-| **text**      | **str**  | The response body of the route.             | [optional] |
-| **url**       | **str**  | The URL of the route.                       | [optional] |
+| Name          | Type     | Description                                                     | Notes      |
+| ------------- | -------- | --------------------------------------------------------------- | ---------- |
+| **attn**      | **bool** | True if the attempt failed.                                     | [optional] |
+| **var_date**  | **str**  | When the attempt was made, in RFC 3339 format.                  | [optional] |
+| **duration**  | **int**  | How long the attempt took, in milliseconds.                     | [optional] |
+| **event_uid** | **str**  | EventUID of the event that was sent.                            | [optional] |
+| **route_uid** | **str**  | RouteUID of the route.                                          | [optional] |
+| **status**    | **str**  | The destination&#39;s response status, such as &#x60;200&#x60;. | [optional] |
+| **text**      | **str**  | The destination&#39;s response body, or an error message.       | [optional] |
+| **url**       | **str**  | The URL the event was sent to.                                  | [optional] |
 
 ## Example
 

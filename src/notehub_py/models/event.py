@@ -39,7 +39,7 @@ class Event(BaseModel):
     """  # noqa: E501
 
     app: Optional[StrictStr] = Field(
-        default=None, description="App UID (globally unique)"
+        default=None, description="AppUID (globally unique)"
     )
     bars: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(
         default=None, description="Bars. Only available on _session.qo events."
@@ -69,15 +69,19 @@ class Event(BaseModel):
     bssid: Optional[StrictStr] = Field(
         default=None, description="BSSID. Only available on _session.qo events."
     )
+    deleted: Optional[StrictBool] = Field(
+        default=None,
+        description="True if this event has been deleted. Only present when reading with a `cursor`. ",
+    )
     device: Optional[StrictStr] = Field(
-        default=None, description="Device UID (globally unique)"
+        default=None, description="DeviceUID (globally unique)"
     )
     environment: Optional[Dict[str, Any]] = Field(
         default=None,
         description='Routed environment variables beginning with "$". Only available on _session.qo events.',
     )
     event: Optional[StrictStr] = Field(
-        default=None, description="Event UID (globally unique)"
+        default=None, description="EventUID (globally unique)"
     )
     file: Optional[StrictStr] = Field(
         default=None, description="The notefile associated with this event"
@@ -104,7 +108,7 @@ class Event(BaseModel):
         description="Whether this is a platform event (administrative, e.g. _health.qo, _session.qo) rather than user data",
     )
     product: Optional[StrictStr] = Field(
-        default=None, description="Product UID (globally unique)"
+        default=None, description="ProductUID (globally unique)"
     )
     rat: Optional[StrictStr] = Field(
         default=None, description="Rat. Only available on _session.qo events."
@@ -125,10 +129,10 @@ class Event(BaseModel):
     )
     sensor: Optional[StrictStr] = Field(
         default=None,
-        description="Sensor UID, for events originating from a sensor attached to the device",
+        description="SensorUID, for events originating from a sensor attached to the device",
     )
     session: Optional[StrictStr] = Field(
-        default=None, description="Session UID (globally unique)"
+        default=None, description="SessionUID (globally unique)"
     )
     sinr: Optional[StrictInt] = Field(
         default=None, description="SINR. Only available on _session.qo events."
@@ -220,6 +224,7 @@ class Event(BaseModel):
         "best_timezone",
         "body",
         "bssid",
+        "deleted",
         "device",
         "environment",
         "event",
@@ -336,6 +341,7 @@ class Event(BaseModel):
                 "best_timezone": obj.get("best_timezone"),
                 "body": obj.get("body"),
                 "bssid": obj.get("bssid"),
+                "deleted": obj.get("deleted"),
                 "device": obj.get("device"),
                 "environment": obj.get("environment"),
                 "event": obj.get("event"),

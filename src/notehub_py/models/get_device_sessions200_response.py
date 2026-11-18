@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.device_session import DeviceSession
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,8 +31,12 @@ class GetDeviceSessions200Response(BaseModel):
     """  # noqa: E501
 
     has_more: StrictBool
+    next_cursor: Optional[StrictStr] = Field(
+        default=None,
+        description="Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes. ",
+    )
     sessions: List[DeviceSession]
-    __properties: ClassVar[List[str]] = ["has_more", "sessions"]
+    __properties: ClassVar[List[str]] = ["has_more", "next_cursor", "sessions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +96,7 @@ class GetDeviceSessions200Response(BaseModel):
         _obj = cls.model_validate(
             {
                 "has_more": obj.get("has_more"),
+                "next_cursor": obj.get("next_cursor"),
                 "sessions": (
                     [DeviceSession.from_dict(_item) for _item in obj["sessions"]]
                     if obj.get("sessions") is not None

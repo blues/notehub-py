@@ -6,7 +6,7 @@
 | ------------ | ------------------------- | ------------------------------------------------------------------- | ---------- |
 | **id**       | **str**                   | Notefile id (e.g., \&quot;test.qi\&quot;, \&quot;config.db\&quot;). |
 | **notes**    | [**List[Note]**](Note.md) |                                                                     |
-| **template** | **str**                   |                                                                     | [optional] |
+| **template** | **str**                   | The notefile&#39;s body template, if it has one.                    | [optional] |
 
 ## Example
 

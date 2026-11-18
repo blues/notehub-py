@@ -26,7 +26,7 @@ from typing_extensions import Self
 
 class DeviceDfuStateMachineNode(BaseModel):
     """
-    Represents a single request to update the host or Notecard firmware
+    One status update in a host or Notecard firmware update.
     """  # noqa: E501
 
     datetime: Optional[StrictStr] = Field(

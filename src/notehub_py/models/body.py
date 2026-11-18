@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +29,10 @@ class Body(BaseModel):
     Body
     """  # noqa: E501
 
-    body: Optional[Dict[str, Any]] = None
+    body: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="The JSON object to send to the Notecard. Must not have a `type` field, which the Notecard reserves.",
+    )
     __properties: ClassVar[List[str]] = ["body"]
 
     model_config = ConfigDict(

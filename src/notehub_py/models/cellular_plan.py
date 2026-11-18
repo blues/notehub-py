@@ -34,14 +34,18 @@ class CellularPlan(BaseModel):
         default=None, description="Unix timestamp of when the SIM was activated"
     )
     data_usage: Optional[DataUsage] = None
-    expires_at: Optional[StrictInt] = None
+    expires_at: Optional[StrictInt] = Field(
+        default=None,
+        description="When the current plan expires, as a Unix timestamp in seconds. Omitted on the Essentials plan.",
+    )
     iccid: Optional[StrictStr] = Field(
         default=None,
         description="The Integrated Circuit Card Identifier of the SIM card",
     )
     imsi: Optional[StrictStr] = Field(default=None, description="IMSI of the SIM card")
     last_updated: Optional[StrictInt] = Field(
-        default=None, description="Time this plan information was last updated"
+        default=None,
+        description="When this plan information was last updated, as a Unix timestamp in seconds.",
     )
     lifetime_used: Optional[StrictInt] = Field(
         default=None, description="Total bytes used by this SIM"

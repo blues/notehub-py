@@ -2,9 +2,9 @@
 
 ## Properties
 
-| Name           | Type          | Description                              | Notes |
-| -------------- | ------------- | ---------------------------------------- | ----- |
-| **fleet_uids** | **List[str]** | The fleetUIDs to remove from the device. |
+| Name           | Type          | Description                          | Notes |
+| -------------- | ------------- | ------------------------------------ | ----- |
+| **fleet_uids** | **List[str]** | FleetUIDs to remove the device from. |
 
 ## Example
 

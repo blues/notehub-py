@@ -2,10 +2,10 @@
 
 ## Properties
 
-| Name      | Type    | Description                                                          | Notes |
-| --------- | ------- | -------------------------------------------------------------------- | ----- |
-| **name**  | **str** | The secret name (alphanumeric and underscores only).                 |
-| **value** | **str** | The secret value (encrypted at rest, never returned after creation). |
+| Name      | Type    | Description                                                                                             | Notes |
+| --------- | ------- | ------------------------------------------------------------------------------------------------------- | ----- |
+| **name**  | **str** | 1 to 64 letters, digits or underscores. Routes and alerts reference the secret as &#x60;[$$name]&#x60;. |
+| **value** | **str** | The secret value. Encrypted at rest and never returned.                                                 |
 
 ## Example
 

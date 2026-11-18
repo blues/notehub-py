@@ -51,7 +51,7 @@ class DeviceSession(BaseModel):
     continuous: Optional[StrictBool] = Field(
         default=None, description="Was this a continuous connection?"
     )
-    device: Optional[StrictStr] = Field(default=None, description="Device UID")
+    device: Optional[StrictStr] = Field(default=None, description="DeviceUID")
     events: Optional[StrictInt] = Field(
         default=None, description="Number of events routed"
     )
@@ -60,7 +60,7 @@ class DeviceSession(BaseModel):
         description="Number of failed connection attempts in the prior session",
     )
     fleets: Optional[List[StrictStr]] = Field(
-        default=None, description="Array of Fleet UIDs"
+        default=None, description="Array of FleetUIDs"
     )
     hp_cycles_data: Optional[StrictInt] = None
     hp_cycles_gps: Optional[StrictInt] = None
@@ -82,13 +82,13 @@ class DeviceSession(BaseModel):
     power_mah: Optional[Union[StrictFloat, StrictInt]] = None
     power_primary: Optional[StrictBool] = None
     power_usb: Optional[StrictBool] = None
-    product: Optional[StrictStr] = Field(default=None, description="Product UID")
+    product: Optional[StrictStr] = Field(default=None, description="ProductUID")
     rat: Optional[StrictStr] = None
     rsrp: Optional[StrictInt] = None
     rsrq: Optional[StrictInt] = None
     rssi: Optional[StrictInt] = None
     scan: Optional[Union[StrictBytes, StrictStr]] = None
-    session: Optional[StrictStr] = Field(default=None, description="Session UID")
+    session: Optional[StrictStr] = Field(default=None, description="SessionUID")
     session_began: Optional[StrictInt] = Field(
         default=None, description="UNIX timestamp of session start"
     )

@@ -4,11 +4,11 @@ Request body for updating host firmware metadata. All fields are optional; only 
 
 ## Properties
 
-| Name        | Type                  | Description                                                  | Notes      |
-| ----------- | --------------------- | ------------------------------------------------------------ | ---------- |
-| **info**    | **Dict[str, object]** | Arbitrary JSON metadata associated with this firmware entry. | [optional] |
-| **notes**   | **str**               | Notes describing this firmware version.                      | [optional] |
-| **version** | **str**               | The firmware version string.                                 | [optional] |
+| Name        | Type                  | Description                                                               | Notes      |
+| ----------- | --------------------- | ------------------------------------------------------------------------- | ---------- |
+| **info**    | **Dict[str, object]** | JSON metadata for this firmware. Replaces the stored object when present. | [optional] |
+| **notes**   | **str**               | New notes for this firmware. Empty keeps the current notes.               | [optional] |
+| **version** | **str**               | New version string. Empty keeps the current version.                      | [optional] |
 
 ## Example
 

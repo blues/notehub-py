@@ -43,13 +43,13 @@ class BatchJobRequests(BaseModel):
     enable: Optional[StrictBool] = Field(default=None, description="Enable the device")
     fleets_to_default: Optional[List[StrictStr]] = Field(
         default=None,
-        description="Fleet UIDs to assign to the device if it has no fleets",
+        description="FleetUIDs to assign to the device if it has no fleets",
     )
     fleets_to_join: Optional[List[StrictStr]] = Field(
-        default=None, description="Fleet UIDs to add the device to"
+        default=None, description="FleetUIDs to add the device to"
     )
     fleets_to_leave: Optional[List[StrictStr]] = Field(
-        default=None, description="Fleet UIDs to remove the device from"
+        default=None, description="FleetUIDs to remove the device from"
     )
     note_reqs: Optional[List[BatchJobNoteRequest]] = Field(
         default=None,
@@ -57,7 +57,7 @@ class BatchJobRequests(BaseModel):
     )
     provision_product: Optional[StrictStr] = Field(
         default=None,
-        description="Product UID to provision the device with if not already provisioned",
+        description="ProductUID to provision the device with if not already provisioned",
     )
     sn_to_default: Optional[StrictStr] = Field(
         default=None, description="Set the device serial number only if not already set"

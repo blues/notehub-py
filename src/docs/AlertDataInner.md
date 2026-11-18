@@ -2,14 +2,14 @@
 
 ## Properties
 
-| Name             | Type      | Description                        | Notes      |
-| ---------------- | --------- | ---------------------------------- | ---------- |
-| **alert_source** | **str**   | The source of the alert            | [optional] |
-| **source**       | **str**   | The UID of the source of the alert | [optional] |
-| **source_type**  | **str**   | The type of source.                | [optional] |
-| **source_uid**   | **str**   | The UID of the source of the alert | [optional] |
-| **value**        | **float** | The value that triggered the alert | [optional] |
-| **when**         | **str**   | The time the alert was created     | [optional] |
+| Name             | Type      | Description                                                       | Notes      |
+| ---------------- | --------- | ----------------------------------------------------------------- | ---------- |
+| **alert_source** | **str**   | The source of the alert                                           | [optional] |
+| **source**       | **str**   | The UID of the source of the alert                                | [optional] |
+| **source_type**  | **str**   | The &#x60;source_type&#x60; of the monitor that raised the alert. | [optional] |
+| **source_uid**   | **str**   | The UID of the source of the alert                                | [optional] |
+| **value**        | **float** | The value that triggered the alert                                | [optional] |
+| **when**         | **str**   | The time the alert was created                                    | [optional] |
 
 ## Example
 

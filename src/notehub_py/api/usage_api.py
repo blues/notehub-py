@@ -49,7 +49,9 @@ class UsageApi:
     def get_api_usage(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -64,7 +66,9 @@ class UsageApi:
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -78,19 +82,19 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetApiUsage200Response:
-        """get_api_usage
+        """Get billable API usage
 
-        Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project's plan are counted
+        Count a project's billable Notehub API requests per day, week or month, by endpoint. Only requests billed against the project's plan are counted.  Returns 400 if `startDate` is after `endDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -142,7 +146,9 @@ class UsageApi:
     def get_api_usage_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -157,7 +163,9 @@ class UsageApi:
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -171,19 +179,19 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetApiUsage200Response]:
-        """get_api_usage
+        """Get billable API usage
 
-        Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project's plan are counted
+        Count a project's billable Notehub API requests per day, week or month, by endpoint. Only requests billed against the project's plan are counted.  Returns 400 if `startDate` is after `endDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -235,7 +243,9 @@ class UsageApi:
     def get_api_usage_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -250,7 +260,9 @@ class UsageApi:
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -264,19 +276,19 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_api_usage
+        """Get billable API usage
 
-        Get billable Notehub API request usage for a project, broken down by endpoint and time period, when endDate is 0 or unspecified the current time is implied. Only requests that are billed against the project's plan are counted
+        Count a project's billable Notehub API requests per day, week or month, by endpoint. Only requests billed against the project's plan are counted.  Returns 400 if `startDate` is after `endDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -395,7 +407,9 @@ class UsageApi:
     def get_data_usage(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -409,17 +423,22 @@ class UsageApi:
             ),
         ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, such as per device or one total for the project."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -433,25 +452,25 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDataUsage200Response:
-        """get_data_usage
+        """Get cellular and satellite data usage
 
-        Get data usage in bytes for a project with time range and period aggregation
+        Get the cellular and satellite data a project's devices used, in bytes. It's counted per day, week or month, by device, fleet or the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.  Returns 400 for an unknown device, or if `endDate` is before `startDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, such as per device or one total for the project.
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -506,7 +525,9 @@ class UsageApi:
     def get_data_usage_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -520,17 +541,22 @@ class UsageApi:
             ),
         ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, such as per device or one total for the project."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -544,25 +570,25 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDataUsage200Response]:
-        """get_data_usage
+        """Get cellular and satellite data usage
 
-        Get data usage in bytes for a project with time range and period aggregation
+        Get the cellular and satellite data a project's devices used, in bytes. It's counted per day, week or month, by device, fleet or the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.  Returns 400 for an unknown device, or if `endDate` is before `startDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, such as per device or one total for the project.
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -617,7 +643,9 @@ class UsageApi:
     def get_data_usage_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -631,17 +659,22 @@ class UsageApi:
             ),
         ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, such as per device or one total for the project."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -655,25 +688,25 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_data_usage
+        """Get cellular and satellite data usage
 
-        Get data usage in bytes for a project with time range and period aggregation
+        Get the cellular and satellite data a project's devices used, in bytes. It's counted per day, week or month, by device, fleet or the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.  Returns 400 for an unknown device, or if `endDate` is before `startDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, such as per device or one total for the project.
         :type aggregate: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -813,7 +846,9 @@ class UsageApi:
     def get_events_usage(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -827,30 +862,36 @@ class UsageApi:
             ),
         ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, such as per device or one total for the project."
+            ),
         ] = None,
         notefile: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
+            Optional[List[StrictStr]],
+            Field(description="Count only events from these notefiles."),
         ] = None,
         skip_recent_data: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+                description="If true, return only summarized data, without filling in the latest day. Faster for large projects."
             ),
         ] = None,
         include_notefiles: Annotated[
             Optional[StrictBool],
-            Field(description="Include per-notefile event counts in the response"),
+            Field(description="If true, include event counts for each notefile."),
         ] = None,
         _request_timeout: Union[
             None,
@@ -864,31 +905,31 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UsageEventsResponse:
-        """get_events_usage
+        """Get event usage
 
-        Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+        Count a project's events per day, week or month, by device, fleet or the whole project, optionally per notefile. Summaries lag; with `period=day` and no `endDate`, the latest day is filled in from recent events unless `skipRecentData` is true.  Returns 400 if `startDate` is after `endDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, such as per device or one total for the project.
         :type aggregate: str
-        :param notefile: Filter to specific notefiles
+        :param notefile: Count only events from these notefiles.
         :type notefile: List[str]
-        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :param skip_recent_data: If true, return only summarized data, without filling in the latest day. Faster for large projects.
         :type skip_recent_data: bool
-        :param include_notefiles: Include per-notefile event counts in the response
+        :param include_notefiles: If true, include event counts for each notefile.
         :type include_notefiles: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -946,7 +987,9 @@ class UsageApi:
     def get_events_usage_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -960,30 +1003,36 @@ class UsageApi:
             ),
         ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, such as per device or one total for the project."
+            ),
         ] = None,
         notefile: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
+            Optional[List[StrictStr]],
+            Field(description="Count only events from these notefiles."),
         ] = None,
         skip_recent_data: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+                description="If true, return only summarized data, without filling in the latest day. Faster for large projects."
             ),
         ] = None,
         include_notefiles: Annotated[
             Optional[StrictBool],
-            Field(description="Include per-notefile event counts in the response"),
+            Field(description="If true, include event counts for each notefile."),
         ] = None,
         _request_timeout: Union[
             None,
@@ -997,31 +1046,31 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[UsageEventsResponse]:
-        """get_events_usage
+        """Get event usage
 
-        Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+        Count a project's events per day, week or month, by device, fleet or the whole project, optionally per notefile. Summaries lag; with `period=day` and no `endDate`, the latest day is filled in from recent events unless `skipRecentData` is true.  Returns 400 if `startDate` is after `endDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, such as per device or one total for the project.
         :type aggregate: str
-        :param notefile: Filter to specific notefiles
+        :param notefile: Count only events from these notefiles.
         :type notefile: List[str]
-        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :param skip_recent_data: If true, return only summarized data, without filling in the latest day. Faster for large projects.
         :type skip_recent_data: bool
-        :param include_notefiles: Include per-notefile event counts in the response
+        :param include_notefiles: If true, include event counts for each notefile.
         :type include_notefiles: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1079,7 +1128,9 @@ class UsageApi:
     def get_events_usage_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -1093,30 +1144,36 @@ class UsageApi:
             ),
         ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, such as per device or one total for the project."
+            ),
         ] = None,
         notefile: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter to specific notefiles")
+            Optional[List[StrictStr]],
+            Field(description="Count only events from these notefiles."),
         ] = None,
         skip_recent_data: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+                description="If true, return only summarized data, without filling in the latest day. Faster for large projects."
             ),
         ] = None,
         include_notefiles: Annotated[
             Optional[StrictBool],
-            Field(description="Include per-notefile event counts in the response"),
+            Field(description="If true, include event counts for each notefile."),
         ] = None,
         _request_timeout: Union[
             None,
@@ -1130,31 +1187,31 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_events_usage
+        """Get event usage
 
-        Get events usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+        Count a project's events per day, week or month, by device, fleet or the whole project, optionally per notefile. Summaries lag; with `period=day` and no `endDate`, the latest day is filled in from recent events unless `skipRecentData` is true.  Returns 400 if `startDate` is after `endDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, such as per device or one total for the project.
         :type aggregate: str
-        :param notefile: Filter to specific notefiles
+        :param notefile: Count only events from these notefiles.
         :type notefile: List[str]
-        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :param skip_recent_data: If true, return only summarized data, without filling in the latest day. Faster for large projects.
         :type skip_recent_data: bool
-        :param include_notefiles: Include per-notefile event counts in the response
+        :param include_notefiles: If true, include event counts for each notefile.
         :type include_notefiles: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1313,7 +1370,9 @@ class UsageApi:
     def get_route_logs_usage(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -1327,19 +1386,24 @@ class UsageApi:
             ),
         ] = None,
         route_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Route UID.")
+            Optional[List[StrictStr]], Field(description="A RouteUID.")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, per route or one total for the project."
+            ),
         ] = None,
         skip_recent_data: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+                description="If true, return only summarized data, without filling in the latest day. Faster for large projects."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1354,25 +1418,25 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetRouteLogsUsage200Response:
-        """get_route_logs_usage
+        """Get route log usage
 
-        Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+        Count a project's attempts to send events to routes per day, week or month, by route or for the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param route_uid: A Route UID.
+        :param route_uid: A RouteUID.
         :type route_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, per route or one total for the project.
         :type aggregate: str
-        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :param skip_recent_data: If true, return only summarized data, without filling in the latest day. Faster for large projects.
         :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1427,7 +1491,9 @@ class UsageApi:
     def get_route_logs_usage_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -1441,19 +1507,24 @@ class UsageApi:
             ),
         ] = None,
         route_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Route UID.")
+            Optional[List[StrictStr]], Field(description="A RouteUID.")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, per route or one total for the project."
+            ),
         ] = None,
         skip_recent_data: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+                description="If true, return only summarized data, without filling in the latest day. Faster for large projects."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1468,25 +1539,25 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetRouteLogsUsage200Response]:
-        """get_route_logs_usage
+        """Get route log usage
 
-        Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+        Count a project's attempts to send events to routes per day, week or month, by route or for the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param route_uid: A Route UID.
+        :param route_uid: A RouteUID.
         :type route_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, per route or one total for the project.
         :type aggregate: str
-        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :param skip_recent_data: If true, return only summarized data, without filling in the latest day. Faster for large projects.
         :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1541,7 +1612,9 @@ class UsageApi:
     def get_route_logs_usage_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -1555,19 +1628,24 @@ class UsageApi:
             ),
         ] = None,
         route_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Route UID.")
+            Optional[List[StrictStr]], Field(description="A RouteUID.")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, per route or one total for the project."
+            ),
         ] = None,
         skip_recent_data: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+                description="If true, return only summarized data, without filling in the latest day. Faster for large projects."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1582,25 +1660,25 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_route_logs_usage
+        """Get route log usage
 
-        Get route logs usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+        Count a project's attempts to send events to routes per day, week or month, by route or for the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param route_uid: A Route UID.
+        :param route_uid: A RouteUID.
         :type route_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, per route or one total for the project.
         :type aggregate: str
-        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :param skip_recent_data: If true, return only summarized data, without filling in the latest day. Faster for large projects.
         :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1739,7 +1817,9 @@ class UsageApi:
     def get_sessions_usage(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -1753,22 +1833,27 @@ class UsageApi:
             ),
         ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, such as per device or one total for the project."
+            ),
         ] = None,
         skip_recent_data: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+                description="If true, return only summarized data, without filling in the latest day. Faster for large projects."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1783,27 +1868,27 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetSessionsUsage200Response:
-        """get_sessions_usage
+        """Get session usage
 
-        Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+        Count a project's device sessions per day, week or month, by device, fleet or the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.  Returns 400 if `startDate` is after `endDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, such as per device or one total for the project.
         :type aggregate: str
-        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :param skip_recent_data: If true, return only summarized data, without filling in the latest day. Faster for large projects.
         :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1859,7 +1944,9 @@ class UsageApi:
     def get_sessions_usage_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -1873,22 +1960,27 @@ class UsageApi:
             ),
         ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, such as per device or one total for the project."
+            ),
         ] = None,
         skip_recent_data: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+                description="If true, return only summarized data, without filling in the latest day. Faster for large projects."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1903,27 +1995,27 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetSessionsUsage200Response]:
-        """get_sessions_usage
+        """Get session usage
 
-        Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+        Count a project's device sessions per day, week or month, by device, fleet or the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.  Returns 400 if `startDate` is after `endDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, such as per device or one total for the project.
         :type aggregate: str
-        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :param skip_recent_data: If true, return only summarized data, without filling in the latest day. Faster for large projects.
         :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1979,7 +2071,9 @@ class UsageApi:
     def get_sessions_usage_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        period: Annotated[StrictStr, Field(description="Period type for aggregation")],
+        period: Annotated[
+            StrictStr, Field(description="The length of time each data point covers.")
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -1993,22 +2087,27 @@ class UsageApi:
             ),
         ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         limit: Annotated[
             Optional[Annotated[int, Field(le=400000, strict=True, ge=1)]],
-            Field(description="Limit the number of data points returned"),
+            Field(
+                description="The most data points to return. If there are more, `truncated` is true."
+            ),
         ] = None,
         aggregate: Annotated[
-            Optional[StrictStr], Field(description="Aggregation level for results")
+            Optional[StrictStr],
+            Field(
+                description="How to group the counts, such as per device or one total for the project."
+            ),
         ] = None,
         skip_recent_data: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects."
+                description="If true, return only summarized data, without filling in the latest day. Faster for large projects."
             ),
         ] = None,
         _request_timeout: Union[
@@ -2023,27 +2122,27 @@ class UsageApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_sessions_usage
+        """Get session usage
 
-        Get sessions usage for a project with time range and period aggregation, when endDate is 0 or unspecified the current time is implied
+        Count a project's device sessions per day, week or month, by device, fleet or the whole project. If there are more data points than `limit`, the rest are dropped and `truncated` is true.  Returns 400 if `startDate` is after `endDate`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param period: Period type for aggregation (required)
+        :param period: The length of time each data point covers. (required)
         :type period: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param device_uid: A Device UID.
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param limit: Limit the number of data points returned
+        :param limit: The most data points to return. If there are more, `truncated` is true.
         :type limit: int
-        :param aggregate: Aggregation level for results
+        :param aggregate: How to group the counts, such as per device or one total for the project.
         :type aggregate: str
-        :param skip_recent_data: When true, skips fetching recent data from raw event tables and only returns data from summary tables. Use this for better performance on large projects.
+        :param skip_recent_data: If true, return only summarized data, without filling in the latest day. Faster for large projects.
         :type skip_recent_data: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

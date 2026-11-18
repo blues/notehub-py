@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,11 +30,21 @@ class NotehubRouteSummary(BaseModel):
     NotehubRouteSummary
     """  # noqa: E501
 
-    disabled: Optional[StrictBool] = False
-    label: Optional[StrictStr] = "success route"
-    modified: Optional[datetime] = None
-    type: Optional[StrictStr] = "http"
-    uid: Optional[StrictStr] = "route:8d65a087d5d290ce5bdf03aeff2becc0"
+    disabled: Optional[StrictBool] = Field(
+        default=False, description="True if the route is turned off and sends nothing."
+    )
+    label: Optional[StrictStr] = Field(
+        default="success route", description="Route name."
+    )
+    modified: Optional[datetime] = Field(
+        default=None, description="When the route was last changed."
+    )
+    type: Optional[StrictStr] = Field(
+        default="http", description="Route type; see `NotehubRoute.type`."
+    )
+    uid: Optional[StrictStr] = Field(
+        default="route:8d65a087d5d290ce5bdf03aeff2becc0", description="RouteUID."
+    )
     __properties: ClassVar[List[str]] = ["disabled", "label", "modified", "type", "uid"]
 
     model_config = ConfigDict(

@@ -8,9 +8,9 @@ Device selection criteria
 | --------------------- | ------------- | ---------------------------------------------------------------------- | ---------- |
 | **all_devices**       | **bool**      | Select all devices in the project                                      | [optional] |
 | **comment**           | **str**       |                                                                        | [optional] |
-| **devices**           | **List[str]** | Specific device UIDs to include                                        | [optional] |
+| **devices**           | **List[str]** | Specific DeviceUIDs to include                                         | [optional] |
 | **devices_by_sn**     | **List[str]** | Serial number patterns to match (supports glob wildcards \*, ?, [...]) | [optional] |
-| **devices_in_fleets** | **List[str]** | Fleet UIDs whose devices should be included                            | [optional] |
+| **devices_in_fleets** | **List[str]** | FleetUIDs whose devices should be included                             | [optional] |
 
 ## Example
 

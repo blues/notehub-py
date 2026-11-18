@@ -33,13 +33,15 @@ class SlackBearerNotification(BaseModel):
         default=None, description="The channel to send the message to."
     )
     message_type: Optional[StrictStr] = Field(
-        default=None, description="text or blocks"
+        default=None,
+        description="How `text` is read. - `text`: plain message text - `blocks`: a Slack Block Kit JSON definition ",
     )
     text: Optional[StrictStr] = Field(
-        default=None, description="The text of the message, or the blocks definition"
+        default=None,
+        description="The message, or Block Kit JSON. Event placeholders such as `[.body.temp]` aren't allowed.",
     )
-    token: Optional[StrictStr] = Field(
-        default=None, description="The bearer token for the Slack app."
+    token: StrictStr = Field(
+        description="The bearer token for the Slack app. Returned as `(omitted)`. Sending it back keeps the stored token if the monitor has only one Slack bearer route."
     )
     __properties: ClassVar[List[str]] = ["channel", "message_type", "text", "token"]
 

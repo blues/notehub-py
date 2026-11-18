@@ -78,8 +78,18 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         note_input: Annotated[
             NoteInput,
             Field(description="Body or payload of note to be added to the device"),
@@ -96,17 +106,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """add_db_note
+        """Add a note to a .db notefile
 
-        Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
+        Add a note with the given ID to a database notefile on a device, synced to the Notecard on its next sync. To change an existing note, use `UpdateDbNote`; to queue a note in a `.qi` notefile, use `AddQiNote`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or `.dbs`, or if `payload` isn't valid base64.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
         :param note_input: Body or payload of note to be added to the device (required)
         :type note_input: NoteInput
@@ -161,8 +171,18 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         note_input: Annotated[
             NoteInput,
             Field(description="Body or payload of note to be added to the device"),
@@ -179,17 +199,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """add_db_note
+        """Add a note to a .db notefile
 
-        Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
+        Add a note with the given ID to a database notefile on a device, synced to the Notecard on its next sync. To change an existing note, use `UpdateDbNote`; to queue a note in a `.qi` notefile, use `AddQiNote`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or `.dbs`, or if `payload` isn't valid base64.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
         :param note_input: Body or payload of note to be added to the device (required)
         :type note_input: NoteInput
@@ -244,8 +264,18 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         note_input: Annotated[
             NoteInput,
             Field(description="Body or payload of note to be added to the device"),
@@ -262,17 +292,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """add_db_note
+        """Add a note to a .db notefile
 
-        Add a Note to a .db notefile.  if noteID is '-' then payload is ignored and empty notefile is created
+        Add a note with the given ID to a database notefile on a device, synced to the Notecard on its next sync. To change an existing note, use `UpdateDbNote`; to queue a note in a `.qi` notefile, use `AddQiNote`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or `.dbs`, or if `payload` isn't valid base64.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
         :param note_input: Body or payload of note to be added to the device (required)
         :type note_input: NoteInput
@@ -396,7 +426,12 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
         note_input: Annotated[
             NoteInput,
             Field(description="Body or payload of note to be added to the device"),
@@ -413,15 +448,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """add_qi_note
+        """Queue a note for a Notecard
 
-        Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+        Add a note to an inbound queue (`.qi`) notefile on a device, creating the notefile if needed. The Notecard receives it on its next sync. For a `.db` notefile, use `AddDbNote`; to reach a connected Notecard immediately, use `SignalDevice`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.qi` or `.qis`, or if `payload` isn't valid base64.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
         :param note_input: Body or payload of note to be added to the device (required)
         :type note_input: NoteInput
@@ -475,7 +510,12 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
         note_input: Annotated[
             NoteInput,
             Field(description="Body or payload of note to be added to the device"),
@@ -492,15 +532,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """add_qi_note
+        """Queue a note for a Notecard
 
-        Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+        Add a note to an inbound queue (`.qi`) notefile on a device, creating the notefile if needed. The Notecard receives it on its next sync. For a `.db` notefile, use `AddDbNote`; to reach a connected Notecard immediately, use `SignalDevice`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.qi` or `.qis`, or if `payload` isn't valid base64.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
         :param note_input: Body or payload of note to be added to the device (required)
         :type note_input: NoteInput
@@ -554,7 +594,12 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
         note_input: Annotated[
             NoteInput,
             Field(description="Body or payload of note to be added to the device"),
@@ -571,15 +616,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """add_qi_note
+        """Queue a note for a Notecard
 
-        Adds a Note to a Notefile, creating the Notefile if it doesn't yet exist.
+        Add a note to an inbound queue (`.qi`) notefile on a device, creating the notefile if needed. The Notecard receives it on its next sync. For a `.db` notefile, use `AddDbNote`; to reach a connected Notecard immediately, use `SignalDevice`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.qi` or `.qis`, or if `payload` isn't valid base64.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
         :param note_input: Body or payload of note to be added to the device (required)
         :type note_input: NoteInput
@@ -699,7 +744,12 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -712,15 +762,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """create_notefile
+        """Create an empty notefile
 
-        Creates an empty Notefile on the device.
+        Create an empty notefile on a device. `AddQiNote` creates a notefile when needed, so this is only required for an empty one.  Requires the Owner or Developer role. Returns 400 if the notefile already exists.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -771,7 +821,12 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -784,15 +839,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """create_notefile
+        """Create an empty notefile
 
-        Creates an empty Notefile on the device.
+        Create an empty notefile on a device. `AddQiNote` creates a notefile when needed, so this is only required for an empty one.  Requires the Owner or Developer role. Returns 400 if the notefile already exists.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -843,7 +898,12 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -856,15 +916,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_notefile
+        """Create an empty notefile
 
-        Creates an empty Notefile on the device.
+        Create an empty notefile on a device. `AddQiNote` creates a notefile when needed, so this is only required for an empty one.  Requires the Owner or Developer role. Returns 400 if the notefile already exists.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -980,9 +1040,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_device
+        """Delete a device
 
-        Delete Device
+        Delete a device and its notefiles from a project. Its events are kept. A Notecard that syncs again is added back as a new device; to block it instead, use `DisableDevice`.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1048,9 +1108,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_device
+        """Delete a device
 
-        Delete Device
+        Delete a device and its notefiles from a project. Its events are kept. A Notecard that syncs again is added back as a new device; to block it instead, use `DisableDevice`.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1116,9 +1176,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_device
+        """Delete a device
 
-        Delete Device
+        Delete a device and its notefiles from a project. Its events are kept. A Notecard that syncs again is added back as a new device; to block it instead, use `DisableDevice`.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1237,9 +1297,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvironmentVariables:
-        """delete_device_environment_variable
+        """Delete a device environment variable
 
-        Delete environment variable of a device
+        Delete one device environment variable and return the ones left. Fleet and project variables with the same name then apply. Deleting a variable that doesn't exist succeeds.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1311,9 +1371,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvironmentVariables]:
-        """delete_device_environment_variable
+        """Delete a device environment variable
 
-        Delete environment variable of a device
+        Delete one device environment variable and return the ones left. Fleet and project variables with the same name then apply. Deleting a variable that doesn't exist succeeds.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1385,9 +1445,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_device_environment_variable
+        """Delete a device environment variable
 
-        Delete environment variable of a device
+        Delete one device environment variable and return the ones left. Fleet and project variables with the same name then apply. Deleting a variable that doesn't exist succeeds.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1497,8 +1557,18 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1511,17 +1581,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_note
+        """Delete a note
 
-        Delete a note from a .db or .qi notefile
+        Delete one note from a notefile on a device. To delete whole notefiles, use `DeleteNotefiles`.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1573,8 +1643,18 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1587,17 +1667,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_note
+        """Delete a note
 
-        Delete a note from a .db or .qi notefile
+        Delete one note from a notefile on a device. To delete whole notefiles, use `DeleteNotefiles`.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1649,8 +1729,18 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1663,17 +1753,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_note
+        """Delete a note
 
-        Delete a note from a .db or .qi notefile
+        Delete one note from a notefile on a device. To delete whole notefiles, use `DeleteNotefiles`.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1781,7 +1871,9 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        delete_notefiles_request: DeleteNotefilesRequest,
+        delete_notefiles_request: Annotated[
+            DeleteNotefilesRequest, Field(description="The notefiles to delete.")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1794,15 +1886,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_notefiles
+        """Delete notefiles
 
-        Deletes Notefiles and the Notes they contain.
+        Delete notefiles and all their notes from a device. To delete one note, use `DeleteNote`.  Requires the Owner or Developer role. Returns 400 if `files` is empty.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param delete_notefiles_request: (required)
+        :param delete_notefiles_request: The notefiles to delete. (required)
         :type delete_notefiles_request: DeleteNotefilesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1853,7 +1945,9 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        delete_notefiles_request: DeleteNotefilesRequest,
+        delete_notefiles_request: Annotated[
+            DeleteNotefilesRequest, Field(description="The notefiles to delete.")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1866,15 +1960,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_notefiles
+        """Delete notefiles
 
-        Deletes Notefiles and the Notes they contain.
+        Delete notefiles and all their notes from a device. To delete one note, use `DeleteNote`.  Requires the Owner or Developer role. Returns 400 if `files` is empty.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param delete_notefiles_request: (required)
+        :param delete_notefiles_request: The notefiles to delete. (required)
         :type delete_notefiles_request: DeleteNotefilesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1925,7 +2019,9 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        delete_notefiles_request: DeleteNotefilesRequest,
+        delete_notefiles_request: Annotated[
+            DeleteNotefilesRequest, Field(description="The notefiles to delete.")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1938,15 +2034,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_notefiles
+        """Delete notefiles
 
-        Deletes Notefiles and the Notes they contain.
+        Delete notefiles and all their notes from a device. To delete one note, use `DeleteNote`.  Requires the Owner or Developer role. Returns 400 if `files` is empty.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param delete_notefiles_request: (required)
+        :param delete_notefiles_request: The notefiles to delete. (required)
         :type delete_notefiles_request: DeleteNotefilesRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2072,9 +2168,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """disable_device
+        """Disable a device
 
-        Disable Device
+        Stop a device from connecting to Notehub, ending any open session. The device and its data stay in the project; undo with `EnableDevice`. Does nothing if it's already disabled.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2140,9 +2236,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """disable_device
+        """Disable a device
 
-        Disable Device
+        Stop a device from connecting to Notehub, ending any open session. The device and its data stay in the project; undo with `EnableDevice`. Does nothing if it's already disabled.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2208,9 +2304,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """disable_device
+        """Disable a device
 
-        Disable Device
+        Stop a device from connecting to Notehub, ending any open session. The device and its data stay in the project; undo with `EnableDevice`. Does nothing if it's already disabled.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2326,9 +2422,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """enable_device
+        """Enable a device
 
-        Enable Device
+        Re-enable a device turned off with `DisableDevice`, so it can connect to Notehub again. Does nothing if the device is already enabled.  Requires the Owner or Developer role. Returns 409 if the device's cellular service was deactivated; it must be reactivated instead.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2394,9 +2490,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """enable_device
+        """Enable a device
 
-        Enable Device
+        Re-enable a device turned off with `DisableDevice`, so it can connect to Notehub again. Does nothing if the device is already enabled.  Requires the Owner or Developer role. Returns 409 if the device's cellular service was deactivated; it must be reactivated instead.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2462,9 +2558,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """enable_device
+        """Enable a device
 
-        Enable Device
+        Re-enable a device turned off with `DisableDevice`, so it can connect to Notehub again. Does nothing if the device is already enabled.  Requires the Owner or Developer role. Returns 409 if the device's cellular service was deactivated; it must be reactivated instead.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2568,14 +2664,27 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         delete: Annotated[
             Optional[StrictBool],
-            Field(description="Whether to delete the note from the DB notefile"),
+            Field(
+                description="If true, delete the note after returning it. Requires the Owner or Developer role."
+            ),
         ] = None,
         deleted: Annotated[
-            Optional[StrictBool], Field(description="Whether to return deleted notes")
+            Optional[StrictBool],
+            Field(description="If true, also return the note if it has been deleted."),
         ] = None,
         _request_timeout: Union[
             None,
@@ -2589,21 +2698,21 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDbNote200Response:
-        """get_db_note
+        """Get a note
 
-        Get a note from a .db or .qi notefile
+        Get one note's body, payload and time from a notefile on a device. To get every note in a notefile, use `GetNotefile`.  With `delete=true`, the note is deleted after it is read, which requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
-        :param delete: Whether to delete the note from the DB notefile
+        :param delete: If true, delete the note after returning it. Requires the Owner or Developer role.
         :type delete: bool
-        :param deleted: Whether to return deleted notes
+        :param deleted: If true, also return the note if it has been deleted.
         :type deleted: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2657,14 +2766,27 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         delete: Annotated[
             Optional[StrictBool],
-            Field(description="Whether to delete the note from the DB notefile"),
+            Field(
+                description="If true, delete the note after returning it. Requires the Owner or Developer role."
+            ),
         ] = None,
         deleted: Annotated[
-            Optional[StrictBool], Field(description="Whether to return deleted notes")
+            Optional[StrictBool],
+            Field(description="If true, also return the note if it has been deleted."),
         ] = None,
         _request_timeout: Union[
             None,
@@ -2678,21 +2800,21 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDbNote200Response]:
-        """get_db_note
+        """Get a note
 
-        Get a note from a .db or .qi notefile
+        Get one note's body, payload and time from a notefile on a device. To get every note in a notefile, use `GetNotefile`.  With `delete=true`, the note is deleted after it is read, which requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
-        :param delete: Whether to delete the note from the DB notefile
+        :param delete: If true, delete the note after returning it. Requires the Owner or Developer role.
         :type delete: bool
-        :param deleted: Whether to return deleted notes
+        :param deleted: If true, also return the note if it has been deleted.
         :type deleted: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2746,14 +2868,27 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         delete: Annotated[
             Optional[StrictBool],
-            Field(description="Whether to delete the note from the DB notefile"),
+            Field(
+                description="If true, delete the note after returning it. Requires the Owner or Developer role."
+            ),
         ] = None,
         deleted: Annotated[
-            Optional[StrictBool], Field(description="Whether to return deleted notes")
+            Optional[StrictBool],
+            Field(description="If true, also return the note if it has been deleted."),
         ] = None,
         _request_timeout: Union[
             None,
@@ -2767,21 +2902,21 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_db_note
+        """Get a note
 
-        Get a note from a .db or .qi notefile
+        Get one note's body, payload and time from a notefile on a device. To get every note in a notefile, use `GetNotefile`.  With `delete=true`, the note is deleted after it is read, which requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
-        :param delete: Whether to delete the note from the DB notefile
+        :param delete: If true, delete the note after returning it. Requires the Owner or Developer role.
         :type delete: bool
-        :param deleted: Whether to return deleted notes
+        :param deleted: If true, also return the note if it has been deleted.
         :type deleted: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2913,9 +3048,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Device:
-        """get_device
+        """Get a device
 
-        Get Device
+        Get one device's details: serial number, product, fleets, locations, firmware versions, SIM usage and DFU state. To find devices by tag, serial number or other fields, use `GetDevices`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2981,9 +3116,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Device]:
-        """get_device
+        """Get a device
 
-        Get Device
+        Get one device's details: serial number, product, fleets, locations, firmware versions, SIM usage and DFU state. To find devices by tag, serial number or other fields, use `GetDevices`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3049,9 +3184,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device
+        """Get a device
 
-        Get Device
+        Get one device's details: serial number, product, fleets, locations, firmware versions, SIM usage and DFU state. To find devices by tag, serial number or other fields, use `GetDevices`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3167,8 +3302,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvTreeJsonNode:
-        """Get environment variable hierarchy for a device
+        """Get a device's environment hierarchy
 
+        Get a device's environment variables and the fleet and project variables it inherits, as a tree. Each variable has its precedence and whether it is used or overridden. For just the resolved values, use `GetDeviceEnvironmentVariables`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3236,8 +3372,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvTreeJsonNode]:
-        """Get environment variable hierarchy for a device
+        """Get a device's environment hierarchy
 
+        Get a device's environment variables and the fleet and project variables it inherits, as a tree. Each variable has its precedence and whether it is used or overridden. For just the resolved values, use `GetDeviceEnvironmentVariables`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3305,8 +3442,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get environment variable hierarchy for a device
+        """Get a device's environment hierarchy
 
+        Get a device's environment variables and the fleet and project variables it inherits, as a tree. Each variable has its precedence and whether it is used or overridden. For just the resolved values, use `GetDeviceEnvironmentVariables`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3424,9 +3562,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceEnvironmentVariablesByPin200Response:
-        """get_device_environment_variables
+        """Get device environment variables
 
-        Get environment variables of a device
+        Get a device's own environment variables, its `env.default` values, and its effective values. Effective values merge in project and fleet variables, which device variables override. To see where each value comes from, use `GetDeviceEnvironmentHierarchy`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3492,9 +3630,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceEnvironmentVariablesByPin200Response]:
-        """get_device_environment_variables
+        """Get device environment variables
 
-        Get environment variables of a device
+        Get a device's own environment variables, its `env.default` values, and its effective values. Effective values merge in project and fleet variables, which device variables override. To see where each value comes from, use `GetDeviceEnvironmentHierarchy`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3560,9 +3698,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_environment_variables
+        """Get device environment variables
 
-        Get environment variables of a device
+        Get a device's own environment variables, its `env.default` values, and its effective values. Effective values merge in project and fleet variables, which device variables override. To see where each value comes from, use `GetDeviceEnvironmentHierarchy`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3667,7 +3805,8 @@ class DeviceApi:
         product_uid: StrictStr,
         device_uid: StrictStr,
         x_auth_token: Annotated[
-            StrictStr, Field(description="For accessing endpoints by Device pin.")
+            StrictStr,
+            Field(description="The device's PIN, used instead of an API token."),
         ],
         _request_timeout: Union[
             None,
@@ -3681,15 +3820,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceEnvironmentVariablesByPin200Response:
-        """get_device_environment_variables_by_pin
+        """Get device environment variables using a PIN
 
-        Get environment variables of a device with device pin authorization
+        Get a device's environment variables using its PIN instead of an API token. Pass the PIN in `X-Auth-Token`. Made for device dashboard pages; with a token, use `GetDeviceEnvironmentVariables`, which also returns effective values.  Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :param x_auth_token: The device's PIN, used instead of an API token. (required)
         :type x_auth_token: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3741,7 +3880,8 @@ class DeviceApi:
         product_uid: StrictStr,
         device_uid: StrictStr,
         x_auth_token: Annotated[
-            StrictStr, Field(description="For accessing endpoints by Device pin.")
+            StrictStr,
+            Field(description="The device's PIN, used instead of an API token."),
         ],
         _request_timeout: Union[
             None,
@@ -3755,15 +3895,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceEnvironmentVariablesByPin200Response]:
-        """get_device_environment_variables_by_pin
+        """Get device environment variables using a PIN
 
-        Get environment variables of a device with device pin authorization
+        Get a device's environment variables using its PIN instead of an API token. Pass the PIN in `X-Auth-Token`. Made for device dashboard pages; with a token, use `GetDeviceEnvironmentVariables`, which also returns effective values.  Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :param x_auth_token: The device's PIN, used instead of an API token. (required)
         :type x_auth_token: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3815,7 +3955,8 @@ class DeviceApi:
         product_uid: StrictStr,
         device_uid: StrictStr,
         x_auth_token: Annotated[
-            StrictStr, Field(description="For accessing endpoints by Device pin.")
+            StrictStr,
+            Field(description="The device's PIN, used instead of an API token."),
         ],
         _request_timeout: Union[
             None,
@@ -3829,15 +3970,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_environment_variables_by_pin
+        """Get device environment variables using a PIN
 
-        Get environment variables of a device with device pin authorization
+        Get a device's environment variables using its PIN instead of an API token. Pass the PIN in `X-Auth-Token`. Made for device dashboard pages; with a token, use `GetDeviceEnvironmentVariables`, which also returns effective values.  Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :param x_auth_token: The device's PIN, used instead of an API token. (required)
         :type x_auth_token: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3955,7 +4096,9 @@ class DeviceApi:
         ] = None,
         log_type: Annotated[
             Optional[List[StrictStr]],
-            Field(description="Return only specified log types"),
+            Field(
+                description="Return only these kinds of entry. If omitted, all entries are returned. - `boot`: the device restarted - `dfu_completed`: a host firmware update finished "
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -3969,9 +4112,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceHealthLog200Response:
-        """get_device_health_log
+        """Get a device's health log
 
-        Get Device Health Log
+        Get a device's health log: timestamped status messages such as restarts and completed firmware updates. Only the latest 100 entries are kept.  To filter by date, pass both `startDate` and `endDate`; `startDate` alone returns 400, and the same value for both returns every entry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -3981,7 +4124,7 @@ class DeviceApi:
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param log_type: Return only specified log types
+        :param log_type: Return only these kinds of entry. If omitted, all entries are returned. - `boot`: the device restarted - `dfu_completed`: a host firmware update finished
         :type log_type: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4048,7 +4191,9 @@ class DeviceApi:
         ] = None,
         log_type: Annotated[
             Optional[List[StrictStr]],
-            Field(description="Return only specified log types"),
+            Field(
+                description="Return only these kinds of entry. If omitted, all entries are returned. - `boot`: the device restarted - `dfu_completed`: a host firmware update finished "
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -4062,9 +4207,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceHealthLog200Response]:
-        """get_device_health_log
+        """Get a device's health log
 
-        Get Device Health Log
+        Get a device's health log: timestamped status messages such as restarts and completed firmware updates. Only the latest 100 entries are kept.  To filter by date, pass both `startDate` and `endDate`; `startDate` alone returns 400, and the same value for both returns every entry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4074,7 +4219,7 @@ class DeviceApi:
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param log_type: Return only specified log types
+        :param log_type: Return only these kinds of entry. If omitted, all entries are returned. - `boot`: the device restarted - `dfu_completed`: a host firmware update finished
         :type log_type: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4141,7 +4286,9 @@ class DeviceApi:
         ] = None,
         log_type: Annotated[
             Optional[List[StrictStr]],
-            Field(description="Return only specified log types"),
+            Field(
+                description="Return only these kinds of entry. If omitted, all entries are returned. - `boot`: the device restarted - `dfu_completed`: a host firmware update finished "
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -4155,9 +4302,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_health_log
+        """Get a device's health log
 
-        Get Device Health Log
+        Get a device's health log: timestamped status messages such as restarts and completed firmware updates. Only the latest 100 entries are kept.  To filter by date, pass both `startDate` and `endDate`; `startDate` alone returns 400, and the same value for both returns every entry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4167,7 +4314,7 @@ class DeviceApi:
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param log_type: Return only specified log types
+        :param log_type: Return only these kinds of entry. If omitted, all entries are returned. - `boot`: the device restarted - `dfu_completed`: a host firmware update finished
         :type log_type: List[str]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -4293,7 +4440,7 @@ class DeviceApi:
                 description="Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey). "
             ),
         ],
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         _request_timeout: Union[
             None,
@@ -4307,9 +4454,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceJourney200Response:
-        """get_device_journey
+        """Get a journey and its events
 
-        Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+        Get one journey's start and end time and its events, oldest first. Only events with a location are included, and a run of events at the same location is reduced to the first.  The events are paginated; `journey.has_more` is true if there are more. Returns 404 if the journey doesn't exist, and 403 if the organization is suspended.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4378,7 +4525,7 @@ class DeviceApi:
                 description="Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey). "
             ),
         ],
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         _request_timeout: Union[
             None,
@@ -4392,9 +4539,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceJourney200Response]:
-        """get_device_journey
+        """Get a journey and its events
 
-        Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+        Get one journey's start and end time and its events, oldest first. Only events with a location are included, and a run of events at the same location is reduced to the first.  The events are paginated; `journey.has_more` is true if there are more. Returns 404 if the journey doesn't exist, and 403 if the organization is suspended.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4463,7 +4610,7 @@ class DeviceApi:
                 description="Identifier of the journey, taken from the numeric `journey` field in the event body (a Unix timestamp marking the start of the journey). "
             ),
         ],
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         _request_timeout: Union[
             None,
@@ -4477,9 +4624,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_journey
+        """Get a journey and its events
 
-        Get a single journey for a device along with its events. The events array is paginated via `pageSize` / `pageNum`; use `journey.has_more` to detect additional pages.
+        Get one journey's start and end time and its events, oldest first. Only events with a location are included, and a run of events at the same location is reduced to the first.  The events are paginated; `journey.has_more` is true if there are more. Returns 404 if the journey doesn't exist, and 403 if the organization is suspended.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4629,9 +4776,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceJourneys200Response:
-        """get_device_journeys
+        """List a device's journeys
 
-        Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+        List a device's journeys, newest first, without their events. A journey is the events whose body has the same `journey` value and a `jcount` field; one-event journeys are left out. For a journey's events, use `GetDeviceJourney`.  Returns at most 100; `has_more` is true if there are more. `startDate` and `endDate` filter on the journey's start. Returns 403 if the organization is suspended.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4715,9 +4862,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceJourneys200Response]:
-        """get_device_journeys
+        """List a device's journeys
 
-        Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+        List a device's journeys, newest first, without their events. A journey is the events whose body has the same `journey` value and a `jcount` field; one-event journeys are left out. For a journey's events, use `GetDeviceJourney`.  Returns at most 100; `has_more` is true if there are more. `startDate` and `endDate` filter on the journey's start. Returns 403 if the organization is suspended.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4801,9 +4948,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_journeys
+        """List a device's journeys
 
-        Get the list of journeys for a device, derived from events whose body contains `journey` and `jcount` fields. Returns journey metadata only (no event payloads). Capped at 100 most recent journeys; `has_more` is true when the cap is hit.
+        List a device's journeys, newest first, without their events. A journey is the events whose body has the same `journey` value and a `jcount` field; one-event journeys are left out. For a journey's events, use `GetDeviceJourney`.  Returns at most 100; `has_more` is true if there are more. `startDate` and `endDate` filter on the journey's start. Returns 403 if the organization is suspended.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -4935,9 +5082,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceLatestEvents200Response:
-        """get_device_latest_events
+        """Get a device's latest event per notefile
 
-        Get Device Latest Events
+        Get the most recent event from each of a device's notefiles, sorted by notefile name. `_env.qo` is left out. To search a device's event history, use `GetEvents`.  Returns 403 if the organization is suspended.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5003,9 +5150,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceLatestEvents200Response]:
-        """get_device_latest_events
+        """Get a device's latest event per notefile
 
-        Get Device Latest Events
+        Get the most recent event from each of a device's notefiles, sorted by notefile name. `_env.qo` is left out. To search a device's event history, use `GetEvents`.  Returns 403 if the organization is suspended.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5071,9 +5218,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_latest_events
+        """Get a device's latest event per notefile
 
-        Get Device Latest Events
+        Get the most recent event from each of a device's notefiles, sorted by notefile name. `_env.qo` is left out. To search a device's event history, use `GetEvents`.  Returns 403 if the organization is suspended.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5189,9 +5336,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDevicePlans200Response:
-        """get_device_plans
+        """Get a device's cellular data plans
 
-        Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+        Get the data plan of each cellular SIM in a device: plan type, data used and remaining, and expiry. Covers the built-in SIM and any external SIM, but not satellite plans.  Returns 404 if the device has no cellular or satellite SIM.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5257,9 +5404,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDevicePlans200Response]:
-        """get_device_plans
+        """Get a device's cellular data plans
 
-        Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+        Get the data plan of each cellular SIM in a device: plan type, data used and remaining, and expiry. Covers the built-in SIM and any external SIM, but not satellite plans.  Returns 404 if the device has no cellular or satellite SIM.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5325,9 +5472,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_plans
+        """Get a device's cellular data plans
 
-        Get Data Plans associated with the device, this include the primary sim, any external sim, as well as any satellite connections.
+        Get the data plan of each cellular SIM in a device: plan type, data used and remaining, and expiry. Covers the built-in SIM and any external SIM, but not satellite plans.  Returns 404 if the device has no cellular or satellite SIM.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5443,9 +5590,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDevicePublicKey200Response:
-        """get_device_public_key
+        """Get a device's public key
 
-        Get Device Public Key
+        Get one Notecard's public key, in PEM format. For every device in the project, use `GetDevicePublicKeys`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5511,9 +5658,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDevicePublicKey200Response]:
-        """get_device_public_key
+        """Get a device's public key
 
-        Get Device Public Key
+        Get one Notecard's public key, in PEM format. For every device in the project, use `GetDevicePublicKeys`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5579,9 +5726,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_public_key
+        """Get a device's public key
 
-        Get Device Public Key
+        Get one Notecard's public key, in PEM format. For every device in the project, use `GetDevicePublicKeys`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5684,8 +5831,14 @@ class DeviceApi:
     def get_device_public_keys(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5698,9 +5851,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDevicePublicKeys200Response:
-        """get_device_public_keys
+        """List public keys of all devices
 
-        Get Device Public Keys of a Project
+        List the public key of every device in a project. For one device, use `GetDevicePublicKey`.  Paginated. Deleted devices are included only when reading with a `cursor`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5708,6 +5861,8 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5734,6 +5889,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5756,8 +5912,14 @@ class DeviceApi:
     def get_device_public_keys_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5770,9 +5932,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDevicePublicKeys200Response]:
-        """get_device_public_keys
+        """List public keys of all devices
 
-        Get Device Public Keys of a Project
+        List the public key of every device in a project. For one device, use `GetDevicePublicKey`.  Paginated. Deleted devices are included only when reading with a `cursor`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5780,6 +5942,8 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5806,6 +5970,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5828,8 +5993,14 @@ class DeviceApi:
     def get_device_public_keys_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5842,9 +6013,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_public_keys
+        """List public keys of all devices
 
-        Get Device Public Keys of a Project
+        List the public key of every device in a project. For one device, use `GetDevicePublicKey`.  Paginated. Deleted devices are included only when reading with a `cursor`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -5852,6 +6023,8 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5878,6 +6051,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5897,6 +6071,7 @@ class DeviceApi:
         project_or_product_uid,
         page_size,
         page_num,
+        cursor,
         _request_auth,
         _content_type,
         _headers,
@@ -5925,6 +6100,10 @@ class DeviceApi:
         if page_num is not None:
 
             _query_params.append(("pageNum", page_num))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
 
         # process the header parameters
         # process the form parameters
@@ -5958,8 +6137,14 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -5975,7 +6160,7 @@ class DeviceApi:
         first_sync: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, filters results to only show first sync sessions"
+                description='If true, return only sessions whose `why_session_opened` begins with "first sync".'
             ),
         ] = None,
         _request_timeout: Union[
@@ -5990,9 +6175,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDeviceSessions200Response:
-        """get_device_sessions
+        """List a device's sessions
 
-        Get Device Sessions
+        List a device's sessions, its connections to Notehub. Each shows why it opened and closed, signal strength, location and data usage. `startDate` and `endDate` filter on when the session began. For every device's sessions, use `GetSessions`.  Paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -6002,11 +6187,13 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param first_sync: When true, filters results to only show first sync sessions
+        :param first_sync: If true, return only sessions whose `why_session_opened` begins with \"first sync\".
         :type first_sync: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6035,6 +6222,7 @@ class DeviceApi:
             device_uid=device_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             start_date=start_date,
             end_date=end_date,
             first_sync=first_sync,
@@ -6061,8 +6249,14 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -6078,7 +6272,7 @@ class DeviceApi:
         first_sync: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, filters results to only show first sync sessions"
+                description='If true, return only sessions whose `why_session_opened` begins with "first sync".'
             ),
         ] = None,
         _request_timeout: Union[
@@ -6093,9 +6287,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDeviceSessions200Response]:
-        """get_device_sessions
+        """List a device's sessions
 
-        Get Device Sessions
+        List a device's sessions, its connections to Notehub. Each shows why it opened and closed, signal strength, location and data usage. `startDate` and `endDate` filter on when the session began. For every device's sessions, use `GetSessions`.  Paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -6105,11 +6299,13 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param first_sync: When true, filters results to only show first sync sessions
+        :param first_sync: If true, return only sessions whose `why_session_opened` begins with \"first sync\".
         :type first_sync: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6138,6 +6334,7 @@ class DeviceApi:
             device_uid=device_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             start_date=start_date,
             end_date=end_date,
             first_sync=first_sync,
@@ -6164,8 +6361,14 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -6181,7 +6384,7 @@ class DeviceApi:
         first_sync: Annotated[
             Optional[StrictBool],
             Field(
-                description="When true, filters results to only show first sync sessions"
+                description='If true, return only sessions whose `why_session_opened` begins with "first sync".'
             ),
         ] = None,
         _request_timeout: Union[
@@ -6196,9 +6399,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_device_sessions
+        """List a device's sessions
 
-        Get Device Sessions
+        List a device's sessions, its connections to Notehub. Each shows why it opened and closed, signal strength, location and data usage. `startDate` and `endDate` filter on when the session began. For every device's sessions, use `GetSessions`.  Paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -6208,11 +6411,13 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param first_sync: When true, filters results to only show first sync sessions
+        :param first_sync: If true, return only sessions whose `why_session_opened` begins with \"first sync\".
         :type first_sync: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6241,6 +6446,7 @@ class DeviceApi:
             device_uid=device_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             start_date=start_date,
             end_date=end_date,
             first_sync=first_sync,
@@ -6264,6 +6470,7 @@ class DeviceApi:
         device_uid,
         page_size,
         page_num,
+        cursor,
         start_date,
         end_date,
         first_sync,
@@ -6297,6 +6504,10 @@ class DeviceApi:
         if page_num is not None:
 
             _query_params.append(("pageNum", page_num))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
 
         if start_date is not None:
 
@@ -6341,10 +6552,16 @@ class DeviceApi:
     def get_devices(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -6380,7 +6597,7 @@ class DeviceApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -6401,9 +6618,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDevices200Response:
-        """get_devices
+        """List devices in a project
 
-        Get Devices of a Project
+        List the devices in a project, with optional filters such as tag, serial number, fleet, location and firmware version. For one fleet's devices, use `GetFleetDevices`.  Paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -6411,7 +6628,9 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -6425,7 +6644,7 @@ class DeviceApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -6455,6 +6674,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             tag=tag,
             serial_number=serial_number,
@@ -6486,10 +6706,16 @@ class DeviceApi:
     def get_devices_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -6525,7 +6751,7 @@ class DeviceApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -6546,9 +6772,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDevices200Response]:
-        """get_devices
+        """List devices in a project
 
-        Get Devices of a Project
+        List the devices in a project, with optional filters such as tag, serial number, fleet, location and firmware version. For one fleet's devices, use `GetFleetDevices`.  Paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -6556,7 +6782,9 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -6570,7 +6798,7 @@ class DeviceApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -6600,6 +6828,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             tag=tag,
             serial_number=serial_number,
@@ -6631,10 +6860,16 @@ class DeviceApi:
     def get_devices_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -6670,7 +6905,7 @@ class DeviceApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -6691,9 +6926,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_devices
+        """List devices in a project
 
-        Get Devices of a Project
+        List the devices in a project, with optional filters such as tag, serial number, fleet, location and firmware version. For one fleet's devices, use `GetFleetDevices`.  Paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -6701,7 +6936,9 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -6715,7 +6952,7 @@ class DeviceApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -6745,6 +6982,7 @@ class DeviceApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             tag=tag,
             serial_number=serial_number,
@@ -6773,6 +7011,7 @@ class DeviceApi:
         project_or_product_uid,
         page_size,
         page_num,
+        cursor,
         device_uid,
         tag,
         serial_number,
@@ -6820,6 +7059,10 @@ class DeviceApi:
         if page_num is not None:
 
             _query_params.append(("pageNum", page_num))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
 
         if device_uid is not None:
 
@@ -6889,10 +7132,16 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -6927,7 +7176,7 @@ class DeviceApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -6948,9 +7197,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetDevices200Response:
-        """get_fleet_devices
+        """List devices in a fleet
 
-        Get Devices of a Fleet within a Project
+        List the devices in one fleet, with the same filters as `GetDevices`. To list a device's fleets instead, use `GetDeviceFleets`.  Paginated. Returns 404 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -6960,7 +7209,9 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -6972,7 +7223,7 @@ class DeviceApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -7003,6 +7254,7 @@ class DeviceApi:
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             tag=tag,
             serial_number=serial_number,
@@ -7034,10 +7286,16 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -7072,7 +7330,7 @@ class DeviceApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -7093,9 +7351,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetDevices200Response]:
-        """get_fleet_devices
+        """List devices in a fleet
 
-        Get Devices of a Fleet within a Project
+        List the devices in one fleet, with the same filters as `GetDevices`. To list a device's fleets instead, use `GetDeviceFleets`.  Paginated. Returns 404 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -7105,7 +7363,9 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -7117,7 +7377,7 @@ class DeviceApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -7148,6 +7408,7 @@ class DeviceApi:
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             tag=tag,
             serial_number=serial_number,
@@ -7179,10 +7440,16 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         tag: Annotated[
             Optional[List[StrictStr]],
@@ -7217,7 +7484,7 @@ class DeviceApi:
         product_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
+                description="ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally."
             ),
         ] = None,
         sku: Annotated[
@@ -7238,9 +7505,9 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_fleet_devices
+        """List devices in a fleet
 
-        Get Devices of a Fleet within a Project
+        List the devices in one fleet, with the same filters as `GetDevices`. To list a device's fleets instead, use `GetDeviceFleets`.  Paginated. Returns 404 if the fleet doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -7250,7 +7517,9 @@ class DeviceApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
         :param tag: Tag filter. Matches the whole tag, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally. For example, `51*` matches tags starting with `51`.
         :type tag: List[str]
@@ -7262,7 +7531,7 @@ class DeviceApi:
         :type location: List[str]
         :param host_firmware: Host firmware filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type host_firmware: List[str]
-        :param product_uid: Product UID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
+        :param product_uid: ProductUID filter. Matches any value containing the filter text, case-insensitive. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type product_uid: List[str]
         :param sku: SKU filter. Matches any value containing the filter text. Use `*` as a wildcard and `\\*` to match a literal `*`; all other characters, including `%` and `_`, match literally.
         :type sku: List[str]
@@ -7293,6 +7562,7 @@ class DeviceApi:
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             tag=tag,
             serial_number=serial_number,
@@ -7321,6 +7591,7 @@ class DeviceApi:
         fleet_uid,
         page_size,
         page_num,
+        cursor,
         device_uid,
         tag,
         serial_number,
@@ -7368,6 +7639,10 @@ class DeviceApi:
         if page_num is not None:
 
             _query_params.append(("pageNum", page_num))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
 
         if device_uid is not None:
 
@@ -7433,17 +7708,24 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
         max: Annotated[
-            Optional[StrictInt],
-            Field(description="The maximum number of Notes to return in the request."),
+            Optional[StrictInt], Field(description="The most notes to return.")
         ] = None,
         deleted: Annotated[
-            Optional[StrictBool], Field(description="true to return deleted notes.")
+            Optional[StrictBool],
+            Field(description="If true, also return deleted notes."),
         ] = None,
         delete: Annotated[
             Optional[StrictBool],
-            Field(description="true to delete the notes returned by the request."),
+            Field(
+                description="If true, delete the notes this request returns. Requires the Owner or Developer role."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -7457,21 +7739,21 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetNotefile200Response:
-        """get_notefile
+        """Get the notes in a notefile
 
-        For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile
+        Get the notes in one notefile on a device. For a `.qi` notefile, that's the notes still queued; for a `.db` notefile, every note. To list all of a device's notefiles with their notes, use `ListNotefiles`.  With `delete=true`, the returned notes are deleted, which requires the Owner or Developer role. Returns 400 if `notefileID` has no valid notefile extension.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param max: The maximum number of Notes to return in the request.
+        :param max: The most notes to return.
         :type max: int
-        :param deleted: true to return deleted notes.
+        :param deleted: If true, also return deleted notes.
         :type deleted: bool
-        :param delete: true to delete the notes returned by the request.
+        :param delete: If true, delete the notes this request returns. Requires the Owner or Developer role.
         :type delete: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7525,17 +7807,24 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
         max: Annotated[
-            Optional[StrictInt],
-            Field(description="The maximum number of Notes to return in the request."),
+            Optional[StrictInt], Field(description="The most notes to return.")
         ] = None,
         deleted: Annotated[
-            Optional[StrictBool], Field(description="true to return deleted notes.")
+            Optional[StrictBool],
+            Field(description="If true, also return deleted notes."),
         ] = None,
         delete: Annotated[
             Optional[StrictBool],
-            Field(description="true to delete the notes returned by the request."),
+            Field(
+                description="If true, delete the notes this request returns. Requires the Owner or Developer role."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -7549,21 +7838,21 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetNotefile200Response]:
-        """get_notefile
+        """Get the notes in a notefile
 
-        For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile
+        Get the notes in one notefile on a device. For a `.qi` notefile, that's the notes still queued; for a `.db` notefile, every note. To list all of a device's notefiles with their notes, use `ListNotefiles`.  With `delete=true`, the returned notes are deleted, which requires the Owner or Developer role. Returns 400 if `notefileID` has no valid notefile extension.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param max: The maximum number of Notes to return in the request.
+        :param max: The most notes to return.
         :type max: int
-        :param deleted: true to return deleted notes.
+        :param deleted: If true, also return deleted notes.
         :type deleted: bool
-        :param delete: true to delete the notes returned by the request.
+        :param delete: If true, delete the notes this request returns. Requires the Owner or Developer role.
         :type delete: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7617,17 +7906,24 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
         max: Annotated[
-            Optional[StrictInt],
-            Field(description="The maximum number of Notes to return in the request."),
+            Optional[StrictInt], Field(description="The most notes to return.")
         ] = None,
         deleted: Annotated[
-            Optional[StrictBool], Field(description="true to return deleted notes.")
+            Optional[StrictBool],
+            Field(description="If true, also return deleted notes."),
         ] = None,
         delete: Annotated[
             Optional[StrictBool],
-            Field(description="true to delete the notes returned by the request."),
+            Field(
+                description="If true, delete the notes this request returns. Requires the Owner or Developer role."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -7641,21 +7937,21 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_notefile
+        """Get the notes in a notefile
 
-        For .qi files, returns the queued up notes.  For .db files, returns all notes in the notefile
+        Get the notes in one notefile on a device. For a `.qi` notefile, that's the notes still queued; for a `.db` notefile, every note. To list all of a device's notefiles with their notes, use `ListNotefiles`.  With `delete=true`, the returned notes are deleted, which requires the Owner or Developer role. Returns 400 if `notefileID` has no valid notefile extension.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param max: The maximum number of Notes to return in the request.
+        :param max: The most notes to return.
         :type max: int
-        :param deleted: true to return deleted notes.
+        :param deleted: If true, also return deleted notes.
         :type deleted: bool
-        :param delete: true to delete the notes returned by the request.
+        :param delete: If true, delete the notes this request returns. Requires the Owner or Developer role.
         :type delete: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -7773,13 +8069,459 @@ class DeviceApi:
         )
 
     @validate_call
+    def get_sessions(
+        self,
+        project_or_product_uid: StrictStr,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
+        start_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        end_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        first_sync: Annotated[
+            Optional[StrictBool],
+            Field(
+                description='If true, return only sessions whose `why_session_opened` begins with "first sync".'
+            ),
+        ] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
+        ] = None,
+        fleet_uid: Optional[List[StrictStr]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetDeviceSessions200Response:
+        """List sessions in a project
+
+        List the sessions of every device in a project, as `GetDeviceSessions` does for one device. `startDate` and `endDate` filter on when the session began. `deviceUID` and `fleetUID` each match any of their values; `fleetUID` matches the fleets recorded on the session.  Paginated.
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param page_size:
+        :type page_size: int
+        :param page_num:
+        :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
+        :type start_date: int
+        :param end_date: End date for filtering results, specified as a Unix timestamp
+        :type end_date: int
+        :param first_sync: If true, return only sessions whose `why_session_opened` begins with \"first sync\".
+        :type first_sync: bool
+        :param device_uid: A DeviceUID.
+        :type device_uid: List[str]
+        :param fleet_uid:
+        :type fleet_uid: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_sessions_serialize(
+            project_or_product_uid=project_or_product_uid,
+            page_size=page_size,
+            page_num=page_num,
+            cursor=cursor,
+            start_date=start_date,
+            end_date=end_date,
+            first_sync=first_sync,
+            device_uid=device_uid,
+            fleet_uid=fleet_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDeviceSessions200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    @validate_call
+    def get_sessions_with_http_info(
+        self,
+        project_or_product_uid: StrictStr,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
+        start_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        end_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        first_sync: Annotated[
+            Optional[StrictBool],
+            Field(
+                description='If true, return only sessions whose `why_session_opened` begins with "first sync".'
+            ),
+        ] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
+        ] = None,
+        fleet_uid: Optional[List[StrictStr]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetDeviceSessions200Response]:
+        """List sessions in a project
+
+        List the sessions of every device in a project, as `GetDeviceSessions` does for one device. `startDate` and `endDate` filter on when the session began. `deviceUID` and `fleetUID` each match any of their values; `fleetUID` matches the fleets recorded on the session.  Paginated.
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param page_size:
+        :type page_size: int
+        :param page_num:
+        :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
+        :type start_date: int
+        :param end_date: End date for filtering results, specified as a Unix timestamp
+        :type end_date: int
+        :param first_sync: If true, return only sessions whose `why_session_opened` begins with \"first sync\".
+        :type first_sync: bool
+        :param device_uid: A DeviceUID.
+        :type device_uid: List[str]
+        :param fleet_uid:
+        :type fleet_uid: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_sessions_serialize(
+            project_or_product_uid=project_or_product_uid,
+            page_size=page_size,
+            page_num=page_num,
+            cursor=cursor,
+            start_date=start_date,
+            end_date=end_date,
+            first_sync=first_sync,
+            device_uid=device_uid,
+            fleet_uid=fleet_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDeviceSessions200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+    @validate_call
+    def get_sessions_without_preload_content(
+        self,
+        project_or_product_uid: StrictStr,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
+        start_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="Start date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        end_date: Annotated[
+            Optional[Annotated[int, Field(strict=True, ge=0)]],
+            Field(
+                description="End date for filtering results, specified as a Unix timestamp"
+            ),
+        ] = None,
+        first_sync: Annotated[
+            Optional[StrictBool],
+            Field(
+                description='If true, return only sessions whose `why_session_opened` begins with "first sync".'
+            ),
+        ] = None,
+        device_uid: Annotated[
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
+        ] = None,
+        fleet_uid: Optional[List[StrictStr]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List sessions in a project
+
+        List the sessions of every device in a project, as `GetDeviceSessions` does for one device. `startDate` and `endDate` filter on when the session began. `deviceUID` and `fleetUID` each match any of their values; `fleetUID` matches the fleets recorded on the session.  Paginated.
+
+        :param project_or_product_uid: (required)
+        :type project_or_product_uid: str
+        :param page_size:
+        :type page_size: int
+        :param page_num:
+        :type page_num: int
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param start_date: Start date for filtering results, specified as a Unix timestamp
+        :type start_date: int
+        :param end_date: End date for filtering results, specified as a Unix timestamp
+        :type end_date: int
+        :param first_sync: If true, return only sessions whose `why_session_opened` begins with \"first sync\".
+        :type first_sync: bool
+        :param device_uid: A DeviceUID.
+        :type device_uid: List[str]
+        :param fleet_uid:
+        :type fleet_uid: List[str]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _param = self._get_sessions_serialize(
+            project_or_product_uid=project_or_product_uid,
+            page_size=page_size,
+            page_num=page_num,
+            cursor=cursor,
+            start_date=start_date,
+            end_date=end_date,
+            first_sync=first_sync,
+            device_uid=device_uid,
+            fleet_uid=fleet_uid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index,
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "GetDeviceSessions200Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param, _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+    def _get_sessions_serialize(
+        self,
+        project_or_product_uid,
+        page_size,
+        page_num,
+        cursor,
+        start_date,
+        end_date,
+        first_sync,
+        device_uid,
+        fleet_uid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            "deviceUID": "multi",
+            "fleetUID": "multi",
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if project_or_product_uid is not None:
+            _path_params["projectOrProductUID"] = project_or_product_uid
+        # process the query parameters
+        if page_size is not None:
+
+            _query_params.append(("pageSize", page_size))
+
+        if page_num is not None:
+
+            _query_params.append(("pageNum", page_num))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
+
+        if start_date is not None:
+
+            _query_params.append(("startDate", start_date))
+
+        if end_date is not None:
+
+            _query_params.append(("endDate", end_date))
+
+        if first_sync is not None:
+
+            _query_params.append(("firstSync", first_sync))
+
+        if device_uid is not None:
+
+            _query_params.append(("deviceUID", device_uid))
+
+        if fleet_uid is not None:
+
+            _query_params.append(("fleetUID", fleet_uid))
+
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
+        )
+
+        # authentication setting
+        _auth_settings: List[str] = ["personalAccessToken"]
+
+        return self.api_client.param_serialize(
+            method="GET",
+            resource_path="/v1/projects/{projectOrProductUID}/sessions",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     def list_notefiles(
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
         files: Annotated[
             Optional[List[StrictStr]],
-            Field(description="One or more files to obtain change information from."),
+            Field(
+                description="Notefiles to include, e.g. `config.db`. If omitted, all are listed."
+            ),
         ] = None,
         pending: Annotated[
             Optional[StrictBool],
@@ -7797,15 +8539,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Notefile]:
-        """list_notefiles
+        """List a device's notefiles and notes
 
-        Lists .qi and .db files for the device
+        List a device's notefiles with the notes in each, sorted `.qo`, then `.qi`, then `.db`. `.qo` notefiles are listed without notes, since Notehub empties them as it processes them. Most system notefiles (names starting with `_`) are left out. For one notefile, use `GetNotefile`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param files: One or more files to obtain change information from.
+        :param files: Notefiles to include, e.g. `config.db`. If omitted, all are listed.
         :type files: List[str]
         :param pending: show only files that are pending sync to the Notecard
         :type pending: bool
@@ -7861,7 +8603,9 @@ class DeviceApi:
         device_uid: StrictStr,
         files: Annotated[
             Optional[List[StrictStr]],
-            Field(description="One or more files to obtain change information from."),
+            Field(
+                description="Notefiles to include, e.g. `config.db`. If omitted, all are listed."
+            ),
         ] = None,
         pending: Annotated[
             Optional[StrictBool],
@@ -7879,15 +8623,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[Notefile]]:
-        """list_notefiles
+        """List a device's notefiles and notes
 
-        Lists .qi and .db files for the device
+        List a device's notefiles with the notes in each, sorted `.qo`, then `.qi`, then `.db`. `.qo` notefiles are listed without notes, since Notehub empties them as it processes them. Most system notefiles (names starting with `_`) are left out. For one notefile, use `GetNotefile`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param files: One or more files to obtain change information from.
+        :param files: Notefiles to include, e.g. `config.db`. If omitted, all are listed.
         :type files: List[str]
         :param pending: show only files that are pending sync to the Notecard
         :type pending: bool
@@ -7943,7 +8687,9 @@ class DeviceApi:
         device_uid: StrictStr,
         files: Annotated[
             Optional[List[StrictStr]],
-            Field(description="One or more files to obtain change information from."),
+            Field(
+                description="Notefiles to include, e.g. `config.db`. If omitted, all are listed."
+            ),
         ] = None,
         pending: Annotated[
             Optional[StrictBool],
@@ -7961,15 +8707,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """list_notefiles
+        """List a device's notefiles and notes
 
-        Lists .qi and .db files for the device
+        List a device's notefiles with the notes in each, sorted `.qo`, then `.qi`, then `.db`. `.qo` notefiles are listed without notes, since Notehub empties them as it processes them. Most system notefiles (names starting with `_`) are left out. For one notefile, use `GetNotefile`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param files: One or more files to obtain change information from.
+        :param files: Notefiles to include, e.g. `config.db`. If omitted, all are listed.
         :type files: List[str]
         :param pending: show only files that are pending sync to the Notecard
         :type pending: bool
@@ -8087,7 +8833,7 @@ class DeviceApi:
         device_uid: StrictStr,
         provision_device_request: Annotated[
             ProvisionDeviceRequest,
-            Field(description="Provision a device to a specific ProductUID"),
+            Field(description="The product, serial number and fleets for the device."),
         ],
         _request_timeout: Union[
             None,
@@ -8101,15 +8847,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> object:
-        """provision_device
+        """Provision a Notecard
 
-        Provision Device for a Project
+        Add a Notecard to a project before it first connects, with its product, serial number and fleets. A device that already exists isn't reset and keeps its fleets.  Requires the Owner or Developer role. Returns 404 if `product_uid` doesn't exist, and 400 if it belongs to another project or `deviceUID` isn't a valid Notecard DeviceUID.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param provision_device_request: Provision a device to a specific ProductUID (required)
+        :param provision_device_request: The product, serial number and fleets for the device. (required)
         :type provision_device_request: ProvisionDeviceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8162,7 +8908,7 @@ class DeviceApi:
         device_uid: StrictStr,
         provision_device_request: Annotated[
             ProvisionDeviceRequest,
-            Field(description="Provision a device to a specific ProductUID"),
+            Field(description="The product, serial number and fleets for the device."),
         ],
         _request_timeout: Union[
             None,
@@ -8176,15 +8922,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[object]:
-        """provision_device
+        """Provision a Notecard
 
-        Provision Device for a Project
+        Add a Notecard to a project before it first connects, with its product, serial number and fleets. A device that already exists isn't reset and keeps its fleets.  Requires the Owner or Developer role. Returns 404 if `product_uid` doesn't exist, and 400 if it belongs to another project or `deviceUID` isn't a valid Notecard DeviceUID.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param provision_device_request: Provision a device to a specific ProductUID (required)
+        :param provision_device_request: The product, serial number and fleets for the device. (required)
         :type provision_device_request: ProvisionDeviceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8237,7 +8983,7 @@ class DeviceApi:
         device_uid: StrictStr,
         provision_device_request: Annotated[
             ProvisionDeviceRequest,
-            Field(description="Provision a device to a specific ProductUID"),
+            Field(description="The product, serial number and fleets for the device."),
         ],
         _request_timeout: Union[
             None,
@@ -8251,15 +8997,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """provision_device
+        """Provision a Notecard
 
-        Provision Device for a Project
+        Add a Notecard to a project before it first connects, with its product, serial number and fleets. A device that already exists isn't reset and keeps its fleets.  Requires the Owner or Developer role. Returns 404 if `product_uid` doesn't exist, and 400 if it belongs to another project or `deviceUID` isn't a valid Notecard DeviceUID.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param provision_device_request: Provision a device to a specific ProductUID (required)
+        :param provision_device_request: The product, serial number and fleets for the device. (required)
         :type provision_device_request: ProvisionDeviceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8375,7 +9121,7 @@ class DeviceApi:
         device_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
-            Field(description="Environment variables to be added to the device"),
+            Field(description="The variables to add or change, and optional notes."),
         ],
         _request_timeout: Union[
             None,
@@ -8389,15 +9135,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvironmentVariables:
-        """set_device_environment_variables
+        """Set device environment variables
 
-        Set environment variables of a device
+        Add or change a device's environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param environment_variables: Environment variables to be added to the device (required)
+        :param environment_variables: The variables to add or change, and optional notes. (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8450,7 +9196,7 @@ class DeviceApi:
         device_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
-            Field(description="Environment variables to be added to the device"),
+            Field(description="The variables to add or change, and optional notes."),
         ],
         _request_timeout: Union[
             None,
@@ -8464,15 +9210,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvironmentVariables]:
-        """set_device_environment_variables
+        """Set device environment variables
 
-        Set environment variables of a device
+        Add or change a device's environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param environment_variables: Environment variables to be added to the device (required)
+        :param environment_variables: The variables to add or change, and optional notes. (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8525,7 +9271,7 @@ class DeviceApi:
         device_uid: StrictStr,
         environment_variables: Annotated[
             EnvironmentVariables,
-            Field(description="Environment variables to be added to the device"),
+            Field(description="The variables to add or change, and optional notes."),
         ],
         _request_timeout: Union[
             None,
@@ -8539,15 +9285,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_device_environment_variables
+        """Set device environment variables
 
-        Set environment variables of a device
+        Add or change a device's environment variables; variables you don't send keep their values. A value of `\"\"` or `-` deletes that variable. Setting `_fw`, `_fwc` or `_fwm` starts a host, Notecard or modem firmware update.  Requires the Owner or Developer role. Returns 400 if a note's key isn't a variable.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param environment_variables: Environment variables to be added to the device (required)
+        :param environment_variables: The variables to add or change, and optional notes. (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8662,11 +9408,12 @@ class DeviceApi:
         product_uid: StrictStr,
         device_uid: StrictStr,
         x_auth_token: Annotated[
-            StrictStr, Field(description="For accessing endpoints by Device pin.")
+            StrictStr,
+            Field(description="The device's PIN, used instead of an API token."),
         ],
         environment_variables: Annotated[
             EnvironmentVariables,
-            Field(description="Environment variables to be added to the device"),
+            Field(description="The variables to add or change, and optional notes."),
         ],
         _request_timeout: Union[
             None,
@@ -8680,17 +9427,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnvironmentVariables:
-        """set_device_environment_variables_by_pin
+        """Set device environment variables using a PIN
 
-        Set environment variables of a device with device pin authorization
+        Add or change a device's environment variables using its PIN instead of an API token. Pass the PIN in `X-Auth-Token`. Works like `SetDeviceEnvironmentVariables`: a value of `\"\"` or `-` deletes that variable.  Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :param x_auth_token: The device's PIN, used instead of an API token. (required)
         :type x_auth_token: str
-        :param environment_variables: Environment variables to be added to the device (required)
+        :param environment_variables: The variables to add or change, and optional notes. (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8743,11 +9490,12 @@ class DeviceApi:
         product_uid: StrictStr,
         device_uid: StrictStr,
         x_auth_token: Annotated[
-            StrictStr, Field(description="For accessing endpoints by Device pin.")
+            StrictStr,
+            Field(description="The device's PIN, used instead of an API token."),
         ],
         environment_variables: Annotated[
             EnvironmentVariables,
-            Field(description="Environment variables to be added to the device"),
+            Field(description="The variables to add or change, and optional notes."),
         ],
         _request_timeout: Union[
             None,
@@ -8761,17 +9509,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EnvironmentVariables]:
-        """set_device_environment_variables_by_pin
+        """Set device environment variables using a PIN
 
-        Set environment variables of a device with device pin authorization
+        Add or change a device's environment variables using its PIN instead of an API token. Pass the PIN in `X-Auth-Token`. Works like `SetDeviceEnvironmentVariables`: a value of `\"\"` or `-` deletes that variable.  Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :param x_auth_token: The device's PIN, used instead of an API token. (required)
         :type x_auth_token: str
-        :param environment_variables: Environment variables to be added to the device (required)
+        :param environment_variables: The variables to add or change, and optional notes. (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8824,11 +9572,12 @@ class DeviceApi:
         product_uid: StrictStr,
         device_uid: StrictStr,
         x_auth_token: Annotated[
-            StrictStr, Field(description="For accessing endpoints by Device pin.")
+            StrictStr,
+            Field(description="The device's PIN, used instead of an API token."),
         ],
         environment_variables: Annotated[
             EnvironmentVariables,
-            Field(description="Environment variables to be added to the device"),
+            Field(description="The variables to add or change, and optional notes."),
         ],
         _request_timeout: Union[
             None,
@@ -8842,17 +9591,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_device_environment_variables_by_pin
+        """Set device environment variables using a PIN
 
-        Set environment variables of a device with device pin authorization
+        Add or change a device's environment variables using its PIN instead of an API token. Pass the PIN in `X-Auth-Token`. Works like `SetDeviceEnvironmentVariables`: a value of `\"\"` or `-` deletes that variable.  Returns 401 if the project's device dashboard URL has no `[pin]`, or the PIN is wrong.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param x_auth_token: For accessing endpoints by Device pin. (required)
+        :param x_auth_token: The device's PIN, used instead of an API token. (required)
         :type x_auth_token: str
-        :param environment_variables: Environment variables to be added to the device (required)
+        :param environment_variables: The variables to add or change, and optional notes. (required)
         :type environment_variables: EnvironmentVariables
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -8970,10 +9719,7 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        body: Annotated[
-            Body,
-            Field(description="Body or payload of signal to be sent to the device"),
-        ],
+        body: Annotated[Body, Field(description="The signal to send.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8986,15 +9732,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SignalDevice200Response:
-        """signal_device
+        """Send a signal to a connected Notecard
 
-        Send a signal from Notehub to a Notecard.
+        Send a JSON object straight to a Notecard, which the host can read with `hub.signal`. It's delivered only if the Notecard is connected to Notehub at that moment, and is never queued; `connected` in the response says whether it was. To queue data for the next sync, use `AddQiNote` instead.  Requires the Owner or Developer role. Returns 400 if the body has a `type` field.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param body: Body or payload of signal to be sent to the device (required)
+        :param body: The signal to send. (required)
         :type body: Body
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9045,10 +9791,7 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        body: Annotated[
-            Body,
-            Field(description="Body or payload of signal to be sent to the device"),
-        ],
+        body: Annotated[Body, Field(description="The signal to send.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9061,15 +9804,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[SignalDevice200Response]:
-        """signal_device
+        """Send a signal to a connected Notecard
 
-        Send a signal from Notehub to a Notecard.
+        Send a JSON object straight to a Notecard, which the host can read with `hub.signal`. It's delivered only if the Notecard is connected to Notehub at that moment, and is never queued; `connected` in the response says whether it was. To queue data for the next sync, use `AddQiNote` instead.  Requires the Owner or Developer role. Returns 400 if the body has a `type` field.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param body: Body or payload of signal to be sent to the device (required)
+        :param body: The signal to send. (required)
         :type body: Body
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9120,10 +9863,7 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        body: Annotated[
-            Body,
-            Field(description="Body or payload of signal to be sent to the device"),
-        ],
+        body: Annotated[Body, Field(description="The signal to send.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9136,15 +9876,15 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """signal_device
+        """Send a signal to a connected Notecard
 
-        Send a signal from Notehub to a Notecard.
+        Send a JSON object straight to a Notecard, which the host can read with `hub.signal`. It's delivered only if the Notecard is connected to Notehub at that moment, and is never queued; `connected` in the response says whether it was. To queue data for the next sync, use `AddQiNote` instead.  Requires the Owner or Developer role. Returns 400 if the body has a `type` field.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param body: Body or payload of signal to be sent to the device (required)
+        :param body: The signal to send. (required)
         :type body: Body
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -9258,8 +9998,18 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         note_input: Annotated[
             NoteInput,
             Field(description="Body or payload of note to be added to the device"),
@@ -9276,17 +10026,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """update_db_note
+        """Update a note in a .db notefile
 
-        Update a note in a .db or .qi notefile
+        Replace the body and payload of a note in a database notefile on a device, synced to the Notecard on its next sync. To add a new note, use `AddDbNote`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or `.dbs`, or if `payload` isn't valid base64.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
         :param note_input: Body or payload of note to be added to the device (required)
         :type note_input: NoteInput
@@ -9341,8 +10091,18 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         note_input: Annotated[
             NoteInput,
             Field(description="Body or payload of note to be added to the device"),
@@ -9359,17 +10119,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """update_db_note
+        """Update a note in a .db notefile
 
-        Update a note in a .db or .qi notefile
+        Replace the body and payload of a note in a database notefile on a device, synced to the Notecard on its next sync. To add a new note, use `AddDbNote`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or `.dbs`, or if `payload` isn't valid base64.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
         :param note_input: Body or payload of note to be added to the device (required)
         :type note_input: NoteInput
@@ -9424,8 +10184,18 @@ class DeviceApi:
         self,
         project_or_product_uid: StrictStr,
         device_uid: StrictStr,
-        notefile_id: StrictStr,
-        note_id: StrictStr,
+        notefile_id: Annotated[
+            StrictStr,
+            Field(
+                description="Notefile name, including its extension, e.g. `config.db` or `commands.qi`."
+            ),
+        ],
+        note_id: Annotated[
+            StrictStr,
+            Field(
+                description="Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`."
+            ),
+        ],
         note_input: Annotated[
             NoteInput,
             Field(description="Body or payload of note to be added to the device"),
@@ -9442,17 +10212,17 @@ class DeviceApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_db_note
+        """Update a note in a .db notefile
 
-        Update a note in a .db or .qi notefile
+        Replace the body and payload of a note in a database notefile on a device, synced to the Notecard on its next sync. To add a new note, use `AddDbNote`.  Requires the Owner or Developer role. Returns 400 unless the notefile ends in `.db` or `.dbs`, or if `payload` isn't valid base64.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param notefile_id: (required)
+        :param notefile_id: Notefile name, including its extension, e.g. `config.db` or `commands.qi`. (required)
         :type notefile_id: str
-        :param note_id: (required)
+        :param note_id: Note ID within the notefile, e.g. `my_note`. Notes in a `.qi` notefile have IDs like `1:435`. (required)
         :type note_id: str
         :param note_input: Body or payload of note to be added to the device (required)
         :type note_input: NoteInput

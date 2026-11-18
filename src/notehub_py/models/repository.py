@@ -32,10 +32,11 @@ class Repository(BaseModel):
 
     archive: Optional[ArchiveStats] = None
     fleet_uids: Optional[List[StrictStr]] = None
-    name: Optional[StrictStr] = Field(default=None, description="repository name")
+    name: Optional[StrictStr] = Field(default=None, description="Repository name.")
     project_uids: Optional[List[StrictStr]] = None
     uid: Optional[StrictStr] = Field(
-        default=None, description="The unique identifier for the data repository"
+        default=None,
+        description="Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`.",
     )
     __properties: ClassVar[List[str]] = [
         "archive",

@@ -32,21 +32,26 @@ class Fleet(BaseModel):
     """  # noqa: E501
 
     connectivity_assurance: Optional[FleetConnectivityAssurance] = None
-    created: datetime = Field(description="RFC3339 timestamp in UTC")
+    created: datetime = Field(description="When the fleet was created.")
     environment_variables: Optional[Dict[str, StrictStr]] = Field(
         default=None,
-        description="The environment variables for this device that have been set using the Notehub API or UI.",
+        description="Environment variables set on this fleet. Not returned by `GetDeviceFleets`.",
     )
-    label: StrictStr = Field(description="Fleet label")
+    label: StrictStr = Field(description="Fleet name shown in Notehub.")
     smart_rule: Optional[StrictStr] = Field(
         default=None,
-        description="JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.",
+        description="JSONata expression for smart fleet membership: `1` adds the device, `-1` removes it, and `0` or an error leaves it unchanged.",
     )
-    smart_rule_enabled: Optional[StrictBool] = None
-    uid: StrictStr = Field(description="Fleet UID")
+    smart_rule_enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Whether `smart_rule` adds and removes devices. Returned only by `CreateFleet` and `UpdateFleet`.",
+    )
+    uid: StrictStr = Field(
+        description="FleetUID, e.g. `fleet:1042ddc5-3b2c-4cec-b1fb-d3040538094d`."
+    )
     watchdog_mins: Optional[StrictInt] = Field(
         default=None,
-        description="A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog",
+        description="Minutes of inactivity before Notehub generates a watchdog event. `0` means no watchdog.",
     )
     __properties: ClassVar[List[str]] = [
         "connectivity_assurance",

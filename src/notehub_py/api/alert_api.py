@@ -43,9 +43,17 @@ class AlertApi:
     def get_alerts(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        monitor_uid: Optional[StrictStr] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
+        monitor_uid: Annotated[
+            Optional[StrictStr], Field(description="Return only this monitor's alerts.")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -58,9 +66,9 @@ class AlertApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetAlerts200Response:
-        """get_alerts
+        """List alerts
 
-        Get list of defined Alerts
+        List the alerts a project's monitors have raised, with each one's value, device and the notifications sent. Set `monitorUID` for one monitor's alerts.  Paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -68,7 +76,9 @@ class AlertApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param monitor_uid:
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param monitor_uid: Return only this monitor's alerts.
         :type monitor_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -96,6 +106,7 @@ class AlertApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             monitor_uid=monitor_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -119,9 +130,17 @@ class AlertApi:
     def get_alerts_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        monitor_uid: Optional[StrictStr] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
+        monitor_uid: Annotated[
+            Optional[StrictStr], Field(description="Return only this monitor's alerts.")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,9 +153,9 @@ class AlertApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetAlerts200Response]:
-        """get_alerts
+        """List alerts
 
-        Get list of defined Alerts
+        List the alerts a project's monitors have raised, with each one's value, device and the notifications sent. Set `monitorUID` for one monitor's alerts.  Paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -144,7 +163,9 @@ class AlertApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param monitor_uid:
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param monitor_uid: Return only this monitor's alerts.
         :type monitor_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -172,6 +193,7 @@ class AlertApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             monitor_uid=monitor_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -195,9 +217,17 @@ class AlertApi:
     def get_alerts_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        monitor_uid: Optional[StrictStr] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
+        monitor_uid: Annotated[
+            Optional[StrictStr], Field(description="Return only this monitor's alerts.")
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -210,9 +240,9 @@ class AlertApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_alerts
+        """List alerts
 
-        Get list of defined Alerts
+        List the alerts a project's monitors have raised, with each one's value, device and the notifications sent. Set `monitorUID` for one monitor's alerts.  Paginated.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -220,7 +250,9 @@ class AlertApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param monitor_uid:
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param monitor_uid: Return only this monitor's alerts.
         :type monitor_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -248,6 +280,7 @@ class AlertApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             monitor_uid=monitor_uid,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -268,6 +301,7 @@ class AlertApi:
         project_or_product_uid,
         page_size,
         page_num,
+        cursor,
         monitor_uid,
         _request_auth,
         _content_type,
@@ -297,6 +331,10 @@ class AlertApi:
         if page_num is not None:
 
             _query_params.append(("pageNum", page_num))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
 
         if monitor_uid is not None:
 

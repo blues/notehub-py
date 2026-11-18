@@ -32,13 +32,16 @@ class CreateFleetRequest(BaseModel):
 
     connectivity_assurance: Optional[FleetConnectivityAssurance] = None
     label: Optional[StrictStr] = Field(
-        default=None, description="The label, or name,  for the Fleet."
+        default=None, description="Fleet name shown in Notehub. Required."
     )
     smart_rule: Optional[StrictStr] = Field(
         default=None,
-        description="JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.",
+        description="JSONata expression for smart fleet membership: `1` adds the device, `-1` removes it, and `0` or an error leaves it unchanged.",
     )
-    smart_rule_enabled: Optional[StrictBool] = None
+    smart_rule_enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="If `true`, `smart_rule` adds and removes devices. Default `false`.",
+    )
     __properties: ClassVar[List[str]] = [
         "connectivity_assurance",
         "label",

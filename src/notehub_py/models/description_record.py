@@ -30,7 +30,7 @@ class DescriptionRecord(BaseModel):
     """  # noqa: E501
 
     content_type: StrictStr = Field(
-        description='The stored content type, either "application/json" or "text/plain; charset=utf-8".'
+        description="The Content-Type served on GET, as sent when the record was stored or detected from its content."
     )
     created_at: StrictInt = Field(
         description="When the record was first created (Unix seconds)."
@@ -51,10 +51,10 @@ class DescriptionRecord(BaseModel):
     )
     owner_uid: Optional[StrictStr] = Field(
         default=None,
-        description="The owning project (app) UID for project-scoped records; empty for global.",
+        description="ProjectUID of the owning project, e.g. `app:2606f411-dea6-44a0-9743-1130f57d77d8`. Empty for a global record.",
     )
     scope: StrictStr = Field(
-        description='The ownership scope of the record ("global" or "project").'
+        description="Where the record is stored. - `project`: in one project - `global`: platform-wide, readable by every signed-in user "
     )
     __properties: ClassVar[List[str]] = [
         "content_type",

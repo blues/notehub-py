@@ -30,7 +30,7 @@ class DeleteNotefilesRequest(BaseModel):
     """  # noqa: E501
 
     files: Optional[List[StrictStr]] = Field(
-        default=None, description="Name of notefiles to delete"
+        default=None, description="Names of the notefiles to delete, e.g. `config.db`."
     )
     __properties: ClassVar[List[str]] = ["files"]
 

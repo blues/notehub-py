@@ -32,13 +32,19 @@ class DeviceDfuStatus(BaseModel):
     """  # noqa: E501
 
     current: Optional[DeviceDfuHistoryCurrent] = None
-    device_uid: Optional[StrictStr] = Field(default=None, description="Device UID")
+    deleted: Optional[StrictBool] = Field(
+        default=None,
+        description="True if this device has been deleted. Only present when reading with a `cursor`. ",
+    )
+    device_uid: Optional[StrictStr] = Field(default=None, description="DeviceUID")
     dfu_in_progress: Optional[StrictBool] = Field(
-        default=None, description="true if there is a DFU currently in progress"
+        default=None,
+        description="`true` while the device's latest firmware update hasn't finished.",
     )
     status: Optional[DeviceDfuStateMachine] = None
     __properties: ClassVar[List[str]] = [
         "current",
+        "deleted",
         "device_uid",
         "dfu_in_progress",
         "status",
@@ -105,6 +111,7 @@ class DeviceDfuStatus(BaseModel):
                     if obj.get("current") is not None
                     else None
                 ),
+                "deleted": obj.get("deleted"),
                 "device_uid": obj.get("device_uid"),
                 "dfu_in_progress": obj.get("dfu_in_progress"),
                 "status": (

@@ -18,8 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.get_device_public_keys200_response_device_public_keys_inner import (
     GetDevicePublicKeys200ResponseDevicePublicKeysInner,
 )
@@ -34,7 +34,15 @@ class GetDevicePublicKeys200Response(BaseModel):
 
     device_public_keys: List[GetDevicePublicKeys200ResponseDevicePublicKeysInner]
     has_more: StrictBool
-    __properties: ClassVar[List[str]] = ["device_public_keys", "has_more"]
+    next_cursor: Optional[StrictStr] = Field(
+        default=None,
+        description="Pass this value (epoch microseconds, optionally `.N`) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes. ",
+    )
+    __properties: ClassVar[List[str]] = [
+        "device_public_keys",
+        "has_more",
+        "next_cursor",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,6 +112,7 @@ class GetDevicePublicKeys200Response(BaseModel):
                     else None
                 ),
                 "has_more": obj.get("has_more"),
+                "next_cursor": obj.get("next_cursor"),
             }
         )
         return _obj

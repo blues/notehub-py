@@ -2,9 +2,9 @@
 
 ## Properties
 
-| Name      | Type          | Description                 | Notes      |
-| --------- | ------------- | --------------------------- | ---------- |
-| **files** | **List[str]** | Name of notefiles to delete | [optional] |
+| Name      | Type          | Description                                                   | Notes      |
+| --------- | ------------- | ------------------------------------------------------------- | ---------- |
+| **files** | **List[str]** | Names of the notefiles to delete, e.g. &#x60;config.db&#x60;. | [optional] |
 
 ## Example
 

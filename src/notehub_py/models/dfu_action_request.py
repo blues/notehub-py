@@ -30,7 +30,8 @@ class DfuActionRequest(BaseModel):
     """  # noqa: E501
 
     filename: Optional[StrictStr] = Field(
-        default=None, description="The name of the firmware file"
+        default=None,
+        description="Stored firmware filename to install, as listed by `GetFirmwareInfo`. Required for `update`; ignored for `cancel`.",
     )
     __properties: ClassVar[List[str]] = ["filename"]
 

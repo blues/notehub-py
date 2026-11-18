@@ -2,9 +2,9 @@
 
 ## Properties
 
-| Name               | Type                                      | Description | Notes      |
-| ------------------ | ----------------------------------------- | ----------- | ---------- |
-| **cellular_plans** | [**List[CellularPlan]**](CellularPlan.md) |             | [optional] |
+| Name               | Type                                      | Description                                                                      | Notes      |
+| ------------------ | ----------------------------------------- | -------------------------------------------------------------------------------- | ---------- |
+| **cellular_plans** | [**List[CellularPlan]**](CellularPlan.md) | One entry per cellular SIM. Empty for a device with only a satellite connection. | [optional] |
 
 ## Example
 

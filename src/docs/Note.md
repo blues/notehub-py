@@ -2,15 +2,15 @@
 
 ## Properties
 
-| Name        | Type                  | Description                                                              | Notes      |
-| ----------- | --------------------- | ------------------------------------------------------------------------ | ---------- |
-| **body**    | **Dict[str, object]** | Arbitrary user-defined JSON for the note.                                |
-| **edge**    | **bool**              | True if originated from an edge source.                                  | [optional] |
-| **id**      | **str**               | Note name/identifier (e.g., \&quot;1:435\&quot;, \&quot;my_note\&quot;). |
-| **payload** | **bytearray**         | Optional base64-encoded payload.                                         | [optional] |
-| **pending** | **bool**              | True if the note is pending delivery or processing.                      | [optional] |
-| **time**    | **int**               | Unix epoch seconds.                                                      |
-| **where**   | **str**               | Optional location/metadata string.                                       | [optional] |
+| Name        | Type                  | Description                                                                               | Notes      |
+| ----------- | --------------------- | ----------------------------------------------------------------------------------------- | ---------- |
+| **body**    | **Dict[str, object]** | Arbitrary user-defined JSON for the note.                                                 |
+| **edge**    | **bool**              | True if originated from an edge source.                                                   | [optional] |
+| **id**      | **str**               | Note name/identifier (e.g., \&quot;1:435\&quot;, \&quot;my_note\&quot;).                  |
+| **payload** | **bytearray**         | Optional base64-encoded payload.                                                          | [optional] |
+| **pending** | **bool**              | True if the note is pending delivery or processing.                                       | [optional] |
+| **time**    | **int**               | Unix epoch seconds.                                                                       |
+| **where**   | **str**               | Place name where the note was created, from its latitude and longitude. Empty if unknown. | [optional] |
 
 ## Example
 

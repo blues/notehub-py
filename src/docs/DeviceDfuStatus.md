@@ -2,12 +2,13 @@
 
 ## Properties
 
-| Name                | Type                                                      | Description                                  | Notes      |
-| ------------------- | --------------------------------------------------------- | -------------------------------------------- | ---------- |
-| **current**         | [**DeviceDfuHistoryCurrent**](DeviceDfuHistoryCurrent.md) |                                              | [optional] |
-| **device_uid**      | **str**                                                   | Device UID                                   | [optional] |
-| **dfu_in_progress** | **bool**                                                  | true if there is a DFU currently in progress | [optional] |
-| **status**          | [**DeviceDfuStateMachine**](DeviceDfuStateMachine.md)     |                                              | [optional] |
+| Name                | Type                                                      | Description                                                                                | Notes      |
+| ------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ---------- |
+| **current**         | [**DeviceDfuHistoryCurrent**](DeviceDfuHistoryCurrent.md) |                                                                                            | [optional] |
+| **deleted**         | **bool**                                                  | True if this device has been deleted. Only present when reading with a &#x60;cursor&#x60;. | [optional] |
+| **device_uid**      | **str**                                                   | DeviceUID                                                                                  | [optional] |
+| **dfu_in_progress** | **bool**                                                  | &#x60;true&#x60; while the device&#39;s latest firmware update hasn&#39;t finished.        | [optional] |
+| **status**          | [**DeviceDfuStateMachine**](DeviceDfuStateMachine.md)     |                                                                                            | [optional] |
 
 ## Example
 

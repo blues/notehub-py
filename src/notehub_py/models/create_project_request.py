@@ -30,9 +30,9 @@ class CreateProjectRequest(BaseModel):
     """  # noqa: E501
 
     billing_account_uid: StrictStr = Field(
-        description="The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned. "
+        description="UID of the organization that owns and is billed for the project. List them with `GetBillingAccounts`."
     )
-    label: StrictStr = Field(description="The label for the project.")
+    label: StrictStr = Field(description="Project name shown in Notehub.")
     __properties: ClassVar[List[str]] = ["billing_account_uid", "label"]
 
     model_config = ConfigDict(

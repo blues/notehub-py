@@ -63,9 +63,9 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """create_legacy_webhook_event
+        """Add a note-shaped event from a device (legacy)
 
-        Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
+        Legacy: add an event from a device, adding the device to the project if it's new. The body is note-shaped: `file`, `body`, an optional base64 `payload`, and other event fields such as `when` and `sn`. No webhook transform applies. New integrations should use `CreateWebhookDeviceEventByProduct`.  Requires the Owner or Developer role. Returns 400 if there's no `body` or `payload`.
 
         :param product_uid: (required)
         :type product_uid: str
@@ -140,9 +140,9 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """create_legacy_webhook_event
+        """Add a note-shaped event from a device (legacy)
 
-        Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
+        Legacy: add an event from a device, adding the device to the project if it's new. The body is note-shaped: `file`, `body`, an optional base64 `payload`, and other event fields such as `when` and `sn`. No webhook transform applies. New integrations should use `CreateWebhookDeviceEventByProduct`.  Requires the Owner or Developer role. Returns 400 if there's no `body` or `payload`.
 
         :param product_uid: (required)
         :type product_uid: str
@@ -217,9 +217,9 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_legacy_webhook_event
+        """Add a note-shaped event from a device (legacy)
 
-        Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
+        Legacy: add an event from a device, adding the device to the project if it's new. The body is note-shaped: `file`, `body`, an optional base64 `payload`, and other event fields such as `when` and `sn`. No webhook transform applies. New integrations should use `CreateWebhookDeviceEventByProduct`.  Requires the Owner or Developer role. Returns 400 if there's no `body` or `payload`.
 
         :param product_uid: (required)
         :type product_uid: str
@@ -338,7 +338,12 @@ class WebhookApi:
     def create_webhook(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         webhook_settings: WebhookSettings,
         _request_timeout: Union[
             None,
@@ -352,13 +357,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """create_webhook
+        """Create a webhook
 
-        Creates a webhook for the specified product with the given name. The name | must be unique within the project.
+        Create an inbound webhook that outside services post to with `CreateWebhookEventByProduct`. Its events go to the notefile `<webhookUID>.qo` unless its JSONata `transform` sets `file`. Use a lower-case ID; the event endpoints look it up in lower case.  Requires the Owner or Developer role. Returns 409 if the ID is taken, and 400 if it has characters other than letters, digits, `-` and `_`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param webhook_settings: (required)
         :type webhook_settings: WebhookSettings
@@ -410,7 +415,12 @@ class WebhookApi:
     def create_webhook_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         webhook_settings: WebhookSettings,
         _request_timeout: Union[
             None,
@@ -424,13 +434,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """create_webhook
+        """Create a webhook
 
-        Creates a webhook for the specified product with the given name. The name | must be unique within the project.
+        Create an inbound webhook that outside services post to with `CreateWebhookEventByProduct`. Its events go to the notefile `<webhookUID>.qo` unless its JSONata `transform` sets `file`. Use a lower-case ID; the event endpoints look it up in lower case.  Requires the Owner or Developer role. Returns 409 if the ID is taken, and 400 if it has characters other than letters, digits, `-` and `_`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param webhook_settings: (required)
         :type webhook_settings: WebhookSettings
@@ -482,7 +492,12 @@ class WebhookApi:
     def create_webhook_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         webhook_settings: WebhookSettings,
         _request_timeout: Union[
             None,
@@ -496,13 +511,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_webhook
+        """Create a webhook
 
-        Creates a webhook for the specified product with the given name. The name | must be unique within the project.
+        Create an inbound webhook that outside services post to with `CreateWebhookEventByProduct`. Its events go to the notefile `<webhookUID>.qo` unless its JSONata `transform` sets `file`. Use a lower-case ID; the event endpoints look it up in lower case.  Requires the Owner or Developer role. Returns 409 if the ID is taken, and 400 if it has characters other than letters, digits, `-` and `_`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param webhook_settings: (required)
         :type webhook_settings: WebhookSettings
@@ -617,10 +632,18 @@ class WebhookApi:
     def create_webhook_device_event_by_product(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         device_uid: StrictStr,
         request_body: Annotated[
-            Dict[str, Any], Field(description="The event body (arbitrary JSON)")
+            Dict[str, Any],
+            Field(
+                description="Any JSON object; it becomes the event body, or the transform's input."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -634,17 +657,17 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """create_webhook_device_event_by_product
+        """Send a device's event through a webhook
 
-        Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
+        Post JSON to a webhook as one device's event, like `CreateWebhookEventByProduct`, adding the device if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:abc` becomes `dev:ext:abc`, not an existing Notecard.  Requires the Owner or Developer role. Returns 400 if the transform fails, and 500 if the webhook is disabled.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param request_body: The event body (arbitrary JSON) (required)
+        :param request_body: Any JSON object; it becomes the event body, or the transform's input. (required)
         :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -695,10 +718,18 @@ class WebhookApi:
     def create_webhook_device_event_by_product_with_http_info(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         device_uid: StrictStr,
         request_body: Annotated[
-            Dict[str, Any], Field(description="The event body (arbitrary JSON)")
+            Dict[str, Any],
+            Field(
+                description="Any JSON object; it becomes the event body, or the transform's input."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -712,17 +743,17 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """create_webhook_device_event_by_product
+        """Send a device's event through a webhook
 
-        Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
+        Post JSON to a webhook as one device's event, like `CreateWebhookEventByProduct`, adding the device if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:abc` becomes `dev:ext:abc`, not an existing Notecard.  Requires the Owner or Developer role. Returns 400 if the transform fails, and 500 if the webhook is disabled.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param request_body: The event body (arbitrary JSON) (required)
+        :param request_body: Any JSON object; it becomes the event body, or the transform's input. (required)
         :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -773,10 +804,18 @@ class WebhookApi:
     def create_webhook_device_event_by_product_without_preload_content(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         device_uid: StrictStr,
         request_body: Annotated[
-            Dict[str, Any], Field(description="The event body (arbitrary JSON)")
+            Dict[str, Any],
+            Field(
+                description="Any JSON object; it becomes the event body, or the transform's input."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -790,17 +829,17 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_webhook_device_event_by_product
+        """Send a device's event through a webhook
 
-        Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
+        Post JSON to a webhook as one device's event, like `CreateWebhookEventByProduct`, adding the device if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:abc` becomes `dev:ext:abc`, not an existing Notecard.  Requires the Owner or Developer role. Returns 400 if the transform fails, and 500 if the webhook is disabled.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param request_body: The event body (arbitrary JSON) (required)
+        :param request_body: Any JSON object; it becomes the event body, or the transform's input. (required)
         :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -917,9 +956,17 @@ class WebhookApi:
     def create_webhook_event_by_product(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         request_body: Annotated[
-            Dict[str, Any], Field(description="The event body (arbitrary JSON)")
+            Dict[str, Any],
+            Field(
+                description="Any JSON object; it becomes the event body, or the transform's input."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -933,15 +980,15 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """create_webhook_event_by_product
+        """Send an event through a webhook
 
-        Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
+        Post JSON to a webhook. The body becomes the event body, in `<webhookUID>.qo`, from `dev:ext:webhook`; a `transform` can change all three, but must set `body`. For a specific device, use `CreateWebhookDeviceEventByProduct`.  Requires the Owner or Developer role. Returns 400 if the transform fails or sets no `body`, and 500 if the webhook is disabled.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
-        :param request_body: The event body (arbitrary JSON) (required)
+        :param request_body: Any JSON object; it becomes the event body, or the transform's input. (required)
         :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -991,9 +1038,17 @@ class WebhookApi:
     def create_webhook_event_by_product_with_http_info(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         request_body: Annotated[
-            Dict[str, Any], Field(description="The event body (arbitrary JSON)")
+            Dict[str, Any],
+            Field(
+                description="Any JSON object; it becomes the event body, or the transform's input."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -1007,15 +1062,15 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """create_webhook_event_by_product
+        """Send an event through a webhook
 
-        Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
+        Post JSON to a webhook. The body becomes the event body, in `<webhookUID>.qo`, from `dev:ext:webhook`; a `transform` can change all three, but must set `body`. For a specific device, use `CreateWebhookDeviceEventByProduct`.  Requires the Owner or Developer role. Returns 400 if the transform fails or sets no `body`, and 500 if the webhook is disabled.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
-        :param request_body: The event body (arbitrary JSON) (required)
+        :param request_body: Any JSON object; it becomes the event body, or the transform's input. (required)
         :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1065,9 +1120,17 @@ class WebhookApi:
     def create_webhook_event_by_product_without_preload_content(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         request_body: Annotated[
-            Dict[str, Any], Field(description="The event body (arbitrary JSON)")
+            Dict[str, Any],
+            Field(
+                description="Any JSON object; it becomes the event body, or the transform's input."
+            ),
         ],
         _request_timeout: Union[
             None,
@@ -1081,15 +1144,15 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_webhook_event_by_product
+        """Send an event through a webhook
 
-        Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
+        Post JSON to a webhook. The body becomes the event body, in `<webhookUID>.qo`, from `dev:ext:webhook`; a `transform` can change all three, but must set `body`. For a specific device, use `CreateWebhookDeviceEventByProduct`.  Requires the Owner or Developer role. Returns 400 if the transform fails or sets no `body`, and 500 if the webhook is disabled.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
-        :param request_body: The event body (arbitrary JSON) (required)
+        :param request_body: Any JSON object; it becomes the event body, or the transform's input. (required)
         :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1202,7 +1265,12 @@ class WebhookApi:
     def delete_webhook(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1215,13 +1283,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_webhook
+        """Delete a webhook
 
-        Deletes the specified webhook
+        Delete a webhook's settings. Posts to its ID are still accepted, just without a transform; to stop accepting them, set `disabled` with `UpdateWebhook` instead.  Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1270,7 +1338,12 @@ class WebhookApi:
     def delete_webhook_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1283,13 +1356,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_webhook
+        """Delete a webhook
 
-        Deletes the specified webhook
+        Delete a webhook's settings. Posts to its ID are still accepted, just without a transform; to stop accepting them, set `disabled` with `UpdateWebhook` instead.  Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1338,7 +1411,12 @@ class WebhookApi:
     def delete_webhook_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1351,13 +1429,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_webhook
+        """Delete a webhook
 
-        Deletes the specified webhook
+        Delete a webhook's settings. Posts to its ID are still accepted, just without a transform; to stop accepting them, set `disabled` with `UpdateWebhook` instead.  Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1456,7 +1534,12 @@ class WebhookApi:
     def get_webhook(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1469,13 +1552,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebhookSettings:
-        """get_webhook
+        """Get a webhook
 
-        Retrieves the configuration settings for the specified webhook
+        Get one webhook's transform and whether it's disabled.  Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1524,7 +1607,12 @@ class WebhookApi:
     def get_webhook_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1537,13 +1625,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebhookSettings]:
-        """get_webhook
+        """Get a webhook
 
-        Retrieves the configuration settings for the specified webhook
+        Get one webhook's transform and whether it's disabled.  Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1592,7 +1680,12 @@ class WebhookApi:
     def get_webhook_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1605,13 +1698,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_webhook
+        """Get a webhook
 
-        Retrieves the configuration settings for the specified webhook
+        Get one webhook's transform and whether it's disabled.  Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1710,7 +1803,12 @@ class WebhookApi:
     def get_webhook_settings_by_product(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1723,13 +1821,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WebhookSettings:
-        """get_webhook_settings_by_product
+        """Get a webhook by ProductUID
 
-        Retrieves the configuration settings for the specified webhook, addressed by productUID.
+        Get one webhook's settings, like `GetWebhook`, but addressed by ProductUID instead of the project.  Requires the Owner or Developer role. Returns 500, not 404, if the webhook doesn't exist.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1778,7 +1876,12 @@ class WebhookApi:
     def get_webhook_settings_by_product_with_http_info(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1791,13 +1894,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[WebhookSettings]:
-        """get_webhook_settings_by_product
+        """Get a webhook by ProductUID
 
-        Retrieves the configuration settings for the specified webhook, addressed by productUID.
+        Get one webhook's settings, like `GetWebhook`, but addressed by ProductUID instead of the project.  Requires the Owner or Developer role. Returns 500, not 404, if the webhook doesn't exist.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1846,7 +1949,12 @@ class WebhookApi:
     def get_webhook_settings_by_product_without_preload_content(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1859,13 +1967,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_webhook_settings_by_product
+        """Get a webhook by ProductUID
 
-        Retrieves the configuration settings for the specified webhook, addressed by productUID.
+        Get one webhook's settings, like `GetWebhook`, but addressed by ProductUID instead of the project.  Requires the Owner or Developer role. Returns 500, not 404, if the webhook doesn't exist.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1976,9 +2084,9 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetWebhooks200Response:
-        """get_webhooks
+        """List webhooks
 
-        Retrieves all webhooks for the specified project
+        List a project's inbound webhooks with their transforms and whether they're disabled. An inbound webhook lets an outside service post data that Notehub turns into events.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2040,9 +2148,9 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetWebhooks200Response]:
-        """get_webhooks
+        """List webhooks
 
-        Retrieves all webhooks for the specified project
+        List a project's inbound webhooks with their transforms and whether they're disabled. An inbound webhook lets an outside service post data that Notehub turns into events.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2104,9 +2212,9 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_webhooks
+        """List webhooks
 
-        Retrieves all webhooks for the specified project
+        List a project's inbound webhooks with their transforms and whether they're disabled. An inbound webhook lets an outside service post data that Notehub turns into events.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2205,7 +2313,10 @@ class WebhookApi:
         product_uid: StrictStr,
         device_uid: StrictStr,
         request_body: Annotated[
-            Optional[Dict[str, Any]], Field(description="Optional session metadata.")
+            Optional[Dict[str, Any]],
+            Field(
+                description="Session fields, such as `why_session_opened`, `why_session_closed` and signal or location values."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -2219,15 +2330,15 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """update_legacy_webhook_session
+        """Open or close a webhook device's session (legacy)
 
-        Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+        Legacy: open, update or close a webhook device's session, adding the device if it's new. The body is a session: set `why_session_opened` to open one, `why_session_closed` to close it, both to close and reopen, or neither to update the open session.  Requires the Owner or Developer role. Returns 400 when updating with no session open.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param request_body: Optional session metadata.
+        :param request_body: Session fields, such as `why_session_opened`, `why_session_closed` and signal or location values.
         :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2279,7 +2390,10 @@ class WebhookApi:
         product_uid: StrictStr,
         device_uid: StrictStr,
         request_body: Annotated[
-            Optional[Dict[str, Any]], Field(description="Optional session metadata.")
+            Optional[Dict[str, Any]],
+            Field(
+                description="Session fields, such as `why_session_opened`, `why_session_closed` and signal or location values."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -2293,15 +2407,15 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """update_legacy_webhook_session
+        """Open or close a webhook device's session (legacy)
 
-        Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+        Legacy: open, update or close a webhook device's session, adding the device if it's new. The body is a session: set `why_session_opened` to open one, `why_session_closed` to close it, both to close and reopen, or neither to update the open session.  Requires the Owner or Developer role. Returns 400 when updating with no session open.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param request_body: Optional session metadata.
+        :param request_body: Session fields, such as `why_session_opened`, `why_session_closed` and signal or location values.
         :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2353,7 +2467,10 @@ class WebhookApi:
         product_uid: StrictStr,
         device_uid: StrictStr,
         request_body: Annotated[
-            Optional[Dict[str, Any]], Field(description="Optional session metadata.")
+            Optional[Dict[str, Any]],
+            Field(
+                description="Session fields, such as `why_session_opened`, `why_session_closed` and signal or location values."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -2367,15 +2484,15 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_legacy_webhook_session
+        """Open or close a webhook device's session (legacy)
 
-        Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+        Legacy: open, update or close a webhook device's session, adding the device if it's new. The body is a session: set `why_session_opened` to open one, `why_session_closed` to close it, both to close and reopen, or neither to update the open session.  Requires the Owner or Developer role. Returns 400 when updating with no session open.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param request_body: Optional session metadata.
+        :param request_body: Session fields, such as `why_session_opened`, `why_session_closed` and signal or location values.
         :type request_body: Dict[str, object]
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2488,7 +2605,12 @@ class WebhookApi:
     def update_webhook(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         webhook_settings: WebhookSettings,
         _request_timeout: Union[
             None,
@@ -2502,13 +2624,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """update_webhook
+        """Update a webhook
 
-        Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
+        Replace a webhook's settings, creating the webhook if it doesn't exist. Send every field: a missing `transform` is cleared and a missing `disabled` enables the webhook.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param webhook_settings: (required)
         :type webhook_settings: WebhookSettings
@@ -2560,7 +2682,12 @@ class WebhookApi:
     def update_webhook_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         webhook_settings: WebhookSettings,
         _request_timeout: Union[
             None,
@@ -2574,13 +2701,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """update_webhook
+        """Update a webhook
 
-        Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
+        Replace a webhook's settings, creating the webhook if it doesn't exist. Send every field: a missing `transform` is cleared and a missing `disabled` enables the webhook.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param webhook_settings: (required)
         :type webhook_settings: WebhookSettings
@@ -2632,7 +2759,12 @@ class WebhookApi:
     def update_webhook_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         webhook_settings: WebhookSettings,
         _request_timeout: Union[
             None,
@@ -2646,13 +2778,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_webhook
+        """Update a webhook
 
-        Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
+        Replace a webhook's settings, creating the webhook if it doesn't exist. Send every field: a missing `transform` is cleared and a missing `disabled` enables the webhook.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param webhook_settings: (required)
         :type webhook_settings: WebhookSettings
@@ -2767,7 +2899,12 @@ class WebhookApi:
     def update_webhook_settings_by_product(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         webhook_settings: WebhookSettings,
         _request_timeout: Union[
             None,
@@ -2781,13 +2918,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """update_webhook_settings_by_product
+        """Update a webhook by ProductUID
 
-        Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
+        Replace a webhook's settings, like `UpdateWebhook`, but addressed by ProductUID. Creates the webhook if it doesn't exist.  Requires the Owner or Developer role. Returns 400 if the ID has characters other than letters, digits, `-` and `_`.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param webhook_settings: (required)
         :type webhook_settings: WebhookSettings
@@ -2839,7 +2976,12 @@ class WebhookApi:
     def update_webhook_settings_by_product_with_http_info(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         webhook_settings: WebhookSettings,
         _request_timeout: Union[
             None,
@@ -2853,13 +2995,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """update_webhook_settings_by_product
+        """Update a webhook by ProductUID
 
-        Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
+        Replace a webhook's settings, like `UpdateWebhook`, but addressed by ProductUID. Creates the webhook if it doesn't exist.  Requires the Owner or Developer role. Returns 400 if the ID has characters other than letters, digits, `-` and `_`.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param webhook_settings: (required)
         :type webhook_settings: WebhookSettings
@@ -2911,7 +3053,12 @@ class WebhookApi:
     def update_webhook_settings_by_product_without_preload_content(
         self,
         product_uid: StrictStr,
-        webhook_uid: Annotated[StrictStr, Field(description="Webhook UID")],
+        webhook_uid: Annotated[
+            StrictStr,
+            Field(
+                description="Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`."
+            ),
+        ],
         webhook_settings: WebhookSettings,
         _request_timeout: Union[
             None,
@@ -2925,13 +3072,13 @@ class WebhookApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_webhook_settings_by_product
+        """Update a webhook by ProductUID
 
-        Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
+        Replace a webhook's settings, like `UpdateWebhook`, but addressed by ProductUID. Creates the webhook if it doesn't exist.  Requires the Owner or Developer role. Returns 400 if the ID has characters other than letters, digits, `-` and `_`.
 
         :param product_uid: (required)
         :type product_uid: str
-        :param webhook_uid: Webhook UID (required)
+        :param webhook_uid: Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`. (required)
         :type webhook_uid: str
         :param webhook_settings: (required)
         :type webhook_settings: WebhookSettings

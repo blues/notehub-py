@@ -2,16 +2,16 @@
 
 ## Properties
 
-| Name              | Type                          | Description                                                                            | Notes      |
-| ----------------- | ----------------------------- | -------------------------------------------------------------------------------------- | ---------- |
-| **activated**     | **int**                       | Unix timestamp of when the SIM was activated                                           | [optional] |
-| **data_usage**    | [**DataUsage**](DataUsage.md) |                                                                                        | [optional] |
-| **expires_at**    | **int**                       |                                                                                        | [optional] |
-| **iccid**         | **str**                       | The Integrated Circuit Card Identifier of the SIM card                                 | [optional] |
-| **imsi**          | **str**                       | IMSI of the SIM card                                                                   | [optional] |
-| **last_updated**  | **int**                       | Time this plan information was last updated                                            | [optional] |
-| **lifetime_used** | **int**                       | Total bytes used by this SIM                                                           | [optional] |
-| **plan_type**     | **str**                       | Description of the SIM plan type including data allowance, region, and validity period | [optional] |
+| Name              | Type                          | Description                                                                                    | Notes      |
+| ----------------- | ----------------------------- | ---------------------------------------------------------------------------------------------- | ---------- |
+| **activated**     | **int**                       | Unix timestamp of when the SIM was activated                                                   | [optional] |
+| **data_usage**    | [**DataUsage**](DataUsage.md) |                                                                                                | [optional] |
+| **expires_at**    | **int**                       | When the current plan expires, as a Unix timestamp in seconds. Omitted on the Essentials plan. | [optional] |
+| **iccid**         | **str**                       | The Integrated Circuit Card Identifier of the SIM card                                         | [optional] |
+| **imsi**          | **str**                       | IMSI of the SIM card                                                                           | [optional] |
+| **last_updated**  | **int**                       | When this plan information was last updated, as a Unix timestamp in seconds.                   | [optional] |
+| **lifetime_used** | **int**                       | Total bytes used by this SIM                                                                   | [optional] |
+| **plan_type**     | **str**                       | Description of the SIM plan type including data allowance, region, and validity period         | [optional] |
 
 ## Example
 

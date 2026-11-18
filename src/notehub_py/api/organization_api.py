@@ -20,11 +20,9 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from notehub_py.models.get_billing_account200_response import (
-    GetBillingAccount200Response,
-)
-from notehub_py.models.get_billing_account_balance_history200_response import (
-    GetBillingAccountBalanceHistory200Response,
+from notehub_py.models.get_organization200_response import GetOrganization200Response
+from notehub_py.models.get_organization_balance_history200_response import (
+    GetOrganizationBalanceHistory200Response,
 )
 from notehub_py.models.get_organizations200_response import GetOrganizations200Response
 
@@ -48,7 +46,10 @@ class OrganizationApi:
     @validate_call
     def get_organization(
         self,
-        organization_uid: StrictStr,
+        organization_uid: Annotated[
+            StrictStr,
+            Field(description="Organization UID. List with `GetOrganizations`."),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,12 +61,12 @@ class OrganizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetBillingAccount200Response:
-        """get_organization
+    ) -> GetOrganization200Response:
+        """Get an organization
 
-        Get Organization Information
+        Get an organization's name, owner, contact email and current plan. The plan has its type, event capacity, billing period and remaining balance. For the daily history, use `GetOrganizationBalanceHistory`.  Requires the `org_admin`, `billing_manager` or `org_support` role in the organization. Returns 403 if your membership is deactivated.
 
-        :param organization_uid: (required)
+        :param organization_uid: Organization UID. List with `GetOrganizations`. (required)
         :type organization_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -98,7 +99,7 @@ class OrganizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetBillingAccount200Response",
+            "200": "GetOrganization200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -112,7 +113,10 @@ class OrganizationApi:
     @validate_call
     def get_organization_with_http_info(
         self,
-        organization_uid: StrictStr,
+        organization_uid: Annotated[
+            StrictStr,
+            Field(description="Organization UID. List with `GetOrganizations`."),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -124,12 +128,12 @@ class OrganizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetBillingAccount200Response]:
-        """get_organization
+    ) -> ApiResponse[GetOrganization200Response]:
+        """Get an organization
 
-        Get Organization Information
+        Get an organization's name, owner, contact email and current plan. The plan has its type, event capacity, billing period and remaining balance. For the daily history, use `GetOrganizationBalanceHistory`.  Requires the `org_admin`, `billing_manager` or `org_support` role in the organization. Returns 403 if your membership is deactivated.
 
-        :param organization_uid: (required)
+        :param organization_uid: Organization UID. List with `GetOrganizations`. (required)
         :type organization_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -162,7 +166,7 @@ class OrganizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetBillingAccount200Response",
+            "200": "GetOrganization200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -176,7 +180,10 @@ class OrganizationApi:
     @validate_call
     def get_organization_without_preload_content(
         self,
-        organization_uid: StrictStr,
+        organization_uid: Annotated[
+            StrictStr,
+            Field(description="Organization UID. List with `GetOrganizations`."),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -189,11 +196,11 @@ class OrganizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_organization
+        """Get an organization
 
-        Get Organization Information
+        Get an organization's name, owner, contact email and current plan. The plan has its type, event capacity, billing period and remaining balance. For the daily history, use `GetOrganizationBalanceHistory`.  Requires the `org_admin`, `billing_manager` or `org_support` role in the organization. Returns 403 if your membership is deactivated.
 
-        :param organization_uid: (required)
+        :param organization_uid: Organization UID. List with `GetOrganizations`. (required)
         :type organization_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -226,7 +233,7 @@ class OrganizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetBillingAccount200Response",
+            "200": "GetOrganization200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -287,7 +294,10 @@ class OrganizationApi:
     @validate_call
     def get_organization_balance_history(
         self,
-        organization_uid: StrictStr,
+        organization_uid: Annotated[
+            StrictStr,
+            Field(description="Organization UID. List with `GetOrganizations`."),
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -311,12 +321,12 @@ class OrganizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetBillingAccountBalanceHistory200Response:
-        """get_organization_balance_history
+    ) -> GetOrganizationBalanceHistory200Response:
+        """Get an organization's daily balance
 
-        Get Organization Balance history
+        Get an organization's events used and remaining event capacity for each day. The range is `startDate` to `endDate`, which default to the start of the billing period and today.  Requires the `org_admin`, `billing_manager` or `org_support` role in the organization. Returns 400 if `startDate` is after `endDate`.
 
-        :param organization_uid: (required)
+        :param organization_uid: Organization UID. List with `GetOrganizations`. (required)
         :type organization_uid: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
@@ -355,7 +365,7 @@ class OrganizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetBillingAccountBalanceHistory200Response",
+            "200": "GetOrganizationBalanceHistory200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -369,7 +379,10 @@ class OrganizationApi:
     @validate_call
     def get_organization_balance_history_with_http_info(
         self,
-        organization_uid: StrictStr,
+        organization_uid: Annotated[
+            StrictStr,
+            Field(description="Organization UID. List with `GetOrganizations`."),
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -393,12 +406,12 @@ class OrganizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetBillingAccountBalanceHistory200Response]:
-        """get_organization_balance_history
+    ) -> ApiResponse[GetOrganizationBalanceHistory200Response]:
+        """Get an organization's daily balance
 
-        Get Organization Balance history
+        Get an organization's events used and remaining event capacity for each day. The range is `startDate` to `endDate`, which default to the start of the billing period and today.  Requires the `org_admin`, `billing_manager` or `org_support` role in the organization. Returns 400 if `startDate` is after `endDate`.
 
-        :param organization_uid: (required)
+        :param organization_uid: Organization UID. List with `GetOrganizations`. (required)
         :type organization_uid: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
@@ -437,7 +450,7 @@ class OrganizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetBillingAccountBalanceHistory200Response",
+            "200": "GetOrganizationBalanceHistory200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -451,7 +464,10 @@ class OrganizationApi:
     @validate_call
     def get_organization_balance_history_without_preload_content(
         self,
-        organization_uid: StrictStr,
+        organization_uid: Annotated[
+            StrictStr,
+            Field(description="Organization UID. List with `GetOrganizations`."),
+        ],
         start_date: Annotated[
             Optional[Annotated[int, Field(strict=True, ge=0)]],
             Field(
@@ -476,11 +492,11 @@ class OrganizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_organization_balance_history
+        """Get an organization's daily balance
 
-        Get Organization Balance history
+        Get an organization's events used and remaining event capacity for each day. The range is `startDate` to `endDate`, which default to the start of the billing period and today.  Requires the `org_admin`, `billing_manager` or `org_support` role in the organization. Returns 400 if `startDate` is after `endDate`.
 
-        :param organization_uid: (required)
+        :param organization_uid: Organization UID. List with `GetOrganizations`. (required)
         :type organization_uid: str
         :param start_date: Start date for filtering results, specified as a Unix timestamp
         :type start_date: int
@@ -519,7 +535,7 @@ class OrganizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetBillingAccountBalanceHistory200Response",
+            "200": "GetOrganizationBalanceHistory200Response",
         }
         response_data = self.api_client.call_api(
             *_param, _request_timeout=_request_timeout
@@ -602,9 +618,9 @@ class OrganizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetOrganizations200Response:
-        """get_organizations
+        """List your organizations
 
-        Get Organizations accessible by the api_key
+        List the organizations you belong to, with your role in each. A scoped token gets an empty list.  Returns 401 if your email address isn't verified.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -662,9 +678,9 @@ class OrganizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetOrganizations200Response]:
-        """get_organizations
+        """List your organizations
 
-        Get Organizations accessible by the api_key
+        List the organizations you belong to, with your role in each. A scoped token gets an empty list.  Returns 401 if your email address isn't verified.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -722,9 +738,9 @@ class OrganizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_organizations
+        """List your organizations
 
-        Get Organizations accessible by the api_key
+        List the organizations you belong to, with your role in each. A scoped token gets an empty list.  Returns 401 if your email address isn't verified.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

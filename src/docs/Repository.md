@@ -2,13 +2,13 @@
 
 ## Properties
 
-| Name             | Type                                | Description                                   | Notes      |
-| ---------------- | ----------------------------------- | --------------------------------------------- | ---------- |
-| **archive**      | [**ArchiveStats**](ArchiveStats.md) |                                               | [optional] |
-| **fleet_uids**   | **List[str]**                       |                                               | [optional] |
-| **name**         | **str**                             | repository name                               | [optional] |
-| **project_uids** | **List[str]**                       |                                               | [optional] |
-| **uid**          | **str**                             | The unique identifier for the data repository | [optional] |
+| Name             | Type                                | Description                                                                 | Notes      |
+| ---------------- | ----------------------------------- | --------------------------------------------------------------------------- | ---------- |
+| **archive**      | [**ArchiveStats**](ArchiveStats.md) |                                                                             | [optional] |
+| **fleet_uids**   | **List[str]**                       |                                                                             | [optional] |
+| **name**         | **str**                             | Repository name.                                                            | [optional] |
+| **project_uids** | **List[str]**                       |                                                                             | [optional] |
+| **uid**          | **str**                             | Repository UID, e.g. &#x60;repo:2606f411-dea6-44a0-9743-1130f57d77d8&#x60;. | [optional] |
 
 ## Example
 
