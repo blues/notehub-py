@@ -2,10 +2,11 @@
 
 ## Properties
 
-| Name         | Type                                            | Description | Notes                         |
-| ------------ | ----------------------------------------------- | ----------- | ----------------------------- |
-| **devices**  | [**List[DeviceDfuStatus]**](DeviceDfuStatus.md) |             | [optional]                    |
-| **has_more** | **bool**                                        |             | [optional] [default to False] |
+| Name            | Type                                            | Description                                                                                                                                                                                                                       | Notes                         |
+| --------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| **devices**     | [**List[DeviceDfuStatus]**](DeviceDfuStatus.md) |                                                                                                                                                                                                                                   | [optional]                    |
+| **has_more**    | **bool**                                        |                                                                                                                                                                                                                                   | [optional] [default to False] |
+| **next_cursor** | **str**                                         | Pass this value (epoch microseconds, optionally &#x60;.N&#x60;) as a cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes. | [optional]                    |
 
 ## Example
 

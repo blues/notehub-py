@@ -43,7 +43,12 @@ class DescriptionApi:
     @validate_call
     def delete_global_description(
         self,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -56,11 +61,11 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_global_description
+        """Delete a global description record
 
-        Delete a global description record by name (Blues staff only).
+        Delete one platform-wide description record.  Blues staff only; returns 403 for anyone else. Returns 404 if the record doesn't exist.
 
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -109,7 +114,12 @@ class DescriptionApi:
     @validate_call
     def delete_global_description_with_http_info(
         self,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -122,11 +132,11 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_global_description
+        """Delete a global description record
 
-        Delete a global description record by name (Blues staff only).
+        Delete one platform-wide description record.  Blues staff only; returns 403 for anyone else. Returns 404 if the record doesn't exist.
 
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -175,7 +185,12 @@ class DescriptionApi:
     @validate_call
     def delete_global_description_without_preload_content(
         self,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -188,11 +203,11 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_global_description
+        """Delete a global description record
 
-        Delete a global description record by name (Blues staff only).
+        Delete one platform-wide description record.  Blues staff only; returns 403 for anyone else. Returns 404 if the record doesn't exist.
 
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -289,7 +304,12 @@ class DescriptionApi:
     def delete_project_description(
         self,
         project_or_product_uid: StrictStr,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -302,13 +322,13 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_project_description
+        """Delete a project description record
 
-        Delete a project description record by name.
+        Delete one of a project's description records.  Requires the Owner or Developer role. Returns 404 if the record doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -358,7 +378,12 @@ class DescriptionApi:
     def delete_project_description_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -371,13 +396,13 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_project_description
+        """Delete a project description record
 
-        Delete a project description record by name.
+        Delete one of a project's description records.  Requires the Owner or Developer role. Returns 404 if the record doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -427,7 +452,12 @@ class DescriptionApi:
     def delete_project_description_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -440,13 +470,13 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_project_description
+        """Delete a project description record
 
-        Delete a project description record by name.
+        Delete one of a project's description records.  Requires the Owner or Developer role. Returns 404 if the record doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -545,7 +575,12 @@ class DescriptionApi:
     @validate_call
     def get_global_description(
         self,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -558,11 +593,11 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> bytearray:
-        """get_global_description
+        """Get a global description record
 
-        Get a global description record. Returns the raw content with its stored Content-Type.
+        Get the content of one platform-wide description record, served with the Content-Type it was stored with. Any signed-in user can read it.  Returns 404 if the record doesn't exist.
 
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -610,7 +645,12 @@ class DescriptionApi:
     @validate_call
     def get_global_description_with_http_info(
         self,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -623,11 +663,11 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[bytearray]:
-        """get_global_description
+        """Get a global description record
 
-        Get a global description record. Returns the raw content with its stored Content-Type.
+        Get the content of one platform-wide description record, served with the Content-Type it was stored with. Any signed-in user can read it.  Returns 404 if the record doesn't exist.
 
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -675,7 +715,12 @@ class DescriptionApi:
     @validate_call
     def get_global_description_without_preload_content(
         self,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -688,11 +733,11 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_global_description
+        """Get a global description record
 
-        Get a global description record. Returns the raw content with its stored Content-Type.
+        Get the content of one platform-wide description record, served with the Content-Type it was stored with. Any signed-in user can read it.  Returns 404 if the record doesn't exist.
 
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -788,7 +833,12 @@ class DescriptionApi:
     def get_project_description(
         self,
         project_or_product_uid: StrictStr,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -801,13 +851,13 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> bytearray:
-        """get_project_description
+        """Get a project description record
 
-        Get a project description record. Returns the raw content with its stored Content-Type.
+        Get the content of one of a project's description records, served with the Content-Type it was stored with. For the metadata of every record, use `ListProjectDescriptions`.  Returns 404 if the record doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -857,7 +907,12 @@ class DescriptionApi:
     def get_project_description_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -870,13 +925,13 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[bytearray]:
-        """get_project_description
+        """Get a project description record
 
-        Get a project description record. Returns the raw content with its stored Content-Type.
+        Get the content of one of a project's description records, served with the Content-Type it was stored with. For the metadata of every record, use `ListProjectDescriptions`.  Returns 404 if the record doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -926,7 +981,12 @@ class DescriptionApi:
     def get_project_description_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -939,13 +999,13 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_project_description
+        """Get a project description record
 
-        Get a project description record. Returns the raw content with its stored Content-Type.
+        Get the content of one of a project's description records, served with the Content-Type it was stored with. For the metadata of every record, use `ListProjectDescriptions`.  Returns 404 if the record doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1056,9 +1116,9 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DescriptionRecordList:
-        """list_global_descriptions
+        """List global description records
 
-        List metadata for all global description records.
+        List the platform-wide description records that Blues publishes, without their content. Any signed-in user can read them. For a project's own records, use `ListProjectDescriptions`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1116,9 +1176,9 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DescriptionRecordList]:
-        """list_global_descriptions
+        """List global description records
 
-        List metadata for all global description records.
+        List the platform-wide description records that Blues publishes, without their content. Any signed-in user can read them. For a project's own records, use `ListProjectDescriptions`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1176,9 +1236,9 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """list_global_descriptions
+        """List global description records
 
-        List metadata for all global description records.
+        List the platform-wide description records that Blues publishes, without their content. Any signed-in user can read them. For a project's own records, use `ListProjectDescriptions`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1281,9 +1341,9 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DescriptionRecordList:
-        """list_project_descriptions
+        """List a project's description records
 
-        List metadata for all description records in a project.
+        List a project's description records by name, with each one's content type, size and change history but not its content. A description record is a named document, such as Markdown, JSON or plain text, that explains the project's data. For Blues' platform-wide records, use `ListGlobalDescriptions`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1345,9 +1405,9 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DescriptionRecordList]:
-        """list_project_descriptions
+        """List a project's description records
 
-        List metadata for all description records in a project.
+        List a project's description records by name, with each one's content type, size and change history but not its content. A description record is a named document, such as Markdown, JSON or plain text, that explains the project's data. For Blues' platform-wide records, use `ListGlobalDescriptions`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1409,9 +1469,9 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """list_project_descriptions
+        """List a project's description records
 
-        List metadata for all description records in a project.
+        List a project's description records by name, with each one's content type, size and change history but not its content. A description record is a named document, such as Markdown, JSON or plain text, that explains the project's data. For Blues' platform-wide records, use `ListGlobalDescriptions`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1507,11 +1567,16 @@ class DescriptionApi:
     @validate_call
     def set_global_description(
         self,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         body: Annotated[
             Union[StrictBytes, StrictStr],
             Field(
-                description="The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text)."
+                description="The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected."
             ),
         ],
         _request_timeout: Union[
@@ -1526,13 +1591,13 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DescriptionRecord:
-        """set_global_description
+        """Create or replace a global description record
 
-        Create or replace a global description record, Blues staff only (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        Store a platform-wide named document that every signed-in user can read, replacing any record with that name. The Content-Type is handled as in `SetProjectDescription`.  Blues staff only; returns 403 for anyone else. Returns 400 if the content is over 10 MB or the name isn't valid.
 
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
-        :param body: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text). (required)
+        :param body: The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected. (required)
         :type body: bytearray
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1582,11 +1647,16 @@ class DescriptionApi:
     @validate_call
     def set_global_description_with_http_info(
         self,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         body: Annotated[
             Union[StrictBytes, StrictStr],
             Field(
-                description="The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text)."
+                description="The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected."
             ),
         ],
         _request_timeout: Union[
@@ -1601,13 +1671,13 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DescriptionRecord]:
-        """set_global_description
+        """Create or replace a global description record
 
-        Create or replace a global description record, Blues staff only (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        Store a platform-wide named document that every signed-in user can read, replacing any record with that name. The Content-Type is handled as in `SetProjectDescription`.  Blues staff only; returns 403 for anyone else. Returns 400 if the content is over 10 MB or the name isn't valid.
 
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
-        :param body: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text). (required)
+        :param body: The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected. (required)
         :type body: bytearray
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1657,11 +1727,16 @@ class DescriptionApi:
     @validate_call
     def set_global_description_without_preload_content(
         self,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         body: Annotated[
             Union[StrictBytes, StrictStr],
             Field(
-                description="The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text)."
+                description="The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected."
             ),
         ],
         _request_timeout: Union[
@@ -1676,13 +1751,13 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_global_description
+        """Create or replace a global description record
 
-        Create or replace a global description record, Blues staff only (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        Store a platform-wide named document that every signed-in user can read, replacing any record with that name. The Content-Type is handled as in `SetProjectDescription`.  Blues staff only; returns 403 for anyone else. Returns 400 if the content is over 10 MB or the name isn't valid.
 
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
-        :param body: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text). (required)
+        :param body: The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected. (required)
         :type body: bytearray
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1798,11 +1873,16 @@ class DescriptionApi:
     def set_project_description(
         self,
         project_or_product_uid: StrictStr,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         body: Annotated[
             Union[StrictBytes, StrictStr],
             Field(
-                description="The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text)."
+                description="The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected."
             ),
         ],
         _request_timeout: Union[
@@ -1817,15 +1897,15 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DescriptionRecord:
-        """set_project_description
+        """Create or replace a project description record
 
-        Create or replace a project description record (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        Store a named document in a project, replacing any record with that name. The request's Content-Type is stored and served back by `GetProjectDescription`; if it's missing or `application/octet-stream`, the type is detected from the content.  Requires the Owner or Developer role. Returns 400 if the content is over 10 MB or the name isn't valid.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
-        :param body: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text). (required)
+        :param body: The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected. (required)
         :type body: bytearray
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1876,11 +1956,16 @@ class DescriptionApi:
     def set_project_description_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         body: Annotated[
             Union[StrictBytes, StrictStr],
             Field(
-                description="The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text)."
+                description="The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected."
             ),
         ],
         _request_timeout: Union[
@@ -1895,15 +1980,15 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DescriptionRecord]:
-        """set_project_description
+        """Create or replace a project description record
 
-        Create or replace a project description record (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        Store a named document in a project, replacing any record with that name. The request's Content-Type is stored and served back by `GetProjectDescription`; if it's missing or `application/octet-stream`, the type is detected from the content.  Requires the Owner or Developer role. Returns 400 if the content is over 10 MB or the name isn't valid.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
-        :param body: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text). (required)
+        :param body: The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected. (required)
         :type body: bytearray
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1954,11 +2039,16 @@ class DescriptionApi:
     def set_project_description_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        description_name: StrictStr,
+        description_name: Annotated[
+            StrictStr,
+            Field(
+                description="Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`."
+            ),
+        ],
         body: Annotated[
             Union[StrictBytes, StrictStr],
             Field(
-                description="The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text)."
+                description="The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected."
             ),
         ],
         _request_timeout: Union[
@@ -1973,15 +2063,15 @@ class DescriptionApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """set_project_description
+        """Create or replace a project description record
 
-        Create or replace a project description record (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text).
+        Store a named document in a project, replacing any record with that name. The request's Content-Type is stored and served back by `GetProjectDescription`; if it's missing or `application/octet-stream`, the type is detected from the content.  Requires the Owner or Developer role. Returns 400 if the content is over 10 MB or the name isn't valid.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param description_name: (required)
+        :param description_name: Record name, 1-128 letters, digits, `.`, `_` or `-`, e.g. `_health.qo`. (required)
         :type description_name: str
-        :param body: The description content (up to 10MB). The request Content-Type is stored and returned on GET; when omitted it is detected (JSON or text). (required)
+        :param body: The document to store, up to 10 MB. Send its Content-Type, such as `text/markdown`; Markdown isn't detected. (required)
         :type body: bytearray
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

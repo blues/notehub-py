@@ -2,12 +2,12 @@
 
 ## Properties
 
-| Name                           | Type          | Description | Notes      |
-| ------------------------------ | ------------- | ----------- | ---------- |
-| **auto_provision_fleets**      | **List[str]** |             | [optional] |
-| **disable_devices_by_default** | **bool**      |             |
-| **label**                      | **str**       |             |
-| **uid**                        | **str**       |             |
+| Name                           | Type          | Description                                                                                                                   | Notes      |
+| ------------------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **auto_provision_fleets**      | **List[str]** | FleetUIDs that devices are added to when first provisioned with this ProductUID.                                              | [optional] |
+| **disable_devices_by_default** | **bool**      | If &#x60;true&#x60;, devices provisioned with this ProductUID start out disabled.                                             |
+| **label**                      | **str**       | Product name shown in Notehub.                                                                                                |
+| **uid**                        | **str**       | ProductUID, e.g. &#x60;com.blues.bridge:sensors&#x60;. &#x60;GetProducts&#x60; returns it with a &#x60;product:&#x60; prefix. |
 
 ## Example
 

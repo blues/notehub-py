@@ -2,13 +2,13 @@
 
 ## Properties
 
-| Name           | Type                                          | Description                                            | Notes      |
-| -------------- | --------------------------------------------- | ------------------------------------------------------ | ---------- |
-| **items**      | [**List[SchemaProperty]**](SchemaProperty.md) | Used if type is array                                  | [optional] |
-| **name**       | **str**                                       | Name of the field (optional for array/object children) | [optional] |
-| **properties** | [**List[SchemaProperty]**](SchemaProperty.md) | Used if type is object                                 | [optional] |
-| **type**       | **str**                                       |                                                        |
-| **updated_at** | **datetime**                                  |                                                        | [optional] |
+| Name           | Type                                          | Description                                                              | Notes      |
+| -------------- | --------------------------------------------- | ------------------------------------------------------------------------ | ---------- |
+| **items**      | [**List[SchemaProperty]**](SchemaProperty.md) | For an array, the type of its elements, inferred from the first element. | [optional] |
+| **name**       | **str**                                       | Name of the field (optional for array/object children)                   | [optional] |
+| **properties** | [**List[SchemaProperty]**](SchemaProperty.md) | For an object, its fields.                                               | [optional] |
+| **type**       | **str**                                       | The field&#39;s JSON type.                                               |
+| **updated_at** | **datetime**                                  | When Notehub recorded this field, usually when it first appeared.        | [optional] |
 
 ## Example
 

@@ -30,17 +30,18 @@ class CreatedRepository(BaseModel):
     """  # noqa: E501
 
     fleet_uids: Optional[List[StrictStr]] = None
-    name: Optional[StrictStr] = Field(default=None, description="repository name")
+    name: Optional[StrictStr] = Field(default=None, description="Repository name.")
     password: Optional[StrictStr] = Field(
         default=None,
-        description="read-only password for the database, also used as X-Repository-Token header for subsequent API calls.  This value is only served once when the repository is created, and never to a scoped token, which queries through the repository token endpoint instead",
+        description="The repository key, for `X-Repository-Key` and as the database password. Returned only here, never to a scoped token.",
     )
     project_uids: Optional[List[StrictStr]] = None
     uid: Optional[StrictStr] = Field(
-        default=None, description="The unique identifier for the data repository"
+        default=None,
+        description="Repository UID, e.g. `repo:2606f411-dea6-44a0-9743-1130f57d77d8`.",
     )
     user: Optional[StrictStr] = Field(
-        default=None, description="read-only user for database"
+        default=None, description="Read-only database user that goes with `password`."
     )
     __properties: ClassVar[List[str]] = [
         "fleet_uids",

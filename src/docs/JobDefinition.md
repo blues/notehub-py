@@ -4,13 +4,13 @@ Batch job definition
 
 ## Properties
 
-| Name                 | Type                                                            | Description                                            | Notes      |
-| -------------------- | --------------------------------------------------------------- | ------------------------------------------------------ | ---------- |
-| **comment**          | **str**                                                         | Human-readable description of the job                  | [optional] |
-| **default_requests** | [**BatchJobRequests**](BatchJobRequests.md)                     |                                                        | [optional] |
-| **device_requests**  | [**Dict[str, BatchJobRequests]**](BatchJobRequests.md)          | Device-specific request overrides, keyed by device UID | [optional] |
-| **report_options**   | [**JobDefinitionReportOptions**](JobDefinitionReportOptions.md) |                                                        | [optional] |
-| **select**           | [**JobDefinitionSelect**](JobDefinitionSelect.md)               |                                                        | [optional] |
+| Name                 | Type                                                            | Description                                           | Notes      |
+| -------------------- | --------------------------------------------------------------- | ----------------------------------------------------- | ---------- |
+| **comment**          | **str**                                                         | Human-readable description of the job                 | [optional] |
+| **default_requests** | [**BatchJobRequests**](BatchJobRequests.md)                     |                                                       | [optional] |
+| **device_requests**  | [**Dict[str, BatchJobRequests]**](BatchJobRequests.md)          | Device-specific request overrides, keyed by DeviceUID | [optional] |
+| **report_options**   | [**JobDefinitionReportOptions**](JobDefinitionReportOptions.md) |                                                       | [optional] |
+| **select**           | [**JobDefinitionSelect**](JobDefinitionSelect.md)               |                                                       | [optional] |
 
 ## Example
 

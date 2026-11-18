@@ -2,11 +2,11 @@
 
 ## Properties
 
-| Name     | Type                                        | Description | Notes |
-| -------- | ------------------------------------------- | ----------- | ----- |
-| **name** | **str**                                     |             |
-| **role** | [**OrganizationRole**](OrganizationRole.md) |             |
-| **uid**  | **str**                                     |             |
+| Name     | Type                                        | Description        | Notes |
+| -------- | ------------------------------------------- | ------------------ | ----- |
+| **name** | **str**                                     | Organization name. |
+| **role** | [**OrganizationRole**](OrganizationRole.md) |                    |
+| **uid**  | **str**                                     | Organization UID.  |
 
 ## Example
 

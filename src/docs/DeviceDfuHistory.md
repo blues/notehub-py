@@ -2,11 +2,12 @@
 
 ## Properties
 
-| Name           | Type                                                        | Description | Notes      |
-| -------------- | ----------------------------------------------------------- | ----------- | ---------- |
-| **current**    | [**DeviceDfuHistoryCurrent**](DeviceDfuHistoryCurrent.md)   |             | [optional] |
-| **device_uid** | **str**                                                     | Device UID  | [optional] |
-| **history**    | [**List[DeviceDfuStateMachine]**](DeviceDfuStateMachine.md) |             | [optional] |
+| Name           | Type                                                        | Description                                                                                | Notes      |
+| -------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ---------- |
+| **current**    | [**DeviceDfuHistoryCurrent**](DeviceDfuHistoryCurrent.md)   |                                                                                            | [optional] |
+| **deleted**    | **bool**                                                    | True if this device has been deleted. Only present when reading with a &#x60;cursor&#x60;. | [optional] |
+| **device_uid** | **str**                                                     | DeviceUID                                                                                  | [optional] |
+| **history**    | [**List[DeviceDfuStateMachine]**](DeviceDfuStateMachine.md) | Every firmware update requested for this device, newest first.                             | [optional] |
 
 ## Example
 

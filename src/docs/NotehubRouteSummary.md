@@ -2,13 +2,13 @@
 
 ## Properties
 
-| Name         | Type         | Description | Notes                                                            |
-| ------------ | ------------ | ----------- | ---------------------------------------------------------------- |
-| **disabled** | **bool**     |             | [optional] [default to False]                                    |
-| **label**    | **str**      |             | [optional] [default to 'success route']                          |
-| **modified** | **datetime** |             | [optional] [readonly]                                            |
-| **type**     | **str**      |             | [optional] [default to 'http']                                   |
-| **uid**      | **str**      |             | [optional] [default to 'route:8d65a087d5d290ce5bdf03aeff2becc0'] |
+| Name         | Type         | Description                                        | Notes                                                            |
+| ------------ | ------------ | -------------------------------------------------- | ---------------------------------------------------------------- |
+| **disabled** | **bool**     | True if the route is turned off and sends nothing. | [optional] [default to False]                                    |
+| **label**    | **str**      | Route name.                                        | [optional] [default to 'success route']                          |
+| **modified** | **datetime** | When the route was last changed.                   | [optional] [readonly]                                            |
+| **type**     | **str**      | Route type; see &#x60;NotehubRoute.type&#x60;.     | [optional] [default to 'http']                                   |
+| **uid**      | **str**      | RouteUID.                                          | [optional] [default to 'route:8d65a087d5d290ce5bdf03aeff2becc0'] |
 
 ## Example
 

@@ -2,9 +2,9 @@
 
 ## Properties
 
-| Name              | Type                        | Description                                                                                  | Notes      |
-| ----------------- | --------------------------- | -------------------------------------------------------------------------------------------- | ---------- |
-| **latest_events** | [**List[Event]**](Event.md) | The set of latest events. Will always include the current \&quot;session.begin\&quot; event. | [optional] |
+| Name              | Type                        | Description                                                        | Notes      |
+| ----------------- | --------------------------- | ------------------------------------------------------------------ | ---------- |
+| **latest_events** | [**List[Event]**](Event.md) | The most recent event from each notefile, sorted by notefile name. | [optional] |
 
 ## Example
 

@@ -2,70 +2,17 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                           | HTTP request           | Description                                          |
-| -------------------------------------------------------------------------------- | ---------------------- | ---------------------------------------------------- |
-| [**login**](AuthorizationApi.md#login)                                           | **POST** /auth/login   |
-| [**o_auth2_client_credentials**](AuthorizationApi.md#o_auth2_client_credentials) | **POST** /oauth2/token | Issue an OAuth 2.0 access token (Client Credentials) |
-
-## login
-
-> Login200Response login(login_request)
-
-Gets an API key from username and password
-
-### Example
-
-```python
-import notehub_py
-from notehub_py.models.login200_response import Login200Response
-from notehub_py.models.login_request import LoginRequest
-from notehub_py.rest import ApiException
-from pprint import pprint
-
-
-# Enter a context with an instance of the API client
-with notehub_py.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = notehub_py.AuthorizationApi(api_client)
-    login_request = {
-        "password": "test-password",
-        "username": "name@example.com",
-    }  # LoginRequest |
-
-    try:
-        api_response = api_instance.login(login_request)
-        print("The response of AuthorizationApi->login:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling AuthorizationApi->login: %s\n" % e)
-```
-
-### Parameters
-
-| Name              | Type                                | Description | Notes |
-| ----------------- | ----------------------------------- | ----------- | ----- |
-| **login_request** | [**LoginRequest**](LoginRequest.md) |             |
-
-### Return type
-
-[**Login200Response**](Login200Response.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
+| Method                                                                           | HTTP request           | Description                                       |
+| -------------------------------------------------------------------------------- | ---------------------- | ------------------------------------------------- |
+| [**o_auth2_client_credentials**](AuthorizationApi.md#o_auth2_client_credentials) | **POST** /oauth2/token | Get an access token with OAuth client credentials |
 
 ## o_auth2_client_credentials
 
 > OAuth2TokenResponse o_auth2_client_credentials(client_id, client_secret, grant_type, scope=scope)
 
-Issue an OAuth 2.0 access token (Client Credentials)
+Get an access token with OAuth client credentials
 
-Exchanges client credentials for an access token. Parameters must be sent as application/x-www-form-urlencoded.
+Exchange an OAuth client's ID and secret for a bearer access token, using the OAuth 2.0 client credentials grant. Send the parameters form-encoded, not as JSON. Returns 401 for a bad client ID or secret, and 403 for a scope the client can't have.
 
 ### Example
 
@@ -86,7 +33,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     scope = "scope_example"  # str | Space-delimited scopes. (optional)
 
     try:
-        # Issue an OAuth 2.0 access token (Client Credentials)
+        # Get an access token with OAuth client credentials
         api_response = api_instance.o_auth2_client_credentials(
             client_id, client_secret, grant_type, scope=scope
         )

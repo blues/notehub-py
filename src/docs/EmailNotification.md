@@ -2,9 +2,9 @@
 
 ## Properties
 
-| Name      | Type    | Description   | Notes      |
-| --------- | ------- | ------------- | ---------- |
-| **email** | **str** | Email Address | [optional] |
+| Name      | Type    | Description                                    | Notes |
+| --------- | ------- | ---------------------------------------------- | ----- |
+| **email** | **str** | Email address, or several separated by commas. |
 
 ## Example
 

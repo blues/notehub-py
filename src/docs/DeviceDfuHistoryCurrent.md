@@ -4,14 +4,14 @@ Description of the current firmware
 
 ## Properties
 
-| Name             | Type    | Description           | Notes      |
-| ---------------- | ------- | --------------------- | ---------- |
-| **builder**      | **str** | Firmware author       | [optional] |
-| **built**        | **str** | Firmware build date   | [optional] |
-| **description**  | **str** | Firmware description  | [optional] |
-| **organization** | **str** | Firmware organization | [optional] |
-| **product**      | **str** | Firmware product      | [optional] |
-| **version**      | **str** | Firmware version      | [optional] |
+| Name             | Type    | Description                                                                                 | Notes      |
+| ---------------- | ------- | ------------------------------------------------------------------------------------------- | ---------- |
+| **builder**      | **str** | Firmware author                                                                             | [optional] |
+| **built**        | **str** | Firmware build date                                                                         | [optional] |
+| **description**  | **str** | Firmware description                                                                        | [optional] |
+| **organization** | **str** | Firmware organization                                                                       | [optional] |
+| **product**      | **str** | Firmware product                                                                            | [optional] |
+| **version**      | **str** | Firmware version the device runs, or &#x60;Unknown (device has not fully sync&#39;d)&#x60;. | [optional] |
 
 ## Example
 

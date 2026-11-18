@@ -44,18 +44,24 @@ from typing_extensions import Self
 
 class NotehubRoute(BaseModel):
     """
-    Route resource as stored/returned by the server.
+    A route, which sends a project's events to a destination. Only the object named by `type` is used.
     """  # noqa: E501
 
     aws: Optional[AwsRoute] = None
     azure: Optional[AzureRoute] = None
     blynk: Optional[BlynkRoute] = None
     datacake: Optional[DatacakeRoute] = None
-    disabled: Optional[StrictBool] = False
+    disabled: Optional[StrictBool] = Field(
+        default=False, description="If true, the route sends no events."
+    )
     google: Optional[GoogleRoute] = None
     http: Optional[HttpRoute] = None
-    label: Optional[StrictStr] = None
-    modified: Optional[datetime] = None
+    label: Optional[StrictStr] = Field(
+        default=None, description="Route name. Required."
+    )
+    modified: Optional[datetime] = Field(
+        default=None, description="When the route was last changed."
+    )
     mqtt: Optional[MqttRoute] = None
     notes: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
         default=None, description="Optional free-form text for annotating the route."
@@ -70,9 +76,13 @@ class NotehubRoute(BaseModel):
     thingworx: Optional[ThingworxRoute] = None
     twilio: Optional[TwilioRoute] = None
     type: Optional[StrictStr] = Field(
-        default=None, description="Mirrors hublib.RouteType."
+        default=None,
+        description="Route type. Fill in the object named in parentheses. - `http`: send each event to a URL (`http`) - `proxy`: let Notecards make `web.*` requests through Notehub (`proxy`) - `mqtt`: publish to an MQTT broker (`mqtt`) - `google-function`: call a Google Cloud Function (`google`) - `aws-lambda`, `aws-lambda-with-access-key`, `aws-sqs`, `aws-sqs-with-access-key`, `aws-sqs-fifo`, `aws-sqs-fifo-with-access-key`, `aws-sqs-with-role`, `aws-iot-analytics` (`aws`) - `azure-function`, `azure-function-with-key`, `azure-service-bus-with-sas-token` (`azure`) - `snowflake` (`snowflake`); `snowpipe-streaming` (`snowpipe_streaming`) - `s3-archive` (`s3archive`) - `slack-bearer`, `slack-webhook` (`slack`) - `radnote-radresp-fixed-survey`, `radnote-radresp-field-survey`, `radnote-radresp-mobile-survey`, `radnote-radresp-mobile-equipment-survey`, `radnote-missionedge-fixed-survey` (`radnote`) - `thingworx`, `twilio`, `datacake`, `blynk`, `qubitro` (object of the same name) ",
     )
-    uid: Optional[StrictStr] = None
+    uid: Optional[StrictStr] = Field(
+        default=None,
+        description="RouteUID, e.g. `route:cbd20093cba58392c9f9bbdd0cdeb1a0`.",
+    )
     __properties: ClassVar[List[str]] = [
         "aws",
         "azure",

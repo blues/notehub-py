@@ -44,7 +44,8 @@ class AlertDataInner(BaseModel):
         default=None, description="The UID of the source of the alert"
     )
     source_type: Optional[StrictStr] = Field(
-        default=None, description="The type of source."
+        default=None,
+        description="The `source_type` of the monitor that raised the alert.",
     )
     source_uid: Optional[StrictStr] = Field(
         default=None, description="The UID of the source of the alert"
@@ -80,8 +81,10 @@ class AlertDataInner(BaseModel):
         if value is None:
             return value
 
-        if value not in set(["event", "device"]):
-            raise ValueError("must be one of enum values ('event', 'device')")
+        if value not in set(["event", "heartbeat", "usage"]):
+            raise ValueError(
+                "must be one of enum values ('event', 'heartbeat', 'usage')"
+            )
         return value
 
     model_config = ConfigDict(

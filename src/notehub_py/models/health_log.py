@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,9 +30,11 @@ class HealthLog(BaseModel):
     HealthLog
     """  # noqa: E501
 
-    alert: StrictBool
-    text: StrictStr
-    when: datetime
+    alert: StrictBool = Field(description="True if the entry was flagged as an alert.")
+    text: StrictStr = Field(
+        description="The log message. Restart entries begin with `boot`."
+    )
+    when: datetime = Field(description="When the entry was recorded.")
     __properties: ClassVar[List[str]] = ["alert", "text", "when"]
 
     model_config = ConfigDict(

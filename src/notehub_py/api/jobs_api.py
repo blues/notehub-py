@@ -52,7 +52,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         report_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a job run report")
+            StrictStr, Field(description="Job run UID, as returned by `RunJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -66,13 +66,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CancelJobRun200Response:
-        """cancel_job_run
+        """Cancel a job run
 
-        Cancel a running job execution
+        Ask a running job to stop. `successful` is false if the run couldn't be cancelled.  Requires the Owner or Developer role. Returns 404 if the run doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param report_uid: Unique identifier for a job run report (required)
+        :param report_uid: Job run UID, as returned by `RunJob`. (required)
         :type report_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -123,7 +123,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         report_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a job run report")
+            StrictStr, Field(description="Job run UID, as returned by `RunJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -137,13 +137,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CancelJobRun200Response]:
-        """cancel_job_run
+        """Cancel a job run
 
-        Cancel a running job execution
+        Ask a running job to stop. `successful` is false if the run couldn't be cancelled.  Requires the Owner or Developer role. Returns 404 if the run doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param report_uid: Unique identifier for a job run report (required)
+        :param report_uid: Job run UID, as returned by `RunJob`. (required)
         :type report_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -194,7 +194,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         report_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a job run report")
+            StrictStr, Field(description="Job run UID, as returned by `RunJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -208,13 +208,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """cancel_job_run
+        """Cancel a job run
 
-        Cancel a running job execution
+        Ask a running job to stop. `successful` is false if the run couldn't be cancelled.  Requires the Owner or Developer role. Returns 404 if the run doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param report_uid: Unique identifier for a job run report (required)
+        :param report_uid: Job run UID, as returned by `RunJob`. (required)
         :type report_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -314,7 +314,12 @@ class JobsApi:
     def create_job(
         self,
         project_or_product_uid: StrictStr,
-        name: Annotated[StrictStr, Field(description="Name for the job")],
+        name: Annotated[
+            StrictStr,
+            Field(
+                description="Job name, shown in lists. It doesn't have to be unique."
+            ),
+        ],
         job_definition: Annotated[
             JobDefinition, Field(description="The batch job definition")
         ],
@@ -330,13 +335,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CreateJob201Response:
-        """create_job
+        """Create a batch job
 
-        Create a new batch job with an optional name
+        Create a batch job from a definition that selects devices and the changes to make to them. It doesn't run until `RunJob`. Each call creates a new job with its own UID; names needn't be unique.  Requires the Owner or Developer role. Returns 400 without a `name`; an invalid definition returns 500.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param name: Name for the job (required)
+        :param name: Job name, shown in lists. It doesn't have to be unique. (required)
         :type name: str
         :param job_definition: The batch job definition (required)
         :type job_definition: JobDefinition
@@ -389,7 +394,12 @@ class JobsApi:
     def create_job_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        name: Annotated[StrictStr, Field(description="Name for the job")],
+        name: Annotated[
+            StrictStr,
+            Field(
+                description="Job name, shown in lists. It doesn't have to be unique."
+            ),
+        ],
         job_definition: Annotated[
             JobDefinition, Field(description="The batch job definition")
         ],
@@ -405,13 +415,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CreateJob201Response]:
-        """create_job
+        """Create a batch job
 
-        Create a new batch job with an optional name
+        Create a batch job from a definition that selects devices and the changes to make to them. It doesn't run until `RunJob`. Each call creates a new job with its own UID; names needn't be unique.  Requires the Owner or Developer role. Returns 400 without a `name`; an invalid definition returns 500.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param name: Name for the job (required)
+        :param name: Job name, shown in lists. It doesn't have to be unique. (required)
         :type name: str
         :param job_definition: The batch job definition (required)
         :type job_definition: JobDefinition
@@ -464,7 +474,12 @@ class JobsApi:
     def create_job_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        name: Annotated[StrictStr, Field(description="Name for the job")],
+        name: Annotated[
+            StrictStr,
+            Field(
+                description="Job name, shown in lists. It doesn't have to be unique."
+            ),
+        ],
         job_definition: Annotated[
             JobDefinition, Field(description="The batch job definition")
         ],
@@ -480,13 +495,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_job
+        """Create a batch job
 
-        Create a new batch job with an optional name
+        Create a batch job from a definition that selects devices and the changes to make to them. It doesn't run until `RunJob`. Each call creates a new job with its own UID; names needn't be unique.  Requires the Owner or Developer role. Returns 400 without a `name`; an invalid definition returns 500.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param name: Name for the job (required)
+        :param name: Job name, shown in lists. It doesn't have to be unique. (required)
         :type name: str
         :param job_definition: The batch job definition (required)
         :type job_definition: JobDefinition
@@ -605,7 +620,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -619,13 +634,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DeleteJob200Response:
-        """delete_job
+        """Delete a batch job
 
-        Delete a batch job
+        Delete a batch job.  Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -676,7 +691,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -690,13 +705,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[DeleteJob200Response]:
-        """delete_job
+        """Delete a batch job
 
-        Delete a batch job
+        Delete a batch job.  Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -747,7 +762,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -761,13 +776,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_job
+        """Delete a batch job
 
-        Delete a batch job
+        Delete a batch job.  Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -868,7 +883,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         report_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a job run report")
+            StrictStr, Field(description="Job run UID, as returned by `RunJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -882,13 +897,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """delete_job_run
+        """Delete a job run
 
-        Delete the results of a job run
+        Delete a job run and its results. Deleting a run that doesn't exist also succeeds.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param report_uid: Unique identifier for a job run report (required)
+        :param report_uid: Job run UID, as returned by `RunJob`. (required)
         :type report_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -939,7 +954,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         report_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a job run report")
+            StrictStr, Field(description="Job run UID, as returned by `RunJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -953,13 +968,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """delete_job_run
+        """Delete a job run
 
-        Delete the results of a job run
+        Delete a job run and its results. Deleting a run that doesn't exist also succeeds.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param report_uid: Unique identifier for a job run report (required)
+        :param report_uid: Job run UID, as returned by `RunJob`. (required)
         :type report_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1010,7 +1025,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         report_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a job run report")
+            StrictStr, Field(description="Job run UID, as returned by `RunJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -1024,13 +1039,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_job_run
+        """Delete a job run
 
-        Delete the results of a job run
+        Delete a job run and its results. Deleting a run that doesn't exist also succeeds.  Requires the Owner or Developer role.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param report_uid: Unique identifier for a job run report (required)
+        :param report_uid: Job run UID, as returned by `RunJob`. (required)
         :type report_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1131,7 +1146,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -1145,13 +1160,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> JobDetail:
-        """get_job
+        """Get a batch job
 
-        Get a specific batch job definition
+        Get one batch job's definition and its latest run's status.  Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1202,7 +1217,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -1216,13 +1231,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[JobDetail]:
-        """get_job
+        """Get a batch job
 
-        Get a specific batch job definition
+        Get one batch job's definition and its latest run's status.  Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1273,7 +1288,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         _request_timeout: Union[
             None,
@@ -1287,13 +1302,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_job
+        """Get a batch job
 
-        Get a specific batch job definition
+        Get one batch job's definition and its latest run's status.  Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1394,7 +1409,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         report_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a job run report")
+            StrictStr, Field(description="Job run UID, as returned by `RunJob`.")
         ],
         view: Annotated[
             Optional[StrictStr],
@@ -1414,13 +1429,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> JobRun:
-        """get_job_run
+        """Get a job run
 
-        Get the result of a job execution
+        Get a job run's status and, with `view=detail`, its full results.  Returns 404 if the run doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param report_uid: Unique identifier for a job run report (required)
+        :param report_uid: Job run UID, as returned by `RunJob`. (required)
         :type report_uid: str
         :param view: Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload
         :type view: str
@@ -1474,7 +1489,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         report_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a job run report")
+            StrictStr, Field(description="Job run UID, as returned by `RunJob`.")
         ],
         view: Annotated[
             Optional[StrictStr],
@@ -1494,13 +1509,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[JobRun]:
-        """get_job_run
+        """Get a job run
 
-        Get the result of a job execution
+        Get a job run's status and, with `view=detail`, its full results.  Returns 404 if the run doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param report_uid: Unique identifier for a job run report (required)
+        :param report_uid: Job run UID, as returned by `RunJob`. (required)
         :type report_uid: str
         :param view: Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload
         :type view: str
@@ -1554,7 +1569,7 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         report_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a job run report")
+            StrictStr, Field(description="Job run UID, as returned by `RunJob`.")
         ],
         view: Annotated[
             Optional[StrictStr],
@@ -1574,13 +1589,13 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_job_run
+        """Get a job run
 
-        Get the result of a job execution
+        Get a job run's status and, with `view=detail`, its full results.  Returns 404 if the run doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param report_uid: Unique identifier for a job run report (required)
+        :param report_uid: Job run UID, as returned by `RunJob`. (required)
         :type report_uid: str
         :param view: Controls the level of detail returned: 'summary' returns metadata only, 'detail' returns the full result payload
         :type view: str
@@ -1689,13 +1704,16 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         status: Annotated[
-            Optional[StrictStr], Field(description="Filter runs by status")
+            Optional[StrictStr], Field(description="Return only runs with this status.")
         ] = None,
         dry_run: Annotated[
-            Optional[StrictBool], Field(description="Filter runs by dry run flag")
+            Optional[StrictBool],
+            Field(
+                description="If set, return only dry runs (`true`) or only real runs (`false`)."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -1709,17 +1727,17 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetJobRuns200Response:
-        """get_job_runs
+        """List a job's runs
 
-        List all runs for a specific job
+        List a batch job's runs, optionally filtered by status or dry-run flag.  Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
-        :param status: Filter runs by status
+        :param status: Return only runs with this status.
         :type status: str
-        :param dry_run: Filter runs by dry run flag
+        :param dry_run: If set, return only dry runs (`true`) or only real runs (`false`).
         :type dry_run: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1772,13 +1790,16 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         status: Annotated[
-            Optional[StrictStr], Field(description="Filter runs by status")
+            Optional[StrictStr], Field(description="Return only runs with this status.")
         ] = None,
         dry_run: Annotated[
-            Optional[StrictBool], Field(description="Filter runs by dry run flag")
+            Optional[StrictBool],
+            Field(
+                description="If set, return only dry runs (`true`) or only real runs (`false`)."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -1792,17 +1813,17 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetJobRuns200Response]:
-        """get_job_runs
+        """List a job's runs
 
-        List all runs for a specific job
+        List a batch job's runs, optionally filtered by status or dry-run flag.  Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
-        :param status: Filter runs by status
+        :param status: Return only runs with this status.
         :type status: str
-        :param dry_run: Filter runs by dry run flag
+        :param dry_run: If set, return only dry runs (`true`) or only real runs (`false`).
         :type dry_run: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1855,13 +1876,16 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         status: Annotated[
-            Optional[StrictStr], Field(description="Filter runs by status")
+            Optional[StrictStr], Field(description="Return only runs with this status.")
         ] = None,
         dry_run: Annotated[
-            Optional[StrictBool], Field(description="Filter runs by dry run flag")
+            Optional[StrictBool],
+            Field(
+                description="If set, return only dry runs (`true`) or only real runs (`false`)."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -1875,17 +1899,17 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_job_runs
+        """List a job's runs
 
-        List all runs for a specific job
+        List a batch job's runs, optionally filtered by status or dry-run flag.  Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
-        :param status: Filter runs by status
+        :param status: Return only runs with this status.
         :type status: str
-        :param dry_run: Filter runs by dry run flag
+        :param dry_run: If set, return only dry runs (`true`) or only real runs (`false`).
         :type dry_run: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2009,9 +2033,9 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetJobs200Response:
-        """get_jobs
+        """List batch jobs
 
-        List all batch jobs for a project
+        List a project's batch jobs with their latest run's status. A batch job applies changes, such as environment variables, to a selected set of devices.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2073,9 +2097,9 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetJobs200Response]:
-        """get_jobs
+        """List batch jobs
 
-        List all batch jobs for a project
+        List a project's batch jobs with their latest run's status. A batch job applies changes, such as environment variables, to a selected set of devices.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2137,9 +2161,9 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_jobs
+        """List batch jobs
 
-        List all batch jobs for a project
+        List a project's batch jobs with their latest run's status. A batch job applies changes, such as environment variables, to a selected set of devices.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -2237,11 +2261,13 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         dry_run: Annotated[
             Optional[StrictBool],
-            Field(description="Run job in dry-run mode without making actual changes"),
+            Field(
+                description="If true, report what the job would change without changing anything."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -2255,15 +2281,15 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RunJob200Response:
-        """run_job
+        """Run a batch job
 
-        Execute a batch job
+        Start a run of a batch job and return its run UID. The run continues in the background, and `GetJobRun` shows its progress. With `dry_run=true`, it reports what would change without changing anything.  Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
-        :param dry_run: Run job in dry-run mode without making actual changes
+        :param dry_run: If true, report what the job would change without changing anything.
         :type dry_run: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2315,11 +2341,13 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         dry_run: Annotated[
             Optional[StrictBool],
-            Field(description="Run job in dry-run mode without making actual changes"),
+            Field(
+                description="If true, report what the job would change without changing anything."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -2333,15 +2361,15 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[RunJob200Response]:
-        """run_job
+        """Run a batch job
 
-        Execute a batch job
+        Start a run of a batch job and return its run UID. The run continues in the background, and `GetJobRun` shows its progress. With `dry_run=true`, it reports what would change without changing anything.  Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
-        :param dry_run: Run job in dry-run mode without making actual changes
+        :param dry_run: If true, report what the job would change without changing anything.
         :type dry_run: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2393,11 +2421,13 @@ class JobsApi:
         self,
         project_or_product_uid: StrictStr,
         job_uid: Annotated[
-            StrictStr, Field(description="Unique identifier for a batch job")
+            StrictStr, Field(description="Batch job UID, as returned by `CreateJob`.")
         ],
         dry_run: Annotated[
             Optional[StrictBool],
-            Field(description="Run job in dry-run mode without making actual changes"),
+            Field(
+                description="If true, report what the job would change without changing anything."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -2411,15 +2441,15 @@ class JobsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """run_job
+        """Run a batch job
 
-        Execute a batch job
+        Start a run of a batch job and return its run UID. The run continues in the background, and `GetJobRun` shows its progress. With `dry_run=true`, it reports what would change without changing anything.  Requires the Owner or Developer role. Returns 404 if the job doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param job_uid: Unique identifier for a batch job (required)
+        :param job_uid: Batch job UID, as returned by `CreateJob`. (required)
         :type job_uid: str
-        :param dry_run: Run job in dry-run mode without making actual changes
+        :param dry_run: If true, report what the job would change without changing anything.
         :type dry_run: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,12 +29,16 @@ class Location(BaseModel):
     Location
     """  # noqa: E501
 
-    country: StrictStr
-    latitude: Union[StrictFloat, StrictInt]
-    longitude: Union[StrictFloat, StrictInt]
-    name: StrictStr
-    timezone: StrictStr
-    when: StrictStr
+    country: StrictStr = Field(description="Two-letter country code, e.g. `US`.")
+    latitude: Union[StrictFloat, StrictInt] = Field(description="Latitude in degrees.")
+    longitude: Union[StrictFloat, StrictInt] = Field(
+        description="Longitude in degrees."
+    )
+    name: StrictStr = Field(description="Place name, e.g. `Waverly MI`.")
+    timezone: StrictStr = Field(description="IANA time zone, e.g. `America/Detroit`.")
+    when: StrictStr = Field(
+        description="When the location was recorded, in RFC 3339 format. Empty if unknown."
+    )
     __properties: ClassVar[List[str]] = [
         "country",
         "latitude",

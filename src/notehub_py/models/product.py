@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,10 +29,17 @@ class Product(BaseModel):
     Product
     """  # noqa: E501
 
-    auto_provision_fleets: Optional[List[StrictStr]] = None
-    disable_devices_by_default: StrictBool
-    label: StrictStr
-    uid: StrictStr
+    auto_provision_fleets: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="FleetUIDs that devices are added to when first provisioned with this ProductUID.",
+    )
+    disable_devices_by_default: StrictBool = Field(
+        description="If `true`, devices provisioned with this ProductUID start out disabled."
+    )
+    label: StrictStr = Field(description="Product name shown in Notehub.")
+    uid: StrictStr = Field(
+        description="ProductUID, e.g. `com.blues.bridge:sensors`. `GetProducts` returns it with a `product:` prefix."
+    )
     __properties: ClassVar[List[str]] = [
         "auto_provision_fleets",
         "disable_devices_by_default",

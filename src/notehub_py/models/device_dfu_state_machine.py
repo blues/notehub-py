@@ -41,7 +41,9 @@ class DeviceDfuStateMachine(BaseModel):
         default=None,
         description="Version of the firmware that was requested to be installed",
     )
-    updates: Optional[List[DeviceDfuStateMachineNode]] = None
+    updates: Optional[List[DeviceDfuStateMachineNode]] = Field(
+        default=None, description="Status updates reported for this firmware update."
+    )
     __properties: ClassVar[List[str]] = [
         "current_version",
         "initiated",

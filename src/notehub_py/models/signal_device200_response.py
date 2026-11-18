@@ -30,7 +30,8 @@ class SignalDevice200Response(BaseModel):
     """  # noqa: E501
 
     connected: Optional[StrictBool] = Field(
-        default=None, description="true if the Notecard is connected to Notehub."
+        default=None,
+        description="True if the Notecard was connected and the signal was delivered. False means it was dropped.",
     )
     __properties: ClassVar[List[str]] = ["connected"]
 

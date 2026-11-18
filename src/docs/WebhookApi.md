@@ -2,25 +2,27 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                                                                             | HTTP request                                                                       | Description |
-| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ----------- |
-| [**create_legacy_webhook_event**](WebhookApi.md#create_legacy_webhook_event)                       | **POST** /v1/products/{productUID}/devices/{deviceUID}/webhook-event               |
-| [**create_webhook**](WebhookApi.md#create_webhook)                                                 | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                  |
-| [**create_webhook_device_event_by_product**](WebhookApi.md#create_webhook_device_event_by_product) | **POST** /v1/products/{productUID}/webhooks/{webhookUID}/devices/{deviceUID}/event |
-| [**create_webhook_event_by_product**](WebhookApi.md#create_webhook_event_by_product)               | **POST** /v1/products/{productUID}/webhooks/{webhookUID}/event                     |
-| [**delete_webhook**](WebhookApi.md#delete_webhook)                                                 | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                |
-| [**get_webhook**](WebhookApi.md#get_webhook)                                                       | **GET** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                   |
-| [**get_webhook_settings_by_product**](WebhookApi.md#get_webhook_settings_by_product)               | **GET** /v1/products/{productUID}/webhooks/{webhookUID}/settings                   |
-| [**get_webhooks**](WebhookApi.md#get_webhooks)                                                     | **GET** /v1/projects/{projectOrProductUID}/webhooks                                |
-| [**update_legacy_webhook_session**](WebhookApi.md#update_legacy_webhook_session)                   | **PUT** /v1/products/{productUID}/devices/{deviceUID}/webhook-session              |
-| [**update_webhook**](WebhookApi.md#update_webhook)                                                 | **PUT** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                   |
-| [**update_webhook_settings_by_product**](WebhookApi.md#update_webhook_settings_by_product)         | **PUT** /v1/products/{productUID}/webhooks/{webhookUID}/settings                   |
+| Method                                                                                             | HTTP request                                                                       | Description                                           |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| [**create_legacy_webhook_event**](WebhookApi.md#create_legacy_webhook_event)                       | **POST** /v1/products/{productUID}/devices/{deviceUID}/webhook-event               | Add a note-shaped event from a device (legacy)        |
+| [**create_webhook**](WebhookApi.md#create_webhook)                                                 | **POST** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                  | Create a webhook                                      |
+| [**create_webhook_device_event_by_product**](WebhookApi.md#create_webhook_device_event_by_product) | **POST** /v1/products/{productUID}/webhooks/{webhookUID}/devices/{deviceUID}/event | Send a device&#39;s event through a webhook           |
+| [**create_webhook_event_by_product**](WebhookApi.md#create_webhook_event_by_product)               | **POST** /v1/products/{productUID}/webhooks/{webhookUID}/event                     | Send an event through a webhook                       |
+| [**delete_webhook**](WebhookApi.md#delete_webhook)                                                 | **DELETE** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                | Delete a webhook                                      |
+| [**get_webhook**](WebhookApi.md#get_webhook)                                                       | **GET** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                   | Get a webhook                                         |
+| [**get_webhook_settings_by_product**](WebhookApi.md#get_webhook_settings_by_product)               | **GET** /v1/products/{productUID}/webhooks/{webhookUID}/settings                   | Get a webhook by ProductUID                           |
+| [**get_webhooks**](WebhookApi.md#get_webhooks)                                                     | **GET** /v1/projects/{projectOrProductUID}/webhooks                                | List webhooks                                         |
+| [**update_legacy_webhook_session**](WebhookApi.md#update_legacy_webhook_session)                   | **PUT** /v1/products/{productUID}/devices/{deviceUID}/webhook-session              | Open or close a webhook device&#39;s session (legacy) |
+| [**update_webhook**](WebhookApi.md#update_webhook)                                                 | **PUT** /v1/projects/{projectOrProductUID}/webhooks/{webhookUID}                   | Update a webhook                                      |
+| [**update_webhook_settings_by_product**](WebhookApi.md#update_webhook_settings_by_product)         | **PUT** /v1/products/{productUID}/webhooks/{webhookUID}/settings                   | Update a webhook by ProductUID                        |
 
 ## create_legacy_webhook_event
 
 > create_legacy_webhook_event(product_uid, device_uid, request_body)
 
-Legacy endpoint for sending an event from a webhook, associated with the given device (provisioning it if necessary). The request body is a Note-shaped object containing the notefile name, body, and optional payload.
+Add a note-shaped event from a device (legacy)
+
+Legacy: add an event from a device, adding the device to the project if it's new. The body is note-shaped: `file`, `body`, an optional base64 `payload`, and other event fields such as `when` and `sn`. No webhook transform applies. New integrations should use `CreateWebhookDeviceEventByProduct`. Requires the Owner or Developer role. Returns 400 if there's no `body` or `payload`.
 
 ### Example
 
@@ -44,6 +46,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     }  # Dict[str, object] | A Note-shaped event. Typically contains the notefile name (file), a JSON body, and an optional base64-encoded payload, but any additional Note fields (e.g. when, sn, where_lat, where_lon) are accepted and honored.
 
     try:
+        # Add a note-shaped event from a device (legacy)
         api_instance.create_legacy_webhook_event(product_uid, device_uid, request_body)
     except Exception as e:
         print(
@@ -76,7 +79,9 @@ void (empty response body)
 
 > create_webhook(project_or_product_uid, webhook_uid, webhook_settings)
 
-Creates a webhook for the specified product with the given name. The name | must be unique within the project.
+Create a webhook
+
+Create an inbound webhook that outside services post to with `CreateWebhookEventByProduct`. Its events go to the notefile `<webhookUID>.qo` unless its JSONata `transform` sets `file`. Use a lower-case ID; the event endpoints look it up in lower case. Requires the Owner or Developer role. Returns 409 if the ID is taken, and 400 if it has characters other than letters, digits, `-` and `_`.
 
 ### Example
 
@@ -93,16 +98,15 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
+    webhook_uid = "ttn-uplink"  # str | Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
     webhook_settings = {
-        "settings": {
-            "disabled": false,
-            "id": "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8",
-            "transform": '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}',
-        }
+        "disabled": false,
+        "id": "ttn-uplink",
+        "transform": '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}',
     }  # WebhookSettings |
 
     try:
+        # Create a webhook
         api_instance.create_webhook(
             project_or_product_uid, webhook_uid, webhook_settings
         )
@@ -112,11 +116,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                                      | Description | Notes |
-| -------------------------- | ----------------------------------------- | ----------- | ----- |
-| **project_or_product_uid** | **str**                                   |             |
-| **webhook_uid**            | **str**                                   | Webhook UID |
-| **webhook_settings**       | [**WebhookSettings**](WebhookSettings.md) |             |
+| Name                       | Type                                      | Description                                                                                 | Notes |
+| -------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**                                   |                                                                                             |
+| **webhook_uid**            | **str**                                   | Webhook ID, e.g. &#x60;ttn-uplink&#x60;. Use lower case. List with &#x60;GetWebhooks&#x60;. |
+| **webhook_settings**       | [**WebhookSettings**](WebhookSettings.md) |                                                                                             |
 
 ### Return type
 
@@ -135,7 +139,9 @@ void (empty response body)
 
 > create_webhook_device_event_by_product(product_uid, webhook_uid, device_uid, request_body)
 
-Sends an event to be processed by the specified webhook, addressed by productUID, associated with the given device (provisioning it if necessary). The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing.
+Send a device's event through a webhook
+
+Post JSON to a webhook as one device's event, like `CreateWebhookEventByProduct`, adding the device if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:abc` becomes `dev:ext:abc`, not an existing Notecard. Requires the Owner or Developer role. Returns 400 if the transform fails, and 500 if the webhook is disabled.
 
 ### Example
 
@@ -151,11 +157,12 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
     product_uid = "com.blues.bridge:sensors"  # str |
-    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
+    webhook_uid = "ttn-uplink"  # str | Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
     device_uid = "dev:000000000000000"  # str |
-    request_body = None  # Dict[str, object] | The event body (arbitrary JSON)
+    request_body = None  # Dict[str, object] | Any JSON object; it becomes the event body, or the transform's input.
 
     try:
+        # Send a device's event through a webhook
         api_instance.create_webhook_device_event_by_product(
             product_uid, webhook_uid, device_uid, request_body
         )
@@ -168,12 +175,12 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name             | Type                               | Description                     | Notes |
-| ---------------- | ---------------------------------- | ------------------------------- | ----- |
-| **product_uid**  | **str**                            |                                 |
-| **webhook_uid**  | **str**                            | Webhook UID                     |
-| **device_uid**   | **str**                            |                                 |
-| **request_body** | [**Dict[str, object]**](object.md) | The event body (arbitrary JSON) |
+| Name             | Type                               | Description                                                                                 | Notes |
+| ---------------- | ---------------------------------- | ------------------------------------------------------------------------------------------- | ----- |
+| **product_uid**  | **str**                            |                                                                                             |
+| **webhook_uid**  | **str**                            | Webhook ID, e.g. &#x60;ttn-uplink&#x60;. Use lower case. List with &#x60;GetWebhooks&#x60;. |
+| **device_uid**   | **str**                            |                                                                                             |
+| **request_body** | [**Dict[str, object]**](object.md) | Any JSON object; it becomes the event body, or the transform&#39;s input.                   |
 
 ### Return type
 
@@ -192,7 +199,9 @@ void (empty response body)
 
 > create_webhook_event_by_product(product_uid, webhook_uid, request_body)
 
-Sends an event to be processed by the specified webhook, addressed by productUID. The entire request body becomes the event body. The webhook's configured JSONata transform, if any, is applied before routing. The event is not associated with a specific device.
+Send an event through a webhook
+
+Post JSON to a webhook. The body becomes the event body, in `<webhookUID>.qo`, from `dev:ext:webhook`; a `transform` can change all three, but must set `body`. For a specific device, use `CreateWebhookDeviceEventByProduct`. Requires the Owner or Developer role. Returns 400 if the transform fails or sets no `body`, and 500 if the webhook is disabled.
 
 ### Example
 
@@ -208,10 +217,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
     product_uid = "com.blues.bridge:sensors"  # str |
-    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
-    request_body = None  # Dict[str, object] | The event body (arbitrary JSON)
+    webhook_uid = "ttn-uplink"  # str | Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
+    request_body = None  # Dict[str, object] | Any JSON object; it becomes the event body, or the transform's input.
 
     try:
+        # Send an event through a webhook
         api_instance.create_webhook_event_by_product(
             product_uid, webhook_uid, request_body
         )
@@ -224,11 +234,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name             | Type                               | Description                     | Notes |
-| ---------------- | ---------------------------------- | ------------------------------- | ----- |
-| **product_uid**  | **str**                            |                                 |
-| **webhook_uid**  | **str**                            | Webhook UID                     |
-| **request_body** | [**Dict[str, object]**](object.md) | The event body (arbitrary JSON) |
+| Name             | Type                               | Description                                                                                 | Notes |
+| ---------------- | ---------------------------------- | ------------------------------------------------------------------------------------------- | ----- |
+| **product_uid**  | **str**                            |                                                                                             |
+| **webhook_uid**  | **str**                            | Webhook ID, e.g. &#x60;ttn-uplink&#x60;. Use lower case. List with &#x60;GetWebhooks&#x60;. |
+| **request_body** | [**Dict[str, object]**](object.md) | Any JSON object; it becomes the event body, or the transform&#39;s input.                   |
 
 ### Return type
 
@@ -247,7 +257,9 @@ void (empty response body)
 
 > delete_webhook(project_or_product_uid, webhook_uid)
 
-Deletes the specified webhook
+Delete a webhook
+
+Delete a webhook's settings. Posts to its ID are still accepted, just without a transform; to stop accepting them, set `disabled` with `UpdateWebhook` instead. Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
 
 ### Example
 
@@ -263,9 +275,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
+    webhook_uid = "ttn-uplink"  # str | Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
 
     try:
+        # Delete a webhook
         api_instance.delete_webhook(project_or_product_uid, webhook_uid)
     except Exception as e:
         print("Exception when calling WebhookApi->delete_webhook: %s\n" % e)
@@ -273,10 +286,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description | Notes |
-| -------------------------- | ------- | ----------- | ----- |
-| **project_or_product_uid** | **str** |             |
-| **webhook_uid**            | **str** | Webhook UID |
+| Name                       | Type    | Description                                                                                 | Notes |
+| -------------------------- | ------- | ------------------------------------------------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str** |                                                                                             |
+| **webhook_uid**            | **str** | Webhook ID, e.g. &#x60;ttn-uplink&#x60;. Use lower case. List with &#x60;GetWebhooks&#x60;. |
 
 ### Return type
 
@@ -295,7 +308,9 @@ void (empty response body)
 
 > WebhookSettings get_webhook(project_or_product_uid, webhook_uid)
 
-Retrieves the configuration settings for the specified webhook
+Get a webhook
+
+Get one webhook's transform and whether it's disabled. Requires the Owner or Developer role. Returns 404 if the webhook doesn't exist.
 
 ### Example
 
@@ -312,9 +327,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
+    webhook_uid = "ttn-uplink"  # str | Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
 
     try:
+        # Get a webhook
         api_response = api_instance.get_webhook(project_or_product_uid, webhook_uid)
         print("The response of WebhookApi->get_webhook:\n")
         pprint(api_response)
@@ -324,10 +340,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description | Notes |
-| -------------------------- | ------- | ----------- | ----- |
-| **project_or_product_uid** | **str** |             |
-| **webhook_uid**            | **str** | Webhook UID |
+| Name                       | Type    | Description                                                                                 | Notes |
+| -------------------------- | ------- | ------------------------------------------------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str** |                                                                                             |
+| **webhook_uid**            | **str** | Webhook ID, e.g. &#x60;ttn-uplink&#x60;. Use lower case. List with &#x60;GetWebhooks&#x60;. |
 
 ### Return type
 
@@ -346,7 +362,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > WebhookSettings get_webhook_settings_by_product(product_uid, webhook_uid)
 
-Retrieves the configuration settings for the specified webhook, addressed by productUID.
+Get a webhook by ProductUID
+
+Get one webhook's settings, like `GetWebhook`, but addressed by ProductUID instead of the project. Requires the Owner or Developer role. Returns 500, not 404, if the webhook doesn't exist.
 
 ### Example
 
@@ -363,9 +381,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
     product_uid = "com.blues.bridge:sensors"  # str |
-    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
+    webhook_uid = "ttn-uplink"  # str | Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
 
     try:
+        # Get a webhook by ProductUID
         api_response = api_instance.get_webhook_settings_by_product(
             product_uid, webhook_uid
         )
@@ -380,10 +399,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name            | Type    | Description | Notes |
-| --------------- | ------- | ----------- | ----- |
-| **product_uid** | **str** |             |
-| **webhook_uid** | **str** | Webhook UID |
+| Name            | Type    | Description                                                                                 | Notes |
+| --------------- | ------- | ------------------------------------------------------------------------------------------- | ----- |
+| **product_uid** | **str** |                                                                                             |
+| **webhook_uid** | **str** | Webhook ID, e.g. &#x60;ttn-uplink&#x60;. Use lower case. List with &#x60;GetWebhooks&#x60;. |
 
 ### Return type
 
@@ -402,7 +421,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > GetWebhooks200Response get_webhooks(project_or_product_uid)
 
-Retrieves all webhooks for the specified project
+List webhooks
+
+List a project's inbound webhooks with their transforms and whether they're disabled. An inbound webhook lets an outside service post data that Notehub turns into events. Requires the Owner or Developer role.
 
 ### Example
 
@@ -421,6 +442,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
 
     try:
+        # List webhooks
         api_response = api_instance.get_webhooks(project_or_product_uid)
         print("The response of WebhookApi->get_webhooks:\n")
         pprint(api_response)
@@ -451,7 +473,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > update_legacy_webhook_session(product_uid, device_uid, request_body=request_body)
 
-Legacy endpoint for opening or updating a webhook session for the given device (provisioning the device if necessary). Used by external services that need to maintain a callable session against a device behind a webhook.
+Open or close a webhook device's session (legacy)
+
+Legacy: open, update or close a webhook device's session, adding the device if it's new. The body is a session: set `why_session_opened` to open one, `why_session_closed` to close it, both to close and reopen, or neither to update the open session. Requires the Owner or Developer role. Returns 400 when updating with no session open.
 
 ### Example
 
@@ -468,9 +492,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     api_instance = notehub_py.WebhookApi(api_client)
     product_uid = "com.blues.bridge:sensors"  # str |
     device_uid = "dev:000000000000000"  # str |
-    request_body = None  # Dict[str, object] | Optional session metadata. (optional)
+    request_body = None  # Dict[str, object] | Session fields, such as `why_session_opened`, `why_session_closed` and signal or location values. (optional)
 
     try:
+        # Open or close a webhook device's session (legacy)
         api_instance.update_legacy_webhook_session(
             product_uid, device_uid, request_body=request_body
         )
@@ -482,11 +507,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name             | Type                               | Description                | Notes      |
-| ---------------- | ---------------------------------- | -------------------------- | ---------- |
-| **product_uid**  | **str**                            |                            |
-| **device_uid**   | **str**                            |                            |
-| **request_body** | [**Dict[str, object]**](object.md) | Optional session metadata. | [optional] |
+| Name             | Type                               | Description                                                                                                           | Notes      |
+| ---------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **product_uid**  | **str**                            |                                                                                                                       |
+| **device_uid**   | **str**                            |                                                                                                                       |
+| **request_body** | [**Dict[str, object]**](object.md) | Session fields, such as &#x60;why_session_opened&#x60;, &#x60;why_session_closed&#x60; and signal or location values. | [optional] |
 
 ### Return type
 
@@ -505,7 +530,9 @@ void (empty response body)
 
 > update_webhook(project_or_product_uid, webhook_uid, webhook_settings)
 
-Updates the configuration settings for the specified webhook. | Webhook will be created if it does not exist. Update body will completely replace the existing settings.
+Update a webhook
+
+Replace a webhook's settings, creating the webhook if it doesn't exist. Send every field: a missing `transform` is cleared and a missing `disabled` enables the webhook. Requires the Owner or Developer role.
 
 ### Example
 
@@ -522,13 +549,14 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
+    webhook_uid = "ttn-uplink"  # str | Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
     webhook_settings = {
         "disabled": false,
         "transform": '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}',
     }  # WebhookSettings |
 
     try:
+        # Update a webhook
         api_instance.update_webhook(
             project_or_product_uid, webhook_uid, webhook_settings
         )
@@ -538,11 +566,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                                      | Description | Notes |
-| -------------------------- | ----------------------------------------- | ----------- | ----- |
-| **project_or_product_uid** | **str**                                   |             |
-| **webhook_uid**            | **str**                                   | Webhook UID |
-| **webhook_settings**       | [**WebhookSettings**](WebhookSettings.md) |             |
+| Name                       | Type                                      | Description                                                                                 | Notes |
+| -------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**                                   |                                                                                             |
+| **webhook_uid**            | **str**                                   | Webhook ID, e.g. &#x60;ttn-uplink&#x60;. Use lower case. List with &#x60;GetWebhooks&#x60;. |
+| **webhook_settings**       | [**WebhookSettings**](WebhookSettings.md) |                                                                                             |
 
 ### Return type
 
@@ -561,7 +589,9 @@ void (empty response body)
 
 > update_webhook_settings_by_product(product_uid, webhook_uid, webhook_settings)
 
-Updates the configuration settings for the specified webhook, addressed by productUID. Update body will completely replace the existing settings.
+Update a webhook by ProductUID
+
+Replace a webhook's settings, like `UpdateWebhook`, but addressed by ProductUID. Creates the webhook if it doesn't exist. Requires the Owner or Developer role. Returns 400 if the ID has characters other than letters, digits, `-` and `_`.
 
 ### Example
 
@@ -578,13 +608,14 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.WebhookApi(api_client)
     product_uid = "com.blues.bridge:sensors"  # str |
-    webhook_uid = "Abc_123-2646f411-dc56-44a0-9743-4130f47a74h8"  # str | Webhook UID
+    webhook_uid = "ttn-uplink"  # str | Webhook ID, e.g. `ttn-uplink`. Use lower case. List with `GetWebhooks`.
     webhook_settings = {
         "disabled": false,
         "transform": '{"device":body.end_device_ids.dev_eui,"sn":body.end_device_ids.device_id,"body":body.uplink_message.decoded_payload,"details":body}',
     }  # WebhookSettings |
 
     try:
+        # Update a webhook by ProductUID
         api_instance.update_webhook_settings_by_product(
             product_uid, webhook_uid, webhook_settings
         )
@@ -597,11 +628,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                 | Type                                      | Description | Notes |
-| -------------------- | ----------------------------------------- | ----------- | ----- |
-| **product_uid**      | **str**                                   |             |
-| **webhook_uid**      | **str**                                   | Webhook UID |
-| **webhook_settings** | [**WebhookSettings**](WebhookSettings.md) |             |
+| Name                 | Type                                      | Description                                                                                 | Notes |
+| -------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------- | ----- |
+| **product_uid**      | **str**                                   |                                                                                             |
+| **webhook_uid**      | **str**                                   | Webhook ID, e.g. &#x60;ttn-uplink&#x60;. Use lower case. List with &#x60;GetWebhooks&#x60;. |
+| **webhook_settings** | [**WebhookSettings**](WebhookSettings.md) |                                                                                             |
 
 ### Return type
 

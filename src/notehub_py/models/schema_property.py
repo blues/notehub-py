@@ -31,17 +31,21 @@ class SchemaProperty(BaseModel):
     """  # noqa: E501
 
     items: Optional[List[SchemaProperty]] = Field(
-        default=None, description="Used if type is array"
+        default=None,
+        description="For an array, the type of its elements, inferred from the first element.",
     )
     name: Optional[StrictStr] = Field(
         default=None,
         description="Name of the field (optional for array/object children)",
     )
     properties: Optional[List[SchemaProperty]] = Field(
-        default=None, description="Used if type is object"
+        default=None, description="For an object, its fields."
     )
-    type: StrictStr
-    updated_at: Optional[datetime] = None
+    type: StrictStr = Field(description="The field's JSON type.")
+    updated_at: Optional[datetime] = Field(
+        default=None,
+        description="When Notehub recorded this field, usually when it first appeared.",
+    )
     __properties: ClassVar[List[str]] = [
         "items",
         "name",

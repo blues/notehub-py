@@ -44,7 +44,12 @@ class ExternalDevicesApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        event: Annotated[Event, Field(description="Event Object")],
+        event: Annotated[
+            Event,
+            Field(
+                description="The event. `file`, `body` and `payload` are the usual fields."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -57,15 +62,15 @@ class ExternalDevicesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """create_event_ext_device
+        """Add an event from an external device
 
-        Creates an event using specified webhook
+        Add an event from a device that isn't a Notecard, adding the device to the project if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:123` becomes `dev:ext:123`. Notehub sets `when` to the current time and adds `.qo` to a `file` with no extension.  Requires the Owner or Developer role.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param event: Event Object (required)
+        :param event: The event. `file`, `body` and `payload` are the usual fields. (required)
         :type event: Event
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -116,7 +121,12 @@ class ExternalDevicesApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        event: Annotated[Event, Field(description="Event Object")],
+        event: Annotated[
+            Event,
+            Field(
+                description="The event. `file`, `body` and `payload` are the usual fields."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -129,15 +139,15 @@ class ExternalDevicesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """create_event_ext_device
+        """Add an event from an external device
 
-        Creates an event using specified webhook
+        Add an event from a device that isn't a Notecard, adding the device to the project if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:123` becomes `dev:ext:123`. Notehub sets `when` to the current time and adds `.qo` to a `file` with no extension.  Requires the Owner or Developer role.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param event: Event Object (required)
+        :param event: The event. `file`, `body` and `payload` are the usual fields. (required)
         :type event: Event
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -188,7 +198,12 @@ class ExternalDevicesApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        event: Annotated[Event, Field(description="Event Object")],
+        event: Annotated[
+            Event,
+            Field(
+                description="The event. `file`, `body` and `payload` are the usual fields."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -201,15 +216,15 @@ class ExternalDevicesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_event_ext_device
+        """Add an event from an external device
 
-        Creates an event using specified webhook
+        Add an event from a device that isn't a Notecard, adding the device to the project if it's new. The DeviceUID is lower-cased and gets `dev:ext:` unless it has its own sub-prefix, so `dev:123` becomes `dev:ext:123`. Notehub sets `when` to the current time and adds `.qo` to a `file` with no extension.  Requires the Owner or Developer role.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param event: Event Object (required)
+        :param event: The event. `file`, `body` and `payload` are the usual fields. (required)
         :type event: Event
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -323,7 +338,12 @@ class ExternalDevicesApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        device_session: Annotated[DeviceSession, Field(description="Session Object")],
+        device_session: Annotated[
+            DeviceSession,
+            Field(
+                description="Session fields, such as `why_session_opened` or `why_session_closed`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -336,15 +356,15 @@ class ExternalDevicesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """ext_device_session_close
+        """Close an external device's session
 
-        Closes the session for the specified device if open
+        Close an external device's session, if one is open, adding the device if it's new. The DeviceUID gets `dev:ext:` as in `CreateEventExtDevice`.  Requires the Owner or Developer role.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param device_session: Session Object (required)
+        :param device_session: Session fields, such as `why_session_opened` or `why_session_closed`. (required)
         :type device_session: DeviceSession
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -395,7 +415,12 @@ class ExternalDevicesApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        device_session: Annotated[DeviceSession, Field(description="Session Object")],
+        device_session: Annotated[
+            DeviceSession,
+            Field(
+                description="Session fields, such as `why_session_opened` or `why_session_closed`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -408,15 +433,15 @@ class ExternalDevicesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """ext_device_session_close
+        """Close an external device's session
 
-        Closes the session for the specified device if open
+        Close an external device's session, if one is open, adding the device if it's new. The DeviceUID gets `dev:ext:` as in `CreateEventExtDevice`.  Requires the Owner or Developer role.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param device_session: Session Object (required)
+        :param device_session: Session fields, such as `why_session_opened` or `why_session_closed`. (required)
         :type device_session: DeviceSession
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -467,7 +492,12 @@ class ExternalDevicesApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        device_session: Annotated[DeviceSession, Field(description="Session Object")],
+        device_session: Annotated[
+            DeviceSession,
+            Field(
+                description="Session fields, such as `why_session_opened` or `why_session_closed`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -480,15 +510,15 @@ class ExternalDevicesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """ext_device_session_close
+        """Close an external device's session
 
-        Closes the session for the specified device if open
+        Close an external device's session, if one is open, adding the device if it's new. The DeviceUID gets `dev:ext:` as in `CreateEventExtDevice`.  Requires the Owner or Developer role.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param device_session: Session Object (required)
+        :param device_session: Session fields, such as `why_session_opened` or `why_session_closed`. (required)
         :type device_session: DeviceSession
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -602,7 +632,12 @@ class ExternalDevicesApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        device_session: Annotated[DeviceSession, Field(description="Session Object")],
+        device_session: Annotated[
+            DeviceSession,
+            Field(
+                description="Session fields, such as `why_session_opened` or `why_session_closed`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -615,15 +650,15 @@ class ExternalDevicesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """ext_device_session_open
+        """Open an external device's session
 
-        Create a Session for the specified device.  | If a session is currently open it will be closed and a new one opened.
+        Open a session for an external device, adding the device if it's new. An open session is closed first, with `why_session_closed` as the reason. The DeviceUID gets `dev:ext:` as in `CreateEventExtDevice`.  Requires the Owner or Developer role. Returns 500 if webhooks are disabled for the project.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param device_session: Session Object (required)
+        :param device_session: Session fields, such as `why_session_opened` or `why_session_closed`. (required)
         :type device_session: DeviceSession
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -674,7 +709,12 @@ class ExternalDevicesApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        device_session: Annotated[DeviceSession, Field(description="Session Object")],
+        device_session: Annotated[
+            DeviceSession,
+            Field(
+                description="Session fields, such as `why_session_opened` or `why_session_closed`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -687,15 +727,15 @@ class ExternalDevicesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """ext_device_session_open
+        """Open an external device's session
 
-        Create a Session for the specified device.  | If a session is currently open it will be closed and a new one opened.
+        Open a session for an external device, adding the device if it's new. An open session is closed first, with `why_session_closed` as the reason. The DeviceUID gets `dev:ext:` as in `CreateEventExtDevice`.  Requires the Owner or Developer role. Returns 500 if webhooks are disabled for the project.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param device_session: Session Object (required)
+        :param device_session: Session fields, such as `why_session_opened` or `why_session_closed`. (required)
         :type device_session: DeviceSession
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -746,7 +786,12 @@ class ExternalDevicesApi:
         self,
         product_uid: StrictStr,
         device_uid: StrictStr,
-        device_session: Annotated[DeviceSession, Field(description="Session Object")],
+        device_session: Annotated[
+            DeviceSession,
+            Field(
+                description="Session fields, such as `why_session_opened` or `why_session_closed`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -759,15 +804,15 @@ class ExternalDevicesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """ext_device_session_open
+        """Open an external device's session
 
-        Create a Session for the specified device.  | If a session is currently open it will be closed and a new one opened.
+        Open a session for an external device, adding the device if it's new. An open session is closed first, with `why_session_closed` as the reason. The DeviceUID gets `dev:ext:` as in `CreateEventExtDevice`.  Requires the Owner or Developer role. Returns 500 if webhooks are disabled for the project.
 
         :param product_uid: (required)
         :type product_uid: str
         :param device_uid: (required)
         :type device_uid: str
-        :param device_session: Session Object (required)
+        :param device_session: Session fields, such as `why_session_opened` or `why_session_closed`. (required)
         :type device_session: DeviceSession
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

@@ -9,7 +9,7 @@ Represents a single request to update the host or Notecard firmware
 | **current_version**   | **str**                                                             | Version of the firmware that was installed prior to this request | [optional] |
 | **initiated**         | **str**                                                             | RFC3339 datetime of when this update was requested               | [optional] |
 | **requested_version** | **str**                                                             | Version of the firmware that was requested to be installed       | [optional] |
-| **updates**           | [**List[DeviceDfuStateMachineNode]**](DeviceDfuStateMachineNode.md) |                                                                  | [optional] |
+| **updates**           | [**List[DeviceDfuStateMachineNode]**](DeviceDfuStateMachineNode.md) | Status updates reported for this firmware update.                | [optional] |
 
 ## Example
 

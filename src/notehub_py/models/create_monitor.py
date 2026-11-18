@@ -42,37 +42,46 @@ class CreateMonitor(BaseModel):
 
     aggregate_function: Optional[StrictStr] = Field(
         default=None,
-        description="Aggregate function to apply to the selected values before applying the condition. [none, avg, max, min, sum, count]",
+        description="How values in `aggregate_window` are combined before the comparison. - `none`: compare each value on its own - `avg`, `max`, `min`, `sum`: compare the average, largest, smallest or total - `count`: compare the number of matching events; needs no `source_selector` ",
     )
     aggregate_window: Optional[Annotated[str, Field(strict=True)]] = Field(
         default=None,
-        description="The time window to aggregate the selected values. It follows the format of a number followed by a time unit",
+        description="The time window for `aggregate_function`, such as `10m` or `5h30m40s`.",
     )
     alert: Optional[StrictBool] = Field(
         default=None, description="If true, the monitor is in alert state."
     )
-    alert_routes: List[MonitorAlertRoutesInner]
+    alert_routes: List[MonitorAlertRoutesInner] = Field(
+        description="Where to send notifications, by email, Slack or Twilio. Required to create a monitor."
+    )
     condition_type: Optional[StrictStr] = Field(
         default=None,
-        description="A comparison operation to apply to the value selected by the source_selector. Required for event and usage monitors; set automatically for heartbeat monitors. [greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to]",
+        description="How the value is compared with `threshold`. Required for event and usage monitors; heartbeat monitors always use `greater_than_or_equal_to`.",
     )
-    description: Optional[StrictStr] = ""
+    description: Optional[StrictStr] = Field(
+        default="", description="Free-form description."
+    )
     disabled: Optional[StrictBool] = Field(
         default=None, description="If true, the monitor will not be evaluated."
     )
-    fleet_filter: Optional[List[StrictStr]] = None
-    last_routed_at: Optional[StrictStr] = Field(
-        default=None, description="The last time the monitor was evaluated and routed."
+    fleet_filter: Optional[List[StrictStr]] = Field(
+        default=None, description="Watch only devices in these fleets (FleetUIDs)."
     )
-    name: StrictStr
-    notefile_filter: Optional[List[StrictStr]] = None
+    last_routed_at: Optional[StrictStr] = Field(
+        default=None, description="When the monitor last sent notifications."
+    )
+    name: StrictStr = Field(description="Monitor name. Required to create a monitor.")
+    notefile_filter: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Watch only events from these notefiles, e.g. `data.qo`. Not allowed for heartbeat monitors.",
+    )
     per_device: Optional[StrictBool] = Field(
         default=None,
-        description="Only relevant when using an aggregate_function. If true, the monitor will be evaluated per device, | rather than across the set of selected devices. If true then if a single device matches the specified criteria, | and alert will be created, otherwise the aggregate function will be applied across all devices.",
+        description="With an `aggregate_function`, aggregate each device on its own, so one device can raise an alert. If false, aggregate across all devices.",
     )
     routing_cooldown_period: Optional[Annotated[str, Field(strict=True)]] = Field(
         default=None,
-        description="The time period to wait before routing another event after the monitor | has been triggered. It follows the format of a number followed by a time unit.",
+        description="How long to wait after notifying before notifying again, such as `10m` or `5h30m`. Defaults to `5m`.",
     )
     silenced: Optional[StrictBool] = Field(
         default=None,
@@ -80,27 +89,29 @@ class CreateMonitor(BaseModel):
     )
     source_selector: Optional[StrictStr] = Field(
         default=None,
-        description="A dot-delimited path to a single numeric value within the event body.",
+        description="Dot path to a numeric value inside the event body, such as `temperature`, not `body.temperature`. Required for event monitors unless `aggregate_function` is `count`. ",
     )
     source_type: Optional[StrictStr] = Field(
         default="event",
-        description='The type of source to monitor. Defaults to "event".',
+        description="What the monitor watches. Defaults to `event` on create. - `event`: a numeric value in event bodies, read with `source_selector` - `heartbeat`: devices that go `threshold` seconds without activity - `usage`: cellular or satellite data usage ",
     )
     threshold: Union[StrictFloat, StrictInt] = Field(
         description="The value that condition_type compares against. For heartbeat monitors this is seconds of inactivity; for usage monitors it is bytes."
     )
-    uid: Optional[StrictStr] = None
+    uid: Optional[StrictStr] = Field(
+        default=None, description="MonitorUID, `monitor:` followed by a UUID."
+    )
     usage_scope: Optional[StrictStr] = Field(
         default=None,
-        description='For usage monitors: the scope of aggregation. Supported values are "device" and "fleet".',
+        description="For usage monitors, what usage is summed over. - `device`: each device on its own - `fleet`: each fleet in `fleet_filter` on its own. Requires `fleet_filter`, or the monitor never fires. ",
     )
     usage_type: Optional[StrictStr] = Field(
         default=None,
-        description='For usage monitors: the type of data usage to monitor. Supported values are "cellular" and "satellite".',
+        description="For usage monitors, which data to watch. - `cellular`: cellular data - `satellite`: satellite data ",
     )
     usage_window: Optional[StrictInt] = Field(
         default=None,
-        description="For usage monitors: the rolling time window in days to sum usage over (e.g. 30 for 30 days).",
+        description="For usage monitors, the rolling window to sum usage over, in days, e.g. `30`.",
     )
     __properties: ClassVar[List[str]] = [
         "aggregate_function",

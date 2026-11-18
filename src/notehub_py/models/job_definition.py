@@ -38,7 +38,7 @@ class JobDefinition(BaseModel):
     default_requests: Optional[BatchJobRequests] = None
     device_requests: Optional[Dict[str, BatchJobRequests]] = Field(
         default=None,
-        description="Device-specific request overrides, keyed by device UID",
+        description="Device-specific request overrides, keyed by DeviceUID",
     )
     report_options: Optional[JobDefinitionReportOptions] = None
     select: Optional[JobDefinitionSelect] = None

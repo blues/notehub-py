@@ -33,7 +33,9 @@ class Notefile(BaseModel):
 
     id: StrictStr = Field(description='Notefile id (e.g., "test.qi", "config.db").')
     notes: Annotated[List[Note], Field(min_length=0)]
-    template: Optional[StrictStr] = None
+    template: Optional[StrictStr] = Field(
+        default=None, description="The notefile's body template, if it has one."
+    )
     __properties: ClassVar[List[str]] = ["id", "notes", "template"]
 
     model_config = ConfigDict(

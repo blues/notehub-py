@@ -31,15 +31,18 @@ class ProjectSecret(BaseModel):
     """  # noqa: E501
 
     created: datetime = Field(description="When the secret was first created.")
-    created_by: StrictStr = Field(description="The actor who created the secret.")
+    created_by: StrictStr = Field(
+        description="UID of the user or OAuth client that created the secret."
+    )
     modified: Optional[datetime] = Field(
-        default=None, description="When the secret was last updated."
+        default=None, description="When the secret's value was last set."
     )
     modified_by: Optional[StrictStr] = Field(
-        default=None, description="The actor who last updated the secret."
+        default=None,
+        description="UID of the user or OAuth client that last set the secret's value.",
     )
     name: StrictStr = Field(
-        description="The secret name (alphanumeric and underscores only)."
+        description="The secret's name. Routes and alerts reference it as `[$$name]`."
     )
     __properties: ClassVar[List[str]] = [
         "created",

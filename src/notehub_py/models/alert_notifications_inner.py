@@ -38,7 +38,8 @@ class AlertNotificationsInner(BaseModel):
     """  # noqa: E501
 
     notification_type: Optional[StrictStr] = Field(
-        default=None, description="The type of notification"
+        default=None,
+        description="How the notification was sent. - `email`: by email - `slack-webhook`: to a Slack webhook - `slack-bearer`: through a Slack app, with a bearer token - `twilio`: by SMS, through Twilio ",
     )
     recipients: Optional[StrictStr] = Field(
         default=None, description="The recipients of the notification"
@@ -54,8 +55,10 @@ class AlertNotificationsInner(BaseModel):
         if value is None:
             return value
 
-        if value not in set(["email", "slack"]):
-            raise ValueError("must be one of enum values ('email', 'slack')")
+        if value not in set(["email", "slack-webhook", "slack-bearer", "twilio"]):
+            raise ValueError(
+                "must be one of enum values ('email', 'slack-webhook', 'slack-bearer', 'twilio')"
+            )
         return value
 
     model_config = ConfigDict(

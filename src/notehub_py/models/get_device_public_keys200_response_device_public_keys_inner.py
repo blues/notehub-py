@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,9 +29,18 @@ class GetDevicePublicKeys200ResponseDevicePublicKeysInner(BaseModel):
     GetDevicePublicKeys200ResponseDevicePublicKeysInner
     """  # noqa: E501
 
-    key: Optional[StrictStr] = None
-    uid: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["key", "uid"]
+    deleted: Optional[StrictBool] = Field(
+        default=None,
+        description="True if this device has been deleted. Only present when reading with a `cursor`. ",
+    )
+    key: Optional[StrictStr] = Field(
+        default=None,
+        description="The Notecard's public key in PEM format. Empty if it hasn't reported one.",
+    )
+    uid: Optional[StrictStr] = Field(
+        default=None, description="DeviceUID, e.g. `dev:864475040509284`."
+    )
+    __properties: ClassVar[List[str]] = ["deleted", "key", "uid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,5 +90,11 @@ class GetDevicePublicKeys200ResponseDevicePublicKeysInner(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"key": obj.get("key"), "uid": obj.get("uid")})
+        _obj = cls.model_validate(
+            {
+                "deleted": obj.get("deleted"),
+                "key": obj.get("key"),
+                "uid": obj.get("uid"),
+            }
+        )
         return _obj

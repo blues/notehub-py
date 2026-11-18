@@ -21,9 +21,6 @@ from pydantic import Field, StrictBool, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from notehub_py.models.get_events200_response import GetEvents200Response
-from notehub_py.models.get_events_by_cursor200_response import (
-    GetEventsByCursor200Response,
-)
 from notehub_py.models.route_log import RouteLog
 
 from notehub_py.api_client import ApiClient, RequestSerialized
@@ -47,15 +44,21 @@ class EventApi:
     def get_events(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         sensor_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+                description="SensorUID to filter by, matched exactly. Repeat for more than one."
             ),
         ] = None,
         sort_by: Optional[StrictStr] = None,
@@ -75,30 +78,46 @@ class EventApi:
         date_type: Annotated[
             Optional[StrictStr],
             Field(
-                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
+                description="Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it "
             ),
         ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
+        system_files_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`."
+            ),
+        ] = None,
+        files: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`."
+            ),
+        ] = None,
         format: Annotated[
-            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
+            Optional[StrictStr],
+            Field(
+                description="Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields` "
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
+            Optional[List[StrictStr]],
+            Field(description="Serial number to filter by. Repeat for more than one."),
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         session_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Session UID")
+            Optional[List[StrictStr]],
+            Field(description="SessionUID to filter by. Repeat for more than one."),
         ] = None,
         event_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Event UID")
+            Optional[List[StrictStr]],
+            Field(description="EventUID to filter by. Repeat for more than one."),
         ] = None,
         select_fields: Annotated[
             Optional[StrictStr],
             Field(
-                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
+                description="Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns."
             ),
         ] = None,
         _request_timeout: Union[
@@ -113,9 +132,9 @@ class EventApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetEvents200Response:
-        """get_events
+        """List events in a project
 
-        Get Events of a Project
+        List a project's events, filtered by device, notefile, date, fleet, session and more. Use `cursor` to read events in the order Notehub stored them and to poll for new ones. Set `format=csv` for CSV. For one fleet, use `GetFleetEvents`.  Paginated. Returns 403 if the organization is suspended, and 500 if the query times out; narrow the filters and retry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -123,9 +142,11 @@ class EventApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :param sensor_uid: SensorUID to filter by, matched exactly. Repeat for more than one.
         :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
@@ -135,23 +156,23 @@ class EventApi:
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+        :param date_type: Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it
         :type date_type: str
-        :param system_files_only:
+        :param system_files_only: If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
         :type system_files_only: bool
-        :param files:
+        :param files: Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
         :type files: str
-        :param format: Response format (JSON or CSV)
+        :param format: Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields`
         :type format: str
-        :param serial_number: Filter by Serial Number
+        :param serial_number: Serial number to filter by. Repeat for more than one.
         :type serial_number: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param session_uid: Filter by Session UID
+        :param session_uid: SessionUID to filter by. Repeat for more than one.
         :type session_uid: List[str]
-        :param event_uid: Filter by Event UID
+        :param event_uid: EventUID to filter by. Repeat for more than one.
         :type event_uid: List[str]
-        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+        :param select_fields: Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns.
         :type select_fields: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -179,6 +200,7 @@ class EventApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             sensor_uid=sensor_uid,
             sort_by=sort_by,
@@ -216,15 +238,21 @@ class EventApi:
     def get_events_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         sensor_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+                description="SensorUID to filter by, matched exactly. Repeat for more than one."
             ),
         ] = None,
         sort_by: Optional[StrictStr] = None,
@@ -244,30 +272,46 @@ class EventApi:
         date_type: Annotated[
             Optional[StrictStr],
             Field(
-                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
+                description="Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it "
             ),
         ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
+        system_files_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`."
+            ),
+        ] = None,
+        files: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`."
+            ),
+        ] = None,
         format: Annotated[
-            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
+            Optional[StrictStr],
+            Field(
+                description="Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields` "
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
+            Optional[List[StrictStr]],
+            Field(description="Serial number to filter by. Repeat for more than one."),
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         session_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Session UID")
+            Optional[List[StrictStr]],
+            Field(description="SessionUID to filter by. Repeat for more than one."),
         ] = None,
         event_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Event UID")
+            Optional[List[StrictStr]],
+            Field(description="EventUID to filter by. Repeat for more than one."),
         ] = None,
         select_fields: Annotated[
             Optional[StrictStr],
             Field(
-                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
+                description="Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns."
             ),
         ] = None,
         _request_timeout: Union[
@@ -282,9 +326,9 @@ class EventApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetEvents200Response]:
-        """get_events
+        """List events in a project
 
-        Get Events of a Project
+        List a project's events, filtered by device, notefile, date, fleet, session and more. Use `cursor` to read events in the order Notehub stored them and to poll for new ones. Set `format=csv` for CSV. For one fleet, use `GetFleetEvents`.  Paginated. Returns 403 if the organization is suspended, and 500 if the query times out; narrow the filters and retry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -292,9 +336,11 @@ class EventApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :param sensor_uid: SensorUID to filter by, matched exactly. Repeat for more than one.
         :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
@@ -304,23 +350,23 @@ class EventApi:
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+        :param date_type: Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it
         :type date_type: str
-        :param system_files_only:
+        :param system_files_only: If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
         :type system_files_only: bool
-        :param files:
+        :param files: Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
         :type files: str
-        :param format: Response format (JSON or CSV)
+        :param format: Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields`
         :type format: str
-        :param serial_number: Filter by Serial Number
+        :param serial_number: Serial number to filter by. Repeat for more than one.
         :type serial_number: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param session_uid: Filter by Session UID
+        :param session_uid: SessionUID to filter by. Repeat for more than one.
         :type session_uid: List[str]
-        :param event_uid: Filter by Event UID
+        :param event_uid: EventUID to filter by. Repeat for more than one.
         :type event_uid: List[str]
-        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+        :param select_fields: Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns.
         :type select_fields: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -348,6 +394,7 @@ class EventApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             sensor_uid=sensor_uid,
             sort_by=sort_by,
@@ -385,15 +432,21 @@ class EventApi:
     def get_events_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         sensor_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+                description="SensorUID to filter by, matched exactly. Repeat for more than one."
             ),
         ] = None,
         sort_by: Optional[StrictStr] = None,
@@ -413,30 +466,46 @@ class EventApi:
         date_type: Annotated[
             Optional[StrictStr],
             Field(
-                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
+                description="Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it "
             ),
         ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
+        system_files_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`."
+            ),
+        ] = None,
+        files: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`."
+            ),
+        ] = None,
         format: Annotated[
-            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
+            Optional[StrictStr],
+            Field(
+                description="Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields` "
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
+            Optional[List[StrictStr]],
+            Field(description="Serial number to filter by. Repeat for more than one."),
         ] = None,
         fleet_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Fleet UID")
+            Optional[List[StrictStr]], Field(description="Filter by FleetUID")
         ] = None,
         session_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Session UID")
+            Optional[List[StrictStr]],
+            Field(description="SessionUID to filter by. Repeat for more than one."),
         ] = None,
         event_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Event UID")
+            Optional[List[StrictStr]],
+            Field(description="EventUID to filter by. Repeat for more than one."),
         ] = None,
         select_fields: Annotated[
             Optional[StrictStr],
             Field(
-                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
+                description="Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns."
             ),
         ] = None,
         _request_timeout: Union[
@@ -451,9 +520,9 @@ class EventApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_events
+        """List events in a project
 
-        Get Events of a Project
+        List a project's events, filtered by device, notefile, date, fleet, session and more. Use `cursor` to read events in the order Notehub stored them and to poll for new ones. Set `format=csv` for CSV. For one fleet, use `GetFleetEvents`.  Paginated. Returns 403 if the organization is suspended, and 500 if the query times out; narrow the filters and retry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -461,9 +530,11 @@ class EventApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :param sensor_uid: SensorUID to filter by, matched exactly. Repeat for more than one.
         :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
@@ -473,23 +544,23 @@ class EventApi:
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+        :param date_type: Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it
         :type date_type: str
-        :param system_files_only:
+        :param system_files_only: If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
         :type system_files_only: bool
-        :param files:
+        :param files: Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
         :type files: str
-        :param format: Response format (JSON or CSV)
+        :param format: Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields`
         :type format: str
-        :param serial_number: Filter by Serial Number
+        :param serial_number: Serial number to filter by. Repeat for more than one.
         :type serial_number: List[str]
-        :param fleet_uid: Filter by Fleet UID
+        :param fleet_uid: Filter by FleetUID
         :type fleet_uid: List[str]
-        :param session_uid: Filter by Session UID
+        :param session_uid: SessionUID to filter by. Repeat for more than one.
         :type session_uid: List[str]
-        :param event_uid: Filter by Event UID
+        :param event_uid: EventUID to filter by. Repeat for more than one.
         :type event_uid: List[str]
-        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+        :param select_fields: Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns.
         :type select_fields: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -517,6 +588,7 @@ class EventApi:
             project_or_product_uid=project_or_product_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             sensor_uid=sensor_uid,
             sort_by=sort_by,
@@ -551,6 +623,7 @@ class EventApi:
         project_or_product_uid,
         page_size,
         page_num,
+        cursor,
         device_uid,
         sensor_uid,
         sort_by,
@@ -601,6 +674,10 @@ class EventApi:
         if page_num is not None:
 
             _query_params.append(("pageNum", page_num))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
 
         if device_uid is not None:
 
@@ -690,433 +767,25 @@ class EventApi:
         )
 
     @validate_call
-    def get_events_by_cursor(
-        self,
-        project_or_product_uid: StrictStr,
-        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
-            ),
-        ] = None,
-        sort_order: Optional[StrictStr] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        fleet_uid: Optional[StrictStr] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        sensor_uid: Annotated[
-            Optional[List[StrictStr]],
-            Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetEventsByCursor200Response:
-        """get_events_by_cursor
-
-        Get Events of a Project by cursor
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param limit:
-        :type limit: int
-        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-        :type cursor: str
-        :param sort_order:
-        :type sort_order: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param fleet_uid:
-        :type fleet_uid: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
-        :type sensor_uid: List[str]
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_events_by_cursor_serialize(
-            project_or_product_uid=project_or_product_uid,
-            limit=limit,
-            cursor=cursor,
-            sort_order=sort_order,
-            system_files_only=system_files_only,
-            files=files,
-            fleet_uid=fleet_uid,
-            device_uid=device_uid,
-            sensor_uid=sensor_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetEventsByCursor200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def get_events_by_cursor_with_http_info(
-        self,
-        project_or_product_uid: StrictStr,
-        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
-            ),
-        ] = None,
-        sort_order: Optional[StrictStr] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        fleet_uid: Optional[StrictStr] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        sensor_uid: Annotated[
-            Optional[List[StrictStr]],
-            Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetEventsByCursor200Response]:
-        """get_events_by_cursor
-
-        Get Events of a Project by cursor
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param limit:
-        :type limit: int
-        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-        :type cursor: str
-        :param sort_order:
-        :type sort_order: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param fleet_uid:
-        :type fleet_uid: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
-        :type sensor_uid: List[str]
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_events_by_cursor_serialize(
-            project_or_product_uid=project_or_product_uid,
-            limit=limit,
-            cursor=cursor,
-            sort_order=sort_order,
-            system_files_only=system_files_only,
-            files=files,
-            fleet_uid=fleet_uid,
-            device_uid=device_uid,
-            sensor_uid=sensor_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetEventsByCursor200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def get_events_by_cursor_without_preload_content(
-        self,
-        project_or_product_uid: StrictStr,
-        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
-            ),
-        ] = None,
-        sort_order: Optional[StrictStr] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        fleet_uid: Optional[StrictStr] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        sensor_uid: Annotated[
-            Optional[List[StrictStr]],
-            Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """get_events_by_cursor
-
-        Get Events of a Project by cursor
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param limit:
-        :type limit: int
-        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-        :type cursor: str
-        :param sort_order:
-        :type sort_order: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param fleet_uid:
-        :type fleet_uid: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
-        :type sensor_uid: List[str]
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_events_by_cursor_serialize(
-            project_or_product_uid=project_or_product_uid,
-            limit=limit,
-            cursor=cursor,
-            sort_order=sort_order,
-            system_files_only=system_files_only,
-            files=files,
-            fleet_uid=fleet_uid,
-            device_uid=device_uid,
-            sensor_uid=sensor_uid,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetEventsByCursor200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _get_events_by_cursor_serialize(
-        self,
-        project_or_product_uid,
-        limit,
-        cursor,
-        sort_order,
-        system_files_only,
-        files,
-        fleet_uid,
-        device_uid,
-        sensor_uid,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-            "deviceUID": "multi",
-            "sensorUID": "multi",
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if project_or_product_uid is not None:
-            _path_params["projectOrProductUID"] = project_or_product_uid
-        # process the query parameters
-        if limit is not None:
-
-            _query_params.append(("limit", limit))
-
-        if cursor is not None:
-
-            _query_params.append(("cursor", cursor))
-
-        if sort_order is not None:
-
-            _query_params.append(("sortOrder", sort_order))
-
-        if system_files_only is not None:
-
-            _query_params.append(("systemFilesOnly", system_files_only))
-
-        if files is not None:
-
-            _query_params.append(("files", files))
-
-        if fleet_uid is not None:
-
-            _query_params.append(("fleetUID", fleet_uid))
-
-        if device_uid is not None:
-
-            _query_params.append(("deviceUID", device_uid))
-
-        if sensor_uid is not None:
-
-            _query_params.append(("sensorUID", sensor_uid))
-
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(
-            ["application/json"]
-        )
-
-        # authentication setting
-        _auth_settings: List[str] = ["personalAccessToken"]
-
-        return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/v1/projects/{projectOrProductUID}/events-cursor",
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth,
-        )
-
-    @validate_call
     def get_fleet_events(
         self,
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         sensor_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+                description="SensorUID to filter by, matched exactly. Repeat for more than one."
             ),
         ] = None,
         sort_by: Optional[StrictStr] = None,
@@ -1136,27 +805,43 @@ class EventApi:
         date_type: Annotated[
             Optional[StrictStr],
             Field(
-                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
+                description="Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it "
             ),
         ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
+        system_files_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`."
+            ),
+        ] = None,
+        files: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`."
+            ),
+        ] = None,
         format: Annotated[
-            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
+            Optional[StrictStr],
+            Field(
+                description="Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields` "
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
+            Optional[List[StrictStr]],
+            Field(description="Serial number to filter by. Repeat for more than one."),
         ] = None,
         session_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Session UID")
+            Optional[List[StrictStr]],
+            Field(description="SessionUID to filter by. Repeat for more than one."),
         ] = None,
         event_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Event UID")
+            Optional[List[StrictStr]],
+            Field(description="EventUID to filter by. Repeat for more than one."),
         ] = None,
         select_fields: Annotated[
             Optional[StrictStr],
             Field(
-                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
+                description="Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1171,9 +856,9 @@ class EventApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetEvents200Response:
-        """get_fleet_events
+        """List events in a fleet
 
-        Get Events of a Fleet
+        List the events from one fleet, with the same filters, `cursor` and CSV output as `GetEvents`.  Paginated. Returns 403 if the organization is suspended, and 500 if the query times out; narrow the filters and retry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1183,9 +868,11 @@ class EventApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :param sensor_uid: SensorUID to filter by, matched exactly. Repeat for more than one.
         :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
@@ -1195,21 +882,21 @@ class EventApi:
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+        :param date_type: Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it
         :type date_type: str
-        :param system_files_only:
+        :param system_files_only: If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
         :type system_files_only: bool
-        :param files:
+        :param files: Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
         :type files: str
-        :param format: Response format (JSON or CSV)
+        :param format: Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields`
         :type format: str
-        :param serial_number: Filter by Serial Number
+        :param serial_number: Serial number to filter by. Repeat for more than one.
         :type serial_number: List[str]
-        :param session_uid: Filter by Session UID
+        :param session_uid: SessionUID to filter by. Repeat for more than one.
         :type session_uid: List[str]
-        :param event_uid: Filter by Event UID
+        :param event_uid: EventUID to filter by. Repeat for more than one.
         :type event_uid: List[str]
-        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+        :param select_fields: Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns.
         :type select_fields: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1238,6 +925,7 @@ class EventApi:
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             sensor_uid=sensor_uid,
             sort_by=sort_by,
@@ -1275,15 +963,21 @@ class EventApi:
         self,
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         sensor_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+                description="SensorUID to filter by, matched exactly. Repeat for more than one."
             ),
         ] = None,
         sort_by: Optional[StrictStr] = None,
@@ -1303,27 +997,43 @@ class EventApi:
         date_type: Annotated[
             Optional[StrictStr],
             Field(
-                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
+                description="Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it "
             ),
         ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
+        system_files_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`."
+            ),
+        ] = None,
+        files: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`."
+            ),
+        ] = None,
         format: Annotated[
-            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
+            Optional[StrictStr],
+            Field(
+                description="Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields` "
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
+            Optional[List[StrictStr]],
+            Field(description="Serial number to filter by. Repeat for more than one."),
         ] = None,
         session_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Session UID")
+            Optional[List[StrictStr]],
+            Field(description="SessionUID to filter by. Repeat for more than one."),
         ] = None,
         event_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Event UID")
+            Optional[List[StrictStr]],
+            Field(description="EventUID to filter by. Repeat for more than one."),
         ] = None,
         select_fields: Annotated[
             Optional[StrictStr],
             Field(
-                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
+                description="Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1338,9 +1048,9 @@ class EventApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[GetEvents200Response]:
-        """get_fleet_events
+        """List events in a fleet
 
-        Get Events of a Fleet
+        List the events from one fleet, with the same filters, `cursor` and CSV output as `GetEvents`.  Paginated. Returns 403 if the organization is suspended, and 500 if the query times out; narrow the filters and retry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1350,9 +1060,11 @@ class EventApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :param sensor_uid: SensorUID to filter by, matched exactly. Repeat for more than one.
         :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
@@ -1362,21 +1074,21 @@ class EventApi:
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+        :param date_type: Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it
         :type date_type: str
-        :param system_files_only:
+        :param system_files_only: If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
         :type system_files_only: bool
-        :param files:
+        :param files: Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
         :type files: str
-        :param format: Response format (JSON or CSV)
+        :param format: Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields`
         :type format: str
-        :param serial_number: Filter by Serial Number
+        :param serial_number: Serial number to filter by. Repeat for more than one.
         :type serial_number: List[str]
-        :param session_uid: Filter by Session UID
+        :param session_uid: SessionUID to filter by. Repeat for more than one.
         :type session_uid: List[str]
-        :param event_uid: Filter by Event UID
+        :param event_uid: EventUID to filter by. Repeat for more than one.
         :type event_uid: List[str]
-        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+        :param select_fields: Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns.
         :type select_fields: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1405,6 +1117,7 @@ class EventApi:
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             sensor_uid=sensor_uid,
             sort_by=sort_by,
@@ -1442,15 +1155,21 @@ class EventApi:
         self,
         project_or_product_uid: StrictStr,
         fleet_uid: StrictStr,
-        page_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = None,
+        page_size: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
         page_num: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped. "
+            ),
+        ] = None,
         device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
+            Optional[List[StrictStr]], Field(description="A DeviceUID.")
         ] = None,
         sensor_uid: Annotated[
             Optional[List[StrictStr]],
             Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
+                description="SensorUID to filter by, matched exactly. Repeat for more than one."
             ),
         ] = None,
         sort_by: Optional[StrictStr] = None,
@@ -1470,27 +1189,43 @@ class EventApi:
         date_type: Annotated[
             Optional[StrictStr],
             Field(
-                description="Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters"
+                description="Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it "
             ),
         ] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
+        system_files_only: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`."
+            ),
+        ] = None,
+        files: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`."
+            ),
+        ] = None,
         format: Annotated[
-            Optional[StrictStr], Field(description="Response format (JSON or CSV)")
+            Optional[StrictStr],
+            Field(
+                description="Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields` "
+            ),
         ] = None,
         serial_number: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Serial Number")
+            Optional[List[StrictStr]],
+            Field(description="Serial number to filter by. Repeat for more than one."),
         ] = None,
         session_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Session UID")
+            Optional[List[StrictStr]],
+            Field(description="SessionUID to filter by. Repeat for more than one."),
         ] = None,
         event_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="Filter by Event UID")
+            Optional[List[StrictStr]],
+            Field(description="EventUID to filter by. Repeat for more than one."),
         ] = None,
         select_fields: Annotated[
             Optional[StrictStr],
             Field(
-                description='Comma-separated list of fields to select from JSON payload (e.g., "field1,field2.subfield,field3"), this will reflect the columns in the CSV output.'
+                description="Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1505,9 +1240,9 @@ class EventApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_fleet_events
+        """List events in a fleet
 
-        Get Events of a Fleet
+        List the events from one fleet, with the same filters, `cursor` and CSV output as `GetEvents`.  Paginated. Returns 403 if the organization is suspended, and 500 if the query times out; narrow the filters and retry.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1517,9 +1252,11 @@ class EventApi:
         :type page_size: int
         :param page_num:
         :type page_num: int
-        :param device_uid: A Device UID.
+        :param cursor: If supplied, results are returned in ascending order of modification time. A cursor is a timestamp: Unix epoch microseconds (UTC), optionally followed by `.N`. To start at a time, pass the bare microsecond value (inclusive; e.g. now minus 30 days); 0 starts from the beginning. To resume, pass next_cursor (or X-Next-Cursor) back unchanged; `.N` is the serial of the last row read at that microsecond, so nothing repeats or is skipped.
+        :type cursor: str
+        :param device_uid: A DeviceUID.
         :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
+        :param sensor_uid: SensorUID to filter by, matched exactly. Repeat for more than one.
         :type sensor_uid: List[str]
         :param sort_by:
         :type sort_by: str
@@ -1529,21 +1266,21 @@ class EventApi:
         :type start_date: int
         :param end_date: End date for filtering results, specified as a Unix timestamp
         :type end_date: int
-        :param date_type: Which date to filter on, either 'captured' or 'uploaded'.  This will apply to the startDate and endDate parameters
+        :param date_type: Which time `startDate` and `endDate` filter on. - `captured`: when the Notecard created the event - `uploaded`: when Notehub received it
         :type date_type: str
-        :param system_files_only:
+        :param system_files_only: If true, return only events from system notefiles, such as `_session.qo` and `_health.qo`.
         :type system_files_only: bool
-        :param files:
+        :param files: Comma-separated notefiles, e.g. `data.qo,_health.qo`. Don't combine with `systemFilesOnly`.
         :type files: str
-        :param format: Response format (JSON or CSV)
+        :param format: Response format. - `json`: a JSON object with `events` - `csv`: CSV, with the columns in `selectFields`
         :type format: str
-        :param serial_number: Filter by Serial Number
+        :param serial_number: Serial number to filter by. Repeat for more than one.
         :type serial_number: List[str]
-        :param session_uid: Filter by Session UID
+        :param session_uid: SessionUID to filter by. Repeat for more than one.
         :type session_uid: List[str]
-        :param event_uid: Filter by Event UID
+        :param event_uid: EventUID to filter by. Repeat for more than one.
         :type event_uid: List[str]
-        :param select_fields: Comma-separated list of fields to select from JSON payload (e.g., \"field1,field2.subfield,field3\"), this will reflect the columns in the CSV output.
+        :param select_fields: Comma-separated event fields to return, e.g. `device,when,body.temp`. Also sets the CSV columns.
         :type select_fields: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1572,6 +1309,7 @@ class EventApi:
             fleet_uid=fleet_uid,
             page_size=page_size,
             page_num=page_num,
+            cursor=cursor,
             device_uid=device_uid,
             sensor_uid=sensor_uid,
             sort_by=sort_by,
@@ -1606,6 +1344,7 @@ class EventApi:
         fleet_uid,
         page_size,
         page_num,
+        cursor,
         device_uid,
         sensor_uid,
         sort_by,
@@ -1656,6 +1395,10 @@ class EventApi:
         if page_num is not None:
 
             _query_params.append(("pageNum", page_num))
+
+        if cursor is not None:
+
+            _query_params.append(("cursor", cursor))
 
         if device_uid is not None:
 
@@ -1741,486 +1484,13 @@ class EventApi:
         )
 
     @validate_call
-    def get_fleet_events_by_cursor(
-        self,
-        project_or_product_uid: StrictStr,
-        fleet_uid: StrictStr,
-        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
-            ),
-        ] = None,
-        sort_order: Optional[StrictStr] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        sensor_uid: Annotated[
-            Optional[List[StrictStr]],
-            Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
-            ),
-        ] = None,
-        start_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="Start date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        end_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="End date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetEventsByCursor200Response:
-        """get_fleet_events_by_cursor
-
-        Get Events of a Fleet by cursor
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param fleet_uid: (required)
-        :type fleet_uid: str
-        :param limit:
-        :type limit: int
-        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-        :type cursor: str
-        :param sort_order:
-        :type sort_order: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
-        :type sensor_uid: List[str]
-        :param start_date: Start date for filtering results, specified as a Unix timestamp
-        :type start_date: int
-        :param end_date: End date for filtering results, specified as a Unix timestamp
-        :type end_date: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_fleet_events_by_cursor_serialize(
-            project_or_product_uid=project_or_product_uid,
-            fleet_uid=fleet_uid,
-            limit=limit,
-            cursor=cursor,
-            sort_order=sort_order,
-            system_files_only=system_files_only,
-            files=files,
-            device_uid=device_uid,
-            sensor_uid=sensor_uid,
-            start_date=start_date,
-            end_date=end_date,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetEventsByCursor200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    @validate_call
-    def get_fleet_events_by_cursor_with_http_info(
-        self,
-        project_or_product_uid: StrictStr,
-        fleet_uid: StrictStr,
-        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
-            ),
-        ] = None,
-        sort_order: Optional[StrictStr] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        sensor_uid: Annotated[
-            Optional[List[StrictStr]],
-            Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
-            ),
-        ] = None,
-        start_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="Start date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        end_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="End date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetEventsByCursor200Response]:
-        """get_fleet_events_by_cursor
-
-        Get Events of a Fleet by cursor
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param fleet_uid: (required)
-        :type fleet_uid: str
-        :param limit:
-        :type limit: int
-        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-        :type cursor: str
-        :param sort_order:
-        :type sort_order: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
-        :type sensor_uid: List[str]
-        :param start_date: Start date for filtering results, specified as a Unix timestamp
-        :type start_date: int
-        :param end_date: End date for filtering results, specified as a Unix timestamp
-        :type end_date: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_fleet_events_by_cursor_serialize(
-            project_or_product_uid=project_or_product_uid,
-            fleet_uid=fleet_uid,
-            limit=limit,
-            cursor=cursor,
-            sort_order=sort_order,
-            system_files_only=system_files_only,
-            files=files,
-            device_uid=device_uid,
-            sensor_uid=sensor_uid,
-            start_date=start_date,
-            end_date=end_date,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetEventsByCursor200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-    @validate_call
-    def get_fleet_events_by_cursor_without_preload_content(
-        self,
-        project_or_product_uid: StrictStr,
-        fleet_uid: StrictStr,
-        limit: Optional[Annotated[int, Field(strict=True, ge=1)]] = None,
-        cursor: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included. "
-            ),
-        ] = None,
-        sort_order: Optional[StrictStr] = None,
-        system_files_only: Optional[StrictBool] = None,
-        files: Optional[StrictStr] = None,
-        device_uid: Annotated[
-            Optional[List[StrictStr]], Field(description="A Device UID.")
-        ] = None,
-        sensor_uid: Annotated[
-            Optional[List[StrictStr]],
-            Field(
-                description="A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix."
-            ),
-        ] = None,
-        start_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="Start date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        end_date: Annotated[
-            Optional[Annotated[int, Field(strict=True, ge=0)]],
-            Field(
-                description="End date for filtering results, specified as a Unix timestamp"
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """get_fleet_events_by_cursor
-
-        Get Events of a Fleet by cursor
-
-        :param project_or_product_uid: (required)
-        :type project_or_product_uid: str
-        :param fleet_uid: (required)
-        :type fleet_uid: str
-        :param limit:
-        :type limit: int
-        :param cursor: A cursor, which can be obtained from the `next_cursor` value from a previous call to this endpoint. The results set returned will include this event as its first result if the given identifier is actually the UID of an event. If this event UID is not found, the parameter is ignored and the results set is the same as if the parameter was not included.
-        :type cursor: str
-        :param sort_order:
-        :type sort_order: str
-        :param system_files_only:
-        :type system_files_only: bool
-        :param files:
-        :type files: str
-        :param device_uid: A Device UID.
-        :type device_uid: List[str]
-        :param sensor_uid: A sensor UID to filter events by, matched exactly against the event sensor field. The value may carry any prefix.
-        :type sensor_uid: List[str]
-        :param start_date: Start date for filtering results, specified as a Unix timestamp
-        :type start_date: int
-        :param end_date: End date for filtering results, specified as a Unix timestamp
-        :type end_date: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _param = self._get_fleet_events_by_cursor_serialize(
-            project_or_product_uid=project_or_product_uid,
-            fleet_uid=fleet_uid,
-            limit=limit,
-            cursor=cursor,
-            sort_order=sort_order,
-            system_files_only=system_files_only,
-            files=files,
-            device_uid=device_uid,
-            sensor_uid=sensor_uid,
-            start_date=start_date,
-            end_date=end_date,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "GetEventsByCursor200Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-    def _get_fleet_events_by_cursor_serialize(
-        self,
-        project_or_product_uid,
-        fleet_uid,
-        limit,
-        cursor,
-        sort_order,
-        system_files_only,
-        files,
-        device_uid,
-        sensor_uid,
-        start_date,
-        end_date,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-            "deviceUID": "multi",
-            "sensorUID": "multi",
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, Union[str, bytes]] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if project_or_product_uid is not None:
-            _path_params["projectOrProductUID"] = project_or_product_uid
-        if fleet_uid is not None:
-            _path_params["fleetUID"] = fleet_uid
-        # process the query parameters
-        if limit is not None:
-
-            _query_params.append(("limit", limit))
-
-        if cursor is not None:
-
-            _query_params.append(("cursor", cursor))
-
-        if sort_order is not None:
-
-            _query_params.append(("sortOrder", sort_order))
-
-        if system_files_only is not None:
-
-            _query_params.append(("systemFilesOnly", system_files_only))
-
-        if files is not None:
-
-            _query_params.append(("files", files))
-
-        if device_uid is not None:
-
-            _query_params.append(("deviceUID", device_uid))
-
-        if sensor_uid is not None:
-
-            _query_params.append(("sensorUID", sensor_uid))
-
-        if start_date is not None:
-
-            _query_params.append(("startDate", start_date))
-
-        if end_date is not None:
-
-            _query_params.append(("endDate", end_date))
-
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-        # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(
-            ["application/json"]
-        )
-
-        # authentication setting
-        _auth_settings: List[str] = ["personalAccessToken"]
-
-        return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/v1/projects/{projectOrProductUID}/fleets/{fleetUID}/events-cursor",
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth,
-        )
-
-    @validate_call
     def get_route_logs_by_event(
         self,
         project_or_product_uid: StrictStr,
-        event_uid: StrictStr,
+        event_uid: Annotated[
+            StrictStr,
+            Field(description="EventUID, e.g. `4506f411-dea6-44a0-9743-1130f57d7747`."),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2233,13 +1503,13 @@ class EventApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[RouteLog]:
-        """get_route_logs_by_event
+        """Get an event's route logs
 
-        Get Route Logs by Event UID
+        Get the log of every attempt to send one event to each route, with the response status, body and duration. For a route's logs across events, use `GetRouteLogsByRoute`.  Returns 404 if the event doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param event_uid: (required)
+        :param event_uid: EventUID, e.g. `4506f411-dea6-44a0-9743-1130f57d7747`. (required)
         :type event_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2288,7 +1558,10 @@ class EventApi:
     def get_route_logs_by_event_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        event_uid: StrictStr,
+        event_uid: Annotated[
+            StrictStr,
+            Field(description="EventUID, e.g. `4506f411-dea6-44a0-9743-1130f57d7747`."),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2301,13 +1574,13 @@ class EventApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[RouteLog]]:
-        """get_route_logs_by_event
+        """Get an event's route logs
 
-        Get Route Logs by Event UID
+        Get the log of every attempt to send one event to each route, with the response status, body and duration. For a route's logs across events, use `GetRouteLogsByRoute`.  Returns 404 if the event doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param event_uid: (required)
+        :param event_uid: EventUID, e.g. `4506f411-dea6-44a0-9743-1130f57d7747`. (required)
         :type event_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2356,7 +1629,10 @@ class EventApi:
     def get_route_logs_by_event_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        event_uid: StrictStr,
+        event_uid: Annotated[
+            StrictStr,
+            Field(description="EventUID, e.g. `4506f411-dea6-44a0-9743-1130f57d7747`."),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2369,13 +1645,13 @@ class EventApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_route_logs_by_event
+        """Get an event's route logs
 
-        Get Route Logs by Event UID
+        Get the log of every attempt to send one event to each route, with the response status, body and duration. For a route's logs across events, use `GetRouteLogsByRoute`.  Returns 404 if the event doesn't exist.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param event_uid: (required)
+        :param event_uid: EventUID, e.g. `4506f411-dea6-44a0-9743-1130f57d7747`. (required)
         :type event_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

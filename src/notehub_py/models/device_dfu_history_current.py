@@ -38,7 +38,10 @@ class DeviceDfuHistoryCurrent(BaseModel):
         default=None, description="Firmware organization"
     )
     product: Optional[StrictStr] = Field(default=None, description="Firmware product")
-    version: Optional[StrictStr] = Field(default=None, description="Firmware version")
+    version: Optional[StrictStr] = Field(
+        default=None,
+        description="Firmware version the device runs, or `Unknown (device has not fully sync'd)`.",
+    )
     __properties: ClassVar[List[str]] = [
         "builder",
         "built",

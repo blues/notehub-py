@@ -2,14 +2,14 @@
 
 ## Properties
 
-| Name                       | Type                      | Description | Notes      |
-| -------------------------- | ------------------------- | ----------- | ---------- |
-| **administrative_contact** | [**Contact**](Contact.md) |             | [optional] |
-| **created**                | **datetime**              |             |
-| **label**                  | **str**                   |             |
-| **role**                   | [**Role**](Role.md)       |             | [optional] |
-| **technical_contact**      | [**Contact**](Contact.md) |             | [optional] |
-| **uid**                    | **str**                   |             |
+| Name                       | Type                      | Description                                                            | Notes      |
+| -------------------------- | ------------------------- | ---------------------------------------------------------------------- | ---------- |
+| **administrative_contact** | [**Contact**](Contact.md) |                                                                        | [optional] |
+| **created**                | **datetime**              | When the project was created.                                          |
+| **label**                  | **str**                   | Project name shown in Notehub.                                         |
+| **role**                   | [**Role**](Role.md)       |                                                                        | [optional] |
+| **technical_contact**      | [**Contact**](Contact.md) |                                                                        | [optional] |
+| **uid**                    | **str**                   | ProjectUID, e.g. &#x60;app:2606f411-dea6-44a0-9743-1130f57d77d8&#x60;. |
 
 ## Example
 

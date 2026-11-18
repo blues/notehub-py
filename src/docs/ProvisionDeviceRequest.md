@@ -2,11 +2,11 @@
 
 ## Properties
 
-| Name            | Type          | Description                                | Notes      |
-| --------------- | ------------- | ------------------------------------------ | ---------- |
-| **device_sn**   | **str**       | The serial number to assign to the device. | [optional] |
-| **fleet_uids**  | **List[str]** | The fleetUIDs to provision the device to.  | [optional] |
-| **product_uid** | **str**       | The ProductUID that the device should use. |
+| Name            | Type          | Description                                                                                                                                    | Notes      |
+| --------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **device_sn**   | **str**       | Serial number to give the device. Ignored if the device already has one.                                                                       | [optional] |
+| **fleet_uids**  | **List[str]** | FleetUIDs to put a new device in. If omitted or empty, the product&#39;s auto-provision fleets are used. Ignored if the device already exists. | [optional] |
+| **product_uid** | **str**       | ProductUID to provision the device under, e.g. &#x60;com.blues.bridge:sensors&#x60;. Must belong to this project.                              |
 
 ## Example
 

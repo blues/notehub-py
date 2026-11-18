@@ -32,26 +32,30 @@ class UpdateFleetRequest(BaseModel):
 
     add_devices: Optional[List[StrictStr]] = Field(
         default=None,
-        description="List of DeviceUIDs to add to fleet",
+        description="DeviceUIDs to add to the fleet. Each must be in the project and not also in `removeDevices`.",
         alias="addDevices",
     )
     connectivity_assurance: Optional[FleetConnectivityAssurance] = None
     label: Optional[StrictStr] = Field(
-        default=None, description="The label for the Fleet."
+        default=None,
+        description="New fleet name. Empty keeps the current name; a fleet must have one, so `-` returns 400.",
     )
     remove_devices: Optional[List[StrictStr]] = Field(
         default=None,
-        description="List of DeviceUIDs to remove from fleet",
+        description="DeviceUIDs to remove from the fleet. Each must be in the project and not also in `addDevices`.",
         alias="removeDevices",
     )
     smart_rule: Optional[StrictStr] = Field(
         default=None,
-        description="JSONata expression that will be evaluated to determine device membership into this fleet, if the expression evaluates to a 1, the device will be included, if it evaluates to -1 it will be removed, and if it evaluates to 0 or errors it will be left unchanged.",
+        description="JSONata expression for smart fleet membership: `1` adds the device, `-1` removes it, and `0` or an error leaves it unchanged.",
     )
-    smart_rule_enabled: Optional[StrictBool] = None
+    smart_rule_enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Whether `smart_rule` adds and removes devices. Always send it; omitting it sets `false`.",
+    )
     watchdog_mins: Optional[StrictInt] = Field(
         default=None,
-        description="A watchdog timer is used to generate an event every N minutes of inactivity. 0 means no watchdog",
+        description="Minutes of inactivity before Notehub generates a watchdog event. Omit or `0` to keep the current value; a negative value turns it off.",
     )
     __properties: ClassVar[List[str]] = [
         "addDevices",

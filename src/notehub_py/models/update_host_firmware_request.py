@@ -31,13 +31,14 @@ class UpdateHostFirmwareRequest(BaseModel):
 
     info: Optional[Dict[str, Any]] = Field(
         default=None,
-        description="Arbitrary JSON metadata associated with this firmware entry.",
+        description="JSON metadata for this firmware. Replaces the stored object when present.",
     )
     notes: Optional[StrictStr] = Field(
-        default=None, description="Notes describing this firmware version."
+        default=None,
+        description="New notes for this firmware. Empty keeps the current notes.",
     )
     version: Optional[StrictStr] = Field(
-        default=None, description="The firmware version string."
+        default=None, description="New version string. Empty keeps the current version."
     )
     __properties: ClassVar[List[str]] = ["info", "notes", "version"]
 

@@ -2,11 +2,11 @@
 
 ## Properties
 
-| Name             | Type          | Description | Notes      |
-| ---------------- | ------------- | ----------- | ---------- |
-| **fleet_uids**   | **List[str]** |             | [optional] |
-| **name**         | **str**       |             | [optional] |
-| **project_uids** | **List[str]** |             | [optional] |
+| Name             | Type          | Description                                                                                    | Notes      |
+| ---------------- | ------------- | ---------------------------------------------------------------------------------------------- | ---------- |
+| **fleet_uids**   | **List[str]** |                                                                                                | [optional] |
+| **name**         | **str**       | Repository name.                                                                               | [optional] |
+| **project_uids** | **List[str]** | The project whose events the repository holds. A repository can reference at most one project. | [optional] |
 
 ## Example
 

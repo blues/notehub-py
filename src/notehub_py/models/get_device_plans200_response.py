@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from notehub_py.models.cellular_plan import CellularPlan
 from typing import Optional, Set
@@ -30,7 +30,10 @@ class GetDevicePlans200Response(BaseModel):
     GetDevicePlans200Response
     """  # noqa: E501
 
-    cellular_plans: Optional[List[CellularPlan]] = None
+    cellular_plans: Optional[List[CellularPlan]] = Field(
+        default=None,
+        description="One entry per cellular SIM. Empty for a device with only a satellite connection.",
+    )
     __properties: ClassVar[List[str]] = ["cellular_plans"]
 
     model_config = ConfigDict(

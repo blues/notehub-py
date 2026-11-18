@@ -30,23 +30,32 @@ class RouteLog(BaseModel):
     """  # noqa: E501
 
     attn: Optional[StrictBool] = Field(
-        default=None, description="If true, an error was returned when routing"
+        default=None, description="True if the attempt failed."
     )
     var_date: Optional[StrictStr] = Field(
-        default=None, description="The date of the logs.", alias="date"
+        default=None,
+        description="When the attempt was made, in RFC 3339 format.",
+        alias="date",
     )
     duration: Optional[StrictInt] = Field(
-        default=None, description="The duration of the route in milliseconds"
+        default=None, description="How long the attempt took, in milliseconds."
     )
-    event_uid: Optional[StrictStr] = Field(default=None, description="The event UID.")
-    route_uid: Optional[StrictStr] = Field(default=None, description="The route UID.")
+    event_uid: Optional[StrictStr] = Field(
+        default=None, description="EventUID of the event that was sent."
+    )
+    route_uid: Optional[StrictStr] = Field(
+        default=None, description="RouteUID of the route."
+    )
     status: Optional[StrictStr] = Field(
-        default=None, description="The status of the event."
+        default=None, description="The destination's response status, such as `200`."
     )
     text: Optional[StrictStr] = Field(
-        default=None, description="The response body of the route."
+        default=None,
+        description="The destination's response body, or an error message.",
     )
-    url: Optional[StrictStr] = Field(default=None, description="The URL of the route.")
+    url: Optional[StrictStr] = Field(
+        default=None, description="The URL the event was sent to."
+    )
     __properties: ClassVar[List[str]] = [
         "attn",
         "date",

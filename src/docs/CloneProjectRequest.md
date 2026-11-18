@@ -2,12 +2,12 @@
 
 ## Properties
 
-| Name                     | Type     | Description                                                                                                                                                     | Notes      |
-| ------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **billing_account_uid**  | **str**  | The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned. |
-| **disable_clone_fleets** | **bool** | Whether to disallow the cloning of the fleets from the parent project. Default is false if not specified.                                                       | [optional] |
-| **disable_clone_routes** | **bool** | Whether to disallow the cloning of the routes from the parent project. Default is false if not specified.                                                       | [optional] |
-| **label**                | **str**  | The label for the project.                                                                                                                                      |
+| Name                     | Type     | Description                                                                                                                            | Notes      |
+| ------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **billing_account_uid**  | **str**  | UID of the organization that owns the new project. List them with &#x60;GetBillingAccounts&#x60;.                                      |
+| **disable_clone_fleets** | **bool** | If &#x60;true&#x60;, the new project gets one default fleet instead of copies of this project&#39;s fleets. Default &#x60;false&#x60;. | [optional] |
+| **disable_clone_routes** | **bool** | If &#x60;true&#x60;, the new project starts with no routes. Default &#x60;false&#x60;.                                                 | [optional] |
+| **label**                | **str**  | Name of the new project.                                                                                                               |
 
 ## Example
 

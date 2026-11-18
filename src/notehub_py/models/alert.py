@@ -44,18 +44,20 @@ class Alert(BaseModel):
         default=None, description="The source of the alert"
     )
     created_at: Optional[StrictInt] = Field(
-        default=None, description="The time the alert was created"
+        default=None,
+        description="When the alert was raised, as a Unix timestamp in seconds.",
     )
     data: Optional[List[AlertDataInner]] = None
-    device_uid: Optional[StrictStr] = Field(default=None, description="Device UID")
+    device_uid: Optional[StrictStr] = Field(default=None, description="DeviceUID")
     field_name: Optional[StrictStr] = Field(
-        default=None, description="The field name that triggered the alert"
+        default=None, description="The monitor's `source_selector`."
     )
     monitor_name: Optional[StrictStr] = Field(default=None, description="Monitor Name")
     monitor_type: Optional[StrictStr] = Field(
-        default=None, description="The type of monitor that triggered the alert"
+        default=None,
+        description="The `source_type` of the monitor that raised the alert.",
     )
-    monitor_uid: Optional[StrictStr] = Field(default=None, description="Monitor UID")
+    monitor_uid: Optional[StrictStr] = Field(default=None, description="MonitorUID")
     notifications: Optional[List[AlertNotificationsInner]] = None
     resolved: Optional[StrictBool] = Field(
         default=None, description="If true, the alert has been resolved"
@@ -63,7 +65,7 @@ class Alert(BaseModel):
     source: Optional[StrictStr] = Field(
         default=None, description="The UID of the source of the alert"
     )
-    uid: Optional[StrictStr] = Field(default=None, description="Alert UID")
+    uid: Optional[StrictStr] = Field(default=None, description="AlertUID")
     value: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="The value that triggered the alert"
     )
@@ -103,8 +105,10 @@ class Alert(BaseModel):
         if value is None:
             return value
 
-        if value not in set(["event", "device"]):
-            raise ValueError("must be one of enum values ('event', 'device')")
+        if value not in set(["event", "heartbeat", "usage"]):
+            raise ValueError(
+                "must be one of enum values ('event', 'heartbeat', 'usage')"
+            )
         return value
 
     model_config = ConfigDict(

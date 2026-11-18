@@ -4,7 +4,7 @@
 
 | Name                   | Type       | Description                                                                                                                                            | Notes      |
 | ---------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
-| **app**                | **str**    | App UID (globally unique)                                                                                                                              | [optional] |
+| **app**                | **str**    | AppUID (globally unique)                                                                                                                               | [optional] |
 | **bars**               | **int**    | Bars. Only available on \_session.qo events.                                                                                                           | [optional] |
 | **best_country**       | **str**    | Country                                                                                                                                                | [optional] |
 | **best_id**            | **str**    | The device serial number, or the DeviceUID if the serial number is not set                                                                             | [optional] |
@@ -16,9 +16,10 @@
 | **best_timezone**      | **str**    | Timezone                                                                                                                                               | [optional] |
 | **body**               | **object** | A JSON object containing event details                                                                                                                 | [optional] |
 | **bssid**              | **str**    | BSSID. Only available on \_session.qo events.                                                                                                          | [optional] |
-| **device**             | **str**    | Device UID (globally unique)                                                                                                                           | [optional] |
+| **deleted**            | **bool**   | True if this event has been deleted. Only present when reading with a &#x60;cursor&#x60;.                                                              | [optional] |
+| **device**             | **str**    | DeviceUID (globally unique)                                                                                                                            | [optional] |
 | **environment**        | **object** | Routed environment variables beginning with \&quot;$\&quot;. Only available on \_session.qo events.                                                    | [optional] |
-| **event**              | **str**    | Event UID (globally unique)                                                                                                                            | [optional] |
+| **event**              | **str**    | EventUID (globally unique)                                                                                                                             | [optional] |
 | **file**               | **str**    | The notefile associated with this event                                                                                                                | [optional] |
 | **moved**              | **int**    | The number of times the device was sensed to have moved between the last session and this session. Only available on \_session.qo events.              | [optional] |
 | **note**               | **str**    | The note ID in the notefile                                                                                                                            | [optional] |
@@ -26,15 +27,15 @@
 | **orientation**        | **str**    | The orientation of the device. Only available on \_session.qo events.                                                                                  | [optional] |
 | **payload**            | **str**    | A base64-encoded binary payload                                                                                                                        | [optional] |
 | **platform**           | **bool**   | Whether this is a platform event (administrative, e.g. \_health.qo, \_session.qo) rather than user data                                                | [optional] |
-| **product**            | **str**    | Product UID (globally unique)                                                                                                                          | [optional] |
+| **product**            | **str**    | ProductUID (globally unique)                                                                                                                           | [optional] |
 | **rat**                | **str**    | Rat. Only available on \_session.qo events.                                                                                                            | [optional] |
 | **received**           | **float**  | The unix timestamp when the event was received                                                                                                         | [optional] |
 | **req**                | **str**    | The notecard request                                                                                                                                   | [optional] |
 | **rsrp**               | **int**    | RSRP. Only available on \_session.qo events.                                                                                                           | [optional] |
 | **rsrq**               | **int**    | RSRQ. Only available on \_session.qo events.                                                                                                           | [optional] |
 | **rssi**               | **int**    | Received Signal Strength Indicator (RSSI) is an estimated measurement of how well a device can receive signals. Only available on \_session.qo events. | [optional] |
-| **sensor**             | **str**    | Sensor UID, for events originating from a sensor attached to the device                                                                                | [optional] |
-| **session**            | **str**    | Session UID (globally unique)                                                                                                                          | [optional] |
+| **sensor**             | **str**    | SensorUID, for events originating from a sensor attached to the device                                                                                 | [optional] |
+| **session**            | **str**    | SessionUID (globally unique)                                                                                                                           | [optional] |
 | **sinr**               | **int**    | SINR. Only available on \_session.qo events.                                                                                                           | [optional] |
 | **sku**                | **str**    | SKU. Only available on \_session.qo events.                                                                                                            | [optional] |
 | **sn**                 | **str**    | The device serial number                                                                                                                               | [optional] |

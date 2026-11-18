@@ -30,17 +30,17 @@ class CloneProjectRequest(BaseModel):
     """  # noqa: E501
 
     billing_account_uid: StrictStr = Field(
-        description="The billing account UID for the project. The caller of the API must be able to create projects within the billing account, otherwise an error will be returned."
+        description="UID of the organization that owns the new project. List them with `GetBillingAccounts`."
     )
     disable_clone_fleets: Optional[StrictBool] = Field(
         default=None,
-        description="Whether to disallow the cloning of the fleets from the parent project.  Default is false if not specified.",
+        description="If `true`, the new project gets one default fleet instead of copies of this project's fleets. Default `false`.",
     )
     disable_clone_routes: Optional[StrictBool] = Field(
         default=None,
-        description="Whether to disallow the cloning of the routes from the parent project.  Default is false if not specified.",
+        description="If `true`, the new project starts with no routes. Default `false`.",
     )
-    label: StrictStr = Field(description="The label for the project.")
+    label: StrictStr = Field(description="Name of the new project.")
     __properties: ClassVar[List[str]] = [
         "billing_account_uid",
         "disable_clone_fleets",

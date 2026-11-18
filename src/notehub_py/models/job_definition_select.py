@@ -34,14 +34,14 @@ class JobDefinitionSelect(BaseModel):
     )
     comment: Optional[StrictStr] = None
     devices: Optional[List[StrictStr]] = Field(
-        default=None, description="Specific device UIDs to include"
+        default=None, description="Specific DeviceUIDs to include"
     )
     devices_by_sn: Optional[List[StrictStr]] = Field(
         default=None,
         description="Serial number patterns to match (supports glob wildcards *, ?, [...])",
     )
     devices_in_fleets: Optional[List[StrictStr]] = Field(
-        default=None, description="Fleet UIDs whose devices should be included"
+        default=None, description="FleetUIDs whose devices should be included"
     )
     __properties: ClassVar[List[str]] = [
         "all_devices",

@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,8 +29,10 @@ class GetDevicePublicKey200Response(BaseModel):
     GetDevicePublicKey200Response
     """  # noqa: E501
 
-    key: StrictStr
-    uid: StrictStr
+    key: StrictStr = Field(
+        description="The Notecard's public key in PEM format. Empty if it hasn't reported one."
+    )
+    uid: StrictStr = Field(description="DeviceUID, e.g. `dev:864475040509284`.")
     __properties: ClassVar[List[str]] = ["key", "uid"]
 
     model_config = ConfigDict(

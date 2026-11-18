@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,8 +31,11 @@ class CreateUpdateRepository(BaseModel):
     """  # noqa: E501
 
     fleet_uids: Optional[List[StrictStr]] = None
-    name: Optional[StrictStr] = None
-    project_uids: Optional[List[StrictStr]] = None
+    name: Optional[StrictStr] = Field(default=None, description="Repository name.")
+    project_uids: Optional[Annotated[List[StrictStr], Field(max_length=1)]] = Field(
+        default=None,
+        description="The project whose events the repository holds. A repository can reference at most one project.",
+    )
     __properties: ClassVar[List[str]] = ["fleet_uids", "name", "project_uids"]
 
     model_config = ConfigDict(

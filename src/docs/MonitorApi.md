@@ -2,19 +2,21 @@
 
 All URIs are relative to *https://api.notefile.net*
 
-| Method                                             | HTTP request                                                        | Description |
-| -------------------------------------------------- | ------------------------------------------------------------------- | ----------- |
-| [**create_monitor**](MonitorApi.md#create_monitor) | **POST** /v1/projects/{projectOrProductUID}/monitors                |
-| [**delete_monitor**](MonitorApi.md#delete_monitor) | **DELETE** /v1/projects/{projectOrProductUID}/monitors/{monitorUID} |
-| [**get_monitor**](MonitorApi.md#get_monitor)       | **GET** /v1/projects/{projectOrProductUID}/monitors/{monitorUID}    |
-| [**get_monitors**](MonitorApi.md#get_monitors)     | **GET** /v1/projects/{projectOrProductUID}/monitors                 |
-| [**update_monitor**](MonitorApi.md#update_monitor) | **PUT** /v1/projects/{projectOrProductUID}/monitors/{monitorUID}    |
+| Method                                             | HTTP request                                                        | Description      |
+| -------------------------------------------------- | ------------------------------------------------------------------- | ---------------- |
+| [**create_monitor**](MonitorApi.md#create_monitor) | **POST** /v1/projects/{projectOrProductUID}/monitors                | Create a monitor |
+| [**delete_monitor**](MonitorApi.md#delete_monitor) | **DELETE** /v1/projects/{projectOrProductUID}/monitors/{monitorUID} | Delete a monitor |
+| [**get_monitor**](MonitorApi.md#get_monitor)       | **GET** /v1/projects/{projectOrProductUID}/monitors/{monitorUID}    | Get a monitor    |
+| [**get_monitors**](MonitorApi.md#get_monitors)     | **GET** /v1/projects/{projectOrProductUID}/monitors                 | List monitors    |
+| [**update_monitor**](MonitorApi.md#update_monitor) | **PUT** /v1/projects/{projectOrProductUID}/monitors/{monitorUID}    | Update a monitor |
 
 ## create_monitor
 
 > Monitor create_monitor(project_or_product_uid, create_monitor)
 
-Create a new Monitor
+Create a monitor
+
+Create a monitor that raises an alert and notifies email, Slack or Twilio when its condition holds. It can watch an event value (`event`, the default), devices going quiet (`heartbeat`), or data usage (`usage`). Requires the Owner or Developer role. Returns 403 if the project's plan doesn't allow the monitor, and 400 for invalid settings.
 
 ### Example
 
@@ -37,6 +39,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     )  # CreateMonitor | Body or payload of monitor to be created
 
     try:
+        # Create a monitor
         api_response = api_instance.create_monitor(
             project_or_product_uid, create_monitor
         )
@@ -70,7 +73,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > Monitor delete_monitor(project_or_product_uid, monitor_uid)
 
-Delete Monitor
+Delete a monitor
+
+Delete a monitor so it stops raising alerts. Returns an empty monitor object. To pause it instead, set `disabled` with `UpdateMonitor`. Requires the Owner or Developer role. Returns 404 if the monitor never existed; deleting it again succeeds.
 
 ### Example
 
@@ -87,9 +92,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.MonitorApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    monitor_uid = "monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"  # str |
+    monitor_uid = "monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"  # str | MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`.
 
     try:
+        # Delete a monitor
         api_response = api_instance.delete_monitor(project_or_product_uid, monitor_uid)
         print("The response of MonitorApi->delete_monitor:\n")
         pprint(api_response)
@@ -99,10 +105,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description | Notes |
-| -------------------------- | ------- | ----------- | ----- |
-| **project_or_product_uid** | **str** |             |
-| **monitor_uid**            | **str** |             |
+| Name                       | Type    | Description                                                                             | Notes |
+| -------------------------- | ------- | --------------------------------------------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str** |                                                                                         |
+| **monitor_uid**            | **str** | MonitorUID, &#x60;monitor:&#x60; followed by a UUID. List with &#x60;GetMonitors&#x60;. |
 
 ### Return type
 
@@ -121,7 +127,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > Monitor get_monitor(project_or_product_uid, monitor_uid)
 
-Get Monitor
+Get a monitor
+
+Get one monitor's settings and whether it's in alert. Slack and Twilio credentials in `alert_routes` come back as `(omitted)`. Returns 404 if the monitor never existed; a deleted monitor is still returned.
 
 ### Example
 
@@ -138,9 +146,10 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.MonitorApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    monitor_uid = "monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"  # str |
+    monitor_uid = "monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"  # str | MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`.
 
     try:
+        # Get a monitor
         api_response = api_instance.get_monitor(project_or_product_uid, monitor_uid)
         print("The response of MonitorApi->get_monitor:\n")
         pprint(api_response)
@@ -150,10 +159,10 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type    | Description | Notes |
-| -------------------------- | ------- | ----------- | ----- |
-| **project_or_product_uid** | **str** |             |
-| **monitor_uid**            | **str** |             |
+| Name                       | Type    | Description                                                                             | Notes |
+| -------------------------- | ------- | --------------------------------------------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str** |                                                                                         |
+| **monitor_uid**            | **str** | MonitorUID, &#x60;monitor:&#x60; followed by a UUID. List with &#x60;GetMonitors&#x60;. |
 
 ### Return type
 
@@ -172,7 +181,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > List[Monitor] get_monitors(project_or_product_uid)
 
-Get list of defined Monitors
+List monitors
+
+List a project's monitors with their settings and whether each is in alert. For the alerts they've raised, use `GetAlerts`.
 
 ### Example
 
@@ -191,6 +202,7 @@ with notehub_py.ApiClient(configuration) as api_client:
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
 
     try:
+        # List monitors
         api_response = api_instance.get_monitors(project_or_product_uid)
         print("The response of MonitorApi->get_monitors:\n")
         pprint(api_response)
@@ -221,7 +233,9 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 > Monitor update_monitor(project_or_product_uid, monitor_uid, monitor)
 
-Update Monitor
+Update a monitor
+
+Replace a monitor's settings with the whole monitor, as `GetMonitor` returns it. Omitted fields are cleared or reset, except `source_type`, `fleet_filter`, `notefile_filter`, `condition_type`, `aggregate_window` and `alert_routes`. Slack and Twilio credentials left as `(omitted)` are kept. Requires the Owner or Developer role. Returns 403 if the plan doesn't allow a new `source_type`.
 
 ### Example
 
@@ -238,10 +252,11 @@ with notehub_py.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = notehub_py.MonitorApi(api_client)
     project_or_product_uid = "app:2606f411-dea6-44a0-9743-1130f57d77d8"  # str |
-    monitor_uid = "monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"  # str |
+    monitor_uid = "monitor:8bAdf00d-000f-51c-af-01d5eaf00dbad"  # str | MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`.
     monitor = notehub_py.Monitor()  # Monitor | Body or payload of monitor to be created
 
     try:
+        # Update a monitor
         api_response = api_instance.update_monitor(
             project_or_product_uid, monitor_uid, monitor
         )
@@ -253,11 +268,11 @@ with notehub_py.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-| Name                       | Type                      | Description                              | Notes |
-| -------------------------- | ------------------------- | ---------------------------------------- | ----- |
-| **project_or_product_uid** | **str**                   |                                          |
-| **monitor_uid**            | **str**                   |                                          |
-| **monitor**                | [**Monitor**](Monitor.md) | Body or payload of monitor to be created |
+| Name                       | Type                      | Description                                                                             | Notes |
+| -------------------------- | ------------------------- | --------------------------------------------------------------------------------------- | ----- |
+| **project_or_product_uid** | **str**                   |                                                                                         |
+| **monitor_uid**            | **str**                   | MonitorUID, &#x60;monitor:&#x60; followed by a UUID. List with &#x60;GetMonitors&#x60;. |
+| **monitor**                | [**Monitor**](Monitor.md) | Body or payload of monitor to be created                                                |
 
 ### Return type
 

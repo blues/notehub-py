@@ -28,6 +28,7 @@ from typing import Any, List, Optional
 from notehub_py.models.email_notification import EmailNotification
 from notehub_py.models.slack_bearer_notification import SlackBearerNotification
 from notehub_py.models.slack_web_hook_notification import SlackWebHookNotification
+from notehub_py.models.twilio_notification import TwilioNotification
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
@@ -36,6 +37,7 @@ MONITORALERTROUTESINNER_ONE_OF_SCHEMAS = [
     "EmailNotification",
     "SlackBearerNotification",
     "SlackWebHookNotification",
+    "TwilioNotification",
 ]
 
 
@@ -50,13 +52,21 @@ class MonitorAlertRoutesInner(BaseModel):
     oneof_schema_2_validator: Optional[SlackBearerNotification] = None
     # data type: EmailNotification
     oneof_schema_3_validator: Optional[EmailNotification] = None
+    # data type: TwilioNotification
+    oneof_schema_4_validator: Optional[TwilioNotification] = None
     actual_instance: Optional[
-        Union[EmailNotification, SlackBearerNotification, SlackWebHookNotification]
+        Union[
+            EmailNotification,
+            SlackBearerNotification,
+            SlackWebHookNotification,
+            TwilioNotification,
+        ]
     ] = None
     one_of_schemas: Set[str] = {
         "EmailNotification",
         "SlackBearerNotification",
         "SlackWebHookNotification",
+        "TwilioNotification",
     }
 
     model_config = ConfigDict(
@@ -104,16 +114,23 @@ class MonitorAlertRoutesInner(BaseModel):
             )
         else:
             match += 1
+        # validate data type: TwilioNotification
+        if not isinstance(v, TwilioNotification):
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `TwilioNotification`"
+            )
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when setting `actual_instance` in MonitorAlertRoutesInner with oneOf schemas: EmailNotification, SlackBearerNotification, SlackWebHookNotification. Details: "
+                "Multiple matches found when setting `actual_instance` in MonitorAlertRoutesInner with oneOf schemas: EmailNotification, SlackBearerNotification, SlackWebHookNotification, TwilioNotification. Details: "
                 + ", ".join(error_messages)
             )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when setting `actual_instance` in MonitorAlertRoutesInner with oneOf schemas: EmailNotification, SlackBearerNotification, SlackWebHookNotification. Details: "
+                "No match found when setting `actual_instance` in MonitorAlertRoutesInner with oneOf schemas: EmailNotification, SlackBearerNotification, SlackWebHookNotification, TwilioNotification. Details: "
                 + ", ".join(error_messages)
             )
         else:
@@ -148,17 +165,23 @@ class MonitorAlertRoutesInner(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into TwilioNotification
+        try:
+            instance.actual_instance = TwilioNotification.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when deserializing the JSON string into MonitorAlertRoutesInner with oneOf schemas: EmailNotification, SlackBearerNotification, SlackWebHookNotification. Details: "
+                "Multiple matches found when deserializing the JSON string into MonitorAlertRoutesInner with oneOf schemas: EmailNotification, SlackBearerNotification, SlackWebHookNotification, TwilioNotification. Details: "
                 + ", ".join(error_messages)
             )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into MonitorAlertRoutesInner with oneOf schemas: EmailNotification, SlackBearerNotification, SlackWebHookNotification. Details: "
+                "No match found when deserializing the JSON string into MonitorAlertRoutesInner with oneOf schemas: EmailNotification, SlackBearerNotification, SlackWebHookNotification, TwilioNotification. Details: "
                 + ", ".join(error_messages)
             )
         else:
@@ -184,6 +207,7 @@ class MonitorAlertRoutesInner(BaseModel):
             EmailNotification,
             SlackBearerNotification,
             SlackWebHookNotification,
+            TwilioNotification,
         ]
     ]:
         """Returns the dict representation of the actual instance"""

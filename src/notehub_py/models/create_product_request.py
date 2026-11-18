@@ -29,14 +29,17 @@ class CreateProductRequest(BaseModel):
     CreateProductRequest
     """  # noqa: E501
 
-    auto_provision_fleets: Optional[List[StrictStr]] = None
+    auto_provision_fleets: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="FleetUIDs that devices are added to when first provisioned with this ProductUID.",
+    )
     disable_devices_by_default: Optional[StrictBool] = Field(
         default=None,
-        description="If `true`, devices provisioned to this product will be automatically disabled by default.",
+        description="If `true`, devices provisioned with this ProductUID start out disabled.",
     )
-    label: StrictStr = Field(description="The label for the Product.")
+    label: StrictStr = Field(description="Product name shown in Notehub.")
     product_uid: StrictStr = Field(
-        description="The requested uid for the Product. Will be prefixed with the user's reversed email."
+        description="Suffix of the new ProductUID. Must start with a lowercase letter and contain only lowercase letters, digits, `.`, `_` or `-`."
     )
     __properties: ClassVar[List[str]] = [
         "auto_provision_fleets",

@@ -30,10 +30,10 @@ class CreateProjectSecretRequest(BaseModel):
     """  # noqa: E501
 
     name: StrictStr = Field(
-        description="The secret name (alphanumeric and underscores only)."
+        description="1 to 64 letters, digits or underscores. Routes and alerts reference the secret as `[$$name]`."
     )
     value: StrictStr = Field(
-        description="The secret value (encrypted at rest, never returned after creation)."
+        description="The secret value. Encrypted at rest and never returned."
     )
     __properties: ClassVar[List[str]] = ["name", "value"]
 

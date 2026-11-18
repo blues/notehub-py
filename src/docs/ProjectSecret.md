@@ -4,13 +4,13 @@ Metadata for a project secret. The value is never returned.
 
 ## Properties
 
-| Name            | Type         | Description                                          | Notes      |
-| --------------- | ------------ | ---------------------------------------------------- | ---------- |
-| **created**     | **datetime** | When the secret was first created.                   |
-| **created_by**  | **str**      | The actor who created the secret.                    |
-| **modified**    | **datetime** | When the secret was last updated.                    | [optional] |
-| **modified_by** | **str**      | The actor who last updated the secret.               | [optional] |
-| **name**        | **str**      | The secret name (alphanumeric and underscores only). |
+| Name            | Type         | Description                                                                    | Notes      |
+| --------------- | ------------ | ------------------------------------------------------------------------------ | ---------- |
+| **created**     | **datetime** | When the secret was first created.                                             |
+| **created_by**  | **str**      | UID of the user or OAuth client that created the secret.                       |
+| **modified**    | **datetime** | When the secret&#39;s value was last set.                                      | [optional] |
+| **modified_by** | **str**      | UID of the user or OAuth client that last set the secret&#39;s value.          | [optional] |
+| **name**        | **str**      | The secret&#39;s name. Routes and alerts reference it as &#x60;[$$name]&#x60;. |
 
 ## Example
 

@@ -1,0 +1,36 @@
+# Skill
+
+A Project Skill (also called a Product Skill) with full metadata and exact Markdown content.
+
+## Properties
+
+| Name           | Type                            | Description                                                            | Notes |
+| -------------- | ------------------------------- | ---------------------------------------------------------------------- | ----- |
+| **content**    | **str**                         | Exact UTF-8 document. Always present, including for an empty document. |
+| **created_at** | **datetime**                    |                                                                        |
+| **kinds**      | **List[str]**                   | Effective stored kinds, independent of document front matter.          |
+| **links**      | [**SkillLinks**](SkillLinks.md) |                                                                        |
+| **name**       | **str**                         |                                                                        |
+| **revision**   | **str**                         | Opaque concurrency token; ETag is this value wrapped in double quotes. |
+| **size_bytes** | **int**                         | UTF-8 content byte count.                                              |
+| **updated_at** | **datetime**                    |                                                                        |
+
+## Example
+
+```python
+from notehub_py.models.skill import Skill
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Skill from a JSON string
+skill_instance = Skill.from_json(json)
+# print the JSON string representation of the object
+print(Skill.to_json())
+
+# convert the object into a dict
+skill_dict = skill_instance.to_dict()
+# create an instance of Skill from a dict
+skill_from_dict = Skill.from_dict(skill_dict)
+```
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

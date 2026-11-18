@@ -2,11 +2,11 @@
 
 ## Properties
 
-| Name      | Type         | Description | Notes |
-| --------- | ------------ | ----------- | ----- |
-| **alert** | **bool**     |             |
-| **text**  | **str**      |             |
-| **when**  | **datetime** |             |
+| Name      | Type         | Description                                                   | Notes |
+| --------- | ------------ | ------------------------------------------------------------- | ----- |
+| **alert** | **bool**     | True if the entry was flagged as an alert.                    |
+| **text**  | **str**      | The log message. Restart entries begin with &#x60;boot&#x60;. |
+| **when**  | **datetime** | When the entry was recorded.                                  |
 
 ## Example
 

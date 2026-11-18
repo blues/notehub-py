@@ -32,10 +32,14 @@ class GetEvents200Response(BaseModel):
 
     events: List[Event]
     has_more: StrictBool = Field(description="True if there are more events")
+    next_cursor: Optional[StrictStr] = Field(
+        default=None,
+        description="Pass this value as the cursor parameter to start a search from where the last search left off. Returned even when there are no more results, so it can be used to poll for changes. ",
+    )
     through: Optional[StrictStr] = Field(
         default=None, description="The UID of the last event returned"
     )
-    __properties: ClassVar[List[str]] = ["events", "has_more", "through"]
+    __properties: ClassVar[List[str]] = ["events", "has_more", "next_cursor", "through"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +104,7 @@ class GetEvents200Response(BaseModel):
                     else None
                 ),
                 "has_more": obj.get("has_more"),
+                "next_cursor": obj.get("next_cursor"),
                 "through": obj.get("through"),
             }
         )

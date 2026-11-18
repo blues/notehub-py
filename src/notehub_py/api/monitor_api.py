@@ -59,9 +59,9 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Monitor:
-        """create_monitor
+        """Create a monitor
 
-        Create a new Monitor
+        Create a monitor that raises an alert and notifies email, Slack or Twilio when its condition holds. It can watch an event value (`event`, the default), devices going quiet (`heartbeat`), or data usage (`usage`).  Requires the Owner or Developer role. Returns 403 if the project's plan doesn't allow the monitor, and 400 for invalid settings.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -129,9 +129,9 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Monitor]:
-        """create_monitor
+        """Create a monitor
 
-        Create a new Monitor
+        Create a monitor that raises an alert and notifies email, Slack or Twilio when its condition holds. It can watch an event value (`event`, the default), devices going quiet (`heartbeat`), or data usage (`usage`).  Requires the Owner or Developer role. Returns 403 if the project's plan doesn't allow the monitor, and 400 for invalid settings.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -199,9 +199,9 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """create_monitor
+        """Create a monitor
 
-        Create a new Monitor
+        Create a monitor that raises an alert and notifies email, Slack or Twilio when its condition holds. It can watch an event value (`event`, the default), devices going quiet (`heartbeat`), or data usage (`usage`).  Requires the Owner or Developer role. Returns 403 if the project's plan doesn't allow the monitor, and 400 for invalid settings.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -314,7 +314,12 @@ class MonitorApi:
     def delete_monitor(
         self,
         project_or_product_uid: StrictStr,
-        monitor_uid: StrictStr,
+        monitor_uid: Annotated[
+            StrictStr,
+            Field(
+                description="MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -327,13 +332,13 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Monitor:
-        """delete_monitor
+        """Delete a monitor
 
-        Delete Monitor
+        Delete a monitor so it stops raising alerts. Returns an empty monitor object. To pause it instead, set `disabled` with `UpdateMonitor`.  Requires the Owner or Developer role. Returns 404 if the monitor never existed; deleting it again succeeds.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param monitor_uid: (required)
+        :param monitor_uid: MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`. (required)
         :type monitor_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -382,7 +387,12 @@ class MonitorApi:
     def delete_monitor_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        monitor_uid: StrictStr,
+        monitor_uid: Annotated[
+            StrictStr,
+            Field(
+                description="MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -395,13 +405,13 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Monitor]:
-        """delete_monitor
+        """Delete a monitor
 
-        Delete Monitor
+        Delete a monitor so it stops raising alerts. Returns an empty monitor object. To pause it instead, set `disabled` with `UpdateMonitor`.  Requires the Owner or Developer role. Returns 404 if the monitor never existed; deleting it again succeeds.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param monitor_uid: (required)
+        :param monitor_uid: MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`. (required)
         :type monitor_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -450,7 +460,12 @@ class MonitorApi:
     def delete_monitor_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        monitor_uid: StrictStr,
+        monitor_uid: Annotated[
+            StrictStr,
+            Field(
+                description="MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -463,13 +478,13 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """delete_monitor
+        """Delete a monitor
 
-        Delete Monitor
+        Delete a monitor so it stops raising alerts. Returns an empty monitor object. To pause it instead, set `disabled` with `UpdateMonitor`.  Requires the Owner or Developer role. Returns 404 if the monitor never existed; deleting it again succeeds.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param monitor_uid: (required)
+        :param monitor_uid: MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`. (required)
         :type monitor_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -568,7 +583,12 @@ class MonitorApi:
     def get_monitor(
         self,
         project_or_product_uid: StrictStr,
-        monitor_uid: StrictStr,
+        monitor_uid: Annotated[
+            StrictStr,
+            Field(
+                description="MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -581,13 +601,13 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Monitor:
-        """get_monitor
+        """Get a monitor
 
-        Get Monitor
+        Get one monitor's settings and whether it's in alert. Slack and Twilio credentials in `alert_routes` come back as `(omitted)`.  Returns 404 if the monitor never existed; a deleted monitor is still returned.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param monitor_uid: (required)
+        :param monitor_uid: MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`. (required)
         :type monitor_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -636,7 +656,12 @@ class MonitorApi:
     def get_monitor_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        monitor_uid: StrictStr,
+        monitor_uid: Annotated[
+            StrictStr,
+            Field(
+                description="MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -649,13 +674,13 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Monitor]:
-        """get_monitor
+        """Get a monitor
 
-        Get Monitor
+        Get one monitor's settings and whether it's in alert. Slack and Twilio credentials in `alert_routes` come back as `(omitted)`.  Returns 404 if the monitor never existed; a deleted monitor is still returned.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param monitor_uid: (required)
+        :param monitor_uid: MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`. (required)
         :type monitor_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -704,7 +729,12 @@ class MonitorApi:
     def get_monitor_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        monitor_uid: StrictStr,
+        monitor_uid: Annotated[
+            StrictStr,
+            Field(
+                description="MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -717,13 +747,13 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_monitor
+        """Get a monitor
 
-        Get Monitor
+        Get one monitor's settings and whether it's in alert. Slack and Twilio credentials in `alert_routes` come back as `(omitted)`.  Returns 404 if the monitor never existed; a deleted monitor is still returned.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param monitor_uid: (required)
+        :param monitor_uid: MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`. (required)
         :type monitor_uid: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -834,9 +864,9 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Monitor]:
-        """get_monitors
+        """List monitors
 
-        Get list of defined Monitors
+        List a project's monitors with their settings and whether each is in alert. For the alerts they've raised, use `GetAlerts`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -898,9 +928,9 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[Monitor]]:
-        """get_monitors
+        """List monitors
 
-        Get list of defined Monitors
+        List a project's monitors with their settings and whether each is in alert. For the alerts they've raised, use `GetAlerts`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -962,9 +992,9 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """get_monitors
+        """List monitors
 
-        Get list of defined Monitors
+        List a project's monitors with their settings and whether each is in alert. For the alerts they've raised, use `GetAlerts`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
@@ -1061,7 +1091,12 @@ class MonitorApi:
     def update_monitor(
         self,
         project_or_product_uid: StrictStr,
-        monitor_uid: StrictStr,
+        monitor_uid: Annotated[
+            StrictStr,
+            Field(
+                description="MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`."
+            ),
+        ],
         monitor: Annotated[
             Monitor, Field(description="Body or payload of monitor to be created")
         ],
@@ -1077,13 +1112,13 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Monitor:
-        """update_monitor
+        """Update a monitor
 
-        Update Monitor
+        Replace a monitor's settings with the whole monitor, as `GetMonitor` returns it. Omitted fields are cleared or reset, except `source_type`, `fleet_filter`, `notefile_filter`, `condition_type`, `aggregate_window` and `alert_routes`. Slack and Twilio credentials left as `(omitted)` are kept.  Requires the Owner or Developer role. Returns 403 if the plan doesn't allow a new `source_type`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param monitor_uid: (required)
+        :param monitor_uid: MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`. (required)
         :type monitor_uid: str
         :param monitor: Body or payload of monitor to be created (required)
         :type monitor: Monitor
@@ -1135,7 +1170,12 @@ class MonitorApi:
     def update_monitor_with_http_info(
         self,
         project_or_product_uid: StrictStr,
-        monitor_uid: StrictStr,
+        monitor_uid: Annotated[
+            StrictStr,
+            Field(
+                description="MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`."
+            ),
+        ],
         monitor: Annotated[
             Monitor, Field(description="Body or payload of monitor to be created")
         ],
@@ -1151,13 +1191,13 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Monitor]:
-        """update_monitor
+        """Update a monitor
 
-        Update Monitor
+        Replace a monitor's settings with the whole monitor, as `GetMonitor` returns it. Omitted fields are cleared or reset, except `source_type`, `fleet_filter`, `notefile_filter`, `condition_type`, `aggregate_window` and `alert_routes`. Slack and Twilio credentials left as `(omitted)` are kept.  Requires the Owner or Developer role. Returns 403 if the plan doesn't allow a new `source_type`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param monitor_uid: (required)
+        :param monitor_uid: MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`. (required)
         :type monitor_uid: str
         :param monitor: Body or payload of monitor to be created (required)
         :type monitor: Monitor
@@ -1209,7 +1249,12 @@ class MonitorApi:
     def update_monitor_without_preload_content(
         self,
         project_or_product_uid: StrictStr,
-        monitor_uid: StrictStr,
+        monitor_uid: Annotated[
+            StrictStr,
+            Field(
+                description="MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`."
+            ),
+        ],
         monitor: Annotated[
             Monitor, Field(description="Body or payload of monitor to be created")
         ],
@@ -1225,13 +1270,13 @@ class MonitorApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """update_monitor
+        """Update a monitor
 
-        Update Monitor
+        Replace a monitor's settings with the whole monitor, as `GetMonitor` returns it. Omitted fields are cleared or reset, except `source_type`, `fleet_filter`, `notefile_filter`, `condition_type`, `aggregate_window` and `alert_routes`. Slack and Twilio credentials left as `(omitted)` are kept.  Requires the Owner or Developer role. Returns 403 if the plan doesn't allow a new `source_type`.
 
         :param project_or_product_uid: (required)
         :type project_or_product_uid: str
-        :param monitor_uid: (required)
+        :param monitor_uid: MonitorUID, `monitor:` followed by a UUID. List with `GetMonitors`. (required)
         :type monitor_uid: str
         :param monitor: Body or payload of monitor to be created (required)
         :type monitor: Monitor

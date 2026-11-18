@@ -54,7 +54,8 @@ class Note(BaseModel):
     )
     time: StrictInt = Field(description="Unix epoch seconds.")
     where: Optional[StrictStr] = Field(
-        default=None, description="Optional location/metadata string."
+        default=None,
+        description="Place name where the note was created, from its latitude and longitude. Empty if unknown.",
     )
     __properties: ClassVar[List[str]] = [
         "body",

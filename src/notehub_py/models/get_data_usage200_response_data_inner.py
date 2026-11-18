@@ -33,14 +33,14 @@ class GetDataUsage200ResponseDataInner(BaseModel):
     data: List[UsageData]
     device: Optional[StrictStr] = Field(
         default=None,
-        description="The device UID this usage data belongs to (only present when aggregate is 'device')",
+        description="The DeviceUID this usage data belongs to (only present when aggregate is 'device')",
     )
     device_count: Optional[StrictInt] = Field(
         default=None, description="the number of devices represented by this data point"
     )
     fleet: Optional[StrictStr] = Field(
         default=None,
-        description="The fleet UID this usage data belongs to (only present when aggregate is 'fleet')",
+        description="The FleetUID this usage data belongs to (only present when aggregate is 'fleet')",
     )
     iccid: Optional[StrictStr] = Field(
         default=None,

@@ -30,11 +30,16 @@ class WebhookSettings(BaseModel):
     """  # noqa: E501
 
     disabled: Optional[StrictBool] = Field(
-        default=None, description="Flag indicating if the webhook is disabled"
+        default=None,
+        description="If true, posts to the webhook return an error and create no events.",
     )
-    id: Optional[StrictStr] = Field(default=None, description="Webhook ID")
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="Webhook ID, also the default notefile name (`<id>.qo`). Letters, digits, `-` and `_`.",
+    )
     transform: Optional[StrictStr] = Field(
-        default=None, description="Transformation to be applied to the event"
+        default=None,
+        description="JSONata expression applied to the event, with the post under `body`. Its output replaces the event and must set `body`. `$doNotRoute()` drops it. ",
     )
     __properties: ClassVar[List[str]] = ["disabled", "id", "transform"]
 

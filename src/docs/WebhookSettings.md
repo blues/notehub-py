@@ -2,11 +2,11 @@
 
 ## Properties
 
-| Name          | Type     | Description                                | Notes      |
-| ------------- | -------- | ------------------------------------------ | ---------- |
-| **disabled**  | **bool** | Flag indicating if the webhook is disabled | [optional] |
-| **id**        | **str**  | Webhook ID                                 | [optional] |
-| **transform** | **str**  | Transformation to be applied to the event  | [optional] |
+| Name          | Type     | Description                                                                                                                                                                     | Notes      |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **disabled**  | **bool** | If true, posts to the webhook return an error and create no events.                                                                                                             | [optional] |
+| **id**        | **str**  | Webhook ID, also the default notefile name (&#x60;&lt;id&gt;.qo&#x60;). Letters, digits, &#x60;-&#x60; and &#x60;\_&#x60;.                                                      | [optional] |
+| **transform** | **str**  | JSONata expression applied to the event, with the post under &#x60;body&#x60;. Its output replaces the event and must set &#x60;body&#x60;. &#x60;$doNotRoute()&#x60; drops it. | [optional] |
 
 ## Example
 
